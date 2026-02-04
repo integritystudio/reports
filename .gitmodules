@@ -1,0 +1,6 @@
+[submodule "ai-news"]
+	path = ai-news
+	url = ./ai-news
+[submodule "calender-updates"]
+	path = calender-updates
+	url = ./calender-updates
