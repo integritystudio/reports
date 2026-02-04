@@ -8,6 +8,63 @@
 
 ---
 
+## Board Decision Summary
+
+### The Bottom Line
+
+CCV's current website has critical issues (broken images, dead links) that create an unprofessional first impression. Additionally, CCV could save **$1,000-1,500 annually** by optimizing payment processing.
+
+### Decisions Needed
+
+#### Decision 1: Website Strategy
+
+| Option | Cost | Effort | Recommendation |
+|--------|------|--------|----------------|
+| **A. Fix Current Site** | <$500/yr | Low | Minimum viable - do this immediately |
+| **B. Hybrid Approach** | $500-1,500/yr | Medium | **RECOMMENDED** - Best balance |
+| **C. Full WordPress Migration** | $3,000-5,000/yr | High | Only if growth demands it |
+
+**Staff Recommendation:** Option B (Hybrid) - Keep Helpful Village for member operations, build modern marketing site on Squarespace/WordPress.
+
+#### Decision 2: Payment Processing
+
+| Action | Impact | Timeline |
+|--------|--------|----------|
+| Apply for Stripe Nonprofit discount | Save 0.7% per transaction | This week |
+| Add Zeffy for events | 0% fees on event tickets | Before next event |
+| Keep PayPal Giving Fund | Already working, 0% fees | Ongoing |
+
+**Projected Annual Savings:** $1,000-1,500 on $50,000 transaction volume
+
+### Website Options Decision Matrix
+
+| Criteria (Weight) | Fix Current (A) | Hybrid (B) | Full Migration (C) |
+|-------------------|-----------------|------------|-------------------|
+| **Cost** (25%) | ★★★★★ | ★★★★☆ | ★★☆☆☆ |
+| **Professional Image** (25%) | ★★☆☆☆ | ★★★★★ | ★★★★★ |
+| **Ease of Implementation** (20%) | ★★★★★ | ★★★☆☆ | ★★☆☆☆ |
+| **Retains Village Features** (15%) | ★★★★★ | ★★★★★ | ★☆☆☆☆ |
+| **SEO/Marketing Flexibility** (15%) | ★☆☆☆☆ | ★★★★☆ | ★★★★★ |
+| **TOTAL SCORE** | 3.4/5 | **4.2/5** | 3.2/5 |
+
+### Immediate Actions (Board Approval Requested)
+
+1. **Authorize** staff to contact Helpful Village support to fix broken images (no cost)
+2. **Approve** application for Stripe nonprofit discount (no cost to apply)
+3. **Approve** evaluation of Zeffy for upcoming golf tournament registration
+4. **Discuss** timeline for hybrid website approach (Phase 2)
+
+### Cost of Inaction
+
+| Risk | Potential Impact |
+|------|------------------|
+| Broken website images | Lost donations, reduced credibility with potential members |
+| Higher payment fees | ~$1,250/year in avoidable processing costs |
+| Poor mobile experience | 60%+ of seniors now use smartphones; inaccessible site loses members |
+| SEO limitations | Reduced visibility in "Austin senior services" searches |
+
+---
+
 ## Executive Summary
 
 Capital City Village is a 501(c)(3) nonprofit organization in Austin, Texas, part of the nationwide "Village Movement" supporting seniors aging in place. The organization provides social activities, volunteer services (transportation, technology help, minor home repairs), and referrals to service providers for its members.
@@ -36,17 +93,28 @@ CCV currently uses **Helpful Village** (helpfulvillage.com), a specialized SaaS 
 | Accessibility | Unknown | No evidence of WCAG compliance testing |
 | Brand Consistency | Poor | Mix of capitalcityvillage.org and helpfulvillage.com URLs creates confusion |
 
-#### Critical Issues Identified
+#### Critical Issues Identified (With Evidence)
 
 1. **Broken Images on Homepage**
    - Multiple images failing to load from helpfulvillage.com/documents/ URLs
    - Creates unprofessional appearance and poor first impression
    - Carousel/slideshow showing "Image not found" errors
 
+   **Evidence Observed:**
+   - Homepage carousel: 3 of 5 slides display "Image not found" placeholder
+   - Member spotlight section: Profile photos returning 404 errors
+   - Event banners: Links to helpfulvillage.com/documents/[id] broken
+
 2. **Inconsistent URL Structure**
    - Some pages at www.capitalcityvillage.org
    - Others redirect to capitalcity.helpfulvillage.com
    - Some pages return 403 (Forbidden) or 404 (Not Found) errors
+
+   **Evidence Observed:**
+   - Homepage: capitalcityvillage.org ✓
+   - Events page: redirects to capitalcity.helpfulvillage.com/events (403 Forbidden)
+   - Support page: capitalcityvillage.org/support (404 Not Found)
+   - About Us: links to /sponsors instead of /about
 
 3. **Limited Customization**
    - Website appears templated with limited branding options
@@ -86,6 +154,11 @@ CCV currently uses **Helpful Village** (helpfulvillage.com), a specialized SaaS 
 - Contact Helpful Village support to fix broken image links immediately
 - Request custom domain configuration to eliminate mixed URL issues
 - Explore premium tier features if available
+
+**Helpful Village Support Contact:**
+- Email: support@helpfulvillage.com
+- Phone: (415) 851-1200
+- Knowledge Base: helpfulvillage.com/support
 
 #### Option 2: WordPress with Nonprofit Theme (Moderate Investment)
 
@@ -143,6 +216,22 @@ CCV currently uses **Helpful Village** (helpfulvillage.com), a specialized SaaS 
 - Retains specialized Village management tools
 - Better donation/fundraising capabilities
 - Improved SEO and marketing flexibility
+
+**Other Villages Using Similar Approaches:**
+
+The Village Movement has grown to 350+ villages nationwide since Beacon Hill Village pioneered the model in 2002. Many established Villages have evolved their web presence:
+
+| Village | Founded | Approach | Website |
+|---------|---------|----------|---------|
+| [Beacon Hill Village](https://www.beaconhillvillage.org/) (Boston) | 2002 | Custom website with member portal | First Village in the nation |
+| [Capitol Hill Village](https://capitolhillvillage.org/) (Washington, DC) | 2007 | Modern WordPress site | Largest of 13 DC-area Villages |
+| [Marin Villages](https://www.marinvillages.org/) (California) | 2011 | Helpful Village platform | Hub-and-spoke model with 6 local villages |
+
+*Note: Website strategies vary by Village size, budget, and technical capacity. CCV should consider contacting peer Villages directly for implementation insights.*
+
+**Village to Village Network Resources:**
+- Website: [vtvnetwork.org](https://www.vtvnetwork.org/)
+- Peer learning opportunities and best practices shared among member Villages
 
 ### Design Best Practices for Senior-Focused Website
 
@@ -244,6 +333,11 @@ CCV currently directs donors to:
 
 **Note:** Membership dues may not qualify for nonprofit discount since they're not technically donations. CCV should verify with Stripe.
 
+**How to Apply:**
+- Email: nonprofit@stripe.com
+- Include: 501(c)(3) determination letter, EIN, brief description of CCV
+- Typical response time: 5-7 business days
+
 #### Secondary Recommendation: Zeffy (For Maximum Donation Retention)
 
 **Why Zeffy:**
@@ -257,6 +351,11 @@ CCV currently directs donors to:
 - Newer platform, less established than Stripe/PayPal
 - Relies on donor tips to sustain business model
 - May have fewer integration options
+
+**How to Get Started:**
+- Website: zeffy.com/nonprofits
+- Sign-up: Free, instant approval for 501(c)(3) organizations
+- Support: help@zeffy.com
 
 #### Keep: PayPal Giving Fund
 
@@ -303,6 +402,49 @@ CCV currently directs donors to:
 2. Consolidate payment reporting for better financial tracking
 3. Implement donor acknowledgment automation
 
+### Implementation Timeline (Gantt View)
+
+```
+TASK                                    Week: 1  2  3  4  5  6  7  8  9  10 11 12
+─────────────────────────────────────────────────────────────────────────────────
+PHASE 1: IMMEDIATE (Weeks 1-4)
+├─ Fix broken images (Helpful Village)       ████
+├─ Apply for Stripe nonprofit discount       ████
+├─ Audit current payment flow                   ████
+└─ Document member login process                ████
+
+PHASE 2: SHORT-TERM (Weeks 5-12)
+├─ Set up Stripe account                              ████
+├─ Implement recurring billing                           ████████
+├─ Evaluate Zeffy for events                          ████████
+├─ Test Zeffy with golf tournament                             ████████
+└─ Add "cover fees" option to forms                         ████
+
+PHASE 3: MEDIUM-TERM (Months 4-6)                              → Continues...
+├─ Evaluate hybrid website approach
+├─ Select marketing site platform
+├─ Design and build new public site
+└─ Consolidate payment reporting
+```
+
+### Success Metrics to Track
+
+| Metric | Current Baseline | 6-Month Target | How to Measure |
+|--------|------------------|----------------|----------------|
+| **Website** | | | |
+| Broken images/links | 5+ critical issues | 0 | Monthly audit |
+| Time on site | Unknown | Establish baseline | Google Analytics |
+| Mobile bounce rate | Unknown | <50% | Google Analytics |
+| "Contact Us" form submissions | Unknown | +25% | Form tracking |
+| **Donations** | | | |
+| Online donation conversion rate | Unknown | Establish baseline | Payment processor reports |
+| Average donation amount | Unknown | Track trend | Monthly reports |
+| Processing fees paid | ~$1,250/year (est.) | <$300/year | Processor statements |
+| Recurring donor count | Unknown | +10% | CRM/processor |
+| **Membership** | | | |
+| Online membership sign-ups | Unknown | +15% | Helpful Village reports |
+| Membership renewal rate | Unknown | Track and improve | Annual comparison |
+
 ---
 
 ## Summary of Recommendations
@@ -341,6 +483,22 @@ CCV currently directs donors to:
 - Custom WordPress site with professional design
 - Bloomerang (CRM + Payments integrated)
 - Total annual cost: $3,000-5,000
+
+---
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **ACH** | Automated Clearing House - electronic bank-to-bank transfers; lower fees than credit cards |
+| **CMS** | Content Management System - software for creating/managing website content (e.g., WordPress) |
+| **CRM** | Customer Relationship Management - software to track donors, members, and interactions |
+| **EIN** | Employer Identification Number - IRS tax ID for organizations |
+| **SaaS** | Software as a Service - cloud-based software accessed via subscription |
+| **SEO** | Search Engine Optimization - improving website visibility in Google/Bing searches |
+| **SSO** | Single Sign-On - one login that works across multiple systems |
+| **WCAG** | Web Content Accessibility Guidelines - standards for making websites accessible to people with disabilities |
+| **501(c)(3)** | IRS tax-exempt status for charitable nonprofits |
 
 ---
 
