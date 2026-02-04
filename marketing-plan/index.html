@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrity Studio - Marketing Plan Documentation</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f8fafc;
+      --bg-white: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --code-bg: #f1f5f9;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 320px;
+      background: var(--bg-white);
+      border-right: 1px solid var(--border);
+      padding: 24px;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar h1 {
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .sidebar .subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .toc-section {
+      margin-bottom: 16px;
+    }
+    .toc-section h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .toc-section ul {
+      list-style: none;
+    }
+    .toc-section li {
+      margin-bottom: 4px;
+    }
+    .toc-section a {
+      display: block;
+      padding: 6px 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .toc-section a:hover {
+      background: var(--primary);
+      color: white;
+    }
+    /* Main Content */
+    .main {
+      flex: 1;
+      margin-left: 320px;
+      padding: 48px;
+      max-width: 960px;
+    }
+    .section {
+      background: var(--bg-white);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 32px;
+      border: 1px solid var(--border);
+    }
+    .section h2 {
+      font-size: 1.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary);
+    }
+    .section .filepath {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-family: 'SF Mono', Consolas, monospace;
+    }
+    .content h1 { font-size: 1.75rem; margin: 24px 0 16px; color: var(--text); }
+    .content h2 { font-size: 1.375rem; margin: 20px 0 12px; color: var(--text); border: none; padding: 0; }
+    .content h3 { font-size: 1.125rem; margin: 16px 0 8px; color: var(--text); }
+    .content h4 { font-size: 1rem; margin: 12px 0 8px; color: var(--text); }
+    .content p { margin-bottom: 12px; }
+    .content ul, .content ol { margin: 12px 0 12px 24px; }
+    .content li { margin-bottom: 6px; }
+    .content code {
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'SF Mono', Consolas, monospace;
+      font-size: 0.875em;
+    }
+    .content pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 16px 0;
+      font-family: 'SF Mono', Consolas, monospace;
+      font-size: 0.875rem;
+    }
+    .content pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.875rem;
+    }
+    .content th, .content td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+    }
+    .content th {
+      background: var(--code-bg);
+      font-weight: 600;
+    }
+    .content blockquote {
+      border-left: 4px solid var(--primary);
+      padding-left: 16px;
+      margin: 16px 0;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 24px 0;
+    }
+    .content strong { font-weight: 600; }
+    .content a { color: var(--primary); }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      border-radius: 9999px;
+      margin-left: 8px;
+    }
+    @media (max-width: 1024px) {
+      .sidebar { width: 260px; }
+      .main { margin-left: 260px; padding: 32px; }
+    }
+    @media (max-width: 768px) {
+      .container { flex-direction: column; }
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .main { margin-left: 0; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="sidebar">
+      <h1>Integrity Studio</h1>
+      <p class="subtitle">Marketing Plan Documentation</p>
+
+      <div class="toc-section">
+        <h3>Overview</h3>
+        <ul>
+          <li><a href="#readme">README</a></li>
+          <li><a href="#quick-start">Quick Start Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="toc-section">
+        <h3>Marketing Strategy</h3>
+        <ul>
+          <li><a href="#marketing-strategy">Strategy Summary</a></li>
+          <li><a href="#marketing-budget">Budget & ROI</a></li>
+          <li><a href="#marketing-timeline">Timeline & Gantt</a></li>
+          <li><a href="#marketing-content">Content Pieces</a></li>
+          <li><a href="#marketing-templates">Implementation Templates</a></li>
+        </ul>
+      </div>
+
+      <div class="toc-section">
+        <h3>Technical Setup</h3>
+        <ul>
+          <li><a href="#auth0-setup">Auth0 Setup</a></li>
+          <li><a href="#auth-analytics">Auth0 + Analytics</a></li>
+          <li><a href="#user-database">User Database Integration</a></li>
+        </ul>
+      </div>
+
+      <div class="toc-section">
+        <h3>Development</h3>
+        <ul>
+          <li><a href="#schema-guide">Schema.org Guide</a></li>
+          <li><a href="#tailwind-classes">Tailwind CSS Classes</a></li>
+          <li><a href="#tailwind-usage">Tailwind Usage</a></li>
+        </ul>
+      </div>
+
+      <div class="toc-section">
+        <h3>Testing & Quality</h3>
+        <ul>
+          <li><a href="#seo-tests">SEO Validation Tests</a></li>
+          <li><a href="#accessibility">Accessibility Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="toc-section">
+        <h3>Security</h3>
+        <ul>
+          <li><a href="#security">Security Documentation</a></li>
+          <li><a href="#access-policy">Access Policy</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main">
+      <!-- README -->
+      <section class="section" id="readme">
+        <h2>README</h2>
+        <p class="filepath">README.md</p>
+        <div class="content">
+          <h1>The Integrity Studio - Documentation</h1>
+          <p>React-based web application with Auth0 authentication, PostgreSQL database, Tinybird analytics, and comprehensive monitoring.</p>
+
+          <h2>Quick Links</h2>
+          <ul>
+            <li><strong>Quick Start Guide</strong> - Get started in 5 minutes</li>
+            <li><strong>Next Steps</strong> - What to do after setup</li>
+            <li><strong>Test Documentation</strong> - Testing guides and commands</li>
+          </ul>
+
+          <h2>Technology Stack</h2>
+          <h3>Frontend</h3>
+          <ul>
+            <li><strong>React 18</strong> + <strong>TypeScript</strong> - Modern React with type safety</li>
+            <li><strong>Vite</strong> - Fast build tool and dev server</li>
+            <li><strong>Tailwind CSS</strong> - Utility-first styling</li>
+          </ul>
+
+          <h3>Backend & Database</h3>
+          <ul>
+            <li><strong>PostgreSQL</strong> - User data and application state</li>
+            <li><strong>Prisma</strong> - Type-safe database ORM</li>
+          </ul>
+
+          <h3>Authentication & Analytics</h3>
+          <ul>
+            <li><strong>Auth0</strong> - User authentication and management</li>
+            <li><strong>Google Analytics 4</strong> - Web analytics</li>
+            <li><strong>Facebook Pixel</strong> - Marketing analytics</li>
+            <li><strong>Tinybird</strong> - Real-time event streaming and metrics</li>
+          </ul>
+
+          <h3>Testing</h3>
+          <ul>
+            <li><strong>Vitest</strong> - Unit and integration tests</li>
+            <li><strong>Playwright</strong> - End-to-end browser testing</li>
+            <li><strong>Accessibility tests</strong> - WCAG compliance validation</li>
+          </ul>
+
+          <h2>Development Workflow</h2>
+          <pre><code># Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Run tests
+npm test</code></pre>
+        </div>
+      </section>
+
+      <!-- Quick Start -->
+      <section class="section" id="quick-start">
+        <h2>Quick Start Guide</h2>
+        <p class="filepath">QUICK_START.md</p>
+        <div class="content">
+          <h1>Quick Start: Auth0</h1>
+          <p>Get up and running with Auth0 in 5 minutes.</p>
+
+          <h2>Quick Setup</h2>
+          <pre><code># Install and configure (one command!)
+npx @auth0/auth0-mcp-server init
+
+# Follow the interactive prompts:
+# - Select your MCP client (Claude Desktop, Cursor, etc.)
+# - Choose read-only scopes for safety
+# - Authenticate in your browser
+# - Done!</code></pre>
+
+          <p><strong>Test it:</strong> Open Claude Desktop and ask: "List all my Auth0 applications"</p>
+
+          <h2>What You Get</h2>
+          <ul>
+            <li>Manage Auth0 via AI/natural language</li>
+            <li>20+ authentication tools</li>
+            <li>OAuth 2.0 compliant</li>
+            <li>Free and open-source (MIT)</li>
+            <li>One-command setup</li>
+          </ul>
+
+          <h2>Quick Troubleshooting</h2>
+          <pre><code># Re-authenticate
+npx @auth0/auth0-mcp-server logout
+npx @auth0/auth0-mcp-server init</code></pre>
+        </div>
+      </section>
+
+      <!-- Marketing Strategy Summary -->
+      <section class="section" id="marketing-strategy">
+        <h2>Marketing Strategy Summary</h2>
+        <p class="filepath">MARKETING_STRATEGY_SUMMARY.md</p>
+        <div class="content">
+          <h1>Integrity Studio LLC - Marketing Strategy Summary</h1>
+          <p><strong>AI Consulting for Nonprofit Organizations</strong></p>
+
+          <h2>Executive Summary</h2>
+          <p>This document summarizes comprehensive market research on how Integrity Studio LLC should position and market its AI consulting services to nonprofit organizations in 2025.</p>
+
+          <h3>Key Market Findings</h3>
+          <ul>
+            <li>82% of nonprofits use AI informally (primarily for content generation)</li>
+            <li>76% lack any AI policy or governance framework</li>
+            <li>92% of nonprofit leaders feel unprepared for AI</li>
+            <li>70% concerned about data privacy and security</li>
+            <li>$50M+ in AI-specific grant funding available in 2025</li>
+          </ul>
+
+          <h2>Strategic Positioning</h2>
+          <h3>Unique Value Proposition</h3>
+          <blockquote>"Enterprise AI capabilities at nonprofit-accessible pricing, with governance and responsible implementation built in from day one."</blockquote>
+
+          <h3>Key Differentiators</h3>
+          <ol>
+            <li><strong>Nonprofit-First Approach</strong> - Solutions designed for mission-driven constraints</li>
+            <li><strong>Responsible AI Focus</strong> - Ethics, governance, and compliance expertise</li>
+            <li><strong>Accessible Pricing</strong> - Sliding scale, pilot programs, and grant application support</li>
+            <li><strong>Education-Centric</strong> - Capacity building over consultant dependency</li>
+            <li><strong>Technical + Strategic</strong> - Full-stack services from policy to implementation</li>
+          </ol>
+
+          <h2>Go-to-Market Strategy</h2>
+          <h3>Phase 1: Foundation (Months 1-3)</h3>
+          <ul>
+            <li>Join NTEN (Nonprofit Technology Enterprise Network)</li>
+            <li>Optimize digital presence (website, LinkedIn)</li>
+            <li>Create high-value lead magnet (AI Readiness Assessment)</li>
+            <li>Launch LinkedIn outreach campaign</li>
+            <li>Publish SEO-optimized blog posts</li>
+          </ul>
+
+          <h3>Phase 2: Traction (Months 4-6)</h3>
+          <ul>
+            <li>Launch monthly webinar series</li>
+            <li>Guest blogging campaign</li>
+            <li>Develop "90-Day AI Pilot Program"</li>
+            <li>Formalize referral partnerships</li>
+          </ul>
+
+          <h3>Phase 3: Authority Building (Months 7-12)</h3>
+          <ul>
+            <li>Execute "State of AI in Nonprofits" research report</li>
+            <li>Submit speaking proposals for NTC 2026</li>
+            <li>Launch "Nonprofit AI Practitioners" community</li>
+            <li>Publish thought leadership in major outlets</li>
+          </ul>
+
+          <h2>Success Metrics</h2>
+          <h3>12-Month Targets</h3>
+          <table>
+            <tr><th>Metric</th><th>Target</th></tr>
+            <tr><td>Email subscribers</td><td>1,000-2,000</td></tr>
+            <tr><td>LinkedIn followers</td><td>1,500-3,000</td></tr>
+            <tr><td>Qualified leads/month</td><td>20-40</td></tr>
+            <tr><td>Pilot programs completed</td><td>3-6</td></tr>
+            <tr><td>Full implementations</td><td>1-3</td></tr>
+            <tr><td>Year 1 revenue</td><td>$120K-$450K</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- Marketing Budget & ROI -->
+      <section class="section" id="marketing-budget">
+        <h2>Marketing Budget & ROI Projections</h2>
+        <p class="filepath">MARKETING_BUDGET_ROI.md</p>
+        <div class="content">
+          <h1>Marketing Budget & ROI Projections</h1>
+          <p><strong>Year 1 Financial Planning</strong></p>
+
+          <h2>Executive Summary</h2>
+          <table>
+            <tr><th>Scenario</th><th>Revenue</th><th>ROI</th></tr>
+            <tr><td>Conservative</td><td>$120,000-$200,000</td><td>5.5x to 9.1x</td></tr>
+            <tr><td>Moderate</td><td>$200,000-$350,000</td><td>9.1x to 15.9x</td></tr>
+            <tr><td>Optimistic</td><td>$350,000-$450,000</td><td>15.9x to 20.5x</td></tr>
+          </table>
+
+          <p><strong>Total Year 1 Marketing Investment:</strong> $21,400-$22,000</p>
+
+          <h2>Budget Breakdown</h2>
+          <h3>One-Time Setup Costs</h3>
+          <table>
+            <tr><th>Item</th><th>Cost</th></tr>
+            <tr><td>NTEN Individual Membership</td><td>$150</td></tr>
+            <tr><td>Website SEO Optimization</td><td>$0 (in-house)</td></tr>
+            <tr><td>Lead Magnet Creation</td><td>$0 (in-house)</td></tr>
+          </table>
+
+          <h3>Monthly Recurring Costs</h3>
+          <table>
+            <tr><th>Category</th><th>Monthly</th><th>Annual</th></tr>
+            <tr><td>Email Marketing Platform</td><td>$25-$50</td><td>$300-$600</td></tr>
+            <tr><td>Webinar Platform (Zoom)</td><td>$79</td><td>$948</td></tr>
+            <tr><td>Design Tools (Canva Pro)</td><td>$13</td><td>$156</td></tr>
+          </table>
+
+          <h2>Revenue Model</h2>
+          <h3>Service Offerings & Pricing</h3>
+          <table>
+            <tr><th>Service</th><th>Price Range</th><th>Close Rate</th></tr>
+            <tr><td>90-Day Pilot (Small Org)</td><td>$15,000-$25,000</td><td>40%</td></tr>
+            <tr><td>90-Day Pilot (Mid Org)</td><td>$25,000-$40,000</td><td>35%</td></tr>
+            <tr><td>Full Implementation</td><td>$75,000-$150,000</td><td>25%</td></tr>
+            <tr><td>Fractional CTO Retainer</td><td>$5,000-$10,000/mo</td><td>30%</td></tr>
+            <tr><td>Training & Workshops</td><td>$2,000-$10,000</td><td>50%</td></tr>
+          </table>
+
+          <h2>Key Insight</h2>
+          <p>All scenarios break even very early (Month 3) due to relatively low marketing costs and high deal values. This provides significant margin for error and experimentation.</p>
+        </div>
+      </section>
+
+      <!-- Marketing Timeline -->
+      <section class="section" id="marketing-timeline">
+        <h2>12-Month Marketing Timeline</h2>
+        <p class="filepath">MARKETING_TIMELINE_GANTT.md</p>
+        <div class="content">
+          <h1>12-Month Marketing Timeline & Gantt Chart</h1>
+          <p>Detailed month-by-month execution plan for Integrity Studio's go-to-market strategy.</p>
+
+          <h2>Visual Timeline</h2>
+          <pre><code>PHASE 1: FOUNDATION (Months 1-3)     [============------------]
+PHASE 2: TRACTION (Months 4-6)       [------------============]
+PHASE 3: AUTHORITY (Months 7-12)     [------------------------============]</code></pre>
+
+          <h2>Month 1: Foundation Building</h2>
+          <h3>Week 1</h3>
+          <ul>
+            <li>Join NTEN as individual member ($150)</li>
+            <li>Audit and optimize website for nonprofit AI keywords</li>
+            <li>Create and optimize LinkedIn Company Page</li>
+            <li>Set up email marketing platform</li>
+            <li>Create first lead magnet: "AI Readiness Assessment"</li>
+          </ul>
+
+          <h3>Week 2</h3>
+          <ul>
+            <li>Write and schedule first 4 blog posts</li>
+            <li>Set up lead magnet landing page</li>
+            <li>Configure email automation sequences</li>
+            <li>Begin NTEN community participation</li>
+          </ul>
+
+          <h2>Year 1 Summary</h2>
+          <h3>Expected Outcomes</h3>
+          <table>
+            <tr><th>Category</th><th>Target</th></tr>
+            <tr><td>Email subscribers</td><td>3,500-5,000</td></tr>
+            <tr><td>LinkedIn connections</td><td>500-1,000</td></tr>
+            <tr><td>Community members</td><td>300-500</td></tr>
+            <tr><td>Blog posts published</td><td>100+</td></tr>
+            <tr><td>Webinars hosted</td><td>10-12</td></tr>
+            <tr><td>Speaking engagements</td><td>3-5</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- Marketing Content -->
+      <section class="section" id="marketing-content">
+        <h2>Marketing Content Pieces</h2>
+        <p class="filepath">MARKETING_CONTENT_PIECES.md</p>
+        <div class="content">
+          <h1>Marketing Content Pieces</h1>
+          <p>Ready-to-publish content for Integrity Studio LLC.</p>
+
+          <h2>Blog Posts</h2>
+          <h3>Blog Post 1: "82% of Nonprofits Use AI But 76% Lack Policies"</h3>
+          <p><strong>Target Keyword:</strong> nonprofit AI policy<br>
+          <strong>Word Count:</strong> 1,800-2,000 words</p>
+          <p>Addresses the dangerous disconnect between AI adoption and governance in nonprofits, covering legal, operational, and reputational risks.</p>
+
+          <h3>Blog Post 2: "How to Write an AI Policy for Your Nonprofit in 30 Days"</h3>
+          <p>Step-by-step guide with day-by-day implementation plan, template walkthrough, and board presentation tips.</p>
+
+          <h3>Blog Post 3: "AI Grants for Nonprofits 2025: $50M+ in Funding"</h3>
+          <p>Comprehensive guide covering OpenAI, Google.org, AWS, Microsoft programs and application strategies.</p>
+
+          <h2>Lead Magnets</h2>
+          <ol>
+            <li><strong>AI Readiness Assessment</strong> - Self-scoring PDF evaluating 5 key dimensions</li>
+            <li><strong>AI Policy Template</strong> - Fully editable Word document</li>
+            <li><strong>2025 AI Grant Database</strong> - Excel spreadsheet with 20+ programs</li>
+          </ol>
+
+          <h2>Email Sequences</h2>
+          <p>5-email welcome sequence for new subscribers including:</p>
+          <ul>
+            <li>Email 1: Welcome + Deliver Lead Magnet</li>
+            <li>Email 2: Introduce yourself + Value</li>
+            <li>Email 3: Educational value (#1 mistake)</li>
+            <li>Email 4: Social proof + Resource</li>
+            <li>Email 5: Clear CTA</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Marketing Templates -->
+      <section class="section" id="marketing-templates">
+        <h2>Implementation Templates</h2>
+        <p class="filepath">MARKETING_IMPLEMENTATION_TEMPLATES.md</p>
+        <div class="content">
+          <h1>Marketing Implementation Templates & Scripts</h1>
+          <p>Ready-to-use marketing materials.</p>
+
+          <h2>Email Templates</h2>
+          <ul>
+            <li>Lead Magnet Delivery Email</li>
+            <li>Webinar Invitation Email</li>
+            <li>Post-Webinar Follow-Up Email</li>
+            <li>Cold Outreach Email</li>
+            <li>Pilot Program Proposal Email</li>
+            <li>Monthly Newsletter Template</li>
+          </ul>
+
+          <h2>LinkedIn Scripts</h2>
+          <ul>
+            <li>Connection Request (Personalized)</li>
+            <li>Follow-Up Message</li>
+            <li>Thought Leadership Post Template</li>
+            <li>Case Study Post Template</li>
+            <li>Comment Strategy</li>
+          </ul>
+
+          <h2>Webinar Outlines</h2>
+          <ol>
+            <li>"AI Policy Development for Nonprofits: 60-Min Crash Course"</li>
+            <li>"Getting Started with AI: Your First 3 Use Cases"</li>
+            <li>"AI Grant Opportunities 2025: How to Apply and Win"</li>
+          </ol>
+
+          <h2>Proposal Template: 90-Day AI Pilot Program</h2>
+          <ul>
+            <li>Executive Summary</li>
+            <li>Understanding Your Challenge</li>
+            <li>Proposed Approach (4 phases)</li>
+            <li>Success Metrics</li>
+            <li>Timeline</li>
+            <li>Investment</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Auth0 Setup -->
+      <section class="section" id="auth0-setup">
+        <h2>Auth0 Setup Guide</h2>
+        <p class="filepath">AUTH0_SETUP.md</p>
+        <div class="content">
+          <h1>Auth0 Setup Guide</h1>
+          <p>Complete guide for setting up Auth0 authentication.</p>
+
+          <h2>Step 1: Create Auth0 Application</h2>
+          <ol>
+            <li>Log in to Auth0 Dashboard at manage.auth0.com</li>
+            <li>Click "Applications" - "Applications" - "Create Application"</li>
+            <li>Select "Single Page Application"</li>
+            <li>Note your Domain and Client ID</li>
+          </ol>
+
+          <h2>Step 2: Configure URLs</h2>
+          <p><strong>Allowed Callback URLs:</strong></p>
+          <pre><code>http://localhost:5173,
+http://localhost:5173/callback,
+https://yourdomain.com</code></pre>
+
+          <h2>Step 3: Environment Variables</h2>
+          <pre><code># Auth0 Configuration
+VITE_AUTH0_DOMAIN=your-domain.auth0.com
+VITE_AUTH0_CLIENT_ID=your_client_id_here
+VITE_AUTH0_AUDIENCE=https://your-domain.auth0.com/api/v2/</code></pre>
+
+          <h2>Available Components</h2>
+          <ul>
+            <li><code>&lt;LoginButton /&gt;</code> - Pre-styled login button</li>
+            <li><code>&lt;LogoutButton /&gt;</code> - Pre-styled logout button</li>
+            <li><code>&lt;UserProfile /&gt;</code> - User profile display</li>
+            <li><code>&lt;AuthGuard /&gt;</code> - Protected content wrapper</li>
+          </ul>
+
+          <h2>Security Best Practices</h2>
+          <ul>
+            <li>Never commit <code>.env</code> file</li>
+            <li>Use HTTPS in production</li>
+            <li>Enable MFA for sensitive operations</li>
+            <li>Implement proper token refresh logic</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Auth Analytics -->
+      <section class="section" id="auth-analytics">
+        <h2>Auth0 MCP Server + Analytics Setup</h2>
+        <p class="filepath">AUTH_ANALYTICS_SETUP.md</p>
+        <div class="content">
+          <h1>Auth0 MCP Server + Tinybird Analytics Setup</h1>
+
+          <h2>Part 1: Auth0 MCP Server Setup</h2>
+          <h3>Step 1: Install</h3>
+          <pre><code>npx @auth0/auth0-mcp-server init</code></pre>
+
+          <h3>Step 2: Interactive Setup</h3>
+          <p>The installer will prompt you to:</p>
+          <ol>
+            <li>Select your MCP client (Claude Desktop, Cursor, Windsurf)</li>
+            <li>Choose scopes (read:users, read:clients, read:logs)</li>
+            <li>Authenticate in browser</li>
+          </ol>
+
+          <h3>Security Best Practices</h3>
+          <pre><code># Read-only mode (recommended for testing)
+npx @auth0/auth0-mcp-server init --read-only
+
+# Logout when done
+npx @auth0/auth0-mcp-server logout</code></pre>
+
+          <h2>Security Checklist</h2>
+          <ul>
+            <li>Auth0 credentials stored in system keychain</li>
+            <li>Logout implemented when switching contexts</li>
+            <li>Error messages don't expose sensitive data</li>
+            <li>HTTPS enabled for all API calls</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- User Database -->
+      <section class="section" id="user-database">
+        <h2>User Database Integration Guide</h2>
+        <p class="filepath">USER_DATABASE_INTEGRATION.md</p>
+        <div class="content">
+          <h1>User Database Integration Guide</h1>
+          <p>Complete guide for integrating Auth0 with PostgreSQL database and MCP services.</p>
+
+          <h2>Overview</h2>
+          <p>This system provides:</p>
+          <ul>
+            <li>User authentication with Auth0</li>
+            <li>User data storage in PostgreSQL</li>
+            <li>User context in MCP Memory (knowledge graph)</li>
+            <li>Profile enrichment using MCP Fetch</li>
+            <li>Activity and session tracking</li>
+            <li>Role-based permissions</li>
+          </ul>
+
+          <h2>Database Schema</h2>
+          <ul>
+            <li><strong>users</strong> - Core user information</li>
+            <li><strong>user_profiles</strong> - Extended profile data</li>
+            <li><strong>user_sessions</strong> - Active sessions</li>
+            <li><strong>user_activity</strong> - Activity log</li>
+            <li><strong>roles</strong> - Role definitions</li>
+            <li><strong>user_roles</strong> - User-role assignments</li>
+          </ul>
+
+          <h2>Setup Steps</h2>
+          <pre><code># Create database
+createdb integrity_studio
+
+# Run schema migration
+./scripts/setup-database.sh</code></pre>
+
+          <h2>Usage Example</h2>
+          <pre><code>import { useUserSync } from './hooks/useUserSync';
+
+function App() {
+  const { dbUser, isSyncing, syncError } = useUserSync();
+
+  if (isSyncing) {
+    return &lt;div&gt;Syncing user data...&lt;/div&gt;;
+  }
+
+  return &lt;div&gt;Welcome {dbUser?.name}!&lt;/div&gt;;
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Schema Guide -->
+      <section class="section" id="schema-guide">
+        <h2>Schema.org Implementation Guide</h2>
+        <p class="filepath">schema/schema-implementation-guide.md</p>
+        <div class="content">
+          <h1>Schema.org Structured Data Implementation</h1>
+          <p>Comprehensive Schema.org recommendations using JSON-LD format.</p>
+
+          <h2>Implemented Schema Types</h2>
+          <ol>
+            <li><strong>Organization Schema</strong> - Knowledge Graph presence, brand recognition</li>
+            <li><strong>ProfessionalService Schema</strong> - Service-specific rich results</li>
+            <li><strong>Service Schemas</strong> - 6 individual services defined</li>
+            <li><strong>WebSite & WebPage Schemas</strong> - Sitelinks search box</li>
+            <li><strong>BreadcrumbList Schema</strong> - Navigation hierarchy</li>
+            <li><strong>FAQPage Schema</strong> - Expandable Q&A in search</li>
+            <li><strong>LocalBusiness Schema</strong> - Local pack eligibility</li>
+            <li><strong>BlogPosting Schemas</strong> - Article rich results</li>
+          </ol>
+
+          <h2>Rich Results Eligibility</h2>
+          <ul>
+            <li>Knowledge Panel - Organization information</li>
+            <li>Sitelinks & Search Box - Enhanced navigation</li>
+            <li>FAQ Rich Results - Expandable Q&A</li>
+            <li>Breadcrumbs - Navigation path</li>
+            <li>Local Pack - Business listings</li>
+            <li>Service Snippets - Detailed service info</li>
+          </ul>
+
+          <h2>SEO Impact</h2>
+          <ul>
+            <li><strong>Visibility:</strong> 30-40% increase in SERP visibility</li>
+            <li><strong>CTR:</strong> 15-25% improvement in click-through rates</li>
+            <li><strong>Trust:</strong> Enhanced credibility through knowledge graph</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Tailwind Classes -->
+      <section class="section" id="tailwind-classes">
+        <h2>Tailwind CSS Class Reference</h2>
+        <p class="filepath">development/tailwind-class-chart.md</p>
+        <div class="content">
+          <h1>Tailwind CSS Class Usage Chart</h1>
+          <p>Documentation of all Tailwind CSS class combinations used across project files.</p>
+
+          <h2>Sample Class Definitions</h2>
+          <table>
+            <tr><th>className</th><th>Tailwind Classes</th></tr>
+            <tr><td><code>btn-primary-base</code></td><td>bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600</td></tr>
+            <tr><td><code>card-surface</code></td><td>bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-700</td></tr>
+            <tr><td><code>form-input</code></td><td>w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500</td></tr>
+            <tr><td><code>gradient-text</code></td><td>text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400</td></tr>
+            <tr><td><code>hero-heading</code></td><td>text-4xl lg:text-6xl font-bold text-white leading-tight</td></tr>
+          </table>
+
+          <h2>Naming Conventions</h2>
+          <ol>
+            <li>Use semantic prefixes: text-*, bg-*, flex-*, grid-*, border-*, card-*, btn-*</li>
+            <li>Add modifiers: -light, -dark, -sm, -md, -lg, -primary, -rounded, -responsive</li>
+            <li>Use kebab-case for multi-word names</li>
+            <li>Order: [component]-[variant]-[size]-[state]</li>
+          </ol>
+          <p><strong>Total unique class combinations:</strong> 99</p>
+        </div>
+      </section>
+
+      <!-- Tailwind Usage -->
+      <section class="section" id="tailwind-usage">
+        <h2>Tailwind CSS Usage Guide</h2>
+        <p class="filepath">development/tailwind-usage-chart.md</p>
+        <div class="content">
+          <h1>Tailwind CSS Usage Chart</h1>
+          <p>Documentation of complete Tailwind CSS class combinations excluding classes defined in index.css.</p>
+
+          <h2>Naming Conventions</h2>
+          <ol>
+            <li>Use semantic prefixes based on primary utility</li>
+            <li>Add descriptive modifiers: -muted, -light, -accent, -bold, -rounded, -interactive, -animated, -responsive</li>
+            <li>Use component context when no clear pattern is found</li>
+            <li>Keep names concise but descriptive</li>
+            <li>Use kebab-case for multi-word names</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- SEO Tests -->
+      <section class="section" id="seo-tests">
+        <h2>SEO Validation Tests</h2>
+        <p class="filepath">testing/seo-validation-tests.md</p>
+        <div class="content">
+          <h1>SEO and Schema.org Validation Tests</h1>
+          <p>Automated testing strategy for structured data and Rich Results eligibility.</p>
+
+          <h2>Test Coverage</h2>
+          <h3>Schema Validation Tests</h3>
+          <ul>
+            <li>Valid JSON-LD structure</li>
+            <li>Required properties for each schema type</li>
+            <li>Organization, Service, WebSite, FAQPage schemas</li>
+            <li>Proper @id references</li>
+          </ul>
+
+          <h3>Rich Results Validation Tests</h3>
+          <ul>
+            <li>Organization rich results</li>
+            <li>Local Business rich results</li>
+            <li>FAQ rich results</li>
+            <li>Sitelinks Search Box</li>
+            <li>Breadcrumb rich results</li>
+          </ul>
+
+          <h2>Running Tests</h2>
+          <pre><code># Run schema validation tests
+npm test -- tests/seo/schema-validation.test.tsx
+
+# Run rich results tests
+npm test -- tests/seo/rich-results.test.tsx
+
+# Run all SEO tests
+npm test -- tests/seo/</code></pre>
+
+          <h2>Performance Expectations</h2>
+          <ul>
+            <li>30-40% increase in SERP visibility</li>
+            <li>15-25% improvement in click-through rates</li>
+            <li>Enhanced Knowledge Graph presence</li>
+            <li>Better local search rankings</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Accessibility -->
+      <section class="section" id="accessibility">
+        <h2>Accessibility Implementation Guide</h2>
+        <p class="filepath">accessibility/accessibility-implementation.md</p>
+        <div class="content">
+          <h1>Accessibility Implementation Guide</h1>
+          <p>Comprehensive accessibility features for WCAG 2.1 AA compliance.</p>
+
+          <h2>Features Implemented</h2>
+          <h3>1. Semantic HTML & ARIA</h3>
+          <ul>
+            <li>Proper heading hierarchy (h1 - h2 - h3)</li>
+            <li>Semantic HTML5 elements</li>
+            <li>ARIA landmarks for screen readers</li>
+            <li>ARIA live regions for dynamic content</li>
+          </ul>
+
+          <h3>2. Keyboard Navigation</h3>
+          <ul>
+            <li>Full keyboard accessibility</li>
+            <li>Visible focus indicators (2px blue outline)</li>
+            <li>Logical tab order</li>
+            <li>Skip navigation link</li>
+          </ul>
+
+          <h3>3. Form Accessibility</h3>
+          <ul>
+            <li>Proper label associations</li>
+            <li>Real-time validation with screen reader announcements</li>
+            <li>Error messages with role="alert"</li>
+            <li>Required field indicators</li>
+          </ul>
+
+          <h3>4. Visual Accessibility</h3>
+          <ul>
+            <li>Enhanced color contrast (WCAG AA)</li>
+            <li>High contrast mode support</li>
+            <li>Reduced motion support</li>
+            <li>Print accessibility</li>
+          </ul>
+
+          <h2>Testing</h2>
+          <pre><code># Run accessibility tests
+npm run test:a11y
+
+# Watch mode
+npm run test:a11y:watch</code></pre>
+
+          <h2>WCAG 2.1 AA Compliance</h2>
+          <ul>
+            <li><strong>Perceivable:</strong> Text alternatives, captions, contrast</li>
+            <li><strong>Operable:</strong> Keyboard accessible, timing, seizures</li>
+            <li><strong>Understandable:</strong> Readable, predictable</li>
+            <li><strong>Robust:</strong> Compatible with assistive technologies</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Security -->
+      <section class="section" id="security">
+        <h2>Security Documentation</h2>
+        <p class="filepath">security/README.md</p>
+        <div class="content">
+          <h1>Security Documentation</h1>
+          <p>This directory contains security-related documentation.</p>
+
+          <h2>Best Practices</h2>
+          <ul>
+            <li>Never commit <code>.env</code> files or API tokens</li>
+            <li>Use Doppler for secrets management</li>
+            <li>Rotate tokens every 90 days</li>
+            <li>Report vulnerabilities to security@integritystudio.ai</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Access Policy -->
+      <section class="section" id="access-policy">
+        <h2>Access Policy</h2>
+        <p class="filepath">access_policy.com</p>
+        <div class="content">
+          <h1>Cloudflare Access Policy</h1>
+          <pre><code>const accessPolicy = {
+  "name": "secure-app-access",
+  "decision": "allow",
+  "include": [
+    {
+      "email_domain": {
+        "domain": "integrityai.com"
+      }
+    }
+  ],
+  "session_duration": "24h"
+};</code></pre>
+        </div>
+      </section>
+
+      <footer style="text-align: center; padding: 32px; color: var(--text-muted); font-size: 0.875rem;">
+        <p>Generated from repomix-output.xml</p>
+        <p>Integrity Studio LLC - Marketing Plan Documentation</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

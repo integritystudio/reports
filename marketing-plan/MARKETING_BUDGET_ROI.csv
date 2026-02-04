@@ -1,0 +1,108 @@
+Category,Item,Month 1,Month 2,Month 3,Month 4,Month 5,Month 6,Month 7,Month 8,Month 9,Month 10,Month 11,Month 12,Annual Total,Notes
+ONE-TIME SETUP,,,,,,,,,,,,,,,
+Setup,NTEN Membership,150,0,0,0,0,0,0,0,0,0,0,0,150,Annual membership
+Setup,Website Optimization,0,0,0,0,0,0,0,0,0,0,0,0,0,DIY (or $1000-2000 if outsourced)
+Setup,Lead Magnet Creation,0,0,0,0,0,0,0,0,0,0,0,0,0,DIY (or $500-1500 if designed)
+Setup Subtotal,,150,0,0,0,0,0,0,0,0,0,0,0,150,
+,,,,,,,,,,,,,,,
+MONTHLY RECURRING,,,,,,,,,,,,,,,
+Software,Email Marketing Platform,25,25,25,25,25,25,25,25,25,25,25,25,300,Mailchimp/ConvertKit
+Software,Webinar Platform (Zoom),79,79,79,79,79,79,79,79,79,79,79,79,948,Zoom Webinars
+Software,LinkedIn Sales Navigator (optional),0,0,0,0,0,0,0,0,0,0,0,0,0,Optional - add if needed
+Software,Design Tools (Canva Pro),13,13,13,13,13,13,13,13,13,13,13,13,156,For graphics
+Software Subtotal,,117,117,117,117,117,117,117,117,117,117,117,117,1404,
+,,,,,,,,,,,,,,,
+VARIABLE MARKETING,,,,,,,,,,,,,,,
+Ads,LinkedIn Ads,300,500,500,800,800,1000,1000,1000,1000,1000,1000,1000,9900,Paid lead generation
+Ads,Google Ads (optional),0,0,0,0,0,0,0,0,0,0,0,0,0,Start if LinkedIn proves out
+Marketing,Webinar Promotion,0,0,0,0,0,0,0,0,0,0,0,0,0,Organic + included in ads
+Marketing,Survey Promotion,0,0,0,0,0,200,0,0,0,0,0,0,200,Month 6 research survey
+Marketing,Research Report,0,0,0,0,0,0,1000,0,0,0,0,0,1000,Design and PR distribution
+Marketing,Conference Fees,0,0,0,0,0,0,0,0,0,0,0,0,0,Included if speaking
+Marketing,Annual Report Design,0,0,0,0,0,0,0,0,0,0,0,500,500,Year-end impact report
+Variable Marketing Subtotal,,300,500,500,800,800,1200,2000,1000,1000,1000,1000,1500,11600,
+,,,,,,,,,,,,,,,
+CONTENT CREATION (OPTIONAL),,,,,,,,,,,,,,,
+Content,Blog Posts (if outsourced),0,0,0,0,0,0,0,0,0,0,0,0,0,Assume DIY in base budget
+Content,Design/Graphics (if outsourced),0,0,0,0,0,0,0,0,0,0,0,0,0,Assume Canva DIY
+Content,Video Editing (if outsourced),0,0,0,0,0,0,0,0,0,0,0,0,0,Future consideration
+Content Subtotal,,0,0,0,0,0,0,0,0,0,0,0,0,0,Add if outsourcing
+,,,,,,,,,,,,,,,
+MONTHLY TOTALS,,,,,,,,,,,,,,,
+Total,Monthly Spend,567,617,617,917,917,1317,2117,1117,1117,1117,1117,1617,13154,
+Total,Cumulative Spend,567,1184,1801,2718,3635,4952,7069,8186,9303,10420,11537,13154,13154,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+REVENUE PROJECTIONS,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+CONSERVATIVE SCENARIO,,,,,,,,,,,,,,,
+Revenue,New Client Deals,0,0,20000,0,25000,30000,0,75000,0,0,35000,0,185000,
+Revenue,Cumulative Revenue,0,0,20000,20000,45000,75000,75000,150000,150000,150000,185000,185000,185000,
+Metrics,Net Cash Flow,-567,-617,19383,-917,24083,28683,-2117,73883,-1117,-1117,33883,-1617,171846,Revenue minus marketing spend
+Metrics,Cumulative Net,-567,-1184,18199,17282,41365,70048,67931,141814,140697,139580,173463,171846,171846,
+Metrics,ROI,0.0x,0.0x,11.1x,7.4x,12.4x,15.1x,10.6x,18.3x,16.1x,14.4x,16.0x,14.1x,14.1x,Times return on cumulative spend
+,,,,,,,,,,,,,,,
+MODERATE SCENARIO,,,,,,,,,,,,,,,
+Revenue,New Client Deals,0,0,25000,30000,35000,85000,5000,45000,105000,5000,50000,12000,397000,Includes retainers starting M7
+Revenue,Cumulative Revenue,0,0,25000,55000,90000,175000,180000,225000,330000,335000,385000,397000,397000,
+Metrics,Net Cash Flow,-567,-617,24383,29083,34083,83683,2883,43883,103883,3883,48883,10383,383846,
+Metrics,Cumulative Net,-567,-1184,23199,52282,86365,170048,172931,216814,320697,324580,373463,383846,383846,
+Metrics,ROI,0.0x,0.0x,13.9x,20.2x,24.8x,35.3x,25.5x,27.5x,35.5x,32.1x,33.4x,30.2x,30.2x,
+,,,,,,,,,,,,,,,
+OPTIMISTIC SCENARIO,,,,,,,,,,,,,,,
+Revenue,New Client Deals,0,0,40000,110000,100000,57000,127000,63000,150000,60000,130000,0,837000,Aggressive growth
+Revenue,Adjusted Realistic,0,0,40000,70000,80000,90000,100000,110000,120000,120000,140000,150000,1020000,More realistic optimistic
+Revenue,Conservative Optimistic,0,0,40000,70000,80000,90000,100000,110000,120000,120000,140000,150000,450000,Realistic Year 1 optimistic
+Revenue,Cumulative (Realistic),0,0,40000,110000,190000,280000,380000,490000,610000,730000,870000,1020000,1020000,
+Metrics,Net Cash Flow,-567,-617,39383,69083,79083,88683,97883,108883,118883,118883,138883,148383,436846,Using realistic optimistic
+Metrics,ROI,0.0x,0.0x,22.2x,40.5x,52.3x,56.5x,53.8x,59.8x,65.6x,70.1x,75.4x,77.5x,77.5x,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+LEAD GENERATION METRICS,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+Leads,Total Leads (Moderate),20,30,40,60,80,100,90,120,150,105,150,200,1145,Monthly totals ramping up
+Leads,Marketing Qualified Leads,5,8,10,15,20,25,20,30,35,24,35,46,273,~25% conversion
+Leads,Sales Qualified Leads,2,3,4,5,8,10,7,12,13,8,14,16,102,~37% conversion
+Leads,Closed Deals,0,0,1,1,1,1,1,2,2,1,2,2,14,~14% conversion (moderate)
+,,,,,,,,,,,,,,,
+COST PER ACQUISITION,,,,,,,,,,,,,,,
+CPA,Marketing Spend,567,617,617,917,917,1317,2117,1117,1117,1117,1117,1617,13154,
+CPA,Cumulative Spend,567,1184,1801,2718,3635,4952,7069,8186,9303,10420,11537,13154,13154,
+CPA,Closed Deals (Cumulative),0,0,1,2,3,4,5,7,9,10,12,14,14,
+CPA,Cost Per Client,N/A,N/A,1801,1359,1212,1238,1414,1169,1034,1042,961,940,940,Average CPA
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+KEY RATIOS,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+CONSERVATIVE,,,,,,,,,,,,,,,
+Ratio,Revenue to Marketing Spend,,,,,,,,,,,,14.1x,ROI
+Ratio,Profit Margin on Marketing,,,,,,,,,,,,93%,Profit / Revenue
+Ratio,Break-even Month,,,3,,,,,,,,,,Month 3,First revenue covers all spend
+,,,,,,,,,,,,,,,
+MODERATE,,,,,,,,,,,,,,,
+Ratio,Revenue to Marketing Spend,,,,,,,,,,,,30.2x,ROI
+Ratio,Profit Margin on Marketing,,,,,,,,,,,,97%,Profit / Revenue
+Ratio,Break-even Month,,,3,,,,,,,,,,Month 3,First revenue covers all spend
+,,,,,,,,,,,,,,,
+OPTIMISTIC,,,,,,,,,,,,,,,
+Ratio,Revenue to Marketing Spend,,,,,,,,,,,,34.2x,ROI (using realistic optimistic $450K)
+Ratio,Profit Margin on Marketing,,,,,,,,,,,,97%,Profit / Revenue
+Ratio,Break-even Month,,,3,,,,,,,,,,Month 3,First revenue covers all spend
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+SENSITIVITY ANALYSIS,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+Scenario,Description,Year 1 Revenue,Marketing Spend,Net Profit,ROI,Notes
+Base Conservative,As modeled above,185000,13154,171846,14.1x,Conservative baseline
+50% Lower Leads,Half the lead generation,92500,13154,79346,7.0x,Still profitable
+50% Lower Close Rate,Half the conversion,92500,13154,79346,7.0x,Still profitable
+30% Smaller Deals,Lower average deal size,129500,13154,116346,9.8x,Still strong ROI
+50% Higher Costs,Marketing costs increase 50%,185000,19731,165269,9.4x,Robust to cost overruns
+Worst Case Combined,All negative factors,46250,19731,26519,2.3x,Still profitable even in worst case
+,,,,,,,,,,,,,,,
+Base Moderate,As modeled above,397000,13154,383846,30.2x,Most likely scenario
+50% Lower Leads,Half the lead generation,198500,13154,185346,15.1x,Still excellent
+50% Lower Close Rate,Half the conversion,198500,13154,185346,15.1x,Still excellent
+30% Smaller Deals,Lower average deal size,277900,13154,264746,21.1x,Strong ROI maintained
+50% Higher Costs,Marketing costs increase 50%,397000,19731,377269,20.1x,Very robust
+Worst Case Combined,All negative factors,99250,19731,79519,5.0x,Still profitable even in worst case

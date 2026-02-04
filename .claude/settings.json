@@ -1,0 +1,5 @@
+{
+  "enabledPlugins": {
+    "auto-scaling-configurator@claude-code-plugins-plus": true
+  }
+}

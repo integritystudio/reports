@@ -1,0 +1,364 @@
+# Capital City Village - Comprehensive Analysis Report
+
+**Organization:** Capital City Village (CCV)
+**Website:** https://www.capitalcityvillage.org/
+**Location:** 3710 Cedar St, Suite 283, Austin, TX 78705
+**Contact:** 512-524-2709 | info@capitalcityvillage.org
+**Report Date:** February 3, 2026
+
+---
+
+## Executive Summary
+
+Capital City Village is a 501(c)(3) nonprofit organization in Austin, Texas, part of the nationwide "Village Movement" supporting seniors aging in place. The organization provides social activities, volunteer services (transportation, technology help, minor home repairs), and referrals to service providers for its members.
+
+This analysis covers two main areas:
+1. **Website Redesign Analysis** - Current state evaluation and recommendations
+2. **Payment Processors Analysis** - Comparison of options suitable for CCV's needs
+
+---
+
+## Part 1: Website Redesign Analysis
+
+### Current State Assessment
+
+#### Platform
+CCV currently uses **Helpful Village** (helpfulvillage.com), a specialized SaaS platform built specifically for Village Movement organizations. The website is hosted at capitalcityvillage.org but the backend runs on capitalcity.helpfulvillage.com.
+
+#### Design/UX Evaluation
+
+| Aspect | Rating | Notes |
+|--------|--------|-------|
+| Visual Design | Poor | Outdated appearance; multiple broken image links observed on homepage |
+| Navigation | Fair | Basic menu structure exists but inconsistent URL patterns |
+| Mobile Responsiveness | Unknown | Could not fully evaluate; platform claims mobile support |
+| Content Organization | Fair | Information is present but scattered across multiple page types |
+| Accessibility | Unknown | No evidence of WCAG compliance testing |
+| Brand Consistency | Poor | Mix of capitalcityvillage.org and helpfulvillage.com URLs creates confusion |
+
+#### Critical Issues Identified
+
+1. **Broken Images on Homepage**
+   - Multiple images failing to load from helpfulvillage.com/documents/ URLs
+   - Creates unprofessional appearance and poor first impression
+   - Carousel/slideshow showing "Image not found" errors
+
+2. **Inconsistent URL Structure**
+   - Some pages at www.capitalcityvillage.org
+   - Others redirect to capitalcity.helpfulvillage.com
+   - Some pages return 403 (Forbidden) or 404 (Not Found) errors
+
+3. **Limited Customization**
+   - Website appears templated with limited branding options
+   - Design reflects platform defaults rather than CCV's identity
+
+4. **Navigation Confusion**
+   - "Support" page returned 404 error
+   - "About Us" link led to "Sponsors" page instead
+   - Events calendar inaccessible (403 error)
+
+#### Strengths
+
+- Clear mission statement on homepage
+- Detailed membership information and pricing tiers
+- Staff/Board pages with photos and bios create personal connection
+- Diversity, Equity, and Inclusion statement prominently displayed
+- GuideStar Silver Transparency badge displayed
+- Title VI compliance notice present
+
+### Redesign Recommendations
+
+#### Option 1: Stay with Helpful Village (Minimal Investment)
+
+**Pros:**
+- No migration required
+- Village-specific features built-in (volunteer management, service requests, events)
+- Used by 110+ Villages nationwide
+- Integrated member/volunteer database
+- Affordable for small nonprofits
+
+**Cons:**
+- Limited design customization
+- Current broken image issues suggest platform limitations
+- Dependent on third-party for fixes
+
+**Action Items:**
+- Contact Helpful Village support to fix broken image links immediately
+- Request custom domain configuration to eliminate mixed URL issues
+- Explore premium tier features if available
+
+#### Option 2: WordPress with Nonprofit Theme (Moderate Investment)
+
+**Recommended Technology Stack:**
+- **CMS:** WordPress
+- **Theme:** Starter themes like Neve, GeneratePress, or nonprofit-specific themes from ThemeForest
+- **Hosting:** WP Engine, SiteGround, or Bluehost (all offer nonprofit discounts)
+- **Donation Plugin:** GiveWP or Charitable
+- **Events:** The Events Calendar
+- **Forms:** Gravity Forms or WPForms
+
+**Estimated Costs:**
+- Hosting: $100-300/year
+- Premium theme: $50-100 (one-time)
+- Essential plugins: $200-400/year
+- Development: $2,000-5,000 (one-time for setup)
+
+**Pros:**
+- Full design control and customization
+- Large ecosystem of plugins
+- Easy content management for non-technical staff
+- Better SEO capabilities
+- Scalable as organization grows
+
+**Cons:**
+- Loses integrated Village-specific features from Helpful Village
+- Requires manual integration with member management
+- Ongoing maintenance responsibility
+
+#### Option 3: Squarespace or Wix (Low Investment)
+
+**Pros:**
+- Very user-friendly for non-technical staff
+- Beautiful modern templates
+- Built-in donation features
+- Affordable pricing ($12-40/month)
+
+**Cons:**
+- Limited customization compared to WordPress
+- No Village-specific integrations
+- Less SEO flexibility
+
+#### Option 4: Hybrid Approach (Recommended)
+
+**Strategy:** Keep Helpful Village for backend operations (member management, volunteer coordination, service requests) but build a modern marketing website on WordPress or Squarespace.
+
+**Implementation:**
+1. New public-facing website for marketing, donations, events calendar
+2. Members log into Helpful Village portal for services (with clear SSO or linked login)
+3. Donation processing through dedicated nonprofit payment processor
+4. Clear separation: Public site = engagement, Helpful Village = operations
+
+**Benefits:**
+- Modern, professional public image
+- Retains specialized Village management tools
+- Better donation/fundraising capabilities
+- Improved SEO and marketing flexibility
+
+### Design Best Practices for Senior-Focused Website
+
+1. **Typography:** Minimum 16px base font size, high contrast text
+2. **Navigation:** Simple, clear menu with maximum 5-7 top-level items
+3. **Colors:** High contrast ratios (WCAG AA minimum, AAA preferred)
+4. **Buttons:** Large click targets (minimum 44x44 pixels)
+5. **Forms:** Single-column layouts, clear labels, helpful error messages
+6. **Content:** Short paragraphs, bullet points, scannable headings
+7. **Media:** Compress images for fast loading, always include alt text
+
+---
+
+## Part 2: Payment Processors Analysis
+
+### CCV's Payment Needs
+
+Based on the organization's structure, CCV requires payment processing for:
+
+| Payment Type | Frequency | Estimated Volume |
+|--------------|-----------|------------------|
+| **Membership Dues** | Annual/Monthly | $100-$800/year per member |
+| **Donations** | Ongoing | One-time and recurring |
+| **Event Fees** | Periodic | Golf tournament, Keep Aging Weird luncheon |
+| **Sponsorships** | Annual | Corporate/business sponsors |
+
+**Key Requirements:**
+- Recurring payment support (monthly membership options)
+- Low fees (nonprofit budget constraints)
+- Easy donor/member experience
+- Integration with existing systems
+- Reporting for transparency/compliance
+- ACH/bank transfer options (seniors may prefer)
+
+### Current Payment Setup
+
+CCV currently directs donors to:
+- Helpful Village's built-in fundraising campaigns
+- PayPal Giving Fund (mentioned as "skip processing fees" option)
+
+### Payment Processor Comparison
+
+#### Tier 1: Zero/Minimal Fee Options
+
+| Processor | Transaction Fee | Monthly Fee | Nonprofit Discount | Best For |
+|-----------|----------------|-------------|-------------------|----------|
+| **Zeffy** | 0% (tip model) | $0 | 100% free | Small nonprofits wanting zero fees |
+| **PayPal Giving Fund** | 0% | $0 | 100% free | Donations only (45-day payout delay) |
+
+**Zeffy Details:**
+- Truly free for nonprofits - no transaction fees
+- Operates on voluntary donor tips to Zeffy
+- Includes donation forms, event ticketing, peer-to-peer
+- Integrated CRM and donor management
+
+**PayPal Giving Fund Details:**
+- 100% of donation goes to charity
+- PayPal covers all processing fees
+- Connected to Facebook, Instagram fundraisers
+- Drawback: 15-45 day payout delay
+- CCV already uses this option
+
+#### Tier 2: Low-Fee Nonprofit-Focused Platforms
+
+| Processor | Transaction Fee | Monthly Fee | ACH Fee | Key Features |
+|-----------|----------------|-------------|---------|--------------|
+| **Stripe (Nonprofit)** | 2.2% + $0.30 | $0 | 0.8% + $0.30 | Global, 100+ payment methods |
+| **Bloomerang Payments** | 2.2% + $0.30 + 1% platform | $0 | 0.8% + $0.30 | CRM integration, fraud protection |
+| **DonorPerfect** | 2.2% + $0.30 | Varies | 0.8% + $0.30 | Full donor management CRM |
+| **Donorbox** | 1.75% platform + processing | $0-25+ | 0.8% | Recurring giving, embeddable forms |
+| **Givebutter** | 2.9% + $0.30 | $0 | 1.9% + $0.30 | 47% conversion rate, tips enabled |
+
+#### Tier 3: General-Purpose Processors
+
+| Processor | Transaction Fee | Monthly Fee | Nonprofit Rate | Notes |
+|-----------|----------------|-------------|----------------|-------|
+| **PayPal Standard** | 1.99% + $0.49 | $0 | Yes | High donor recognition/trust |
+| **Square** | 2.9% + $0.30 | $0 | No | Good for in-person events |
+| **Authorize.Net** | 2.9% + $0.30 | $25 | No | Strong security features |
+| **Clover** | 2.3% + $0.10 | Varies | No | POS hardware options |
+
+### Detailed Recommendations
+
+#### Primary Recommendation: Stripe for Nonprofits
+
+**Why Stripe:**
+- Industry-standard reliability and security
+- Nonprofit discount: 2.2% + $0.30 (vs standard 2.9% + $0.30)
+- Lower ACH fees for larger donations (0.8%)
+- Integrates with virtually any website or platform
+- Instant payouts available if needed
+- Supports recurring donations natively
+- Global payment methods (for snowbird members)
+
+**Requirements to Apply:**
+- 501(c)(3) documentation (CCV has this - GuideStar verified)
+- 80%+ of volume must be tax-deductible donations
+- Email nonprofit@stripe.com with EIN and verification
+
+**Note:** Membership dues may not qualify for nonprofit discount since they're not technically donations. CCV should verify with Stripe.
+
+#### Secondary Recommendation: Zeffy (For Maximum Donation Retention)
+
+**Why Zeffy:**
+- Zero transaction fees means 100% of donations reach CCV
+- Particularly valuable for small-dollar recurring gifts
+- Free event ticketing (golf tournament, luncheons)
+- No monthly minimums or hidden fees
+- Donor covers optional tip to Zeffy (not to CCV)
+
+**Considerations:**
+- Newer platform, less established than Stripe/PayPal
+- Relies on donor tips to sustain business model
+- May have fewer integration options
+
+#### Keep: PayPal Giving Fund
+
+**Why Continue Using:**
+- Already established
+- Zero fees
+- Integrates with social media fundraising
+- Familiar to many donors
+
+**Improvements:**
+- Promote more prominently on website
+- Use for one-time donations where delayed payout is acceptable
+- Not ideal for membership dues (delayed access to funds)
+
+### Fee Impact Analysis
+
+**Scenario:** CCV processes $50,000 annually in donations/memberships
+
+| Processor | Effective Fee Rate | Annual Cost | Net to CCV |
+|-----------|-------------------|-------------|------------|
+| Zeffy | 0% | $0 | $50,000 |
+| PayPal Giving Fund | 0% | $0 | $50,000 |
+| Stripe Nonprofit | ~2.5% | $1,250 | $48,750 |
+| Bloomerang | ~3.5% | $1,750 | $48,250 |
+| PayPal Standard | ~2.5% | $1,250 | $48,750 |
+| Square | ~3.2% | $1,600 | $48,400 |
+
+**Note:** Donor-covered fees can offset these costs. Many platforms report 70-85% of donors opt to cover fees when asked.
+
+### Implementation Strategy
+
+#### Phase 1: Immediate (0-30 days)
+1. Fix broken images on current website (contact Helpful Village)
+2. Continue using PayPal Giving Fund for donations
+3. Apply for Stripe nonprofit discount
+
+#### Phase 2: Short-term (1-3 months)
+1. Implement Stripe for membership dues (recurring billing)
+2. Evaluate Zeffy for event registration/ticketing
+3. Add "cover processing fees" option to all donation forms
+
+#### Phase 3: Medium-term (3-6 months)
+1. If pursuing website redesign, integrate payment processor with new site
+2. Consolidate payment reporting for better financial tracking
+3. Implement donor acknowledgment automation
+
+---
+
+## Summary of Recommendations
+
+### Website
+
+| Priority | Recommendation | Investment | Timeline |
+|----------|---------------|------------|----------|
+| Critical | Fix broken homepage images | Low (support ticket) | Immediate |
+| High | Resolve inconsistent URLs | Low-Medium | 1-2 weeks |
+| Medium | Evaluate hybrid approach (new marketing site + Helpful Village backend) | Medium-High | 3-6 months |
+| Optional | Full WordPress migration | High | 6-12 months |
+
+### Payment Processing
+
+| Priority | Recommendation | Rationale |
+|----------|---------------|-----------|
+| Primary | **Stripe for Nonprofits** | Reliability, integrations, nonprofit discount |
+| Secondary | **Zeffy** | Zero fees, ideal for events and small donations |
+| Continue | **PayPal Giving Fund** | Already in use, zero fees for donations |
+| Avoid | Square, Authorize.Net | Higher fees, no nonprofit discounts |
+
+### Budget Considerations
+
+**Minimal Investment Path:**
+- Stay with Helpful Village, fix current issues
+- Use Zeffy + PayPal Giving Fund (zero fees)
+- Total annual cost: <$500
+
+**Moderate Investment Path:**
+- Hybrid website approach with Squarespace marketing site
+- Stripe for Nonprofits + Zeffy
+- Total annual cost: $500-1,500
+
+**Full Investment Path:**
+- Custom WordPress site with professional design
+- Bloomerang (CRM + Payments integrated)
+- Total annual cost: $3,000-5,000
+
+---
+
+## Sources
+
+### Payment Processing Research
+- [Kindful - 8 Best Nonprofit Credit Card Processing Platforms 2026](https://kindful.com/blog/best-nonprofit-payment-processors/)
+- [Bloomerang - 8 Best Nonprofit Credit Card Processing Options 2026](https://bloomerang.com/blog/nonprofit-credit-card-processing/)
+- [Stripe - Fee Discount for Nonprofit Organizations](https://support.stripe.com/questions/fee-discount-for-nonprofit-organizations)
+- [PayPal - Are There Any Fees for PayPal Giving Fund?](https://www.paypal.com/us/cshelp/article/are-there-any-fees-charged-for-using-paypal-giving-fund--help207)
+- [Donorbox - PayPal Nonprofit Donation Fees](https://donorbox.org/nonprofit-blog/paypal-nonprofit-donation-fees)
+- [Double the Donation - Payment Processing Tools for Nonprofits](https://doublethedonation.com/payment-processing-tools-for-nonprofits/)
+
+### Village Movement / Helpful Village
+- [Helpful Village - The Village Movement](https://www.helpfulvillage.com/the-village-movement)
+- [Helpful Village - Village Software](https://www.helpfulvillage.com/copy-of-high-efficency-villages)
+
+---
+
+*Report prepared for Capital City Village Board of Directors*
+*Analysis conducted: February 3, 2026*

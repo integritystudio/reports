@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leora Home Health - Employee Referral Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .form-content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .checkbox-group {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: flex-start;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .bonus-info {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .bonus-info h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .bonus-info ul {
+            margin-left: 20px;
+            color: #333;
+        }
+
+        .bonus-info li {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .form-content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Employee Referral Form</h1>
+            <p>Help us build our amazing team - Refer a great caregiver!</p>
+        </div>
+
+        <div class="form-content">
+            <form id="referralForm">
+                <!-- Your Information -->
+                <div class="section">
+                    <h2 class="section-title">Your Information</h2>
+
+                    <div class="form-group">
+                        <label>Your Full Name <span class="required">*</span></label>
+                        <input type="text" id="employeeName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Employee ID <span class="required">*</span></label>
+                        <input type="text" id="employeeId" required>
+                        <div class="helper-text">Found on your employee badge or payroll stub</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Email <span class="required">*</span></label>
+                        <input type="email" id="employeeEmail" required>
+                    </div>
+                </div>
+
+                <!-- Candidate Information -->
+                <div class="section">
+                    <h2 class="section-title">Candidate Information</h2>
+
+                    <div class="form-group">
+                        <label>Candidate's Full Name <span class="required">*</span></label>
+                        <input type="text" id="candidateName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Candidate's Email <span class="required">*</span></label>
+                        <input type="email" id="candidateEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Candidate's Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="candidatePhone" required>
+                        <div class="helper-text">Format: 512-555-0100</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Position Referring For <span class="required">*</span></label>
+                        <select id="position" required>
+                            <option value="">-- Select Position --</option>
+                            <option value="CNA">Certified Nursing Assistant (CNA)</option>
+                            <option value="LVN">Licensed Vocational Nurse (LVN)</option>
+                            <option value="RN">Registered Nurse (RN)</option>
+                            <option value="Specialized">Specialized/Hard-to-Fill Position</option>
+                            <option value="Other">Other - Any Open Position</option>
+                        </select>
+                    </div>
+
+                    <div class="bonus-info">
+                        <h3>Referral Bonuses:</h3>
+                        <ul>
+                            <li><strong>CNA:</strong> $750 total ($250 at hire, $250 at 90 days, $250 at 180 days)</li>
+                            <li><strong>LVN:</strong> $1,000 total ($300/$350/$350)</li>
+                            <li><strong>RN:</strong> $1,500 total ($500/$500/$500)</li>
+                            <li><strong>Specialized:</strong> $2,000 total ($600/$700/$700)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Relationship & Qualifications -->
+                <div class="section">
+                    <h2 class="section-title">Additional Details</h2>
+
+                    <div class="form-group">
+                        <label>How do you know this candidate? <span class="required">*</span></label>
+                        <select id="relationship" required>
+                            <option value="">-- Select Relationship --</option>
+                            <option value="Friend">Friend</option>
+                            <option value="Family">Family Member</option>
+                            <option value="Former Colleague">Former Colleague</option>
+                            <option value="Classmate">Classmate/School</option>
+                            <option value="Neighbor">Neighbor</option>
+                            <option value="Social Network">Social Network/Online</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Why would they be a great fit for Leora? <span class="required">*</span></label>
+                        <textarea id="fitDescription" required placeholder="Tell us what makes this person special. Consider: their empathy, reliability, patient care skills, cultural fit, work ethic, etc."></textarea>
+                        <div class="helper-text">2-5 sentences about their strengths and why they align with our values</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Does the candidate have required certifications/licenses?</label>
+                        <select id="hasCertifications">
+                            <option value="">-- Select --</option>
+                            <option value="Yes">Yes, currently certified</option>
+                            <option value="In Progress">In progress (enrolled in program)</option>
+                            <option value="No">No, not yet</option>
+                            <option value="Unknown">I'm not sure</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Notes or Special Skills</label>
+                        <textarea id="additionalNotes" placeholder="Bilingual? Wound care experience? Dementia care training? Any other relevant information..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Confirmation -->
+                <div class="section">
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="confirmation" required>
+                            <span>I confirm that I have discussed this opportunity with the candidate and they are aware I'm submitting this referral. I understand the candidate must mention my name in their application to qualify for the referral bonus. <span class="required">*</span></span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group" style="margin-top: 10px;">
+                        <label>
+                            <input type="checkbox" id="eligibility" required>
+                            <span>I confirm that I meet the eligibility requirements (employed for 60+ days, in good standing) and understand the bonus payment structure. <span class="required">*</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Referral</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('referralForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = {
+                referralId: 'REF-' + new Date().getFullYear() + '-' + Math.floor(Math.random() * 10000).toString().padStart(4, '0'),
+                dateSubmitted: new Date().toISOString().split('T')[0],
+                employeeName: document.getElementById('employeeName').value,
+                employeeId: document.getElementById('employeeId').value,
+                employeeEmail: document.getElementById('employeeEmail').value,
+                candidateName: document.getElementById('candidateName').value,
+                candidateEmail: document.getElementById('candidateEmail').value,
+                candidatePhone: document.getElementById('candidatePhone').value,
+                position: document.getElementById('position').value,
+                relationship: document.getElementById('relationship').value,
+                fitDescription: document.getElementById('fitDescription').value,
+                hasCertifications: document.getElementById('hasCertifications').value,
+                additionalNotes: document.getElementById('additionalNotes').value,
+                status: 'Submitted'
+            };
+
+            // In production, this would send to your backend/database
+            console.log('Referral Submitted:', formData);
+
+            // Show success message
+            alert('Thank you! Your referral has been submitted successfully.\n\nReferral ID: ' + formData.referralId + '\n\nYou will receive a confirmation email within 48 hours. The candidate should apply and mention your name within 30 days.\n\nTrack your referral at: leorahomehealth.com/my-referrals');
+
+            // Reset form
+            this.reset();
+
+            // In production, redirect to confirmation page or dashboard
+            // window.location.href = '/referral-success?id=' + formData.referralId;
+        });
+
+        // Phone number formatting
+        document.getElementById('candidatePhone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 3 && value.length <= 6) {
+                e.target.value = value.slice(0,3) + '-' + value.slice(3);
+            } else if (value.length > 6) {
+                e.target.value = value.slice(0,3) + '-' + value.slice(3,6) + '-' + value.slice(6,10);
+            } else {
+                e.target.value = value;
+            }
+        });
+    </script>
+</body>
+</html>

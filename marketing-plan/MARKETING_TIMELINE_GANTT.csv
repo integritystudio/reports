@@ -1,0 +1,85 @@
+Task ID,Task Name,Start Week,Duration (Weeks),Dependencies,Assignee,Category,Budget,Expected Outcome
+1,Join NTEN membership,1,1,,Marketing,Foundation,$150,Community access
+2,Website optimization for SEO,1,1,,Marketing,Foundation,$0,Improved search visibility
+3,Create LinkedIn Company Page,1,1,,Marketing,Foundation,$0,Professional presence
+4,Set up email marketing platform,1,1,,Marketing,Foundation,$25-50/mo,Email infrastructure
+5,Create AI Readiness Assessment lead magnet,1,1,4,Content,Foundation,$0,Lead generation tool
+6,Write first 4 blog posts,2,1,,Content,Content,$0,SEO and thought leadership
+7,Set up lead magnet landing page,2,1,5,Marketing,Foundation,$0,Lead capture
+8,Configure email automation,2,1,7,Marketing,Foundation,$0,Nurture sequence
+9,Begin NTEN community participation,2,ongoing,,Marketing,Community,$0,Relationship building
+10,Create LinkedIn outreach templates,3,1,,Marketing,Outreach,$0,Scalable outreach
+11,Begin LinkedIn outreach,3,ongoing,10,Marketing,Outreach,$0,Connection building
+12,Plan first webinar,3,1,,Content,Events,$0,Educational offering
+13,Set up webinar platform,3,1,,Marketing,Foundation,$79/mo,Webinar infrastructure
+14,Create webinar landing page,3,1,13,Marketing,Events,$0,Registration system
+15,Publish first 2 blog posts,4,1,6,Content,Content,$0,Traffic generation
+16,Promote webinar,4,1,14,Marketing,Events,$300-500,Attendee acquisition
+17,Create first case study,4,1,,Content,Sales,$0,Social proof
+18,Month 1 review,4,1,,All,Admin,$0,Course correction
+19,Host first webinar,5,1,16,Marketing,Events,$0,Lead generation
+20,Webinar follow-up,5,1,19,Sales,Events,$0,Lead nurturing
+21,Develop pilot program package,6,2,,Sales,Product,$0,Service offering
+22,Create pilot program landing page,6,1,21,Marketing,Product,$0,Sales enablement
+23,Partner outreach,6,2,,BD,Partnerships,$0,Referral pipeline
+24,Publish 2 more blog posts,7,1,,Content,Content,$0,SEO authority
+25,Set up LinkedIn ad campaigns,7,1,7,Marketing,Ads,$500,Paid lead generation
+26,Launch LinkedIn ads,7,ongoing,25,Marketing,Ads,$500/mo,Consistent leads
+27,Plan second webinar,8,1,19,Content,Events,$0,Continued education
+28,Research guest blogging opportunities,8,1,,Content,Outreach,$0,Publication pipeline
+29,Month 2 review,8,1,,All,Admin,$0,Metrics analysis
+30,Host second webinar,9,1,27,Marketing,Events,$0,Lead generation
+31,TechSoup partnership outreach,9,1,,BD,Partnerships,$0,Strategic alliance
+32,Create AI Policy Template lead magnet,10,1,,Content,Foundation,$0,Lead generation
+33,Sales conversations,11,1,20,Sales,Sales,$0,Revenue generation
+34,Send pilot proposals,11,1,33,Sales,Sales,$0,Close deals
+35,Write first guest blog post,12,1,28,Content,Outreach,$0,External credibility
+36,Quarter 1 review,12,1,,All,Admin,$0,Strategic assessment
+37,Formalize referral partnerships,13,1,23,BD,Partnerships,$0,Documented agreements
+38,Create AI Grant Database lead magnet,13,1,,Content,Foundation,$0,High-value resource
+39,Plan third webinar,14,1,30,Content,Events,$0,Grant-focused education
+40,Host third webinar,15,1,39,Marketing,Events,$0,Lead generation
+41,Write second guest blog post,15,1,35,Content,Outreach,$0,Continued visibility
+42,Research speaking opportunities,16,1,,BD,Speaking,$0,Conference pipeline
+43,Month 4 review,16,1,,All,Admin,$0,Metrics check
+44,Plan research report,17,2,,Content,Research,$0,Annual thought leadership
+45,Launch Practitioner Network community,17,1,,Marketing,Community,$0,Community platform
+46,Host fourth webinar,19,1,40,Marketing,Events,$0,Lead generation
+47,Submit NTC 2026 proposals,20,1,42,BD,Speaking,$0,Conference speaking
+48,Submit regional conference proposals,20,1,42,BD,Speaking,$0,Additional speaking
+49,Month 5 review,20,1,,All,Admin,$0,Mid-year prep
+50,Launch research survey,21,2,44,Marketing,Research,$0,Data collection
+51,Pilot conversion sales push,21,1,34,Sales,Sales,$0,Upsell implementations
+52,Host fifth webinar,23,1,46,Marketing,Events,$0,Lead generation
+53,Write guest blog posts 3-4,23,1,41,Content,Outreach,$0,Publication momentum
+54,Half-year comprehensive review,24,1,,All,Admin,$0,Strategic pivot point
+55,Analyze survey data,25,2,50,Content,Research,$0,Report preparation
+56,Draft research report,25,2,55,Content,Research,$0,Major publication
+57,Design and format report,26,1,56,Content,Research,$0,Professional finish
+58,Publish and promote research report,27,1,57,Marketing,Research,$1000,Major visibility boost
+59,Media outreach,27,1,58,PR,Research,$0,Press coverage
+60,Podcast pitching,28,1,58,BD,Media,$0,Speaking opportunities
+61,Host sixth webinar,28,1,52,Marketing,Events,$0,Lead generation
+62,Month 7 review,28,1,,All,Admin,$0,Authority metrics
+63,Write SSIR/Chronicle article,29,1,58,Content,Outreach,$0,Top-tier publication
+64,Speaking engagement prep,30,1,47,BD,Speaking,$0,Presentation polish
+65,Host seventh webinar,32,1,61,Marketing,Events,$0,Lead generation
+66,Community growth initiatives,32,1,45,Marketing,Community,$0,Engagement boost
+67,Month 8 review,32,1,,All,Admin,$0,Thought leadership check
+68,Develop AI Maturity Model framework,33,2,,Product,Product,$0,Proprietary IP
+69,Host eighth webinar,36,1,65,Marketing,Events,$0,Lead generation
+70,Technology partner applications,36,1,,BD,Partnerships,$0,Vendor relationships
+71,Quarter 3 review,36,1,,All,Admin,$0,Strategic assessment
+72,Begin book planning,37,2,,Content,Book,$0,Long-term authority
+73,Host ninth webinar,39,1,68,Marketing,Events,$0,Lead generation
+74,Plan 2026 strategy,40,1,71,All,Planning,$0,Next year roadmap
+75,Month 10 review,40,1,,All,Admin,$0,Late-year metrics
+76,Develop certificate curriculum,41,2,,Product,Training,$0,New offering
+77,Host tenth webinar,43,1,73,Marketing,Events,$0,Lead generation
+78,Partnership optimization review,44,1,37,BD,Partnerships,$0,Maximize ROI
+79,Month 11 review,44,1,,All,Admin,$0,Year-end prep
+80,Create Annual Impact Report,45,2,,Content,Reporting,$0,Client appreciation
+81,Client appreciation initiatives,46,1,80,All,Client Success,$0,Retention focus
+82,Host year-end webinar,47,1,77,Marketing,Events,$0,Lead generation
+83,Comprehensive Year 1 Review,48,2,,All,Planning,$0,Full analysis
+84,2026 Strategic Plan,48,1,83,All,Planning,$0,Next year execution
