@@ -1,8 +1,8 @@
 # Marketing Implementation Templates & Scripts
 ## Integrity Studio LLC - Ready-to-Use Marketing Materials
 
-**Version:** 1.0
-**Date:** January 2025
+**Version:** 2.0
+**Date:** February 2026
 
 ---
 
@@ -65,7 +65,7 @@ P.S. - Over the next few weeks, I'll share practical tips on responsible AI impl
 ```
 Hi [First Name],
 
-Did you know that 82% of nonprofits are using AI, but 76% don't have any AI policy in place?
+Did you know that 85%+ of nonprofits are using AI, but 65-70% don't have any formal AI policy in place?
 
 If your organization is using ChatGPT, AI-powered donor tools, or any AI technology, you need a policy - and it's easier to create than you think.
 
@@ -161,7 +161,7 @@ I came across [Organization Name]'s recent [program/initiative/announcement] and
 
 I'm reaching out because I specialize in helping nonprofits like yours navigate AI adoption responsibly - specifically around governance, policy development, and strategic implementation.
 
-I recently published research showing that 82% of nonprofits are using AI informally, but 76% don't have policies in place. This gap creates significant risk exposure, especially around:
+Research shows that 85%+ of nonprofits are using AI tools, but 65-70% still don't have formal policies in place. This gap creates significant risk exposure, especially around:
 • Donor data privacy
 • Bias in service delivery
 • Board oversight and accountability
@@ -259,9 +259,9 @@ Welcome to the monthly Nonprofit AI Insights newsletter! Here's what's new this 
 
 **📰 IN THE NEWS**
 
-**$50M in AI Grants for Nonprofits:** OpenAI's People-First AI Fund is now accepting applications. Eligibility: US nonprofits with $500K-$10M budgets. [LEARN MORE →]
+**$150M+ in AI Grants for Nonprofits:** OpenAI, Google.org ($75M+), Microsoft, AWS, McGovern Foundation and others are funding nonprofit AI adoption. [LEARN MORE →]
 
-**New Research:** 92% of nonprofit leaders feel unprepared for AI. We break down what this means for your organization. [READ ANALYSIS →]
+**New Research:** Only 28% of nonprofits have provided formal AI training, yet 85%+ are using AI tools. We break down what this means for your organization. [READ ANALYSIS →]
 
 ---
 
@@ -333,7 +333,7 @@ Hi [First Name],
 
 Thanks for connecting! I'm always interested to hear how nonprofit leaders are thinking about AI and technology.
 
-Is AI adoption something that's on your radar at [Organization]? I've been researching this space and found that 92% of nonprofit leaders feel unprepared for AI, despite 82% already using it informally.
+Is AI adoption something that's on your radar at [Organization]? I've been researching this space and found that 75-80% of nonprofit leaders feel insufficiently prepared for AI, despite 85%+ already using it - and only 28% have provided formal staff training.
 
 No sales pitch - I'm genuinely curious about your perspective!
 
@@ -348,9 +348,9 @@ Best,
 ### Script 3: LinkedIn Post Template - Thought Leadership
 
 ```
-82% of nonprofits are using AI.
+85%+ of nonprofits are using AI.
 
-But 76% don't have an AI policy.
+But 65-70% don't have a formal AI policy.
 
 This gap is a ticking time bomb.
 
@@ -491,7 +491,7 @@ Best of luck! 🎉
 - Today's agenda
 
 **Part 1: The AI Policy Gap (10 minutes)**
-- Statistics: 82% using AI, 76% without policies
+- Statistics: 85%+ using AI, 65-70% without formal policies, only 28% with formal AI training
 - Real-world risks: data breaches, bias incidents, compliance failures
 - Why nonprofits are particularly vulnerable
 - Case study: What happens when AI goes wrong (brief example)
@@ -612,14 +612,14 @@ Best of luck! 🎉
 
 ---
 
-### Webinar 3: "AI Grant Opportunities 2025: How to Apply and Win"
+### Webinar 3: "AI Grant Opportunities 2026: How to Apply and Win"
 
 **Duration:** 60 minutes
 
 **Outline:**
 
 **Part 1: AI Grant Landscape (15 minutes)**
-- $50M+ available in 2025
+- $150M+ available in 2026
 - Major programs: OpenAI, Google.org, AWS, Microsoft, foundations
 - Eligibility requirements by program
 - What funders are looking for
@@ -642,7 +642,7 @@ Best of luck! 🎉
 **Q&A (15 minutes)**
 
 **Resources:**
-- 2025 AI Grant Database (Excel spreadsheet)
+- 2026 AI Grant Database (Excel spreadsheet)
 - Grant Proposal Template
 - Budget Template
 
@@ -1003,13 +1003,13 @@ Founder, Integrity Studio LLC
 
 ### Template 3: NTEN Sponsorship Inquiry
 
-**Subject:** NTC 2026 Sponsorship Inquiry
+**Subject:** NTC 2027 Sponsorship Inquiry
 
 **Body:**
 ```
 Dear NTEN Sponsorship Team,
 
-I'm interested in learning about sponsorship opportunities for the Nonprofit Technology Conference (NTC) 2026 in Baltimore.
+I'm interested in learning about sponsorship opportunities for the Nonprofit Technology Conference (NTC) 2027.
 
 **About Integrity Studio:**
 We're a consulting firm specializing in responsible AI implementation for nonprofits. Our work focuses on helping organizations adopt AI strategically while addressing governance, ethics, and mission alignment.
@@ -1022,7 +1022,7 @@ The NTEN community is exactly who we serve, and we believe we can provide signif
 - Thought leadership in the responsible AI space
 
 **Questions:**
-1. What sponsorship tiers are available for NTC 2026?
+1. What sponsorship tiers are available for NTC 2027?
 2. What's the timeline for sponsorship commitments?
 3. Are there opportunities to sponsor specific tracks or sessions?
 4. Are speaking submissions separate from sponsorship, or do sponsors receive guaranteed slots?
@@ -1034,7 +1034,7 @@ The NTEN community is exactly who we serve, and we believe we can provide signif
 - Position as thought leaders in nonprofit AI
 - Support NTEN's mission to help nonprofits use technology effectively
 
-I'd appreciate any information you can share or a conversation about how we might participate in NTC 2026.
+I'd appreciate any information you can share or a conversation about how we might participate in NTC 2027.
 
 Best regards,
 [Your Name]
@@ -1057,7 +1057,7 @@ P.S. - We're currently individual NTEN members and actively participate in the o
 **Structure:**
 
 **Introduction (200 words)**
-- Hook: The 82%/76% statistic
+- Hook: The 85%/65-70% statistic
 - Why policies matter (risk mitigation, board confidence, staff guidance)
 - Promise: This is easier than you think
 
@@ -1101,8 +1101,8 @@ P.S. - We're currently individual NTEN members and actively participate in the o
 - Offer for consultation
 
 **SEO Elements:**
-- Title tag: "How to Write an AI Policy for Your Nonprofit in 30 Days [2025 Guide]"
-- Meta description: "82% of nonprofits use AI but 76% lack policies. Learn how to create an AI governance policy in 30 days with our step-by-step guide and free template."
+- Title tag: "How to Write an AI Policy for Your Nonprofit in 30 Days [2026 Guide]"
+- Meta description: "85%+ of nonprofits use AI but 65-70% lack formal policies. Learn how to create an AI governance policy in 30 days with our step-by-step guide and free template."
 - Headers: H2 for main sections, H3 for sub-points
 - Internal links: Link to related posts on AI governance, data privacy, board oversight
 - External links: Link to example policies from leading nonprofits, legal resources
@@ -1111,7 +1111,7 @@ P.S. - We're currently individual NTEN members and actively participate in the o
 
 ---
 
-### Blog Post Brief 2: "AI Grants for Nonprofits 2025: Complete Guide"
+### Blog Post Brief 2: "AI Grants for Nonprofits 2026: Complete Guide"
 
 **Target Keyword:** "AI grants for nonprofits"
 **Word Count:** 2,000-2,500 words
@@ -1120,14 +1120,14 @@ P.S. - We're currently individual NTEN members and actively participate in the o
 **Structure:**
 
 **Introduction (150 words)**
-- Hook: $50M+ in AI grants available
+- Hook: $150M+ in AI grants available
 - Why now (AI is priority funding area)
 - Who this guide is for
 
 **Major AI Grant Programs (1,200 words)**
 
 For each program (200 words each):
-- **OpenAI People-First AI Fund** ($50M)
+- **OpenAI People-First AI Fund** ($50M+)
   - Eligibility
   - Grant amounts
   - Application process
@@ -1163,12 +1163,12 @@ For each program (200 words each):
 - CTA: Download grant database and proposal template
 
 **SEO Elements:**
-- Title: "AI Grants for Nonprofits 2025: $50M+ in Funding Opportunities [Complete Guide]"
-- Meta description: "Comprehensive guide to AI grants for nonprofits in 2025. Learn about $50M+ in funding from OpenAI, Google, AWS, Microsoft and how to apply successfully."
+- Title: "AI Grants for Nonprofits 2026: $150M+ in Funding Opportunities [Complete Guide]"
+- Meta description: "Comprehensive guide to AI grants for nonprofits in 2026. Learn about $150M+ in funding from OpenAI, Google, AWS, Microsoft, McGovern Foundation and how to apply successfully."
 - Headers: H2 for main sections, H3 for each grant program
 - Table: Comparison of grant programs (eligibility, amounts, deadlines)
 - Infographic: Application timeline
-- CTA: "Download 2025 AI Grant Database" (Excel spreadsheet with all programs)
+- CTA: "Download 2026 AI Grant Database" (Excel spreadsheet with all programs)
 
 ---
 
@@ -1179,8 +1179,8 @@ For each program (200 words each):
 **Subheadline:** Learn how to create an AI governance policy that gives your board confidence and your staff clear guidance - without months of work or legal fees.
 
 **The Problem:**
-- 82% of nonprofits are using AI (ChatGPT, donor tools, analytics)
-- But 76% don't have any AI policy
+- 85%+ of nonprofits are using AI (ChatGPT, Microsoft Copilot, donor tools, analytics)
+- But 65-70% don't have any formal AI policy
 - This creates serious risks: data breaches, bias, compliance failures, board liability
 
 **What You'll Learn:**
@@ -1253,7 +1253,7 @@ A: Absolutely! We encourage you to register multiple people from your organizati
 
 ---
 
-*© 2025 Integrity Studio LLC | [Privacy Policy] | [Terms of Service]*
+*© 2026 Integrity Studio LLC | [Privacy Policy] | [Terms of Service]*
 
 ---
 

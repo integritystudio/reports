@@ -1,8 +1,8 @@
 # Marketing Budget & ROI Projections
 ## Integrity Studio LLC - Year 1 Financial Planning
 
-**Version:** 1.0
-**Date:** January 2025
+**Version:** 2.0
+**Date:** February 2026
 **Planning Period:** 12 months
 
 ---
@@ -42,11 +42,11 @@
 | Category | Monthly Cost | Annual Cost | Notes |
 |----------|--------------|-------------|-------|
 | **Software & Tools** | | | |
-| Email Marketing Platform | $25-$50 | $300-$600 | Mailchimp, ConvertKit, or similar |
-| Webinar Platform (Zoom) | $79 | $948 | Zoom Webinars plan |
-| LinkedIn Sales Navigator (optional) | $80-$135 | $960-$1,620 | For advanced outreach |
-| Design Tools (Canva Pro) | $13 | $156 | For graphics and social media |
-| **Subtotal** | **$197-$277** | **$2,364-$3,324** | |
+| Email Marketing Platform | $25-$50 | $300-$600 | Mailchimp, Kit (formerly ConvertKit), or similar |
+| Webinar Platform (Zoom) | $79-$101 | $948-$1,212 | Zoom Webinars add-on + Workplace Business base |
+| LinkedIn Sales Navigator (optional) | $100-$150 | $1,200-$1,800 | Core: $99.99/mo; Advanced: $149.99/mo |
+| Design Tools (Canva Pro) | $0-$15 | $0-$180 | $15/mo retail; FREE via Canva for Nonprofits (501c3) |
+| **Subtotal** | **$204-$316** | **$2,448-$3,792** | |
 
 ---
 
@@ -117,8 +117,8 @@
 | **TOTAL (DIY Content)** | **$13,914-15,074** | **Base scenario** |
 | **TOTAL (Outsourced Content)** | **$23,914-35,074** | **If hiring writers** |
 
-**Recommended Year 1 Budget: $21,400-22,000**
-(Assumes hybrid: in-house blog writing, occasional freelance design)
+**Recommended Year 1 Budget: $22,000-24,000**
+(Assumes hybrid: in-house blog writing, occasional freelance design; reflects 2026 tool pricing)
 
 ---
 
@@ -143,10 +143,10 @@
 | Channel | Monthly Leads (Mature) | Conversion to MQL | MQL to SQL | SQL to Close |
 |---------|------------------------|-------------------|------------|--------------|
 | Webinars | 50-100 attendees | 20% (10-20 MQL) | 30% (3-6 SQL) | 30% (1-2 deals) |
-| LinkedIn Ads | 30-50 downloads | 15% (5-8 MQL) | 25% (1-2 SQL) | 25% (0.25-0.5 deals) |
+| LinkedIn Ads | 8-17 downloads | 15% (1-3 MQL) | 25% (0.5-1 SQL) | 25% (0.1-0.25 deals) |
 | Organic Content/SEO | 20-40 inquiries | 30% (6-12 MQL) | 40% (2-5 SQL) | 35% (1-2 deals) |
 | Referrals/Partnerships | 5-10 referrals | 60% (3-6 MQL) | 50% (2-3 SQL) | 40% (1 deal) |
-| **Monthly Total** | **105-200 leads** | **24-46 MQL** | **8-16 SQL** | **3-5 deals** |
+| **Monthly Total** | **83-167 leads** | **20-41 MQL** | **7-14 SQL** | **2-4 deals** |
 
 **Lead Flow Build-Up:**
 
@@ -279,12 +279,13 @@
 
 **LinkedIn Ads:**
 - Monthly ad spend: $500-$1,000
-- Monthly leads: 30-50
-- Cost per lead: $10-$33
-- Lead to MQL rate: 15% (5-8)
-- Cost per MQL: $67-$200
+- Monthly leads: 4-17 (revised; 2026 LinkedIn CPL for nonprofit sector: $40-$120)
+- Cost per lead: $40-$120
+- Lead to MQL rate: 15% (1-3)
+- Cost per MQL: $267-$800
 - MQL to client close rate: 8%
-- **Cost per client: $835-$2,500**
+- **Cost per client: $3,300-$10,000**
+- Note: LinkedIn Thought Leader Ads and Event Ads may achieve lower CPL; test and optimize
 
 **Organic Content/SEO:**
 - Monthly time investment: 40-60 hours
@@ -445,9 +446,9 @@ Based on typical nonprofit consulting metrics:
 ### Lower-ROI Activities to Minimize
 
 **1. Broad LinkedIn Ads (without optimization)**
-- Can be expensive per lead ($10-33)
+- Expensive per lead ($40-120 for nonprofit sector targeting; C-suite $75-150+)
 - Lower conversion if not well-targeted
-- **Recommendation:** Start small, optimize aggressively, scale only what converts
+- **Recommendation:** Start small, test Thought Leader Ads and Event Ads for better CPL, optimize aggressively, scale only what converts
 
 **2. Conference Attendance (without speaking)**
 - High cost (travel, registration: $1,500-5,000)
@@ -565,4 +566,4 @@ The Year 1 marketing budget of $21,400-$22,000 provides excellent ROI potential:
 
 ---
 
-*This budget model should be reviewed monthly and adjusted based on actual performance. The assumptions are conservative and based on nonprofit consulting industry benchmarks.*
+*This budget model should be reviewed monthly and adjusted based on actual performance. The assumptions are conservative and based on nonprofit consulting industry benchmarks. Tool pricing and LinkedIn ad benchmarks updated February 2026.*

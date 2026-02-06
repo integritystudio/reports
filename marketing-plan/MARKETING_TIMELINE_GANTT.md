@@ -1,8 +1,8 @@
 # 12-Month Marketing Timeline & Gantt Chart
 ## Integrity Studio LLC - Go-to-Market Execution Plan
 
-**Version:** 1.0
-**Date:** January 2025
+**Version:** 2.0
+**Date:** February 2026
 **Planning Horizon:** 12 months
 
 ---
@@ -54,9 +54,9 @@ PHASE 3: AUTHORITY (Months 7-12)          [░░░░░░░░░░░░�
 **Content Creation & Marketing Setup**
 - [ ] Day 8-10: Write and schedule first 4 blog posts - 16 hours
   - "How to Write an AI Policy for Your Nonprofit in 30 Days"
-  - "82% of Nonprofits Use AI But 76% Lack Policies - Here's Why That's Dangerous"
+  - "85% of Nonprofits Use AI But 65-70% Lack Policies - Here's Why That's Dangerous"
   - "Getting Started with AI: Your First 3 Use Cases"
-  - "AI Grants for Nonprofits 2025: Complete Guide"
+  - "AI Grants for Nonprofits 2026: Complete Guide"
 - [ ] Day 11-12: Set up lead magnet landing page with email capture - 6 hours
 - [ ] Day 12-13: Configure email automation sequences (5-email welcome series) - 6 hours
 - [ ] Day 13-14: Begin NTEN community participation - 2 hours/day ongoing
@@ -261,10 +261,10 @@ PHASE 3: AUTHORITY (Months 7-12)          [░░░░░░░░░░░░�
   - Draft partnership agreements
   - Create referral enablement materials
   - Set up communication protocols
-- [ ] Day 96-100: Create third lead magnet: "2025 AI Grant Database" - 12 hours
+- [ ] Day 96-100: Create third lead magnet: "2026 AI Grant Database" ($150M+ available) - 12 hours
 - [ ] Day 100-104: Publish 4 blog posts - 2 hours
 - [ ] Day 91-104: LinkedIn outreach continues (20-30/week) - 2 hours/day
-- [ ] Day 101-104: Plan third webinar: "AI Grant Opportunities 2025" - 8 hours
+- [ ] Day 101-104: Plan third webinar: "AI Grant Opportunities 2026" - 8 hours
 
 **Budget:** $800 (increased ad spend - optimized campaigns)
 
@@ -277,9 +277,9 @@ PHASE 3: AUTHORITY (Months 7-12)          [░░░░░░░░░░░░�
 - [ ] Day 111: Follow-ups - 2 hours
 - [ ] Day 112-115: Write guest blog post #2 - 8 hours
 - [ ] Day 116-118: Research conferences for speaking opportunities - 6 hours
-  - NTC 2026 (submit proposal)
+  - NTC 2027 (submit proposal by summer 2026)
   - Regional nonprofit conferences
-  - AFP chapters
+  - AFP ICON, bbcon, SXSW Nonprofit Track
 - [ ] Day 119-120: Month 4 review - 3 hours
 
 **Budget:** $800 (ads)
@@ -300,7 +300,7 @@ PHASE 3: AUTHORITY (Months 7-12)          [░░░░░░░░░░░░�
 ### Week 17-18 (Days 121-134)
 
 **Research Report Planning & Community Launch**
-- [ ] Day 121-125: Plan "State of AI in Nonprofits 2025" research report - 12 hours
+- [ ] Day 121-125: Plan "State of AI in Nonprofits 2026" research report - 12 hours
   - Survey design (20-30 questions)
   - Distribution strategy
   - Analysis plan
@@ -321,7 +321,7 @@ PHASE 3: AUTHORITY (Months 7-12)          [░░░░░░░░░░░░�
 
 **Fourth Webinar & Conference Submissions**
 - [ ] Day 140: Host fourth webinar - 2 hours
-- [ ] Day 141-145: Submit NTC 2026 speaking proposals (2-3 sessions) - 12 hours
+- [ ] Day 141-145: Submit NTC 2027 speaking proposals (2-3 sessions) - 12 hours
 - [ ] Day 146-148: Submit regional conference proposals - 6 hours
 - [ ] Day 149-150: Month 5 review - 3 hours
 
@@ -531,7 +531,7 @@ PHASE 3: AUTHORITY (Months 7-12)          [░░░░░░░░░░░░�
 
 **Ninth Webinar & Year-End Planning**
 - [ ] Day 290: Host ninth webinar - 2 hours
-- [ ] Day 291-295: Plan 2026 strategy and budget - 10 hours
+- [ ] Day 291-295: Plan 2027 strategy and budget - 10 hours
 - [ ] Day 296-300: Month 10 review - 3 hours
 
 **Budget:** $1,000 (ads)
@@ -570,7 +570,7 @@ PHASE 3: AUTHORITY (Months 7-12)          [░░░░░░░░░░░░�
 ### Week 45-46 (Days 331-344)
 
 **Annual Report & Client Appreciation**
-- [ ] Day 331-340: Create 2025 Annual Impact Report - 16 hours
+- [ ] Day 331-340: Create 2026 Annual Impact Report - 16 hours
   - Clients served
   - Aggregate impact metrics
   - Case studies
@@ -591,7 +591,7 @@ PHASE 3: AUTHORITY (Months 7-12)          [░░░░░░░░░░░░�
   - What worked / what didn't
   - Lessons learned
   - Client feedback compilation
-- [ ] Day 361-365: 2026 Strategic Plan - 8 hours
+- [ ] Day 361-365: 2027 Strategic Plan - 8 hours
 
 **Budget:** $1,000 (ads)
 
@@ -609,8 +609,8 @@ PHASE 3: AUTHORITY (Months 7-12)          [░░░░░░░░░░░░�
 **Foundation Costs:**
 - NTEN membership: $150
 - Email marketing platform: $300-600/year
-- Webinar platform: $948 ($79 x 12 months)
-- **Subtotal:** ~$1,400-1,700
+- Webinar platform: $948-$1,212/year ($79-$101/mo)
+- **Subtotal:** ~$1,400-1,960
 
 **Marketing Spend:**
 - Months 1-3: $2,550-2,750
@@ -624,7 +624,7 @@ PHASE 3: AUTHORITY (Months 7-12)          [░░░░░░░░░░░░�
 - If in-house: Sweat equity
 - **Subtotal (assuming in-house):** $0
 
-**Total Year 1 Marketing Investment:** $21,400-22,000
+**Total Year 1 Marketing Investment:** $22,000-24,000
 
 ### Expected Year 1 Outcomes
 
@@ -702,7 +702,7 @@ Thought Leadership → Brand Equity → Inbound Leads → Revenue
 - **Month 9:** Proprietary framework launched
 - **Month 10:** Book planning begins
 - **Month 11:** Training program outlined
-- **Month 12:** Year 1 review and 2026 plan
+- **Month 12:** Year 1 review and 2027 plan
 
 **If Behind Schedule:**
 - Month 3 with no pilot: Double down on outreach, lower pilot pricing

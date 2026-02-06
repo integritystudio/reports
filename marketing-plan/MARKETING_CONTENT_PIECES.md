@@ -1,8 +1,8 @@
 # Marketing Content Pieces
 ## Integrity Studio LLC - Ready-to-Publish Content
 
-**Version:** 1.0
-**Date:** January 2025
+**Version:** 2.0
+**Date:** February 2026
 
 ---
 
@@ -17,10 +17,10 @@
 
 ## Blog Posts
 
-### Blog Post 1: "82% of Nonprofits Use AI But 76% Lack Policies - Here's Why That's Dangerous"
+### Blog Post 1: "85% of Nonprofits Use AI But 65-70% Lack Policies - Here's Why That's Dangerous"
 
-**Meta Title:** 82% of Nonprofits Use AI Without Policies - The Hidden Risks [2025]
-**Meta Description:** New research shows 82% of nonprofits use AI but 76% have no policies. Learn the legal, ethical, and operational risks your organization faces without AI governance.
+**Meta Title:** 85%+ of Nonprofits Use AI Without Formal Policies - The Hidden Risks [2026]
+**Meta Description:** Research shows 85%+ of nonprofits use AI but 65-70% still have no formal policies. Learn the legal, ethical, and operational risks your organization faces without AI governance.
 **Target Keyword:** nonprofit AI policy
 **Word Count:** 1,800-2,000 words
 
@@ -36,14 +36,14 @@ The answer? The organization. The board. Potentially the executive director pers
 
 And here's the scary part: This scenario is happening at thousands of nonprofits right now.
 
-New research reveals a dangerous disconnect:
+Research reveals a persistent disconnect:
 
-→ **82% of nonprofits are using AI** (ChatGPT, donor engagement tools, program analytics)
-→ But **76% don't have any AI policy**
+→ **85%+ of nonprofits are now using AI tools** (ChatGPT, Microsoft Copilot, donor engagement tools, program analytics)
+→ But **65-70% still don't have any formal AI policy**
 
-That's not a gap. That's a canyon.
+That's not a gap. That's a canyon. And with AI governance now becoming a funder requirement, the risks are growing.
 
-And the risks aren't theoretical. They're happening right now.
+The risks aren't theoretical. They're happening right now.
 
 ---
 
@@ -107,7 +107,7 @@ Without AI policies, your nonprofit is exposed to:
 
 **The Perfect Storm of Risk**
 
-So if the risks are real, why do 76% of nonprofits operate without policies?
+So if the risks are real, why do 65-70% of nonprofits still operate without formal AI policies?
 
 **1. The Innovation Trap**
 "Everyone else is using AI, we need to keep up!"
@@ -124,7 +124,7 @@ The cost of prevention is a fraction of the cost of remediation.
 **3. Knowledge Gaps**
 "We don't know what an AI policy should include."
 
-92% of nonprofit leaders feel unprepared for AI. That's understandable - this is new territory. But "I didn't know" isn't a defense when things go wrong.
+75-80% of nonprofit leaders still feel insufficiently prepared for AI - and only 28% have provided formal AI training to staff. That's understandable - this is evolving territory. But "I didn't know" isn't a defense when things go wrong.
 
 **4. Board Disconnect**
 Only 29% of nonprofit boards actively discuss technology strategy. If the board isn't asking about AI governance, leadership may not prioritize it.
@@ -268,7 +268,7 @@ The math is clear.
 
 **[CONCLUSION]**
 
-The 82%/76% gap isn't sustainable.
+The 85%/65-70% gap isn't sustainable.
 
 Nonprofits cannot continue using AI at scale without governance.
 
@@ -320,10 +320,10 @@ Download our free **AI Policy Template for Nonprofits** - a customizable framewo
 
 ---
 
-### Blog Post 3: "AI Grants for Nonprofits 2025: $50M+ in Funding Opportunities"
+### Blog Post 3: "AI Grants for Nonprofits 2026: $150M+ in Funding Opportunities"
 
-**Meta Title:** AI Grants for Nonprofits 2025: $50M+ in Funding [Complete Guide]
-**Meta Description:** Comprehensive guide to AI grants for nonprofits in 2025. Learn about $50M+ from OpenAI, Google, AWS, Microsoft and how to win funding for your AI projects.
+**Meta Title:** AI Grants for Nonprofits 2026: $150M+ in Funding [Complete Guide]
+**Meta Description:** Comprehensive guide to AI grants for nonprofits in 2026. Learn about $150M+ from OpenAI, Google, AWS, Microsoft, McGovern Foundation and how to win funding for your AI projects.
 **Target Keyword:** AI grants for nonprofits
 **Word Count:** 2,500-2,800 words
 
@@ -337,7 +337,7 @@ Not through fundraising appeals. Not by cutting program budgets.
 
 Through dedicated grant funding specifically for AI adoption.
 
-Here's what most nonprofits don't realize: There's over **$50 million in AI-specific grant funding** available right now for nonprofits.
+Here's what most nonprofits don't realize: There's over **$150 million in AI-specific grant funding** available right now for nonprofits. The landscape has tripled since 2024.
 
 The problem? Many nonprofits either:
 1. Don't know these grants exist
@@ -346,11 +346,11 @@ The problem? Many nonprofits either:
 
 This guide changes that.
 
-By the end of this post, you'll have a complete database of 2025 AI grant programs, understand what funders are looking for, and have a template to craft winning proposals.
+By the end of this post, you'll have a complete database of 2026 AI grant programs, understand what funders are looking for, and have a template to craft winning proposals.
 
 ---
 
-**[SECTION 1: MAJOR AI GRANT PROGRAMS FOR 2025]**
+**[SECTION 1: MAJOR AI GRANT PROGRAMS FOR 2026]**
 
 ### OpenAI's People-First AI Fund - $50 Million
 
@@ -370,9 +370,10 @@ The largest dedicated AI fund for nonprofits, launched to support organizations 
 - Multi-year grants possible for larger initiatives
 
 **Application Timeline:**
-- Applications closed October 2025 (for this cycle)
-- Grants distributed by year's end
-- Expect annual cycles going forward
+- First round of grants distributed in late 2024/early 2025
+- Second cycle expected; total commitment may have expanded beyond $50M
+- Annual cycles going forward
+- OpenAI for Nonprofits program also offers discounted API access
 
 **What They're Looking For:**
 1. **Mission Clarity:** How does AI advance your specific mission?
@@ -386,10 +387,10 @@ The largest dedicated AI fund for nonprofits, launched to support organizations 
 
 ---
 
-### Google.org AI Opportunity Fund - $17 Million
+### Google.org AI Opportunity Fund - $75 Million+
 
 **Overview:**
-Part of Google's $75M global AI initiative, focused on AI literacy and implementation support for nonprofits.
+Expanded from original $17M to $75M+ globally, focused on AI literacy training at scale and implementation support for nonprofits. Partnerships include Goodwill, YWCA for workforce AI training.
 
 **Geographic Focus:**
 - United States
@@ -405,7 +406,7 @@ Part of Google's $75M global AI initiative, focused on AI literacy and implement
 **Grant Types:**
 - **Direct Implementation Grants:** $25K - $200K for AI deployment
 - **Capacity Building Grants:** $10K - $75K for training and infrastructure
-- **Accelerator Program:** Up to $30M for high-impact solutions (very competitive)
+- **Google.org Impact Challenge:** Separate periodic challenge grants for innovative AI applications ($500K-$2M for high-impact solutions)
 
 **Application Process:**
 - Rolling applications (check google.org for current status)
@@ -455,20 +456,22 @@ AWS prefers organizations with some AWS experience or partnerships with AWS cons
 ### Microsoft AI for Good
 
 **Overview:**
-Microsoft's long-standing AI for Good program focuses on using AI to address global challenges.
+Microsoft's expanded AI for Good program focuses on using AI to address global challenges. Now includes five focus areas and integration with Microsoft 365 Copilot for nonprofits.
 
 **Focus Areas:**
-1. **AI for Earth:** Environmental sustainability, climate change
+1. **AI for Earth:** Environmental sustainability, climate change ($50M+ committed)
 2. **AI for Accessibility:** Empowering people with disabilities
 3. **AI for Humanitarian Action:** Crisis response and resilience
 4. **AI for Cultural Heritage:** Preservation and access
+5. **AI for Health:** (newer program) Health equity and research
 
 **What's Included:**
 - Azure AI services and credits
 - Technical consultation
-- Potential cash grants ($25K - $250K)
+- Potential cash grants ($25K - $500K)
 - Access to Microsoft research team
 - Partnership opportunities
+- Microsoft 365 Copilot access through nonprofit pricing via Tech for Social Impact
 
 **Eligibility:**
 - Must align with one of the four focus areas
@@ -513,14 +516,32 @@ Grants specifically for nonprofits using AI to expand economic opportunity.
 - Austin, TX based organizations only
 - Example of growing local foundation interest
 
+### Patrick J. McGovern Foundation - $40M+
+
+**Overview:**
+Major funder committed to responsible AI in the social sector. Focus on data capacity, AI readiness, and responsible deployment.
+
+**Grant Amounts:** $200K - $1M+
+**Focus:** Data capacity building, AI readiness, responsible AI deployment in social sector
+
+---
+
+### Anthropic Nonprofit Programs
+
+**Overview:**
+New entrant offering nonprofit partnerships and discount programs for Claude API access. Qualifying nonprofits receive reduced pricing for AI integration.
+
+---
+
 **Regional Community Foundations:**
-Many community foundations are launching AI initiative grants. Check your local foundation for:
-- Capacity building grants
+Many community foundations are now launching AI initiative grants. Check your local foundation for:
+- Capacity building grants (e.g., Austin Community Foundation: $1M for AI Training, 20 nonprofits x $50K)
+- Silicon Valley Community Foundation: AI readiness grants
 - Innovation funds
 - Technology transformation programs
 
 **State-Level Programs:**
-Some states are launching AI funding through:
+Growing number of states launching AI funding through:
 - Economic development agencies
 - Education departments
 - Social services divisions
@@ -730,7 +751,7 @@ AI grant funders are looking for:
 
 **[CONCLUSION]**
 
-$50 million in AI funding is available for nonprofits in 2025.
+$150 million+ in AI funding is available for nonprofits in 2026.
 
 The question isn't whether funding exists. It's whether you're positioned to win it.
 
@@ -751,7 +772,7 @@ Your mission deserves the best tools available. Including AI.
 
 **Ready to apply for AI grants?**
 
-Download our **2025 AI Grant Database** (Excel) with complete details on 20+ grant programs, application deadlines, and eligibility requirements.
+Download our **2026 AI Grant Database** (Excel) with complete details on 25+ grant programs, application deadlines, and eligibility requirements.
 
 [DOWNLOAD GRANT DATABASE →]
 
@@ -1197,7 +1218,7 @@ Based on your scores in each dimension, here are targeted recommendations:
 
 **Free Resources from Integrity Studio:**
 - AI Policy Template for Nonprofits
-- 2025 AI Grant Database
+- 2026 AI Grant Database
 - Use Case Library (50+ nonprofit AI applications)
 - Monthly webinars on AI topics
 - Blog with practical implementation guides
@@ -1268,7 +1289,7 @@ Our approach:
 
 ---
 
-### Lead Magnet 3: 2025 AI Grant Database
+### Lead Magnet 3: 2026 AI Grant Database
 
 **Format:** Excel Spreadsheet (.xlsx)
 **Tabs:** Programs, Deadlines, Eligibility Quick Reference
@@ -1290,7 +1311,7 @@ Our approach:
 - Application Link
 - Notes
 
-[Database would include 20+ grant programs with complete information]
+[Database would include 25+ grant programs with complete information, reflecting the $150M+ landscape]
 
 ---
 
@@ -1300,9 +1321,9 @@ Our approach:
 
 **Week 1, Day 1: Attention-Grabbing Statistic**
 ```
-82% of nonprofits are using AI.
+85%+ of nonprofits are using AI.
 
-But 76% don't have policies.
+But 65-70% don't have formal policies.
 
 That's not innovation.
 That's risk.
@@ -1340,7 +1361,7 @@ Do you know:
 - If it violates your data privacy policies?
 - Who's liable if something goes wrong?
 
-I'm asking because 82% of nonprofits are using AI informally.
+I'm asking because 85%+ of nonprofits are using AI tools.
 
 But most haven't thought through these questions.
 
