@@ -1,5 +1,14 @@
 {
   "enabledPlugins": {
-    "auto-scaling-configurator@claude-code-plugins-plus": true
+    "auto-scaling-configurator@claude-code-plugins-plus": true,
+    "frontend-design@claude-code-plugins": true,
+    "document-skills-pptx@awesome-claude-skills": true,
+    "deep-learning-optimizer@claude-code-plugins-plus": true,
+    "double-shot-latte@superpowers-marketplace": true,
+    "synthetic-monitoring-setup@claude-code-plugins-plus": true,
+    "neural-network-builder@claude-code-plugins-plus": true,
+    "market-movers-scanner@claude-code-plugins-plus": true,
+    "market-sentiment-analyzer@claude-code-plugins-plus": true,
+    "gdpr-compliance-scanner@claude-code-plugins-plus": true
   }
 }

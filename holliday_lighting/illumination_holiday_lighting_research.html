@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illumination Holiday Lighting, LLC - Research Report</title>
+    <style>
+        :root {
+            --primary: #1a5f7a;
+            --secondary: #159895;
+            --accent: #57c5b6;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        header .meta {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .executive-summary {
+            background: white;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .executive-summary h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        section {
+            background: white;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        section h2 {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        section h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 0.75rem 0;
+            font-size: 1.1rem;
+        }
+
+        .section-content {
+            padding: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f4f8, #d4edda);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box {
+            background: #e7f1ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        blockquote {
+            background: #f8f9fa;
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .source {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .badge-success { background: #d4edda; color: #155724; }
+        .badge-warning { background: #fff3cd; color: #856404; }
+        .badge-danger { background: #f8d7da; color: #721c24; }
+        .badge-info { background: #d1ecf1; color: #0c5460; }
+
+        .rating {
+            color: #ffc107;
+            font-size: 1.2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .contact-item {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .contact-item .label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item .value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .verification-table td:nth-child(2),
+        .verification-table td:nth-child(3),
+        .verification-table td:nth-child(4) {
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media print {
+            body { background: white; }
+            .container { max-width: 100%; }
+            section { box-shadow: none; border: 1px solid #ddd; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Illumination Holiday Lighting, LLC</h1>
+            <div class="subtitle">Comprehensive Research Report</div>
+            <div class="meta">
+                <strong>Report Date:</strong> February 6, 2026 |
+                <strong>Primary Source:</strong> <a href="https://www.illuminationholidaylighting.com/" style="color: white;">illuminationholidaylighting.com</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>Illumination Holiday Lighting is a Texas-based holiday lighting company serving the Austin metropolitan area. The company provides professional holiday lighting services for both commercial and residential properties, including design, installation, maintenance, and seasonal takedown. Based on available information, the company has been in business for approximately 10 years (established circa 2014-2016) and operates out of Austin, TX 78704. The business appears to be a small, locally-operated company with limited online presence compared to larger competitors in the market.</p>
+        </div>
+
+        <section>
+            <h2>1. Company Overview</h2>
+            <div class="section-content">
+                <h3>Services Offered</h3>
+
+                <div class="highlight-box">
+                    <strong>Mission Statement:</strong> "Transform your community, home or business this season with the beauty of Illumination."
+                </div>
+
+                <h4 style="color: var(--primary); margin-top: 1rem;">Commercial Services</h4>
+                <ul>
+                    <li>Holiday lighting design and installation for business properties</li>
+                    <li>Shopping center and city block lighting</li>
+                    <li>Garlands and wreaths installation</li>
+                    <li>Commercial-grade LED lighting products</li>
+                    <li>Full-service installation, removal, and storage</li>
+                    <li>Maintenance throughout the holiday season</li>
+                </ul>
+
+                <h4 style="color: var(--primary); margin-top: 1rem;">Residential Services</h4>
+                <ul>
+                    <li>Custom outdoor lighting design plans (free consultations)</li>
+                    <li>Professional installation by trained technicians</li>
+                    <li>Seasonal takedown and storage services</li>
+                    <li>Premium quality materials</li>
+                </ul>
+
+                <h4 style="color: var(--primary); margin-top: 1rem;">Key Service Features</h4>
+                <ul>
+                    <li>Free custom outdoor lighting design plan with no obligation</li>
+                    <li>100% satisfaction guarantee</li>
+                    <li>Highest quality equipment</li>
+                    <li>Bilingual service available</li>
+                    <li>Commercial-grade products with heavier gauge wire, industrial sockets, and longer-lasting bulbs</li>
+                    <li>LED products that are brighter, energy efficient, and waterproof</li>
+                </ul>
+
+                <h3>Geographic Service Area</h3>
+                <p><strong>Primary Market:</strong> Austin, Texas metropolitan area</p>
+
+                <p class="source">Source: <a href="https://www.illuminationholidaylighting.com/">Illumination Holiday Lighting Website</a></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Contact Information</h2>
+            <div class="section-content">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="label">Phone</div>
+                        <div class="value">(737) 471-9627</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Email</div>
+                        <div class="value">INFO@ILLUMINATIONHOLIDAYLIGHTING.COM</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Website</div>
+                        <div class="value"><a href="https://www.illuminationholidaylighting.com/">illuminationholidaylighting.com</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Physical Address</div>
+                        <div class="value">1701 A Garner Ave, Austin, TX 78704</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>Note:</strong> The 737 area code is an overlay for the Austin, Texas metropolitan area, confirming the company's Austin location. The address is located in the Zilker neighborhood and appears to be a residential/multi-family property, suggesting the business may operate from a home office.
+                </div>
+
+                <p class="source">Sources: <a href="https://www.illuminationholidaylighting.com/take-action/">Illumination Holiday Lighting Contact Page</a>, <a href="https://www.homeadvisor.com/rated.IlluminationHoliday.82299889.html">HomeAdvisor Listing</a></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Business Status and Registration</h2>
+            <div class="section-content">
+                <table>
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Business Registration</td>
+                        <td><span class="badge badge-warning">Unable to Verify</span></td>
+                    </tr>
+                    <tr>
+                        <td>Years in Business</td>
+                        <td><span class="badge badge-success">~10 Years (est. 2014-2016)</span></td>
+                    </tr>
+                    <tr>
+                        <td>LLC Filing Number</td>
+                        <td><span class="badge badge-danger">Not Found</span></td>
+                    </tr>
+                </table>
+
+                <div class="warning-box">
+                    <strong>Research Limitations:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Texas SOS direct database search requires a paid account ($1.00 per search)</li>
+                        <li>No specific LLC filing number was found in public search results</li>
+                        <li>The company may be operating as a sole proprietorship or DBA rather than a formal LLC</li>
+                    </ul>
+                </div>
+
+                <p class="source">Sources: <a href="https://www.sos.state.tx.us/corp/sosda/index.shtml">Texas Secretary of State - SOSDirect</a>, <a href="https://mycpa.cpa.state.tx.us/coa/">Texas Comptroller Franchise Tax Search</a></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. Key Personnel</h2>
+            <div class="section-content">
+                <table>
+                    <tr>
+                        <th>Role</th>
+                        <th>Name</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Owner/Operator</td>
+                        <td><strong>Dan</strong> (last name not publicly disclosed)</td>
+                        <td>Described as "extremely organized, prompt and accommodating" in customer reviews</td>
+                    </tr>
+                </table>
+
+                <h3>Team Information</h3>
+                <p>Company employs professional technicians with extensive training in:</p>
+                <ul>
+                    <li>Safety protocols</li>
+                    <li>Electrical work</li>
+                    <li>Holiday lighting design</li>
+                    <li>Light supply and maintenance</li>
+                </ul>
+
+                <p class="source">Source: <a href="https://www.homeadvisor.com/rated.IlluminationHoliday.82299889.html">HomeAdvisor Customer Reviews</a></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>5. Reviews and Ratings</h2>
+            <div class="section-content">
+                <h3>HomeAdvisor</h3>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Overall Rating</td>
+                        <td><span class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5.0 / 5.0</td>
+                    </tr>
+                    <tr>
+                        <td>Verified Reviews</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Satisfaction Guarantee</td>
+                        <td><span class="badge badge-success">100%</span></td>
+                    </tr>
+                    <tr>
+                        <td>Screened & Approved</td>
+                        <td><span class="badge badge-success">Yes</span></td>
+                    </tr>
+                </table>
+
+                <blockquote>
+                    "The initial company I hired didn't come through. I called Illumination Holiday Lighting and Dan was able to get my lights up the next day as originally scheduled. The lights are beautiful, and my property outshines the other nearby businesses. I've received many compliments and strongly recommend this company. They're easy to work with, especially during the busy season."
+                </blockquote>
+
+                <h3>Other Platforms</h3>
+                <table>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Better Business Bureau (BBB)</td>
+                        <td><span class="badge badge-warning">No Profile Found</span></td>
+                    </tr>
+                    <tr>
+                        <td>Google Business Profile</td>
+                        <td><span class="badge badge-warning">Not Prominently Listed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Yelp</td>
+                        <td><span class="badge badge-warning">No Profile Found</span></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>6. Financial Information</h2>
+            <div class="section-content">
+                <div class="warning-box">
+                    <strong>Status:</strong> Not publicly available
+                    <ul style="margin-top: 0.5rem;">
+                        <li>No Dun & Bradstreet profile found</li>
+                        <li>No ZoomInfo company profile found</li>
+                        <li>No public funding announcements or investment records</li>
+                        <li>No credit report information available through public sources</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <strong>Industry Context:</strong> The company appears to be a small, privately-held business typical of the local holiday lighting installation market. Most companies in this segment are small businesses with annual revenues typically ranging from $50,000 to $500,000, depending on service area and client base.
+                </div>
+
+                <h3>Industry Market Data</h3>
+                <table>
+                    <tr>
+                        <th>Market Metric</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Global Christmas Lights & Decorations Market (2024)</td>
+                        <td>$8.09 billion</td>
+                    </tr>
+                    <tr>
+                        <td>Projected Market Value (2025)</td>
+                        <td>$8.39 billion</td>
+                    </tr>
+                    <tr>
+                        <td>Growth Rate (CAGR 2025-2033)</td>
+                        <td>3.75%</td>
+                    </tr>
+                    <tr>
+                        <td>Projected Market Value (2033)</td>
+                        <td>$11.30 billion</td>
+                    </tr>
+                </table>
+
+                <p class="source">Sources: <a href="https://www.marketdataforecast.com/market-reports/christmas-lights-and-decoration-market">Market Data Forecast</a>, <a href="https://www.technavio.com/report/christmas-lights-and-decorations-market-industry-analysis">Technavio</a></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>7. Competitive Analysis</h2>
+            <div class="section-content">
+                <h3>Key Competitors in Austin Market</h3>
+                <table>
+                    <tr>
+                        <th>Company</th>
+                        <th>Rating</th>
+                        <th>Notable Features</th>
+                    </tr>
+                    <tr>
+                        <td>Holiday Lighting & Creations</td>
+                        <td><span class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5.0</td>
+                        <td>Founded by 2019 "Great Christmas Light Fight" winner</td>
+                    </tr>
+                    <tr>
+                        <td>Premier Austin Holiday Lighting</td>
+                        <td><span class="rating">&#9733;&#9733;&#9733;&#9733;</span> 4.4</td>
+                        <td>24-hour availability, comprehensive services</td>
+                    </tr>
+                    <tr>
+                        <td>Illumination Concepts</td>
+                        <td><span class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.9</td>
+                        <td>25+ years experience, landscape lighting focus</td>
+                    </tr>
+                    <tr>
+                        <td>Trimlight Austin</td>
+                        <td><span class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.9</td>
+                        <td>Permanent lighting solutions</td>
+                    </tr>
+                    <tr>
+                        <td>EZ Holiday Lights</td>
+                        <td><span class="rating">&#9733;&#9733;&#9733;&#9733;</span> 4.4</td>
+                        <td>Physical retail location</td>
+                    </tr>
+                </table>
+
+                <h3>Competitive Positioning</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                    <div class="highlight-box">
+                        <strong>Strengths</strong>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>10 years of experience</li>
+                            <li>High customer satisfaction (5.0 rating)</li>
+                            <li>Personal service approach (owner-operated)</li>
+                            <li>Bilingual services</li>
+                            <li>Commercial-grade equipment</li>
+                            <li>Free design consultations</li>
+                        </ul>
+                    </div>
+                    <div class="warning-box" style="border-left-color: #dc3545;">
+                        <strong>Potential Challenges</strong>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Limited online presence vs. competitors</li>
+                            <li>Only 1 verified review</li>
+                            <li>No BBB profile or Google Business listing</li>
+                            <li>Smaller scale operation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Market Pricing Context</h3>
+                <p>Average holiday lighting installation costs in Austin:</p>
+                <ul>
+                    <li><strong>Average Cost:</strong> $425</li>
+                    <li><strong>Range:</strong> $220 - $675</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>8. Online Presence</h2>
+            <div class="section-content">
+                <h3>Website</h3>
+                <table>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Assessment</th>
+                    </tr>
+                    <tr>
+                        <td>Platform</td>
+                        <td>Squarespace</td>
+                    </tr>
+                    <tr>
+                        <td>SSL Certificate</td>
+                        <td><span class="badge badge-success">Yes (HTTPS)</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile Responsive</td>
+                        <td><span class="badge badge-success">Yes</span></td>
+                    </tr>
+                    <tr>
+                        <td>Content Quality</td>
+                        <td>Professional, clear messaging</td>
+                    </tr>
+                </table>
+
+                <h3>Social Media Presence</h3>
+                <table>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Instagram</td>
+                        <td><span class="badge badge-danger">Not Accessible / May Not Exist</span></td>
+                    </tr>
+                    <tr>
+                        <td>Facebook</td>
+                        <td><span class="badge badge-danger">Not Found</span></td>
+                    </tr>
+                    <tr>
+                        <td>LinkedIn</td>
+                        <td><span class="badge badge-danger">Not Found</span></td>
+                    </tr>
+                    <tr>
+                        <td>Twitter/X</td>
+                        <td><span class="badge badge-danger">Not Found</span></td>
+                    </tr>
+                </table>
+
+                <h3>Directory Listings</h3>
+                <table>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Listed</th>
+                        <th>Rating</th>
+                    </tr>
+                    <tr>
+                        <td>HomeAdvisor</td>
+                        <td><span class="badge badge-success">Yes</span></td>
+                        <td>5.0</td>
+                    </tr>
+                    <tr>
+                        <td>Thumbtack</td>
+                        <td><span class="badge badge-warning">Unclear</span></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Angi</td>
+                        <td><span class="badge badge-warning">Not Prominently Listed</span></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Google Business</td>
+                        <td><span class="badge badge-danger">Not Found</span></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Yelp</td>
+                        <td><span class="badge badge-danger">Not Found</span></td>
+                        <td>-</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>9. Data Verification Summary</h2>
+            <div class="section-content">
+                <table class="verification-table">
+                    <tr>
+                        <th>Data Category</th>
+                        <th>Verified</th>
+                        <th>Partially Verified</th>
+                        <th>Not Found</th>
+                    </tr>
+                    <tr>
+                        <td>Company Name</td>
+                        <td><span class="badge badge-success">&#10003;</span></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Services Offered</td>
+                        <td><span class="badge badge-success">&#10003;</span></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td><span class="badge badge-success">&#10003;</span></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Email Address</td>
+                        <td><span class="badge badge-success">&#10003;</span></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Physical Address</td>
+                        <td></td>
+                        <td><span class="badge badge-warning">&#10003;</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Owner Name (Dan)</td>
+                        <td></td>
+                        <td><span class="badge badge-warning">&#10003;</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Years in Business</td>
+                        <td></td>
+                        <td><span class="badge badge-warning">&#10003;</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>LLC Registration</td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="badge badge-danger">&#10003;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Financial Data</td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="badge badge-danger">&#10003;</span></td>
+                    </tr>
+                    <tr>
+                        <td>BBB Rating</td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="badge badge-danger">&#10003;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Social Media</td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="badge badge-danger">&#10003;</span></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>10. Conclusions and Recommendations</h2>
+            <div class="section-content">
+                <h3>Summary Assessment</h3>
+                <p>Illumination Holiday Lighting appears to be a legitimate, small-scale holiday lighting installation company serving the Austin, Texas metropolitan area. The company has been operating for approximately 10 years with positive customer feedback on available review platforms.</p>
+
+                <h3>Key Findings</h3>
+                <ol>
+                    <li><strong>Legitimacy:</strong> The company appears to be a genuine operating business with an active website, phone number, and service offerings consistent with industry standards.</li>
+                    <li><strong>Scale:</strong> This appears to be a small, owner-operated business rather than a large commercial enterprise.</li>
+                    <li><strong>Reputation:</strong> Limited but positive customer feedback (5.0 rating on HomeAdvisor).</li>
+                    <li><strong>Online Presence:</strong> Minimal digital footprint compared to competitors; opportunity for growth in online marketing and social media engagement.</li>
+                    <li><strong>Transparency:</strong> Limited publicly available business information; no formal business registration documentation found through standard public searches.</li>
+                </ol>
+
+                <h3>Recommendations for Further Research</h3>
+                <div class="info-box">
+                    <ol>
+                        <li><strong>Texas Secretary of State SOSDirect Search:</strong> Pay the $1.00 fee to conduct a formal business entity search</li>
+                        <li><strong>Texas Comptroller Franchise Tax Search:</strong> Verify franchise tax status and business registration</li>
+                        <li><strong>Direct Contact:</strong> Call (737) 471-9627 or email for additional business information</li>
+                        <li><strong>Insurance Verification:</strong> Request proof of insurance and bonding directly from the company</li>
+                        <li><strong>Reference Check:</strong> Request customer references for completed projects</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>11. Sources and Citations</h2>
+            <div class="section-content">
+                <h3>Primary Sources</h3>
+                <ol>
+                    <li><a href="https://www.illuminationholidaylighting.com/">Illumination Holiday Lighting Official Website</a></li>
+                    <li><a href="https://www.illuminationholidaylighting.com/commercial/">Commercial Services Page</a></li>
+                    <li><a href="https://www.illuminationholidaylighting.com/residential-1/">Residential Services Page</a></li>
+                    <li><a href="https://www.illuminationholidaylighting.com/new-page">About Page</a></li>
+                    <li><a href="https://www.illuminationholidaylighting.com/take-action/">Contact Page</a></li>
+                </ol>
+
+                <h3>Third-Party Sources</h3>
+                <ol start="6">
+                    <li><a href="https://www.homeadvisor.com/rated.IlluminationHoliday.82299889.html">HomeAdvisor - Illumination Holiday Lighting Profile</a></li>
+                    <li><a href="https://www.sos.state.tx.us/corp/sosda/index.shtml">Texas Secretary of State - SOSDirect</a></li>
+                    <li><a href="https://mycpa.cpa.state.tx.us/coa/">Texas Comptroller - Franchise Tax Search</a></li>
+                    <li><a href="https://www.bbb.org/">Better Business Bureau</a></li>
+                </ol>
+
+                <h3>Market Research Sources</h3>
+                <ol start="10">
+                    <li><a href="https://www.marketdataforecast.com/market-reports/christmas-lights-and-decoration-market">Market Data Forecast - Christmas Lights and Decoration Market</a></li>
+                    <li><a href="https://www.technavio.com/report/christmas-lights-and-decorations-market-industry-analysis">Technavio - Christmas Lights and Decorations Market Analysis</a></li>
+                    <li><a href="https://www.yelp.com/search?find_desc=Holiday+Lighting&find_loc=Austin,+TX">Yelp - Austin Holiday Lighting Search</a></li>
+                    <li><a href="https://www.thumbtack.com/tx/austin/holiday-lighting-installation">Thumbtack - Austin Holiday Lighting Professionals</a></li>
+                </ol>
+
+                <h3>Property Records</h3>
+                <ol start="14">
+                    <li><a href="https://www.zillow.com/homedetails/1701-Garner-Ave-Austin-TX-78704/29322300_zpid/">Zillow - 1701 Garner Ave Property Information</a></li>
+                </ol>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>Report compiled:</strong> February 6, 2026</p>
+            <p><strong>Research methodology:</strong> Web scraping, search engine queries, public records review</p>
+        </footer>
+    </div>
+</body>
+</html>
