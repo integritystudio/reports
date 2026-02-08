@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Balloon Collective - Austin Resources &amp; Opportunities</title>
+    <style>
+:root {
+    --primary: #7b2d8e;
+    --secondary: #c44569;
+    --accent: #f78fb3;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --border: #dee2e6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background: var(--light);
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+}
+header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+header .subtitle { font-size: 1.2rem; opacity: 0.9; }
+header .meta { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
+
+.executive-summary {
+    background: white;
+    border-left: 4px solid var(--accent);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+
+section {
+    background: white;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+section h2 {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 1.5rem;
+    font-size: 1.3rem;
+}
+
+section h3 {
+    color: var(--secondary);
+    margin: 1.5rem 0 0.75rem 0;
+    font-size: 1.1rem;
+}
+
+.section-content { padding: 1.5rem; }
+
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--light); font-weight: 600; color: var(--primary); }
+tr:hover { background: #f8f9fa; }
+
+ul, ol { margin: 1rem 0; padding-left: 1.5rem; }
+li { margin-bottom: 0.5rem; }
+
+.highlight-box {
+    background: linear-gradient(135deg, #f3e5f5, #fce4ec);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+}
+
+.warning-box {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.info-box {
+    background: #f3e5f5;
+    border-left: 4px solid var(--primary);
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.success-box {
+    background: #d4edda;
+    border-left: 4px solid #28a745;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+blockquote {
+    background: #f8f9fa;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    font-style: italic;
+    color: #555;
+}
+
+.source { font-size: 0.85rem; color: #666; font-style: italic; }
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.badge-success { background: #d4edda; color: #155724; }
+.badge-warning { background: #fff3cd; color: #856404; }
+.badge-danger { background: #f8d7da; color: #721c24; }
+.badge-info { background: #d1ecf1; color: #0c5460; }
+.badge-primary { background: #f3e5f5; color: var(--primary); }
+
+.priority-high { border-left: 4px solid #dc3545; }
+.priority-medium { border-left: 4px solid #ffc107; }
+.priority-low { border-left: 4px solid #28a745; }
+
+.action-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 0.75rem 0;
+    transition: box-shadow 0.2s ease;
+}
+.action-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.action-card .card-title { font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; font-size: 1.05rem; }
+.action-card .card-meta { font-size: 0.85rem; color: #666; margin-bottom: 0.5rem; }
+.action-card .card-body { font-size: 0.95rem; }
+.action-card .card-link { display: inline-block; margin-top: 0.5rem; color: var(--secondary); font-weight: 500; font-size: 0.9rem; }
+
+.timeline-item {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+    border-left: 2px solid var(--accent);
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--secondary);
+}
+.timeline-item .timeline-label { font-weight: 600; color: var(--primary); font-size: 0.9rem; }
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+}
+
+a { color: var(--secondary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+details {
+    margin: 1rem 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+details summary {
+    padding: 0.75rem 1rem;
+    background: var(--light);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    user-select: none;
+}
+
+details summary::-webkit-details-marker { display: none; }
+
+details summary::before {
+    content: '\25B6';
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+details[open] summary::before { transform: rotate(90deg); }
+
+details summary:hover { background: #e9ecef; }
+
+details summary .detail-count {
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: #666;
+    margin-left: auto;
+}
+
+details .details-content { padding: 1rem 1.5rem; }
+
+details details { margin: 0.75rem 0; border-color: #e9ecef; }
+details details summary { font-size: 0.95rem; padding: 0.6rem 1rem; }
+
+@media print {
+    body { background: white; }
+    .container { max-width: 100%; }
+    section { box-shadow: none; border: 1px solid #ddd; }
+    details { border: none; }
+    details, details[open] { display: block; }
+    details > summary { display: none; }
+    details .details-content { padding: 0; }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>The Balloon Collective</h1>
+            <div class="subtitle">Austin Resources &amp; Opportunities Guide</div>
+            <div class="meta">
+                <strong>Report Date:</strong> February 8, 2026 |
+                <strong>Prepared for:</strong> <a href="https://www.theballooncollective.com/" style="color: white;">The Balloon Collective, LLC</a> &mdash; South Austin, TX
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <div class="executive-summary">
+            <h2>Overview</h2>
+            <p>This guide compiles actionable Austin-based resources, grants, certifications, partnerships, and growth opportunities specifically curated for The Balloon Collective, LLC. Each recommendation includes direct application links, eligibility details, and relevance to a luxury balloon design and installation company. Items are organized by priority and category, with a recommended action timeline at the end.</p>
+            <div class="highlight-box" style="margin-top: 1rem; margin-bottom: 0;">
+                <strong>Priority Actions:</strong> The three highest-impact items are (1) claiming a Google Business Profile, (2) applying for the <strong>Nexus Grant</strong> (opens March 2026, $5K&ndash;$10K), and (3) registering as a City of Austin vendor + MBE/WBE certification. Time-sensitive: <strong>TCA FY27 deadline is March 2&ndash;16, 2026</strong> and <strong>AWPA Vendor Expo is May 2026</strong> ($135).
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <nav style="background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden;">
+            <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Table of Contents</h2>
+            <div style="padding: 1.5rem;">
+                <ol style="margin: 0; padding-left: 1.5rem;">
+                    <li><a href="#immediate-actions">Immediate Actions (Free &amp; High Impact)</a></li>
+                    <li><a href="#grants-funding">Grants &amp; Funding Programs</a></li>
+                    <li><a href="#certifications">Business Certifications</a></li>
+                    <li><a href="#business-associations">Chambers &amp; Business Associations</a></li>
+                    <li><a href="#event-opportunities">Austin Event Opportunities</a></li>
+                    <li><a href="#networking">Networking &amp; Professional Development</a></li>
+                    <li><a href="#free-tools">Free Business Support &amp; Tools</a></li>
+                    <li><a href="#sustainability">Sustainability Programs</a></li>
+                    <li><a href="#wedding-event">Wedding &amp; Event Industry Associations</a></li>
+                    <li><a href="#action-timeline">Recommended Action Timeline</a></li>
+                    <li><a href="#sources">Sources</a></li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- 1. Immediate Actions -->
+        <section id="immediate-actions">
+            <h2>1. Immediate Actions (Free &amp; High Impact)</h2>
+            <div class="section-content">
+                <p>These cost nothing and directly address the visibility gaps identified in the research report. Each can be completed in under an hour.</p>
+
+                <div class="action-card priority-high">
+                    <div class="card-title">Claim Google Business Profile</div>
+                    <div class="card-meta"><span class="badge badge-danger">Critical Priority</span> &middot; Free &middot; ~30 minutes</div>
+                    <div class="card-body">
+                        <p>The research report identified that The Balloon Collective has <strong>no Google Business listing</strong>, making it invisible to local "balloon decor Austin" searches. Competitors like Balloon People TX (219 photos) and Balloon Boutique (22 reviews) dominate local search results.</p>
+                        <ul>
+                            <li>Go to <a href="https://business.google.com/">business.google.com</a> and sign in with a Google account</li>
+                            <li>Enter "The Balloon Collective" and follow the prompts to create a new listing</li>
+                            <li>Select category: <strong>Balloon Artist</strong> or <strong>Party &amp; Event Planning Service</strong></li>
+                            <li>Add South Austin as service area (hide exact address if home-based)</li>
+                            <li>Upload 10&ndash;20 high-quality portfolio photos immediately</li>
+                            <li>Verify via mail, phone, or video &mdash; typically takes 3&ndash;14 days</li>
+                        </ul>
+                    </div>
+                    <a class="card-link" href="https://business.google.com/">Create Google Business Profile &rarr;</a>
+                </div>
+
+                <div class="action-card priority-high">
+                    <div class="card-title">Create Yelp Business Page</div>
+                    <div class="card-meta"><span class="badge badge-danger">Critical Priority</span> &middot; Free &middot; ~20 minutes</div>
+                    <div class="card-body">
+                        <p>No Yelp page exists. In the Austin balloon decor market, Yelp is a primary discovery channel. Balloon Boutique has 22 reviews and ATX Bubbles has 16 reviews on Yelp.</p>
+                        <ul>
+                            <li>Visit <a href="https://business.yelp.com/">business.yelp.com</a> and click "Manage my free listing"</li>
+                            <li>Add business details, photos, service descriptions, and hours</li>
+                            <li>Respond to any reviews that appear after claiming</li>
+                        </ul>
+                    </div>
+                    <a class="card-link" href="https://business.yelp.com/">Claim Yelp Business &rarr;</a>
+                </div>
+
+                <div class="action-card priority-high">
+                    <div class="card-title">Register as City of Austin Vendor</div>
+                    <div class="card-meta"><span class="badge badge-warning">High Priority</span> &middot; Free &middot; ~45 minutes</div>
+                    <div class="card-body">
+                        <p>Required before applying for MBE/WBE certification or bidding on city contracts. The City of Austin contracts with local vendors for event decor at public events, festivals, and civic celebrations.</p>
+                        <ul>
+                            <li>Create an account on <a href="https://financeonline.austintexas.gov/">Austin Finance Online (AFO)</a></li>
+                            <li>Complete the online vendor registration form</li>
+                            <li>Select relevant commodity codes for event decor, party supplies, and art installation services</li>
+                        </ul>
+                    </div>
+                    <a class="card-link" href="https://financeonline.austintexas.gov/">Register on Austin Finance Online &rarr;</a>
+                </div>
+
+                <div class="action-card priority-medium">
+                    <div class="card-title">List on Thumbtack</div>
+                    <div class="card-meta"><span class="badge badge-info">Medium Priority</span> &middot; Free listing &middot; ~15 minutes</div>
+                    <div class="card-body">
+                        <p>Thumbtack is a high-intent lead generation platform for local event services. No Thumbtack listing was found in the research audit.</p>
+                    </div>
+                    <a class="card-link" href="https://www.thumbtack.com/pro">Join Thumbtack as a Pro &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Grants & Funding -->
+        <section id="grants-funding">
+            <h2>2. Grants &amp; Funding Programs</h2>
+            <div class="section-content">
+                <p>Austin and Texas offer multiple grant and funding programs relevant to creative small businesses. The Balloon Collective's work in immersive art installations (Hopscotch, Austin Pride Parade) may qualify for arts-specific funding.</p>
+
+                <div class="warning-box">
+                    <strong>Time-Sensitive:</strong> The City of Austin AACME department distributes over $21M in arts grants from the Hotel Occupancy Tax. The <strong>Nexus Grant Round 1 opens March 2026</strong> ($5K&ndash;$10K). Virtual office hours are available Tuesdays 10am&ndash;12pm through March 4. The <strong>Texas Commission on the Arts FY27 deadline is March 2&ndash;16, 2026</strong>.
+                </div>
+
+                <details>
+                    <summary>City of Austin AACME Arts Grants <span class="detail-count">5 programs</span></summary>
+                    <div class="details-content">
+                        <div class="action-card priority-high">
+                            <div class="card-title">Nexus Grant &mdash; City of Austin AACME</div>
+                            <div class="card-meta"><span class="badge badge-danger">Opens March 2026</span> &middot; $5,000&ndash;$10,000 &middot; 2 rounds/year</div>
+                            <div class="card-body">
+                                <p>Grants for new and emerging local arts businesses to produce creative public projects. A public balloon art installation (e.g., at a community event or public space) would be a strong application. The $10K tier could fund a signature public art piece that doubles as marketing.</p>
+                                <ul>
+                                    <li><strong>Round 1:</strong> Opens March 2026 for activities July 2026&ndash;June 2027</li>
+                                    <li><strong>Round 2:</strong> Opens September 2026 for activities Jan&ndash;Dec 2027</li>
+                                    <li><strong>Eligibility:</strong> Small arts businesses producing creative public projects; one application per round</li>
+                                    <li><strong>Application support:</strong> Virtual office hours Tuesdays 10am&ndash;12pm via Zoom (through March 4)</li>
+                                    <li><strong>Email:</strong> <a href="mailto:applicationhelp@thelongcenter.org">applicationhelp@thelongcenter.org</a></li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://createaustin.org/nexus/">Nexus Grant &mdash; createaustin.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Elevate Grant &mdash; City of Austin AACME</div>
+                            <div class="card-meta"><span class="badge badge-primary">Arts Grant</span> &middot; $15,000&ndash;$30,000 &middot; FY27 cycle TBD</div>
+                            <div class="card-body">
+                                <p>Ongoing budget for arts organizations and creative businesses with at least 2 years of creative production history in Austin. Supports creative, administrative, and operational expenses. With 18+ years of experience and documented public projects (Hopscotch, Maker Faire, Pride Parade), The Balloon Collective should be competitive.</p>
+                                <ul>
+                                    <li><strong>Eligibility:</strong> Creative businesses with 2+ years Austin production history; produces events open to Austin residents/visitors</li>
+                                    <li><strong>Status:</strong> FY26 closed; register on <a href="https://thelongcenter.submittable.com/submit">Submittable</a> to be notified when FY27 opens</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://createaustin.org/elevate/">Elevate Grant &mdash; createaustin.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Art in Public Places (AIPP)</div>
+                            <div class="card-meta"><span class="badge badge-primary">Public Art</span> &middot; Project-based &middot; Varies</div>
+                            <div class="card-body">
+                                <p>Commissions artists for temporary and permanent public art installations across Austin. Balloon sculptures and immersive installations could qualify as temporary public art commissions. AIPP issues open calls throughout the year.</p>
+                                <ul>
+                                    <li><strong>Eligibility:</strong> Professional artists; can be individuals, collectives, or teams</li>
+                                    <li><strong>How to apply:</strong> Monitor open calls on the AIPP page and <a href="https://www.publicartist.org/">PublicArtist.org</a></li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.austintexas.gov/department/art-public-places">Art in Public Places (AIPP) &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Creative Space Assistance Program (CSAP)</div>
+                            <div class="card-meta"><span class="badge badge-primary">Space Grant</span> &middot; Varies &middot; Ongoing</div>
+                            <div class="card-body">
+                                <p>Supports commercial creative spaces facing displacement or higher lease costs. If The Balloon Collective has or needs a studio/workshop space, this could offset rising commercial lease costs in Austin.</p>
+                            </div>
+                            <a class="card-link" href="https://createaustin.org/csap/">Creative Space Assistance &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Cultural Funding Program</div>
+                            <div class="card-meta"><span class="badge badge-primary">Arts Funding</span> &middot; $5,000&ndash;$100,000+ &middot; Annual</div>
+                            <div class="card-body">
+                                <p>The City's largest arts funding mechanism. Requires 501(c)(3) status or fiscal sponsorship through <a href="https://www.austincreativealliance.org/">Austin Creative Alliance</a>.</p>
+                            </div>
+                            <a class="card-link" href="https://www.austintexas.gov/department/cultural-arts-division">Cultural Funding Program &rarr;</a>
+                        </div>
+
+                        <div class="info-box">
+                            <strong>All AACME grants are administered by Create Austin.</strong> Applications go through the <a href="https://thelongcenter.submittable.com/submit">Submittable portal</a>. Create an account now to receive notifications about all upcoming windows. Grant questions: <a href="mailto:culturalarts@austintexas.gov">culturalarts@austintexas.gov</a> | (512) 974-7700
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Texas &amp; Federal Small Business Programs <span class="detail-count">7 programs</span></summary>
+                    <div class="details-content">
+                        <div class="action-card priority-high">
+                            <div class="card-title">Texas Commission on the Arts (TCA) Grants</div>
+                            <div class="card-meta"><span class="badge badge-danger">Deadline: March 2&ndash;16, 2026</span> &middot; $5K&ndash;$150K+ &middot; FY27</div>
+                            <div class="card-body">
+                                <p>TCA approved $16.5M+ in FY26 across multiple programs. The "Arts Respond" program funds arts-based projects addressing economic development or tourism &mdash; balloon installations at community events or tourism-driving public art would align.</p>
+                                <ul>
+                                    <li><strong>Arts Create:</strong> Year-round operational support for arts orgs with budgets over $50K (475 grants, $6.8M in FY26)</li>
+                                    <li><strong>Arts Respond Project:</strong> Funds arts projects addressing economic development, education, health, or public safety</li>
+                                    <li><strong>Arts Respond Cultural District:</strong> Projects using arts to diversify local economies and attract visitors (118 grantees, $7.6M in FY26)</li>
+                                    <li><strong>Deadline:</strong> March 2 or 16, 2026 (FY27), determined by organization type</li>
+                                    <li><strong>Contact:</strong> <a href="mailto:grants@arts.texas.gov">grants@arts.texas.gov</a> | 512-463-5535</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.arts.texas.gov/current-grants/">TCA Current Grants &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Place-Based Enhancement Program (PBEP)</div>
+                            <div class="card-meta"><span class="badge badge-primary">City Grant</span> &middot; Varies &middot; Check current cycle</div>
+                            <div class="card-body">
+                                <p>Commercial affordability relief for local small businesses, legacy businesses, and creative sector businesses. Pay-for-performance program. Explicitly targets creative sector businesses &mdash; balloon artistry qualifies.</p>
+                            </div>
+                            <a class="card-link" href="https://www.austintexas.gov/business/incentives-and-grants">Austin Business Incentives &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">BiGAUSTIN (Business Investment Growth Austin)</div>
+                            <div class="card-meta"><span class="badge badge-info">Microloan</span> &middot; Up to $35,000 &middot; Rolling</div>
+                            <div class="card-body">
+                                <p>25+ year Austin nonprofit providing microloans and training. Established businesses (1+ year) can borrow up to $35,000. 70% of loans go to low-income borrowers, 69% to minority clients, 58% to women. Over 6,000 clients served.</p>
+                            </div>
+                            <a class="card-link" href="https://www.bigaustin.org/">BiGAUSTIN.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Texas Music Office / Creative Industries Program</div>
+                            <div class="card-meta"><span class="badge badge-primary">State Resource</span> &middot; Free &middot; Ongoing</div>
+                            <div class="card-body">
+                                <p>The Governor's Office supports Texas creative economy businesses. The Creative Industries directory lists event production companies and provides networking opportunities with large-scale event producers.</p>
+                            </div>
+                            <a class="card-link" href="https://gov.texas.gov/music">Texas Music Office &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">SBA Community Advantage Loans</div>
+                            <div class="card-meta"><span class="badge badge-info">Federal</span> &middot; Up to $350,000 &middot; Ongoing</div>
+                            <div class="card-body">
+                                <p>SBA-backed loans through community-based lenders designed for underserved small businesses. Lower barriers than conventional bank loans. Could fund studio expansion, vehicle fleet, or inventory scaling.</p>
+                                <ul>
+                                    <li><strong>Austin SBA Office:</strong> 300 E. 8th Street, Suite 1032, Austin, TX 78701</li>
+                                    <li><strong>Phone:</strong> (512) 981-0069</li>
+                                    <li><strong>Local lender:</strong> <a href="https://www.peoplefund.org/">PeopleFund</a> (Austin-based SBA microlender)</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.sba.gov/funding-programs/loans">SBA Loan Programs &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">PeopleFund &mdash; Austin Microlender</div>
+                            <div class="card-meta"><span class="badge badge-info">Microloan</span> &middot; $500&ndash;$250,000 &middot; Ongoing</div>
+                            <div class="card-body">
+                                <p>Austin-based CDFI (Community Development Financial Institution) providing small business loans, many with lower interest rates than commercial lenders. Also provides free business coaching.</p>
+                                <ul>
+                                    <li><strong>Eligibility:</strong> Texas-based small businesses; focus on underserved communities</li>
+                                    <li><strong>Also offers:</strong> Free 1-on-1 business coaching, financial literacy workshops</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.peoplefund.org/">PeopleFund.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">City of Austin Small Business Program &mdash; Small &amp; Minority Business Resources (SMBR)</div>
+                            <div class="card-meta"><span class="badge badge-warning">High Relevance</span> &middot; Free &middot; Ongoing</div>
+                            <div class="card-body">
+                                <p>SMBR connects certified small and minority businesses to City of Austin contracting opportunities. Once registered as a vendor and certified (MBE/WBE), The Balloon Collective gains access to sole-source contracts under $50,000 and priority on city-funded events.</p>
+                                <ul>
+                                    <li><strong>Phone:</strong> (512) 974-7645</li>
+                                    <li><strong>Email:</strong> <a href="mailto:SMBRCertification@austintexas.gov">SMBRCertification@austintexas.gov</a></li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.austintexas.gov/department/small-minority-business-resources">SMBR Department &rarr;</a>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 3. Business Certifications -->
+        <section id="certifications">
+            <h2>3. Business Certifications</h2>
+            <div class="section-content">
+                <p>Certifications open doors to government contracts, corporate supplier diversity programs, and preferential vendor status. The Balloon Collective's LLC structure and Austin location make it eligible for multiple programs.</p>
+
+                <div class="info-box">
+                    <strong>Prerequisites:</strong> Register as a vendor with the City of Austin via <a href="https://financeonline.austintexas.gov/">Austin Finance Online</a> before beginning any City certification application.
+                </div>
+
+                <details>
+                    <summary>City of Austin Certifications <span class="detail-count">2 certifications</span></summary>
+                    <div class="details-content">
+                        <div class="action-card priority-high">
+                            <div class="card-title">MBE Certification (Minority Business Enterprise)</div>
+                            <div class="card-meta"><span class="badge badge-danger">High Priority</span> &middot; Free &middot; Renews every 4 years</div>
+                            <div class="card-body">
+                                <p>A City of Austin certification for small businesses that are at least 51% owned, managed, and controlled by one or more economically disadvantaged minorities. Nate Culpepper's ownership may qualify.</p>
+                                <ul>
+                                    <li><strong>Requirements:</strong> 51% minority ownership, meet SBA small business size standards, Austin-area operations</li>
+                                    <li><strong>Benefits:</strong> Access to city contracts with MBE participation goals, vendor matchmaking events, SMBR networking</li>
+                                    <li><strong>Process:</strong> Complete online application on the <a href="https://austintexas.gov/financeonline">CCS portal</a> after vendor registration</li>
+                                    <li><strong>Renewal:</strong> Every 4 years via online recertification</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.austintexas.gov/department/small-minority-business-resources">Apply for MBE Certification &rarr;</a>
+                        </div>
+
+                        <div class="action-card priority-high">
+                            <div class="card-title">WBE Certification (Women's Business Enterprise)</div>
+                            <div class="card-meta"><span class="badge badge-danger">High Priority</span> &middot; Free &middot; Renews every 4 years</div>
+                            <div class="card-body">
+                                <p>For businesses that are at least 51% owned, managed, and controlled by one or more economically disadvantaged women. If Stacy Wheeler holds qualifying ownership, this certification is directly applicable.</p>
+                                <ul>
+                                    <li><strong>Requirements:</strong> 51% woman ownership, meet SBA size standards, Austin-area operations</li>
+                                    <li><strong>Benefits:</strong> Same as MBE &mdash; city contract access, networking events, SMBR support</li>
+                                    <li><strong>Contact:</strong> (512) 974-7645 or <a href="mailto:SMBRCertification@austintexas.gov">SMBRCertification@austintexas.gov</a></li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.austintexas.gov/department/small-minority-business-resources">Apply for WBE Certification &rarr;</a>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>State &amp; National Certifications <span class="detail-count">3 certifications</span></summary>
+                    <div class="details-content">
+                        <div class="action-card">
+                            <div class="card-title">Texas HUB Certification (Historically Underutilized Business)</div>
+                            <div class="card-meta"><span class="badge badge-primary">State</span> &middot; Free &middot; Ongoing</div>
+                            <div class="card-body">
+                                <p>Texas Comptroller program that certifies minority-owned, women-owned, and service-disabled veteran-owned businesses for state contracting preference. State agencies have HUB participation goals.</p>
+                                <ul>
+                                    <li><strong>Requirements:</strong> Texas-based, for-profit, 51% owned by qualifying individual(s)</li>
+                                    <li><strong>Benefits:</strong> Access to $40B+ in annual Texas state purchasing, HUB directory listing, state agency matchmaking</li>
+                                    <li><strong>Application:</strong> Online through the TX Comptroller's office</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://comptroller.texas.gov/purchasing/vendor/hub/">TX HUB Certification &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">WBENC National Certification (Women's Business Enterprise)</div>
+                            <div class="card-meta"><span class="badge badge-primary">National</span> &middot; $350&ndash;$1,500 fee &middot; 15&ndash;90 days</div>
+                            <div class="card-body">
+                                <p>The gold standard for women-owned business certification, recognized by 1,000+ corporations for supplier diversity programs. The regional affiliate is the <strong>Women's Business Enterprise Alliance (WBEA)</strong> based in Texas.</p>
+                                <ul>
+                                    <li><strong>Requirements:</strong> 51% woman ownership, U.S. citizenship, independent business</li>
+                                    <li><strong>Benefits:</strong> Corporate supplier diversity programs (Dell, Apple, Google, Meta &mdash; all Austin employers), national networking events</li>
+                                    <li><strong>Regional contact:</strong> <a href="https://www.wbenc.org/rpo/wbea/">WBEA &mdash; Women's Business Enterprise Alliance</a></li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.wbenc.org/">WBENC.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">SBA 8(a) Business Development Program</div>
+                            <div class="card-meta"><span class="badge badge-primary">Federal</span> &middot; Free &middot; 9-year program</div>
+                            <div class="card-body">
+                                <p>Federal program for small, disadvantaged businesses providing access to sole-source federal contracts, mentorship, and business development support. Significant competitive advantage for government event contracts.</p>
+                                <ul>
+                                    <li><strong>Requirements:</strong> Unconditionally owned (51%+) by socially/economically disadvantaged individual(s), under $750K net worth, under SBA size standards</li>
+                                    <li><strong>Benefits:</strong> Sole-source federal contracts up to $4.5M, mentorship, joint ventures with large contractors</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.sba.gov/federal-contracting/contracting-assistance-programs/8a-business-development-program">SBA 8(a) Program &rarr;</a>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 4. Business Associations -->
+        <section id="business-associations">
+            <h2>4. Chambers &amp; Business Associations</h2>
+            <div class="section-content">
+
+                <details>
+                    <summary>Austin Chambers &amp; Business Groups <span class="detail-count">6 organizations</span></summary>
+                    <div class="details-content">
+                        <div class="action-card">
+                            <div class="card-title">Greater Austin Chamber of Commerce</div>
+                            <div class="card-meta"><span class="badge badge-warning">High Value</span> &middot; $300&ndash;$500/year &middot; Membership</div>
+                            <div class="card-body">
+                                <p>Austin's largest business organization with 2,800+ member companies. Provides networking events, business advocacy, B2B connections, and annual gala/awards events where balloon decor is regularly contracted.</p>
+                                <ul>
+                                    <li><strong>Key benefit:</strong> Access to corporate event planners who hire decor vendors</li>
+                                    <li><strong>Events:</strong> Annual Gala, State of the City, Business After Hours (monthly)</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.austinchamber.com/">AustinChamber.com &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Independent Business Alliance (AIBA)</div>
+                            <div class="card-meta"><span class="badge badge-success">Recommended</span> &middot; $100&ndash;$350/year &middot; Membership</div>
+                            <div class="card-body">
+                                <p>Nonprofit promoting locally-owned independent businesses in Austin. Runs the "IBiz" directory and "Keep Austin Weird" campaigns. Strong alignment with The Balloon Collective's independent, artisanal brand positioning.</p>
+                                <ul>
+                                    <li><strong>Benefits:</strong> IBiz directory listing, cross-promotion with other local businesses, joint marketing events, "Shop Local" holiday campaigns</li>
+                                    <li><strong>Event tie-in:</strong> Small Business Saturday promotions, local business expos</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.ibuyaustin.com/">AIBA &mdash; IBuyAustin.com &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Creative Alliance</div>
+                            <div class="card-meta"><span class="badge badge-success">Recommended</span> &middot; $50&ndash;$200/year &middot; Membership</div>
+                            <div class="card-body">
+                                <p>Advocacy organization for Austin's creative sector. Provides fiscal sponsorship (enabling access to arts grants), professional development workshops, and connections to the Austin cultural community. Directly relevant to the "balloon art as fine art" positioning.</p>
+                                <ul>
+                                    <li><strong>Fiscal sponsorship:</strong> Allows applying for grants that require 501(c)(3) status</li>
+                                    <li><strong>Networking:</strong> Connects with galleries, museums, and cultural organizations</li>
+                                    <li><strong>Advocacy:</strong> Lobbies for creative industry support at the city/state level</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.austincreativealliance.org/">AustinCreativeAlliance.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Greater Austin Hispanic Chamber of Commerce</div>
+                            <div class="card-meta"><span class="badge badge-info">Networking</span> &middot; $200&ndash;$500/year &middot; Membership</div>
+                            <div class="card-body">
+                                <p>4,000+ members. Austin's Hispanic population is 31% of the metro. The chamber hosts large galas, awards dinners, and networking events that regularly need event decor vendors.</p>
+                            </div>
+                            <a class="card-link" href="https://www.gahcc.org/">GAHCC.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Greater Austin Black Chamber of Commerce</div>
+                            <div class="card-meta"><span class="badge badge-info">Networking</span> &middot; Varies &middot; Membership</div>
+                            <div class="card-body">
+                                <p>Supports Black-owned businesses in the Austin metro. Hosts galas, business showcases, and networking events. If Nate qualifies, membership provides visibility within the Black business community and access to supplier diversity networks.</p>
+                            </div>
+                            <a class="card-link" href="https://www.austinbcc.org/">AustinBCC.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">South Austin Business Alliance</div>
+                            <div class="card-meta"><span class="badge badge-info">Local</span> &middot; Low cost &middot; Membership</div>
+                            <div class="card-body">
+                                <p>Hyperlocal business group for the South Austin corridor where The Balloon Collective's studio is located. Great for neighborhood visibility, cross-referrals with nearby event venues, and participation in South Austin events.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 5. Austin Event Opportunities -->
+        <section id="event-opportunities">
+            <h2>5. Austin Event Opportunities</h2>
+            <div class="section-content">
+                <p>Austin hosts 50+ major annual events. The following represent the highest-potential partnerships for a luxury balloon installation company, based on event scale, audience, and decor needs.</p>
+
+                <div class="info-box">
+                    <strong>Strategy:</strong> For large-scale events like SXSW and ACL, the approach is not to apply as a "vendor" but to partner with <strong>brand activation agencies</strong> that hire specialty decor for sponsor activations. Pop &amp; Drop already works with TikTok, Meta, and Reddit through this model.
+                </div>
+
+                <details>
+                    <summary>Tier 1: Major Events (National/International Reach) <span class="detail-count">4 events</span></summary>
+                    <div class="details-content">
+                        <div class="action-card">
+                            <div class="card-title">SXSW (South by Southwest)</div>
+                            <div class="card-meta"><span class="badge badge-primary">March annually</span> &middot; 300,000+ attendees &middot; Brand activations</div>
+                            <div class="card-body">
+                                <p>Austin's largest event. Brands spend $50K&ndash;$500K+ on experiential activations throughout the city. Instagram-worthy balloon installations are a staple of SXSW activations.</p>
+                                <ul>
+                                    <li><strong>Opportunity:</strong> Partner with brand activation agencies (Mirrorball, Giant Spoon, Civic Entertainment Group) who build branded pop-ups</li>
+                                    <li><strong>Vendor registration:</strong> <a href="https://www.sxsw.com/exhibitions/">SXSW Exhibitions</a></li>
+                                    <li><strong>Timeline:</strong> Agencies plan 3&ndash;6 months ahead; pitch by September for the following March</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.sxsw.com/">SXSW.com &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin City Limits Music Festival</div>
+                            <div class="card-meta"><span class="badge badge-primary">October annually</span> &middot; 450,000 attendees &middot; Zilker Park</div>
+                            <div class="card-body">
+                                <p>Two-weekend festival at Zilker Park. Sponsor lounges and VIP areas use elaborate decor installations. Austin-based vendors get preference.</p>
+                                <ul>
+                                    <li><strong>Opportunity:</strong> VIP area decor, sponsor lounge installations, photo-op builds</li>
+                                    <li><strong>Contact:</strong> Reach out to C3 Presents (festival producer) and sponsors directly</li>
+                                    <li><strong>Timeline:</strong> Pitch by April&ndash;May for October events</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.aclfestival.com/">ACL Festival &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Trail of Lights</div>
+                            <div class="card-meta"><span class="badge badge-primary">December annually</span> &middot; 400,000 visitors &middot; Zilker Park</div>
+                            <div class="card-body">
+                                <p>City-run holiday event. Sponsors create themed installations along the trail. Balloon installations integrated with holiday lighting would be distinctive and highly photographed.</p>
+                                <ul>
+                                    <li><strong>Opportunity:</strong> Sponsor activation installations, themed entry arch, interactive photo spots</li>
+                                    <li><strong>Sponsor contact:</strong> <a href="https://www.austintrailoflights.org/">austintrailoflights.org</a> (sponsor info available after January)</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.austintrailoflights.org/">Trail of Lights &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Formula 1 United States Grand Prix (COTA)</div>
+                            <div class="card-meta"><span class="badge badge-primary">October annually</span> &middot; 440,000 attendees &middot; Circuit of the Americas</div>
+                            <div class="card-body">
+                                <p>Premium motorsport event at COTA. Hospitality suites and brand activations at the venue use high-end decor. Luxury balloon positioning aligns with the F1 demographic.</p>
+                                <ul>
+                                    <li><strong>Opportunity:</strong> Corporate hospitality suite decor, brand activations, VIP lounge installations</li>
+                                    <li><strong>Contact:</strong> COTA events team and F1 sponsor agencies</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.circuitoftheamericas.com/">CircuitOfTheAmericas.com &rarr;</a>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Tier 2: Regional &amp; Community Events <span class="detail-count">6 events</span></summary>
+                    <div class="details-content">
+                        <div class="action-card">
+                            <div class="card-title">Pecan Street Festival</div>
+                            <div class="card-meta"><span class="badge badge-info">May &amp; September</span> &middot; 6th Street &middot; 250,000 visitors</div>
+                            <div class="card-body">
+                                <p>Free outdoor arts festival on 6th Street, twice annually. One of the largest free arts festivals in the U.S. Artist vendor booths and live demonstrations available.</p>
+                            </div>
+                            <a class="card-link" href="https://www.pecanstreetfestival.org/">PecanStreetFestival.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Pride</div>
+                            <div class="card-meta"><span class="badge badge-info">August annually</span> &middot; Downtown Austin &middot; 350,000+ attendees</div>
+                            <div class="card-body">
+                                <p>The Balloon Collective has <strong>already participated</strong> in Austin Pride builds. Expand this into a recurring branded presence &mdash; sponsor a section, lead the parade float decor, or partner with corporate sponsors for activation builds.</p>
+                            </div>
+                            <a class="card-link" href="https://www.austinpride.org/">AustinPride.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Food + Wine Festival</div>
+                            <div class="card-meta"><span class="badge badge-info">April annually</span> &middot; Auditorium Shores &middot; Premium audience</div>
+                            <div class="card-body">
+                                <p>High-end food and wine event with premium brand sponsors. VIP areas and tasting lounges use upscale decor. Strong alignment with luxury positioning.</p>
+                            </div>
+                            <a class="card-link" href="https://www.austinfoodandwinefestival.com/">Austin Food + Wine Festival &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">ABC Kite Festival</div>
+                            <div class="card-meta"><span class="badge badge-info">March/April</span> &middot; Zilker Park &middot; Community event</div>
+                            <div class="card-body">
+                                <p>The Balloon Collective has <strong>already built a custom rainbow-and-clouds arch</strong> (275 balloons, 6 hours) for this event. Convert this from a one-time project into an annual branded partnership.</p>
+                            </div>
+                            <a class="card-link" href="https://abckitefest.org/">ABC Kite Festival &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">East Austin Studio Tour (EAST)</div>
+                            <div class="card-meta"><span class="badge badge-info">November annually</span> &middot; East Austin &middot; Free</div>
+                            <div class="card-body">
+                                <p>City-wide open studios event. Artists across Austin open their workspaces to the public. The Balloon Collective could participate with live balloon sculpting demonstrations, immersive installations, and studio tours.</p>
+                            </div>
+                            <a class="card-link" href="https://www.eastaustinstudiotour.com/">EAST Tour &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Maker Faire</div>
+                            <div class="card-meta"><span class="badge badge-info">Annual</span> &middot; Various venues</div>
+                            <div class="card-body">
+                                <p>The Balloon Collective has <strong>already participated</strong>. Continue and expand &mdash; maker faires attract families and creatives who are ideal referral sources for private events.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Corporate Event Partnerships <span class="detail-count">Key targets</span></summary>
+                    <div class="details-content">
+                        <div class="highlight-box">
+                            <strong>Austin's Top Corporate Event Spenders:</strong> These companies regularly contract with local event decor vendors for office celebrations, product launches, recruiting events, and holiday parties.
+                        </div>
+                        <table>
+                            <tr><th>Company</th><th>Austin Employees</th><th>Event Types</th></tr>
+                            <tr><td>Apple</td><td>~6,000</td><td>Product launches, campus events, holiday parties</td></tr>
+                            <tr><td>Meta / Facebook</td><td>~2,000</td><td>Brand activations, office celebrations</td></tr>
+                            <tr><td>Google</td><td>~1,700</td><td>Campus events, recruiting, community</td></tr>
+                            <tr><td>Dell Technologies</td><td>~13,000</td><td>Corporate events, Dell World conference</td></tr>
+                            <tr><td>Samsung Austin Semiconductor</td><td>~3,000</td><td>Campus celebrations, grand openings</td></tr>
+                            <tr><td>Tesla / Giga Texas</td><td>~10,000</td><td>Production milestones, employee events</td></tr>
+                            <tr><td>Oracle</td><td>~3,000</td><td>Cloud World events, office decor</td></tr>
+                            <tr><td>University of Texas at Austin</td><td>~24,000</td><td>Athletics, graduations, galas, alumni events</td></tr>
+                        </table>
+                        <p class="source">Note: ATX Bubbles already lists Apple, Dell, and UT as clients. Pop &amp; Drop works with TikTok, Meta, and Reddit. These are proven buyers of balloon decor services.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 6. Networking & Professional Development -->
+        <section id="networking">
+            <h2>6. Networking &amp; Professional Development</h2>
+            <div class="section-content">
+
+                <details>
+                    <summary>Austin Networking Organizations <span class="detail-count">5 groups</span></summary>
+                    <div class="details-content">
+                        <div class="action-card">
+                            <div class="card-title">SCORE Austin &mdash; Free Business Mentoring</div>
+                            <div class="card-meta"><span class="badge badge-success">Free</span> &middot; Ongoing &middot; 1-on-1 mentoring</div>
+                            <div class="card-body">
+                                <p>SCORE is a national SBA-partnered organization providing free, confidential business mentoring. Austin's SCORE chapter has 50+ volunteer mentors with expertise in marketing, finance, operations, and growth strategy.</p>
+                                <ul>
+                                    <li><strong>Services:</strong> 1-on-1 mentoring sessions (in-person or virtual), workshops on pricing strategy, digital marketing, scaling</li>
+                                    <li><strong>Relevance:</strong> Could help with website optimization, pricing strategy, and growth planning</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.score.org/austin">SCORE Austin &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Creative Mornings Austin</div>
+                            <div class="card-meta"><span class="badge badge-success">Free</span> &middot; Monthly &middot; Breakfast + talk</div>
+                            <div class="card-body">
+                                <p>Monthly free breakfast lecture series for the creative community. Excellent networking with designers, artists, event planners, photographers, and creative agencies. Austin chapter has 3,000+ registered members.</p>
+                            </div>
+                            <a class="card-link" href="https://creativemornings.com/cities/atx">Creative Mornings ATX &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Young Chamber</div>
+                            <div class="card-meta"><span class="badge badge-info">Membership</span> &middot; $75&ndash;$200/year &middot; Monthly events</div>
+                            <div class="card-body">
+                                <p>Networking organization for young professionals in Austin. Monthly happy hours, annual gala, and community service events &mdash; all of which need event decor and provide networking with a younger demographic of future clients.</p>
+                            </div>
+                            <a class="card-link" href="https://www.austinyoungchamber.org/">AustinYoungChamber.org &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Qualbe Marketing Group &mdash; Austin Biz Networking</div>
+                            <div class="card-meta"><span class="badge badge-info">Networking</span> &middot; Varies &middot; Regular meetups</div>
+                            <div class="card-body">
+                                <p>Local BNI-style networking groups where small business owners refer each other. Particularly valuable for connecting with wedding planners, photographers, and florists who cross-refer event decor.</p>
+                            </div>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Balloon Industry Conventions</div>
+                            <div class="card-meta"><span class="badge badge-primary">Professional Dev</span> &middot; Varies &middot; Annual</div>
+                            <div class="card-body">
+                                <p>Nate and Stacy already teach at conventions. Continue leveraging this for brand authority and networking.</p>
+                                <ul>
+                                    <li><strong>Twist &amp; Shout Balloon Convention</strong> &mdash; Stacy has competed here</li>
+                                    <li><strong>World Balloon Convention (WBC)</strong> &mdash; largest global balloon convention</li>
+                                    <li><strong>Balloon Summit</strong> &mdash; U.S. regional conventions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 7. Free Business Support & Tools -->
+        <section id="free-tools">
+            <h2>7. Free Business Support &amp; Tools</h2>
+            <div class="section-content">
+
+                <details>
+                    <summary>Austin SBDC &amp; Library Resources <span class="detail-count">4 resources</span></summary>
+                    <div class="details-content">
+                        <div class="action-card">
+                            <div class="card-title">Texas State SBDC &mdash; Austin Region</div>
+                            <div class="card-meta"><span class="badge badge-success">Free</span> &middot; Ongoing &middot; Consulting + workshops</div>
+                            <div class="card-body">
+                                <p>The Small Business Development Center provides free, confidential business consulting and low-cost training. Funded by the SBA and hosted at local universities.</p>
+                                <ul>
+                                    <li><strong>Services:</strong> Business plan review, financial analysis, marketing strategy, government contracting assistance</li>
+                                    <li><strong>Government contracting help:</strong> Specifically assists with SAM.gov registration and MBE/WBE/HUB certification applications</li>
+                                    <li><strong>Location:</strong> Multiple Austin locations, virtual sessions available</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.txstate.edu/sbdc/">Texas State SBDC &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Public Library &mdash; Business Resources</div>
+                            <div class="card-meta"><span class="badge badge-success">Free</span> &middot; Library card required</div>
+                            <div class="card-body">
+                                <p>Austin Public Library provides free access to premium business databases that would otherwise cost hundreds per month.</p>
+                                <ul>
+                                    <li><strong>Reference USA / Data Axle:</strong> Business contact lists for prospecting (find event planners, corporate offices, venues)</li>
+                                    <li><strong>Gale Business Plan Builder:</strong> Step-by-step business plan creation tool</li>
+                                    <li><strong>Morningstar Investment Research:</strong> Industry analysis reports</li>
+                                    <li><strong>LinkedIn Learning:</strong> Free with library card &mdash; courses on social media marketing, SEO, business growth</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://library.austintexas.gov/database">Austin Public Library Databases &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">SAM.gov Registration (System for Award Management)</div>
+                            <div class="card-meta"><span class="badge badge-success">Free</span> &middot; Required for federal contracts</div>
+                            <div class="card-body">
+                                <p>Federal vendor registration system. Required before receiving any federal contract or grant. Free to register and renew annually. Opens access to government event decor contracts (military bases, federal offices, embassies).</p>
+                            </div>
+                            <a class="card-link" href="https://sam.gov/">SAM.gov &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Google for Small Business &mdash; Free Digital Skills Training</div>
+                            <div class="card-meta"><span class="badge badge-success">Free</span> &middot; Online &middot; Self-paced</div>
+                            <div class="card-body">
+                                <p>Free courses on Google Ads, Google Business Profile optimization, SEO, and digital marketing. After claiming a Google Business Profile (Section 1), use these courses to optimize the listing for maximum local search visibility.</p>
+                            </div>
+                            <a class="card-link" href="https://smallbusiness.withgoogle.com/">Google for Small Business &rarr;</a>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 8. Sustainability Programs -->
+        <section id="sustainability">
+            <h2>8. Sustainability Programs</h2>
+            <div class="section-content">
+                <div class="warning-box">
+                    <strong>Industry Context:</strong> The research report identified sustainability as an accelerating trend &mdash; 35% of balloon manufacturers now offer biodegradable options, and multiple Austin competitors (Pop &amp; Drop, Balloon Boutique) already emphasize eco-friendly practices. The Balloon Collective's website does not currently address sustainability.
+                </div>
+
+                <details>
+                    <summary>Austin &amp; Industry Sustainability Programs <span class="detail-count">4 programs</span></summary>
+                    <div class="details-content">
+                        <div class="action-card">
+                            <div class="card-title">Austin Green Business Leaders Program</div>
+                            <div class="card-meta"><span class="badge badge-success">Free</span> &middot; City of Austin &middot; Certification</div>
+                            <div class="card-body">
+                                <p>City of Austin program recognizing businesses that adopt sustainable practices. Provides a "Green Business Leader" certification badge and listing on the city's green business directory.</p>
+                                <ul>
+                                    <li><strong>Requirements:</strong> Complete a sustainability checklist covering waste reduction, energy efficiency, and green purchasing</li>
+                                    <li><strong>Relevance:</strong> Commit to biodegradable latex, air-filled (vs. helium) installations, and recycling/composting of balloon waste</li>
+                                    <li><strong>Marketing value:</strong> Differentiator on website and proposals; addresses the sustainability gap vs. competitors</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.austintexas.gov/department/green-business-leaders">Austin Green Business Leaders &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Resource Recovery &mdash; Business Waste Reduction</div>
+                            <div class="card-meta"><span class="badge badge-success">Free</span> &middot; City program &middot; Ongoing</div>
+                            <div class="card-body">
+                                <p>Free waste audits and recycling assistance for Austin businesses. Can help establish a formal balloon waste recycling or composting program.</p>
+                            </div>
+                            <a class="card-link" href="https://www.austintexas.gov/department/austin-resource-recovery">Austin Resource Recovery &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Biodegradable Balloon Sourcing &amp; Certification</div>
+                            <div class="card-meta"><span class="badge badge-info">Industry</span> &middot; Varies</div>
+                            <div class="card-body">
+                                <p>Formalize use of biodegradable latex balloons and develop a sustainability page on the website. Key suppliers offering certified biodegradable options:</p>
+                                <ul>
+                                    <li><strong>Qualatex (by Pioneer Balloon Company):</strong> Industry-standard biodegradable latex</li>
+                                    <li><strong>EUROLOONS:</strong> European biodegradable balloon supplier</li>
+                                    <li><strong>Balloon release bans:</strong> Texas does not currently have a statewide ban, but Austin's zero-waste goals align with proactive compliance</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Climate Equity Plan &mdash; Business Resources</div>
+                            <div class="card-meta"><span class="badge badge-info">City Policy</span> &middot; Awareness</div>
+                            <div class="card-body">
+                                <p>Austin's climate goals include net-zero by 2040. Businesses that proactively align receive favorable treatment in city contracting and marketing. Positioning as Austin's first "zero-waste balloon company" would be a significant differentiator.</p>
+                            </div>
+                            <a class="card-link" href="https://www.austintexas.gov/page/austin-climate-equity-plan">Austin Climate Equity Plan &rarr;</a>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 9. Wedding & Event Industry -->
+        <section id="wedding-event">
+            <h2>9. Wedding &amp; Event Industry Associations</h2>
+            <div class="section-content">
+                <p>Austin is one of the top 10 wedding destinations in Texas, with an average wedding cost of $35,000&ndash;$40,000. Balloon decor is a growing line item in wedding budgets.</p>
+
+                <details>
+                    <summary>Professional Associations &amp; Venue Partnerships <span class="detail-count">5 opportunities</span></summary>
+                    <div class="details-content">
+                        <div class="action-card priority-high">
+                            <div class="card-title">ILEA Austin (International Live Events Association)</div>
+                            <div class="card-meta"><span class="badge badge-warning">High Value</span> &middot; Membership &middot; 120+ event professionals</div>
+                            <div class="card-body">
+                                <p>THE industry association for Austin event professionals. 120+ members including event planners, venues, caterers, and decor specialists. Monthly meetings and education events provide direct access to the people who book decor vendors.</p>
+                            </div>
+                            <a class="card-link" href="https://www.ileaaustin.com/">ILEA Austin &rarr;</a>
+                        </div>
+
+                        <div class="action-card priority-high">
+                            <div class="card-title">AWPA (Austin Wedding Planners Association) &mdash; New Vendor Expo</div>
+                            <div class="card-meta"><span class="badge badge-danger">May 2026</span> &middot; $135 &middot; Direct planner access</div>
+                            <div class="card-body">
+                                <p>Annual vendor expo that puts you directly in front of Austin's top wedding planners. This is one of the most cost-effective ways to get on multiple preferred vendor lists in a single day. Register early &mdash; spots fill.</p>
+                                <ul>
+                                    <li><strong>Contact:</strong> <a href="mailto:planners@awpaustin.com">planners@awpaustin.com</a></li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.awpaustin.com/vendors">AWPA Vendor Info &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">NACE Austin (National Association for Catering &amp; Events)</div>
+                            <div class="card-meta"><span class="badge badge-warning">High Value</span> &middot; $200&ndash;$500/year &middot; Membership</div>
+                            <div class="card-body">
+                                <p>The premier networking organization for event professionals in Austin. Monthly meetings, annual gala, and a preferred vendor directory. Members include caterers, venues, planners, photographers, and decor specialists.</p>
+                                <ul>
+                                    <li><strong>Benefits:</strong> Preferred vendor referrals, education on event industry trends, annual NACE gala attendance</li>
+                                    <li><strong>Key contact:</strong> Austin chapter meetings held monthly at local venues</li>
+                                </ul>
+                            </div>
+                            <a class="card-link" href="https://www.nace.net/">NACE.net &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Wedding Planners &amp; Venues (Preferred Vendor Lists)</div>
+                            <div class="card-meta"><span class="badge badge-warning">High Value</span> &middot; Free or reciprocal &middot; Ongoing</div>
+                            <div class="card-body">
+                                <p>Most Austin wedding venues maintain a "preferred vendor" list. Getting on these lists is the single highest-volume referral source for wedding balloon decor.</p>
+                                <ul>
+                                    <li><strong>Target venues:</strong> The Driskill Hotel, Barr Mansion, Prospect House, Ma Maison, Mattie's, Mercury Hall, Allan House, Hotel Ella, The Grand Lady</li>
+                                    <li><strong>How to get listed:</strong> Contact venue coordinators with a portfolio deck, offer to do one styled shoot at the venue in exchange for preferred vendor status</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">The Knot / WeddingWire Vendor Listing</div>
+                            <div class="card-meta"><span class="badge badge-info">Lead Generation</span> &middot; Free basic / $1,000+ premium &middot; Ongoing</div>
+                            <div class="card-body">
+                                <p>The two largest wedding vendor directories. Free basic listings available. Couples planning Austin weddings use these platforms to find decor vendors.</p>
+                            </div>
+                            <a class="card-link" href="https://www.theknot.com/marketplace">The Knot Vendor Marketplace &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">PartySlate Profile Optimization</div>
+                            <div class="card-meta"><span class="badge badge-success">Already Active</span> &middot; Free &middot; Update now</div>
+                            <div class="card-body">
+                                <p>The Balloon Collective already has an active PartySlate profile (56 photos, 15 vendor connections). Optimize this by adding new portfolio images, updating service descriptions, and requesting reviews from past clients.</p>
+                            </div>
+                            <a class="card-link" href="https://www.partyslate.com/vendors/the-balloon-collective">View PartySlate Profile &rarr;</a>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="card-title">Austin Event Planner Styled Shoots</div>
+                            <div class="card-meta"><span class="badge badge-info">Marketing</span> &middot; Cost of materials &middot; Quarterly</div>
+                            <div class="card-body">
+                                <p>Collaborate with local photographers and event planners on styled shoots (mock events). These generate high-quality portfolio images and create vendor relationships that lead to referrals. Austin has an active styled shoot community on Instagram.</p>
+                                <ul>
+                                    <li><strong>Connect via:</strong> Instagram hashtags #AustinStyledShoot, #ATXWedding, #AustinEventPlanner</li>
+                                    <li><strong>Benefit:</strong> Professional photos for Google Business, Yelp, website, and social media</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 10. Recommended Action Timeline -->
+        <section id="action-timeline">
+            <h2>10. Recommended Action Timeline</h2>
+            <div class="section-content">
+                <p>Prioritized roadmap based on impact, cost, and time investment.</p>
+
+                <h3>Week 1&ndash;2: Foundation (Free, Immediate Impact)</h3>
+                <div class="timeline-item">
+                    <div class="timeline-label">Day 1&ndash;3</div>
+                    <p>Claim <strong>Google Business Profile</strong> and <strong>Yelp Business page</strong>. Upload 15+ portfolio photos to each. Begin verification process.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-label">Day 3&ndash;5</div>
+                    <p>Register as a vendor on <strong>Austin Finance Online</strong>. Create a <strong>Thumbtack Pro</strong> profile.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-label">Day 5&ndash;10</div>
+                    <p>Begin <strong>MBE and/or WBE certification</strong> application through the City of Austin SMBR portal. Contact SMBR at (512) 974-7645 with questions.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-label">Day 10&ndash;14</div>
+                    <p>Register on <strong>SAM.gov</strong>. Schedule a free <strong>SCORE Austin</strong> mentoring session. Apply for <strong>The Knot</strong> basic listing. Create account on <a href="https://thelongcenter.submittable.com/submit">Submittable</a> for AACME grant notifications.</p>
+                </div>
+
+                <div class="warning-box">
+                    <strong>March 2026 Deadlines:</strong> (1) <strong>Nexus Grant Round 1</strong> opens in March &mdash; prepare application. Virtual office hours available Tuesdays 10am&ndash;12pm. (2) <strong>Texas Commission on the Arts FY27</strong> deadline March 2&ndash;16 &mdash; sign up at <a href="https://www.arts.texas.gov/grants/sign-up/">arts.texas.gov</a> now.
+                </div>
+
+                <h3>Month 1&ndash;2: Growth (Low Cost, High Value)</h3>
+                <div class="timeline-item">
+                    <div class="timeline-label">Week 3&ndash;4</div>
+                    <p>Join <strong>Austin Creative Alliance</strong> ($50&ndash;$200) and <strong>AIBA</strong> ($100&ndash;$350). Attend first networking event. Contact 3&ndash;5 Austin wedding venues about preferred vendor lists.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-label">Week 5&ndash;6</div>
+                    <p>Apply for <strong>Texas HUB Certification</strong>. Begin <strong>Austin Green Business Leaders</strong> certification process. Add sustainability messaging to website.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-label">Week 7&ndash;8</div>
+                    <p>Join <strong>NACE Austin</strong>. Attend a <strong>Creative Mornings ATX</strong> event. Optimize <strong>PartySlate</strong> profile with new images.</p>
+                </div>
+
+                <h3>Month 3&ndash;6: Expansion (Strategic Investment)</h3>
+                <div class="timeline-item">
+                    <div class="timeline-label">Month 3</div>
+                    <p>Submit <strong>Nexus Grant Round 1</strong> application. Apply for <strong>TCA Arts Respond</strong> grant. Begin outreach to <strong>SXSW brand activation agencies</strong> for following year. Apply for <strong>East Austin Studio Tour (EAST)</strong> participation.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-label">Month 4&ndash;5</div>
+                    <p>Join <strong>Greater Austin Chamber of Commerce</strong> and <strong>ILEA Austin</strong>. Attend <strong>AWPA Vendor Expo</strong> (May, $135). Pitch <strong>ACL Festival</strong> sponsor activations. Organize first <strong>styled shoot</strong> with Austin wedding vendors. If eligible, begin <strong>WBENC</strong> national certification.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-label">Month 6</div>
+                    <p>Evaluate ROI of all actions. Pursue <strong>Trail of Lights</strong> sponsor partnership. Begin pitching corporate clients (Dell, Apple, UT Austin) for holiday season decor. Review and respond to all Google and Yelp reviews.</p>
+                </div>
+
+                <div class="success-box" style="margin-top: 1.5rem;">
+                    <strong>Expected Outcomes (6 months):</strong>
+                    <ul style="margin-bottom: 0;">
+                        <li>Google Business and Yelp listings live with 10+ reviews each</li>
+                        <li>MBE/WBE and HUB certifications active, enabling city/state contract access</li>
+                        <li>Membership in 3&ndash;4 business associations generating monthly networking touchpoints</li>
+                        <li>Preferred vendor status at 3&ndash;5 Austin wedding venues</li>
+                        <li>Pipeline of 2&ndash;3 major Austin event partnerships for upcoming season</li>
+                        <li>Sustainability positioning established on website and marketing materials</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Sources -->
+        <section id="sources">
+            <h2>11. Sources</h2>
+            <div class="section-content">
+                <details>
+                    <summary>City of Austin &amp; Government Sources <span class="detail-count">16 sources</span></summary>
+                    <div class="details-content">
+                        <ol>
+                            <li><a href="https://www.austintexas.gov/department/small-minority-business-resources">City of Austin &mdash; Small &amp; Minority Business Resources (SMBR)</a></li>
+                            <li><a href="https://financeonline.austintexas.gov/">Austin Finance Online (AFO) &mdash; Vendor Registration</a></li>
+                            <li><a href="https://createaustin.org/nexus/">Create Austin &mdash; Nexus Grant</a></li>
+                            <li><a href="https://createaustin.org/elevate/">Create Austin &mdash; Elevate Grant</a></li>
+                            <li><a href="https://createaustin.org/csap/">Create Austin &mdash; Creative Space Assistance Program</a></li>
+                            <li><a href="https://www.austintexas.gov/department/art-public-places">City of Austin &mdash; Art in Public Places (AIPP)</a></li>
+                            <li><a href="https://www.austintexas.gov/department/cultural-arts-division">City of Austin &mdash; Cultural Arts Division</a></li>
+                            <li><a href="https://www.austintexas.gov/business/incentives-and-grants">City of Austin &mdash; Business Incentives &amp; Grants (PBEP)</a></li>
+                            <li><a href="https://www.austintexas.gov/department/green-business-leaders">City of Austin &mdash; Green Business Leaders Program</a></li>
+                            <li><a href="https://www.austintexas.gov/department/austin-resource-recovery">City of Austin &mdash; Austin Resource Recovery</a></li>
+                            <li><a href="https://www.austintexas.gov/page/austin-climate-equity-plan">City of Austin &mdash; Climate Equity Plan</a></li>
+                            <li><a href="https://www.arts.texas.gov/current-grants/">Texas Commission on the Arts &mdash; Current Grants</a></li>
+                            <li><a href="https://comptroller.texas.gov/purchasing/vendor/hub/">Texas Comptroller &mdash; HUB Certification</a></li>
+                            <li><a href="https://www.sba.gov/funding-programs/loans">U.S. SBA &mdash; Loan Programs</a></li>
+                            <li><a href="https://www.sba.gov/federal-contracting/contracting-assistance-programs/8a-business-development-program">U.S. SBA &mdash; 8(a) Business Development Program</a></li>
+                            <li><a href="https://www.bigaustin.org/">BiGAUSTIN &mdash; Business Investment Growth Austin</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Business Associations &amp; Organizations <span class="detail-count">9 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="11">
+                            <li><a href="https://www.austinchamber.com/">Greater Austin Chamber of Commerce</a></li>
+                            <li><a href="https://www.ibuyaustin.com/">Austin Independent Business Alliance (AIBA)</a></li>
+                            <li><a href="https://www.austincreativealliance.org/">Austin Creative Alliance</a></li>
+                            <li><a href="https://www.gahcc.org/">Greater Austin Hispanic Chamber of Commerce</a></li>
+                            <li><a href="https://www.austinbcc.org/">Greater Austin Black Chamber of Commerce</a></li>
+                            <li><a href="https://www.score.org/austin">SCORE Austin</a></li>
+                            <li><a href="https://creativemornings.com/cities/atx">Creative Mornings ATX</a></li>
+                            <li><a href="https://www.austinyoungchamber.org/">Austin Young Chamber</a></li>
+                            <li><a href="https://www.nace.net/">NACE &mdash; National Association for Catering &amp; Events</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Events &amp; Venues <span class="detail-count">9 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="20">
+                            <li><a href="https://www.sxsw.com/">SXSW (South by Southwest)</a></li>
+                            <li><a href="https://www.aclfestival.com/">Austin City Limits Music Festival</a></li>
+                            <li><a href="https://www.austintrailoflights.org/">Austin Trail of Lights</a></li>
+                            <li><a href="https://www.circuitoftheamericas.com/">Circuit of the Americas (F1 USGP)</a></li>
+                            <li><a href="https://www.pecanstreetfestival.org/">Pecan Street Festival</a></li>
+                            <li><a href="https://www.austinpride.org/">Austin Pride</a></li>
+                            <li><a href="https://www.austinfoodandwinefestival.com/">Austin Food + Wine Festival</a></li>
+                            <li><a href="https://www.eastaustinstudiotour.com/">East Austin Studio Tour (EAST)</a></li>
+                            <li><a href="https://abckitefest.org/">ABC Kite Festival</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Business Tools &amp; Directories <span class="detail-count">9 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="29">
+                            <li><a href="https://business.google.com/">Google Business Profile</a></li>
+                            <li><a href="https://business.yelp.com/">Yelp for Business</a></li>
+                            <li><a href="https://www.thumbtack.com/pro">Thumbtack Pro</a></li>
+                            <li><a href="https://sam.gov/">SAM.gov (System for Award Management)</a></li>
+                            <li><a href="https://www.peoplefund.org/">PeopleFund &mdash; Austin Microlender</a></li>
+                            <li><a href="https://www.txstate.edu/sbdc/">Texas State SBDC</a></li>
+                            <li><a href="https://library.austintexas.gov/database">Austin Public Library &mdash; Business Databases</a></li>
+                            <li><a href="https://smallbusiness.withgoogle.com/">Google for Small Business</a></li>
+                            <li><a href="https://www.wbenc.org/">WBENC &mdash; Women's Business Enterprise National Council</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Wedding &amp; Event Industry <span class="detail-count">5 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="38">
+                            <li><a href="https://www.ileaaustin.com/">ILEA Austin &mdash; International Live Events Association</a></li>
+                            <li><a href="https://www.awpaustin.com/vendors">AWPA &mdash; Austin Wedding Planners Association</a></li>
+                            <li><a href="https://www.theknot.com/marketplace">The Knot &mdash; Vendor Marketplace</a></li>
+                            <li><a href="https://www.partyslate.com/vendors/the-balloon-collective">PartySlate &mdash; The Balloon Collective Profile</a></li>
+                            <li><a href="https://www.publicartist.org/">PublicArtist.org &mdash; Public Art Calls</a></li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>Report compiled:</strong> February 8, 2026</p>
+            <p><strong>Companion document:</strong> <a href="the_balloon_collective_research.html">The Balloon Collective &mdash; Comprehensive Research Report</a></p>
+            <p><strong>Total unique resources cited:</strong> 48</p>
+        </footer>
+    </div>
+</body>
+</html>

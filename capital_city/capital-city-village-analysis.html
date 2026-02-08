@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capital City Village - Comprehensive Analysis Report</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-secondary: #f8f9fa;
+      --color-text-primary: #1a1a1a;
+      --color-text-secondary: #666666;
+      --color-primary-dark: #1a365d;
+      --color-primary-medium: #2b6cb0;
+      --color-primary-light: #2c5282;
+      --color-accent-light: #90cdf4;
+      --color-accent-bg: #ebf8ff;
+      --color-border: #e5e7eb;
+      --color-card-bg: #ffffff;
+      --color-star-filled: #2b6cb0;
+      --color-star-empty: #d1d5db;
+      --color-recommended: #059669;
+      --color-recommended-bg: #f0fdf4;
+      --color-warning: #dc2626;
+      --color-warning-bg: #fef2f2;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #0f172a;
+        --color-bg-secondary: #1e293b;
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #cbd5e1;
+        --color-primary-dark: #93c5fd;
+        --color-primary-medium: #60a5fa;
+        --color-primary-light: #3b82f6;
+        --color-accent-light: #1e3a5f;
+        --color-accent-bg: rgba(43, 108, 176, 0.15);
+        --color-border: #334155;
+        --color-card-bg: #1e293b;
+        --color-star-filled: #60a5fa;
+        --color-star-empty: #475569;
+        --color-recommended-bg: rgba(5, 150, 105, 0.1);
+        --color-warning-bg: rgba(220, 38, 38, 0.1);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* Document Header */
+    .doc-header {
+      background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+      color: #fff;
+      padding: var(--spacing-xl) var(--spacing-lg);
+      text-align: center;
+      border-bottom: 4px solid var(--color-accent-light);
+    }
+
+    .doc-header-content { max-width: 900px; margin: 0 auto; }
+
+    .doc-header h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .doc-header .subtitle {
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .doc-header .meta-box {
+      background: rgba(0,0,0,0.15);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      font-size: 0.9375rem;
+      line-height: 1.8;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .doc-header .meta-box a { color: #90cdf4; }
+    .doc-header .meta-box a:hover { text-decoration: underline; }
+
+    /* Navigation Bar */
+    .nav-bar {
+      background: var(--color-bg-secondary);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--spacing-sm) var(--spacing-lg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-bar-content {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+    }
+
+    .nav-bar a {
+      color: var(--color-primary-medium);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9375rem;
+    }
+
+    .nav-bar a:hover { text-decoration: underline; }
+    .nav-bar a:focus-visible {
+      outline: 2px solid var(--color-primary-medium);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Content Container */
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-lg);
+    }
+
+    /* Table of Contents */
+    .toc {
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .toc h2 {
+      font-size: 1.25rem;
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary-dark);
+      border: none;
+      padding: 0;
+    }
+
+    .toc-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .toc-list li {
+      margin: var(--spacing-xs) 0;
+      border-left: 3px solid var(--color-primary-medium);
+      padding-left: var(--spacing-md);
+    }
+
+    .toc-list li.toc-sub {
+      margin-left: var(--spacing-lg);
+      border-left-color: var(--color-accent-light);
+    }
+
+    .toc-list a {
+      color: var(--color-primary-medium);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.625rem 0;
+      min-height: 44px;
+    }
+
+    .toc-list a:hover { text-decoration: underline; }
+
+    /* Section Headers */
+    .content h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      border-bottom: 2px solid var(--color-primary-medium);
+      padding-bottom: var(--spacing-sm);
+      margin-top: var(--spacing-xl);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .content h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-primary-medium);
+      margin-top: var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      border-left: 4px solid var(--color-primary-medium);
+      padding-left: var(--spacing-md);
+    }
+
+    .content h4 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-top: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .content p {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .content a {
+      color: var(--color-primary-medium);
+      text-decoration: none;
+    }
+
+    .content a:hover { text-decoration: underline; }
+
+    /* Callout Boxes */
+    .callout {
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      margin: var(--spacing-lg) 0;
+      border-left: 5px solid var(--color-primary-medium);
+      background: var(--color-accent-bg);
+    }
+
+    .callout h4 {
+      margin-top: 0;
+      color: var(--color-primary-dark);
+    }
+
+    .callout-recommended {
+      border-left-color: var(--color-recommended);
+      background: var(--color-recommended-bg);
+    }
+
+    .callout-recommended h4 { color: var(--color-recommended); }
+
+    .callout-warning {
+      border-left-color: var(--color-warning);
+      background: var(--color-warning-bg);
+    }
+
+    .callout-warning h4 { color: var(--color-warning); }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: var(--spacing-md) 0 var(--spacing-lg);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9375rem;
+    }
+
+    thead { background: var(--color-primary-medium); color: #fff; }
+
+    th {
+      padding: var(--spacing-sm) var(--spacing-md);
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(odd) { background: var(--color-bg-secondary); }
+    tbody tr:hover { background: var(--color-accent-bg); }
+
+    /* Star Ratings */
+    .stars { display: inline-flex; gap: 2px; letter-spacing: 1px; }
+    .stars .filled { color: var(--color-star-filled); }
+    .stars .empty { color: var(--color-star-empty); }
+    .stars-label {
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+      margin-left: 0.25rem;
+    }
+
+    /* Lists */
+    .content ul, .content ol {
+      margin: var(--spacing-sm) 0;
+      padding-left: var(--spacing-lg);
+    }
+
+    .content li { margin: var(--spacing-xs) 0; }
+
+    .content li strong { color: var(--color-primary-dark); }
+
+    /* Evidence Block */
+    .evidence {
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      margin: var(--spacing-sm) 0 var(--spacing-md);
+      font-size: 0.9375rem;
+    }
+
+    .evidence-title {
+      font-weight: 600;
+      color: var(--color-primary-dark);
+      margin-bottom: var(--spacing-xs);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Timeline */
+    .timeline-container {
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+      overflow-x: auto;
+    }
+
+    .timeline-phase {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .timeline-phase:last-child { margin-bottom: 0; }
+
+    .phase-label {
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: var(--spacing-sm);
+      font-size: 0.9375rem;
+    }
+
+    .timeline-task {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .task-name {
+      min-width: 240px;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    .task-bar-track {
+      flex-grow: 1;
+      height: 22px;
+      background: var(--color-border);
+      border-radius: var(--radius-sm);
+      position: relative;
+      min-width: 200px;
+    }
+
+    .task-bar {
+      height: 100%;
+      border-radius: var(--radius-sm);
+      background: var(--color-primary-medium);
+      opacity: 0.8;
+    }
+
+    /* Horizontal Rule */
+    hr {
+      border: none;
+      border-top: 2px solid var(--color-border);
+      margin: var(--spacing-xl) 0;
+    }
+
+    /* Glossary */
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: var(--spacing-sm) var(--spacing-lg);
+    }
+
+    .glossary-term {
+      font-weight: 700;
+      color: var(--color-primary-medium);
+    }
+
+    .glossary-def { margin: 0; }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-recommended {
+      background: var(--color-recommended-bg);
+      color: var(--color-recommended);
+      border: 1px solid var(--color-recommended);
+    }
+
+    /* Sources */
+    .sources-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sources-list li {
+      margin: var(--spacing-xs) 0;
+      padding-left: var(--spacing-md);
+      position: relative;
+    }
+
+    .sources-list li::before {
+      content: '\2022';
+      position: absolute;
+      left: 0;
+      color: var(--color-primary-medium);
+    }
+
+    /* Footer */
+    .doc-footer {
+      border-top: 2px solid var(--color-border);
+      padding: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+      background: var(--color-bg-secondary);
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    .doc-footer .footer-nav {
+      display: flex;
+      gap: var(--spacing-lg);
+      justify-content: center;
+      margin-bottom: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .doc-footer a {
+      color: var(--color-primary-medium);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .doc-footer a:hover { text-decoration: underline; }
+
+    .footer-meta { color: var(--color-text-secondary); margin: 0; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .doc-header h1 { font-size: 1.75rem; }
+      .doc-header .subtitle { font-size: 1.0625rem; }
+      .doc-header { padding: var(--spacing-lg) var(--spacing-md); }
+      .content { padding: var(--spacing-lg) var(--spacing-md); }
+      .content h2 { font-size: 1.5rem; }
+      .content h3 { font-size: 1.125rem; }
+      .task-name { min-width: 160px; }
+      .glossary-grid { grid-template-columns: 1fr; }
+      .glossary-term { margin-top: var(--spacing-sm); }
+      .nav-bar-content { justify-content: center; }
+      .doc-footer .footer-nav { flex-direction: column; gap: var(--spacing-sm); }
+    }
+
+    @media (max-width: 480px) {
+      .doc-header h1 { font-size: 1.5rem; }
+      .content { padding: var(--spacing-md) var(--spacing-sm); }
+      .content h2 { font-size: 1.375rem; }
+      th, td { padding: var(--spacing-xs) var(--spacing-sm); font-size: 0.8125rem; }
+      .task-name { min-width: 120px; font-size: 0.75rem; }
+    }
+
+    /* Print */
+    @media print {
+      body { background: #fff; color: #000; font-size: 11pt; }
+      .nav-bar { display: none; }
+      .doc-header { background: none; color: #000; border-bottom: 3px solid #2b6cb0; }
+      .doc-header h1 { color: #1a365d; }
+      .doc-header .subtitle { color: #666; }
+      .doc-header .meta-box { background: #f7fafc; border: 1px solid #e2e8f0; }
+      .doc-header .meta-box a { color: #2b6cb0; }
+      .toc { page-break-after: always; }
+      section { page-break-inside: avoid; }
+      table { page-break-inside: avoid; }
+      .callout { page-break-inside: avoid; border: 1px solid #ccc; }
+      .timeline-container { page-break-inside: avoid; }
+      a { color: #2b6cb0; }
+      .doc-footer { background: none; border-top: 1px solid #ccc; }
+      @page { size: letter; margin: 0.75in; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Document Header -->
+  <header class="doc-header">
+    <div class="doc-header-content">
+      <h1>Capital City Village</h1>
+      <p class="subtitle">Comprehensive Analysis Report</p>
+      <div class="meta-box">
+        <strong>Organization:</strong> Capital City Village (CCV)<br>
+        <strong>Website:</strong> <a href="https://www.capitalcityvillage.org/">capitalcityvillage.org</a><br>
+        <strong>Location:</strong> 3710 Cedar St, Suite 283, Austin, TX 78705<br>
+        <strong>Contact:</strong> 512-524-2709 | info@capitalcityvillage.org<br>
+        <strong>Report Date:</strong> February 3, 2026
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Nav -->
+  <nav class="nav-bar">
+    <div class="nav-bar-content">
+      <a href="index.html">&larr; Back to Index</a>
+      <a href="#toc">&uarr; Table of Contents</a>
+      <a href="Capital-City-Village-Analysis-Report.pdf">Download PDF</a>
+    </div>
+  </nav>
+
+  <div class="content">
+
+    <!-- Table of Contents -->
+    <nav class="toc" id="toc">
+      <h2>Table of Contents</h2>
+      <ul class="toc-list">
+        <li><a href="#board-decision-summary">Board Decision Summary</a></li>
+        <li><a href="#executive-summary">Executive Summary</a></li>
+        <li><a href="#website-redesign">Part 1: Website Redesign Analysis</a></li>
+        <li class="toc-sub"><a href="#current-state">Current State Assessment</a></li>
+        <li class="toc-sub"><a href="#redesign-options">Redesign Recommendations</a></li>
+        <li class="toc-sub"><a href="#senior-design">Senior-Focused Design Best Practices</a></li>
+        <li><a href="#payment-processors">Part 2: Payment Processors Analysis</a></li>
+        <li class="toc-sub"><a href="#processor-comparison">Processor Comparison</a></li>
+        <li class="toc-sub"><a href="#fee-impact">Fee Impact Analysis</a></li>
+        <li class="toc-sub"><a href="#implementation-timeline">Implementation Timeline</a></li>
+        <li><a href="#recommendations">Summary of Recommendations</a></li>
+        <li><a href="#glossary">Glossary</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ul>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- BOARD DECISION SUMMARY                       -->
+    <!-- ============================================ -->
+    <section id="board-decision-summary">
+      <h2>Board Decision Summary</h2>
+
+      <div class="callout callout-warning">
+        <h4>The Bottom Line</h4>
+        <p>CCV's current website has critical issues (broken images, dead links) that create an unprofessional first impression. Additionally, CCV could save <strong>$1,000&ndash;1,500 annually</strong> by optimizing payment processing.</p>
+      </div>
+
+      <h3>Decision 1: Website Strategy</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Option</th><th>Cost</th><th>Effort</th><th>Recommendation</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>A. Fix Current Site</strong></td>
+              <td>&lt;$500/yr</td>
+              <td>Low</td>
+              <td>Minimum viable &mdash; do this immediately</td>
+            </tr>
+            <tr>
+              <td><strong>B. Hybrid Approach</strong></td>
+              <td>$500&ndash;1,500/yr</td>
+              <td>Medium</td>
+              <td><span class="badge badge-recommended">Recommended</span> Best balance</td>
+            </tr>
+            <tr>
+              <td><strong>C. Full WordPress Migration</strong></td>
+              <td>$3,000&ndash;5,000/yr</td>
+              <td>High</td>
+              <td>Only if growth demands it</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Staff Recommendation:</strong> Option B (Hybrid) &mdash; Keep Helpful Village for member operations, build modern marketing site on Squarespace/WordPress.</p>
+
+      <h3>Decision 2: Payment Processing</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Action</th><th>Impact</th><th>Timeline</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apply for Stripe Nonprofit discount</td>
+              <td>Save 0.7% per transaction</td>
+              <td>This week</td>
+            </tr>
+            <tr>
+              <td>Add Zeffy for events</td>
+              <td>0% fees on event tickets</td>
+              <td>Before next event</td>
+            </tr>
+            <tr>
+              <td>Keep PayPal Giving Fund</td>
+              <td>Already working, 0% fees</td>
+              <td>Ongoing</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Projected Annual Savings:</strong> $1,000&ndash;1,500 on $50,000 transaction volume</p>
+
+      <h3>Website Options Decision Matrix</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Criteria (Weight)</th><th>Fix Current (A)</th><th>Hybrid (B)</th><th>Full Migration (C)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cost</strong> (25%)</td>
+              <td><span class="stars" role="img" aria-label="5 out of 5 stars"><span class="filled">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> <span class="stars-label">5/5</span></td>
+              <td><span class="stars" role="img" aria-label="4 out of 5 stars"><span class="filled">&#9733;&#9733;&#9733;&#9733;</span><span class="empty">&#9734;</span></span> <span class="stars-label">4/5</span></td>
+              <td><span class="stars" role="img" aria-label="2 out of 5 stars"><span class="filled">&#9733;&#9733;</span><span class="empty">&#9734;&#9734;&#9734;</span></span> <span class="stars-label">2/5</span></td>
+            </tr>
+            <tr>
+              <td><strong>Professional Image</strong> (25%)</td>
+              <td><span class="stars" role="img" aria-label="2 out of 5 stars"><span class="filled">&#9733;&#9733;</span><span class="empty">&#9734;&#9734;&#9734;</span></span> <span class="stars-label">2/5</span></td>
+              <td><span class="stars" role="img" aria-label="5 out of 5 stars"><span class="filled">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> <span class="stars-label">5/5</span></td>
+              <td><span class="stars" role="img" aria-label="5 out of 5 stars"><span class="filled">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> <span class="stars-label">5/5</span></td>
+            </tr>
+            <tr>
+              <td><strong>Ease of Implementation</strong> (20%)</td>
+              <td><span class="stars" role="img" aria-label="5 out of 5 stars"><span class="filled">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> <span class="stars-label">5/5</span></td>
+              <td><span class="stars" role="img" aria-label="3 out of 5 stars"><span class="filled">&#9733;&#9733;&#9733;</span><span class="empty">&#9734;&#9734;</span></span> <span class="stars-label">3/5</span></td>
+              <td><span class="stars" role="img" aria-label="2 out of 5 stars"><span class="filled">&#9733;&#9733;</span><span class="empty">&#9734;&#9734;&#9734;</span></span> <span class="stars-label">2/5</span></td>
+            </tr>
+            <tr>
+              <td><strong>Retains Village Features</strong> (15%)</td>
+              <td><span class="stars" role="img" aria-label="5 out of 5 stars"><span class="filled">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> <span class="stars-label">5/5</span></td>
+              <td><span class="stars" role="img" aria-label="5 out of 5 stars"><span class="filled">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> <span class="stars-label">5/5</span></td>
+              <td><span class="stars" role="img" aria-label="1 out of 5 stars"><span class="filled">&#9733;</span><span class="empty">&#9734;&#9734;&#9734;&#9734;</span></span> <span class="stars-label">1/5</span></td>
+            </tr>
+            <tr>
+              <td><strong>SEO/Marketing Flexibility</strong> (15%)</td>
+              <td><span class="stars" role="img" aria-label="1 out of 5 stars"><span class="filled">&#9733;</span><span class="empty">&#9734;&#9734;&#9734;&#9734;</span></span> <span class="stars-label">1/5</span></td>
+              <td><span class="stars" role="img" aria-label="4 out of 5 stars"><span class="filled">&#9733;&#9733;&#9733;&#9733;</span><span class="empty">&#9734;</span></span> <span class="stars-label">4/5</span></td>
+              <td><span class="stars" role="img" aria-label="5 out of 5 stars"><span class="filled">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> <span class="stars-label">5/5</span></td>
+            </tr>
+            <tr>
+              <td><strong>Total Score</strong></td>
+              <td><strong>3.4/5</strong></td>
+              <td><strong>4.2/5</strong> <span class="badge badge-recommended">Recommended</span></td>
+              <td><strong>3.2/5</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Immediate Actions (Board Approval Requested)</h3>
+      <ol>
+        <li><strong>Authorize</strong> staff to contact Helpful Village support to fix broken images (no cost)</li>
+        <li><strong>Approve</strong> application for Stripe nonprofit discount (no cost to apply)</li>
+        <li><strong>Approve</strong> evaluation of Zeffy for upcoming golf tournament registration</li>
+        <li><strong>Discuss</strong> timeline for hybrid website approach (Phase 2)</li>
+      </ol>
+
+      <h3>Cost of Inaction</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Risk</th><th>Potential Impact</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Broken website images</td><td>Lost donations, reduced credibility with potential members</td></tr>
+            <tr><td>Higher payment fees</td><td>~$1,250/year in avoidable processing costs</td></tr>
+            <tr><td>Poor mobile experience</td><td>60%+ of seniors now use smartphones; inaccessible site loses members</td></tr>
+            <tr><td>SEO limitations</td><td>Reduced visibility in "Austin senior services" searches</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- EXECUTIVE SUMMARY                            -->
+    <!-- ============================================ -->
+    <section id="executive-summary">
+      <h2>Executive Summary</h2>
+      <p>Capital City Village is a 501(c)(3) nonprofit organization in Austin, Texas, part of the nationwide "Village Movement" supporting seniors aging in place. The organization provides social activities, volunteer services (transportation, technology help, minor home repairs), and referrals to service providers for its members.</p>
+      <p>This analysis covers two main areas:</p>
+      <ol>
+        <li><strong>Website Redesign Analysis</strong> &mdash; Current state evaluation and recommendations</li>
+        <li><strong>Payment Processors Analysis</strong> &mdash; Comparison of options suitable for CCV's needs</li>
+      </ol>
+    </section>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- PART 1: WEBSITE REDESIGN                     -->
+    <!-- ============================================ -->
+    <section id="website-redesign">
+      <h2>Part 1: Website Redesign Analysis</h2>
+
+      <h3 id="current-state">Current State Assessment</h3>
+
+      <h4>Platform</h4>
+      <p>CCV currently uses <strong>Helpful Village</strong> (helpfulvillage.com), a specialized SaaS platform built specifically for Village Movement organizations. The website is hosted at capitalcityvillage.org but the backend runs on capitalcity.helpfulvillage.com.</p>
+
+      <h4>Design/UX Evaluation</h4>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Rating</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Visual Design</td><td>Poor</td><td>Outdated appearance; multiple broken image links observed on homepage</td></tr>
+            <tr><td>Navigation</td><td>Fair</td><td>Basic menu structure exists but inconsistent URL patterns</td></tr>
+            <tr><td>Mobile Responsiveness</td><td>Unknown</td><td>Could not fully evaluate; platform claims mobile support</td></tr>
+            <tr><td>Content Organization</td><td>Fair</td><td>Information is present but scattered across multiple page types</td></tr>
+            <tr><td>Accessibility</td><td>Unknown</td><td>No evidence of WCAG compliance testing</td></tr>
+            <tr><td>Brand Consistency</td><td>Poor</td><td>Mix of capitalcityvillage.org and helpfulvillage.com URLs creates confusion</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Critical Issues Identified</h4>
+
+      <p><strong>1. Broken Images on Homepage</strong></p>
+      <p>Multiple images failing to load from helpfulvillage.com/documents/ URLs. Creates unprofessional appearance and poor first impression. Carousel/slideshow showing "Image not found" errors.</p>
+
+      <div class="evidence">
+        <div class="evidence-title">Evidence Observed</div>
+        <ul>
+          <li>Homepage carousel: 3 of 5 slides display "Image not found" placeholder</li>
+          <li>Member spotlight section: Profile photos returning 404 errors</li>
+          <li>Event banners: Links to helpfulvillage.com/documents/[id] broken</li>
+        </ul>
+      </div>
+
+      <p><strong>2. Inconsistent URL Structure</strong></p>
+      <p>Some pages at www.capitalcityvillage.org, others redirect to capitalcity.helpfulvillage.com. Some pages return 403 (Forbidden) or 404 (Not Found) errors.</p>
+
+      <div class="evidence">
+        <div class="evidence-title">Evidence Observed</div>
+        <ul>
+          <li>Homepage: capitalcityvillage.org &#10003;</li>
+          <li>Events page: redirects to capitalcity.helpfulvillage.com/events (403 Forbidden)</li>
+          <li>Support page: capitalcityvillage.org/support (404 Not Found)</li>
+          <li>About Us: links to /sponsors instead of /about</li>
+        </ul>
+      </div>
+
+      <p><strong>3. Limited Customization</strong></p>
+      <p>Website appears templated with limited branding options. Design reflects platform defaults rather than CCV's identity.</p>
+
+      <p><strong>4. Navigation Confusion</strong></p>
+      <ul>
+        <li>"Support" page returned 404 error</li>
+        <li>"About Us" link led to "Sponsors" page instead</li>
+        <li>Events calendar inaccessible (403 error)</li>
+      </ul>
+
+      <h4>Strengths</h4>
+      <ul>
+        <li>Clear mission statement on homepage</li>
+        <li>Detailed membership information and pricing tiers</li>
+        <li>Staff/Board pages with photos and bios create personal connection</li>
+        <li>Diversity, Equity, and Inclusion statement prominently displayed</li>
+        <li>GuideStar Silver Transparency badge displayed</li>
+        <li>Title VI compliance notice present</li>
+      </ul>
+
+      <h3 id="redesign-options">Redesign Recommendations</h3>
+
+      <h4>Option 1: Stay with Helpful Village (Minimal Investment)</h4>
+
+      <p><strong>Pros:</strong></p>
+      <ul>
+        <li>No migration required</li>
+        <li>Village-specific features built-in (volunteer management, service requests, events)</li>
+        <li>Used by 110+ Villages nationwide</li>
+        <li>Integrated member/volunteer database</li>
+        <li>Affordable for small nonprofits</li>
+      </ul>
+
+      <p><strong>Cons:</strong></p>
+      <ul>
+        <li>Limited design customization</li>
+        <li>Current broken image issues suggest platform limitations</li>
+        <li>Dependent on third-party for fixes</li>
+      </ul>
+
+      <p><strong>Action Items:</strong></p>
+      <ul>
+        <li>Contact Helpful Village support to fix broken image links immediately</li>
+        <li>Request custom domain configuration to eliminate mixed URL issues</li>
+        <li>Explore premium tier features if available</li>
+      </ul>
+
+      <div class="evidence">
+        <div class="evidence-title">Helpful Village Support Contact</div>
+        <ul>
+          <li>Email: support@helpfulvillage.com</li>
+          <li>Phone: (415) 851-1200</li>
+          <li>Knowledge Base: helpfulvillage.com/support</li>
+        </ul>
+      </div>
+
+      <h4>Option 2: WordPress with Nonprofit Theme (Moderate Investment)</h4>
+
+      <p><strong>Recommended Technology Stack:</strong></p>
+      <ul>
+        <li><strong>CMS:</strong> WordPress</li>
+        <li><strong>Theme:</strong> Starter themes like Neve, GeneratePress, or nonprofit-specific themes</li>
+        <li><strong>Hosting:</strong> WP Engine, SiteGround, or Bluehost (all offer nonprofit discounts)</li>
+        <li><strong>Donation Plugin:</strong> GiveWP or Charitable</li>
+        <li><strong>Events:</strong> The Events Calendar</li>
+        <li><strong>Forms:</strong> Gravity Forms or WPForms</li>
+      </ul>
+
+      <p><strong>Estimated Costs:</strong></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td>Hosting</td><td>$100&ndash;300/year</td></tr>
+            <tr><td>Premium theme</td><td>$50&ndash;100 (one-time)</td></tr>
+            <tr><td>Essential plugins</td><td>$200&ndash;400/year</td></tr>
+            <tr><td>Development</td><td>$2,000&ndash;5,000 (one-time for setup)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Option 3: Squarespace or Wix (Low Investment)</h4>
+
+      <p><strong>Pros:</strong> Very user-friendly, beautiful templates, built-in donation features, affordable ($12&ndash;40/month).</p>
+      <p><strong>Cons:</strong> Limited customization vs WordPress, no Village-specific integrations, less SEO flexibility.</p>
+
+      <h4>Option 4: Hybrid Approach <span class="badge badge-recommended">Recommended</span></h4>
+
+      <div class="callout callout-recommended">
+        <h4>Strategy</h4>
+        <p>Keep Helpful Village for backend operations (member management, volunteer coordination, service requests) but build a modern marketing website on WordPress or Squarespace.</p>
+      </div>
+
+      <p><strong>Implementation:</strong></p>
+      <ol>
+        <li>New public-facing website for marketing, donations, events calendar</li>
+        <li>Members log into Helpful Village portal for services (with clear SSO or linked login)</li>
+        <li>Donation processing through dedicated nonprofit payment processor</li>
+        <li>Clear separation: Public site = engagement, Helpful Village = operations</li>
+      </ol>
+
+      <p><strong>Benefits:</strong></p>
+      <ul>
+        <li>Modern, professional public image</li>
+        <li>Retains specialized Village management tools</li>
+        <li>Better donation/fundraising capabilities</li>
+        <li>Improved SEO and marketing flexibility</li>
+      </ul>
+
+      <h4>Other Villages Using Similar Approaches</h4>
+
+      <p>The Village Movement has grown to 350+ villages nationwide since Beacon Hill Village pioneered the model in 2002.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Village</th><th>Founded</th><th>Approach</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="https://www.beaconhillvillage.org/">Beacon Hill Village</a> (Boston)</td>
+              <td>2002</td>
+              <td>Custom website with member portal</td>
+              <td>First Village in the nation</td>
+            </tr>
+            <tr>
+              <td><a href="https://capitolhillvillage.org/">Capitol Hill Village</a> (Washington, DC)</td>
+              <td>2007</td>
+              <td>Modern WordPress site</td>
+              <td>Largest of 13 DC-area Villages</td>
+            </tr>
+            <tr>
+              <td><a href="https://www.marinvillages.org/">Marin Villages</a> (California)</td>
+              <td>2011</td>
+              <td>Helpful Village platform</td>
+              <td>Hub-and-spoke model with 6 local villages</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><em>Note: Website strategies vary by Village size, budget, and technical capacity. CCV should consider contacting peer Villages directly for implementation insights.</em></p>
+
+      <p><strong>Village to Village Network Resources:</strong> <a href="https://www.vtvnetwork.org/">vtvnetwork.org</a> &mdash; Peer learning opportunities and best practices shared among member Villages.</p>
+
+      <h3 id="senior-design">Design Best Practices for Senior-Focused Website</h3>
+
+      <ol>
+        <li><strong>Typography:</strong> Minimum 16px base font size, high contrast text</li>
+        <li><strong>Navigation:</strong> Simple, clear menu with maximum 5&ndash;7 top-level items</li>
+        <li><strong>Colors:</strong> High contrast ratios (WCAG AA minimum, AAA preferred)</li>
+        <li><strong>Buttons:</strong> Large click targets (minimum 44&times;44 pixels)</li>
+        <li><strong>Forms:</strong> Single-column layouts, clear labels, helpful error messages</li>
+        <li><strong>Content:</strong> Short paragraphs, bullet points, scannable headings</li>
+        <li><strong>Media:</strong> Compress images for fast loading, always include alt text</li>
+      </ol>
+    </section>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- PART 2: PAYMENT PROCESSORS                   -->
+    <!-- ============================================ -->
+    <section id="payment-processors">
+      <h2>Part 2: Payment Processors Analysis</h2>
+
+      <h3>CCV's Payment Needs</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Payment Type</th><th>Frequency</th><th>Estimated Volume</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Membership Dues</strong></td><td>Annual/Monthly</td><td>$100&ndash;$800/year per member</td></tr>
+            <tr><td><strong>Donations</strong></td><td>Ongoing</td><td>One-time and recurring</td></tr>
+            <tr><td><strong>Event Fees</strong></td><td>Periodic</td><td>Golf tournament, Keep Aging Weird luncheon</td></tr>
+            <tr><td><strong>Sponsorships</strong></td><td>Annual</td><td>Corporate/business sponsors</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Key Requirements:</strong></p>
+      <ul>
+        <li>Recurring payment support (monthly membership options)</li>
+        <li>Low fees (nonprofit budget constraints)</li>
+        <li>Easy donor/member experience</li>
+        <li>Integration with existing systems</li>
+        <li>Reporting for transparency/compliance</li>
+        <li>ACH/bank transfer options (seniors may prefer)</li>
+      </ul>
+
+      <h3>Current Payment Setup</h3>
+      <p>CCV currently directs donors to:</p>
+      <ul>
+        <li>Helpful Village's built-in fundraising campaigns</li>
+        <li>PayPal Giving Fund (mentioned as "skip processing fees" option)</li>
+      </ul>
+
+      <h3 id="processor-comparison">Payment Processor Comparison</h3>
+
+      <h4>Tier 1: Zero/Minimal Fee Options</h4>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Processor</th><th>Transaction Fee</th><th>Monthly Fee</th><th>Nonprofit Discount</th><th>Best For</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Zeffy</strong></td><td>0% (tip model)</td><td>$0</td><td>100% free</td><td>Small nonprofits wanting zero fees</td>
+            </tr>
+            <tr>
+              <td><strong>PayPal Giving Fund</strong></td><td>0%</td><td>$0</td><td>100% free</td><td>Donations only (45-day payout delay)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Zeffy Details:</strong> Truly free for nonprofits &mdash; no transaction fees. Operates on voluntary donor tips. Includes donation forms, event ticketing, peer-to-peer, integrated CRM and donor management.</p>
+
+      <p><strong>PayPal Giving Fund Details:</strong> 100% of donation goes to charity. PayPal covers all processing fees. Connected to Facebook/Instagram fundraisers. Drawback: 15&ndash;45 day payout delay. CCV already uses this option.</p>
+
+      <h4>Tier 2: Low-Fee Nonprofit-Focused Platforms</h4>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Processor</th><th>Transaction Fee</th><th>Monthly Fee</th><th>ACH Fee</th><th>Key Features</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Stripe (Nonprofit)</strong></td><td>2.2% + $0.30</td><td>$0</td><td>0.8% + $0.30</td><td>Global, 100+ payment methods</td></tr>
+            <tr><td><strong>Bloomerang Payments</strong></td><td>2.2% + $0.30 + 1%</td><td>$0</td><td>0.8% + $0.30</td><td>CRM integration, fraud protection</td></tr>
+            <tr><td><strong>DonorPerfect</strong></td><td>2.2% + $0.30</td><td>Varies</td><td>0.8% + $0.30</td><td>Full donor management CRM</td></tr>
+            <tr><td><strong>Donorbox</strong></td><td>1.75% + processing</td><td>$0&ndash;25+</td><td>0.8%</td><td>Recurring giving, embeddable forms</td></tr>
+            <tr><td><strong>Givebutter</strong></td><td>2.9% + $0.30</td><td>$0</td><td>1.9% + $0.30</td><td>47% conversion rate, tips enabled</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Tier 3: General-Purpose Processors</h4>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Processor</th><th>Transaction Fee</th><th>Monthly Fee</th><th>Nonprofit Rate</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>PayPal Standard</strong></td><td>1.99% + $0.49</td><td>$0</td><td>Yes</td><td>High donor recognition/trust</td></tr>
+            <tr><td><strong>Square</strong></td><td>2.9% + $0.30</td><td>$0</td><td>No</td><td>Good for in-person events</td></tr>
+            <tr><td><strong>Authorize.Net</strong></td><td>2.9% + $0.30</td><td>$25</td><td>No</td><td>Strong security features</td></tr>
+            <tr><td><strong>Clover</strong></td><td>2.3% + $0.10</td><td>Varies</td><td>No</td><td>POS hardware options</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Detailed Recommendations</h3>
+
+      <h4>Primary Recommendation: Stripe for Nonprofits</h4>
+
+      <div class="callout callout-recommended">
+        <h4>Why Stripe</h4>
+        <ul>
+          <li>Industry-standard reliability and security</li>
+          <li>Nonprofit discount: 2.2% + $0.30 (vs standard 2.9% + $0.30)</li>
+          <li>Lower ACH fees for larger donations (0.8%)</li>
+          <li>Integrates with virtually any website or platform</li>
+          <li>Supports recurring donations natively</li>
+          <li>Global payment methods (for snowbird members)</li>
+        </ul>
+      </div>
+
+      <p><strong>Requirements to Apply:</strong></p>
+      <ul>
+        <li>501(c)(3) documentation (CCV has this &mdash; GuideStar verified)</li>
+        <li>80%+ of volume must be tax-deductible donations</li>
+        <li>Email nonprofit@stripe.com with EIN and verification</li>
+      </ul>
+
+      <p><em>Note: Membership dues may not qualify for nonprofit discount since they're not technically donations. CCV should verify with Stripe.</em></p>
+
+      <div class="evidence">
+        <div class="evidence-title">How to Apply</div>
+        <ul>
+          <li>Email: nonprofit@stripe.com</li>
+          <li>Include: 501(c)(3) determination letter, EIN, brief description of CCV</li>
+          <li>Typical response time: 5&ndash;7 business days</li>
+        </ul>
+      </div>
+
+      <h4>Secondary Recommendation: Zeffy (Maximum Donation Retention)</h4>
+
+      <p><strong>Why Zeffy:</strong></p>
+      <ul>
+        <li>Zero transaction fees means 100% of donations reach CCV</li>
+        <li>Particularly valuable for small-dollar recurring gifts</li>
+        <li>Free event ticketing (golf tournament, luncheons)</li>
+        <li>No monthly minimums or hidden fees</li>
+      </ul>
+
+      <p><strong>Considerations:</strong> Newer platform, less established. Relies on donor tips to sustain business model. May have fewer integration options.</p>
+
+      <div class="evidence">
+        <div class="evidence-title">How to Get Started</div>
+        <ul>
+          <li>Website: zeffy.com/nonprofits</li>
+          <li>Sign-up: Free, instant approval for 501(c)(3) organizations</li>
+          <li>Support: help@zeffy.com</li>
+        </ul>
+      </div>
+
+      <h4>Keep: PayPal Giving Fund</h4>
+      <p>Already established, zero fees, integrates with social media fundraising, familiar to many donors. Promote more prominently on website. Not ideal for membership dues (delayed access to funds).</p>
+
+      <h3 id="fee-impact">Fee Impact Analysis</h3>
+
+      <p><strong>Scenario:</strong> CCV processes $50,000 annually in donations/memberships</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Processor</th><th>Effective Fee Rate</th><th>Annual Cost</th><th>Net to CCV</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Zeffy</strong></td><td>0%</td><td>$0</td><td>$50,000</td></tr>
+            <tr><td><strong>PayPal Giving Fund</strong></td><td>0%</td><td>$0</td><td>$50,000</td></tr>
+            <tr><td><strong>Stripe Nonprofit</strong></td><td>~2.5%</td><td>$1,250</td><td>$48,750</td></tr>
+            <tr><td><strong>Bloomerang</strong></td><td>~3.5%</td><td>$1,750</td><td>$48,250</td></tr>
+            <tr><td><strong>PayPal Standard</strong></td><td>~2.5%</td><td>$1,250</td><td>$48,750</td></tr>
+            <tr><td><strong>Square</strong></td><td>~3.2%</td><td>$1,600</td><td>$48,400</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><em>Note: Donor-covered fees can offset these costs. Many platforms report 70&ndash;85% of donors opt to cover fees when asked.</em></p>
+
+      <h3>Implementation Strategy</h3>
+
+      <h4>Phase 1: Immediate (0&ndash;30 days)</h4>
+      <ol>
+        <li>Fix broken images on current website (contact Helpful Village)</li>
+        <li>Continue using PayPal Giving Fund for donations</li>
+        <li>Apply for Stripe nonprofit discount</li>
+      </ol>
+
+      <h4>Phase 2: Short-term (1&ndash;3 months)</h4>
+      <ol>
+        <li>Implement Stripe for membership dues (recurring billing)</li>
+        <li>Evaluate Zeffy for event registration/ticketing</li>
+        <li>Add "cover processing fees" option to all donation forms</li>
+      </ol>
+
+      <h4>Phase 3: Medium-term (3&ndash;6 months)</h4>
+      <ol>
+        <li>If pursuing website redesign, integrate payment processor with new site</li>
+        <li>Consolidate payment reporting for better financial tracking</li>
+        <li>Implement donor acknowledgment automation</li>
+      </ol>
+
+      <h3 id="implementation-timeline">Implementation Timeline</h3>
+
+      <div class="timeline-container">
+        <div class="timeline-phase">
+          <div class="phase-label">Phase 1: Immediate (Weeks 1&ndash;4)</div>
+          <div class="timeline-task">
+            <span class="task-name">Fix broken images</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 33%; margin-left: 0;"></div></div>
+          </div>
+          <div class="timeline-task">
+            <span class="task-name">Apply for Stripe discount</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 33%; margin-left: 0;"></div></div>
+          </div>
+          <div class="timeline-task">
+            <span class="task-name">Audit current payment flow</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 33%; margin-left: 17%;"></div></div>
+          </div>
+          <div class="timeline-task">
+            <span class="task-name">Document member login process</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 33%; margin-left: 17%;"></div></div>
+          </div>
+        </div>
+
+        <div class="timeline-phase">
+          <div class="phase-label">Phase 2: Short-term (Weeks 5&ndash;12)</div>
+          <div class="timeline-task">
+            <span class="task-name">Set up Stripe account</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 25%; margin-left: 0;"></div></div>
+          </div>
+          <div class="timeline-task">
+            <span class="task-name">Implement recurring billing</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 50%; margin-left: 12%;"></div></div>
+          </div>
+          <div class="timeline-task">
+            <span class="task-name">Evaluate Zeffy for events</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 50%; margin-left: 0;"></div></div>
+          </div>
+          <div class="timeline-task">
+            <span class="task-name">Test Zeffy with golf tournament</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 50%; margin-left: 38%;"></div></div>
+          </div>
+          <div class="timeline-task">
+            <span class="task-name">Add "cover fees" option</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 25%; margin-left: 25%;"></div></div>
+          </div>
+        </div>
+
+        <div class="timeline-phase">
+          <div class="phase-label">Phase 3: Medium-term (Months 4&ndash;6) &rarr; Continues</div>
+          <div class="timeline-task">
+            <span class="task-name">Evaluate hybrid website approach</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 100%; opacity: 0.5;"></div></div>
+          </div>
+          <div class="timeline-task">
+            <span class="task-name">Select marketing site platform</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 100%; opacity: 0.5;"></div></div>
+          </div>
+          <div class="timeline-task">
+            <span class="task-name">Design and build new public site</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 100%; opacity: 0.5;"></div></div>
+          </div>
+          <div class="timeline-task">
+            <span class="task-name">Consolidate payment reporting</span>
+            <div class="task-bar-track"><div class="task-bar" style="width: 100%; opacity: 0.5;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Success Metrics to Track</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>Current Baseline</th><th>6-Month Target</th><th>How to Measure</th></tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="4"><strong>Website</strong></td></tr>
+            <tr><td>Broken images/links</td><td>5+ critical issues</td><td>0</td><td>Monthly audit</td></tr>
+            <tr><td>Time on site</td><td>Unknown</td><td>Establish baseline</td><td>Google Analytics</td></tr>
+            <tr><td>Mobile bounce rate</td><td>Unknown</td><td>&lt;50%</td><td>Google Analytics</td></tr>
+            <tr><td>"Contact Us" form submissions</td><td>Unknown</td><td>+25%</td><td>Form tracking</td></tr>
+            <tr><td colspan="4"><strong>Donations</strong></td></tr>
+            <tr><td>Online donation conversion rate</td><td>Unknown</td><td>Establish baseline</td><td>Payment processor reports</td></tr>
+            <tr><td>Average donation amount</td><td>Unknown</td><td>Track trend</td><td>Monthly reports</td></tr>
+            <tr><td>Processing fees paid</td><td>~$1,250/year (est.)</td><td>&lt;$300/year</td><td>Processor statements</td></tr>
+            <tr><td>Recurring donor count</td><td>Unknown</td><td>+10%</td><td>CRM/processor</td></tr>
+            <tr><td colspan="4"><strong>Membership</strong></td></tr>
+            <tr><td>Online membership sign-ups</td><td>Unknown</td><td>+15%</td><td>Helpful Village reports</td></tr>
+            <tr><td>Membership renewal rate</td><td>Unknown</td><td>Track and improve</td><td>Annual comparison</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- SUMMARY OF RECOMMENDATIONS                   -->
+    <!-- ============================================ -->
+    <section id="recommendations">
+      <h2>Summary of Recommendations</h2>
+
+      <h3>Website</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Priority</th><th>Recommendation</th><th>Investment</th><th>Timeline</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Critical</strong></td><td>Fix broken homepage images</td><td>Low (support ticket)</td><td>Immediate</td></tr>
+            <tr><td><strong>High</strong></td><td>Resolve inconsistent URLs</td><td>Low&ndash;Medium</td><td>1&ndash;2 weeks</td></tr>
+            <tr><td><strong>Medium</strong></td><td>Evaluate hybrid approach (new marketing site + Helpful Village backend)</td><td>Medium&ndash;High</td><td>3&ndash;6 months</td></tr>
+            <tr><td><strong>Optional</strong></td><td>Full WordPress migration</td><td>High</td><td>6&ndash;12 months</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Payment Processing</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Priority</th><th>Recommendation</th><th>Rationale</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Primary</strong></td><td>Stripe for Nonprofits</td><td>Reliability, integrations, nonprofit discount</td></tr>
+            <tr><td><strong>Secondary</strong></td><td>Zeffy</td><td>Zero fees, ideal for events and small donations</td></tr>
+            <tr><td><strong>Continue</strong></td><td>PayPal Giving Fund</td><td>Already in use, zero fees for donations</td></tr>
+            <tr><td><strong>Avoid</strong></td><td>Square, Authorize.Net</td><td>Higher fees, no nonprofit discounts</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Budget Considerations</h3>
+
+      <div class="callout">
+        <h4>Minimal Investment Path</h4>
+        <p>Stay with Helpful Village, fix current issues. Use Zeffy + PayPal Giving Fund (zero fees).<br>
+        <strong>Total annual cost: &lt;$500</strong></p>
+      </div>
+
+      <div class="callout callout-recommended">
+        <h4>Moderate Investment Path (Recommended)</h4>
+        <p>Hybrid website approach with Squarespace marketing site. Stripe for Nonprofits + Zeffy.<br>
+        <strong>Total annual cost: $500&ndash;1,500</strong></p>
+      </div>
+
+      <div class="callout">
+        <h4>Full Investment Path</h4>
+        <p>Custom WordPress site with professional design. Bloomerang (CRM + Payments integrated).<br>
+        <strong>Total annual cost: $3,000&ndash;5,000</strong></p>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- GLOSSARY                                     -->
+    <!-- ============================================ -->
+    <section id="glossary">
+      <h2>Glossary</h2>
+
+      <div class="glossary-grid">
+        <span class="glossary-term">ACH</span>
+        <p class="glossary-def">Automated Clearing House &mdash; electronic bank-to-bank transfers; lower fees than credit cards</p>
+
+        <span class="glossary-term">CMS</span>
+        <p class="glossary-def">Content Management System &mdash; software for creating/managing website content (e.g., WordPress)</p>
+
+        <span class="glossary-term">CRM</span>
+        <p class="glossary-def">Customer Relationship Management &mdash; software to track donors, members, and interactions</p>
+
+        <span class="glossary-term">EIN</span>
+        <p class="glossary-def">Employer Identification Number &mdash; IRS tax ID for organizations</p>
+
+        <span class="glossary-term">SaaS</span>
+        <p class="glossary-def">Software as a Service &mdash; cloud-based software accessed via subscription</p>
+
+        <span class="glossary-term">SEO</span>
+        <p class="glossary-def">Search Engine Optimization &mdash; improving website visibility in Google/Bing searches</p>
+
+        <span class="glossary-term">SSO</span>
+        <p class="glossary-def">Single Sign-On &mdash; one login that works across multiple systems</p>
+
+        <span class="glossary-term">WCAG</span>
+        <p class="glossary-def">Web Content Accessibility Guidelines &mdash; standards for making websites accessible to people with disabilities</p>
+
+        <span class="glossary-term">501(c)(3)</span>
+        <p class="glossary-def">IRS tax-exempt status for charitable nonprofits</p>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- SOURCES                                      -->
+    <!-- ============================================ -->
+    <section id="sources">
+      <h2>Sources</h2>
+
+      <h4>Payment Processing Research</h4>
+      <ul class="sources-list">
+        <li><a href="https://kindful.com/blog/best-nonprofit-payment-processors/">Kindful &mdash; 8 Best Nonprofit Credit Card Processing Platforms 2026</a></li>
+        <li><a href="https://bloomerang.com/blog/nonprofit-credit-card-processing/">Bloomerang &mdash; 8 Best Nonprofit Credit Card Processing Options 2026</a></li>
+        <li><a href="https://support.stripe.com/questions/fee-discount-for-nonprofit-organizations">Stripe &mdash; Fee Discount for Nonprofit Organizations</a></li>
+        <li><a href="https://www.paypal.com/us/cshelp/article/are-there-any-fees-charged-for-using-paypal-giving-fund--help207">PayPal &mdash; Are There Any Fees for PayPal Giving Fund?</a></li>
+        <li><a href="https://donorbox.org/nonprofit-blog/paypal-nonprofit-donation-fees">Donorbox &mdash; PayPal Nonprofit Donation Fees</a></li>
+        <li><a href="https://doublethedonation.com/payment-processing-tools-for-nonprofits/">Double the Donation &mdash; Payment Processing Tools for Nonprofits</a></li>
+      </ul>
+
+      <h4>Village Movement / Helpful Village</h4>
+      <ul class="sources-list">
+        <li><a href="https://www.helpfulvillage.com/the-village-movement">Helpful Village &mdash; The Village Movement</a></li>
+        <li><a href="https://www.helpfulvillage.com/copy-of-high-efficency-villages">Helpful Village &mdash; Village Software</a></li>
+      </ul>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="doc-footer">
+    <nav class="footer-nav">
+      <a href="index.html">&larr; Back to Capital City Village</a>
+      <a href="../index.html">&larr; Reports Hub</a>
+      <a href="#toc">&uarr; Table of Contents</a>
+      <a href="Capital-City-Village-Analysis-Report.pdf">Download PDF</a>
+    </nav>
+    <p class="footer-meta">
+      Report prepared for Capital City Village Board of Directors<br>
+      Analysis conducted: February 3, 2026
+    </p>
+  </footer>
+
+</body>
+</html>

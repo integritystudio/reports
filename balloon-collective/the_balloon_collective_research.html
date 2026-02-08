@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Balloon Collective - Comprehensive Research Report</title>
+    <style>
+:root {
+    --primary: #7b2d8e;
+    --secondary: #c44569;
+    --accent: #f78fb3;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --border: #dee2e6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background: var(--light);
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+}
+header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+header .subtitle { font-size: 1.2rem; opacity: 0.9; }
+header .meta { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
+
+.executive-summary {
+    background: white;
+    border-left: 4px solid var(--accent);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+
+section {
+    background: white;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+section h2 {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 1.5rem;
+    font-size: 1.3rem;
+}
+
+section h3 {
+    color: var(--secondary);
+    margin: 1.5rem 0 0.75rem 0;
+    font-size: 1.1rem;
+}
+
+.section-content { padding: 1.5rem; }
+
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--light); font-weight: 600; color: var(--primary); }
+tr:hover { background: #f8f9fa; }
+
+ul, ol { margin: 1rem 0; padding-left: 1.5rem; }
+li { margin-bottom: 0.5rem; }
+
+.highlight-box {
+    background: linear-gradient(135deg, #f3e5f5, #fce4ec);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+}
+
+.warning-box {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.info-box {
+    background: #f3e5f5;
+    border-left: 4px solid var(--primary);
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+blockquote {
+    background: #f8f9fa;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    font-style: italic;
+    color: #555;
+}
+
+.source { font-size: 0.85rem; color: #666; font-style: italic; }
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.badge-success { background: #d4edda; color: #155724; }
+.badge-warning { background: #fff3cd; color: #856404; }
+.badge-danger { background: #f8d7da; color: #721c24; }
+.badge-info { background: #d1ecf1; color: #0c5460; }
+
+.rating { color: #ffc107; font-size: 1.2rem; }
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.contact-item { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; }
+.contact-item .label { font-size: 0.85rem; color: #666; margin-bottom: 0.25rem; }
+.contact-item .value { font-weight: 600; color: var(--primary); }
+
+.verification-table td:nth-child(2),
+.verification-table td:nth-child(3),
+.verification-table td:nth-child(4) { text-align: center; }
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+}
+
+a { color: var(--secondary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+details {
+    margin: 1rem 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+details summary {
+    padding: 0.75rem 1rem;
+    background: var(--light);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    user-select: none;
+}
+
+details summary::-webkit-details-marker { display: none; }
+
+details summary::before {
+    content: '\25B6';
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+details[open] summary::before { transform: rotate(90deg); }
+
+details summary:hover { background: #e9ecef; }
+
+details summary .detail-count {
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: #666;
+    margin-left: auto;
+}
+
+details .details-content { padding: 1rem 1.5rem; }
+
+details details { margin: 0.75rem 0; border-color: #e9ecef; }
+details details summary { font-size: 0.95rem; padding: 0.6rem 1rem; }
+
+@media print {
+    body { background: white; }
+    .container { max-width: 100%; }
+    section { box-shadow: none; border: 1px solid #ddd; }
+    details { border: none; }
+    details, details[open] { display: block; }
+    details > summary { display: none; }
+    details .details-content { padding: 0; }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>The Balloon Collective</h1>
+            <div class="subtitle">Comprehensive Research Report</div>
+            <div class="meta">
+                <strong>Report Date:</strong> February 8, 2026 |
+                <strong>Primary Source:</strong> <a href="https://www.theballooncollective.com/" style="color: white;">theballooncollective.com</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <div id="executive-summary" class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>The Balloon Collective is a luxury balloon design and installation company based in Austin, Texas, co-founded by Nate "the Great" Culpepper (18+ years experience) and Stacy "Pineapple" Wheeler. Positioned as a nationally-renowned, high-end balloon artistry firm with international travel capability, the company differentiates itself through large-scale sculptural installations, immersive art projects (Hopscotch, Austin Maker Faire, Austin Pride Parade), and convention-level balloon expertise. The Austin metro balloon decor market is highly competitive with 10+ active companies, pricing from $18&ndash;$45 per linear foot for garlands. The Balloon Collective occupies the premium tier with a $500 minimum spend and luxury positioning. The broader decorative balloon market is projected to grow from $3.29B (2024) to $4.5B by 2032 at a 4.01% CAGR, while Austin's MSA population of 2.55M and median household income of $99,897 create a strong addressable market for event decor services.</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <nav id="toc" style="background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden;">
+            <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Table of Contents</h2>
+            <div style="padding: 1.5rem;">
+                <ol style="margin: 0; padding-left: 1.5rem;">
+                    <li><a href="#company-overview">Company Overview</a></li>
+                    <li><a href="#contact-info">Contact Information</a></li>
+                    <li><a href="#business-status">Business Status &amp; Registration</a></li>
+                    <li><a href="#key-personnel">Key Personnel</a></li>
+                    <li><a href="#reviews">Reviews &amp; Ratings</a></li>
+                    <li><a href="#financial">Financial Information</a></li>
+                    <li><a href="#market-data">Industry Market Data</a></li>
+                    <li><a href="#competitive">Competitive Analysis</a></li>
+                    <li><a href="#online-presence">Online Presence</a></li>
+                    <li><a href="#verification">Data Verification Summary</a></li>
+                    <li><a href="#conclusions">Conclusions &amp; Recommendations</a></li>
+                    <li><a href="#sources">Sources &amp; Citations</a></li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- 1. Company Overview -->
+        <section id="company-overview">
+            <h2>1. Company Overview</h2>
+            <div class="section-content">
+                <p>The Balloon Collective is a luxury balloon design and installation company based in Austin, Texas, with national and international service availability. The company describes itself as a "nationally-renowned team of balloon artists with more than 18 years of experience in the high-end balloon decorating and entertainment industry."</p>
+
+                <h3>Services</h3>
+                <ul>
+                    <li><strong>Large-scale sculptural installations</strong> &mdash; custom builds for events, corporate activations, and immersive experiences</li>
+                    <li><strong>Balloon arches</strong> &mdash; standard and organic styles</li>
+                    <li><strong>Balloon garlands</strong> &mdash; pick-up available from South Austin studio (Mon&ndash;Fri, 8AM&ndash;8PM)</li>
+                    <li><strong>Balloon twisting entertainment</strong> &mdash; live event entertainment</li>
+                    <li><strong>Private party decor</strong> &mdash; birthdays, weddings, corporate events</li>
+                    <li><strong>Balloon deliveries</strong> &mdash; including contact-free yard art (developed during COVID-19)</li>
+                    <li><strong>Couture balloon costumes</strong> &mdash; balloon dresses and wearable balloon art</li>
+                </ul>
+
+                <h3>Notable Projects</h3>
+                <ul>
+                    <li>Human-sized balloon labyrinth in <strong>China</strong></li>
+                    <li><strong>The Balloon Wedding</strong> in Australia</li>
+                    <li><strong>Molly Balloons</strong> 2017 and 2018 Fashion Show</li>
+                    <li><strong>Hopscotch</strong> immersive art experience &mdash; "Thunder &amp; Lightning" installation (white balloons simulating clouds with interactive pulleys, sound, and lighting effects in a 10,000 sq ft space)</li>
+                    <li><strong>Austin Maker Faire</strong> participation</li>
+                    <li><strong>Austin Pride Parade</strong> builds</li>
+                    <li><strong>ABC Kite Festival</strong> at Zilker Park &mdash; custom rainbow-and-clouds arch (275 balloons, 6 hours to build)</li>
+                </ul>
+
+                <h3>Geography</h3>
+                <p>Based in South Austin, TX. Studio available for local pick-up. Available nationally for large installations and internationally for special projects. Clients include both local Austin community members and national/international brands.</p>
+
+                <p class="source">Sources: <a href="https://www.theballooncollective.com/">theballooncollective.com</a>, <a href="https://www.partyslate.com/vendors/the-balloon-collective">PartySlate</a>, <a href="https://www.austinchronicle.com/arts/2018-03-09/snapshot-balloon-art-power-couple-stacy-pineapple-wheeler-and-nate-the-great-culpepper/">Austin Chronicle (March 2018)</a></p>
+            </div>
+        </section>
+
+        <!-- 2. Contact Information -->
+        <section id="contact-info">
+            <h2>2. Contact Information</h2>
+            <div class="section-content">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="label">Website</div>
+                        <div class="value"><a href="https://www.theballooncollective.com/">theballooncollective.com</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Instagram</div>
+                        <div class="value"><a href="https://www.instagram.com/theballooncollective/">@theballooncollective</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Facebook</div>
+                        <div class="value"><a href="http://www.facebook.com/theballooncollective">theballooncollective</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Location</div>
+                        <div class="value">South Austin, TX</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Studio Hours</div>
+                        <div class="value">Mon&ndash;Fri 8AM&ndash;8PM</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">PartySlate</div>
+                        <div class="value"><a href="https://www.partyslate.com/vendors/the-balloon-collective">View Profile</a></div>
+                    </div>
+                </div>
+                <div class="warning-box">
+                    <strong>Note:</strong> No phone number or physical address is publicly listed on the website. Inquiries are directed through the <a href="https://www.theballooncollective.com/contact">contact page</a>. A ZoomInfo listing indicates email at nate@theballooncollective.com.
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Business Status -->
+        <section id="business-status">
+            <h2>3. Business Status &amp; Registration</h2>
+            <div class="section-content">
+                <table>
+                    <tr><th>Data Point</th><th>Status</th><th>Source</th></tr>
+                    <tr>
+                        <td>Business Entity</td>
+                        <td>The Balloon Collective, LLC</td>
+                        <td><a href="https://www.linkedin.com/in/nate-culpepper-57a227182/">LinkedIn (Nate Culpepper)</a></td>
+                    </tr>
+                    <tr>
+                        <td>Formation Year</td>
+                        <td>2019 (rebranded from individual operations)</td>
+                        <td><a href="https://www.austinchronicle.com/arts/2018-03-09/snapshot-balloon-art-power-couple-stacy-pineapple-wheeler-and-nate-the-great-culpepper/">Austin Chronicle</a></td>
+                    </tr>
+                    <tr>
+                        <td>TX SOS Filing</td>
+                        <td><span class="badge badge-warning">Not Verified</span> (SOSDirect requires direct lookup)</td>
+                        <td><a href="https://www.sos.state.tx.us/corp/sosda/index.shtml">TX SOS</a></td>
+                    </tr>
+                    <tr>
+                        <td>TX Comptroller</td>
+                        <td><span class="badge badge-warning">Not Verified</span> (requires direct lookup)</td>
+                        <td><a href="https://comptroller.texas.gov/taxes/franchise/">TX Comptroller</a></td>
+                    </tr>
+                    <tr>
+                        <td>Years in Operation</td>
+                        <td>18+ years (Nate's balloon career); LLC since ~2019</td>
+                        <td><a href="https://www.theballooncollective.com/about-us">About Us</a></td>
+                    </tr>
+                    <tr>
+                        <td>BBB Profile</td>
+                        <td><span class="badge badge-danger">Not Found</span></td>
+                        <td>BBB search</td>
+                    </tr>
+                </table>
+                <div class="info-box">
+                    <strong>Background:</strong> Nate Culpepper operated as an individual balloon artist in Austin for 16+ years before forming The Balloon Collective LLC with Stacy Wheeler in approximately 2019. Stacy previously ran "Balloons by Pineapple" (balloonsbypineapple.com, which now redirects to ATX Bubbles &mdash; a separate business).
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Key Personnel -->
+        <section id="key-personnel">
+            <h2>4. Key Personnel</h2>
+            <div class="section-content">
+                <table>
+                    <tr><th>Name</th><th>Role</th><th>Details</th></tr>
+                    <tr>
+                        <td><strong>Nate "the Great" Culpepper</strong></td>
+                        <td>Owner / Creative Director</td>
+                        <td>18+ years of latex-sculpting experience. Custom builder and decorator based in Austin since the early 2000s. Teaches at balloon conventions internationally. <a href="https://www.linkedin.com/in/nate-culpepper-57a227182/">LinkedIn</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stacy "Pineapple" Wheeler</strong></td>
+                        <td>Organizational &amp; Strategy Lead</td>
+                        <td>Balloon dressmaker and artist. Trained by Nate; previously worked as a legal assistant at Google and in social work. Competes at balloon conventions (e.g., Twist &amp; Shout Balloon Convention). <a href="https://www.linkedin.com/in/stacy-n-wheeler-8a532952/">LinkedIn</a></td>
+                    </tr>
+                </table>
+                <blockquote>"Balloon art has been stigmatized for so long in the sense that if you say you're a balloon artist, people act like you don't have a real job. But I've met a lot of professionals doing it full-time and making crazy stuff." &mdash; Stacy Wheeler, <a href="https://www.austinchronicle.com/arts/2018-03-09/snapshot-balloon-art-power-couple-stacy-pineapple-wheeler-and-nate-the-great-culpepper/">Austin Chronicle, 2018</a></blockquote>
+            </div>
+        </section>
+
+        <!-- 5. Reviews & Ratings -->
+        <section id="reviews">
+            <h2>5. Reviews &amp; Ratings</h2>
+            <div class="section-content">
+                <table>
+                    <tr><th>Platform</th><th>Rating</th><th>Reviews</th><th>Status</th></tr>
+                    <tr>
+                        <td>Google Business</td>
+                        <td>&mdash;</td>
+                        <td>&mdash;</td>
+                        <td><span class="badge badge-warning">No Dedicated Listing Found</span></td>
+                    </tr>
+                    <tr>
+                        <td>Yelp</td>
+                        <td>&mdash;</td>
+                        <td>&mdash;</td>
+                        <td><span class="badge badge-warning">No Dedicated Page Found</span></td>
+                    </tr>
+                    <tr>
+                        <td>PartySlate</td>
+                        <td>Listed</td>
+                        <td>56 photos, 2 albums, 15 vendor connections</td>
+                        <td><span class="badge badge-success">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Instagram</td>
+                        <td>&mdash;</td>
+                        <td>Active presence</td>
+                        <td><span class="badge badge-success">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>KXAN Austin</td>
+                        <td>&mdash;</td>
+                        <td>Featured in news coverage</td>
+                        <td><span class="badge badge-info">Media</span></td>
+                    </tr>
+                </table>
+                <div class="warning-box">
+                    <strong>Review Gap Identified:</strong> The Balloon Collective lacks dedicated profiles on Google Business and Yelp, which are standard review platforms for local service businesses. Their competitors (Balloon Boutique: 22 Yelp reviews; ATX Bubbles: 16 Yelp reviews; Balloon People: 219 Yelp photos) maintain active review presences. This represents a significant online visibility gap.
+                </div>
+                <h3>Media Coverage</h3>
+                <ul>
+                    <li><strong>Austin Chronicle (March 2018)</strong> &mdash; Full-page feature: "Snapshot: Balloon Art Power Couple Stacy 'Pineapple' Wheeler and Nate 'The Great' Culpepper"</li>
+                    <li><strong>KXAN Austin</strong> &mdash; Tagged coverage page</li>
+                    <li><strong>Almost Real Things</strong> &mdash; Feature on Stacy Wheeler and the art of balloons</li>
+                    <li><strong>365 Things Austin</strong> &mdash; Coverage of Hopscotch immersive art installation</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 6. Financial Information -->
+        <section id="financial">
+            <h2>6. Financial Information</h2>
+            <div class="section-content">
+                <p>The Balloon Collective is a privately held LLC. No public financial statements are available.</p>
+                <table>
+                    <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+                    <tr>
+                        <td>Minimum Spend</td>
+                        <td>$500</td>
+                        <td><a href="https://www.partyslate.com/vendors/the-balloon-collective">PartySlate</a></td>
+                    </tr>
+                    <tr>
+                        <td>Revenue (estimated)</td>
+                        <td>Not publicly available</td>
+                        <td>&mdash;</td>
+                    </tr>
+                    <tr>
+                        <td>Entity Type</td>
+                        <td>LLC</td>
+                        <td><a href="https://www.linkedin.com/in/nate-culpepper-57a227182/">LinkedIn</a></td>
+                    </tr>
+                </table>
+                <div class="info-box">
+                    <strong>Industry Context:</strong> The U.S. Party &amp; Event Planners industry generates $1.7B in revenue (2026) across 3,449 businesses, with an average of ~$493K per business. The broader Event Decoration Service market was valued at $10B in 2022. High-end balloon builds for international projects (e.g., Dubai) can command minimums of $50,000+ per project.
+                    <p class="source">Sources: <a href="https://www.ibisworld.com/united-states/industry/party-event-planners/4414/">IBISWorld</a>, <a href="https://www.verifiedmarketreports.com/product/event-decoration-service-market/">Verified Market Reports</a>, <a href="https://www.austinchronicle.com/arts/2018-03-09/snapshot-balloon-art-power-couple-stacy-pineapple-wheeler-and-nate-the-great-culpepper/">Austin Chronicle</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Industry Market Data -->
+        <section id="market-data">
+            <h2>7. Industry Market Data</h2>
+            <div class="section-content">
+                <div class="info-box">
+                    <strong>Abbreviations:</strong><br>
+                    MSA = Metropolitan Statistical Area<br>
+                    CAGR = Compound Annual Growth Rate<br>
+                    HUD = U.S. Department of Housing and Urban Development<br>
+                    ACS = American Community Survey<br>
+                    ABoR = Austin Board of Realtors<br>
+                    TRERC = Texas Real Estate Research Center<br>
+                    BBB = Better Business Bureau<br>
+                    TDC = Texas Demographic Center
+                </div>
+
+                <details>
+                    <summary>Global Decorative Balloon Market <span class="detail-count">6 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Market Metric</th><th>Value</th><th>Source</th></tr>
+                            <tr><td>Global Decorative Balloon Market (2024)</td><td>$3.29 billion</td><td><a href="https://www.wiseguyreports.com/reports/decorative-balloon-market">WiseGuy Reports</a></td></tr>
+                            <tr><td>Projected Size (2032)</td><td>$4.5 billion</td><td><a href="https://www.wiseguyreports.com/reports/decorative-balloon-market">WiseGuy Reports</a></td></tr>
+                            <tr><td>CAGR (2024&ndash;2032)</td><td>4.01%</td><td><a href="https://www.wiseguyreports.com/reports/decorative-balloon-market">WiseGuy Reports</a></td></tr>
+                            <tr><td>Global Party Balloons Market (2025)</td><td>$1.85 billion</td><td><a href="https://www.businessresearchinsights.com/market-reports/party-balloon-market-122375">Business Research Insights</a></td></tr>
+                            <tr><td>Party Balloons Projected (2033)</td><td>$3.38 billion</td><td><a href="https://www.businessresearchinsights.com/market-reports/party-balloon-market-122375">Business Research Insights</a></td></tr>
+                            <tr><td>Party Balloons CAGR</td><td>6.9%</td><td><a href="https://www.businessresearchinsights.com/market-reports/party-balloon-market-122375">Business Research Insights</a></td></tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>U.S. Event Decoration &amp; Balloon Services <span class="detail-count">7 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Market Metric</th><th>Value</th><th>Source</th></tr>
+                            <tr><td>U.S. Event Decoration Service Market (2022)</td><td>$10 billion</td><td><a href="https://www.verifiedmarketreports.com/product/event-decoration-service-market/">Verified Market Reports</a></td></tr>
+                            <tr><td>Projected (2030)</td><td>$16 billion</td><td><a href="https://www.verifiedmarketreports.com/product/event-decoration-service-market/">Verified Market Reports</a></td></tr>
+                            <tr><td>CAGR (2024&ndash;2030)</td><td>6.5%</td><td><a href="https://www.verifiedmarketreports.com/product/event-decoration-service-market/">Verified Market Reports</a></td></tr>
+                            <tr><td>U.S. Party &amp; Event Planners Industry (2026)</td><td>$1.7 billion</td><td><a href="https://www.ibisworld.com/united-states/industry/party-event-planners/4414/">IBISWorld</a></td></tr>
+                            <tr><td>Number of Businesses</td><td>3,449</td><td><a href="https://www.ibisworld.com/united-states/industry/party-event-planners/4414/">IBISWorld</a></td></tr>
+                            <tr><td>Industry CAGR (2020&ndash;2025)</td><td>8.6%</td><td><a href="https://www.ibisworld.com/united-states/industry/party-event-planners/4414/">IBISWorld</a></td></tr>
+                            <tr><td>Balloon Share of Party Decor Market</td><td>40%</td><td><a href="https://www.verifiedmarketreports.com/product/party-decoration-market/">Verified Market Reports</a></td></tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Pricing by Tier (Austin Market) <span class="detail-count">7 tiers</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Product</th><th>Austin Price Range</th><th>National Average</th></tr>
+                            <tr><td>Small garland (6ft)</td><td>$150&ndash;$200</td><td>$100&ndash;$200</td></tr>
+                            <tr><td>Medium garland (10ft)</td><td>$250&ndash;$300</td><td>$200&ndash;$350</td></tr>
+                            <tr><td>Medium garland + accents (10&ndash;12ft)</td><td>$285&ndash;$450</td><td>$250&ndash;$450</td></tr>
+                            <tr><td>Large garland (16&ndash;20ft)</td><td>$400&ndash;$700</td><td>$350&ndash;$700</td></tr>
+                            <tr><td>Balloon arch + florals</td><td>$450&ndash;$575</td><td>$400&ndash;$850</td></tr>
+                            <tr><td>25ft balloon wall</td><td>$775+</td><td>$540&ndash;$1,650</td></tr>
+                            <tr><td>Per linear foot (garland)</td><td>$18&ndash;$45</td><td>$10&ndash;$90</td></tr>
+                        </table>
+                        <p class="source">Sources: <a href="https://atxmoments.com/balloons/">ATX Moments</a>, <a href="https://www.myballoonboutique.com/blogs/news/how-much-does-balloon-decoration-cost-%F0%9F%8E%88">Balloon Boutique</a>, <a href="https://balloonhq.com/blog/how-much-does-a-balloon-arch-cost/">BalloonHQ</a></p>
+                    </div>
+                </details>
+
+                <div class="highlight-box">
+                    <strong>Austin Metro Addressable Market Estimate:</strong> With ~1,061,155 households and a 56.89% homeownership rate, approximately 603,683 owner-occupied homes exist in the Austin MSA. At a professional balloon/event decor utilization rate of 3&ndash;5% per year (birthdays, graduations, holidays, corporate events), this suggests a local addressable market of <strong>18,100&ndash;30,200 potential jobs per year</strong>. At an average spend of $350&ndash;$500 per event, the Austin metro balloon decor market represents approximately <strong>$6.3M&ndash;$15.1M annually</strong>.
+                </div>
+
+                <details>
+                    <summary>Austin Metro Market Opportunity <span class="detail-count">12 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Data Point</th><th>Value</th><th>Source</th></tr>
+                            <tr><td>MSA Population (2024 ACS)</td><td>2,550,637</td><td><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter</a></td></tr>
+                            <tr><td>Population Growth (2020&ndash;2024)</td><td>+267,251 (+2.3% annual avg)</td><td><a href="https://communityimpact.com/austin/south-central-austin/government/2025/03/17/austin-metro-grows-to-25th-most-populous-in-us-with-more-than-25m-residents/">Community Impact</a></td></tr>
+                            <tr><td>Total Households</td><td>1,061,155</td><td><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter</a></td></tr>
+                            <tr><td>Homeownership Rate</td><td>56.89%</td><td><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter</a></td></tr>
+                            <tr><td>Median Household Income</td><td>$99,897</td><td><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter</a></td></tr>
+                            <tr><td>Median Home Value</td><td>$482,800</td><td><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter</a></td></tr>
+                            <tr><td>Total Housing Units</td><td>1,127,379</td><td><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter</a></td></tr>
+                            <tr><td>Vacancy Rate</td><td>5.87%</td><td><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter</a></td></tr>
+                            <tr><td>Annual In-Migration</td><td>~145,620 (6.6% of pop.)</td><td><a href="https://opportunityaustin.com/about-austin/population/">Opportunity Austin</a></td></tr>
+                            <tr><td>Net Domestic Migration (2024)</td><td>~13,980</td><td><a href="https://www.kvue.com/article/news/local/people-moving-to-austin-down-texas-florida-sun-belt/269-15ebff42-417c-48e2-aae3-96d5191d1f86">KVUE / Redfin</a></td></tr>
+                            <tr><td>Population Projection (2030)</td><td>2,918,491</td><td><a href="https://opportunityaustin.com/about-austin/population/">Opportunity Austin</a></td></tr>
+                            <tr><td>Population Projection (2040)</td><td>3,611,330</td><td><a href="https://opportunityaustin.com/about-austin/population/">Opportunity Austin</a></td></tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Texas Market Context <span class="detail-count">8 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Data Point</th><th>Value</th><th>Source</th></tr>
+                            <tr><td>TX Building Permits (2024)</td><td>225,756 (15% of U.S. total)</td><td><a href="https://www.newsweek.com/map-shows-us-states-building-most-housing-2026-11241641">Newsweek / Census Bureau</a></td></tr>
+                            <tr><td>TX Single-Family Permits (2024)</td><td>158,121 (+5.5% YoY)</td><td><a href="https://www.constructionowners.com/news/texas-tops-u-s-in-new-home-construction-15-of-permits-in-2024">Construction Owners</a></td></tr>
+                            <tr><td>TX Q1 2025 Home Sales</td><td>70,944 (-1.5% YoY)</td><td><a href="https://www.texasrealestate.com/about-us/newsroom/news-releases/texas-homebuyers-had-more-homes-to-choose-from-in-q1-of-2025/">Texas Realtors</a></td></tr>
+                            <tr><td>TX Median Home Price (Q1 2025)</td><td>$331,000 (+0.3% YoY)</td><td><a href="https://www.texasrealestate.com/about-us/newsroom/news-releases/texas-homebuyers-had-more-homes-to-choose-from-in-q1-of-2025/">Texas Realtors</a></td></tr>
+                            <tr><td>TX Employment Forecast (2026)</td><td>+1.1% (+154,600 jobs)</td><td><a href="https://www.dallasfed.org/research/forecast/2026/emp260206">Dallas Fed</a></td></tr>
+                            <tr><td>TX Unemployment (Dec 2025)</td><td>4.3%</td><td><a href="https://www.dallasfed.org/research/forecast/2026/emp260206">Dallas Fed</a></td></tr>
+                            <tr><td>TX $1M+ Home Sales (2025)</td><td>14,418 (+12% YoY, record)</td><td><a href="https://www.texasrealestate.com/about-us/newsroom/news-releases/more-homes-in-texas-sold-for-1-million-than-ever-before/">Texas Realtors</a></td></tr>
+                            <tr><td>Austin MSA National Ranking</td><td>#25 most populous metro</td><td><a href="https://communityimpact.com/austin/south-central-austin/government/2025/03/17/austin-metro-grows-to-25th-most-populous-in-us-with-more-than-25m-residents/">Community Impact</a></td></tr>
+                        </table>
+                        <div class="info-box">
+                            <strong>Why Texas Matters:</strong> Texas leads the nation in building permits (15% of all U.S. permits) and is the #25 most populous metro with a projected 2.92M population by 2030. The Austin MSA's $99,897 median household income (25% above national average) signals strong purchasing power for discretionary event spending. Record luxury home sales indicate a growing high-end client base.
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Industry Trends (2026) <span class="detail-count">6 trends</span></summary>
+                    <div class="details-content">
+                        <ul>
+                            <li><strong>Sustainability shift:</strong> 35% of manufacturers introduced biodegradable options; 44% investing in biodegradable latex processing. Air-filled installations surging over helium due to global helium shortage. (<a href="https://www.balloudesigns.com/post/balloon-decor-trends-to-watch-in-2026">Ballou Designs</a>)</li>
+                            <li><strong>Social media-driven demand:</strong> 45% of global balloon demand influenced by social-media-driven themed parties; 30% of decorators shifting toward balloon-centric decor concepts. (<a href="https://www.wiseguyreports.com/reports/decorative-balloon-market">WiseGuy Reports</a>)</li>
+                            <li><strong>Personalization premium:</strong> Custom-printed balloons, branded installations, and bespoke designs replacing generic party supplies. 42% of retail campaigns use latex balloons. (<a href="https://www.businessresearchinsights.com/market-reports/party-balloon-market-122375">Business Research Insights</a>)</li>
+                            <li><strong>Technology integration:</strong> Smart balloons with color-changing LEDs, music synchronization, and projection mapping on balloon structures emerging in 2026. (<a href="https://www.balloudesigns.com/post/balloon-decor-trends-to-watch-in-2026">Ballou Designs</a>)</li>
+                            <li><strong>Reuse and modular design:</strong> Modular balloon structures designed for disassembly and reconfiguration; some companies offering balloon rental programs. (<a href="https://www.balloudesigns.com/post/balloon-decor-trends-to-watch-in-2026">Ballou Designs</a>)</li>
+                            <li><strong>Regulatory changes:</strong> Multiple U.S. states and countries restricting balloon releases; California and several European countries have implemented bans, reshaping outdoor event practices. (<a href="https://www.globalgrowthinsights.com/market-reports/latex-balloons-market-122404">Global Growth Insights</a>)</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 8. Competitive Analysis -->
+        <section id="competitive">
+            <h2>8. Competitive Analysis</h2>
+            <div class="section-content">
+                <h3>Austin Balloon Decor Competitor Landscape</h3>
+                <table>
+                    <tr><th>Company</th><th>Est.</th><th>Reviews</th><th>Price/ft</th><th>Differentiator</th></tr>
+                    <tr><td><a href="https://www.myballoonboutique.com/">Balloon Boutique</a></td><td>2020</td><td>22 (Yelp)</td><td>Custom</td><td>Floral-balloon fusion, family-owned</td></tr>
+                    <tr><td><a href="https://atxbubbles.com/">ATX Bubbles</a></td><td>&mdash;</td><td>16 (Yelp)</td><td>Custom</td><td>LED marquees, UT/Apple/Dell clients</td></tr>
+                    <tr><td><a href="https://www.popanddroptx.com/">Pop &amp; Drop</a></td><td>&mdash;</td><td>&mdash;</td><td>Custom</td><td>TikTok, Meta, Reddit clients; streamers</td></tr>
+                    <tr><td><a href="https://starroftexasmemories.com/">Starr of Texas</a></td><td>2017</td><td>89 photos (Yelp)</td><td>$28&ndash;$45</td><td>Bounce castle, Bubble House</td></tr>
+                    <tr><td><a href="https://atxmoments.com/">Austin Moments</a></td><td>&mdash;</td><td>&mdash;</td><td>$25&ndash;$30</td><td>Transparent pricing, themed packages</td></tr>
+                    <tr><td><a href="https://www.balloonpeopletx.com/">Balloon People TX</a></td><td>~1998</td><td>219 photos (Yelp)</td><td>Custom</td><td>28+ years, entertainment + decor</td></tr>
+                    <tr><td><a href="https://www.balloomsoftexas.com/">Ballooms of Texas</a></td><td>&mdash;</td><td>29 (Yelp)</td><td>Custom</td><td>Yard sculptures, multi-city</td></tr>
+                    <tr><td><a href="https://balloonatiksaustin.com/">Balloonatiks</a></td><td>2009</td><td>6 (Yelp)</td><td>Custom</td><td>Same-day delivery, 16+ years</td></tr>
+                    <tr><td><a href="https://www.austinballoonco.com/">Austin Balloon Co</a></td><td>&mdash;</td><td>&mdash;</td><td>Custom</td><td>Luxury positioning, 10% return discount</td></tr>
+                </table>
+
+                <h3>Competitive Positioning</h3>
+                <div class="highlight-box">
+                    <strong>Strengths:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Unmatched experience: 18+ years, international portfolio (China, Australia)</li>
+                        <li>Luxury/high-art positioning with immersive installation capabilities (Hopscotch)</li>
+                        <li>Convention teachers; respected in professional balloon artist community</li>
+                        <li>National/international travel availability differentiates from local-only competitors</li>
+                        <li>Media coverage (Austin Chronicle, KXAN) provides credibility</li>
+                    </ul>
+                </div>
+                <div class="warning-box">
+                    <strong>Challenges:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>No Google Business or Yelp profile &mdash; invisible to most local search traffic</li>
+                        <li>Website is minimal (Squarespace, limited service pages, no pricing transparency)</li>
+                        <li>Competitors like Pop &amp; Drop have marquee corporate clients (TikTok, Meta, Reddit)</li>
+                        <li>Market is saturated: 10+ active competitors in Austin metro</li>
+                        <li>No published pricing on website vs. competitors with transparent pricing</li>
+                        <li>About page still references COVID-era services, suggesting outdated content</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Online Presence -->
+        <section id="online-presence">
+            <h2>9. Online Presence</h2>
+            <div class="section-content">
+                <h3>Website Audit</h3>
+                <table>
+                    <tr><th>Element</th><th>Status</th><th>Notes</th></tr>
+                    <tr><td>Platform</td><td>Squarespace</td><td>Self-hosted CMS</td></tr>
+                    <tr><td>Mobile Responsive</td><td><span class="badge badge-success">Yes</span></td><td>Standard Squarespace template</td></tr>
+                    <tr><td>SSL Certificate</td><td><span class="badge badge-success">Active</span></td><td>HTTPS enabled</td></tr>
+                    <tr><td>Service Pages</td><td><span class="badge badge-danger">Minimal</span></td><td>Homepage shows "Sculptures" only; no detailed service pages</td></tr>
+                    <tr><td>Pricing</td><td><span class="badge badge-danger">Not Listed</span></td><td>No pricing info; PartySlate shows $500 minimum</td></tr>
+                    <tr><td>Portfolio/Gallery</td><td><span class="badge badge-warning">Limited</span></td><td>Homepage has one image; no dedicated gallery</td></tr>
+                    <tr><td>Contact Form</td><td><span class="badge badge-success">Present</span></td><td>Contact page with social links</td></tr>
+                    <tr><td>SEO / Meta Tags</td><td><span class="badge badge-warning">Basic</span></td><td>Title tag: "The Balloon Collective" (no keywords)</td></tr>
+                    <tr><td>Blog / Content</td><td><span class="badge badge-danger">None</span></td><td>No blog or content marketing</td></tr>
+                </table>
+
+                <details>
+                    <summary>Social Media Presence <span class="detail-count">3 platforms</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Platform</th><th>Handle</th><th>Status</th></tr>
+                            <tr><td>Instagram</td><td><a href="https://www.instagram.com/theballooncollective/">@theballooncollective</a></td><td><span class="badge badge-success">Active</span></td></tr>
+                            <tr><td>Facebook</td><td><a href="http://www.facebook.com/theballooncollective">theballooncollective</a></td><td><span class="badge badge-success">Active</span></td></tr>
+                            <tr><td>LinkedIn (Nate)</td><td><a href="https://www.linkedin.com/in/nate-culpepper-57a227182/">Nate Culpepper</a></td><td><span class="badge badge-success">Active</span></td></tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Directory Listings <span class="detail-count">5 directories</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Directory</th><th>Status</th><th>URL</th></tr>
+                            <tr><td>PartySlate</td><td><span class="badge badge-success">Listed</span></td><td><a href="https://www.partyslate.com/vendors/the-balloon-collective">View</a></td></tr>
+                            <tr><td>Google Business</td><td><span class="badge badge-danger">Not Found</span></td><td>&mdash;</td></tr>
+                            <tr><td>Yelp</td><td><span class="badge badge-danger">Not Found</span></td><td>&mdash;</td></tr>
+                            <tr><td>Thumbtack</td><td><span class="badge badge-danger">Not Found</span></td><td>&mdash;</td></tr>
+                            <tr><td>ZoomInfo</td><td><span class="badge badge-success">Listed</span></td><td><a href="https://www.zoominfo.com/p/Nate-Culpepper/9591494148">View</a></td></tr>
+                        </table>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 10. Data Verification Summary -->
+        <section id="verification">
+            <h2>10. Data Verification Summary</h2>
+            <div class="section-content">
+                <details>
+                    <summary>Verification Matrix <span class="detail-count">11 categories</span></summary>
+                    <div class="details-content">
+                        <table class="verification-table">
+                            <tr><th>Category</th><th>Verified</th><th>Partially</th><th>Unverified</th></tr>
+                            <tr><td>Company Name</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td></tr>
+                            <tr><td>Website URL</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td></tr>
+                            <tr><td>Key Personnel</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td></tr>
+                            <tr><td>Services Offered</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td></tr>
+                            <tr><td>Physical Address</td><td></td><td><span class="badge badge-warning">~</span></td><td></td></tr>
+                            <tr><td>Phone Number</td><td></td><td></td><td><span class="badge badge-danger">&#10007;</span></td></tr>
+                            <tr><td>Business Registration (TX SOS)</td><td></td><td></td><td><span class="badge badge-danger">&#10007;</span></td></tr>
+                            <tr><td>Reviews / Ratings</td><td></td><td><span class="badge badge-warning">~</span></td><td></td></tr>
+                            <tr><td>Pricing</td><td></td><td><span class="badge badge-warning">~</span></td><td></td></tr>
+                            <tr><td>Financial Data</td><td></td><td></td><td><span class="badge badge-danger">&#10007;</span></td></tr>
+                            <tr><td>Market Data</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td></tr>
+                        </table>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 11. Conclusions & Recommendations -->
+        <section id="conclusions">
+            <h2>11. Conclusions &amp; Recommendations</h2>
+            <div class="section-content">
+                <h3>Key Findings</h3>
+                <ol>
+                    <li><strong>Premium positioning with experience gap:</strong> The Balloon Collective is the most experienced luxury balloon company in Austin (18+ years, international projects), but competitors are catching up with corporate client rosters and stronger online visibility.</li>
+                    <li><strong>Significant online presence gap:</strong> No Google Business or Yelp profiles means the company is invisible to most consumers searching for "balloon decor Austin." This is the most critical finding.</li>
+                    <li><strong>Growing market:</strong> The decorative balloon market is projected to grow at 4&ndash;7% CAGR through 2032&ndash;2033. Austin's population (2.55M, growing to 2.92M by 2030) and high median income ($99,897) support continued demand.</li>
+                    <li><strong>Competitive market:</strong> 10+ active balloon decor companies in Austin, with pricing ranging from $18&ndash;$45/ft. The market is segmented by price tier and service type.</li>
+                    <li><strong>Sustainability is becoming table stakes:</strong> Multiple competitors (Pop &amp; Drop, ATX Bubbles, Balloon Boutique) already emphasize eco-friendly practices. The Balloon Collective's website does not address sustainability.</li>
+                </ol>
+
+                <h3>Recommendations for Further Research</h3>
+                <ul>
+                    <li>Direct TX SOS and Comptroller verification of LLC status and standing</li>
+                    <li>Property records lookup for South Austin studio location</li>
+                    <li>Instagram engagement analysis (@theballooncollective follower count, engagement rate)</li>
+                    <li>Direct inquiry for current pricing structure and service catalog</li>
+                    <li>Customer interviews for qualitative brand perception data</li>
+                    <li>Google Trends analysis for "balloon decor Austin" search volume trends</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 12. Sources & Citations -->
+        <section id="sources">
+            <h2>12. Sources &amp; Citations</h2>
+            <div class="section-content">
+                <details>
+                    <summary>Primary Sources <span class="detail-count">5 sources</span></summary>
+                    <div class="details-content">
+                        <ol>
+                            <li><a href="https://www.theballooncollective.com/">The Balloon Collective &mdash; Official Website</a></li>
+                            <li><a href="https://www.theballooncollective.com/about-us">The Balloon Collective &mdash; About Us</a></li>
+                            <li><a href="https://www.theballooncollective.com/contact">The Balloon Collective &mdash; Contact</a></li>
+                            <li><a href="https://www.partyslate.com/vendors/the-balloon-collective">PartySlate &mdash; The Balloon Collective Vendor Profile</a></li>
+                            <li><a href="https://www.linkedin.com/in/nate-culpepper-57a227182/">LinkedIn &mdash; Nate Culpepper</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Third-Party &amp; Media Sources <span class="detail-count">6 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="6">
+                            <li><a href="https://www.austinchronicle.com/arts/2018-03-09/snapshot-balloon-art-power-couple-stacy-pineapple-wheeler-and-nate-the-great-culpepper/">Austin Chronicle &mdash; Snapshot: Balloon Art Power Couple (March 2018)</a></li>
+                            <li><a href="https://almostrealthings.com/2020/05/29/stacy-wheeler/">Almost Real Things &mdash; Stacy Wheeler &amp; the Art of Balloons</a></li>
+                            <li><a href="https://365thingsaustin.com/hopscotch-immersive-art-experience-coming-austin/">365 Things Austin &mdash; Hopscotch Immersive Art Experience</a></li>
+                            <li><a href="https://www.kxan.com/tag/the-balloon-collective/">KXAN Austin &mdash; The Balloon Collective Tag</a></li>
+                            <li><a href="https://www.zoominfo.com/p/Nate-Culpepper/9591494148">ZoomInfo &mdash; Nate Culpepper Profile</a></li>
+                            <li><a href="https://www.instagram.com/theballooncollective/">Instagram &mdash; @theballooncollective</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Market Research Sources <span class="detail-count">10 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="12">
+                            <li><a href="https://www.wiseguyreports.com/reports/decorative-balloon-market">WiseGuy Reports &mdash; Decorative Balloon Market Size &amp; Trends</a></li>
+                            <li><a href="https://www.businessresearchinsights.com/market-reports/party-balloon-market-122375">Business Research Insights &mdash; Party Balloon Market Forecast 2033</a></li>
+                            <li><a href="https://www.globalgrowthinsights.com/market-reports/latex-balloons-market-122404">Global Growth Insights &mdash; Latex Balloons Market 2026&ndash;2035</a></li>
+                            <li><a href="https://www.verifiedmarketreports.com/product/event-decoration-service-market/">Verified Market Reports &mdash; Event Decoration Service Market</a></li>
+                            <li><a href="https://www.verifiedmarketreports.com/product/party-decoration-market/">Verified Market Reports &mdash; Party Decoration Market</a></li>
+                            <li><a href="https://www.ibisworld.com/united-states/industry/party-event-planners/4414/">IBISWorld &mdash; Party &amp; Event Planners in the US (2026)</a></li>
+                            <li><a href="https://www.balloudesigns.com/post/balloon-decor-trends-to-watch-in-2026">Ballou Designs &mdash; Balloon Decor Trends to Watch in 2026</a></li>
+                            <li><a href="https://balloonhq.com/blog/how-much-does-a-balloon-arch-cost/">BalloonHQ &mdash; How Much Does a Balloon Arch Cost</a></li>
+                            <li><a href="https://www.myballoonboutique.com/blogs/news/how-much-does-balloon-decoration-cost-%F0%9F%8E%88">Balloon Boutique &mdash; Balloon Decoration Cost Guide</a></li>
+                            <li><a href="https://atxmoments.com/balloons/">ATX Moments &mdash; Balloon Garlands Pricing</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Austin Metro &amp; Texas Economic Sources <span class="detail-count">12 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="22">
+                            <li><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter &mdash; Austin-Round Rock-San Marcos TX Metro Area (2024 ACS)</a></li>
+                            <li><a href="https://communityimpact.com/austin/south-central-austin/government/2025/03/17/austin-metro-grows-to-25th-most-populous-in-us-with-more-than-25m-residents/">Community Impact &mdash; Austin Metro 25th Most Populous</a></li>
+                            <li><a href="https://opportunityaustin.com/about-austin/population/">Opportunity Austin &mdash; Population Data &amp; Projections</a></li>
+                            <li><a href="https://www.dallasfed.org/research/forecast/2026/emp260206">Dallas Fed &mdash; Texas Employment Forecast (Feb 2026)</a></li>
+                            <li><a href="https://www.newsweek.com/map-shows-us-states-building-most-housing-2026-11241641">Newsweek &mdash; Map: States Building Most Housing (2026)</a></li>
+                            <li><a href="https://www.constructionowners.com/news/texas-tops-u-s-in-new-home-construction-15-of-permits-in-2024">Construction Owners &mdash; Texas Leads U.S. in Permits (2024)</a></li>
+                            <li><a href="https://www.texasrealestate.com/about-us/newsroom/news-releases/texas-homebuyers-had-more-homes-to-choose-from-in-q1-of-2025/">Texas Realtors &mdash; Q1 2025 Home Sales</a></li>
+                            <li><a href="https://www.texasrealestate.com/about-us/newsroom/news-releases/more-homes-in-texas-sold-for-1-million-than-ever-before/">Texas Realtors &mdash; Million-Dollar Home Sales Record (2025)</a></li>
+                            <li><a href="https://www.kvue.com/article/news/local/people-moving-to-austin-down-texas-florida-sun-belt/269-15ebff42-417c-48e2-aae3-96d5191d1f86">KVUE &mdash; Austin Migration Data (2024)</a></li>
+                            <li><a href="https://demographics.texas.gov/Projections/">Texas Demographic Center &mdash; Population Projections (2025)</a></li>
+                            <li><a href="https://www.dallasfed.org/research/regional/texas">Dallas Fed &mdash; Texas Economy Dashboard</a></li>
+                            <li><a href="https://trerc.tamu.edu/article/2026-texas-real-estate-forecast/">TRERC &mdash; 2026 Texas Real Estate Forecast</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Competitor Sources <span class="detail-count">9 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="34">
+                            <li><a href="https://www.myballoonboutique.com/">Balloon Boutique &mdash; Official Website</a></li>
+                            <li><a href="https://atxbubbles.com/">ATX Bubbles &mdash; Official Website</a></li>
+                            <li><a href="https://www.popanddroptx.com/">Pop &amp; Drop &mdash; Official Website</a></li>
+                            <li><a href="https://starroftexasmemories.com/">Starr of Texas &mdash; Official Website</a></li>
+                            <li><a href="https://www.balloonpeopletx.com/">Balloon People TX &mdash; Official Website</a></li>
+                            <li><a href="https://www.balloomsoftexas.com/">Ballooms of Texas &mdash; Official Website</a></li>
+                            <li><a href="https://balloonatiksaustin.com/">Balloonatiks &mdash; Official Website</a></li>
+                            <li><a href="https://www.austinballoonco.com/">Austin Balloon Co &mdash; Official Website</a></li>
+                            <li><a href="https://voyageaustin.com/interview/check-out-ana-carters-story/">Voyage Austin &mdash; Ana Carter / Balloon Boutique Story</a></li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>Report compiled:</strong> February 8, 2026</p>
+            <p><strong>Research methodology:</strong> Web scraping, search engine queries, public records review, competitor analysis</p>
+            <p><strong>Total unique sources cited:</strong> 42</p>
+        </footer>
+    </div>
+</body>
+</html>

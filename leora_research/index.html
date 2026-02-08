@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leora Home Health - Bring Your Best Referral Program</title>
+  <style>
+    /* CSS Custom Properties for Theming */
+    :root {
+      --color-bg: #ffffff;
+      --color-bg-secondary: #f9fafb;
+      --color-text-primary: #1f2937;
+      --color-text-secondary: #6b7280;
+      --color-accent: #14b8a6;
+      --color-accent-light: #ccf7f3;
+      --color-border: #e5e7eb;
+      --color-card-bg: #ffffff;
+      --color-shadow: rgba(0, 0, 0, 0.08);
+      --color-shadow-hover: rgba(0, 0, 0, 0.12);
+
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+
+      --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #0f172a;
+        --color-bg-secondary: #1e293b;
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #cbd5e1;
+        --color-accent: #14b8a6;
+        --color-accent-light: #0f766e;
+        --color-border: #334155;
+        --color-card-bg: #1e293b;
+        --color-shadow: rgba(0, 0, 0, 0.3);
+        --color-shadow-hover: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Header */
+    header {
+      background-color: var(--color-bg-secondary);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--spacing-lg);
+      sticky: top;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--spacing-lg);
+    }
+
+    .header-content h1 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+      color: var(--color-text-primary);
+    }
+
+    .header-content p {
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .back-link:hover {
+      background-color: var(--color-accent);
+      color: #ffffff;
+      border-color: var(--color-accent);
+      transform: translateX(-2px);
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-xl);
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-text-primary);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    /* Card */
+    .card {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px var(--color-shadow-hover);
+      border-color: var(--color-accent);
+    }
+
+    .card-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .card-category {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      background-color: var(--color-accent-light);
+      color: var(--color-accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      line-height: 1.4;
+    }
+
+    .card-description {
+      flex: 1;
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--spacing-md);
+      line-height: 1.6;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--color-accent);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .card-link::after {
+      content: '→';
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover .card-link::after {
+      transform: translateX(4px);
+    }
+
+    .card-link:hover {
+      color: var(--color-text-primary);
+    }
+
+    /* Markdown Note */
+    .markdown-note {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      margin-top: var(--spacing-sm);
+      padding: var(--spacing-sm);
+      background-color: var(--color-bg-secondary);
+      border-left: 2px solid var(--color-accent);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+    }
+
+    .markdown-note::before {
+      content: 'i';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.2rem;
+      height: 1.2rem;
+      background-color: var(--color-accent);
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--color-bg-secondary);
+      border-top: 1px solid var(--color-border);
+      padding: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+      }
+
+      .header-content h1 {
+        font-size: 1.5rem;
+      }
+
+      main {
+        padding: var(--spacing-md);
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .card-grid {
+        gap: var(--spacing-md);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-content h1 {
+        font-size: 1.25rem;
+      }
+
+      .header-content p {
+        font-size: 0.875rem;
+      }
+
+      main {
+        padding: var(--spacing-md);
+      }
+
+      .card-title {
+        font-size: 1.1rem;
+      }
+
+      .card-description {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="header-content">
+        <h1>Bring Your Best</h1>
+        <p>Everything you need to refer, track, and grow our team. Leora's Employee Referral Program puts our strongest hiring tool in the hands of the people who know us best — our caregivers.</p>
+      </div>
+      <a href="../index.html" class="back-link">← Back to Reports</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Employee Tools Section -->
+    <section>
+      <h2 class="section-title">Employee Tools</h2>
+      <div class="card-grid">
+        <a href="leora_referral_form.html" class="card">
+          <div class="card-header">
+            <span class="card-category">Form</span>
+            <h3 class="card-title">Submit a Referral</h3>
+          </div>
+          <p class="card-description">
+            Know someone who would thrive at Leora? Use this form to submit their information and start the referral process. It only takes a few minutes.
+          </p>
+          <span class="card-link">Open Form</span>
+        </a>
+
+        <a href="leora_referral_dashboard.html" class="card">
+          <div class="card-header">
+            <span class="card-category">Dashboard</span>
+            <h3 class="card-title">My Referrals</h3>
+          </div>
+          <p class="card-description">
+            Track every referral you've submitted, from application status through milestone bonuses. See your total earnings and upcoming payment dates at a glance.
+          </p>
+          <span class="card-link">View Dashboard</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Program Documentation Section -->
+    <section>
+      <h2 class="section-title">Program Guide</h2>
+      <div class="card-grid">
+        <a href="leora_employee_referral_program.md" class="card">
+          <div class="card-header">
+            <span class="card-category">Guide</span>
+            <h3 class="card-title">"Bring Your Best" Program Guide</h3>
+          </div>
+          <p class="card-description">
+            The complete 12-page program handbook covering tiered bonus structures ($750 to $2,000), eligibility rules, step-by-step process, terms and conditions, success tips, and FAQs.
+          </p>
+          <span class="card-link">Download Guide</span>
+          <div class="markdown-note">Markdown file — download to view</div>
+        </a>
+
+        <a href="LEORA_REFERRAL_PROGRAM_COMPLETE_PACKAGE.md" class="card">
+          <div class="card-header">
+            <span class="card-category">Overview</span>
+            <h3 class="card-title">Implementation Guide & Resource Index</h3>
+          </div>
+          <p class="card-description">
+            A high-level roadmap for launching and managing the referral program, including phased timelines, ROI projections, success benchmarks, and links to every resource in this package.
+          </p>
+          <span class="card-link">Download Overview</span>
+          <div class="markdown-note">Markdown file — download to view</div>
+        </a>
+
+        <a href="leora_referral_launch_communications.md" class="card">
+          <div class="card-header">
+            <span class="card-category">Launch</span>
+            <h3 class="card-title">Launch Communications & Timeline</h3>
+          </div>
+          <p class="card-description">
+            Ready-to-use email templates, team meeting scripts, break room flyers, social media posts, and manager talking points organized across an 8-week launch timeline.
+          </p>
+          <span class="card-link">View Timeline</span>
+          <div class="markdown-note">Markdown file — download to view</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Research & Data Section -->
+    <section>
+      <h2 class="section-title">Research & Data</h2>
+      <div class="card-grid">
+        <a href="leora_home_health_hiring_research.md" class="card">
+          <div class="card-header">
+            <span class="card-category">Research</span>
+            <h3 class="card-title">Home Health Hiring Research</h3>
+          </div>
+          <p class="card-description">
+            Industry data and evidence behind the program: 79.2% turnover benchmarks, top performer traits, retention predictors, cultural fit indicators, and screening best practices for home health care.
+          </p>
+          <span class="card-link">View Research</span>
+          <div class="markdown-note">Markdown file — download to view</div>
+        </a>
+
+        <a href="leora_referral_tracking_template.csv" class="card">
+          <div class="card-header">
+            <span class="card-category">Template</span>
+            <h3 class="card-title">Referral Tracking Spreadsheet</h3>
+          </div>
+          <p class="card-description">
+            CSV template for logging referrals end-to-end — submission dates, candidate status, interview progress, hire milestones, and tiered bonus payment tracking.
+          </p>
+          <span class="card-link">Download Template</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Leora Home Health — Nurse-Owned & Operated in Austin, TX</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illumination Holiday Lighting - Growth &amp; Opportunities Report</title>
+    <style>
+        :root {
+            --primary: #1a5f7a;
+            --secondary: #159895;
+            --accent: #57c5b6;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --high: #28a745;
+            --medium: #ffc107;
+            --low: #6c757d;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: var(--dark); background: var(--light); }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 2rem; margin-bottom: 2rem; }
+        header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        header .subtitle { font-size: 1.2rem; opacity: 0.9; }
+        header .meta { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
+        .executive-summary { background: white; border-left: 4px solid var(--accent); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+        .toc { background: white; padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .toc h2 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
+        .toc ol { padding-left: 1.5rem; }
+        .toc li { margin-bottom: 0.4rem; }
+        .toc a { color: var(--secondary); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        section { background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden; }
+        section h2 { background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem; }
+        section h3 { color: var(--secondary); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+        section h4 { color: var(--primary); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
+        .section-content { padding: 1.5rem; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.92rem; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--light); font-weight: 600; color: var(--primary); }
+        tr:hover { background: #f8f9fa; }
+        ul, ol { margin: 0.75rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.4rem; }
+        .highlight-box { background: linear-gradient(135deg, #e8f4f8, #d4edda); border-radius: 8px; padding: 1rem 1.5rem; margin: 1rem 0; }
+        .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+        .info-box { background: #e7f1ff; border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+        .action-box { background: #d4edda; border-left: 4px solid var(--high); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-high { background: #d4edda; color: #155724; }
+        .badge-medium { background: #fff3cd; color: #856404; }
+        .badge-low { background: #e2e3e5; color: #383d41; }
+        .badge-quick { background: #d1ecf1; color: #0c5460; }
+        .badge-longterm { background: #e7e0f7; color: #4a306d; }
+        .opp-card { border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 1rem 0; transition: box-shadow 0.2s; }
+        .opp-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .opp-card .opp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
+        .opp-card .opp-title { font-weight: 600; color: var(--primary); font-size: 1.05rem; }
+        .opp-card .opp-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .opp-card .opp-details { font-size: 0.92rem; }
+        .opp-card .opp-details dt { font-weight: 600; color: var(--secondary); margin-top: 0.5rem; }
+        .opp-card .opp-details dd { margin-left: 0; margin-bottom: 0.25rem; }
+        a { color: var(--secondary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .source { font-size: 0.85rem; color: #666; font-style: italic; }
+        .sources-section { font-size: 0.88rem; }
+        .sources-section li { margin-bottom: 0.3rem; word-break: break-word; }
+        .priority-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .priority-card { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; }
+        .priority-card .count { font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .priority-card .label { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+        @media (max-width: 768px) { header h1 { font-size: 1.6rem; } .container { padding: 1rem; } .section-content { padding: 1rem; } table { font-size: 0.82rem; } th, td { padding: 0.5rem; } }
+        @media (prefers-color-scheme: dark) { :root { --light: #1a1a2e; --dark: #e0e0e0; --border: #333; } body { background: #0f0f23; } section, .executive-summary, .toc { background: #1a1a2e; } .opp-card { border-color: #333; } th { background: #222; } tr:hover { background: #222; } .priority-card { background: #222; } }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Illumination Holiday Lighting, LLC</h1>
+        <div class="subtitle">Growth, Marketing, Partnership, Certification &amp; Application Opportunities</div>
+        <div class="meta">Prepared: February 8, 2026 | Austin, TX (78704) | Owner-Operator: Dan<br>Website: <a href="https://www.illuminationholidaylighting.com/" style="color: #a8e6cf;">illuminationholidaylighting.com</a> | Phone: (737) 471-9627</div>
+    </div>
+</header>
+<div class="container">
+
+<div class="executive-summary">
+    <h2>Executive Summary</h2>
+    <p>Illumination Holiday Lighting has a strong 10-year track record in Austin's growing holiday lighting market, but is severely limited by near-zero digital presence. The single most impactful action Dan can take is <strong>claiming a Google Business Profile</strong> (free, same-day setup), which alone could increase inbound leads by 50-100% given that "holiday lighting installation Austin TX" searches currently return competitors exclusively.</p>
+    <p style="margin-top: 0.75rem;">Beyond digital visibility, three transformative opportunities stand out: (1) becoming a <strong>Trimlight or EverLights authorized dealer</strong> for permanent lighting to generate year-round revenue; (2) pursuing <strong>CLIPA certification</strong> to differentiate from unlicensed competitors; and (3) building <strong>strategic referral partnerships</strong> with Austin landscapers, property managers, and real estate agents.</p>
+    <p style="margin-top: 0.75rem;">The Austin metro continues to add 50,000+ residents annually with major master-planned communities expanding in Round Rock, Cedar Park, Georgetown, and Leander. The competitive landscape includes at least 6 established competitors. Despite this, the market supports growth: year-round lighting installations are expected to grow 45-60% annually, and holiday lighting profit margins run 25-60%.</p>
+    <div class="priority-summary">
+        <div class="priority-card"><div class="count">12</div><div class="label">High Priority</div></div>
+        <div class="priority-card"><div class="count">15</div><div class="label">Medium Priority</div></div>
+        <div class="priority-card"><div class="count">8</div><div class="label">Low / Long-Term</div></div>
+        <div class="priority-card"><div class="count">$0-500</div><div class="label">Quick Win Cost</div></div>
+    </div>
+</div>
+
+<div class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#growth">Growth Opportunities</a></li>
+        <li><a href="#marketing">Marketing Opportunities</a></li>
+        <li><a href="#partnerships">Partnership Opportunities</a></li>
+        <li><a href="#certifications">Certification &amp; Licensing Opportunities</a></li>
+        <li><a href="#platforms">Application &amp; Platform Opportunities</a></li>
+        <li><a href="#trends">Industry Trends &amp; Technology</a></li>
+        <li><a href="#calendar">90-Day Action Plan</a></li>
+        <li><a href="#sources">Sources &amp; References</a></li>
+    </ol>
+</div>
+
+<section id="growth">
+    <h2>1. Growth Opportunities</h2>
+    <div class="section-content">
+        <h3>1.1 Year-Round Revenue Diversification</h3>
+        <p>Holiday lighting is inherently seasonal (October-January). The biggest growth lever is expanding into services that generate revenue during the other 8 months.</p>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Permanent / Architectural Lighting Systems</span><div class="opp-badges"><span class="badge badge-high">High Priority</span><span class="badge badge-longterm">3-6 Month Setup</span></div></div>
+            <div class="opp-details">
+                <p>Permanent LED lighting systems (Trimlight, JellyFish, EverLights) are the fastest-growing segment. App-controlled, color-changing systems installed once on rooflines, used year-round. Growth rate: 45-60% annually.</p>
+                <dt>Why It Matters</dt><dd>Converts seasonal clients into year-round customers. Average job: $3,000-$8,000+ with recurring service revenue.</dd>
+                <dt>Dealer Programs</dt><dd>See <a href="#trends">Section 6</a> for Trimlight ($5K-$10.5K entry), JellyFish ($20K), and EverLights dealer comparison.</dd>
+            </div>
+        </div>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Landscape Lighting Services</span><div class="opp-badges"><span class="badge badge-high">High Priority</span><span class="badge badge-longterm">3-6 Months</span></div></div>
+            <div class="opp-details">
+                <p>Austin's outdoor lighting market is active with multiple competitors. Low-voltage LED landscape lighting leverages Dan's existing skills.</p>
+                <dt>Opportunity</dt><dd>Path lighting, uplighting, deck/patio lighting, tree lighting as spring/summer service. No electrical license needed for low-voltage in TX.</dd>
+                <dt>Austin Trend</dt><dd>"Backyard bistro lighting" is trending heavily. Smart landscape lighting with app/voice control is a premium upsell.</dd>
+                <dt>Revenue</dt><dd>Residential: $2,000-$6,000. Commercial: $5,000-$25,000+.</dd>
+            </div>
+        </div>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Event &amp; Patio String Lighting</span><div class="opp-badges"><span class="badge badge-medium">Medium Priority</span><span class="badge badge-quick">Quick Win</span></div></div>
+            <div class="opp-details">
+                <p>Austin's event scene creates year-round demand for string lighting installations.</p>
+                <dt>Target Venues</dt><dd>Barr Mansion, Springdale Station, Camp Lucy, Villa Antonia, The Allan House, The Prospect House, SKYBOX on 6th, Laguna Gloria.</dd>
+                <dt>Revenue</dt><dd>Wedding/event: $500-$3,000/event. Permanent patio: $1,500-$5,000.</dd>
+            </div>
+        </div>
+
+        <h3>1.2 Austin Market Growth &amp; New Developments</h3>
+        <div class="highlight-box">
+            <strong>Key Austin Growth Data (2025-2026):</strong>
+            <ul>
+                <li>$42M+ approved for affordable housing (1,429 new units across 11 developments)</li>
+                <li>$46.1M additional approved for housing preservation</li>
+                <li>The Modern Austin: 56-story, 365 units, Rainey Street</li>
+                <li>Waterline: 74-story mixed-use, completion late 2026</li>
+                <li>$3B transit-oriented community near The Domain (7M+ sq ft)</li>
+                <li>Hutto: 42,000 (2024), projected 60,000 by 2029</li>
+            </ul>
+        </div>
+        <h4>High-Value Master-Planned Communities to Target</h4>
+        <table>
+            <tr><th>Community</th><th>Location</th><th>Why Target</th></tr>
+            <tr><td>Wolf Ranch</td><td>Georgetown</td><td>Resort-style amenities, active HOA, upscale homeowners</td></tr>
+            <tr><td>Teravista</td><td>Round Rock</td><td>Best-selling community; already does "snowy wonderland at Christmas" events</td></tr>
+            <tr><td>Rancho Sienna</td><td>Georgetown</td><td>Resort-style pool, 100+ acres parkland, high income</td></tr>
+            <tr><td>Berry Creek</td><td>Georgetown</td><td>Established, community events focus</td></tr>
+            <tr><td>Forest Creek</td><td>Round Rock</td><td>Golf community, larger lots, mature landscaping</td></tr>
+            <tr><td>Avery Ranch</td><td>NW Austin / Cedar Park</td><td>Manicured streets, higher-end homes</td></tr>
+            <tr><td>Traviso</td><td>Leander</td><td>Taylor Morrison ($735K avg), luxury buyers</td></tr>
+            <tr><td>Devine Lake</td><td>Leander</td><td>Lennar new construction, high volume</td></tr>
+            <tr><td>Gateway at Hutto</td><td>Hutto</td><td>257-acre mixed-use, rapid population growth</td></tr>
+        </table>
+        <h4>South Austin (78704) - Home Base Advantage</h4>
+        <ul>
+            <li><strong>Zilker</strong> - ~9,000 residents, 5,500 households; ZNA (<a href="https://zna.org/">zna.org</a>)</li>
+            <li><strong>Bouldin Creek</strong> - 6,100+ residents; BCNA since 1980 (<a href="https://www.bouldincreek.org/">bouldincreek.org</a>)</li>
+            <li><strong>Travis Heights / South River City</strong> - SRCC since 1972 (<a href="https://www.srccatx.org/">srccatx.org</a>)</li>
+            <li><strong>Barton Hills</strong> - Established homes; BHNA (<a href="https://bartonhills.org/">bartonhills.org</a>)</li>
+        </ul>
+
+        <h3>1.3 Service Area Expansion</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Expand to Growing Suburban Markets</span><div class="opp-badges"><span class="badge badge-medium">Medium Priority</span><span class="badge badge-longterm">6-12 Months</span></div></div>
+            <div class="opp-details">
+                <dt>Priority Areas (by growth rate)</dt>
+                <dd><ol>
+                    <li><strong>Georgetown</strong> - Fastest-growing city in TX; affluent retirees + families</li>
+                    <li><strong>Leander / Cedar Park</strong> - Massive new construction from Taylor Morrison, Lennar, DR Horton</li>
+                    <li><strong>Round Rock</strong> - Established wealth; Teravista, Forest Creek, Brushy Creek</li>
+                    <li><strong>Dripping Springs / Bee Cave</strong> - Hill Country luxury homes; wedding venue cluster</li>
+                    <li><strong>Hutto</strong> - Population explosion; Gateway at Hutto 257-acre development</li>
+                    <li><strong>San Marcos / Kyle / Buda</strong> - I-35 corridor growth; high volume</li>
+                </ol></dd>
+                <dt>Strategy</dt><dd>Start by accepting jobs from platform leads (Thumbtack, Angi) in expansion areas. Build portfolio before actively marketing there.</dd>
+            </div>
+        </div>
+
+        <h3>1.4 Upsell Opportunities</h3>
+        <ul>
+            <li><strong>Smart lighting control:</strong> WiFi/Bluetooth controllers with Alexa/Google Home/HomeKit. Hardware: $50-$200; charge $200-$500+ premium.</li>
+            <li><strong>LED conversions:</strong> Austin Energy commercial LED rebates up to $370/kW saved; 30% bonus for small businesses. (<a href="https://savings.austinenergy.com/">savings.austinenergy.com</a>)</li>
+            <li><strong>Maintenance contracts:</strong> Annual packages for permanent/landscape lighting. $200-$500/year per client.</li>
+            <li><strong>Storage services:</strong> Store clients' custom lighting year-round. $100-$300/year. Locks in repeat business.</li>
+        </ul>
+    </div>
+</section>
+
+<section id="marketing">
+    <h2>2. Marketing Opportunities</h2>
+    <div class="section-content">
+        <div class="action-box"><strong>CRITICAL GAP:</strong> No Google Business Profile, no BBB listing, no Yelp page, no social media, only 1 HomeAdvisor review. The company is invisible in local search. Fixing this is the single highest-ROI action.</div>
+
+        <h3>2.1 Google Business Profile (GBP)</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Claim &amp; Optimize Google Business Profile</span><div class="opp-badges"><span class="badge badge-high">High Priority</span><span class="badge badge-quick">Quick Win</span></div></div>
+            <div class="opp-details">
+                <dt>What</dt><dd>100% free. Puts your business in Google Search and Maps. Currently, competitors show up and you do not.</dd>
+                <dt>How to Set Up</dt>
+                <dd><ol>
+                    <li>Go to <a href="https://business.google.com/" target="_blank">business.google.com</a></li>
+                    <li>Sign in; enter "Illumination Holiday Lighting"; select "Holiday Lighting Installation"</li>
+                    <li>Set service area (Austin metro + surrounding cities)</li>
+                    <li>Add phone: (737) 471-9627, website, hours</li>
+                    <li>Upload before/after photos; verify via postcard/phone/video</li>
+                </ol></dd>
+                <dt>Optimization</dt>
+                <dd><ul>
+                    <li>Post weekly updates with project photos</li>
+                    <li>Respond to every review within 24 hours</li>
+                    <li>Add services: Design, Installation, Maintenance, Takedown, Commercial, Residential</li>
+                    <li>Highlight "bilingual service"; set seasonal hours</li>
+                </ul></dd>
+            </div>
+        </div>
+
+        <h3>2.2 Local SEO Strategy</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Local SEO for Austin Holiday Lighting</span><div class="opp-badges"><span class="badge badge-high">High Priority</span><span class="badge badge-longterm">Ongoing</span></div></div>
+            <div class="opp-details">
+                <dt>Target Keywords</dt>
+                <dd><ul>
+                    <li>"holiday lighting installation Austin TX" / "Christmas lights installer Austin"</li>
+                    <li>"commercial holiday lighting Austin" / "permanent outdoor lighting Austin"</li>
+                    <li>"landscape lighting Austin TX" / "holiday lights [neighborhood]"</li>
+                </ul></dd>
+                <dt>NAP Consistency</dt><dd>Name, Address, Phone must be identical across every listing.</dd>
+                <dt>Squarespace SEO</dt><dd>Add page titles with keywords, meta descriptions, alt text, separate pages per service area city, blog section.</dd>
+                <dt>Cost</dt><dd>Free (DIY) or $500-$2,000/month for local SEO agency</dd>
+            </div>
+        </div>
+
+        <h3>2.3 Social Media</h3>
+        <table>
+            <tr><th>Platform</th><th>Why</th><th>Cost</th><th>Priority</th></tr>
+            <tr><td><strong>Nextdoor</strong></td><td>77% homeowners. Free page + 2 posts/month. Local Deals avg $75/neighborhood.</td><td>Free - $75</td><td><span class="badge badge-high">High</span></td></tr>
+            <tr><td><strong>Instagram</strong></td><td>Visual platform for before/after photos and reels.</td><td>Free or $5-50/day</td><td><span class="badge badge-high">High</span></td></tr>
+            <tr><td><strong>Facebook</strong></td><td>Business page with reviews. Neighborhood groups. Zip code ads.</td><td>Free or $5-50/day</td><td><span class="badge badge-high">High</span></td></tr>
+            <tr><td><strong>TikTok / YouTube Shorts</strong></td><td>Time-lapse installation videos. High organic reach.</td><td>Free</td><td><span class="badge badge-medium">Medium</span></td></tr>
+        </table>
+
+        <h3>2.4 Review Generation</h3>
+        <div class="info-box"><strong>Current:</strong> 1 review on HomeAdvisor (5.0). Zero on Google, Yelp, Facebook, BBB. Even 10-15 Google reviews at 4.5+ would dramatically improve search ranking.</div>
+        <ul>
+            <li><strong>Ask every client</strong> for a Google review at completion. Send follow-up text/email with direct link.</li>
+            <li><strong>Create review card:</strong> QR code linking to Google review. Hand out at every job.</li>
+            <li><strong>Incentivize referrals:</strong> "$50 off next season" per referral that books.</li>
+            <li><strong>Respond to all reviews</strong> within 24 hours.</li>
+        </ul>
+
+        <h3>2.5 Local Advertising</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Austin Publications &amp; Newsletters</span><div class="opp-badges"><span class="badge badge-medium">Medium Priority</span><span class="badge badge-quick">Seasonal</span></div></div>
+            <div class="opp-details">
+                <dt>Neighborhood Newsletters</dt>
+                <dd><ul>
+                    <li><strong>Stroll Austin</strong> (<a href="https://strollaustin.com/" target="_blank">strollaustin.com</a>) - Monthly newsletters to affluent neighborhoods</li>
+                    <li><strong>ZNA</strong>, <strong>BCNA</strong>, <strong>SRCC</strong>, <strong>BHNA</strong> newsletters</li>
+                </ul></dd>
+                <dt>Publications</dt>
+                <dd><ul>
+                    <li><strong>Austin Monthly</strong> (<a href="https://www.austinmonthly.com/" target="_blank">austinmonthly.com</a>)</li>
+                    <li><strong>Austin Chronicle</strong> (<a href="https://www.austinchronicle.com/" target="_blank">austinchronicle.com</a>)</li>
+                    <li><strong>ATXtoday</strong> (<a href="https://atxtoday.6amcity.com/" target="_blank">atxtoday.6amcity.com</a>)</li>
+                </ul></dd>
+                <dt>Cost</dt><dd>Newsletters: $100-$500/issue. Magazines: $500-$2,000+/issue.</dd>
+            </div>
+        </div>
+
+        <h3>2.6 Seasonal Marketing Calendar</h3>
+        <table>
+            <tr><th>Month</th><th>Activity</th><th>Details</th></tr>
+            <tr><td>Jan-Feb</td><td>Off-season planning</td><td>Update website, certifications, platform signups</td></tr>
+            <tr><td>Mar-May</td><td>Year-round services</td><td>Landscape lighting, permanent installs, patio string lighting</td></tr>
+            <tr><td>Jun-Jul</td><td>Event lighting</td><td>Wedding season peak. Market permanent systems.</td></tr>
+            <tr><td>Aug</td><td>Pre-season marketing</td><td>Social media content. Begin advertising.</td></tr>
+            <tr><td>Sep</td><td>Active booking</td><td>Email past clients, Nextdoor Deals, Facebook ads. Start 2+ months early.</td></tr>
+            <tr><td>Oct</td><td>Peak booking + early installs</td><td>Homeowners think about lights after Halloween.</td></tr>
+            <tr><td>Nov</td><td>Peak installation</td><td>Highest volume. Collect before/after photos.</td></tr>
+            <tr><td>Dec</td><td>Final installs + maintenance</td><td>Service calls. Collect reviews.</td></tr>
+        </table>
+
+        <h3>2.7 Content Marketing</h3>
+        <ul>
+            <li><strong>Before/after photos:</strong> Photograph every job. Post to Instagram, Facebook, Google Business.</li>
+            <li><strong>Time-lapse videos:</strong> GoPro during installations. Instagram Reels, TikTok, YouTube Shorts.</li>
+            <li><strong>Blog posts:</strong> "How Much Do Holiday Lights Cost in Austin?" / "LED vs Incandescent" - captures search traffic.</li>
+            <li><strong>Bilingual content:</strong> Spanish-language content differentiates and reaches Austin's Spanish-speaking homeowners.</li>
+        </ul>
+    </div>
+</section>
+
+<section id="partnerships">
+    <h2>3. Partnership Opportunities</h2>
+    <div class="section-content">
+        <h3>3.1 Landscaping Companies</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Partner with Austin Landscapers</span><div class="opp-badges"><span class="badge badge-high">High Priority</span><span class="badge badge-quick">Quick Win</span></div></div>
+            <div class="opp-details">
+                <p>Landscapers serve the same homeowners but don't offer holiday lighting. Reciprocal referral costs nothing.</p>
+                <dt>Targets</dt>
+                <dd><ul>
+                    <li><strong>Clean Scapes</strong> (<a href="https://cleanscapes.net/" target="_blank">cleanscapes.net</a>) - Largest TX-based commercial landscaper</li>
+                    <li><strong>PS Landscapes</strong> - Commercial: retail, office, industrial</li>
+                    <li><strong>Bioscapes</strong> - Austin residential since 2010</li>
+                </ul></dd>
+                <dt>Approach</dt><dd>Visit 5-10 companies. "You refer lighting clients to me, I refer landscape clients to you." Leave cards + portfolio.</dd>
+                <dt>Cost</dt><dd>$0 (optional 5-10% referral fee)</dd>
+            </div>
+        </div>
+
+        <h3>3.2 Property Management &amp; HOAs</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Become Preferred Vendor for Property Managers</span><div class="opp-badges"><span class="badge badge-high">High Priority</span><span class="badge badge-longterm">3-6 Months</span></div></div>
+            <div class="opp-details">
+                <dt>Target Firms</dt>
+                <dd><ul>
+                    <li><strong>Harrison-Pearson Associates</strong> - 100+ years in Greater Austin</li>
+                    <li><strong>Austin Landmark Property Services (ALPS)</strong> - CRMC certified</li>
+                    <li><strong>RealManage</strong> - HOA maintenance coordinator</li>
+                    <li><strong>RowCal</strong> (<a href="https://www.rowcal.com/austin" target="_blank">rowcal.com/austin</a>) - HOA management</li>
+                </ul></dd>
+                <dt>HOA Approach</dt><dd>Offer "common area holiday lighting package" for entrances, clubhouses, pools. Volume pricing for 100+ home communities.</dd>
+            </div>
+        </div>
+
+        <h3>3.3 Real Estate Agents</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Partner with Austin Realtors</span><div class="opp-badges"><span class="badge badge-medium">Medium Priority</span><span class="badge badge-quick">Quick Win</span></div></div>
+            <div class="opp-details">
+                <dt>Target Firms</dt>
+                <dd><ul>
+                    <li><strong>JBGoodwin REALTORS</strong> (<a href="https://www.jbgoodwin.com/" target="_blank">jbgoodwin.com</a>) - #1 in Austin since 1972</li>
+                    <li><strong>Spyglass Realty</strong> (<a href="https://www.spyglassrealty.com/" target="_blank">spyglassrealty.com</a>)</li>
+                    <li><strong>Bramlett Partners</strong> (<a href="https://bramlettpartners.com/" target="_blank">bramlettpartners.com</a>)</li>
+                    <li><strong>The Heyl Group</strong> (Keller Williams) - $3B+ sales</li>
+                    <li><strong>Austin Luxury Group</strong> (<a href="https://austinluxurygroup.com/" target="_blank">austinluxurygroup.com</a>)</li>
+                </ul></dd>
+                <dt>Offer</dt><dd>"New homeowner holiday lighting consultation" as gift from agent. Referral fee/discount for their clients.</dd>
+            </div>
+        </div>
+
+        <h3>3.4 Wedding &amp; Event Planners</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Join Austin Wedding Vendor Networks</span><div class="opp-badges"><span class="badge badge-medium">Medium Priority</span><span class="badge badge-longterm">3-6 Months</span></div></div>
+            <div class="opp-details">
+                <dt>Targets</dt>
+                <dd><ul>
+                    <li><strong>AWPA</strong> (<a href="https://www.awpaustin.com/vendors" target="_blank">awpaustin.com</a>) - Preferred vendor partnerships</li>
+                    <li><strong>Scarlet Rose Events</strong> (<a href="https://scarletrose.co/austin" target="_blank">scarletrose.co/austin</a>)</li>
+                    <li><strong>Lumina Events</strong> (<a href="https://myluminaevents.com/" target="_blank">myluminaevents.com</a>)</li>
+                </ul></dd>
+                <dt>Venues</dt><dd>Contact managers at Barr Mansion, Camp Lucy, Springdale Station, Villa Antonia, The Allan House, The Prospect House.</dd>
+            </div>
+        </div>
+
+        <h3>3.5 Home Builders</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Partner with Austin Home Builders</span><div class="opp-badges"><span class="badge badge-medium">Medium Priority</span><span class="badge badge-longterm">6-12 Months</span></div></div>
+            <div class="opp-details">
+                <dt>Active Builders</dt>
+                <dd><ul>
+                    <li><strong>Taylor Morrison</strong> - 56 permits; $735K avg; Traviso (Leander)</li>
+                    <li><strong>Lennar</strong> - 61 permits; Devine Lake (Leander)</li>
+                    <li><strong>KB Homes</strong> - 56 permits</li>
+                    <li><strong>DR Horton</strong> - Bar W, Rosenbusch Ranch (Leander)</li>
+                </ul></dd>
+                <dt>Approach</dt><dd>Contact sales offices. Offer to light model homes. Flyers for new homeowner welcome packages.</dd>
+            </div>
+        </div>
+
+        <h3>3.6 Complementary Home Services</h3>
+        <table>
+            <tr><th>Service</th><th>Why Partner</th><th>Approach</th></tr>
+            <tr><td>Roofing / Gutters</td><td>Already on roofs; Trimlight targets this vertical</td><td>Reciprocal referral</td></tr>
+            <tr><td>Electricians</td><td>Need for outlet additions; they get lighting inquiries</td><td>Preferred vendor exchange</td></tr>
+            <tr><td>Pest Control</td><td>Same homeowner base; frequent visits</td><td>Leave cards; referral bonus</td></tr>
+            <tr><td>Window Cleaning</td><td>Seasonal overlap; work at heights</td><td>Cross-referral</td></tr>
+            <tr><td>Pool Service</td><td>Pool lighting upsell; see backyards regularly</td><td>Referral partnership</td></tr>
+        </table>
+
+        <h3>3.7 Austin Chamber of Commerce</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Chamber Membership</span><div class="opp-badges"><span class="badge badge-medium">Medium Priority</span><span class="badge badge-quick">Quick Win</span></div></div>
+            <div class="opp-details">
+                <dt>What</dt><dd><a href="https://www.austinchamber.com/join" target="_blank">Austin Chamber</a> provides networking, directory listing, credibility, business resources.</dd>
+                <dt>Cost</dt><dd>Typically $300-$500/year for small business. See <a href="https://www.austinchamber.com/uploads/general/Austin-Chamber-MembershipGuide_np-2025.pdf" target="_blank">2025 Guide (PDF)</a>.</dd>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="certifications">
+    <h2>4. Certification &amp; Licensing Opportunities</h2>
+    <div class="section-content">
+        <h3>4.1 CLIPA Certification</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">CLIPA Certified Installer</span><div class="opp-badges"><span class="badge badge-high">High Priority</span><span class="badge badge-longterm">2-6 Months</span></div></div>
+            <div class="opp-details">
+                <p>CLIPA is the #1 Christmas Light Training Company in the nation. 40+ years combined experience. Differentiates from unlicensed operators.</p>
+                <dt>What You Get</dt>
+                <dd><ul>
+                    <li>2-day in-person certification (classroom + hands-on)</li>
+                    <li>National installer directory listing</li>
+                    <li>CLIPA University: training videos, templates, estimating tools</li>
+                    <li>CLIPA Estimating App for profitable quotes</li>
+                    <li>Official branding for marketing</li>
+                    <li>Discounted commercial-grade products</li>
+                    <li>NEW: Nationwide pay-per-lead program</li>
+                </ul></dd>
+                <dt>2026 Training (Nearest to Austin)</dt>
+                <dd><ul>
+                    <li><strong>Dallas, TX - Jul 16:</strong> Permanent Lighting Cert (limited) - <a href="https://et850.infusionsoft.com/app/orderForms/Q-Lighting-Training-2025" target="_blank">Register</a></li>
+                    <li><strong>Dallas, TX - Jul 17-18:</strong> Residential Cert - <a href="https://clipa.com/clipa-residential-training-in-dallas-tx/" target="_blank">Info</a></li>
+                    <li><strong>Virtual - Apr 10-11:</strong> Residential Cert (from home)</li>
+                    <li><strong>CLIPA Con - Orlando - Aug 26:</strong> Annual conference</li>
+                </ul></dd>
+                <dt>Cost</dt><dd>Contact: (888) 552-5472 / info@clipa.com. Typically pays for itself within first installs.</dd>
+                <dt>Links</dt><dd><a href="https://clipa.com/" target="_blank">clipa.com</a> | <a href="https://clipau.com/" target="_blank">CLIPA University</a> | <a href="https://clipa.com/training-schedule/" target="_blank">2026 Schedule</a></dd>
+            </div>
+        </div>
+
+        <h3>4.2 OSHA Safety Certification</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">OSHA 10-Hour Construction Safety</span><div class="opp-badges"><span class="badge badge-high">High Priority</span><span class="badge badge-quick">Quick Win</span></div></div>
+            <div class="opp-details">
+                <p>Industry standard for safety competency. Signals professionalism; often required for commercial contracts.</p>
+                <dt>Covers</dt><dd>Fall protection, ladder safety, electrical safety, PPE, hazard recognition.</dd>
+                <dt>Format</dt><dd>100% online, self-paced. Official DOL card (valid for life) mailed within 2 weeks.</dd>
+                <dt>Providers</dt>
+                <dd><ul>
+                    <li><a href="https://www.careersafeonline.com/courses/osha-10-hour/construction" target="_blank">CareerSafe</a> - $59</li>
+                    <li><a href="https://www.oshaeducationcenter.com/osha-10-hour-training-construction/" target="_blank">OSHA Education Center</a> - $59</li>
+                    <li><a href="https://www.oshaoutreachcourses.com/osha-10-hour-construction" target="_blank">OSHA Outreach</a> - $45-$59</li>
+                </ul></dd>
+                <dt>Marketing Value</dt><dd>"OSHA Certified" on website, truck, cards, every listing.</dd>
+            </div>
+        </div>
+
+        <h3>4.3 Texas Electrical License</h3>
+        <div class="info-box">
+            <strong>Good News:</strong> Under Texas law (TDLR), landscapers are exempt from needing an electrician's license for "the installation and maintenance of low-voltage exterior lighting and holiday lighting, excluding any required power source." Standard holiday lighting using existing outlets does not require an electrical license. New circuits/outlets require a licensed electrician.<br>
+            <em>Source: <a href="https://www.tdlr.texas.gov/electricians/exemptions.htm" target="_blank">TDLR Exemptions</a></em>
+        </div>
+
+        <h3>4.4 BBB Accreditation</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Better Business Bureau</span><div class="opp-badges"><span class="badge badge-medium">Medium Priority</span><span class="badge badge-quick">Quick Win</span></div></div>
+            <div class="opp-details">
+                <dt>Cost</dt><dd>$300-$500/year for micro-business. Apply: <a href="https://www.bbb.org/get-accredited" target="_blank">bbb.org/get-accredited</a></dd>
+                <dt>Note</dt><dd>No longer dominant trust signal. Google reviews matter more in 2026. Still valued by 50+ demographic and commercial clients.</dd>
+            </div>
+        </div>
+
+        <h3>4.5 HomeAdvisor Badge Status</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Elite Service Pro &amp; Top Rated</span><div class="opp-badges"><span class="badge badge-medium">Medium Priority</span></div></div>
+            <div class="opp-details">
+                <dt>Current</dt><dd>1 review at 5.0. Need 4 more for Elite Service Pro.</dd>
+                <dt>Elite Requirements</dt><dd>Min 5 reviews, 5-star, 4.5+ overall, no complaints in 6 months.</dd>
+                <dt>Action</dt><dd>Ask next 4 clients for HomeAdvisor reviews. At 5 reviews with 5.0, you qualify immediately.</dd>
+            </div>
+        </div>
+
+        <h3>4.6 Insurance &amp; Bonding</h3>
+        <ul>
+            <li><strong>General liability:</strong> Market "Fully Insured" on all materials. Provide COIs proactively.</li>
+            <li><strong>Workers' comp:</strong> Required in TX if you have employees (seasonal crews).</li>
+            <li><strong>Surety bond:</strong> Optional but some commercial clients require it.</li>
+        </ul>
+
+        <h3>4.7 Small Business Certifications</h3>
+        <div class="warning-box">
+            <strong>Texas HUB Update (Dec 2025):</strong> HUB program restructured. Now only for service-disabled veterans (20%+ disability) as "VetHUB." 15,000+ businesses lost certification. Unless Dan qualifies as SDV, HUB is unavailable.<br>
+            <strong>SBA resources:</strong> Still available at <a href="https://www.sba.gov/" target="_blank">sba.gov</a>. SCORE Austin offers free mentoring.
+        </div>
+    </div>
+</section>
+
+<section id="platforms">
+    <h2>5. Application &amp; Platform Opportunities</h2>
+    <div class="section-content">
+        <h3>5.1 Home Service Platforms</h3>
+        <table>
+            <tr><th>Platform</th><th>Signup</th><th>Lead Cost</th><th>Details</th><th>Priority</th></tr>
+            <tr><td><strong>Google Business</strong></td><td>Free</td><td>Free</td><td>Most important listing. <a href="https://business.google.com/" target="_blank">Setup</a></td><td><span class="badge badge-high">High</span></td></tr>
+            <tr><td><strong>Yelp</strong></td><td>Free</td><td>Free or paid</td><td><a href="https://business.yelp.com/" target="_blank">Claim listing</a></td><td><span class="badge badge-high">High</span></td></tr>
+            <tr><td><strong>Thumbtack</strong></td><td>Free</td><td>Per lead</td><td><a href="https://www.thumbtack.com/" target="_blank">thumbtack.com</a></td><td><span class="badge badge-high">High</span></td></tr>
+            <tr><td><strong>Angi</strong></td><td>Free</td><td>$15-$120+</td><td>Improved lead quality Jan 2025. <a href="https://signup.angi.com/pro" target="_blank">Sign up</a></td><td><span class="badge badge-high">High</span></td></tr>
+            <tr><td><strong>HomeAdvisor</strong></td><td>$288/yr</td><td>$15-$100</td><td>Have 1 review. Get to 5 for Elite.</td><td><span class="badge badge-medium">Medium</span></td></tr>
+            <tr><td><strong>Nextdoor</strong></td><td>Free</td><td>Free-$75+</td><td>77% homeowners. <a href="https://business.nextdoor.com/" target="_blank">Sign up</a></td><td><span class="badge badge-high">High</span></td></tr>
+            <tr><td><strong>Houzz</strong></td><td>Free</td><td>$149-$249/mo Pro</td><td><a href="https://www.houzz.com/" target="_blank">houzz.com</a></td><td><span class="badge badge-low">Low</span></td></tr>
+            <tr><td><strong>Porch</strong></td><td>Free</td><td>Varies</td><td><a href="https://porch.com/" target="_blank">porch.com</a></td><td><span class="badge badge-low">Low</span></td></tr>
+        </table>
+        <div class="action-box">
+            <strong>Do This Week (all free):</strong>
+            <ol><li>Google Business Profile</li><li>Yelp business page</li><li>Nextdoor business page</li><li>Thumbtack pro profile</li><li>Update Angi profile</li></ol>
+        </div>
+
+        <h3>5.2 CLIPA Lead Network</h3>
+        <p>New nationwide lead program for certified installers. Pay per lead, no upfront commitment. <a href="https://form.jotform.com/250376155824459" target="_blank">Join Network</a></p>
+
+        <h3>5.3 Government Contracts</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">City of Austin &amp; Travis County</span><div class="opp-badges"><span class="badge badge-low">Low Priority</span><span class="badge badge-longterm">Long-Term</span></div></div>
+            <div class="opp-details">
+                <dt>Where to Find</dt>
+                <dd><ul>
+                    <li><a href="https://www.austintexas.gov/page/solicitations" target="_blank">City of Austin Solicitations</a></li>
+                    <li><a href="https://financeonline.austintexas.gov/afo/account_services/solicitation/search.cfm" target="_blank">Austin Finance Online</a></li>
+                    <li><a href="https://trimlight.com/municipal" target="_blank">Trimlight Municipal</a> (if dealer)</li>
+                    <li><a href="https://texasbids.net/" target="_blank">Texas Bids</a></li>
+                </ul></dd>
+            </div>
+        </div>
+
+        <h3>5.4 Franchise vs. Independent</h3>
+        <div class="opp-card">
+            <div class="opp-header"><span class="opp-title">Stay Independent (Recommended)</span><div class="opp-badges"><span class="badge badge-low">Low Priority</span></div></div>
+            <div class="opp-details">
+                <dt>Independent Advantages</dt>
+                <dd><ul>
+                    <li>Net margins: 45-60% (vs. 35-50% franchise after royalties)</li>
+                    <li>100% revenue retention (no 5-8% royalty)</li>
+                    <li>Independents capture ~55% of residential holiday market</li>
+                </ul></dd>
+                <dt>Franchise Options (If Desired)</dt>
+                <dd><ul>
+                    <li><strong>Christmas Decor</strong> (<a href="https://www.christmasdecor.net/franchise/" target="_blank">site</a>) - $19,550-$62,250; $9,900 fee; 5% royalty</li>
+                    <li><strong>Lighting Pros</strong> (<a href="https://lightingprosfranchise.com/" target="_blank">site</a>)</li>
+                    <li><strong>Five Star Holiday Decor</strong> (<a href="https://www.fivestarholidaydecor.com/franchise-opportunities/" target="_blank">site</a>)</li>
+                </ul></dd>
+                <dt>Recommendation</dt><dd>With 10 years experience, invest in CLIPA + GBP + Trimlight instead. Better ROI than franchise royalties.</dd>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="trends">
+    <h2>6. Industry Trends &amp; Technology</h2>
+    <div class="section-content">
+        <h3>6.1 Permanent Lighting - Dealer Comparison</h3>
+        <p>Permanent LED lighting is the biggest growth trend. Install once, use year-round. App-controlled, color-changing.</p>
+        <table>
+            <tr><th>Feature</th><th>Trimlight</th><th>JellyFish</th><th>EverLights</th></tr>
+            <tr><td><strong>Dealer Cost</strong></td><td>$5K-$10K (material credit) + $499 demo</td><td>$20,000</td><td>Minimal; contact for details</td></tr>
+            <tr><td><strong>Ongoing Fees</strong></td><td>None. No royalties.</td><td>Varies</td><td>None reported</td></tr>
+            <tr><td><strong>Territory</strong></td><td>Exclusive by zip. $60/zip one-time.</td><td>Exclusive available</td><td>Wide national network</td></tr>
+            <tr><td><strong>Training</strong></td><td>2-day in Salt Lake City</td><td>Onsite</td><td>Training + support</td></tr>
+            <tr><td><strong>Quota</strong></td><td>400 ft/zip/year</td><td>Not listed</td><td>Not listed</td></tr>
+            <tr><td><strong>App</strong></td><td>Firework, Snowflake; millions of colors</td><td>Smart home leader</td><td>Smartphone control</td></tr>
+            <tr><td><strong>Apply</strong></td><td><a href="https://trimlight.com/become-a-dealer/apply" target="_blank">Apply</a></td><td><a href="https://www.jellyfishlighting.com/" target="_blank">Contact</a></td><td><a href="https://myeverlights.com/become-a-dealer/" target="_blank">Apply</a></td></tr>
+        </table>
+        <div class="highlight-box">
+            <strong>Recommendation:</strong> Trimlight offers the best value for a small independent installer. Entry cost is a material credit (not a fee), no royalties, exclusive territory. Trimlight specifically targets businesses that "already install Christmas lighting." Check 78704 zip code availability before applying.
+        </div>
+
+        <h3>6.2 Smart Home Integration</h3>
+        <p>Austin is a top tech hub. Smart home automation is expected. Offer WiFi controllers, Alexa/Google Home/HomeKit, app control, voice-controlled patio lights.</p>
+
+        <h3>6.3 Sustainability</h3>
+        <ul>
+            <li><strong>LED:</strong> Already using commercial-grade LED. Market: "100% LED - Save Up to 80% on Energy."</li>
+            <li><strong>Austin Energy rebates:</strong> Up to $370/kW saved. 30% bonus for small business. <a href="https://savings.austinenergy.com/" target="_blank">savings.austinenergy.com</a></li>
+            <li><strong>Dark sky compliance:</strong> Austin follows IES-IDA Model Lighting Ordinance. <a href="https://darkskytexas.org/texas-outdoor-lighting-codes-regulations/" target="_blank">DarkSky Texas</a></li>
+        </ul>
+
+        <h3>6.4 Competition Snapshot</h3>
+        <table>
+            <tr><th>Competitor</th><th>Notes</th></tr>
+            <tr><td><a href="https://www.atxholidaylighting.com/" target="_blank">Premier Austin Holiday Lighting</a></td><td>Established, strong web presence</td></tr>
+            <tr><td><a href="https://www.warriorsforlight.com/" target="_blank">Warriors for Light</a></td><td>"#1 in Austin" branding; affordable + insured</td></tr>
+            <tr><td><a href="https://www.elitelightingdesigns.com/" target="_blank">Elite Lighting Designs</a></td><td>Commercial + holiday; Austin &amp; San Antonio</td></tr>
+            <tr><td><a href="https://theholidaylightingco.com/" target="_blank">The Holiday Lighting Co.</a></td><td>Dedicated holiday lighting</td></tr>
+            <tr><td><a href="https://theperfectlight.com/area/austin/" target="_blank">The Perfect Light</a></td><td>Landscape + holiday; Austin office</td></tr>
+            <tr><td>Lights Up Austin</td><td>New entrant (Jun 2025); well-funded startup</td></tr>
+        </table>
+        <div class="warning-box"><strong>Competitive Threat:</strong> Lights Up expanded into Austin June 2025 with strong digital marketing. Illumination's lack of online presence means customers find competitors instead. The digital visibility gap is critical to close.</div>
+    </div>
+</section>
+
+<section id="calendar">
+    <h2>7. 90-Day Action Plan</h2>
+    <div class="section-content">
+        <h3>Week 1-2: Digital Foundation ($0)</h3>
+        <div class="action-box">
+            <ol>
+                <li><strong>Google Business Profile</strong> - Free, 30 min. <a href="https://business.google.com/" target="_blank">business.google.com</a></li>
+                <li><strong>Yelp</strong> - Free, 15 min. <a href="https://business.yelp.com/" target="_blank">business.yelp.com</a></li>
+                <li><strong>Nextdoor</strong> - Free, 15 min. <a href="https://business.nextdoor.com/" target="_blank">business.nextdoor.com</a></li>
+                <li><strong>Thumbtack</strong> - Free, 20 min. <a href="https://www.thumbtack.com/" target="_blank">thumbtack.com</a></li>
+                <li><strong>Angi</strong> - Update profile. <a href="https://signup.angi.com/pro" target="_blank">signup.angi.com/pro</a></li>
+                <li><strong>Facebook + Instagram</strong> business pages - Free, 20 min each.</li>
+            </ol>
+        </div>
+        <h3>Week 3-4: Reviews &amp; Content ($0-$59)</h3>
+        <ol>
+            <li>Contact 20+ past clients for Google reviews</li>
+            <li>Create QR code review cards</li>
+            <li>Upload 10-20 project photos across platforms</li>
+            <li>Complete OSHA 10-Hour ($45-$59 online)</li>
+            <li>Update Squarespace SEO</li>
+        </ol>
+        <h3>Month 2: Partnerships &amp; Certs ($0-$500)</h3>
+        <ol>
+            <li>Visit 5-10 landscaping companies for referral agreements</li>
+            <li>Contact 3-5 property management firms</li>
+            <li>Apply for BBB ($300-$500/yr)</li>
+            <li>Register for CLIPA Dallas training (Jul 2026)</li>
+            <li>Research Trimlight territory for 78704</li>
+        </ol>
+        <h3>Month 3: Growth ($0-$5,500)</h3>
+        <ol>
+            <li>Apply for Trimlight dealership ($5K-$10.5K material credit)</li>
+            <li>Attend CLIPA training</li>
+            <li>Develop year-round service menu</li>
+            <li>Contact AWPA + wedding planners</li>
+            <li>Set up seasonal ad campaigns (Aug start)</li>
+        </ol>
+        <h3>Investment Summary</h3>
+        <table>
+            <tr><th>Investment</th><th>Cost</th><th>ROI</th><th>Timeline</th></tr>
+            <tr><td>Google Business Profile</td><td>$0</td><td>Highest - visible in search</td><td>Same day</td></tr>
+            <tr><td>Free listings</td><td>$0</td><td>High - multiple lead channels</td><td>1 week</td></tr>
+            <tr><td>OSHA 10-Hour</td><td>$45-$59</td><td>High - commercial credibility</td><td>2 weeks</td></tr>
+            <tr><td>BBB</td><td>$300-$500/yr</td><td>Medium - trust signal</td><td>1-2 months</td></tr>
+            <tr><td>CLIPA certification</td><td>Contact</td><td>High - differentiation + tools</td><td>2-6 months</td></tr>
+            <tr><td>Trimlight dealership</td><td>$5K-$10.5K</td><td>Highest long-term</td><td>3-6 months</td></tr>
+            <tr><td>Seasonal ads</td><td>$500-$2K</td><td>Medium-High</td><td>Aug-Nov</td></tr>
+        </table>
+    </div>
+</section>
+
+<section id="sources">
+    <h2>8. Sources &amp; References</h2>
+    <div class="section-content sources-section">
+        <h3>Industry &amp; Market</h3>
+        <ol>
+            <li><a href="https://www.lightnowblog.com/2024/05/the-fast-growing-business-of-holiday-lights-installation/" target="_blank">Holiday Lights Installation Growth - LightNOW</a></li>
+            <li><a href="https://www.strandr.com/blog/christmas-light-installation-pricing-2025-market-analysis" target="_blank">Pricing Guide 2025 - Strandr</a></li>
+            <li><a href="https://inboundlever.com/complete-guide-to-marketing-your-permanent-holiday-lighting-business/" target="_blank">Marketing Permanent Lighting - Inbound Lever</a></li>
+            <li><a href="https://www.cbs42.com/business/press-releases/ein-presswire/826351131/lights-up-expands-to-austin-turnkey-christmas-light-installation-now-available-for-austin-residences-and-businesses/" target="_blank">Lights Up Austin - CBS42</a></li>
+        </ol>
+        <h3>Austin Market</h3>
+        <ol start="5">
+            <li><a href="https://www.kut.org/austin/2025-12-16/austin-tx-housing-market-home-prices-2025" target="_blank">Austin Housing 2025 - KUT</a></li>
+            <li><a href="https://www.movetoaustin.org/blog/new-developments-coming-to-austin-tx/" target="_blank">New Developments - Move to Austin</a></li>
+            <li><a href="https://www.austintexas.gov/news/42-million-approved-funding-affordable-housing-developments-across-austin" target="_blank">$42M Housing - City of Austin</a></li>
+            <li><a href="https://www.austin-suburbs.com/blog/austin-home-builders-ranked-2025" target="_blank">Builders Ranked - Austin Suburbs</a></li>
+        </ol>
+        <h3>Communities</h3>
+        <ol start="9">
+            <li><a href="https://www.homecity.com/blog/master-planned-communities-austin/" target="_blank">Master Planned - HomeCity</a></li>
+            <li><a href="https://www.austinrealestatehomesblog.com/homes/georgetown/georgetown-master-planned-communities/" target="_blank">Georgetown Communities</a></li>
+            <li><a href="https://www.austinrealestatehomesblog.com/homes/round-rock-pflugerville-master-planned-communities/" target="_blank">Round Rock Communities</a></li>
+        </ol>
+        <h3>Certifications</h3>
+        <ol start="12">
+            <li><a href="https://clipa.com/" target="_blank">CLIPA</a> | <a href="https://clipau.com/" target="_blank">CLIPA University</a> | <a href="https://clipa.com/training-schedule/" target="_blank">2026 Schedule</a></li>
+            <li><a href="https://www.tdlr.texas.gov/electricians/exemptions.htm" target="_blank">TDLR Exemptions</a></li>
+            <li><a href="https://www.osha.gov/stop-falls/plan-provide-train" target="_blank">OSHA Fall Prevention</a></li>
+            <li><a href="https://www.careersafeonline.com/courses/osha-10-hour/construction" target="_blank">CareerSafe OSHA 10</a></li>
+        </ol>
+        <h3>Permanent Lighting</h3>
+        <ol start="16">
+            <li><a href="https://trimlight.com/become-a-dealer" target="_blank">Trimlight Dealer</a></li>
+            <li><a href="https://www.jellyfishlighting.com/" target="_blank">JellyFish Lighting</a></li>
+            <li><a href="https://myeverlights.com/become-a-dealer/" target="_blank">EverLights Dealer</a></li>
+            <li><a href="https://ledecorativelighting.com/jellyfish-vs-trimlights-uncovered-which-permanent-lighting-solution-shines-brighter/" target="_blank">JellyFish vs Trimlight</a></li>
+        </ol>
+        <h3>Platforms &amp; Marketing</h3>
+        <ol start="20">
+            <li><a href="https://business.google.com/" target="_blank">Google Business Profile</a></li>
+            <li><a href="https://business.yelp.com/" target="_blank">Yelp for Business</a></li>
+            <li><a href="https://business.nextdoor.com/" target="_blank">Nextdoor for Business</a></li>
+            <li><a href="https://signup.angi.com/pro" target="_blank">Angi Pro</a></li>
+            <li><a href="https://www.thumbtack.com/" target="_blank">Thumbtack</a></li>
+            <li><a href="https://www.bbb.org/get-accredited" target="_blank">BBB Accreditation</a></li>
+            <li><a href="https://www.indispensablemarketing.com/bgoogle-business-profile-marketing-tips-for-christmas-light-contractors" target="_blank">GBP for Christmas Light Contractors</a></li>
+            <li><a href="https://christmaslights.io/blog/b/when-do-i-start-advertising-for-my-christmas-light-installation-business" target="_blank">When to Advertise</a></li>
+            <li><a href="https://www.taradel.com/blog/how-much-do-nextdoor-ads-cost-in-2025" target="_blank">Nextdoor Ads Cost</a></li>
+            <li><a href="https://strollaustin.com/" target="_blank">Stroll Austin</a></li>
+            <li><a href="https://www.austinchamber.com/join" target="_blank">Austin Chamber</a></li>
+        </ol>
+        <h3>Neighborhoods (78704)</h3>
+        <ol start="31">
+            <li><a href="https://zna.org/" target="_blank">Zilker NA</a></li>
+            <li><a href="https://www.bouldincreek.org/" target="_blank">Bouldin Creek NA</a></li>
+            <li><a href="https://www.srccatx.org/" target="_blank">South River City Citizens</a></li>
+            <li><a href="https://bartonhills.org/" target="_blank">Barton Hills NA</a></li>
+        </ol>
+        <h3>Energy &amp; Regulations</h3>
+        <ol start="35">
+            <li><a href="https://savings.austinenergy.com/" target="_blank">Austin Energy Rebates</a></li>
+            <li><a href="https://darkskytexas.org/texas-outdoor-lighting-codes-regulations/" target="_blank">DarkSky Texas</a></li>
+            <li><a href="https://www.totalhometx.com/blog/austin-tx-top-home-automation-trends" target="_blank">Austin Home Automation</a></li>
+        </ol>
+        <h3>Business Structure</h3>
+        <ol start="38">
+            <li><a href="https://www.christmasdecor.net/franchise/" target="_blank">Christmas Decor Franchise</a></li>
+            <li><a href="https://comptroller.texas.gov/about/media-center/news/20251028-historically-underutilized-business-certification-process-under-review-by-acting-texas-comptroller-1761686774358" target="_blank">HUB Suspended - TX Comptroller</a></li>
+            <li><a href="https://www.austintexas.gov/page/solicitations" target="_blank">City of Austin Solicitations</a></li>
+            <li><a href="https://www.awpaustin.com/vendors" target="_blank">AWPA Vendors</a></li>
+        </ol>
+    </div>
+</section>
+
+<footer style="text-align: center; padding: 2rem; color: #666; font-size: 0.85rem;">
+    <p>Prepared for Illumination Holiday Lighting, LLC | Austin, TX 78704</p>
+    <p>Research Date: February 8, 2026 | 41 cited sources</p>
+    <p>This report contains publicly available information from web research. Pricing and program details may change. Verify before making business decisions.</p>
+</footer>
+
+</div>
+</body>
+</html>
