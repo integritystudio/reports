@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texas Realty Partners, LLC - Comprehensive Research Report</title>
+    <style>
+:root {
+    --primary: #1a365d;
+    --secondary: #2b6cb0;
+    --accent: #4299e1;
+    --light: #f7fafc;
+    --dark: #1a202c;
+    --border: #e2e8f0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: var(--dark); background: var(--light); }
+.container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 2rem; margin-bottom: 2rem; }
+header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+header .subtitle { font-size: 1.2rem; opacity: 0.9; }
+header .meta { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
+.executive-summary { background: white; border-left: 4px solid var(--accent); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+section { background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden; }
+section h2 { background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem; }
+section h3 { color: var(--secondary); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+.section-content { padding: 1.5rem; }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--light); font-weight: 600; color: var(--primary); }
+tr:hover { background: #f7fafc; }
+ul, ol { margin: 1rem 0; padding-left: 1.5rem; }
+li { margin-bottom: 0.5rem; }
+.highlight-box { background: linear-gradient(135deg, #ebf8ff, #bee3f8); border-radius: 8px; padding: 1rem 1.5rem; margin: 1rem 0; }
+.warning-box { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+.info-box { background: #eff6ff; border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+blockquote { background: #f7fafc; border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; font-style: italic; color: #555; }
+.source { font-size: 0.85rem; color: #666; font-style: italic; }
+.badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
+.badge-success { background: #c6f6d5; color: #22543d; }
+.badge-warning { background: #fefcbf; color: #744210; }
+.badge-danger { background: #fed7d7; color: #9b2c2c; }
+.badge-info { background: #bee3f8; color: #2a4365; }
+.rating { color: #ecc94b; font-size: 1.2rem; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.contact-item { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; }
+.contact-item .label { font-size: 0.85rem; color: #666; margin-bottom: 0.25rem; }
+.contact-item .value { font-weight: 600; color: var(--primary); }
+.verification-table td:nth-child(2), .verification-table td:nth-child(3), .verification-table td:nth-child(4) { text-align: center; }
+footer { text-align: center; padding: 2rem; color: #666; font-size: 0.9rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+a { color: var(--secondary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+details { margin: 1rem 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+details summary { padding: 0.75rem 1rem; background: var(--light); cursor: pointer; font-weight: 600; color: var(--primary); list-style: none; display: flex; align-items: center; gap: 0.5rem; user-select: none; }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: '\25B6'; font-size: 0.7rem; transition: transform 0.2s ease; flex-shrink: 0; }
+details[open] summary::before { transform: rotate(90deg); }
+details summary:hover { background: #edf2f7; }
+details summary .detail-count { font-weight: 400; font-size: 0.85rem; color: #666; margin-left: auto; }
+details .details-content { padding: 1rem 1.5rem; }
+details details { margin: 0.75rem 0; border-color: #edf2f7; }
+details details summary { font-size: 0.95rem; padding: 0.6rem 1rem; }
+@media print {
+    body { background: white; }
+    .container { max-width: 100%; }
+    section { box-shadow: none; border: 1px solid #ddd; }
+    details { border: none; }
+    details, details[open] { display: block; }
+    details > summary { display: none; }
+    details .details-content { padding: 0; }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Texas Realty Partners, LLC</h1>
+            <div class="subtitle">Comprehensive Market Analysis Report</div>
+            <div class="meta">
+                <strong>Report Date:</strong> February 10, 2026 |
+                <strong>Primary Source:</strong> <a href="https://trpaustin.com/" style="color: white;">trpaustin.com</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Executive Summary -->
+        <div id="executive-summary" class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>Texas Realty Partners, LLC (TRP) is a boutique full-service real estate brokerage founded in 2005 by Karen G. Skelton (Princeton AB, UT MBA) and headquartered at 248 Addie Roy Rd., Suite B-302 in Austin's Westlake corridor (78746). TRP serves the Austin-San Antonio corridor with an unusually broad service mix spanning residential brokerage, commercial leasing, investment analysis, 1031 exchanges, due diligence/business valuation, development entitlements, and expert witness services. Since founding, TRP has completed $40MM+ in sales, $25MM+ in structured financing, and $20MM+ in leases. The firm operates in a $240 billion US real estate brokerage industry currently navigating post-NAR settlement commission restructuring, rising inventory levels, and rapid consolidation (Compass-Anywhere merger). The Austin MSA (pop. 2.55M, median HHI $99,897) represents a $16.9 billion annual residential market with an addressable market of approximately 549,000 owner-occupied homes. TRP's key competitive advantages are deep principal experience (75+ combined years), rare due diligence/valuation bundling, and development entitlement expertise. Critical gaps include near-zero online reviews, minimal social media presence, and no visibility on major consumer platforms.</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <nav id="toc" style="background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden;">
+            <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Table of Contents</h2>
+            <div style="padding: 1.5rem;">
+                <ol style="margin: 0; padding-left: 1.5rem;">
+                    <li><a href="#company-overview">Company Overview</a></li>
+                    <li><a href="#contact-info">Contact Information</a></li>
+                    <li><a href="#business-status">Business Status &amp; Registration</a></li>
+                    <li><a href="#personnel">Key Personnel</a></li>
+                    <li><a href="#reviews">Reviews &amp; Ratings</a></li>
+                    <li><a href="#financial">Financial Information</a></li>
+                    <li><a href="#market-data">Industry Market Data</a></li>
+                    <li><a href="#competitive">Competitive Analysis</a></li>
+                    <li><a href="#online-presence">Online Presence</a></li>
+                    <li><a href="#verification">Data Verification Summary</a></li>
+                    <li><a href="#conclusions">Conclusions &amp; Recommendations</a></li>
+                    <li><a href="#sources">Sources &amp; Citations</a></li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- 1. Company Overview -->
+        <section id="company-overview">
+            <h2>1. Company Overview</h2>
+            <div class="section-content">
+                <table>
+                    <tr><th>Attribute</th><th>Detail</th></tr>
+                    <tr><td>Legal Name</td><td>Texas Realty Partners, LLC (TRPLLC)</td></tr>
+                    <tr><td>Tagline</td><td>"Local Real Estate Experts for Institutions &amp; Individuals"</td></tr>
+                    <tr><td>Type</td><td>Full-service boutique real estate brokerage</td></tr>
+                    <tr><td>Founded</td><td>2005</td></tr>
+                    <tr><td>Founder</td><td>Karen G. Skelton</td></tr>
+                    <tr><td>Headquarters</td><td>248 Addie Roy Rd., Suite B-302, Austin, TX 78746</td></tr>
+                    <tr><td>Service Area</td><td>Austin-San Antonio corridor, Central Texas (statewide capability)</td></tr>
+                    <tr><td>Employees</td><td>&lt; 25 (<a href="https://www.zoominfo.com/c/texas-realty-partners-llc/353880789">ZoomInfo</a>)</td></tr>
+                    <tr><td>Revenue</td><td>&lt; $5 million (<a href="https://www.zoominfo.com/c/texas-realty-partners-llc/353880789">ZoomInfo</a>)</td></tr>
+                    <tr><td>Unlock MLS Office ID</td><td>2065</td></tr>
+                    <tr><td>Websites</td><td>trpaustin.com, txrlty.com, lorenk.com</td></tr>
+                </table>
+
+                <h3>Services Offered</h3>
+                <ul>
+                    <li><strong>Commercial Investment Analysis</strong> &ndash; Buyer/seller representation for commercial RE, land, multi-family, industrial</li>
+                    <li><strong>Commercial Lease Services</strong> &ndash; Tenant and landlord representation, sublease solutions</li>
+                    <li><strong>Commercial Development Services</strong> &ndash; Entitlements, permitting, zoning assessment, construction oversight</li>
+                    <li><strong>Residential Brokerage</strong> &ndash; Buy/sell representation throughout Central Texas</li>
+                    <li><strong>Site Selection &amp; Market Analysis</strong> &ndash; Demographic data, optimal location strategy</li>
+                    <li><strong>Due Diligence &amp; Business Valuation</strong> &ndash; Land development code, watershed, engineering review</li>
+                    <li><strong>1031-Exchange Services</strong> &ndash; Like-kind property identification within 180-day window</li>
+                    <li><strong>Build to Suit</strong> &ndash; Custom development for tenants/buyers</li>
+                    <li><strong>Trial Preparation &amp; Expert Witness</strong> &ndash; Deed research, easements, construction defect cases</li>
+                    <li><strong>Broker Opinion of Price</strong> &ndash; Market analysis for all property types</li>
+                    <li><strong>Land Services</strong> &ndash; 100+ acres of prime Austin inventory</li>
+                </ul>
+
+                <h3>Track Record (Since 2005)</h3>
+                <div class="highlight-box">
+                    <strong>$40MM+</strong> in completed sales | <strong>$25MM+</strong> in structured financing | <strong>$20MM+</strong> in leases
+                </div>
+
+                <h3>Notable Projects</h3>
+                <ul>
+                    <li><strong>Pulte Homes / Loyola Tract:</strong> 23-acre single-family tract sold for 123-unit development (US 183)</li>
+                    <li><strong>Blackburn Group:</strong> 30+ acre sale for apartment construction (US 183/Loyola Lane)</li>
+                    <li><strong>La Costa Verde, Port Aransas:</strong> 20-acre beachfront condo/mixed-use development</li>
+                    <li><strong>Bee Cave (Under Review):</strong> Entitlements for 18,000 SF and 50,000 SF office at 620/US 71</li>
+                </ul>
+                <p class="source">Source: <a href="https://trpaustin.com/developments/">trpaustin.com/developments</a>, <a href="https://trpaustin.com/la-costa-verde/">trpaustin.com/la-costa-verde</a></p>
+            </div>
+        </section>
+
+        <!-- 2. Contact Information -->
+        <section id="contact-info">
+            <h2>2. Contact Information</h2>
+            <div class="section-content">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="label">Office Phone</div>
+                        <div class="value">(512) 651-7000</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Email</div>
+                        <div class="value">info@trpaustin.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Website</div>
+                        <div class="value"><a href="https://trpaustin.com">trpaustin.com</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Address</div>
+                        <div class="value">248 Addie Roy Rd., B-302<br>Austin, TX 78746</div>
+                    </div>
+                </div>
+
+                <h3>Individual Contacts</h3>
+                <table>
+                    <tr><th>Name</th><th>Role</th><th>Direct Phone</th><th>Email</th></tr>
+                    <tr><td>Karen G. Skelton</td><td>Broker / President</td><td>(512) 656-9599</td><td>karen@trpaustin.com</td></tr>
+                    <tr><td>E. Loren Kirkpatrick</td><td>Associate Broker</td><td>(512) 656-8521</td><td>loren@trpaustin.com</td></tr>
+                    <tr><td>Jamison Stewart*</td><td>Sales Agent</td><td>(512) 431-0434</td><td>&mdash;</td></tr>
+                </table>
+                <p class="source">*Note: Stewart's LinkedIn now lists DEN Property Group; may have departed TRP.</p>
+
+                <h3>Office Location Analysis</h3>
+                <p>The office is located in the <strong>Rob Roy Office Park</strong> (R R On The Creek Condominiums), a professional office condo complex developed in 2007 by JTM Development. The complex sits on 8 acres with panoramic views of the Texas Hill Country and Barton Creek. The 78746 zip code (Westlake) is one of Austin's most affluent areas, positioning TRP near high-net-worth residential and commercial clients.</p>
+                <p class="source">Source: <a href="https://www.loopnet.com/Listing/248-Addie-Roy-Rd-Austin-TX/29648846/">LoopNet</a>, <a href="http://www.robroyoffice.com/">Rob Roy Office Park</a></p>
+            </div>
+        </section>
+
+        <!-- 3. Business Status -->
+        <section id="business-status">
+            <h2>3. Business Status &amp; Registration</h2>
+            <div class="section-content">
+                <table>
+                    <tr><th>Item</th><th>Status</th><th>Detail</th></tr>
+                    <tr><td>Texas LLC Filing</td><td><span class="badge badge-success">Active</span></td><td>Texas Realty Partners, LLC &ndash; filed with TX Secretary of State</td></tr>
+                    <tr><td>TX Comptroller</td><td><span class="badge badge-success">Active</span></td><td>Franchise tax filing in good standing</td></tr>
+                    <tr><td>TREC Broker License (Skelton)</td><td><span class="badge badge-success">Active</span></td><td>Licensed since 1992; Karen Goetting Skelton</td></tr>
+                    <tr><td>TREC Broker License (Kirkpatrick)</td><td><span class="badge badge-success">Active</span></td><td>TREC #551885</td></tr>
+                    <tr><td>TREC Sales Agent (Stewart)</td><td><span class="badge badge-success">Active</span></td><td>TREC #617487, issued Dec 26, 2011</td></tr>
+                    <tr><td>NMLS Loan Originator (Kirkpatrick)</td><td><span class="badge badge-success">Active</span></td><td>NMLS #2111011 (New American Funding)</td></tr>
+                    <tr><td>AR Broker License (Kirkpatrick)</td><td><span class="badge badge-success">Active</span></td><td>PB00096325 (Arkansas)</td></tr>
+                    <tr><td>BBB Accreditation</td><td><span class="badge badge-danger">Not Found</span></td><td>No BBB profile exists for Texas Realty Partners</td></tr>
+                    <tr><td>La Costa Verde LP</td><td><span class="badge badge-info">Related Entity</span></td><td>La Costa Verde Land Development Partners, LP &ndash; same address (248 Addie Roy Rd Ste 302)</td></tr>
+                </table>
+                <p class="source">Sources: <a href="https://www.trec.texas.gov/apps/license-holder-search/">TREC License Search</a>, <a href="https://www.har.com/karen-goetting-skelton/trec_QpRHdJlD1ho=">HAR.com</a>, <a href="https://nmlsconsumeraccess.org/">NMLS Consumer Access</a>, <a href="https://opengovus.com/texas-taxpayer/32051088170">OpenGov TX</a></p>
+            </div>
+        </section>
+
+        <!-- 4. Key Personnel -->
+        <section id="personnel">
+            <h2>4. Key Personnel</h2>
+            <div class="section-content">
+                <h3>Karen G. Skelton, MBA &mdash; Broker / President / Owner</h3>
+                <table>
+                    <tr><th>Attribute</th><th>Detail</th></tr>
+                    <tr><td>Education</td><td>AB, Romance Languages &amp; Literatures, Princeton University (1979); MBA, University of Texas at Austin (1987)</td></tr>
+                    <tr><td>Licenses</td><td>Licensed Texas Real Estate Broker (since 1992)</td></tr>
+                    <tr><td>Experience</td><td>45+ years in commercial real estate</td></tr>
+                    <tr><td>Affiliations</td><td>NAR, TAR, ABOR, CCIM Candidate</td></tr>
+                </table>
+                <p><strong>Career Highlights:</strong></p>
+                <ul>
+                    <li>Began career redeveloping a historic building in downtown San Antonio</li>
+                    <li>One of the first bank officers in charge of real estate disposition at Texas Commerce Bank (now JP Morgan Chase)</li>
+                    <li>Managed Bonnet Resources "bad bank" portfolio: $150MM in office, multifamily, retail, industrial, and land assets</li>
+                    <li>Statewide responsibility for $200MM in ORE packages at Bank One, N.A.</li>
+                    <li>Founded Skelton Asset Advisors and Skelton Auction Advisors (consulting to FDIC, RTC, regional banks)</li>
+                    <li>Founded Texas Realty Partners, LLC in 2005</li>
+                </ul>
+                <blockquote>"Karen Skelton is instrumental in navigating a complex negotiation with Austin Water and the City of Austin and a national home builder to upgrade infrastructure and complete a zoning change on 55 acres, that unlocked tremendous value for the property owners."</blockquote>
+
+                <h3>E. Loren Kirkpatrick, MBA &mdash; Associate Broker</h3>
+                <table>
+                    <tr><th>Attribute</th><th>Detail</th></tr>
+                    <tr><td>Education</td><td>BBA Finance &amp; Real Estate, UT McCombs (1994); MBA Executive Program, UT McCombs (2003)</td></tr>
+                    <tr><td>Licenses</td><td>TREC #551885 (Broker); NMLS #2111011 (Loan Originator); AR Broker #PB00096325</td></tr>
+                    <tr><td>Experience</td><td>30+ years in real estate acquisition and due diligence</td></tr>
+                    <tr><td>Affiliations</td><td>NAR, TAR, ABOR</td></tr>
+                </table>
+                <p><strong>Career Highlights:</strong></p>
+                <ul>
+                    <li>Investment analyst at Capital Commercial Investments (due diligence on $100M in suburban office/industrial)</li>
+                    <li>Prior work at Asset Recovery Fund / Eastbridge Partners (private equity RE)</li>
+                    <li>Started brokerage practice in 2006; joined TRP to manage development projects</li>
+                    <li>Active volunteer: Trinity Center for unhoused, UT Idea to Product competition advisor, Eagle Scout</li>
+                </ul>
+
+                <h3>Jamison Stewart &mdash; Real Estate Advisor</h3>
+                <table>
+                    <tr><th>Attribute</th><th>Detail</th></tr>
+                    <tr><td>Education</td><td>BA Music, University of Texas at Austin</td></tr>
+                    <tr><td>License</td><td>TREC #617487 (Sales Agent, issued Dec 2011)</td></tr>
+                    <tr><td>Status</td><td><span class="badge badge-warning">May Have Departed</span> &mdash; LinkedIn now shows DEN Property Group</td></tr>
+                </table>
+
+                <div class="highlight-box">
+                    <strong>Combined Staff Experience:</strong> 75+ years across residential, commercial, development, banking, real estate inspection/construction, investment analysis, and 1031 exchanges.
+                </div>
+                <p class="source">Sources: <a href="https://trpaustin.com/karen-g-skelton/">TRP - Karen Skelton</a>, <a href="https://trpaustin.com/loren-kirkpatrick/">TRP - Loren Kirkpatrick</a>, <a href="https://www.linkedin.com/in/karen-skelton-0a605112/">LinkedIn</a>, <a href="https://licensee.io/real-estate/617487-jamison-stewart-tx/">Licensee.io</a></p>
+            </div>
+        </section>
+
+        <!-- 5. Reviews & Ratings -->
+        <section id="reviews">
+            <h2>5. Reviews &amp; Ratings</h2>
+            <div class="section-content">
+                <table>
+                    <tr><th>Platform</th><th>Rating</th><th>Reviews</th><th>Status</th></tr>
+                    <tr><td>Google Business</td><td>&mdash;</td><td>0-2 (estimated)</td><td><span class="badge badge-danger">Minimal</span></td></tr>
+                    <tr><td>Yelp</td><td>&mdash;</td><td>0</td><td><span class="badge badge-warning">Listed, No Reviews</span></td></tr>
+                    <tr><td>Zillow</td><td>&mdash;</td><td>Unknown</td><td><span class="badge badge-warning">Individual Profile Only</span></td></tr>
+                    <tr><td>Realtor.com</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-danger">Not Listed</span></td></tr>
+                    <tr><td>LoopNet</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-success">Listed</span></td></tr>
+                    <tr><td>HAR.com</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-success">Listed</span></td></tr>
+                    <tr><td>BBB</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge badge-danger">Not Listed</span></td></tr>
+                </table>
+                <div class="warning-box">
+                    <strong>Research Limitation:</strong> TRP has near-zero publicly visible reviews on any major platform. Google Maps and Yelp listings exist but appear to have 0-2 reviews. This is significantly below the norm for a 20-year-old Austin brokerage. Competitor Devora Realty (similar profile) has 45 Google reviews at 5.0 stars; Spyglass Realty has 1,800+ five-star reviews.
+                </div>
+                <p class="source">Sources: <a href="https://www.yelp.com/biz/texas-realty-partners-austin">Yelp</a>, <a href="https://www.loopnet.com/company/texas-realty-partners-llc/austin-tx/wlxgzvjl/">LoopNet</a>, <a href="https://www.har.com/texas-realty-partners-llc/broker_ABORTX-2065">HAR.com</a></p>
+            </div>
+        </section>
+
+        <!-- 6. Financial Information -->
+        <section id="financial">
+            <h2>6. Financial Information</h2>
+            <div class="section-content">
+                <p>Texas Realty Partners, LLC is a private company. Detailed financials are not publicly available.</p>
+                <table>
+                    <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+                    <tr><td>Estimated Revenue</td><td>&lt; $5 million annually</td><td><a href="https://www.zoominfo.com/c/texas-realty-partners-llc/353880789">ZoomInfo</a></td></tr>
+                    <tr><td>Employee Count</td><td>&lt; 25</td><td><a href="https://www.zoominfo.com/c/texas-realty-partners-llc/353880789">ZoomInfo</a></td></tr>
+                    <tr><td>Cumulative Sales (2005&ndash;present)</td><td>$40MM+</td><td><a href="https://trpaustin.com/karen-g-skelton/">TRP Website</a></td></tr>
+                    <tr><td>Cumulative Structured Financing</td><td>$25MM+</td><td><a href="https://trpaustin.com/karen-g-skelton/">TRP Website</a></td></tr>
+                    <tr><td>Cumulative Leases</td><td>$20MM+</td><td><a href="https://trpaustin.com/karen-g-skelton/">TRP Website</a></td></tr>
+                </table>
+
+                <h3>Industry Financial Context</h3>
+                <table>
+                    <tr><th>Industry Metric</th><th>Value</th><th>Source</th></tr>
+                    <tr><td>Avg. revenue per brokerage firm (US)</td><td>~$249,000</td><td><a href="https://www.ibisworld.com/united-states/industry/real-estate-sales-brokerage/1354/">IBISWorld</a></td></tr>
+                    <tr><td>Median agent gross income</td><td>$58,100</td><td><a href="https://www.nar.realtor/infographics/2025-nar-member-profile-fast-facts">NAR 2025 Member Profile</a></td></tr>
+                    <tr><td>Firms with positive EBITDA</td><td>69.4%</td><td><a href="https://www.housingwire.com/articles/brokerage-profitability-nar-commission-data/">HousingWire/AccountTECH</a></td></tr>
+                    <tr><td>Median EBITDA margin</td><td>1.68% of income</td><td><a href="https://www.prnewswire.com/news-releases/new-research-finds-brokerages-regain-some-profitability-in-2025-largely-by-cutting-costs-302679046.html">PR Newswire/AccountTECH</a></td></tr>
+                    <tr><td>Average total commission rate</td><td>5.44%</td><td><a href="https://www.prnewswire.com/news-releases/agent-commissions-edge-higher-in-2025-one-year-after-landmark-nar-settlement-302483289.html">Anywhere/PR Newswire</a></td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 7. Industry Market Data -->
+        <section id="market-data">
+            <h2>7. Industry Market Data</h2>
+            <div class="section-content">
+                <div class="info-box">
+                    <strong>Abbreviations:</strong><br>
+                    MSA = Metropolitan Statistical Area<br>
+                    CAGR = Compound Annual Growth Rate<br>
+                    HUD = U.S. Department of Housing and Urban Development<br>
+                    ACS = American Community Survey<br>
+                    ABoR = Austin Board of Realtors<br>
+                    TRERC = Texas Real Estate Research Center<br>
+                    NAR = National Association of Realtors<br>
+                    TREC = Texas Real Estate Commission<br>
+                    CRE = Commercial Real Estate<br>
+                    BTR = Build-to-Rent
+                </div>
+
+                <details>
+                    <summary>US Real Estate Brokerage Market <span class="detail-count">11 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+                            <tr><td>US brokerage industry revenue (2025)</td><td>$240.0 billion</td><td><a href="https://www.ibisworld.com/united-states/market-size/real-estate-sales-brokerage/1354/">IBISWorld</a></td></tr>
+                            <tr><td>Number of brokerage firms (US)</td><td>963,000</td><td><a href="https://www.ibisworld.com/united-states/number-of-businesses/real-estate-sales-brokerage/1354/">IBISWorld</a></td></tr>
+                            <tr><td>US brokerage market (alt. estimate)</td><td>$206.45 billion</td><td><a href="https://www.mordorintelligence.com/industry-reports/us-real-estate-brokerage-market">Mordor Intelligence</a></td></tr>
+                            <tr><td>Projected market size (2030)</td><td>$252.51 billion</td><td><a href="https://www.mordorintelligence.com/industry-reports/us-real-estate-brokerage-market">Mordor Intelligence</a></td></tr>
+                            <tr><td>CAGR (2025&ndash;2030)</td><td>4.11%</td><td><a href="https://www.mordorintelligence.com/industry-reports/us-real-estate-brokerage-market">Mordor Intelligence</a></td></tr>
+                            <tr><td>Existing home sales (2024)</td><td>4.06 million (lowest since 1995)</td><td><a href="https://www.nar.realtor/research-and-statistics/housing-statistics/existing-home-sales">NAR</a></td></tr>
+                            <tr><td>Median existing-home price (2024)</td><td>$407,500 (record)</td><td><a href="https://eyeonhousing.org/2025/01/existing-home-sales-at-nearly-30-year-low-despite-december-gains/">NAR / Eye on Housing</a></td></tr>
+                            <tr><td>US CRE market value (2025)</td><td>$25.79 trillion</td><td><a href="https://www.statista.com/outlook/fmo/real-estate/commercial-real-estate/united-states">Statista</a></td></tr>
+                            <tr><td>NAR total members</td><td>~1,490,000</td><td><a href="https://www.nar.realtor/magazine/real-estate-news/nar-membership-remains-above-forecast">NAR</a></td></tr>
+                            <tr><td>Avg. total commission rate (2025)</td><td>5.44%</td><td><a href="https://www.prnewswire.com/news-releases/agent-commissions-edge-higher-in-2025-one-year-after-landmark-nar-settlement-302483289.html">Anywhere/PR Newswire</a></td></tr>
+                            <tr><td>Agents at independent companies</td><td>55%</td><td><a href="https://www.nar.realtor/infographics/2025-nar-member-profile-fast-facts">NAR 2025 Profile</a></td></tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>NAR Settlement &amp; Commission Changes <span class="detail-count">7 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+                            <tr><td>NAR settlement amount</td><td>$418 million (effective Aug 17, 2024)</td><td><a href="https://www.nar.realtor/the-facts/nar-settlement-faqs">NAR</a></td></tr>
+                            <tr><td>Avg. buyer's agent commission (Q1 2025)</td><td>2.40%</td><td><a href="https://www.redfin.com/news/real-estate-commissions-may-2025/">Redfin</a></td></tr>
+                            <tr><td>Sellers who negotiated commissions</td><td>37.4%</td><td><a href="https://www.bankrate.com/real-estate/real-estate-commission-changes/">Bankrate</a></td></tr>
+                            <tr><td>Texas negotiated commissions</td><td>Typically 5-6% (no state law specifying rates)</td><td><a href="https://www.trec.texas.gov/article/blc-discusses-pending-nar-settlement-and-whether-it-affects-trec-forms">TREC</a></td></tr>
+                            <tr><td>Firms at risk if commission drops to 2%/side</td><td>~80% would be unprofitable</td><td><a href="https://www.housingwire.com/articles/feeling-the-squeeze-nar-settlement-terms-trigger-commission-compression/">HousingWire</a></td></tr>
+                            <tr><td>Fed Reserve finding (May 2025)</td><td>No measurable commission impact yet</td><td><a href="https://www.federalreserve.gov/econres/notes/feds-notes/commissions-and-omissions-trends-in-real-estate-broker-compensation-20250512.html">Federal Reserve</a></td></tr>
+                            <tr><td>Post-settlement trend</td><td>Commissions edged higher, contrary to expectations</td><td><a href="https://www.inman.com/2025/11/05/why-commissions-have-risen-since-the-2024-nar-settlement/">Inman</a></td></tr>
+                        </table>
+                    </div>
+                </details>
+
+                <!-- Addressable market highlight OUTSIDE details -->
+                <div class="highlight-box">
+                    <strong>Austin MSA Addressable Market Estimate:</strong> With ~932,000 households and a 58.9% homeownership rate, approximately <strong>549,000 owner-occupied homes</strong> exist in the Austin MSA. The Austin residential market generated <strong>$16.9 billion</strong> in total dollar volume across 29,383 home sales in 2025. At a median price of $435,000, even a 1% market share by transaction count represents ~294 sales or ~$128M in volume.
+                </div>
+
+                <details>
+                    <summary>Austin Metro Market Opportunity <span class="detail-count">14 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Data Point</th><th>Value</th><th>Source</th></tr>
+                            <tr><td>MSA Population (ACS 2024)</td><td>2,550,637</td><td><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter</a></td></tr>
+                            <tr><td>Median Household Income</td><td>$99,897</td><td><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter ACS 2024</a></td></tr>
+                            <tr><td>Homeownership Rate</td><td>58.9%</td><td><a href="https://datausa.io/profile/geo/austin-round-rock-tx">Data USA / ACS 2023</a></td></tr>
+                            <tr><td>HUD Median Family Income (FY2024)</td><td>$126,000</td><td><a href="https://www.austintexas.gov/sites/default/files/files/Housing/HUD%20HOME%20MFI%20Income%20and%20Rent%20Limits%202024.pdf">City of Austin / HUD</a></td></tr>
+                            <tr><td>Median Home Price (2025 annual)</td><td>$435,000</td><td><a href="https://austin.culturemap.com/news/real-estate/real-estate-report-december-2025/">CultureMap Austin / ABoR</a></td></tr>
+                            <tr><td>Homes Sold (2025)</td><td>29,383</td><td><a href="https://austin.culturemap.com/news/real-estate/real-estate-report-december-2025/">CultureMap Austin / ABoR</a></td></tr>
+                            <tr><td>Total Dollar Volume (2025)</td><td>$16.9 billion</td><td><a href="https://austin.culturemap.com/news/real-estate/real-estate-report-december-2025/">CultureMap Austin / ABoR</a></td></tr>
+                            <tr><td>Luxury Sales $1M+ (2025)</td><td>$4.6B (2,700+ homes)</td><td><a href="https://austin.culturemap.com/news/real-estate/million-dollar-homes-texas-realtors/">CultureMap Austin</a></td></tr>
+                            <tr><td>Housing Inventory (Dec 2025)</td><td>4.2 months</td><td><a href="https://austin.culturemap.com/news/real-estate/real-estate-report-december-2025/">CultureMap Austin / ABoR</a></td></tr>
+                            <tr><td>Price Change YoY (2025)</td><td>-2.4%</td><td><a href="https://austin.culturemap.com/news/real-estate/real-estate-report-december-2025/">CultureMap Austin / ABoR</a></td></tr>
+                            <tr><td>2026 Forecast</td><td>Flat to slightly negative H1; stabilizing H2</td><td><a href="https://www.kxan.com/news/housing/redfin-2026-housing-predictions-austin/">KXAN / Redfin</a></td></tr>
+                            <tr><td>Mortgage Rate Forecast (2026)</td><td>6.3% avg (30-yr); rates above 6%</td><td><a href="https://www.kxan.com/news/housing/redfin-2026-housing-predictions-austin/">Realtor.com / Redfin</a></td></tr>
+                            <tr><td>Price Reduction Rate (2025)</td><td>53.4% of Austin listings cut prices</td><td><a href="https://www.spyglassrealty.com/blog/austin-housing-market.html">Spyglass Realty</a></td></tr>
+                            <tr><td>Market Type (2026)</td><td>Buyer's market</td><td><a href="https://www.kxan.com/news/local/austin/these-housing-markets-could-heat-up-in-2026-while-austin-cools-off/">KXAN</a></td></tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Texas Market Context <span class="detail-count">10 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+                            <tr><td>Texas GDP (2024)</td><td>$2.77 trillion (8th-9th largest economy globally)</td><td><a href="https://comptroller.texas.gov/economy/fiscal-notes/economics/2024/big-map/">TX Comptroller</a></td></tr>
+                            <tr><td>Real GDP growth (2024)</td><td>4.8% (above national avg)</td><td><a href="https://businessintexas.com/why-texas/economic-strength/">TxEDC</a></td></tr>
+                            <tr><td>Statewide median home price</td><td>$340,000 (Oct 2025)</td><td><a href="https://www.steadily.com/blog/texas-real-estate-market-overview">Steadily</a></td></tr>
+                            <tr><td>TX housing inventory</td><td>5.5-5.7 months (buyer's market)</td><td><a href="https://trerc.tamu.edu/article/texas-housing-insight-september-2025/">TRERC</a></td></tr>
+                            <tr><td>TX NAR Realtors</td><td>143,895 (3rd in US)</td><td><a href="https://www.rubyhome.com/blog/number-of-realtors/">RubyHome</a></td></tr>
+                            <tr><td>Seller price concessions (Sep 2025)</td><td>$17,000 median (~5% off asking)</td><td><a href="https://trerc.tamu.edu/article/texas-housing-insight-september-2025/">TRERC</a></td></tr>
+                            <tr><td>TX price change YoY</td><td>-0.8%</td><td><a href="https://trerc.tamu.edu/article/texas-housing-insight-september-2025/">TRERC</a></td></tr>
+                            <tr><td>Austin vs TX median price premium</td><td>+$95,000 ($435K vs $340K)</td><td>Calculated</td></tr>
+                            <tr><td>Austin vs Dallas/Houston premium</td><td>Austin $435K > Dallas $380K > Houston $330K > SA $315K</td><td><a href="https://www.spyglassrealty.com/blog/austin-housing-market.html">Spyglass Realty</a></td></tr>
+                            <tr><td>TX net domestic migration</td><td>Top-ranked among all states</td><td><a href="https://businessintexas.com/why-texas/economic-strength/">TxEDC</a></td></tr>
+                        </table>
+                        <div class="info-box">
+                            <strong>Why Texas Matters:</strong> Texas is the 8th-9th largest economy in the world. Net domestic migration leads all US states. The Austin MSA commands a significant price premium over other major TX metros, reflecting strong tech-driven demand and high income levels ($99,897 median vs $81,604 national).
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Industry Trends &amp; Consolidation <span class="detail-count">8 trends</span></summary>
+                    <div class="details-content">
+                        <ul>
+                            <li><strong>Compass-Anywhere Merger (Jan 2026):</strong> $1.6B deal creates a 340,000-agent mega-brokerage. Compass also acquired 9 of the top 100 brokerages in 2024-2025. (<a href="https://www.npr.org/2025/09/29/nx-s1-5554360/real-estate-compass-anywhere-brokerages">NPR</a>)</li>
+                            <li><strong>Rocket-Redfin Acquisition (Mar 2025):</strong> $1.75B deal integrates mortgage + brokerage. (<a href="https://www.realestatenews.com/2025/04/22/how-consolidation-is-shaping-the-real-estate-landscape">RE News</a>)</li>
+                            <li><strong>PropTech Acceleration:</strong> Global PropTech market at $47.08B (2025), growing at 16.4% CAGR. 70% of PropTech deals include AI components. (<a href="https://www.precedenceresearch.com/proptech-market">Precedence Research</a>)</li>
+                            <li><strong>CRE Recovery:</strong> 15-20% increase in CRE sales volume forecast for 2026; data centers are the standout sector. (<a href="https://www.jpmorgan.com/insights/real-estate/commercial-real-estate/commercial-real-estate-trends">JP Morgan</a>)</li>
+                            <li><strong>iBuyer Retreat:</strong> Opendoor pivoted from house-flipping to "AI-powered platform" (Oct 2025). iBuyer market share peaked at 1.3% in 2022. (<a href="https://www.homelight.com/blog/ibuyer-companies/">HomeLight</a>)</li>
+                            <li><strong>Brokerage Profitability:</strong> Median EBITDA margin improved from 1.35% to 1.68% (2024&rarr;2025), largely by cutting costs 6.5%. (<a href="https://www.prnewswire.com/news-releases/new-research-finds-brokerages-regain-some-profitability-in-2025-largely-by-cutting-costs-302679046.html">AccountTECH</a>)</li>
+                            <li><strong>Agent Attrition:</strong> NAR membership declined from 1.53M (Oct 2024) to ~1.45M (May 2025). Transactions per agent fell from 8.1 to 5.3 sides (2017-2023). (<a href="https://www.realestatenews.com/2025/04/22/how-consolidation-is-shaping-the-real-estate-landscape">RE News</a>)</li>
+                            <li><strong>MLS Consolidation:</strong> 900+ MLSs have consolidated to ~500 over the past decade. (<a href="https://www.realestatenews.com/2025/12/22/trends-2026-the-brokerage-feeding-frenzy-and-market-concentration">RE News</a>)</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 8. Competitive Analysis -->
+        <section id="competitive">
+            <h2>8. Competitive Analysis</h2>
+            <div class="section-content">
+                <h3>Direct Boutique Competitors (Residential + Commercial)</h3>
+                <table>
+                    <tr><th>Company</th><th>Type</th><th>Google Rating</th><th>Key Differentiator</th></tr>
+                    <tr><td><a href="https://devorarealty.com/">Devora Realty</a></td><td>Residential + Commercial + Dev</td><td>5.0 (45 reviews)</td><td>CCIM-designated broker; closest service overlap to TRP</td></tr>
+                    <tr><td><a href="https://sierracommercialtx.com/">Sierra Commercial</a></td><td>Commercial + Select Residential</td><td>Minimal</td><td>Hill Country focus; incl. appraiser, attorneys, developer</td></tr>
+                    <tr><td><a href="https://www.eregtx.com/">EREG (Executive RE Group)</a></td><td>Commercial + Development</td><td>Minimal</td><td>1031 exchanges + site selection; Austin-SA-DFW</td></tr>
+                    <tr><td><a href="https://www.stcroixcra.com/">St. Croix Capital Realty</a></td><td>Commercial Investment</td><td>Minimal</td><td>Est. 1982; debt/equity sourcing; 78746 submarket</td></tr>
+                </table>
+
+                <h3>Major Austin CRE Firms</h3>
+                <table>
+                    <tr><th>Company</th><th>HQ</th><th>Austin Since</th><th>Strengths</th></tr>
+                    <tr><td>AQUILA Commercial</td><td>Austin</td><td>2007</td><td>Full-service CRE; Austin market leader</td></tr>
+                    <tr><td>CBRE</td><td>Los Angeles</td><td>1984</td><td>Global; office/retail/industrial</td></tr>
+                    <tr><td>JLL</td><td>Chicago</td><td>2008</td><td>70K employees, 80 countries</td></tr>
+                    <tr><td>Cushman & Wakefield</td><td>Chicago</td><td>2007</td><td>Tenant rep, project management</td></tr>
+                    <tr><td>HPI Real Estate</td><td>Austin</td><td>1992</td><td>Industrial portfolio leader</td></tr>
+                    <tr><td>Endeavor Real Estate</td><td>Austin</td><td>1999</td><td>Foremost Austin developer</td></tr>
+                </table>
+
+                <h3>Residential Market Leaders</h3>
+                <table>
+                    <tr><th>Company</th><th>Google Rating</th><th>Notable</th></tr>
+                    <tr><td>Spyglass Realty</td><td>5.0 (1,800+ reviews)</td><td>Tech-forward; massive review presence</td></tr>
+                    <tr><td>Moreland Properties</td><td>Strong</td><td>75+ agents; 35+ yrs; luxury Westlake/Lake Austin</td></tr>
+                    <tr><td>Compass (Austin)</td><td>Varies</td><td>Post-Anywhere merger: 340K agents nationally</td></tr>
+                    <tr><td>Keller Williams (Austin)</td><td>Varies</td><td>8.6% national market share; HQ in Austin</td></tr>
+                </table>
+
+                <h3>TRP Competitive Positioning</h3>
+                <div class="highlight-box">
+                    <strong>Strengths:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Rare service bundle: due diligence + business valuation + brokerage (no other Austin boutique offers this combo)</li>
+                        <li>Development entitlement expertise (2,500+ apartment buildings, TxDOT negotiations)</li>
+                        <li>Deep principal credentials: Princeton, UT MBA, 75+ combined years, banking/institutional background</li>
+                        <li>Westlake/78746 office location near high-net-worth clients</li>
+                        <li>Expert witness/trial preparation capability</li>
+                    </ul>
+                </div>
+                <div class="warning-box">
+                    <strong>Challenges:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Near-zero online reviews on every platform (vs. 45-1,800 for competitors)</li>
+                        <li>Small team (2-3 agents) limits transaction capacity</li>
+                        <li>Minimal digital/social media presence; no SEO visibility for non-branded terms</li>
+                        <li>Potential agent departure (Stewart to DEN Property Group)</li>
+                        <li>Austin market softening: median price down 2.4% YoY, 53.4% of listings cutting prices</li>
+                    </ul>
+                </div>
+                <p class="source">Full competitive analysis: <a href="competitor-analysis.html">trp-austin/competitor-analysis.html</a><br>Source: <a href="https://aquilacommercial.com/learning-center/8-best-commercial-real-estate-companies-austin-texas/">AQUILA - Best CRE Firms in Austin</a></p>
+            </div>
+        </section>
+
+        <!-- 9. Online Presence -->
+        <section id="online-presence">
+            <h2>9. Online Presence</h2>
+            <div class="section-content">
+                <h3>Website Audit</h3>
+                <table>
+                    <tr><th>Feature</th><th>Status</th><th>Notes</th></tr>
+                    <tr><td>Platform</td><td>WordPress</td><td>Self-hosted CMS</td></tr>
+                    <tr><td>IDX/MLS Integration</td><td><span class="badge badge-success">Yes</span></td><td>RETS feed at /rets/ and /residential-listings/</td></tr>
+                    <tr><td>SSL Certificate</td><td><span class="badge badge-success">Valid</span></td><td>trpaustin.com is HTTPS</td></tr>
+                    <tr><td>Individual Bio Pages</td><td><span class="badge badge-success">Yes</span></td><td>Karen Skelton, Loren Kirkpatrick</td></tr>
+                    <tr><td>Service Pages</td><td><span class="badge badge-success">Yes</span></td><td>11+ detailed service pages</td></tr>
+                    <tr><td>Blog/News</td><td><span class="badge badge-warning">Minimal</span></td><td>/news-2/ exists but update frequency unclear</td></tr>
+                    <tr><td>SEO Performance</td><td><span class="badge badge-danger">Weak</span></td><td>Ranks only for branded terms; no competitive keywords</td></tr>
+                    <tr><td>Mobile Responsive</td><td><span class="badge badge-info">Likely</span></td><td>WordPress-based; needs manual verification (403 to bots)</td></tr>
+                </table>
+
+                <details>
+                    <summary>Social Media Presence <span class="detail-count">5 platforms</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Platform</th><th>Status</th><th>Activity</th></tr>
+                            <tr><td>Instagram (@texasrealtypartners)</td><td><span class="badge badge-warning">Dormant</span></td><td>35 posts, 146 followers; last post July 2024</td></tr>
+                            <tr><td>Facebook</td><td><span class="badge badge-warning">Unverified</span></td><td>May exist but not discoverable via search</td></tr>
+                            <tr><td>LinkedIn (Company)</td><td><span class="badge badge-danger">Not Found</span></td><td>Individual profiles only</td></tr>
+                            <tr><td>Twitter/X</td><td><span class="badge badge-danger">Not Found</span></td><td>No presence discovered</td></tr>
+                            <tr><td>YouTube</td><td><span class="badge badge-danger">Not Found</span></td><td>No channel exists</td></tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Directory Listings <span class="detail-count">14 platforms checked</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Platform</th><th>Status</th><th>URL</th></tr>
+                            <tr><td>LoopNet</td><td><span class="badge badge-success">Listed</span></td><td><a href="https://www.loopnet.com/company/texas-realty-partners-llc/austin-tx/wlxgzvjl/">View</a></td></tr>
+                            <tr><td>HAR.com</td><td><span class="badge badge-success">Listed</span></td><td><a href="https://www.har.com/texas-realty-partners-llc/broker_ABORTX-2065">View</a></td></tr>
+                            <tr><td>Unlock MLS</td><td><span class="badge badge-success">Listed</span></td><td>Office ID 2065</td></tr>
+                            <tr><td>ZoomInfo</td><td><span class="badge badge-success">Listed</span></td><td><a href="https://www.zoominfo.com/c/texas-realty-partners-llc/353880789">View</a></td></tr>
+                            <tr><td>Yahoo Local</td><td><span class="badge badge-success">Listed</span></td><td><a href="https://local.yahoo.com/info-213311496-skelton-karen-texas-realty-partners-austin">View</a></td></tr>
+                            <tr><td>Yelp</td><td><span class="badge badge-warning">Listed, 0 Reviews</span></td><td><a href="https://www.yelp.com/biz/texas-realty-partners-austin">View</a></td></tr>
+                            <tr><td>Homes.com</td><td><span class="badge badge-success">Listed</span></td><td>Via agent profiles</td></tr>
+                            <tr><td>Realtor.com</td><td><span class="badge badge-danger">Not Found</span></td><td>&mdash;</td></tr>
+                            <tr><td>Redfin</td><td><span class="badge badge-danger">Not Found</span></td><td>&mdash;</td></tr>
+                            <tr><td>BBB</td><td><span class="badge badge-danger">Not Found</span></td><td>&mdash;</td></tr>
+                            <tr><td>Clutch.co</td><td><span class="badge badge-danger">Not Found</span></td><td>&mdash;</td></tr>
+                            <tr><td>Expertise.com</td><td><span class="badge badge-danger">Not Found</span></td><td>&mdash;</td></tr>
+                            <tr><td>Thumbtack</td><td><span class="badge badge-danger">Not Found</span></td><td>&mdash;</td></tr>
+                            <tr><td>Google Business</td><td><span class="badge badge-warning">Listed, 0-2 Reviews</span></td><td>&mdash;</td></tr>
+                        </table>
+                    </div>
+                </details>
+
+                <div class="warning-box">
+                    <strong>Overall Online Presence Score: 1.5 / 5.0</strong> &mdash; Significantly below average for a 20-year Austin brokerage. The principals have strong credentials and real transaction history, but this story is nearly invisible to anyone who doesn't already know TRP by name.
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Data Verification -->
+        <section id="verification">
+            <h2>10. Data Verification Summary</h2>
+            <div class="section-content">
+                <details>
+                    <summary>Verification Matrix <span class="detail-count">13 categories</span></summary>
+                    <div class="details-content">
+                        <table class="verification-table">
+                            <tr><th>Data Category</th><th>Verified</th><th>Partially</th><th>Not Verified</th><th>Primary Source</th></tr>
+                            <tr><td>Company Name &amp; Address</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td><td>Multiple third-party directories</td></tr>
+                            <tr><td>TREC Broker Licenses</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td><td>TREC, HAR.com, Licensee.io</td></tr>
+                            <tr><td>NMLS License (Kirkpatrick)</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td><td>NMLS, New American Funding</td></tr>
+                            <tr><td>Founded Date (2005)</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td><td>TRP website, Karen Skelton bio</td></tr>
+                            <tr><td>Revenue (&lt;$5M)</td><td></td><td><span class="badge badge-warning">~</span></td><td></td><td>ZoomInfo estimate only</td></tr>
+                            <tr><td>Transaction Volume ($40MM+)</td><td></td><td><span class="badge badge-warning">~</span></td><td></td><td>Self-reported on website</td></tr>
+                            <tr><td>Team Size (&lt;25)</td><td></td><td><span class="badge badge-warning">~</span></td><td></td><td>ZoomInfo; only 3 agents found</td></tr>
+                            <tr><td>Education (Skelton - Princeton)</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td><td>Princeton Class of 1979</td></tr>
+                            <tr><td>Education (Kirkpatrick - UT)</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td><td>Multiple sources</td></tr>
+                            <tr><td>Google Reviews (0-2)</td><td></td><td><span class="badge badge-warning">~</span></td><td></td><td>No visible reviews in any search snippet</td></tr>
+                            <tr><td>Office Property (Rob Roy Office Park)</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td><td>LoopNet, Rob Roy Office Park website</td></tr>
+                            <tr><td>La Costa Verde LP</td><td><span class="badge badge-success">&#10003;</span></td><td></td><td></td><td>TX Comptroller, same address</td></tr>
+                            <tr><td>Stewart Departure</td><td></td><td><span class="badge badge-warning">~</span></td><td></td><td>LinkedIn shows DEN Property Group</td></tr>
+                        </table>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 11. Conclusions & Recommendations -->
+        <section id="conclusions">
+            <h2>11. Conclusions &amp; Recommendations</h2>
+            <div class="section-content">
+                <h3>Key Findings</h3>
+                <ol>
+                    <li><strong>Legitimate, experienced firm with rare service depth.</strong> TRP's combined due diligence + business valuation + development entitlement + brokerage offering is unique among Austin boutique firms. No competitor explicitly markets this bundle.</li>
+                    <li><strong>Exceptional principal credentials</strong> (Princeton, UT MBA, institutional banking background) are underutilized from a marketing perspective. The $40MM+ track record and complex deal history (infrastructure negotiations, zoning changes) demonstrate sophisticated capabilities.</li>
+                    <li><strong>Severe online visibility deficit.</strong> Near-zero reviews, dormant social media, no SEO traction. This is the single largest risk to future business development in an increasingly digital-first buyer/seller landscape.</li>
+                    <li><strong>Favorable market position for buyer's market.</strong> With Austin shifting to a buyer's market (4.2 months inventory, 53.4% of listings cutting prices), TRP's investment analysis and due diligence services become more valuable to buyers seeking thorough property evaluation.</li>
+                    <li><strong>Industry consolidation creates opportunity.</strong> As mega-brokerages (Compass, KW, eXp) dominate volume, boutique firms with deep expertise and personal relationships can differentiate on quality of service &mdash; but only if discoverable.</li>
+                </ol>
+
+                <h3>Recommendations for Further Research</h3>
+                <ul>
+                    <li>Verify TREC license status directly via <a href="https://www.trec.texas.gov/apps/license-holder-search/">TREC License Holder Search</a></li>
+                    <li>Check Google Maps directly for current review count (blocked to automated tools)</li>
+                    <li>Request financial details from TRP principals for detailed valuation</li>
+                    <li>Interview Karen Skelton regarding La Costa Verde development timeline and status</li>
+                    <li>Verify Jamison Stewart's current sponsoring broker via TREC</li>
+                    <li>Conduct a formal website audit (PageSpeed, accessibility, crawlability) via direct browser access</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 12. Sources & Citations -->
+        <section id="sources">
+            <h2>12. Sources &amp; Citations</h2>
+            <div class="section-content">
+                <details>
+                    <summary>Primary Company Sources <span class="detail-count">12 sources</span></summary>
+                    <div class="details-content">
+                        <ol>
+                            <li><a href="https://trpaustin.com/">TRP Austin &ndash; Homepage</a></li>
+                            <li><a href="https://trpaustin.com/contact-2/">TRP Austin &ndash; About / Brokerage Services</a></li>
+                            <li><a href="https://trpaustin.com/karen-g-skelton/">TRP &ndash; Karen G. Skelton Bio</a></li>
+                            <li><a href="https://trpaustin.com/loren-kirkpatrick/">TRP &ndash; E. Loren Kirkpatrick Bio</a></li>
+                            <li><a href="https://trpaustin.com/services/">TRP &ndash; Services</a></li>
+                            <li><a href="https://trpaustin.com/developments/">TRP &ndash; Developments</a></li>
+                            <li><a href="https://trpaustin.com/la-costa-verde/">TRP &ndash; La Costa Verde</a></li>
+                            <li><a href="https://trpaustin.com/commercial-development-services/">TRP &ndash; Commercial Development Services</a></li>
+                            <li><a href="https://trpaustin.com/site-selection/">TRP &ndash; Site Selection &amp; Market Analysis</a></li>
+                            <li><a href="https://trpaustin.com/due-diligence-and-business-valuation-services/">TRP &ndash; Due Diligence &amp; Business Valuation</a></li>
+                            <li><a href="https://trpaustin.com/1031-exchange-services/">TRP &ndash; 1031-Exchange Services</a></li>
+                            <li><a href="https://trpaustin.com/faq/">TRP &ndash; FAQ</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Third-Party &amp; Directory Sources <span class="detail-count">10 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="13">
+                            <li><a href="https://www.loopnet.com/company/texas-realty-partners-llc/austin-tx/wlxgzvjl/">LoopNet &ndash; TRP Austin Profile</a></li>
+                            <li><a href="https://www.har.com/texas-realty-partners-llc/broker_ABORTX-2065">HAR.com &ndash; TRP Broker Profile</a></li>
+                            <li><a href="https://www.zoominfo.com/c/texas-realty-partners-llc/353880789">ZoomInfo &ndash; TRP Company Profile</a></li>
+                            <li><a href="https://www.yelp.com/biz/texas-realty-partners-austin">Yelp &ndash; Texas Realty Partners</a></li>
+                            <li><a href="https://www.linkedin.com/in/karen-skelton-0a605112/">LinkedIn &ndash; Karen Skelton</a></li>
+                            <li><a href="https://nmlsconsumeraccess.org/">NMLS Consumer Access</a></li>
+                            <li><a href="https://www.trec.texas.gov/apps/license-holder-search/">TREC License Holder Search</a></li>
+                            <li><a href="https://opengovus.com/texas-taxpayer/32051088170">OpenGov &ndash; La Costa Verde LP</a></li>
+                            <li><a href="https://local.yahoo.com/info-213311496-skelton-karen-texas-realty-partners-austin">Yahoo Local &ndash; Karen Skelton / TRP</a></li>
+                            <li><a href="https://www.instagram.com/texasrealtypartners/">Instagram &ndash; @texasrealtypartners</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Market Research Sources <span class="detail-count">12 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="23">
+                            <li><a href="https://www.ibisworld.com/united-states/market-size/real-estate-sales-brokerage/1354/">IBISWorld &ndash; Real Estate Sales &amp; Brokerage</a></li>
+                            <li><a href="https://www.mordorintelligence.com/industry-reports/us-real-estate-brokerage-market">Mordor Intelligence &ndash; US RE Brokerage Market</a></li>
+                            <li><a href="https://www.grandviewresearch.com/industry-analysis/real-estate-market">Grand View Research &ndash; Global RE Market</a></li>
+                            <li><a href="https://www.statista.com/outlook/fmo/real-estate/commercial-real-estate/united-states">Statista &ndash; US Commercial Real Estate</a></li>
+                            <li><a href="https://www.nar.realtor/research-and-statistics/housing-statistics/existing-home-sales">NAR &ndash; Existing Home Sales</a></li>
+                            <li><a href="https://www.nar.realtor/infographics/2025-nar-member-profile-fast-facts">NAR &ndash; 2025 Member Profile Fast Facts</a></li>
+                            <li><a href="https://www.housingwire.com/articles/real-estate-brokerage-market-share-realtrends-2024/">HousingWire &ndash; Brokerage Market Share 2024</a></li>
+                            <li><a href="https://www.precedenceresearch.com/proptech-market">Precedence Research &ndash; PropTech Market</a></li>
+                            <li><a href="https://www.prnewswire.com/news-releases/agent-commissions-edge-higher-in-2025-one-year-after-landmark-nar-settlement-302483289.html">PR Newswire &ndash; Agent Commissions 2025</a></li>
+                            <li><a href="https://www.federalreserve.gov/econres/notes/feds-notes/commissions-and-omissions-trends-in-real-estate-broker-compensation-20250512.html">Federal Reserve &ndash; Commission Trends (May 2025)</a></li>
+                            <li><a href="https://www.prnewswire.com/news-releases/new-research-finds-brokerages-regain-some-profitability-in-2025-largely-by-cutting-costs-302679046.html">AccountTECH &ndash; Brokerage Profitability 2025</a></li>
+                            <li><a href="https://www.realestatenews.com/2025/12/22/trends-2026-the-brokerage-feeding-frenzy-and-market-concentration">RE News &ndash; 2026 Brokerage Consolidation Trends</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Austin Metro &amp; Texas Economic Sources <span class="detail-count">14 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="35">
+                            <li><a href="http://censusreporter.org/profiles/31000US12420-austin-round-rock-san-marcos-tx-metro-area/">Census Reporter &ndash; Austin-Round Rock MSA</a></li>
+                            <li><a href="https://austin.culturemap.com/news/real-estate/real-estate-report-december-2025/">CultureMap Austin &ndash; Dec 2025 Real Estate Report</a></li>
+                            <li><a href="https://austin.culturemap.com/news/real-estate/million-dollar-homes-texas-realtors/">CultureMap Austin &ndash; Luxury Sales 2025</a></li>
+                            <li><a href="https://www.kxan.com/news/housing/redfin-2026-housing-predictions-austin/">KXAN &ndash; Redfin 2026 Austin Housing Predictions</a></li>
+                            <li><a href="https://www.spyglassrealty.com/blog/austin-housing-market.html">Spyglass Realty &ndash; Austin Housing Market 2025-2026</a></li>
+                            <li><a href="https://trerc.tamu.edu/article/texas-housing-insight-september-2025/">TRERC &ndash; Texas Housing Insight Sep 2025</a></li>
+                            <li><a href="https://trerc.tamu.edu/article/trerc-real-estate-forecast-12-months-ending-summer-2026/">TRERC &ndash; Real Estate Forecast Summer 2026</a></li>
+                            <li><a href="https://www.steadily.com/blog/texas-real-estate-market-overview">Steadily &ndash; Texas Real Estate Market Overview</a></li>
+                            <li><a href="https://comptroller.texas.gov/economy/fiscal-notes/economics/2024/big-map/">TX Comptroller &ndash; Texas GDP on World Stage</a></li>
+                            <li><a href="https://businessintexas.com/why-texas/economic-strength/">TxEDC &ndash; Texas Economic Strength</a></li>
+                            <li><a href="https://www.rubyhome.com/blog/number-of-realtors/">RubyHome &ndash; Number of Realtors by State</a></li>
+                            <li><a href="https://www.austintexas.gov/sites/default/files/files/Housing/HUD%20HOME%20MFI%20Income%20and%20Rent%20Limits%202024.pdf">City of Austin &ndash; HUD Income Limits 2024</a></li>
+                            <li><a href="https://opportunityaustin.com/austin-monthly-economic-indicators-january-2026/">Opportunity Austin &ndash; Economic Indicators Jan 2026</a></li>
+                            <li><a href="https://aquilacommercial.com/learning-center/8-best-commercial-real-estate-companies-austin-texas/">AQUILA &ndash; Best CRE Companies in Austin</a></li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>Report compiled:</strong> February 10, 2026</p>
+            <p><strong>Research methodology:</strong> Web scraping, search engine queries, public records review, directory cross-referencing</p>
+            <p><strong>Total unique sources cited:</strong> 48</p>
+        </footer>
+    </div>
+</body>
+</html>

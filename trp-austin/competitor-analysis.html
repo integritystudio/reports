@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRP Austin - Competitive Landscape Analysis</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #242836;
+      --border: #2e3345;
+      --text: #e4e6ed;
+      --text-muted: #8b8fa3;
+      --accent: #4f8ff7;
+      --accent2: #7c5cfc;
+      --green: #34d399;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --cyan: #22d3ee;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5f6fa;
+        --surface: #ffffff;
+        --surface2: #f0f1f5;
+        --border: #d8dbe5;
+        --text: #1a1d27;
+        --text-muted: #6b7085;
+        --accent: #2563eb;
+        --accent2: #6d28d9;
+        --green: #059669;
+        --amber: #d97706;
+        --red: #dc2626;
+        --cyan: #0891b2;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem; }
+    .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 2.5rem 0 1rem;
+      color: var(--accent);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.5rem;
+      color: var(--text);
+    }
+    p, li { color: var(--text); font-size: 0.92rem; margin-bottom: 0.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+
+    /* Summary cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .stat-card .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .stat-card .label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* TRP Profile */
+    .profile-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 2px solid var(--accent);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .profile-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 2rem;
+    }
+    @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-item { }
+    .profile-item .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .profile-item .value { font-size: 0.95rem; color: var(--text); font-weight: 500; }
+
+    /* Competitor table */
+    .table-wrap {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      min-width: 1100px;
+    }
+    thead { background: var(--surface2); }
+    th {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      background: var(--surface);
+    }
+    tr:hover td { background: var(--surface2); }
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .badge-direct { background: rgba(79,143,247,0.15); color: var(--accent); }
+    .badge-commercial { background: rgba(124,92,252,0.15); color: var(--accent2); }
+    .badge-investment { background: rgba(52,211,153,0.15); color: var(--green); }
+    .badge-luxury { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .badge-major { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-westlake { background: rgba(34,211,238,0.15); color: var(--cyan); }
+
+    .services-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .services-list li {
+      font-size: 0.78rem;
+      margin-bottom: 0.15rem;
+      padding-left: 0.75rem;
+      position: relative;
+    }
+    .services-list li::before {
+      content: "\2022";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+    .rating { color: var(--amber); font-weight: 600; }
+    .na { color: var(--text-muted); font-style: italic; }
+
+    /* SWOT */
+    .swot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 768px) { .swot-grid { grid-template-columns: 1fr; } }
+    .swot-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .swot-card.strengths { border-left: 4px solid var(--green); }
+    .swot-card.weaknesses { border-left: 4px solid var(--red); }
+    .swot-card.opportunities { border-left: 4px solid var(--accent); }
+    .swot-card.threats { border-left: 4px solid var(--amber); }
+    .swot-card h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .swot-card.strengths h4 { color: var(--green); }
+    .swot-card.weaknesses h4 { color: var(--red); }
+    .swot-card.opportunities h4 { color: var(--accent); }
+    .swot-card.threats h4 { color: var(--amber); }
+    .swot-card li { font-size: 0.85rem; }
+
+    /* Key insights */
+    .insight-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .insight-box h4 {
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .sources {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    .sources h3 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .sources a {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 0.3rem;
+      color: var(--text-muted);
+    }
+    .sources a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TRP Austin - Competitive Landscape Analysis</h1>
+    <p class="subtitle">Texas Realty Partners, LLC | Boutique Real Estate Brokerage | Austin, TX</p>
+    <p class="date">Research Date: February 10, 2026</p>
+
+    <!-- Summary Stats -->
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="number">12</div>
+        <div class="label">Direct / Niche Competitors</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">7</div>
+        <div class="label">Major Firms in Market</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">75+</div>
+        <div class="label">Years Combined (TRP Leaders)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">2</div>
+        <div class="label">Firms Near Westlake/78746</div>
+      </div>
+    </div>
+
+    <!-- TRP Profile -->
+    <h2>Texas Realty Partners, LLC (Subject Company)</h2>
+    <div class="profile-card">
+      <h3>TRP Austin - Company Profile</h3>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <div class="label">Website</div>
+          <div class="value"><a href="https://trpaustin.com/" target="_blank">trpaustin.com</a></div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Location</div>
+          <div class="value">P.O. Box 1609, Austin, TX 78767</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Leadership</div>
+          <div class="value">Karen G. Skelton MBA (45+ yrs experience) &amp; E. Loren Kirkpatrick MBA (30+ yrs experience)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Coverage Area</div>
+          <div class="value">Austin-San Antonio Corridor, Central Texas</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Type</div>
+          <div class="value">Boutique Full-Service Brokerage (Residential + Commercial)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Listings Platforms</div>
+          <div class="value"><a href="https://www.loopnet.com/company/texas-realty-partners-llc/austin-tx/wlxgzvjl/">LoopNet</a>, <a href="https://www.har.com/texas-realty-partners-llc/broker_ABORTX-2065">HAR.com</a>, <a href="https://www.search.unlockmls.com/realtor/offices/Texas-Realty-Partners-LLC/2065">Unlock MLS</a></div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Services Offered</div>
+          <div class="value">Residential Brokerage, Commercial Brokerage, Commercial Leasing, Investment Analysis, Site Selection, Due Diligence &amp; Business Valuation, 1031 Exchanges, Land Development, Property Management</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Online Reviews &amp; Ratings</div>
+          <div class="value">
+            <strong>Yelp:</strong> <a href="https://www.yelp.com/biz/texas-realty-partners-austin">Listed</a> (review count/rating not publicly visible in search results) |
+            <strong>Google:</strong> No prominent Google Business Profile rating found in search results |
+            <strong>Zillow:</strong> No Zillow reviews found |
+            <strong>Press/Awards:</strong> No press mentions or awards found in online searches
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h4>Key Observation - TRP Online Presence Gap</h4>
+      <p>Texas Realty Partners has minimal online review presence across Google, Yelp, Zillow, and other platforms. The website returned a 403 error when crawled, suggesting potential technical issues. No press mentions, awards, or media coverage were found. Compared to competitors like Devora Realty (5.0 stars, 45 reviews on Google) or Spyglass Realty (1,800+ reviews), TRP has a significant online reputation gap that represents both a vulnerability and an opportunity for improvement.</p>
+    </div>
+
+    <!-- Direct Boutique Competitors -->
+    <h2>Direct &amp; Niche Competitors</h2>
+    <p style="margin-bottom: 1rem;">Boutique Austin-area firms that overlap with TRP's service mix of residential brokerage, commercial brokerage, investment services, and development consulting.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Founded</th>
+            <th>Team Size</th>
+            <th>Reviews / Rating</th>
+            <th>Key Services</th>
+            <th>Differentiators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 1. Devora Realty -->
+          <tr>
+            <td>
+              <strong><a href="https://devorarealty.com/" target="_blank">Devora Realty</a></strong>
+            </td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>1200 E. 11th St, Austin, TX 78702</td>
+            <td>~2012</td>
+            <td>~7-10 agents</td>
+            <td><span class="rating">5.0 / 5</span> (45 Google reviews)</td>
+            <td>
+              <ul class="services-list">
+                <li>Residential sales &amp; rentals</li>
+                <li>Commercial brokerage</li>
+                <li>Multi-family acquisition/disposition</li>
+                <li>Adaptive re-positioning</li>
+                <li>Development</li>
+                <li>Land &amp; ranch sales</li>
+              </ul>
+            </td>
+            <td>CCIM-designated broker (Johnny Devora); strongest overlap with TRP services; boutique with residential + commercial + development; perfect Google rating</td>
+          </tr>
+          <!-- 2. Sierra Commercial -->
+          <tr>
+            <td>
+              <strong><a href="https://sierracommercialtx.com/" target="_blank">Sierra Commercial, LLC</a></strong>
+            </td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>6905 Smokey Hill Rd, Austin, TX 78736</td>
+            <td>N/A</td>
+            <td>~5-8 agents</td>
+            <td><span class="na">No public reviews found</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Commercial brokerage</li>
+                <li>Select residential projects</li>
+                <li>Land brokerage</li>
+                <li>Site selection</li>
+                <li>Development consulting</li>
+                <li>Investment strategy</li>
+                <li>Property management</li>
+              </ul>
+            </td>
+            <td>Strong overlap with TRP: site selection + development + investment; Hill Country focus; team includes appraiser, attorneys, and developer; boutique with commercial + residential mix</td>
+          </tr>
+          <!-- 3. Executive Real Estate Group (EREG) -->
+          <tr>
+            <td>
+              <strong><a href="https://www.eregtx.com/" target="_blank">Executive Real Estate Group (EREG)</a></strong>
+            </td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>Austin, TX (statewide offices)</td>
+            <td>~2004</td>
+            <td>Small / principal-led</td>
+            <td><span class="na">No public reviews found</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Commercial brokerage (acquisition/disposition)</li>
+                <li>Development (ground-up &amp; reposition)</li>
+                <li>1031 exchanges</li>
+                <li>Site selection</li>
+                <li>Commercial leasing</li>
+                <li>Land sales</li>
+                <li>Property management</li>
+              </ul>
+            </td>
+            <td>Very close service overlap including 1031 exchanges and site selection; "corporately trained, boutique philosophy"; CEO-led direct engagement; statewide coverage (Austin, Dallas, Houston, San Antonio)</td>
+          </tr>
+          <!-- 4. St. Croix Capital Realty Advisors -->
+          <tr>
+            <td>
+              <strong><a href="https://www.stcroixcra.com/" target="_blank">St. Croix Capital Realty Advisors</a></strong>
+            </td>
+            <td><span class="badge badge-commercial">Commercial</span> <span class="badge badge-westlake">Westlake</span></td>
+            <td>901 S Mopac Expy, Plaza 1 Ste 160, Austin, TX 78746</td>
+            <td>1982</td>
+            <td>~10+ (100+ yrs combined experience)</td>
+            <td><span class="na">Yelp listing; no public rating data found</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Investment sales</li>
+                <li>Retail &amp; industrial brokerage</li>
+                <li>Asset management</li>
+                <li>Property &amp; construction management</li>
+                <li>Debt/equity sourcing</li>
+              </ul>
+            </td>
+            <td>Located in Westlake/78746; 40+ years in business; fully integrated CRE company; "family culture"; strong investment focus; closest competitor geographically in TRP's target area</td>
+          </tr>
+          <!-- 5. Asterra Properties -->
+          <tr>
+            <td>
+              <strong><a href="https://asterra.com/" target="_blank">Asterra Properties</a></strong>
+            </td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>8701 N Mopac, Ste 450, Austin, TX 78759</td>
+            <td>2008</td>
+            <td>~10-15 (brokers, agents, attorneys, PMs, engineers, accountants)</td>
+            <td><span class="rating">4.0 / 5</span> (10 reviews, Birdeye)</td>
+            <td>
+              <ul class="services-list">
+                <li>Commercial brokerage</li>
+                <li>Residential brokerage</li>
+                <li>Property management</li>
+                <li>Investment properties</li>
+                <li>Construction management</li>
+              </ul>
+            </td>
+            <td>Full-service with both commercial + residential; in-house attorneys, engineers, and accountants; "Central Texas premier" positioning; 53+ yrs combined founding team experience</td>
+          </tr>
+          <!-- 6. CLD Realty -->
+          <tr>
+            <td>
+              <strong><a href="https://www.cldrealty.com/" target="_blank">CLD Realty</a></strong>
+            </td>
+            <td><span class="badge badge-commercial">Commercial</span> <span class="badge badge-westlake">Westlake</span></td>
+            <td>1004 Mopac Circle, Suite 200, Austin, TX 78746</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td><span class="na">No public reviews found</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Commercial brokerage (retail focus)</li>
+                <li>Land acquisition/disposition</li>
+                <li>Development</li>
+                <li>Tenant &amp; landlord representation</li>
+              </ul>
+            </td>
+            <td>Located in 78746 (Westlake area); retail CRE specialist; $6.5M revenue; works with national franchises and small businesses; Waco-to-San Antonio coverage</td>
+          </tr>
+          <!-- 7. HPI Real Estate -->
+          <tr>
+            <td>
+              <strong><a href="https://www.hpitx.com/" target="_blank">HPI Real Estate Services &amp; Investments</a></strong>
+            </td>
+            <td><span class="badge badge-commercial">Commercial</span> <span class="badge badge-investment">Investment</span></td>
+            <td>Austin, TX (also Dallas, San Antonio)</td>
+            <td>1992</td>
+            <td>200+ employees</td>
+            <td>Positive client testimonials (15+ yr client relationships cited)</td>
+            <td>
+              <ul class="services-list">
+                <li>Leasing</li>
+                <li>Property management (26M+ sq ft)</li>
+                <li>Development</li>
+                <li>Tenant advisory</li>
+                <li>Investment funds (~$300M raised)</li>
+              </ul>
+            </td>
+            <td>Large local CRE firm; 26M+ sq ft under management; diversified across office, industrial, multifamily, self-storage; strong investment arm; 30+ year track record</td>
+          </tr>
+          <!-- 8. Capital Commercial Investments -->
+          <tr>
+            <td>
+              <strong><a href="https://www.capitalcommercial.com/" target="_blank">Capital Commercial Investments</a></strong>
+            </td>
+            <td><span class="badge badge-investment">Investment</span></td>
+            <td>Austin, TX</td>
+            <td>1992</td>
+            <td>N/A</td>
+            <td><span class="na">No public review rating found</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Real estate private equity</li>
+                <li>Undervalued property acquisitions</li>
+                <li>Asset management</li>
+                <li>Development</li>
+              </ul>
+            </td>
+            <td>"Capital Preservation First, Profit Second"; $1.7B AUM; 22% avg annual returns; 100+ limited partnerships; contrarian value-add strategy; national footprint from Austin HQ</td>
+          </tr>
+          <!-- 9. Wildhorn Capital -->
+          <tr>
+            <td>
+              <strong><a href="https://wildhorncap.com/" target="_blank">Wildhorn Capital</a></strong>
+            </td>
+            <td><span class="badge badge-investment">Investment</span></td>
+            <td>Austin, TX</td>
+            <td>~2018</td>
+            <td>N/A</td>
+            <td>Verified investor reviews on <a href="https://investclearly.com/sponsors/wildhorn-capital">InvestClearly</a></td>
+            <td>
+              <ul class="services-list">
+                <li>Multifamily value-add investing</li>
+                <li>Build-to-rent development</li>
+                <li>Land entitlement</li>
+                <li>Passive investment opportunities</li>
+              </ul>
+            </td>
+            <td>29% avg IRR; $91M+ returned to investors; 4,000+ units; 250+ repeat investors; vertically integrated; Central Texas exclusive focus</td>
+          </tr>
+          <!-- 10. Austin Capital Advisors -->
+          <tr>
+            <td>
+              <strong><a href="https://www.austincapitaladvisors.com/" target="_blank">Austin Capital Advisors</a></strong>
+            </td>
+            <td><span class="badge badge-investment">Investment</span></td>
+            <td>Austin, TX</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td><span class="na">No public reviews found</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Multifamily investment</li>
+                <li>Asset management</li>
+                <li>Vertically integrated platform</li>
+                <li>I-35 corridor strategy</li>
+              </ul>
+            </td>
+            <td>$200M portfolio; pure-play multifamily investor; workforce housing focus; I-35 corridor (Austin-San Antonio); significant co-investment model</td>
+          </tr>
+          <!-- 11. Moreland Properties -->
+          <tr>
+            <td>
+              <strong><a href="https://moreland.com/" target="_blank">Moreland Properties</a></strong>
+            </td>
+            <td><span class="badge badge-luxury">Luxury Res.</span></td>
+            <td>3825 Lake Austin Blvd, Austin, TX (4 locations)</td>
+            <td>1990</td>
+            <td>75+ agents</td>
+            <td><span class="rating">4.5+ / 5</span> (66 Yelp reviews)</td>
+            <td>
+              <ul class="services-list">
+                <li>Luxury residential brokerage</li>
+                <li>Waterfront &amp; Hill Country properties</li>
+                <li>Concierge service</li>
+              </ul>
+            </td>
+            <td>Austin's premier independent luxury brokerage; 35+ year reputation; Westlake/Lake Austin/Hill Country expertise; Luxury Portfolio International member; Eric Moreland Group (Elite 25)</td>
+          </tr>
+          <!-- 12. Brigham Real Estate -->
+          <tr>
+            <td>
+              <strong><a href="https://www.brighamre.com/" target="_blank">Brigham Real Estate (BRE)</a></strong>
+            </td>
+            <td><span class="badge badge-luxury">Luxury Res.</span></td>
+            <td>7 Beecher Lane, Austin, TX 78745</td>
+            <td>N/A</td>
+            <td>8+ agents + appraiser + designer</td>
+            <td>Positive Yelp/testimonial reviews</td>
+            <td>
+              <ul class="services-list">
+                <li>Luxury residential brokerage</li>
+                <li>Real estate appraisal</li>
+                <li>Interior design consultation</li>
+                <li>Marketing/staging</li>
+              </ul>
+            </td>
+            <td>44+ yrs combined experience; in-house appraiser (27 yrs); Luxury Real Estate member; Institute for Luxury Home Marketing; Westlake and Hill Country coverage</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Major Market Competitors -->
+    <h2>Major / National Firms in Austin (Context)</h2>
+    <p style="margin-bottom: 1rem;">These large firms dominate Austin's commercial real estate market by volume and brand recognition. TRP competes on personalized service and local expertise rather than scale.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Type</th>
+            <th>Austin Office Since</th>
+            <th>HQ</th>
+            <th>Austin Strengths</th>
+            <th>Approx. Scale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CBRE</strong></td>
+            <td><span class="badge badge-major">Major CRE</span></td>
+            <td>1984</td>
+            <td>Los Angeles, CA</td>
+            <td>Office, retail, industrial tenant/property rep; investment services; project management</td>
+            <td>Global; 115,000+ employees worldwide</td>
+          </tr>
+          <tr>
+            <td><strong>JLL</strong></td>
+            <td><span class="badge badge-major">Major CRE</span></td>
+            <td>2008 (acquired Staubach Co.)</td>
+            <td>Chicago, IL</td>
+            <td>Full-service; strong project leasing and tenant rep; industrial; investment services</td>
+            <td>Global; 70,000+ employees across 80 countries</td>
+          </tr>
+          <tr>
+            <td><strong>Cushman &amp; Wakefield</strong></td>
+            <td><span class="badge badge-major">Major CRE</span></td>
+            <td>2007 (prev. Oxford Commercial, 1993)</td>
+            <td>Chicago, IL</td>
+            <td>Tenant rep; project management; growing investment arm</td>
+            <td>Global; 50,000+ employees</td>
+          </tr>
+          <tr>
+            <td><strong>AQUILA Commercial</strong></td>
+            <td><span class="badge badge-major">Major CRE</span></td>
+            <td>2007 (founded here)</td>
+            <td>Austin, TX</td>
+            <td>Tenant rep; project leasing; property/asset/project management; 14M+ sq ft managed; 600+ tenant rep clients</td>
+            <td>Regional leader; 11-50 employees; $71.7M revenue (2025)</td>
+          </tr>
+          <tr>
+            <td><strong>Endeavor Real Estate Group</strong></td>
+            <td><span class="badge badge-major">Major CRE</span></td>
+            <td>1999 (founded here)</td>
+            <td>Austin, TX</td>
+            <td>Development; leasing; property management; mixed-use, multifamily, office, industrial</td>
+            <td>190 employees; 21.8M+ sq ft developed; 8.9M sq ft under management; 9x Top Workplace</td>
+          </tr>
+          <tr>
+            <td><strong>Marcus &amp; Millichap</strong></td>
+            <td><span class="badge badge-major">Major CRE</span></td>
+            <td>Austin office</td>
+            <td>Calabasas, CA</td>
+            <td>Investment sales; multifamily and commercial investment brokerage</td>
+            <td>National; 2,000 agents; 80+ offices</td>
+          </tr>
+          <tr>
+            <td><strong>Compass / Keller Williams</strong></td>
+            <td><span class="badge badge-major">Major Res.</span></td>
+            <td>Multiple Austin offices</td>
+            <td>NYC / Austin, TX</td>
+            <td>Residential market dominance; massive agent networks; technology platforms</td>
+            <td>National; Compass + Anywhere merger = 340,000 agents; KW = 165,000 agents globally</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Competitive SWOT for TRP -->
+    <h2>TRP Austin - Competitive SWOT Analysis</h2>
+    <div class="swot-grid">
+      <div class="swot-card strengths">
+        <h4>Strengths</h4>
+        <ul>
+          <li>75+ combined years of leadership experience (Skelton 45+ yrs, Kirkpatrick 30+ yrs)</li>
+          <li>Both principals hold MBAs and are licensed TX brokers</li>
+          <li>Rare dual residential + commercial + investment service offering in a boutique firm</li>
+          <li>Due diligence and business valuation as a service differentiator (few competitors offer this)</li>
+          <li>1031 exchange expertise (only EREG matches this in boutique space)</li>
+          <li>Austin-San Antonio corridor coverage matches market growth patterns</li>
+          <li>Principal-led engagement; clients work directly with senior brokers</li>
+        </ul>
+      </div>
+      <div class="swot-card weaknesses">
+        <h4>Weaknesses</h4>
+        <ul>
+          <li>Minimal online review presence (no Google rating visible, no Zillow reviews, limited Yelp)</li>
+          <li>Website issues (403 errors observed during research)</li>
+          <li>No press mentions, media coverage, or industry awards found</li>
+          <li>Small team limits capacity for large-scale assignments</li>
+          <li>P.O. Box address (vs. competitors with prominent office locations)</li>
+          <li>No visible social media or content marketing presence</li>
+          <li>Competitors like Devora Realty have achieved stronger digital footprints with similar service offerings</li>
+        </ul>
+      </div>
+      <div class="swot-card opportunities">
+        <h4>Opportunities</h4>
+        <ul>
+          <li>Build Google/Yelp review presence (request reviews from past clients)</li>
+          <li>Position due diligence + valuation + 1031 exchange as unique bundled offering</li>
+          <li>Content marketing on Austin investment trends, 1031 strategies, site selection insights</li>
+          <li>Target Westlake/78746 market where St. Croix and CLD Realty are the main boutique players</li>
+          <li>Austin buyer's market (2026) creates demand for investment advisory services</li>
+          <li>I-35 corridor growth (Austin-San Antonio) aligns with TRP's coverage area</li>
+          <li>Institutional clients may prefer boutique firms over large national players for personalized service</li>
+        </ul>
+      </div>
+      <div class="swot-card threats">
+        <h4>Threats</h4>
+        <ul>
+          <li>Major firms (CBRE, JLL, C&W) have dominant brand recognition and resources</li>
+          <li>Devora Realty, Sierra Commercial, and EREG offer nearly identical service mixes</li>
+          <li>Large residential brokerages (Compass, KW) dominate residential search and lead generation</li>
+          <li>Tech-forward firms attract younger buyers/sellers with digital tools</li>
+          <li>Austin market softening (median price down 4.1% YoY) may reduce transaction volume</li>
+          <li>Investment firms (Wildhorn, CCI, ACA) specialize in investor services at scale</li>
+          <li>Competitors with strong review profiles capture more organic search traffic</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Key Competitive Insights -->
+    <h2>Key Competitive Insights</h2>
+
+    <div class="insight-box">
+      <h4>1. Closest Direct Competitors by Service Overlap</h4>
+      <p>Three firms most closely match TRP's service mix of residential + commercial + investment + development:</p>
+      <ul>
+        <li><strong>Devora Realty</strong> - Residential, commercial, multifamily, development, and land. CCIM-designated broker. Perfect 5.0 Google rating with 45 reviews. Strongest overall competitor by service match and online presence.</li>
+        <li><strong>Sierra Commercial</strong> - Commercial, select residential, site selection, development consulting, investment strategy, property management. Very similar positioning but focused on Hill Country. Minimal online review footprint.</li>
+        <li><strong>Executive Real Estate Group (EREG)</strong> - Commercial brokerage, development, 1031 exchanges, site selection, leasing. Only other boutique firm in Austin explicitly offering 1031 exchange services alongside site selection. CEO-led model mirrors TRP's principal-led approach.</li>
+      </ul>
+    </div>
+
+    <div class="insight-box">
+      <h4>2. Westlake / 78746 Competitive Landscape</h4>
+      <p>Two notable competitors operate directly in the Westlake/78746 area where TRP may target high-net-worth clients:</p>
+      <ul>
+        <li><strong>St. Croix Capital Realty Advisors</strong> (901 S Mopac, 78746) - Established 1982; commercial investment sales, asset management, debt/equity sourcing. The longest-operating boutique commercial firm in this submarket.</li>
+        <li><strong>CLD Realty</strong> (1004 Mopac Circle, 78746) - Retail-focused commercial brokerage with development and land services. $6.5M revenue.</li>
+        <li><strong>Moreland Properties</strong> dominates luxury residential in Westlake/Lake Austin with 75+ agents and 35+ year brand recognition.</li>
+      </ul>
+    </div>
+
+    <div class="insight-box">
+      <h4>3. Due Diligence / Business Valuation Gap in Market</h4>
+      <p>TRP's offering of due diligence and business valuation services is a significant differentiator. Among all competitors researched, no other boutique Austin real estate brokerage explicitly markets combined due diligence and business valuation alongside brokerage services. Dedicated valuation firms (Benaglio Group, BizWorth, INNP Consulting) operate separately from brokerage. TRP could position this as its primary competitive advantage.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>4. Online Presence Benchmark</h4>
+      <p>Review counts and ratings across the competitor set highlight a wide range:</p>
+      <ul>
+        <li><strong>Top Tier:</strong> Spyglass Realty (1,800+ five-star reviews), Moreland Properties (66 Yelp reviews)</li>
+        <li><strong>Mid Tier:</strong> Devora Realty (45 Google reviews, 5.0 stars), Asterra (10 reviews, 4.0 stars)</li>
+        <li><strong>Low/No Presence:</strong> TRP Austin, Sierra Commercial, EREG, St. Croix, CLD Realty, Capital Commercial - minimal or no public reviews</li>
+      </ul>
+      <p>The boutique commercial firms tend to have weaker online review profiles than residential-focused firms, suggesting this is an industry-wide pattern rather than unique to TRP. However, Devora Realty demonstrates that a boutique firm doing both residential and commercial can achieve strong review numbers.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>5. Austin Market Context (Feb 2026)</h4>
+      <ul>
+        <li>Median home price: $540,000 (down 4.1% YoY) - shifted to buyer's market in late 2025</li>
+        <li>Mortgage rates: 6.65% (30-yr fixed), 5.77% (15-yr fixed)</li>
+        <li>Population growth continues to drive demand (metro Austin grew 33% 2010-2020)</li>
+        <li>Inventory increasing, giving buyers more options</li>
+        <li>Compass-Anywhere merger creating a 340,000-agent residential mega-brokerage</li>
+        <li>Investment opportunities remain strong in workforce multifamily and I-35 corridor industrial</li>
+      </ul>
+    </div>
+
+    <!-- Sources -->
+    <div class="sources">
+      <h3>Sources &amp; References</h3>
+      <a href="https://trpaustin.com/" target="_blank">TRP Austin - Official Website</a>
+      <a href="https://trpaustin.com/contact-2/" target="_blank">TRP Austin - About / Contact</a>
+      <a href="https://www.har.com/texas-realty-partners-llc/broker_ABORTX-2065" target="_blank">TRP Austin - HAR.com Profile</a>
+      <a href="https://www.loopnet.com/company/texas-realty-partners-llc/austin-tx/wlxgzvjl/" target="_blank">TRP Austin - LoopNet Profile</a>
+      <a href="https://www.yelp.com/biz/texas-realty-partners-austin" target="_blank">TRP Austin - Yelp</a>
+      <a href="https://devorarealty.com/" target="_blank">Devora Realty</a>
+      <a href="https://sierracommercialtx.com/" target="_blank">Sierra Commercial</a>
+      <a href="https://www.eregtx.com/" target="_blank">Executive Real Estate Group (EREG)</a>
+      <a href="https://www.stcroixcra.com/" target="_blank">St. Croix Capital Realty Advisors</a>
+      <a href="https://asterra.com/" target="_blank">Asterra Properties</a>
+      <a href="https://www.cldrealty.com/" target="_blank">CLD Realty</a>
+      <a href="https://www.hpitx.com/" target="_blank">HPI Real Estate Services &amp; Investments</a>
+      <a href="https://www.capitalcommercial.com/" target="_blank">Capital Commercial Investments</a>
+      <a href="https://wildhorncap.com/" target="_blank">Wildhorn Capital</a>
+      <a href="https://www.austincapitaladvisors.com/" target="_blank">Austin Capital Advisors</a>
+      <a href="https://moreland.com/" target="_blank">Moreland Properties</a>
+      <a href="https://www.brighamre.com/" target="_blank">Brigham Real Estate</a>
+      <a href="https://aquilacommercial.com/" target="_blank">AQUILA Commercial</a>
+      <a href="https://www.endeavor-re.com/" target="_blank">Endeavor Real Estate Group</a>
+      <a href="https://aquilacommercial.com/learning-center/8-best-commercial-real-estate-companies-austin-texas/" target="_blank">AQUILA - 8 Best CRE Companies in Austin</a>
+      <a href="https://www.agentup.com/blog/best-real-estate-brokers-in-austin-tx" target="_blank">AgentUp - Best Real Estate Brokers in Austin TX 2026</a>
+      <a href="https://www.spyglassrealty.com/" target="_blank">Spyglass Realty</a>
+      <a href="https://clutch.co/real-estate/austin" target="_blank">Clutch.co - Top CRE Companies in Austin</a>
+      <a href="https://clutch.co/real-estate/commercial-brokerage/austin" target="_blank">Clutch.co - Top CRE Brokers in Austin</a>
+    </div>
+  </div>
+</body>
+</html>
