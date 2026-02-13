@@ -213,6 +213,33 @@
       transform: translateX(4px);
     }
 
+    .card-links {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+      margin-top: auto;
+    }
+
+    .card-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--color-accent);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .card-links a::after {
+      content: '→';
+      transition: transform 0.3s ease;
+    }
+
+    .card-links a:hover::after {
+      transform: translateX(4px);
+    }
+
     /* Footer */
     footer {
       border-top: 1px solid var(--color-border);
@@ -323,77 +350,7 @@
       </div>
     </section>
 
-    <!-- Combined Client Index Section -->
-    <section>
-      <h2 class="section-title">Client Reports</h2>
-      <div class="card-grid">
-        <a href="leora_research/index.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Portal</span>
-            <h3 class="card-title">Leora Home Health</h3>
-          </div>
-          <p class="card-description">Employee referral program hub — submission form, tracking dashboard, program guides, launch communications, and hiring research.</p>
-          <div class="card-link">View Portal</div>
-        </a>
-        <a href="ngo-market/index.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Documentation</span>
-            <h3 class="card-title">Integrity Studio</h3>
-          </div>
-          <p class="card-description">Marketing plan, AI market analysis, and growth strategy for Integrity Studio's AI observability positioning.</p>
-          <div class="card-link">View Documentation</div>
-        </a>
-        <a href="balloon-collective/the_balloon_collective_research.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Research</span>
-            <h3 class="card-title">The Balloon Collective</h3>
-          </div>
-          <p class="card-description">Market analysis, competitive landscape, and Austin resources for The Balloon Collective — balloon sculpture and event decor.</p>
-          <div class="card-link">View Report</div>
-        </a>
-        <a href="trp-austin/texas_realty_partners_research.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Research</span>
-            <h3 class="card-title">Texas Realty Partners</h3>
-          </div>
-          <p class="card-description">Market analysis, Austin metro opportunity sizing, competitive landscape, and online presence audit for Texas Realty Partners.</p>
-          <div class="card-link">View Report</div>
-        </a>
-        <a href="edgar_nadyne/edghar_nadyne_artist_profile.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Artist Profile</span>
-            <h3 class="card-title">Edghar &amp; Nadyne</h3>
-          </div>
-          <p class="card-description">Artist profiles, global and Austin market analyses, and Portuguese translations for Brazilian Zouk instructors Edghar &amp; Nadyne.</p>
-          <div class="card-link">View Report</div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Holliday Lighting Section -->
-    <section>
-      <h2 class="section-title">Illumination Holiday Lighting</h2>
-      <div class="card-grid">
-        <a href="holliday_lighting/illumination_holiday_lighting_research.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Research</span>
-            <h3 class="card-title">Illumination Holiday Lighting, LLC</h3>
-          </div>
-          <p class="card-description">Comprehensive research report covering market analysis and business insights for Illumination Holiday Lighting, LLC.</p>
-          <div class="card-link">View Report</div>
-        </a>
-        <a href="holliday_lighting/illumination_opportunities_report.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Opportunities</span>
-            <h3 class="card-title">Growth &amp; Opportunities Report</h3>
-          </div>
-          <p class="card-description">Growth, marketing, partnership, certification, and platform opportunities for Illumination Holiday Lighting with 90-day action plan. 41 cited sources.</p>
-          <div class="card-link">View Report</div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Leora Research Section -->
+    <!-- Leora Home Health Index -->
     <section>
       <h2 class="section-title">Leora Home Health</h2>
       <div class="card-grid">
@@ -405,57 +362,25 @@
           <p class="card-description">Employee referral program hub — submission form, tracking dashboard, program guides, launch communications, and hiring research.</p>
           <div class="card-link">View Portal</div>
         </a>
-        <a href="PerformanceTest/leora_referral_form.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Performance Test</span>
-            <h3 class="card-title">Employee Referral Form (Test)</h3>
-          </div>
-          <p class="card-description">Performance-optimized test build of the Leora Home Health employee referral form.</p>
-          <div class="card-link">View Form</div>
-        </a>
-        <a href="PerformanceTest/leora_referral_dashboard.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Performance Test</span>
-            <h3 class="card-title">My Referrals Dashboard (Test)</h3>
-          </div>
-          <p class="card-description">Performance-optimized test build of the Leora referral tracking dashboard.</p>
-          <div class="card-link">View Dashboard</div>
-        </a>
       </div>
     </section>
 
-    <!-- Marketing Plan Section -->
+    <!-- Integrity Studio Index -->
     <section>
       <h2 class="section-title">Integrity Studio</h2>
       <div class="card-grid">
         <a href="ngo-market/index.html" class="card">
           <div class="card-header">
             <span class="card-category">Documentation</span>
-            <h3 class="card-title">Integrity Studio Marketing Plan</h3>
+            <h3 class="card-title">Marketing Plan & AI Strategy</h3>
           </div>
-          <p class="card-description">Full marketing plan documentation outlining strategy, market positioning, and projected initiatives for Integrity Studio.</p>
+          <p class="card-description">Marketing plan, AI market analysis, and growth strategy for Integrity Studio's AI observability positioning.</p>
           <div class="card-link">View Documentation</div>
-        </a>
-        <a href="integrity-studio-ai/integrity_studio_ai_research.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Research</span>
-            <h3 class="card-title">Integrity Studio AI Market Analysis</h3>
-          </div>
-          <p class="card-description">Comprehensive market analysis covering AI observability market sizing ($510.5M, 31.8% CAGR), EU AI Act compliance opportunity, competitive landscape, and Austin tech economy. 37 cited sources.</p>
-          <div class="card-link">View Report</div>
-        </a>
-        <a href="integrity-studio-ai/integrity_studio_ai_opportunities_report.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Growth Strategy</span>
-            <h3 class="card-title">Integrity Studio AI Growth & Opportunities</h3>
-          </div>
-          <p class="card-description">Growth, marketing, partnership, certification & platform opportunities with prioritized 90-day action plan. Covers EU AI Act compliance positioning, cloud marketplace listings, and Austin ecosystem. 44 cited sources.</p>
-          <div class="card-link">View Report</div>
         </a>
       </div>
     </section>
 
-    <!-- The Balloon Collective Section -->
+    <!-- The Balloon Collective Index -->
     <section>
       <h2 class="section-title">The Balloon Collective</h2>
       <div class="card-grid">
@@ -464,21 +389,13 @@
             <span class="card-category">Research</span>
             <h3 class="card-title">The Balloon Collective, LLC</h3>
           </div>
-          <p class="card-description">Comprehensive research report covering market analysis, competitive landscape, and business insights for The Balloon Collective — Austin's balloon sculpture and event decor company.</p>
+          <p class="card-description">Market analysis, competitive landscape, and Austin resources for The Balloon Collective — balloon sculpture and event decor.</p>
           <div class="card-link">View Report</div>
-        </a>
-        <a href="balloon-collective/the_balloon_collective_austin_resources.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Recommendations</span>
-            <h3 class="card-title">Austin Resources &amp; Opportunities</h3>
-          </div>
-          <p class="card-description">Curated guide of Austin grants, certifications, event partnerships, business associations, and growth opportunities for The Balloon Collective with a prioritized action timeline.</p>
-          <div class="card-link">View Guide</div>
         </a>
       </div>
     </section>
 
-    <!-- TRP Austin Section -->
+    <!-- Texas Realty Partners Index -->
     <section>
       <h2 class="section-title">Texas Realty Partners</h2>
       <div class="card-grid">
@@ -487,17 +404,60 @@
             <span class="card-category">Research</span>
             <h3 class="card-title">Texas Realty Partners, LLC</h3>
           </div>
-          <p class="card-description">Comprehensive market analysis covering company overview, key personnel, industry market data, Austin metro opportunity sizing, competitive landscape, and online presence audit. 48 cited sources.</p>
+          <p class="card-description">Market analysis, Austin metro opportunity sizing, competitive landscape, and online presence audit for Texas Realty Partners.</p>
           <div class="card-link">View Report</div>
         </a>
-        <a href="trp-austin/competitor-analysis.html" class="card">
+      </div>
+    </section>
+
+    <!-- Edghar & Nadyne Index -->
+    <section>
+      <h2 class="section-title">Edghar &amp; Nadyne</h2>
+      <div class="card-grid">
+        <a href="edgar_nadyne/edghar_nadyne_artist_profile.html" class="card">
           <div class="card-header">
-            <span class="card-category">Competitive Analysis</span>
-            <h3 class="card-title">TRP Austin Competitive Landscape</h3>
+            <span class="card-category">Artist Profile</span>
+            <h3 class="card-title">Edghar &amp; Nadyne Artist Profile</h3>
           </div>
-          <p class="card-description">Comprehensive competitor research for Texas Realty Partners, LLC — 12 direct/niche competitors, 7 major firms, SWOT analysis, and market positioning insights for Austin's boutique real estate brokerage market.</p>
-          <div class="card-link">View Analysis</div>
+          <p class="card-description">Artist profiles, global and Austin market analyses, and Portuguese translations for Brazilian Zouk instructors Edghar &amp; Nadyne.</p>
+          <div class="card-link">View Report</div>
         </a>
+      </div>
+    </section>
+
+    <!-- Holliday Lighting Section -->
+    <section>
+      <h2 class="section-title">Illumination Holiday Lighting</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-category">Research &amp; Growth</span>
+            <h3 class="card-title">Illumination Holiday Lighting, LLC</h3>
+          </div>
+          <p class="card-description">Market analysis, business insights, and growth opportunities with 90-day action plan for Illumination Holiday Lighting. 41 cited sources.</p>
+          <div class="card-links">
+            <a href="holliday_lighting/illumination_holiday_lighting_research.html">Market Research</a>
+            <a href="holliday_lighting/illumination_opportunities_report.html">Growth &amp; Opportunities</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Balloon Collective Section -->
+    <section>
+      <h2 class="section-title">The Balloon Collective</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-category">Research &amp; Recommendations</span>
+            <h3 class="card-title">The Balloon Collective, LLC</h3>
+          </div>
+          <p class="card-description">Market analysis, competitive landscape, and Austin grants, certifications, and event partnership opportunities for The Balloon Collective — balloon sculpture and event decor.</p>
+          <div class="card-links">
+            <a href="balloon-collective/the_balloon_collective_research.html">Market Research</a>
+            <a href="balloon-collective/the_balloon_collective_austin_resources.html">Austin Resources &amp; Opportunities</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -512,61 +472,6 @@
           </div>
           <p class="card-description">Comprehensive market analysis for ZoukMX — Brazilian Zouk dance festival and 100-hour training program in Playa del Carmen, Mexico. Covers music tourism market sizing, competitive landscape, and Riviera Maya tourism data. 33 cited sources.</p>
           <div class="card-link">View Report</div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Edghar & Nadyne Section -->
-    <section>
-      <h2 class="section-title">Edghar & Nadyne</h2>
-      <div class="card-grid">
-        <a href="edgar_nadyne/edghar_nadyne_artist_profile.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Artist Profile</span>
-            <h3 class="card-title">Edghar & Nadyne Artist Profile</h3>
-          </div>
-          <p class="card-description">Comprehensive artist and instructor profile for Brazilian Zouk dancers Edghar Fhernandes & Nadyne Cruz. Covers 20+ years experience, 9+ countries, teaching philosophy, event history, competition credentials, and testimonials.</p>
-          <div class="card-link">View Report</div>
-        </a>
-        <a href="edgar_nadyne/brazilian_zouk_market_analysis.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Market Analysis</span>
-            <h3 class="card-title">Brazilian Zouk Global Market Analysis</h3>
-          </div>
-          <p class="card-description">Global market analysis for the Brazilian Zouk industry. Covers dance training market ($15B), festival circuit economics, competitive landscape (SWOT), online education opportunities, and wellness tourism crossover ($222.5B).</p>
-          <div class="card-link">View Report</div>
-        </a>
-        <a href="edgar_nadyne/austin_dance_market_analysis.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Market Analysis</span>
-            <h3 class="card-title">Austin Dance Market Analysis</h3>
-          </div>
-          <p class="card-description">Austin TX dance studio and instruction market analysis with Brazilian Zouk focus. 170+ studios, $35-45M market, pricing analysis, and market entry strategy for an underserved zouk niche in a 2.3M+ metro area.</p>
-          <div class="card-link">View Report</div>
-        </a>
-        <a href="edgar_nadyne/edghar_nadyne_perfil_artista.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Perfil (PT-BR)</span>
-            <h3 class="card-title">Perfil Completo de Artistas & Instrutores</h3>
-          </div>
-          <p class="card-description">Perfil completo em Português Brasileiro de Edghar Fhernandes & Nadyne Cruz — dançarinos, instrutores e coreógrafos de Zouk Brasileiro. Tradução otimizada para o estilo e voz dos artistas.</p>
-          <div class="card-link">Ver Relatório</div>
-        </a>
-        <a href="edgar_nadyne/analise_mercado_zouk.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Análise (PT-BR)</span>
-            <h3 class="card-title">Análise de Mercado Global do Zouk Brasileiro</h3>
-          </div>
-          <p class="card-description">Análise de mercado global em Português Brasileiro. Mercado de treinamento em dança, economia do circuito de festivais, análise SWOT, oportunidades de educação online e turismo de bem-estar.</p>
-          <div class="card-link">Ver Relatório</div>
-        </a>
-        <a href="edgar_nadyne/analise_mercado_austin.html" class="card">
-          <div class="card-header">
-            <span class="card-category">Análise (PT-BR)</span>
-            <h3 class="card-title">Análise do Mercado de Dança de Austin</h3>
-          </div>
-          <p class="card-description">Análise do mercado de dança de Austin em Português Brasileiro. Foco em Zouk Brasileiro — 170+ estúdios, análise de preços, e estratégia de entrada em um nicho subatendido numa metrópole de 2,3M+ habitantes.</p>
-          <div class="card-link">Ver Relatório</div>
         </a>
       </div>
     </section>
