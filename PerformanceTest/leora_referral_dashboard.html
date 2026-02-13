@@ -271,6 +271,20 @@
                 gap: 15px;
             }
         }
+
+        @media (prefers-color-scheme: dark) {
+            body { background: #0f0f23; color: #e0e0e0; }
+            .stat-card { background: #1a1a2e; color: #e0e0e0; }
+            .stat-card:hover { box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
+            .stat-card .label { color: #999; }
+            .referrals-table { background: #1a1a2e; }
+            table th { background: #252540; color: #ccc; }
+            table td { border-color: #333; color: #e0e0e0; }
+            table tr:hover { background: #252535; }
+            .milestone { background: #252540; }
+            .quick-actions .action-btn { background: #252540; color: #e0e0e0; }
+            .quick-actions .action-btn:hover { background: #333; }
+        }
     </style>
 </head>
 <body>

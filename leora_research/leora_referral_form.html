@@ -180,6 +180,18 @@
                 font-size: 24px;
             }
         }
+
+        @media (prefers-color-scheme: dark) {
+            body { background: linear-gradient(135deg, #2a2a5e 0%, #3a2252 100%); }
+            .container { background: #1a1a2e; color: #e0e0e0; }
+            .form-content { background: #1a1a2e; }
+            .section-title { color: #8899ee; border-color: #333; }
+            .form-group label { color: #ccc; }
+            input, textarea, select { background: #252540; color: #e0e0e0; border-color: #444; }
+            input:focus, textarea:focus, select:focus { border-color: #667eea; }
+            .info-banner { background: #1e2a4e; border-color: #667eea; color: #ccc; }
+            .privacy-notice { background: #252540; border-color: #444; color: #aaa; }
+        }
     </style>
 </head>
 <body>
