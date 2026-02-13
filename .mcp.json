@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "textstat": {
+      "command": "/Users/alyshialedlie/.claude/mcp-servers/textstat-mcp/.venv/bin/python",
+      "args": [
+        "/Users/alyshialedlie/.claude/mcp-servers/textstat-mcp/server.py"
+      ],
+      "description": "Text readability analysis - Flesch-Kincaid, Gunning Fog, SMOG, Dale-Chall"
+    }
+  }
+}
