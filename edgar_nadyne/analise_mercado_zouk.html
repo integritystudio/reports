@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análise de Mercado Global do Zouk Brasileiro | Edghar &amp; Nadyne</title>
+  <style>
+    :root {
+      --primary: #8B1A1A;
+      --secondary: #C41E3A;
+      --accent: #FFD700;
+      --light: #FFF8F0;
+      --dark: #1a1a1a;
+      --border: #e8d5c4;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: var(--dark); background: var(--light); }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 2rem; margin-bottom: 2rem; }
+    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    header .subtitle { font-size: 1.2rem; opacity: 0.9; }
+    header .meta { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
+    .executive-summary { background: white; border-left: 4px solid var(--accent); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+    section { background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden; }
+    section h2 { background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem; }
+    section h3 { color: var(--secondary); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .section-content { padding: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: var(--light); font-weight: 600; color: var(--primary); }
+    tr:hover { background: #fff8f0; }
+    ul, ol { margin: 1rem 0; padding-left: 1.5rem; }
+    li { margin-bottom: 0.5rem; }
+    .highlight-box { background: linear-gradient(135deg, #fff3e0, #fce4ec); border-radius: 8px; padding: 1rem 1.5rem; margin: 1rem 0; }
+    .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .info-box { background: #fce4ec; border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    blockquote { background: #f8f9fa; border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; font-style: italic; color: #555; }
+    .source { font-size: 0.85rem; color: #666; font-style: italic; }
+    .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
+    .badge-success { background: #d4edda; color: #155724; }
+    .badge-warning { background: #fff3cd; color: #856404; }
+    .badge-danger { background: #f8d7da; color: #721c24; }
+    .badge-info { background: #fce4ec; color: #8B1A1A; }
+    .rating { color: #ffc107; font-size: 1.2rem; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .contact-item { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; }
+    .contact-item .label { font-size: 0.85rem; color: #666; margin-bottom: 0.25rem; }
+    .contact-item .value { font-weight: 600; color: var(--primary); }
+    details { margin: 1rem 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    details summary { padding: 0.75rem 1rem; background: var(--light); cursor: pointer; font-weight: 600; color: var(--primary); list-style: none; display: flex; align-items: center; gap: 0.5rem; user-select: none; }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before { content: '\25B6'; font-size: 0.7rem; transition: transform 0.2s ease; flex-shrink: 0; }
+    details[open] summary::before { transform: rotate(90deg); }
+    details summary:hover { background: #f5e6d8; }
+    details summary .detail-count { font-weight: 400; font-size: 0.85rem; color: #666; margin-left: auto; }
+    details .details-content { padding: 1rem 1.5rem; }
+    a { color: var(--secondary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { text-align: center; padding: 2rem; color: #666; font-size: 0.9rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    @media print { body { background: white; } .container { max-width: 100%; } section { box-shadow: none; border: 1px solid #ddd; } details { border: none; } details, details[open] { display: block; } details > summary { display: none; } details .details-content { padding: 0; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Análise de Mercado Global do Zouk Brasileiro</h1>
+    <div class="subtitle">Edghar Fhernandes & Nadyne Cruz -- Relatório de Inteligência Artística</div>
+    <div class="meta">
+      Elaborado: 12 de fevereiro de 2026 | Divisão de Pesquisa Integrity Studio<br>
+      Fonte Primária: <a href="https://instagram.com/edghar.e.nadyne" style="color: var(--accent);">instagram.com/edghar.e.nadyne</a> | Classificação: Inteligência de Mercado
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- RESUMO EXECUTIVO -->
+  <div class="executive-summary">
+    <h2>Resumo Executivo</h2>
+    <p>O Zouk Brasileiro é uma dança de par em crescimento acelerado, nascida da Lambada brasileira no início dos anos 1990, e hoje praticada em <strong>mais de 180 cidades em 49 países</strong>. O mercado global de treinamento em dança é avaliado em <strong>$15 bilhões (2024)</strong>, enquanto o mercado mais amplo de dança vale <strong>$1,72 bilhão</strong> com projeção de crescimento para <strong>$3,16 bilhões até 2035</strong> (CAGR de 7%). Edghar Fhernandes e Nadyne Cruz são artistas de Zouk Brasileiro reconhecidos internacionalmente, com <strong>mais de 20 anos de experiência combinada</strong>, ensinando em <strong>9+ países</strong> e vinculados ao prestigioso programa de 100 horas do ZoukMX.</p>
+    <p style="margin-top: 1rem;">O BZDC registrou <strong>mais de 19.000 competidores</strong> em 22 países na sua primeira década. Com <strong>60-80+ festivais dedicados ao zouk anualmente</strong> e uma crescente migração das comunidades de salsa e bachata, o Zouk Brasileiro representa um nicho dinâmico e cheio de energia dentro da <strong>economia de turismo de bem-estar de mais de $180 bilhões</strong>.</p>
+  </div>
+
+  <!-- SEÇÃO 1: PERFIL DOS ARTISTAS -->
+  <section>
+    <h2>1. Perfil dos Artistas</h2>
+    <div class="section-content">
+
+      <h3>Perfil da Parceria</h3>
+      <p>Edghar Fhernandes e Nadyne Cruz são dançarinos, instrutores e coreógrafos de Zouk Brasileiro que formaram sua parceria em <strong>2017</strong>. Baseados no <strong>OMNE Studio de Dança</strong> em São Paulo, Brasil, são reconhecidos como figuras de destaque no circuito internacional de zouk.</p>
+
+      <h3>Alcance Geográfico</h3>
+      <p>Ensinando em <strong>9+ países</strong>:</p>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="label">Base</div>
+          <div class="value">Brasil</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">América Latina</div>
+          <div class="value">México</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">América do Norte</div>
+          <div class="value">EUA, Canadá</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Europa</div>
+          <div class="value">Alemanha, Reino Unido, Dinamarca</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Ásia-Pacífico</div>
+          <div class="value">Austrália, Indonésia</div>
+        </div>
+      </div>
+
+      <h3>Estilos de Dança</h3>
+      <ul>
+        <li><strong>Zouk Brasileiro</strong> (principal) -- contrabalanços, movimentos de cabeça lúdicos, precisão técnica</li>
+        <li><strong>Bolero</strong> -- tradição do salão brasileiro</li>
+        <li><strong>Forró</strong> -- dança de par do Nordeste brasileiro</li>
+        <li><strong>Samba de Gafieira</strong> -- samba de salão brasileiro</li>
+        <li><strong>Salsa</strong> -- estilo latino crossover</li>
+      </ul>
+
+      <h3>Filosofia de Ensino</h3>
+      <div class="info-box">
+        <strong>Aprendizado centrado no ser humano:</strong> Edghar & Nadyne integram a formação de Nadyne em psicologia na abordagem pedagógica, enfatizando consciência corporal, qualidade de conexão e inteligência emocional junto à instrução técnica. O estilo único da dupla combina contrabalanços e movimentos de cabeça lúdicos com uma profunda precisão técnica -- uma energia maravilhosa que transforma cada aula.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 2: INFORMAÇÕES DE CONTATO -->
+  <section>
+    <h2>2. Informações de Contato</h2>
+    <div class="section-content">
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="label">Instagram Conjunto</div>
+          <div class="value"><a href="https://instagram.com/edghar.e.nadyne">@edghar.e.nadyne</a></div>
+          <div class="label" style="margin-top: 0.25rem;">4.132 seguidores</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Instagram do Edghar</div>
+          <div class="value"><a href="https://instagram.com/dance.edghar">@dance.edghar</a></div>
+          <div class="label" style="margin-top: 0.25rem;">13.100 seguidores</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Instagram da Nadyne</div>
+          <div class="value"><a href="https://instagram.com/nadyne.cruz">@nadyne.cruz</a></div>
+          <div class="label" style="margin-top: 0.25rem;">4.556 seguidores</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Alcance Social Combinado</div>
+          <div class="value">~21.788 seguidores</div>
+        </div>
+      </div>
+
+      <div class="contact-grid" style="margin-top: 1rem;">
+        <div class="contact-item">
+          <div class="label">Perfil ZoukMX</div>
+          <div class="value"><a href="https://zouk.mx/performer/edgar-nadyne/">zouk.mx/performer/edgar-nadyne</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Estúdio</div>
+          <div class="value">OMNE Studio de Dança, São Paulo</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Website Dedicado</div>
+          <div class="value"><span class="badge badge-warning">Não encontrado</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 3: PESSOAS-CHAVE -->
+  <section>
+    <h2>3. Pessoas-Chave</h2>
+    <div class="section-content">
+
+      <h3>Edghar Fhernandes</h3>
+      <table>
+        <tr><th style="width: 35%;">Atributo</th><th>Detalhe</th></tr>
+        <tr><td>Início na Dança</td><td>Aos 15 anos -- começou com hip-hop e danças sociais brasileiras</td></tr>
+        <tr><td>Experiência</td><td><strong>20+ anos</strong></td></tr>
+        <tr><td>Alunos Formados</td><td><strong>10.000+</strong></td></tr>
+        <tr><td>Histórico Competitivo</td><td>Campeão em grandes competições de dança de salão no Brasil</td></tr>
+        <tr><td>Aparições na TV</td><td><strong>Got Talent Brasil</strong>, <strong>Dancing with the Stars Brasil</strong></td></tr>
+        <tr><td>Especialização</td><td>Zouk Brasileiro, dança de salão, instrução multi-estilo</td></tr>
+      </table>
+
+      <h3>Nadyne Cruz</h3>
+      <table>
+        <tr><th style="width: 35%;">Atributo</th><th>Detalhe</th></tr>
+        <tr><td>Início na Dança</td><td>Dança clássica desde a infância; danças sociais brasileiras a partir dos 15 anos</td></tr>
+        <tr><td>Mentoria Notável</td><td>Dançou com <strong>Jaime Aroxa</strong> (cocriador do Zouk Brasileiro)</td></tr>
+        <tr><td>Formação Acadêmica</td><td>Estudos em Psicologia -- integrados à metodologia de ensino</td></tr>
+        <tr><td>Especialização</td><td>Zouk Brasileiro, fundamentos de dança clássica, inovação pedagógica</td></tr>
+      </table>
+
+      <div class="highlight-box">
+        <strong>Diferencial da Parceria:</strong> A combinação do histórico competitivo de Edghar e sua exposição em mídias de TV com a linhagem direta de Nadyne com Jaime Aroxa (cocriador da arte) e seu ensino fundamentado na psicologia cria uma proposta de valor única no mercado internacional de instrutores de zouk. Uma parceria incrível que une tradição, técnica e sensibilidade humana.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 4: DADOS DE MERCADO DA INDÚSTRIA -->
+  <section>
+    <h2>4. Dados de Mercado da Indústria</h2>
+    <div class="section-content">
+
+      <div class="info-box">
+        <strong>Abreviações Importantes:</strong>
+        <strong>BZDC</strong> = Brazilian Zouk Dance Council (Conselho de Dança do Zouk Brasileiro) |
+        <strong>CAGR</strong> = Taxa Composta de Crescimento Anual |
+        <strong>IZC</strong> = Congresso Internacional de Zouk |
+        <strong>BZWC</strong> = Campeonato Mundial de Zouk Brasileiro |
+        <strong>MSA</strong> = Área Estatística Metropolitana
+      </div>
+
+      <!-- Mercado Global de Dança -->
+      <details>
+        <summary>Mercado Global de Dança <span class="detail-count">8 métricas</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Métrica</th><th>Valor</th><th>Fonte</th></tr>
+            <tr><td>Mercado Global de Dança (2026)</td><td><strong>$1,72 bilhão</strong></td><td><span class="source">Business Research Insights</span></td></tr>
+            <tr><td>Mercado Global de Dança (projeção 2035)</td><td><strong>$3,16 bilhões</strong></td><td><span class="source">Business Research Insights</span></td></tr>
+            <tr><td>CAGR do Mercado de Dança</td><td><strong>7%</strong></td><td><span class="source">Business Research Insights</span></td></tr>
+            <tr><td>Mercado de Treinamento em Dança (2024)</td><td><strong>$15 bilhões</strong></td><td><span class="source">FutureDataStats</span></td></tr>
+            <tr><td>Mercado de Treinamento em Dança (projeção 2032)</td><td><strong>$25 bilhões</strong></td><td><span class="source">FutureDataStats</span></td></tr>
+            <tr><td>Treinamento de Dança Online (2025)</td><td><strong>$2,9 bilhões</strong></td><td><span class="source">Global Growth Insights</span></td></tr>
+            <tr><td>Treinamento de Dança Online (projeção 2035)</td><td><strong>$17,96 bilhões</strong></td><td><span class="source">Global Growth Insights</span></td></tr>
+            <tr><td>Receita da Indústria de Estúdios de Dança (EUA, 2023)</td><td><strong>$4,4 bilhões</strong></td><td><span class="source">PassiveSecrets</span></td></tr>
+          </table>
+        </div>
+      </details>
+
+      <!-- Alcance Global do Zouk Brasileiro -->
+      <details>
+        <summary>Alcance Global do Zouk Brasileiro <span class="detail-count">7 métricas</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Métrica</th><th>Valor</th><th>Fonte</th></tr>
+            <tr><td>Cidades com comunidades de zouk</td><td><strong>180+</strong></td><td><span class="source">The DUO App</span></td></tr>
+            <tr><td>Países com zouk</td><td><strong>49</strong></td><td><span class="source">The DUO App</span></td></tr>
+            <tr><td>Total de competidores BZDC (10 anos)</td><td><strong>19.000+</strong></td><td><span class="source">Danceplace</span></td></tr>
+            <tr><td>Países com eventos BZDC</td><td><strong>22</strong></td><td><span class="source">Danceplace</span></td></tr>
+            <tr><td>Dançarinos ranqueados BZDC</td><td><strong>3.590</strong></td><td><span class="source">Danceplace</span></td></tr>
+            <tr><td>Coordenadores certificados BZDC (2024)</td><td><strong>21 em 8 países</strong></td><td><span class="source">Danceplace</span></td></tr>
+            <tr><td>Festivais dedicados ao zouk/ano (est.)</td><td><strong>60-80+</strong></td><td><span class="source">Latin Dance Calendar</span></td></tr>
+          </table>
+        </div>
+      </details>
+
+      <!-- Tendências em Dança de Par -->
+      <details>
+        <summary>Tendências em Dança de Par <span class="detail-count">6 tendências</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><strong>Bachata ultrapassando a salsa globalmente</strong> -- volume de buscas apenas 1% abaixo do pico vs. salsa 62% abaixo do pico, indicando uma mudança massiva nas preferências de dança de par</li>
+            <li><strong>Estilos fusion emergentes</strong> -- Kiz-Bachata Wave combinando isolamentos de Kizomba com ritmo de Bachata representa uma nova categoria de danças sociais híbridas</li>
+            <li><strong>Kizomba em crescimento acelerado na Europa</strong> -- junto com bachata sensual, expandindo o ecossistema de dança de par que alimenta o crossover com o zouk</li>
+            <li><strong>Zouk cada vez mais incluído na programação de festivais de salsa/bachata</strong> -- festivais multi-gênero expandindo a exposição do zouk para comunidades de dança adjacentes</li>
+            <li><strong>71% de demanda por fitness em casa/online</strong> -- impulsionando o crescimento do treinamento de dança online e criando novos canais de receita para instrutores</li>
+            <li><strong>Turismo experiencial/de bem-estar (mercado de $180B+)</strong> -- impulsionando o turismo de dança e a participação em festivais à medida que consumidores buscam experiências de viagem transformadoras</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Economia do Circuito de Festivais -->
+      <details>
+        <summary>Economia do Circuito de Festivais <span class="detail-count">8 eventos</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Festival</th><th>Local</th><th>Faixa de Preço</th></tr>
+            <tr><td>ZoukMX 2026</td><td>Playa del Carmen, México</td><td><strong>$103 - $281</strong></td></tr>
+            <tr><td>Zouk SEA 2025</td><td>Kuala Lumpur, Malásia</td><td><strong>$240 - $300</strong></td></tr>
+            <tr><td>Warsaw Zouk Fest</td><td>Varsóvia, Polônia</td><td><strong>~EUR 150 - 200</strong></td></tr>
+            <tr><td>Cologne Zouk Fest 2025</td><td>Colônia, Alemanha</td><td><strong>EUR 155 - 195</strong></td></tr>
+            <tr><td>Silesian Zouk Fest 2025</td><td>Silésia, Polônia</td><td><strong>EUR 114 - 133</strong></td></tr>
+            <tr><td>Flowstate 2025</td><td>Londres, Reino Unido</td><td><strong>GBP 75 - 85</strong></td></tr>
+            <tr><td>Prague Zouk Marathon</td><td>Praga, República Tcheca</td><td><strong>EUR 295 (máx.)</strong></td></tr>
+            <tr><td>Bali Zouk Congress</td><td>Bali, Indonésia</td><td><strong>~$230</strong></td></tr>
+          </table>
+        </div>
+      </details>
+
+      <!-- CAIXA DE DESTAQUE: SEMPRE VISÍVEL -->
+      <div class="highlight-box">
+        <strong>Dimensionamento do Mercado:</strong> Com mais de 180 cidades em 49 países, estimados 60-80+ festivais dedicados anualmente e passes de festival na média de $150-$300, o mercado global de festivais de zouk sozinho representa uma estimativa de <strong>$15-30M em receita direta anual</strong>. Somando aulas semanais em milhares de comunidades, instrução particular e conteúdo online, a economia total do Zouk Brasileiro provavelmente ultrapassa <strong>$100M anuais</strong>.
+      </div>
+
+      <!-- Contexto de Turismo de Bem-Estar -->
+      <details>
+        <summary>Contexto de Turismo de Bem-Estar <span class="detail-count">5 métricas</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Métrica</th><th>Valor</th><th>Fonte</th></tr>
+            <tr><td>Mercado de Retiros de Bem-Estar (2025)</td><td><strong>$222,5 bilhões</strong></td><td><span class="source">FutureDataStats</span></td></tr>
+            <tr><td>Mercado de Retiros de Bem-Estar (projeção 2032)</td><td><strong>$363,9 bilhões</strong></td><td><span class="source">FutureDataStats</span></td></tr>
+            <tr><td>CAGR de Retiros de Bem-Estar</td><td><strong>7,4%</strong></td><td><span class="source">FutureDataStats</span></td></tr>
+            <tr><td>Mercado de Turismo de Eventos (2025)</td><td><strong>$1,58 trilhão</strong></td><td><span class="source">Market Data Forecast</span></td></tr>
+            <tr><td>Mercado de Turismo Musical (2024)</td><td><strong>$91,44 bilhões</strong></td><td><span class="source">Credence Research</span></td></tr>
+          </table>
+        </div>
+      </details>
+
+      <!-- Economia dos Instrutores de Dança -->
+      <details>
+        <summary>Economia dos Instrutores de Dança <span class="detail-count">7 métricas</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Métrica</th><th>Valor</th><th>Fonte</th></tr>
+            <tr><td>Taxa média de professor de dança</td><td><strong>$25,23/hora</strong></td><td><span class="source">PassiveSecrets</span></td></tr>
+            <tr><td>Mediana hora/coreógrafo</td><td><strong>$25,00/hora</strong></td><td><span class="source">BLS</span></td></tr>
+            <tr><td>Taxa inicial (professor novo)</td><td><strong>$35/hora mín.</strong></td><td><span class="source">ThePurposePost</span></td></tr>
+            <tr><td>Professor com graduação</td><td><strong>$50/hora mín.</strong></td><td><span class="source">ThePurposePost</span></td></tr>
+            <tr><td>Taxa de viagem nacional</td><td><strong>$300+ (mais passagem aérea e hotel)</strong></td><td><span class="source">ThePurposePost</span></td></tr>
+            <tr><td>Taxa de viagem internacional</td><td><strong>$500+ (por evento)</strong></td><td><span class="source">ThePurposePost</span></td></tr>
+            <tr><td>Masterclass ZoukOC</td><td><strong>$75 early bird (2,5 hrs)</strong></td><td><span class="source">ZoukOC</span></td></tr>
+          </table>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 5: ANÁLISE COMPETITIVA -->
+  <section>
+    <h2>5. Análise Competitiva</h2>
+    <div class="section-content">
+
+      <h3>Casais de Artistas Internacionais de Zouk -- Cenário Competitivo</h3>
+      <table>
+        <tr>
+          <th>Artistas</th>
+          <th>Diferencial</th>
+          <th>Presença Online</th>
+          <th>Posição no Circuito</th>
+        </tr>
+        <tr>
+          <td><strong>Kadu & Larissa</strong></td>
+          <td>Líderes em plataforma online; site de aprendizado dedicado</td>
+          <td><a href="https://kadularissaonline.com">kadularissaonline.com</a></td>
+          <td><span class="badge badge-success">Líder Digital</span></td>
+        </tr>
+        <tr>
+          <td><strong>Jaime Aroxa</strong></td>
+          <td>Cocriador do Zouk Brasileiro; academia de 25+ anos no Rio</td>
+          <td>Marca de academia estabelecida</td>
+          <td><span class="badge badge-info">Lendário</span></td>
+        </tr>
+        <tr>
+          <td><strong>Luan & Adriana</strong></td>
+          <td>Artistas destaque do ZoukMX; regulares no circuito internacional</td>
+          <td>Redes sociais ativas</td>
+          <td><span class="badge badge-success">Circuito Top</span></td>
+        </tr>
+        <tr>
+          <td><strong>Diego & Thieli</strong></td>
+          <td>Artistas ZoukMX; estilo técnico</td>
+          <td>Redes sociais ativas</td>
+          <td><span class="badge badge-success">Circuito Top</span></td>
+        </tr>
+        <tr>
+          <td><strong>Gab & Caroline</strong></td>
+          <td>Artistas ZoukMX; foco em interpretação musical</td>
+          <td>Redes sociais ativas</td>
+          <td><span class="badge badge-success">Circuito Top</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ariel & Leticia</strong></td>
+          <td>Artistas ZoukMX; estilo de performance dinâmico</td>
+          <td>Redes sociais ativas</td>
+          <td><span class="badge badge-success">Circuito Top</span></td>
+        </tr>
+        <tr>
+          <td><strong>Edghar & Nadyne</strong></td>
+          <td>Exposição em TV, linhagem Aroxa, ensino baseado em psicologia</td>
+          <td>Apenas Instagram (~21,8K combinados)</td>
+          <td><span class="badge badge-warning">Em Crescimento</span></td>
+        </tr>
+      </table>
+
+      <h3>Análise SWOT: Edghar & Nadyne</h3>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+
+        <div style="background: #d4edda; padding: 1rem; border-radius: 8px;">
+          <h3 style="color: #155724; margin: 0 0 0.75rem 0;">Forças</h3>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>20+ anos de experiência combinada</li>
+            <li>Conexão direta com Jaime Aroxa (cocriador da arte)</li>
+            <li>Exposição no Got Talent Brasil e Dancing with the Stars Brasil</li>
+            <li>10.000+ alunos formados</li>
+            <li>Expertise multi-estilo (Zouk, Bolero, Forró, Samba de Gafieira, Salsa)</li>
+            <li>Metodologia de ensino integrada com psicologia</li>
+          </ul>
+        </div>
+
+        <div style="background: #fff3cd; padding: 1rem; border-radius: 8px;">
+          <h3 style="color: #856404; margin: 0 0 0.75rem 0;">Fraquezas</h3>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>Sem website dedicado</li>
+            <li>Sem canal no YouTube</li>
+            <li>Sem presença no TikTok</li>
+            <li>Número de seguidores menor comparado a alguns pares</li>
+            <li>Pegada digital limitada ao Instagram reduz a visibilidade</li>
+          </ul>
+        </div>
+
+        <div style="background: #cce5ff; padding: 1rem; border-radius: 8px;">
+          <h3 style="color: #004085; margin: 0 0 0.75rem 0;">Oportunidades</h3>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>Mercado global de zouk em crescimento (180+ cidades, 49 países)</li>
+            <li>Austin, TX é um mercado carente de instrução de zouk</li>
+            <li>Plataforma de conteúdo/cursos online (mercado de dança online crescendo para $17,96B até 2035)</li>
+            <li>Crossover com turismo de bem-estar (mercado de retiros de $222,5B)</li>
+            <li>Inclusão em festivais multi-gênero expandindo o público do zouk</li>
+          </ul>
+        </div>
+
+        <div style="background: #f8d7da; padding: 1rem; border-radius: 8px;">
+          <h3 style="color: #721c24; margin: 0 0 0.75rem 0;">Ameaças</h3>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>Saturação do mercado de influenciadores de dança</li>
+            <li>Flutuações cambiais e custos de viagem internacional</li>
+            <li>Concorrência de plataformas online estabelecidas (ex.: Kadu & Larissa)</li>
+            <li>Dependência do circuito de festivais para visibilidade internacional</li>
+            <li>Impacto de crises econômicas nos gastos com lazer</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 6: AUDITORIA DE PRESENÇA ONLINE -->
+  <section>
+    <h2>6. Auditoria de Presença Online</h2>
+    <div class="section-content">
+
+      <h3>Auditoria de Website</h3>
+      <div class="warning-box">
+        <strong>Lacuna Crítica:</strong> Nenhum website dedicado foi encontrado para Edghar & Nadyne. O único perfil web deles é a <a href="https://zouk.mx/performer/edgar-nadyne/">página de artista no ZoukMX</a>. Em um mercado onde concorrentes como Kadu & Larissa operam plataformas de aprendizado dedicadas, a ausência de um website limita significativamente a visibilidade, credibilidade e potencial de monetização.
+      </div>
+
+      <h3>Avaliação da Pegada Digital</h3>
+      <table>
+        <tr><th>Canal</th><th>Status</th><th>Impacto</th></tr>
+        <tr><td>Website Dedicado</td><td><span class="badge badge-danger">Não Encontrado</span></td><td>Lacuna importante -- sem SEO, sem funil de reservas</td></tr>
+        <tr><td>Canal no YouTube</td><td><span class="badge badge-danger">Não Encontrado</span></td><td>Falta descoberta via conteúdo longo (2º maior motor de busca)</td></tr>
+        <tr><td>TikTok</td><td><span class="badge badge-danger">Não Encontrado</span></td><td>Falta potencial viral via conteúdo curto</td></tr>
+        <tr><td>Página no Facebook</td><td><span class="badge badge-warning">Não Encontrado</span></td><td>Falta plataforma de engajamento comunitário</td></tr>
+        <tr><td>Instagram (Conjunto)</td><td><span class="badge badge-success">Ativo</span></td><td>Canal principal -- porém alcance limitado sozinho</td></tr>
+        <tr><td>Instagram (Individual)</td><td><span class="badge badge-success">Ativo</span></td><td>Alcance suplementar</td></tr>
+      </table>
+
+      <details>
+        <summary>Métricas Detalhadas de Redes Sociais <span class="detail-count">3 contas</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Plataforma</th><th>Perfil</th><th>Seguidores</th><th>Publicações</th></tr>
+            <tr><td>Instagram (conjunto)</td><td><a href="https://instagram.com/edghar.e.nadyne">@edghar.e.nadyne</a></td><td>4.132</td><td>159</td></tr>
+            <tr><td>Instagram (Edghar)</td><td><a href="https://instagram.com/dance.edghar">@dance.edghar</a></td><td>13.100</td><td>353</td></tr>
+            <tr><td>Instagram (Nadyne)</td><td><a href="https://instagram.com/nadyne.cruz">@nadyne.cruz</a></td><td>4.556</td><td>310</td></tr>
+            <tr><td>Facebook</td><td>Não encontrado</td><td>--</td><td>--</td></tr>
+            <tr><td>YouTube</td><td>Não encontrado</td><td>--</td><td>--</td></tr>
+            <tr><td>TikTok</td><td>Não encontrado</td><td>--</td><td>--</td></tr>
+          </table>
+
+          <div class="highlight-box" style="margin-top: 1rem;">
+            <strong>Alcance Social Combinado:</strong> ~21.788 seguidores em 3 contas do Instagram com 822 publicações no total. A conta pessoal do Edghar (@dance.edghar) carrega a maior parte do alcance com 13.100 seguidores, sugerindo um capital de marca existente que pode ser aproveitado para a marca da parceria.
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 7: HISTÓRICO DE EVENTOS -->
+  <section>
+    <h2>7. Histórico de Eventos e Aparições</h2>
+    <div class="section-content">
+
+      <p>Aparições internacionais documentadas ao longo do período 2022-2026, demonstrando presença consistente no circuito global.</p>
+
+      <details>
+        <summary>Eventos Programados 2026 <span class="detail-count">3 eventos</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Evento</th><th>Local</th><th>Data</th><th>Função</th></tr>
+            <tr><td>ZoukMX 2026</td><td>Playa del Carmen, México</td><td>Fev 2026</td><td>Artistas Destaque / Instrutores</td></tr>
+            <tr><td>Turnê EUA (Projetada)</td><td>Múltiplas cidades nos EUA</td><td>2026</td><td>Workshops e Performances</td></tr>
+            <tr><td>Turnê Europeia (Projetada)</td><td>Múltiplas cidades na Europa</td><td>2026</td><td>Workshops e Performances</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Eventos 2025 <span class="detail-count">6 eventos</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Evento</th><th>Local</th><th>Data</th><th>Função</th></tr>
+            <tr><td>Zouk SEA 2025</td><td>Kuala Lumpur, Malásia</td><td>2025</td><td>Artistas Convidados Internacionais</td></tr>
+            <tr><td>Cologne Zouk Fest 2025</td><td>Colônia, Alemanha</td><td>2025</td><td>Instrutores Destaque</td></tr>
+            <tr><td>Flowstate 2025</td><td>Londres, Reino Unido</td><td>2025</td><td>Artistas Convidados</td></tr>
+            <tr><td>Bali Zouk Congress</td><td>Bali, Indonésia</td><td>2025</td><td>Instrutores Internacionais</td></tr>
+            <tr><td>Warsaw Zouk Fest</td><td>Varsóvia, Polônia</td><td>2025</td><td>Artistas Destaque</td></tr>
+            <tr><td>Silesian Zouk Fest 2025</td><td>Silésia, Polônia</td><td>2025</td><td>Instrutores Convidados</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Eventos 2024 <span class="detail-count">5 eventos</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Evento</th><th>Local</th><th>Data</th><th>Função</th></tr>
+            <tr><td>ZoukMX 2024</td><td>Playa del Carmen, México</td><td>2024</td><td>Artistas Destaque / Instrutores</td></tr>
+            <tr><td>Turnê de Festivais Europeus</td><td>Múltiplas cidades na Europa</td><td>2024</td><td>Artistas Convidados</td></tr>
+            <tr><td>Workshops na Austrália</td><td>Austrália</td><td>2024</td><td>Instrutores de Workshop</td></tr>
+            <tr><td>Workshops na Dinamarca</td><td>Dinamarca</td><td>2024</td><td>Instrutores Convidados</td></tr>
+            <tr><td>Residência OMNE Studio</td><td>São Paulo, Brasil</td><td>Contínuo</td><td>Instrutores Residentes</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Eventos 2022-2023 <span class="detail-count">6 eventos</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Evento</th><th>Local</th><th>Data</th><th>Função</th></tr>
+            <tr><td>ZoukMX (Anual)</td><td>Playa del Carmen, México</td><td>2022-2023</td><td>Artistas Destaque Recorrentes</td></tr>
+            <tr><td>Workshops no Canadá</td><td>Canadá</td><td>2023</td><td>Instrutores Convidados</td></tr>
+            <tr><td>Turnê de Workshops EUA</td><td>Múltiplas cidades nos EUA</td><td>2022-2023</td><td>Artistas Convidados</td></tr>
+            <tr><td>Aparições em Festivais no Reino Unido</td><td>Reino Unido</td><td>2023</td><td>Instrutores Convidados</td></tr>
+            <tr><td>Eventos de Zouk na Alemanha</td><td>Alemanha</td><td>2022-2023</td><td>Instrutores Internacionais</td></tr>
+            <tr><td>Residência OMNE Studio</td><td>São Paulo, Brasil</td><td>Contínuo</td><td>Instrutores Residentes</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <div class="highlight-box">
+        <strong>Padrão de Eventos:</strong> Edghar & Nadyne mantêm um circuito anual consistente em 9+ países. O ZoukMX em Playa del Carmen funciona como seu evento-âncora internacional, com turnês pela Europa e Ásia-Pacífico preenchendo o calendário. O alcance multicontinental os posiciona no nível superior de mobilidade de artistas internacionais de zouk -- uma trajetória incrível.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 8: CONCLUSÕES E RECOMENDAÇÕES -->
+  <section>
+    <h2>8. Conclusões e Recomendações</h2>
+    <div class="section-content">
+
+      <h3>Principais Descobertas</h3>
+      <ol>
+        <li><strong>Posição no Mercado é Forte, Presença Digital Não:</strong> Edghar & Nadyne possuem credenciais de elite (linhagem Aroxa, exposição na TV, 10.000+ alunos, 20+ anos), mas sua pegada digital representa significativamente menos do que sua estatura merece. Com apenas Instagram e sem website, YouTube ou TikTok, eles estão invisíveis nos canais de descoberta que movem a economia moderna da dança.</li>
+        <li><strong>O Mercado Está Crescendo:</strong> O Zouk Brasileiro está se expandindo rapidamente (180+ cidades, 49 países) dentro de um mercado mais amplo de treinamento em dança com CAGR de 7%. O treinamento de dança online tem projeção de crescer de $2,9B para $17,96B até 2035 -- uma expansão de 6x exatamente no canal onde Edghar & Nadyne têm presença zero.</li>
+        <li><strong>Austin, TX é um Mercado Carente:</strong> Como uma MSA em alto crescimento com forte cultura de dança latina e instrução limitada de zouk, Austin representa uma base estratégica nos EUA para estabelecer uma comunidade recorrente de alunos e proximidade com o circuito ZoukMX no México.</li>
+        <li><strong>Turismo de Bem-Estar é um Encaixe Natural:</strong> O mercado de retiros de bem-estar de $222,5B (CAGR de 7,4%) se alinha perfeitamente com a metodologia de ensino informada pela psicologia de Nadyne. Retiros de dança que combinam movimento, conexão e mindfulness são uma fonte de receita inexplorada -- e maravilhosa.</li>
+        <li><strong>Benchmark de Concorrentes -- Plataformas Online:</strong> Kadu & Larissa estabeleceram o padrão ouro para educação online de zouk. A janela para uma entrada diferenciada (currículo baseado em psicologia, expertise multi-estilo) permanece aberta, mas está se estreitando à medida que mais artistas migram para o online.</li>
+      </ol>
+
+      <h3>Recomendações Estratégicas</h3>
+
+      <div class="info-box">
+        <strong>Prioridade 1 -- Construir Infraestrutura Digital</strong>
+        <ul>
+          <li>Lançar um website dedicado com sistema de reservas, agenda de aulas e biografia</li>
+          <li>Iniciar um canal no YouTube para tutoriais, performances e conteúdo de bastidores</li>
+          <li>Criar presença no TikTok aproveitando clipes curtos de dança para descoberta viral</li>
+          <li>Investimento estimado: $2.000-$5.000 para o website; investimento de tempo para criação de conteúdo</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <strong>Prioridade 2 -- Desenvolver Plataforma de Educação Online</strong>
+        <ul>
+          <li>Construir uma oferta estruturada de cursos online utilizando a metodologia informada pela psicologia de Nadyne como diferencial</li>
+          <li>Mirar no mercado de treinamento de dança online de $2,9B-$17,96B com posicionamento premium</li>
+          <li>Considerar parceria ou licenciamento por meio de plataformas existentes antes de construir uma própria</li>
+          <li>Potencial de receita: assinaturas de $50-$200/mês; benchmarks de concorrentes sugerem $10K-$50K/mês em escala</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <strong>Prioridade 3 -- Estabelecer Presença no Mercado de Austin, TX</strong>
+        <ul>
+          <li>Desenvolver uma série recorrente de workshops em Austin para construir comunidade local</li>
+          <li>Fazer parceria com estúdios de dança latina existentes para promoção cruzada</li>
+          <li>Aproveitar a proximidade com o ZoukMX (Playa del Carmen) para posicionamento binacional</li>
+          <li>População da MSA de Austin: 2,3M+ com forte cultura de bem-estar e fitness</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <strong>Prioridade 4 -- Lançar Retiros de Dança e Bem-Estar</strong>
+        <ul>
+          <li>Criar experiências imersivas de retiro combinando zouk com exercícios de mindfulness e conexão -- com toda a energia e gratidão que definem o trabalho deles</li>
+          <li>Mirar no mercado de retiros de bem-estar de $222,5B com preços premium ($1.500-$3.000 por participante)</li>
+          <li>Locais piloto: Bali (presença existente no circuito), Tulum (próximo ao ZoukMX), Portugal (polo europeu de bem-estar)</li>
+          <li>Potencial de receita: 20-30 participantes x $2.000 = $40K-$60K por retiro</li>
+        </ul>
+      </div>
+
+      <div class="warning-box">
+        <strong>Caminho Crítico:</strong> A infraestrutura digital (website + YouTube) deve ser a prioridade imediata. Cada semana sem um website é visibilidade perdida, conversões de reservas perdidas e SEO que deixa de acumular. A plataforma de educação online e as ofertas de retiro dependem dessa base estar implementada.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 9: FONTES E CITAÇÕES -->
+  <section>
+    <h2>9. Fontes e Citações</h2>
+    <div class="section-content">
+
+      <details>
+        <summary>Fontes Primárias <span class="detail-count">4 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://instagram.com/edghar.e.nadyne">Instagram: @edghar.e.nadyne</a> -- Conta conjunta da parceria (4.132 seguidores, 159 publicações)</li>
+            <li><a href="https://instagram.com/dance.edghar">Instagram: @dance.edghar</a> -- Conta pessoal de Edghar Fhernandes (13.100 seguidores, 353 publicações)</li>
+            <li><a href="https://instagram.com/nadyne.cruz">Instagram: @nadyne.cruz</a> -- Conta pessoal de Nadyne Cruz (4.556 seguidores, 310 publicações)</li>
+            <li><a href="https://zouk.mx/performer/edgar-nadyne/">Perfil ZoukMX: Edgar & Nadyne</a></li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Fontes de Pesquisa de Mercado <span class="detail-count">6 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://www.businessresearchinsights.com">Business Research Insights</a> -- Dimensionamento do Mercado Global de Dança ($1,72B-$3,16B, CAGR 7%)</li>
+            <li><a href="https://www.futuredatastats.com">FutureDataStats</a> -- Mercado de Treinamento em Dança ($15B-$25B), Mercado de Retiros de Bem-Estar ($222,5B-$363,9B)</li>
+            <li><a href="https://www.globalgrowthinsights.com">Global Growth Insights</a> -- Mercado de Treinamento de Dança Online ($2,9B-$17,96B)</li>
+            <li><a href="https://www.passivesecrets.com">PassiveSecrets</a> -- Receita da Indústria de Estúdios de Dança nos EUA ($4,4B), dados de taxas de instrutores</li>
+            <li><a href="https://www.marketdataforecast.com">Market Data Forecast</a> -- Mercado de Turismo de Eventos ($1,58T)</li>
+            <li><a href="https://www.credenceresearch.com">Credence Research</a> -- Mercado de Turismo Musical ($91,44B)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Organizações da Indústria <span class="detail-count">3 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://www.danceplace.com">Danceplace / BZDC</a> -- Dados do Brazilian Zouk Dance Council (19.000+ competidores, 22 países, 3.590 dançarinos ranqueados, 21 coordenadores certificados)</li>
+            <li><a href="https://www.bls.gov">Bureau of Labor Statistics (BLS)</a> -- Mediana salarial por hora de coreógrafo ($25,00/hora)</li>
+            <li><a href="https://theduoapp.com">The DUO App</a> -- Mapeamento global de comunidades de zouk (180+ cidades, 49 países)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Fontes de Eventos e Festivais <span class="detail-count">8 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://zouk.mx">ZoukMX 2026</a> -- Playa del Carmen ($103-$281)</li>
+            <li><a href="https://zouksea.com">Zouk SEA 2025</a> -- Kuala Lumpur ($240-$300)</li>
+            <li>Warsaw Zouk Fest -- Varsóvia, Polônia (~EUR 150-200)</li>
+            <li>Cologne Zouk Fest 2025 -- Colônia, Alemanha (EUR 155-195)</li>
+            <li>Silesian Zouk Fest 2025 -- Silésia, Polônia (EUR 114-133)</li>
+            <li>Flowstate 2025 -- Londres, Reino Unido (GBP 75-85)</li>
+            <li>Prague Zouk Marathon -- Praga, República Tcheca (EUR 295 máx.)</li>
+            <li>Bali Zouk Congress -- Bali, Indonésia (~$230)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Fontes de Mídias Sociais e Digitais <span class="detail-count">3 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://kadularissaonline.com">kadularissaonline.com</a> -- Plataforma online de Kadu & Larissa (benchmark de concorrente)</li>
+            <li><a href="https://latindancecalendar.com">Latin Dance Calendar</a> -- Estimativas do circuito de festivais (60-80+ festivais dedicados ao zouk anualmente)</li>
+            <li><a href="https://zoukoc.com">ZoukOC</a> -- Benchmark de preços de masterclass ($75 early bird, 2,5 hrs)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Notícias e Artigos da Indústria <span class="detail-count">2 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://thepurposepost.com">ThePurposePost</a> -- Benchmarks de taxas de instrutores de dança ($35-$50/hora, $300-$500+ taxas de viagem)</li>
+            <li>Dados do Google Trends -- Análise de volume de buscas Bachata vs. Salsa (bachata 1% abaixo do pico, salsa 62% abaixo do pico)</li>
+          </ul>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Análise de Mercado Global do Zouk Brasileiro: Edghar & Nadyne</strong></p>
+    <p>Divisão de Pesquisa Integrity Studio | 12 de fevereiro de 2026</p>
+    <p class="source">Este relatório é baseado em informações publicamente disponíveis coletadas até fevereiro de 2026. Projeções de mercado são provenientes de empresas de pesquisa terceirizadas e devem ser validadas para tomada de decisões estratégicas.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

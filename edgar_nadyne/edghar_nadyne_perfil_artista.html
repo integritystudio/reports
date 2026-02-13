@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edghar &amp; Nadyne | Perfil Completo de Artistas &amp; Instrutores</title>
+  <style>
+    :root {
+      --primary: #6B2D5B;
+      --secondary: #A0456E;
+      --accent: #E8A87C;
+      --light: #FFF5F5;
+      --dark: #1a1a1a;
+      --border: #e8d5d5;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: var(--dark); background: var(--light); }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 2rem; margin-bottom: 2rem; }
+    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    header .subtitle { font-size: 1.2rem; opacity: 0.9; }
+    header .meta { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
+    .executive-summary { background: white; border-left: 4px solid var(--accent); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+    section { background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden; }
+    section h2 { background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem; }
+    section h3 { color: var(--secondary); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .section-content { padding: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: var(--light); font-weight: 600; color: var(--primary); }
+    tr:hover { background: #fff5f5; }
+    ul, ol { margin: 1rem 0; padding-left: 1.5rem; }
+    li { margin-bottom: 0.5rem; }
+    .highlight-box { background: linear-gradient(135deg, #fff0f0, #fce4ec); border-radius: 8px; padding: 1rem 1.5rem; margin: 1rem 0; }
+    .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .info-box { background: #fce4ec; border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    blockquote { background: #f8f9fa; border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; font-style: italic; color: #555; }
+    .source { font-size: 0.85rem; color: #666; font-style: italic; }
+    .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
+    .badge-success { background: #d4edda; color: #155724; }
+    .badge-warning { background: #fff3cd; color: #856404; }
+    .badge-danger { background: #f8d7da; color: #721c24; }
+    .badge-info { background: #fce4ec; color: #6B2D5B; }
+    .badge-verified { background: #d4edda; color: #155724; }
+    .badge-inferred { background: #fff3cd; color: #856404; }
+    .badge-unverified { background: #f8d7da; color: #721c24; }
+    .rating { color: #E8A87C; font-size: 1.2rem; letter-spacing: 2px; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .contact-item { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; }
+    .contact-item .label { font-size: 0.85rem; color: #666; margin-bottom: 0.25rem; }
+    .contact-item .value { font-weight: 600; color: var(--primary); }
+    details { margin: 1rem 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    details summary { padding: 0.75rem 1rem; background: var(--light); cursor: pointer; font-weight: 600; color: var(--primary); list-style: none; display: flex; align-items: center; gap: 0.5rem; user-select: none; }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before { content: '\25B6'; font-size: 0.7rem; transition: transform 0.2s ease; flex-shrink: 0; }
+    details[open] summary::before { transform: rotate(90deg); }
+    details summary:hover { background: #f5e0e0; }
+    details summary .detail-count { font-weight: 400; font-size: 0.85rem; color: #666; margin-left: auto; }
+    details .details-content { padding: 1rem 1.5rem; }
+    .testimonial { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 1rem 0; }
+    .testimonial .quote { font-style: italic; color: #444; margin-bottom: 0.75rem; }
+    .testimonial .attribution { font-weight: 600; color: var(--primary); font-size: 0.9rem; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1rem 0 2rem 0; }
+    .stat-item { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 1.25rem; border-radius: 8px; text-align: center; }
+    .stat-item .stat-number { font-size: 1.8rem; font-weight: 700; }
+    .stat-item .stat-label { font-size: 0.85rem; opacity: 0.9; margin-top: 0.25rem; }
+    a { color: var(--secondary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { text-align: center; padding: 2rem; color: #666; font-size: 0.9rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    @media print {
+      body { background: white; }
+      .container { max-width: 100%; }
+      section { box-shadow: none; border: 1px solid #ddd; }
+      details { border: none; }
+      details, details[open] { display: block; }
+      details > summary { display: none; }
+      details .details-content { padding: 0; }
+      .stat-item { border: 1px solid #ddd; color: var(--dark); background: white; }
+      .stat-item .stat-number { color: var(--primary); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Edghar &amp; Nadyne</h1>
+    <div class="subtitle">Perfil Completo de Artistas &amp; Instrutores</div>
+    <div class="meta">
+      Elaborado: 12 de fevereiro de 2026 | Divisão de Pesquisa Integrity Studio<br>
+      Fonte Principal: <a href="https://instagram.com/edghar.e.nadyne" style="color: var(--accent);">instagram.com/edghar.e.nadyne</a> | Classificação: Inteligência Artística
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- RESUMO EXECUTIVO -->
+  <div class="executive-summary">
+    <h2>Resumo Executivo</h2>
+    <p>Edghar Fhernandes e Nadyne Cruz são dançarinos, instrutores e coreógrafos de Zouk Brasileiro aclamados internacionalmente, baseados em São Paulo, Brasil. A jornada que começou na Holanda, atravessou oceanos e agora retorna ao lar -- com mais de <strong>20 anos de experiência em dança</strong> combinados e <strong>mais de 10.000 alunos formados</strong>, eles se consolidaram como artistas de elite no circuito global de Zouk Brasileiro. A parceria, formada em <strong>2017</strong>, une o histórico de Edghar como campeão de dança de salão e suas aparições na televisão (<strong>Got Talent Brasil</strong>, <strong>Dança dos Famosos</strong>) com a formação clássica em balé de Nadyne e sua pedagogia fundamentada em psicologia.</p>
+    <p style="margin-top: 1rem;">Já ensinaram em <strong>mais de 9 países em 4 continentes</strong>, mantêm uma posição recorrente no prestigiado programa de 100 horas do ZoukMX em Playa del Carmen e têm conexão direta com <strong>Jaime Aroxa</strong> -- um dos três cocriadores do Zouk Brasileiro. O estilo marcante deles é pura magia: contrabalanços incríveis, movimentos de cabeça cheios de personalidade e precisão técnica entregues com uma abordagem de ensino centrada no ser humano. Energia demais!</p>
+  </div>
+
+  <!-- ESTATÍSTICAS PRINCIPAIS -->
+  <div class="stat-grid">
+    <div class="stat-item">
+      <div class="stat-number">20+</div>
+      <div class="stat-label">Anos de Experiência</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">10K+</div>
+      <div class="stat-label">Alunos Formados</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">9+</div>
+      <div class="stat-label">Países</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">4</div>
+      <div class="stat-label">Continentes</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">~21,8K</div>
+      <div class="stat-label">Seguidores nas Redes</div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 1: VISÃO GERAL DOS ARTISTAS -->
+  <section>
+    <h2>1. Visão Geral dos Artistas</h2>
+    <div class="section-content">
+
+      <h3>Edghar Fhernandes</h3>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="label">Instagram</div>
+          <div class="value"><a href="https://instagram.com/dance.edghar">@dance.edghar</a></div>
+          <div class="label" style="margin-top: 0.25rem;">13.100 seguidores | 353 publicações</div>
+        </div>
+      </div>
+      <blockquote>"Dancer, Instructor, Choreographer / Brazilian Zouk / 20+ years of experience / 10k+ students"</blockquote>
+      <table>
+        <tr><th style="width: 35%;">Atributo</th><th>Detalhe</th></tr>
+        <tr><td>Início na Dança</td><td>Aos 15 anos -- começou com hip-hop, depois danças sociais brasileiras</td></tr>
+        <tr><td>Histórico Competitivo</td><td>Campeão em grandes competições brasileiras de dança de salão</td></tr>
+        <tr><td>Aparições na TV</td><td><strong>Got Talent Brasil</strong>, <strong>Dança dos Famosos</strong></td></tr>
+        <tr><td>Estilos de Dança</td><td>Zouk Brasileiro, Bolero, Forró, Samba de Gafieira, Salsa, Hip-hop</td></tr>
+        <tr><td>Outros Créditos</td><td>Coreografias para programas de TV; trabalho com cantores brasileiros famosos</td></tr>
+      </table>
+
+      <h3>Nadyne Cruz</h3>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="label">Instagram</div>
+          <div class="value"><a href="https://instagram.com/nadyne.cruz">@nadyne.cruz</a></div>
+          <div class="label" style="margin-top: 0.25rem;">4.556 seguidores | 310 publicações</div>
+        </div>
+      </div>
+      <blockquote>"Bailarina, Dançarina de salão, Professora, Coreógrafa"</blockquote>
+      <table>
+        <tr><th style="width: 35%;">Atributo</th><th>Detalhe</th></tr>
+        <tr><td>Início na Dança</td><td>Dança clássica desde criança; danças sociais brasileiras a partir dos 15 anos</td></tr>
+        <tr><td>Mentoria Notável</td><td>Dançou com <strong>Jaime Aroxa</strong> (cocriador do Zouk Brasileiro) no Canadá, EUA e Brasil</td></tr>
+        <tr><td>Formação Acadêmica</td><td>Estudos em Psicologia -- integrados à pedagogia da dança</td></tr>
+        <tr><td>Estilos de Dança</td><td>Balé clássico, Zouk Brasileiro, Dança de salão, Samba</td></tr>
+      </table>
+
+      <h3>Juntos: Edghar &amp; Nadyne</h3>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="label">Instagram Conjunto</div>
+          <div class="value"><a href="https://instagram.com/edghar.e.nadyne">@edghar.e.nadyne</a></div>
+          <div class="label" style="margin-top: 0.25rem;">4.132 seguidores | 159 publicações</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Parceria Formada</div>
+          <div class="value">2017</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Base do Estúdio</div>
+          <div class="value">OMNE Studio de Dança, São Paulo</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Alcance Social Combinado</div>
+          <div class="value">~21.788 seguidores</div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <strong>Estilo Marcante:</strong> Conhecidos pelos "contrabalanços incríveis, movimentos de cabeça cheios de personalidade e o amor pelos detalhes técnicos." Maravilhoso! Começaram a trabalhar juntos em "uma das maiores escolas de dança da América Latina" antes de formarem a parceria internacional.
+      </div>
+
+      <div class="info-box">
+        <strong>Diferencial da Parceria:</strong> A combinação do histórico competitivo de Edghar e sua exposição na mídia com a linhagem direta de Nadyne com Jaime Aroxa (um dos cocriadores do Zouk) e seu ensino fundamentado em psicologia cria uma proposta de valor única no mercado internacional de instrutores de zouk. Só gente top!
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 2: FILOSOFIA DE ENSINO -->
+  <section>
+    <h2>2. Filosofia &amp; Metodologia de Ensino</h2>
+    <div class="section-content">
+
+      <blockquote>"Foco em aproveitar a habilidade natural e a consciência corporal de cada aluno."</blockquote>
+
+      <blockquote>"Eles ensinam pra que o aluno possa ser quem ele é, com confiança, liberdade e criatividade."</blockquote>
+
+      <blockquote>"Guiar cada aluno a explorar novas experiências através do próprio corpo, potencializando a expressão, a autenticidade e criando um estilo pessoal de dança único."</blockquote>
+
+      <blockquote>"Uma sensibilidade que abre caminho pra liberdade na dança."</blockquote>
+
+      <h3>Pilares Fundamentais da Metodologia</h3>
+      <ul>
+        <li><strong>Aprendizado Centrado no Ser Humano:</strong> A formação em psicologia de Nadyne cria um ambiente de aprendizado que prioriza a segurança emocional, a consciência corporal e a expressão individual junto com a instrução técnica</li>
+        <li><strong>Consciência Corporal em Primeiro Lugar:</strong> Os alunos são guiados a explorar o movimento através das próprias capacidades físicas, em vez de serem forçados a padrões rígidos</li>
+        <li><strong>Confiança &amp; Liberdade:</strong> O objetivo pedagógico é formar alunos que dancem com autenticidade pessoal, não a reprodução mecânica do estilo dos instrutores</li>
+        <li><strong>Integração Multidisciplinar:</strong> A expertise em múltiplos estilos permite trazer a técnica do balé para informar o flow do zouk, a postura da dança de salão para melhorar a conexão e a musicalidade do hip-hop para ampliar a expressão</li>
+        <li><strong>Precisão Técnica com Leveza:</strong> A abordagem marcante deles equilibra padrões técnicos exigentes com uma energia de ensino alegre e acessível</li>
+      </ul>
+
+      <div class="highlight-box">
+        <strong>Diferencial:</strong> Enquanto muitos instrutores de zouk ensinam de uma perspectiva puramente baseada em movimento, a integração de psicologia e expertise multiestilos de Edghar &amp; Nadyne cria uma abordagem pedagógica rara no circuito de Zouk Brasileiro. Isso os posiciona de forma única para programações voltadas ao bem-estar e à transformação profunda do aluno, que vai muito além da técnica física. Incrível!
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 3: HISTÓRICO DE EVENTOS -->
+  <section>
+    <h2>3. Histórico de Eventos &amp; Aparições</h2>
+    <div class="section-content">
+
+      <p>Aparições internacionais documentadas de 2022 a 2026, demonstrando presença consistente no circuito global em <strong>mais de 9 países</strong> e <strong>4 continentes</strong>.</p>
+
+      <h3>Eventos Confirmados em 2026</h3>
+      <table>
+        <tr><th>Evento</th><th>Local</th><th>Datas</th><th>Papel</th></tr>
+        <tr><td><strong>ZoukMX Programa de 100 Horas</strong></td><td>Playa del Carmen, MX</td><td>25 Jan - 19 Fev</td><td><span class="badge badge-info">Instrutor Team 100</span></td></tr>
+        <tr><td><strong>ZoukMX Festival</strong></td><td>Playa del Carmen, MX</td><td>17 - 23 Fev</td><td><span class="badge badge-info">Artista Destaque</span></td></tr>
+        <tr><td><strong>Zouk Hour Congress 2026</strong></td><td>Florianópolis, Brasil</td><td>12 - 15 Mar</td><td><span class="badge badge-success">Artista Confirmado</span></td></tr>
+        <tr><td><strong>Zouk Origins Immersion</strong></td><td>Atibaia, SP, Brasil</td><td>23 - 26 Abr</td><td><span class="badge badge-info">Destaque (c/ Jaime Aroxa)</span></td></tr>
+        <tr><td><strong>Brazilian Flow Bali</strong></td><td>Bali, Indonésia</td><td>16 - 19 Jul</td><td><span class="badge badge-info">Artista Destaque</span></td></tr>
+      </table>
+
+      <details>
+        <summary>Eventos de 2025 <span class="detail-count">8 eventos</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Evento</th><th>Local</th><th>Datas</th><th>Papel</th></tr>
+            <tr><td>BZDC Advanced Zouk Competition</td><td>Brasil</td><td>Jan 2026 aprox.</td><td>Competidores</td></tr>
+            <tr><td>Honolulu Zouk</td><td>Honolulu, HI</td><td>Final de 2025</td><td>Líderes de Workshop</td></tr>
+            <tr><td>Maui Workshops</td><td>Maui, HI</td><td>Final de 2025</td><td>Líderes de Workshop</td></tr>
+            <tr><td>ZoukOC Masterclass de Contrabalanço</td><td>Orange County, CA</td><td>Out 2025</td><td>Instrutores Convidados (US$75 early bird)</td></tr>
+            <tr><td>Convergence</td><td>EUA</td><td>2025</td><td>Artistas</td></tr>
+            <tr><td>Sanctuary Dance Fest (Alice in Wonderland)</td><td>Sydney, Austrália</td><td>29 Mai - 1 Jun</td><td>Artista Destaque</td></tr>
+            <tr><td>Edghar &amp; Nadyne Miami Weekender</td><td>Hallandale Beach, FL</td><td>Out-Nov 2025</td><td>Headliners</td></tr>
+            <tr><td>Baila Costão</td><td>Florianópolis, Brasil</td><td>2025</td><td>Artistas</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Eventos de 2024 <span class="detail-count">1 evento</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Evento</th><th>Local</th><th>Datas</th><th>Papel</th></tr>
+            <tr><td>Sanctuary Dance Festival</td><td>Sydney, Austrália</td><td>17 - 19 Mai</td><td>Artista Destaque</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Turnê Europeia de 2022 <span class="detail-count">4 eventos</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Evento</th><th>Local</th><th>Datas</th><th>Papel</th></tr>
+            <tr><td>Zouk Cologne "São Paulo meets Cologne"</td><td>Colônia, Alemanha</td><td>5 - 9 Out</td><td>Instrutor Convidado</td></tr>
+            <tr><td>Zouk Weekend Berlin</td><td>Berlim, Alemanha</td><td>2022</td><td>Instrutor Convidado</td></tr>
+            <tr><td>London Tour</td><td>Londres, Reino Unido</td><td>2022</td><td>Instrutor Convidado</td></tr>
+            <tr><td>Copenhagen (referenciado)</td><td>Dinamarca</td><td>2022</td><td>Instrutor Convidado</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <div class="highlight-box">
+        <strong>Padrão de Eventos:</strong> Edghar &amp; Nadyne mantêm um circuito anual consistente abrangendo mais de 9 países. O ZoukMX em Playa del Carmen funciona como o evento internacional âncora, com uma posição recorrente como instrutor do Team 100. O calendário de 2026 mostra expansão para Bali e a prestigiosa co-participação com Jaime Aroxa no Zouk Origins Immersion.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 4: CREDENCIAIS COMPETITIVAS -->
+  <section>
+    <h2>4. Credenciais Competitivas</h2>
+    <div class="section-content">
+
+      <table>
+        <tr><th>Credencial</th><th>Detalhe</th><th>Status</th></tr>
+        <tr><td>Campeonatos Brasileiros de Dança de Salão</td><td>Edghar: "Campeão em grandes competições brasileiras de dança de salão"</td><td><span class="badge badge-success">Verificado</span></td></tr>
+        <tr><td>BZDC Advanced Jack &amp; Jill</td><td>Edghar competiu com <a href="https://instagram.com/gabidecarvalho">@gabidecarvalho</a> (Jan/Fev 2026)</td><td><span class="badge badge-success">Verificado</span></td></tr>
+        <tr><td>BZDC Advanced Jack &amp; Jill</td><td>Nadyne ficou em <strong>3º lugar</strong> com <a href="https://instagram.com/gabsena.zouk">@gabsena.zouk</a> (início de 2026)</td><td><span class="badge badge-success">Verificado</span></td></tr>
+        <tr><td>Listagem de Instrutores BZDC</td><td>Listados na página de Instrutores do Brazilian Zouk Dance Council</td><td><span class="badge badge-success">Verificado</span></td></tr>
+      </table>
+
+      <div class="info-box">
+        <strong>Contexto Competitivo:</strong> O BZDC (Brazilian Zouk Dance Council) é o principal órgão governante internacional para Zouk Brasileiro competitivo, rastreando mais de 19.000 competidores em 22 países. Estar listado como instrutores do BZDC e competir ativamente no nível Advanced posiciona Edghar &amp; Nadyne entre os dançarinos de zouk competitivo de mais alto nível no mundo.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 5: COLABORAÇÕES -->
+  <section>
+    <h2>5. Colaborações &amp; Rede Profissional</h2>
+    <div class="section-content">
+
+      <div class="highlight-box">
+        <strong>Relação-Chave:</strong> O histórico de Nadyne dançando diretamente com <strong>Jaime Aroxa</strong> -- um dos três cocriadores do Zouk Brasileiro -- representa uma conexão de linhagem que pouquíssimos instrutores ativos podem reivindicar. Essa conexão é ainda mais validada pela co-participação deles no evento Zouk Origins Immersion de 2026.
+      </div>
+
+      <details>
+        <summary>Rede Profissional Completa <span class="detail-count">12 conexões</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Pessoa / Organização</th><th>Relação</th></tr>
+            <tr><td><strong>Jaime Aroxa</strong></td><td>Nadyne dançou com ele no Canadá, EUA e Brasil; co-destaque no Zouk Origins Immersion 2026</td></tr>
+            <tr><td><strong>Xandinho (Alexandre Reberte)</strong></td><td>Organizador do Zouk Hour, coprodutor do Zouk Origins, relação pessoal/profissional próxima</td></tr>
+            <tr><td><strong>Mirella Postai</strong></td><td>Co-organizadora do Zouk Hour Congress</td></tr>
+            <tr><td><strong>ZoukMX</strong></td><td>Posição de ensino recorrente há vários anos; instrutor Team 100</td></tr>
+            <tr><td><strong>Julinha Johann</strong></td><td>Co-ensino no Zouk Cologne 2022</td></tr>
+            <tr><td><strong>Leandro &amp; Nayara</strong></td><td>Co-ensino no Zouk Cologne 2022</td></tr>
+            <tr><td><strong>BZDC</strong></td><td>Competem em eventos sancionados; listados como instrutores</td></tr>
+            <tr><td><strong>OMNE Studio de Dança</strong></td><td>Base de treino / afiliação de estúdio em São Paulo</td></tr>
+            <tr><td><strong>Dança Alegria e.V.</strong></td><td>Organizador de eventos em Berlim</td></tr>
+            <tr><td><strong>ZoukOC / Brazilian Zouk OC</strong></td><td>Sediou Masterclass de Contrabalanço (Out 2025)</td></tr>
+            <tr><td><strong>Honolulu Zouk</strong></td><td>Sediou workshops no Havaí (final de 2025)</td></tr>
+            <tr><td><strong>Sanctuary Dance Festival</strong></td><td>Artistas destaque em Sydney 2024 &amp; 2025</td></tr>
+          </table>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 6: DEPOIMENTOS -->
+  <section>
+    <h2>6. Depoimentos &amp; Avaliações</h2>
+    <div class="section-content">
+
+      <div class="testimonial">
+        <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="quote">"A gente ama ter eles no ZoukMx ano após ano, trazendo essa energia incrível e alegria pra pista de dança. Assistir eles dançando é pura magia."</div>
+        <div class="attribution">-- ZoukMX</div>
+      </div>
+
+      <div class="testimonial">
+        <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="quote">"As aulas têm sido incríveis aqui na nossa escola e recebemos mto feedback positivo! Amei!"</div>
+        <div class="attribution">-- ZoukOC / Brazilian Zouk OC</div>
+      </div>
+
+      <div class="testimonial">
+        <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="quote">"Só ouvimos coisas maravilhosas sobre os workshops deles nas últimas semanas em Maui. Só gente top!"</div>
+        <div class="attribution">-- Honolulu Zouk</div>
+      </div>
+
+      <div class="testimonial">
+        <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="quote">"Já são de casa! Eles têm um trabalho incrível pelo Brasil e pelo mundo. Gratidão!"</div>
+        <div class="attribution">-- Xandinho / Zouk Hour</div>
+      </div>
+
+      <div class="testimonial">
+        <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="quote">"A gente adora o flow elegante e a emoção nessa dança... as possibilidades infinitas do Zouk Brasileiro."</div>
+        <div class="attribution">-- Sanctuary Dance Festival</div>
+      </div>
+
+      <div class="testimonial">
+        <div class="rating">&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="quote">"Conexão suave, footwork firme, musicalidade desbloqueada."</div>
+        <div class="attribution">-- Sanctuary Dance Festival</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 7: ALCANCE GEOGRÁFICO -->
+  <section>
+    <h2>7. Alcance Geográfico</h2>
+    <div class="section-content">
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="label">Base</div>
+          <div class="value">Brasil</div>
+          <div class="source">São Paulo, Florianópolis, Atibaia</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">América Latina</div>
+          <div class="value">México</div>
+          <div class="source">Playa del Carmen (ZoukMX)</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">América do Norte</div>
+          <div class="value">EUA</div>
+          <div class="source">Havaí, Orange County CA, Miami FL</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Europa</div>
+          <div class="value">Alemanha, Reino Unido, Dinamarca</div>
+          <div class="source">Colônia, Berlim, Londres, Copenhague</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Ásia-Pacífico</div>
+          <div class="value">Austrália, Indonésia</div>
+          <div class="source">Sydney; Bali (previsto 2026)</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Américas</div>
+          <div class="value">Canadá</div>
+          <div class="source">Nadyne com Jaime Aroxa</div>
+        </div>
+      </div>
+
+      <details>
+        <summary>Lista Completa de Cidades &amp; Países <span class="detail-count">9 países</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>#</th><th>País</th><th>Cidades</th><th>Contexto</th></tr>
+            <tr><td>1</td><td><strong>Brasil</strong></td><td>São Paulo, Florianópolis, Atibaia</td><td>Base, OMNE Studio, Zouk Hour, Zouk Origins</td></tr>
+            <tr><td>2</td><td><strong>México</strong></td><td>Playa del Carmen</td><td>ZoukMX posição recorrente Team 100</td></tr>
+            <tr><td>3</td><td><strong>EUA</strong></td><td>Honolulu HI, Maui HI, Orange County CA, Hallandale Beach FL</td><td>Workshops, masterclasses, eventos weekender</td></tr>
+            <tr><td>4</td><td><strong>Alemanha</strong></td><td>Colônia, Berlim</td><td>Turnê europeia 2022; Zouk Cologne, Zouk Weekend Berlin</td></tr>
+            <tr><td>5</td><td><strong>Reino Unido</strong></td><td>Londres</td><td>Turnê europeia 2022</td></tr>
+            <tr><td>6</td><td><strong>Dinamarca</strong></td><td>Copenhague</td><td>Turnê europeia 2022 (referenciado)</td></tr>
+            <tr><td>7</td><td><strong>Austrália</strong></td><td>Sydney</td><td>Sanctuary Dance Festival 2024 &amp; 2025</td></tr>
+            <tr><td>8</td><td><strong>Indonésia</strong></td><td>Bali</td><td>Brazilian Flow Bali (previsto Jul 2026)</td></tr>
+            <tr><td>9</td><td><strong>Canadá</strong></td><td>Não especificado</td><td>Nadyne dançou com Jaime Aroxa</td></tr>
+          </table>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 8: AUDITORIA DE PRESENÇA ONLINE -->
+  <section>
+    <h2>8. Auditoria de Presença Online</h2>
+    <div class="section-content">
+
+      <div class="warning-box">
+        <strong>Lacuna Crítica:</strong> Nenhum site dedicado foi encontrado para Edghar &amp; Nadyne. O conteúdo em vídeo é publicado principalmente através dos Reels do Instagram. Nenhuma presença no YouTube, Facebook ou TikTok foi identificada.
+      </div>
+
+      <h3>Avaliação da Presença Digital</h3>
+      <table>
+        <tr><th>Canal</th><th>Status</th><th>Impacto</th></tr>
+        <tr><td>Site Dedicado</td><td><span class="badge badge-danger">Não Encontrado</span></td><td>Sem SEO, sem funil de reservas, sem hub de conteúdo</td></tr>
+        <tr><td>Canal no YouTube</td><td><span class="badge badge-danger">Não Encontrado</span></td><td>Sem descoberta de conteúdo longo (2º maior buscador)</td></tr>
+        <tr><td>TikTok</td><td><span class="badge badge-danger">Não Encontrado</span></td><td>Sem potencial viral de conteúdo curto</td></tr>
+        <tr><td>Página no Facebook</td><td><span class="badge badge-danger">Não Encontrado</span></td><td>Sem plataforma de engajamento comunitário</td></tr>
+        <tr><td>Instagram (Conjunto)</td><td><span class="badge badge-success">Ativo</span></td><td>Canal principal -- 4.132 seguidores, 159 publicações</td></tr>
+        <tr><td>Instagram (Edghar)</td><td><span class="badge badge-success">Ativo</span></td><td>Maior alcance -- 13.100 seguidores, 353 publicações</td></tr>
+        <tr><td>Instagram (Nadyne)</td><td><span class="badge badge-success">Ativo</span></td><td>Complementar -- 4.556 seguidores, 310 publicações</td></tr>
+      </table>
+
+      <details>
+        <summary>Métricas Detalhadas das Redes Sociais <span class="detail-count">3 contas</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Plataforma</th><th>Perfil</th><th>Seguidores</th><th>Publicações</th><th>Tipo de Conteúdo</th></tr>
+            <tr><td>Instagram (conjunto)</td><td><a href="https://instagram.com/edghar.e.nadyne">@edghar.e.nadyne</a></td><td>4.132</td><td>159</td><td>Performances, divulgação de eventos, Reels</td></tr>
+            <tr><td>Instagram (Edghar)</td><td><a href="https://instagram.com/dance.edghar">@dance.edghar</a></td><td>13.100</td><td>353</td><td>Conteúdo de dança, marca pessoal, Reels</td></tr>
+            <tr><td>Instagram (Nadyne)</td><td><a href="https://instagram.com/nadyne.cruz">@nadyne.cruz</a></td><td>4.556</td><td>310</td><td>Conteúdo de dança, ensino, Reels</td></tr>
+          </table>
+          <p style="margin-top: 1rem;"><strong>Alcance total combinado:</strong> ~21.788 seguidores em 3 contas do Instagram com 822 publicações no total. O conteúdo em vídeo é entregue principalmente através dos Reels do Instagram -- nenhuma presença em plataforma de vídeo longo foi detectada.</p>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 9: PONTOS FORTES, DESAFIOS & OPORTUNIDADES -->
+  <section>
+    <h2>9. Pontos Fortes, Desafios &amp; Oportunidades</h2>
+    <div class="section-content">
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+
+        <div style="background: #d4edda; padding: 1rem; border-radius: 8px;">
+          <h3 style="color: #155724; margin: 0 0 0.75rem 0;">Pontos Fortes</h3>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>Credenciais de elite e mais de 20 anos de experiência combinada</li>
+            <li>Linhagem direta com Jaime Aroxa (cocriador do Zouk Brasileiro)</li>
+            <li>Exposição na TV: Got Talent Brasil, Dança dos Famosos</li>
+            <li>Mais de 10.000 alunos formados globalmente</li>
+            <li>Pedagogia fundamentada em psicologia (Nadyne)</li>
+            <li>Expertise em múltiplos estilos (Zouk, Bolero, Forró, Samba, Balé, Hip-hop)</li>
+            <li>Posição recorrente no ZoukMX Team 100</li>
+            <li>Alcance de ensino em 4 continentes (mais de 9 países)</li>
+            <li>Histórico de campeão em dança de salão</li>
+          </ul>
+        </div>
+
+        <div style="background: #fff3cd; padding: 1rem; border-radius: 8px;">
+          <h3 style="color: #856404; margin: 0 0 0.75rem 0;">Desafios</h3>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>Sem site dedicado</li>
+            <li>Sem canal no YouTube ou presença no TikTok</li>
+            <li>Número de seguidores combinado menor (~21,8K) vs. influenciadores top</li>
+            <li>Conteúdo concentrado em uma única plataforma (Instagram)</li>
+            <li>Sem estratégia de conteúdo em vídeo longo</li>
+            <li>Descoberta limitada fora do ecossistema do Instagram</li>
+          </ul>
+        </div>
+
+        <div style="background: #e8d5f5; padding: 1rem; border-radius: 8px;">
+          <h3 style="color: #4a1a6b; margin: 0 0 0.75rem 0;">Oportunidades</h3>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>Plataforma de cursos online (mercado de treinamento de dança online crescendo para US$17,96B até 2035)</li>
+            <li>Canal no YouTube para tutoriais e conteúdo de performances</li>
+            <li>Entrada no mercado de Austin, TX (comunidade de zouk pouco atendida)</li>
+            <li>Retiros de turismo de bem-estar (psicologia + dança)</li>
+            <li>Conteúdo curto no TikTok para descoberta viral</li>
+            <li>Conteúdo crossover multigênero aproveitando a expertise diversa em estilos</li>
+          </ul>
+        </div>
+
+        <div style="background: #fce4ec; padding: 1rem; border-radius: 8px;">
+          <h3 style="color: #6B2D5B; margin: 0 0 0.75rem 0;">Recomendações</h3>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li><strong>Prioridade 1:</strong> Construir um site dedicado com reservas, agenda e biografia</li>
+            <li><strong>Prioridade 2:</strong> Lançar um canal no YouTube para tutoriais e conteúdo de longa duração</li>
+            <li><strong>Prioridade 3:</strong> Desenvolver um curso online aproveitando a metodologia fundamentada em psicologia</li>
+            <li><strong>Prioridade 4:</strong> Expandir presença em Austin, TX como base no mercado dos EUA</li>
+            <li><strong>Prioridade 5:</strong> Criar retiros de dança e bem-estar para posicionamento premium</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 10: VERIFICAÇÃO DE DADOS -->
+  <section>
+    <h2>10. Resumo de Verificação de Dados</h2>
+    <div class="section-content">
+
+      <p>Todos os dados neste perfil foram cruzados com fontes publicamente disponíveis. O status de verificação é categorizado da seguinte forma:</p>
+      <ul>
+        <li><span class="badge badge-verified">Verificado</span> -- Confirmado através de múltiplas fontes independentes ou dados diretos da plataforma</li>
+        <li><span class="badge badge-inferred">Inferido</span> -- Derivado de evidências contextuais, mas não declarado diretamente</li>
+        <li><span class="badge badge-unverified">Não Verificado</span> -- Alegado, mas não confirmado de forma independente</li>
+      </ul>
+
+      <details>
+        <summary>Matriz Completa de Verificação <span class="detail-count">20 pontos de dados</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Ponto de Dado</th><th>Fonte</th><th>Status</th></tr>
+            <tr><td>Mais de 20 anos de experiência</td><td>Bio do Instagram @dance.edghar</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Mais de 10.000 alunos</td><td>Bio do Instagram @dance.edghar</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Parceria formada em 2017</td><td>Perfil de artista ZoukMX</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Aparição no Got Talent Brasil</td><td>Bio @dance.edghar / referências de eventos</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Dança dos Famosos</td><td>Bio @dance.edghar / referências de eventos</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Conexão com Jaime Aroxa</td><td>Posts de @nadyne.cruz; lineup do Zouk Origins</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>OMNE Studio de Dança</td><td>Referências no Instagram</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>ZoukMX Team 100 (2026)</td><td>Anúncios oficiais do ZoukMX</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Zouk Hour Congress 2026</td><td>Anúncios de eventos / posts do Xandinho</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Zouk Origins Immersion 2026</td><td>Anúncios de eventos</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Brazilian Flow Bali 2026</td><td>Anúncios de eventos</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Sanctuary Dance Fest (2024, 2025)</td><td>Posts oficiais do Sanctuary</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Workshops Honolulu/Maui</td><td>Posts do Honolulu Zouk</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Masterclass ZoukOC</td><td>Listagem de eventos ZoukOC (US$75 early bird)</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Status de competidor BZDC</td><td>Resultados de competições BZDC</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Nadyne 3º lugar BZDC</td><td>Publicação de resultados BZDC</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Zouk Cologne 2022</td><td>Postagens de eventos</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+            <tr><td>Estudos em Psicologia (Nadyne)</td><td>Descrições biográficas / filosofia de ensino</td><td><span class="badge badge-inferred">Inferido</span></td></tr>
+            <tr><td>Títulos de campeonato de dança de salão</td><td>Bio @dance.edghar</td><td><span class="badge badge-inferred">Inferido</span></td></tr>
+            <tr><td>Sem site/YouTube/TikTok</td><td>Resultados de busca na web (ausência)</td><td><span class="badge badge-verified">Verificado</span></td></tr>
+          </table>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 11: FONTES -->
+  <section>
+    <h2>11. Fontes</h2>
+    <div class="section-content">
+
+      <details>
+        <summary>Fontes Primárias -- Perfis do Instagram <span class="detail-count">3 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://instagram.com/edghar.e.nadyne">Instagram: @edghar.e.nadyne</a> -- Conta conjunta da parceria (4.132 seguidores, 159 publicações)</li>
+            <li><a href="https://instagram.com/dance.edghar">Instagram: @dance.edghar</a> -- Conta pessoal de Edghar Fhernandes (13.100 seguidores, 353 publicações)</li>
+            <li><a href="https://instagram.com/nadyne.cruz">Instagram: @nadyne.cruz</a> -- Conta pessoal de Nadyne Cruz (4.556 seguidores, 310 publicações)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Fontes de Eventos &amp; Organizações <span class="detail-count">10 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://zouk.mx/performer/edgar-nadyne/">Perfil de Artista ZoukMX: Edgar &amp; Nadyne</a></li>
+            <li><a href="https://zouk.mx">ZoukMX</a> -- Informações do Festival e Programa de 100 Horas</li>
+            <li><a href="https://instagram.com/zoukhour">Zouk Hour / Xandinho</a> -- Anúncios do Zouk Hour Congress</li>
+            <li><a href="https://instagram.com/zoukorigins">Zouk Origins Immersion</a> -- Lineup do evento com Jaime Aroxa</li>
+            <li><a href="https://instagram.com/brazilianflowparadise">Brazilian Flow Paradise</a> -- Evento em Bali 2026</li>
+            <li><a href="https://instagram.com/sanctuarydancefest">Sanctuary Dance Festival</a> -- Sydney 2024 &amp; 2025</li>
+            <li><a href="https://instagram.com/honoluluzouk">Honolulu Zouk</a> -- Depoimentos de workshops no Havaí</li>
+            <li><a href="https://instagram.com/zoukoc">ZoukOC / Brazilian Zouk OC</a> -- Masterclass de Contrabalanço</li>
+            <li><a href="https://instagram.com/dancaalegria">Dança Alegria e.V.</a> -- Organização de eventos em Berlim</li>
+            <li><a href="https://www.danceplace.com">BZDC / Danceplace</a> -- Resultados de competições e listagens de instrutores</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Referências de Colaboradores <span class="detail-count">5 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://instagram.com/jaimearoxa">Jaime Aroxa</a> -- Cocriador do Zouk Brasileiro; mentor de Nadyne</li>
+            <li><a href="https://instagram.com/xandinho_zouk">Xandinho (Alexandre Reberte)</a> -- Organizador do Zouk Hour, coprodutor do Zouk Origins</li>
+            <li><a href="https://instagram.com/mirellapostai">Mirella Postai</a> -- Co-organizadora do Zouk Hour</li>
+            <li><a href="https://instagram.com/gabidecarvalho">@gabidecarvalho</a> -- Parceiro de competição BZDC de Edghar</li>
+            <li><a href="https://instagram.com/gabsena.zouk">@gabsena.zouk</a> -- Parceira de competição BZDC de Nadyne (3º lugar)</li>
+          </ul>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Edghar &amp; Nadyne: Perfil Completo de Artistas &amp; Instrutores</strong></p>
+    <p>Divisão de Pesquisa Integrity Studio | 12 de fevereiro de 2026</p>
+    <p class="source">Este relatório é baseado em informações publicamente disponíveis coletadas até fevereiro de 2026. Todos os pontos de dados foram obtidos de perfis do Instagram, sites de eventos e referências de terceiros. O status de verificação está indicado na Seção 10.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

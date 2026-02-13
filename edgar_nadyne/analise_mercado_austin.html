@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análise do Mercado de Dança de Austin | Edghar &amp; Nadyne</title>
+  <style>
+    :root {
+      --primary: #1B4332;
+      --secondary: #2D6A4F;
+      --accent: #52B788;
+      --light: #F0FFF4;
+      --dark: #1a1a1a;
+      --border: #d4e8d4;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; line-height: 1.6; color: var(--dark); background: var(--light); }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 2rem; margin-bottom: 2rem; }
+    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    header .subtitle { font-size: 1.2rem; opacity: 0.9; }
+    header .meta { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
+    .executive-summary { background: white; border-left: 4px solid var(--accent); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+    section { background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden; }
+    section h2 { background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem; }
+    section h3 { color: var(--secondary); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
+    .section-content { padding: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: var(--light); font-weight: 600; color: var(--primary); }
+    tr:hover { background: #f0fff4; }
+    ul, ol { margin: 1rem 0; padding-left: 1.5rem; }
+    li { margin-bottom: 0.5rem; }
+    .highlight-box { background: linear-gradient(135deg, #d8f3dc, #b7e4c7); border-radius: 8px; padding: 1rem 1.5rem; margin: 1rem 0; }
+    .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .info-box { background: #d8f3dc; border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    blockquote { background: #f8f9fa; border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; font-style: italic; color: #555; }
+    .source { font-size: 0.85rem; color: #666; font-style: italic; }
+    .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
+    .badge-success { background: #d4edda; color: #155724; }
+    .badge-warning { background: #fff3cd; color: #856404; }
+    .badge-danger { background: #f8d7da; color: #721c24; }
+    .badge-info { background: #d8f3dc; color: #1B4332; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .contact-item { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border); }
+    .contact-item .label { font-size: 0.85rem; color: #666; margin-bottom: 0.25rem; }
+    .contact-item .value { font-weight: 600; color: var(--primary); }
+    details { margin: 1rem 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    details summary { padding: 0.75rem 1rem; background: var(--light); cursor: pointer; font-weight: 600; color: var(--primary); list-style: none; display: flex; align-items: center; gap: 0.5rem; user-select: none; }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before { content: '\25B6'; font-size: 0.7rem; transition: transform 0.2s ease; flex-shrink: 0; }
+    details[open] summary::before { transform: rotate(90deg); }
+    details summary:hover { background: #d8f3dc; }
+    details summary .detail-count { font-weight: 400; font-size: 0.85rem; color: #666; margin-left: auto; }
+    details .details-content { padding: 1rem 1.5rem; }
+    a { color: var(--secondary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer { text-align: center; padding: 2rem; color: #666; font-size: 0.9rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .stat-item { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border); }
+    .stat-item .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+    .stat-item .stat-label { font-size: 0.8rem; color: #666; margin-top: 0.25rem; }
+    @media print { body { background: white; } .container { max-width: 100%; } section { box-shadow: none; border: 1px solid #ddd; } details { border: none; } details, details[open] { display: block; } details > summary { display: none; } details .details-content { padding: 0; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Análise do Mercado de Dança de Austin</h1>
+    <div class="subtitle">Mercado de Estúdios &amp; Aulas de Dança -- Foco em Zouk Brasileiro</div>
+    <div class="meta">
+      Elaborado: 12 de fevereiro de 2026 | Divisão de Pesquisa Integrity Studio<br>
+      Fonte Primária: Múltiplos estúdios de dança &amp; organizações comunitárias de Austin | Classificação: Inteligência de Mercado
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- RESUMO EXECUTIVO -->
+  <div class="executive-summary">
+    <h2>Resumo Executivo</h2>
+    <p>Austin, TX apresenta um mercado excepcionalmente favorável para aulas de dança, com <strong>39,7% da população entre 25-44 anos</strong> (vs ~30% nacionalmente), uma renda familiar mediana de <strong>$91.461</strong>, e uma identidade cultural profunda como a "Capital Mundial da Música ao Vivo." A região metropolitana de Austin (2,3M+ residentes) sustenta <strong>mais de 170 estúdios de dança</strong> gerando uma receita anual estimada de <strong>$35-45M</strong>. No entanto, o Zouk Brasileiro é definitivamente subatendido: apenas 2-3 locais o oferecem (principalmente uma noite por semana), nenhum estúdio dedicado ao zouk existe, e o primeiro festival de zouk de Austin (Divergence) só foi lançado em 2025.</p>
+    <p style="margin-top: 1rem;">A infraestrutura existente de dança latina (8-10+ estúdios oferecendo salsa/bachata com aulas diárias) cria um pipeline natural de dançarinos para a transição ao zouk. Com aulas em grupo custando <strong>$15-35 avulso</strong> e <strong>$62-150/mês ilimitado</strong>, e aulas particulares a <strong>$50-155/sessão</strong>, o mercado sustenta instrução de calibre internacional. Para Edghar &amp; Nadyne, Austin representa uma oportunidade incrível de crescimento em um nicho subatendido dentro de um ecossistema de dança vibrante e cheio de energia.</p>
+  </div>
+
+  <!-- SEÇÃO 1: VISÃO GERAL DO MERCADO DE AUSTIN -->
+  <section>
+    <h2>1. Visão Geral do Mercado de Austin</h2>
+    <div class="section-content">
+
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-value">2,31M</div>
+          <div class="stat-label">População Metropolitana (2025)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">1,03M</div>
+          <div class="stat-label">População da Cidade (proj. 2026)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">39,7%</div>
+          <div class="stat-label">Adultos 25-44</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">$91.461</div>
+          <div class="stat-label">Renda Familiar Mediana</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">35,9</div>
+          <div class="stat-label">Idade Mediana</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">32,5%</div>
+          <div class="stat-label">Hispânicos/Latinos</div>
+        </div>
+      </div>
+
+      <details>
+        <summary>Dados Demográficos Completos <span class="detail-count">14 métricas</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Métrica</th><th>Valor</th><th>Contexto</th></tr>
+            <tr><td>População Metropolitana de Austin</td><td><strong>2.313.000</strong></td><td>Estimativa 2025</td></tr>
+            <tr><td>População da Cidade</td><td><strong>~1.032.191</strong></td><td>Projetado 2026</td></tr>
+            <tr><td>Taxa de Crescimento</td><td><strong>1,72%</strong></td><td>58.019 adicionados 2023-2024</td></tr>
+            <tr><td>Ranking Nacional</td><td><strong>13ª</strong></td><td>Cidade mais populosa dos EUA</td></tr>
+            <tr><td>Adultos 25-44</td><td><strong>39,7%</strong></td><td>vs ~30% nacional (faixa etária CHAVE para dança)</td></tr>
+            <tr><td>Idade Ativa 18-64</td><td><strong>65%</strong></td><td>vs 61,3% TX, ~60% nacional</td></tr>
+            <tr><td>Idade Mediana</td><td><strong>35,9</strong></td><td>vs 38,9 nacional</td></tr>
+            <tr><td>Renda Familiar Mediana</td><td><strong>$91.461</strong></td><td>Nível municipal</td></tr>
+            <tr><td>Renda Familiar Mediana (Metrô)</td><td><strong>$126.000</strong></td><td>Nível metropolitano</td></tr>
+            <tr><td>Hispânicos/Latinos</td><td><strong>32,5%</strong></td><td>460.000+ na região metropolitana</td></tr>
+            <tr><td>Taxa de Propriedade Imobiliária</td><td><strong>44,4%</strong></td><td></td></tr>
+            <tr><td>Domicílios na Região Metropolitana</td><td><strong>1.061.155</strong></td><td></td></tr>
+            <tr><td>Domicílios na Cidade</td><td><strong>~440.000</strong></td><td></td></tr>
+            <tr><td>Graduação ou Superior</td><td><strong>44%+</strong></td><td></td></tr>
+          </table>
+        </div>
+      </details>
+
+      <h3>Contexto Cultural</h3>
+      <div class="highlight-box">
+        <strong>"Capital Mundial da Música ao Vivo"</strong> -- A identidade cultural de Austin é inseparável da música e do movimento. Com mais de 250 casas de shows, a única designação de Cidade Criativa de Artes Midiáticas da UNESCO nos EUA, e mais de 100.000 empregados na indústria criativa, o DNA da cidade sustenta empreendimentos artísticos.
+      </div>
+
+      <details>
+        <summary>Indicadores Culturais &amp; Econômicos <span class="detail-count">6 métricas</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Indicador</th><th>Valor</th></tr>
+            <tr><td>Casas de Shows</td><td><strong>250+</strong></td></tr>
+            <tr><td>Designação UNESCO</td><td><strong>Única Cidade Criativa de Artes Midiáticas dos EUA</strong></td></tr>
+            <tr><td>Empregados na Indústria Criativa</td><td><strong>100.000+</strong></td></tr>
+            <tr><td>Financiamento Municipal para Artes/Música</td><td><strong>$25M+</strong></td></tr>
+            <tr><td>Impacto Econômico ACL Fest (2024)</td><td><strong>$534,8M</strong> (recorde)</td></tr>
+            <tr><td>Impacto Econômico SXSW</td><td><strong>$380M</strong></td></tr>
+          </table>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 2: DIRETÓRIO DE ESTÚDIOS DE DANÇA -->
+  <section>
+    <h2>2. Diretório de Estúdios de Dança</h2>
+    <div class="section-content">
+
+      <p>Austin sustenta <strong>mais de 170 estúdios de dança</strong> em todos os estilos. O diretório a seguir foca nos estúdios relevantes para o ecossistema de dança latina/de par e o mercado potencial de zouk.</p>
+
+      <h3>Nível 1 -- Foco em Dança Latina/de Par</h3>
+      <details>
+        <summary>Estúdios de Dança Latina &amp; de Par <span class="detail-count">4 estúdios</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Estúdio</th><th>Endereço</th><th>Especialidades</th><th>Avaliação/Resenhas</th></tr>
+            <tr><td><strong>Austin Inspired Movement</strong></td><td>4201 S Congress Ave #108</td><td>Salsa, Bachata, <strong>ZOUK</strong>, Kizomba</td><td>4.9 (ClassPass)</td></tr>
+            <tr><td><strong>Esquina Tango</strong></td><td>209 Pedernales St</td><td>Tango, Salsa, Bachata, <strong>ZOUK</strong>, Samba, Kizomba</td><td>41 resenhas (Yelp)</td></tr>
+            <tr><td><strong>Dance U2</strong></td><td>Central + North Austin</td><td>Salsa, Bachata, Kizomba, Country, Swing</td><td>--</td></tr>
+            <tr><td><strong>The Art of Movement</strong></td><td>South Austin</td><td><strong>Zouk</strong>, Lambada, Salsa, Bachata</td><td>--</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <h3>Nível 2 -- Estúdios Multi-Estilo</h3>
+      <details>
+        <summary>Estúdios Multi-Estilo <span class="detail-count">4 estúdios</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Estúdio</th><th>Endereço</th><th>Especialidades</th><th>Avaliação/Resenhas</th></tr>
+            <tr><td><strong>Go Dance Studio</strong></td><td>2525 W Anderson Ln #530</td><td>Dança de Salão, Latina, Swing, Country</td><td>71 resenhas (Yelp); "Melhores Aulas de Dança" Austin Chronicle</td></tr>
+            <tr><td><strong>Austin Uptown Dance</strong></td><td>8868 Research Blvd #706</td><td>Country, Swing, Dança de Salão; realiza finais de semana de Zouk</td><td>--</td></tr>
+            <tr><td><strong>Balance Dance Studios</strong></td><td>4544 S Lamar Blvd</td><td>WCS, Dança de Salão, Latina</td><td>38 resenhas Yelp, 173 Birdeye</td></tr>
+            <tr><td><strong>Blue Moon Dance Co</strong></td><td>South Austin</td><td>Country, Dança de Salão, Swing, Latina</td><td>--</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <h3>Nível 3 -- Franquias Nacionais</h3>
+      <details>
+        <summary>Estúdios de Franquias Nacionais <span class="detail-count">3 estúdios</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Estúdio</th><th>Endereço</th><th>Especialidades</th><th>Observações</th></tr>
+            <tr><td><strong>Dance With Me Austin</strong></td><td>11600 Rock Rose (Domain)</td><td>Dança de Salão, Salsa, Bachata, Swing</td><td>4ª unidade no TX</td></tr>
+            <tr><td><strong>Arthur Murray Austin</strong></td><td>13945 US-183 #C1</td><td>30+ estilos</td><td>Franquia nacional</td></tr>
+            <tr><td><strong>Fred Astaire</strong></td><td>Austin</td><td>Dança de Salão, Latina, Country, Swing</td><td>Franquia nacional</td></tr>
+          </table>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 3: COMUNIDADE DE ZOUK DE AUSTIN -->
+  <section>
+    <h2>3. Comunidade de Zouk de Austin</h2>
+    <div class="section-content">
+
+      <div class="highlight-box" style="background: linear-gradient(135deg, #f8d7da, #f5c6cb); border: 2px solid #dc3545; padding: 1.25rem 1.5rem;">
+        <strong style="color: #721c24; font-size: 1.1rem;">O Zouk Brasileiro é definitivamente SUBATENDIDO em Austin.</strong>
+        <p style="margin-top: 0.5rem; color: #721c24;">Apenas 2-3 locais oferecem zouk (principalmente às quartas-feiras à noite em um único local). Nenhum estúdio dedicado ao zouk existe. Compare com salsa/bachata com aulas diárias em 8-10+ locais. O primeiro festival de zouk de Austin só foi lançado em 2025. <strong>Isso representa uma oportunidade de mercado clara e maravilhosa para instrução de zouk de calibre internacional.</strong></p>
+      </div>
+
+      <h3>ATX Zouk Community</h3>
+      <ul>
+        <li><strong>Website:</strong> <a href="https://atxzouk.com">atxzouk.com</a></li>
+        <li>Mantém o Calendário de Zouk de Austin</li>
+        <li>Filosofia: <em>"Iniciantes são a melhor coisa que pode acontecer a qualquer comunidade de dança"</em></li>
+      </ul>
+
+      <h3>The Art of Movement</h3>
+      <ul>
+        <li>Fundado por <strong>Sabrina</strong></li>
+        <li>Fundou o <strong>Austin Brazilian Zouk Safety Committee</strong> (2021)</li>
+        <li>Realiza workshops e eventos</li>
+      </ul>
+
+      <h3>Agenda Semanal de Zouk</h3>
+      <table>
+        <tr><th>Dia</th><th>Local</th><th>Detalhes</th><th>Preços</th></tr>
+        <tr><td><strong>Quarta-feira</strong></td><td>Austin Inspired Movement</td><td>19:00-20:30 Zouk Int/Avançado; 20:45-21:45 Fundamentos; 21:45-23:30 Social</td><td>$93/mês ou $35 avulso; $19 aula+social / $5 somente social</td></tr>
+      </table>
+
+      <h3>Organizações Comunitárias</h3>
+      <ul>
+        <li><strong>Meetup de Zouk:</strong> Austin Bachata Salsa Zouk -- <strong>1.162 membros</strong></li>
+      </ul>
+
+      <h3>Divergence Zouk Festival</h3>
+      <div class="info-box">
+        <strong>O primeiro festival de zouk de Austin de todos os tempos.</strong> 26-28 de setembro de 2025 no Cambria Uptown Hotel. O lançamento do Divergence sinaliza uma demanda crescente por zouk no mercado de Austin, mas também ressalta o quão nascente a cena ainda é -- a maioria das cidades com zouk estabelecido tem múltiplos eventos anuais.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 4: ANÁLISE DE PREÇOS -->
+  <section>
+    <h2>4. Análise de Preços</h2>
+    <div class="section-content">
+
+      <h3>Preços de Aulas em Grupo</h3>
+      <details>
+        <summary>Preços de Aulas em Grupo por Estúdio <span class="detail-count">5 estúdios</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Estúdio</th><th>Avulso</th><th>Mensal</th><th>Pacote</th></tr>
+            <tr><td>Go Dance</td><td>$20</td><td>$145 ilimitado</td><td>4 aulas $68; 12 aulas $168</td></tr>
+            <tr><td>Austin Inspired Movement</td><td>$35 (19h) / $19 (20:45)</td><td>$150 ilimitado; $100 8 aulas</td><td>--</td></tr>
+            <tr><td>Esquina Tango</td><td>Consultar</td><td>$62 ilimitado (normalmente $120)</td><td>--</td></tr>
+            <tr><td>Dance Austin Studio</td><td>--</td><td>$100 ilimitado</td><td>Contrato de 3 meses</td></tr>
+            <tr><td>Ballet Austin</td><td>$5 primeira aula</td><td>Variável</td><td>--</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <h3>Preços de Aulas Particulares</h3>
+      <details>
+        <summary>Preços de Aulas Particulares por Estúdio <span class="detail-count">4 estúdios</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Estúdio</th><th>Introdutória</th><th>Regular</th><th>Pacote</th></tr>
+            <tr><td>Go Dance</td><td>--</td><td>$115/40min</td><td>10 aulas: $1.050</td></tr>
+            <tr><td>Austin Inspired Movement</td><td>$35 introdutória</td><td>$50/hr (Master); $30/30min</td><td>$240/mês ilimitado c/2 particulares</td></tr>
+            <tr><td>Esquina Tango</td><td>$85/hr</td><td>$95/hr</td><td>4 particulares: $360</td></tr>
+            <tr><td>Dance With Me</td><td>$49 introdutória</td><td>$123-155/aula</td><td>Variável</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <h3>Preços de Workshops &amp; Eventos</h3>
+      <p>Eventos de workshops de final de semana em Austin geralmente custam entre <strong>$130-190</strong> por participante.</p>
+
+      <div class="highlight-box">
+        <strong>Resumo de Preços:</strong> O mercado de dança de Austin sustenta preços premium. Aulas em grupo variam de <strong>$15-35 avulso</strong> e <strong>$62-150/mês ilimitado</strong>. Aulas particulares vão de <strong>$50-155/sessão</strong>. Instrutores de calibre internacional como Edghar &amp; Nadyne podem se posicionar no topo dessa faixa, especialmente para instrução especializada de zouk onde a oferta é extremamente limitada.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 5: CENÁRIO COMPETITIVO -->
+  <section>
+    <h2>5. Cenário Competitivo</h2>
+    <div class="section-content">
+
+      <h3>Saturação de Mercado por Estilo de Dança</h3>
+      <table>
+        <tr><th>Estilo de Dança</th><th>Nº de Locais</th><th>Frequência</th><th>Status</th></tr>
+        <tr><td>Salsa</td><td>8-10+</td><td>Diária</td><td><span class="badge badge-warning">Saturado</span></td></tr>
+        <tr><td>Bachata</td><td>8-10+</td><td>Diária</td><td><span class="badge badge-warning">Saturado</span></td></tr>
+        <tr><td>West Coast Swing</td><td>3-4</td><td>Várias vezes por semana</td><td><span class="badge badge-info">Estabelecido</span></td></tr>
+        <tr><td>Tango Argentino</td><td>3-4</td><td>Várias vezes por semana</td><td><span class="badge badge-info">Estabelecido</span></td></tr>
+        <tr><td>Kizomba/UrbanKiz</td><td>3-4</td><td>Semanal</td><td><span class="badge badge-success">Em Crescimento</span></td></tr>
+        <tr><td>Country Two-Step</td><td>4-5</td><td>Várias vezes por semana</td><td><span class="badge badge-info">Estabelecido</span></td></tr>
+        <tr><td>Dança de Salão</td><td>5+</td><td>Várias vezes por semana</td><td><span class="badge badge-info">Estabelecido</span></td></tr>
+        <tr><td><strong>Zouk Brasileiro</strong></td><td><strong>2-3</strong></td><td><strong>1-2x por semana</strong></td><td><span class="badge badge-danger">Subatendido</span></td></tr>
+      </table>
+
+      <div class="info-box">
+        <strong>Insight Principal:</strong> Salsa e bachata estão saturados com aulas diárias em 8-10+ locais, o que significa que o público de dança latina é grande e bem estabelecido. O Zouk Brasileiro, oferecido em apenas 2-3 locais 1-2 vezes por semana, é o estilo de dança de par mais subatendido em Austin em relação à sua trajetória de crescimento global. O pipeline existente de dança latina fornece um público natural de transição.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 6: DIMENSIONAMENTO DA OPORTUNIDADE DE MERCADO -->
+  <section>
+    <h2>6. Dimensionamento da Oportunidade de Mercado</h2>
+    <div class="section-content">
+
+      <div class="highlight-box" style="background: linear-gradient(135deg, #b7e4c7, #95d5b2); border: 2px solid var(--secondary); padding: 1.25rem 1.5rem;">
+        <strong style="font-size: 1.1rem; color: var(--primary);">Dimensionamento de Mercado: Oportunidade Anual de $1,3-4,9M em Zouk</strong>
+        <p style="margin-top: 0.5rem;">Com ~913.000 adultos de 25-44 anos, estimados 55.000 dançarinos sociais ativos, e o zouk capturando 2-5% de interesse, o mercado endereçável de zouk em Austin é de aproximadamente <strong>1.100-2.750 alunos potenciais</strong>. Com taxas médias mensais de $100-150 para frequência regular, isso representa uma <strong>oportunidade de mercado anual de $1,3-4,9M</strong> atualmente atendida por apenas 2-3 locais oferecendo zouk 1-2 noites por semana.</p>
+      </div>
+
+      <details>
+        <summary>Metodologia de Dimensionamento de Mercado <span class="detail-count">6 métricas</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Métrica</th><th>Valor</th><th>Fonte/Base</th></tr>
+            <tr><td>População Metropolitana de Austin</td><td><strong>2.313.000</strong></td><td>Censo dos EUA 2025</td></tr>
+            <tr><td>Adultos 25-44 (39,7%)</td><td><strong>~913.000</strong></td><td>Faixa etária chave para dança</td></tr>
+            <tr><td>Participação Nacional em Dança (não-fitness)</td><td><strong>~6%</strong></td><td>BLS / estimativas do setor</td></tr>
+            <tr><td>Dançarinos Sociais Estimados em Austin</td><td><strong>~55.000</strong></td><td>6% dos adultos em idade ativa</td></tr>
+            <tr><td>Interesse em Zouk (2-5% dos dançarinos sociais)</td><td><strong>1.100-2.750</strong></td><td>Estimativa conservadora de transição</td></tr>
+            <tr><td>Potencial de Receita Anual</td><td><strong>$1,3-4,9M</strong></td><td>A $100-150/mês frequência regular</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <details>
+        <summary>Contexto do Setor <span class="detail-count">4 métricas</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Métrica</th><th>Valor</th><th>Fonte</th></tr>
+            <tr><td>Indústria de Estúdios de Dança dos EUA (2025)</td><td><strong>$5,0B em receita</strong></td><td>IBISWorld</td></tr>
+            <tr><td>Estúdios de Dança nos EUA (quantidade)</td><td><strong>14.622 empresas</strong></td><td>IBISWorld</td></tr>
+            <tr><td>Participação Proporcional de Austin</td><td><strong>~$35-45M</strong></td><td>Estimativa ponderada por população</td></tr>
+            <tr><td>Gasto do Consumidor com Entretenimento</td><td><strong>$652/ano média</strong></td><td>BLS Consumer Expenditure Survey</td></tr>
+          </table>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 7: CENA DE EVENTOS & FESTIVAIS DE AUSTIN -->
+  <section>
+    <h2>7. Cena de Eventos &amp; Festivais de Austin</h2>
+    <div class="section-content">
+
+      <p>A cultura de festivais de Austin é um motor econômico central e cria múltiplos pontos de contato para eventos relacionados à dança e construção de público.</p>
+
+      <details>
+        <summary>Principais Festivais de Austin com Componentes de Dança <span class="detail-count">7 eventos</span></summary>
+        <div class="details-content">
+          <table>
+            <tr><th>Festival/Evento</th><th>Período</th><th>Relevância</th><th>Impacto</th></tr>
+            <tr><td><strong>SXSW</strong></td><td>Março</td><td>Convergência de música, tecnologia e criatividade; apresentações de dança</td><td>$380M de impacto econômico</td></tr>
+            <tr><td><strong>Austin City Limits (ACL)</strong></td><td>Outubro (2 fins de semana)</td><td>Festival de música com atrações latinas; cultura de dança social</td><td>$534,8M de impacto econômico (recorde 2024)</td></tr>
+            <tr><td><strong>Carnaval Brasileiro</strong></td><td>Fevereiro</td><td>O maior carnaval brasileiro fora do Brasil nos EUA; samba, cultura brasileira</td><td>Conexão cultural direta com o zouk</td></tr>
+            <tr><td><strong>Divergence Zouk Festival</strong></td><td>26-28 de setembro de 2025</td><td>O primeiro festival de zouk de Austin; Cambria Uptown Hotel</td><td>Novo -- sinaliza demanda crescente</td></tr>
+            <tr><td><strong>Austin Salsa Congress</strong></td><td>Variável</td><td>Evento da comunidade de dança latina; público de transição</td><td>Evento estabelecido de dança latina</td></tr>
+            <tr><td><strong>Hot Summer Nights</strong></td><td>Verão</td><td>Série de música ao vivo; eventos ao ar livre propícios à dança</td><td>Engajamento cultural</td></tr>
+            <tr><td><strong>Dia de los Muertos Festival</strong></td><td>Novembro</td><td>Celebração cultural latina com apresentações de dança</td><td>460.000+ da população hispânica/latina da região</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <div class="info-box">
+        <strong>Carnaval Brasileiro:</strong> Austin abriga a maior celebração de Carnaval Brasileiro fora do Brasil nos EUA -- e isso é algo maravilhoso! Essa festa conecta diretamente o tecido cultural de Austin às tradições de dança brasileira. É gratidão demais saber que essa ponte cultural já existe, tornando Austin um mercado especialmente estratégico para o ensino do Zouk Brasileiro. A energia do Carnaval e a paixão pela cultura brasileira que já pulsa nessa cidade criam o cenário perfeito para o crescimento do zouk.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 8: ANÁLISE DE ENTRADA DE MERCADO EDGHAR & NADYNE -->
+  <section>
+    <h2>8. Análise de Entrada de Mercado -- Edghar &amp; Nadyne</h2>
+    <div class="section-content">
+
+      <h3>Por Que Austin</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+        <div style="background: #d8f3dc; padding: 1rem; border-radius: 8px;">
+          <h3 style="color: var(--primary); margin: 0 0 0.75rem 0;">Fatores de Mercado</h3>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li><strong>Mercado de zouk subatendido</strong> -- lacuna clara na oferta</li>
+            <li><strong>Grande faixa demográfica 25-44</strong> -- 39,7% (idade ideal para dança)</li>
+            <li><strong>Alta renda</strong> -- $91K de renda familiar mediana sustenta preços premium</li>
+            <li><strong>170+ estúdios</strong> -- demanda comprovada por aulas de dança</li>
+          </ul>
+        </div>
+        <div style="background: #d8f3dc; padding: 1rem; border-radius: 8px;">
+          <h3 style="color: var(--primary); margin: 0 0 0.75rem 0;">Fatores Culturais</h3>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li><strong>32,5% de população hispânica</strong> -- afinidade cultural com dança latina</li>
+            <li><strong>"Capital da Música ao Vivo"</strong> -- cultura que abraça a dança</li>
+            <li><strong>Infraestrutura de dança latina existente</strong> -- pipeline de dançarinos em transição</li>
+            <li><strong>Carnaval Brasileiro</strong> -- presença cultural brasileira</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Opções de Estratégia de Entrada</h3>
+
+      <div class="info-box">
+        <strong>Opção 1: Workshops Intensivos de Final de Semana</strong>
+        <ul>
+          <li>Modelo: Finais de semana intensivos no estilo ZoukOC ($75-190 por aluno)</li>
+          <li>Frequência: Visitas trimestrais para construir reconhecimento e público</li>
+          <li>Potencial de receita: 30-50 alunos x $130-190 = $3.900-9.500 por final de semana</li>
+          <li>Baixo compromisso, alto impacto para construção de marca</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <strong>Opção 2: Residência Mensal em Estúdio Existente</strong>
+        <ul>
+          <li>Parceria com Austin Inspired Movement ou Esquina Tango</li>
+          <li>Adicionar noites dedicadas ao zouk além da oferta atual de quarta-feira</li>
+          <li>Construir base de alunos recorrentes com instrução semanal/quinzenal</li>
+          <li>Aproveitar a infraestrutura e o público do estúdio existente</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <strong>Opção 3: Parceria com o Festival Divergence</strong>
+        <ul>
+          <li>Apresentação principal ou destaque no Divergence Zouk Festival (lançado em 2025)</li>
+          <li>Posicionamento como os principais instrutores de zouk de Austin</li>
+          <li>Workshop + performance + dança social durante o final de semana do festival</li>
+          <li>Constrói credibilidade e visibilidade na comunidade</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <strong>Opção 4: Intensivos de Aulas Particulares</strong>
+        <ul>
+          <li>Preços: $50-155/sessão (alinhado com os valores praticados em Austin)</li>
+          <li>Foco em dançarinos sérios e casais buscando aprendizado acelerado</li>
+          <li>Horários flexíveis durante visitas a Austin</li>
+          <li>Alta receita por hora, menor volume</li>
+        </ul>
+      </div>
+
+      <div class="highlight-box">
+        <strong>Abordagem Recomendada:</strong> Uma entrada em fases combinando as Opções 1 e 3 inicialmente (workshops de final de semana + parceria com o festival Divergence), fazendo a transição para a Opção 2 (residência mensal ou quinzenal) conforme a base de alunos cresce. Isso minimiza o risco inicial enquanto estabelece presença de marca em um mercado subatendido. A energia do mercado de Austin é incrível -- é hora de aproveitar essa oportunidade!
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 9: CONCLUSÕES & RECOMENDAÇÕES -->
+  <section>
+    <h2>9. Conclusões &amp; Recomendações</h2>
+    <div class="section-content">
+
+      <h3>Principais Descobertas</h3>
+      <ol>
+        <li><strong>Austin é um mercado de primeiro nível para aulas de dança:</strong> Com 39,7% da população na faixa etária ideal de 25-44 anos para dança, renda familiar mediana de $91K, mais de 170 estúdios existentes, e profunda identidade cultural ligada à música e ao movimento, os fundamentos são excepcionalmente fortes.</li>
+        <li><strong>O Zouk Brasileiro é o estilo de dança de par mais subatendido:</strong> Apenas 2-3 locais oferecem zouk (principalmente uma noite por semana) comparado com aulas diárias de salsa/bachata em 8-10+ locais. Nenhum estúdio dedicado ao zouk existe em uma região metropolitana de 2,3M+ pessoas.</li>
+        <li><strong>O mercado endereçável é substancial:</strong> Estimados 1.100-2.750 alunos potenciais de zouk representam uma oportunidade de mercado anual de $1,3-4,9M atualmente capturada por uma oferta mínima.</li>
+        <li><strong>A infraestrutura de dança latina existente cria um pipeline:</strong> Os 8-10+ estúdios de salsa/bachata com aulas diárias produzem um fluxo constante de dançarinos de par experientes que são candidatos naturais para a transição ao zouk.</li>
+        <li><strong>O mercado é nascente mas em crescimento:</strong> O Divergence (primeiro festival de zouk de Austin, 2025), a comunidade ATX Zouk, e um grupo de Meetup com 1.162 membros sinalizam uma demanda crescente que supera a oferta atual.</li>
+      </ol>
+
+      <h3>Recomendações Estratégicas</h3>
+
+      <div class="warning-box">
+        <strong>Imediato (0-3 meses):</strong> Estabelecer contato com Austin Inspired Movement e os organizadores do Divergence Zouk Festival. Agendar um workshop inicial de final de semana para testar a recepção do mercado e avaliar a demanda. Meta de 30-50 participantes a $130-190 por final de semana.
+      </div>
+
+      <div class="info-box">
+        <strong>Curto prazo (3-6 meses):</strong> Desenvolver uma série trimestral de workshops em Austin. Fazer parceria com a comunidade ATX Zouk (atxzouk.com) para divulgação. Construir uma lista de e-mails e presença local nas redes sociais. Explorar parceria com estúdio para noites adicionais de zouk além da quarta-feira.
+      </div>
+
+      <div class="info-box">
+        <strong>Médio prazo (6-12 meses):</strong> Fazer a transição para uma residência mensal ou quinzenal em um estúdio existente. Introduzir um currículo estruturado (Fundamentos até Avançado). Oferecer pacotes de aulas particulares. Objetivo de ampliar as ofertas semanais de zouk em Austin de 1 noite para 3-4 noites.
+      </div>
+
+      <div class="info-box">
+        <strong>Longo prazo (12+ meses):</strong> Avaliar a demanda por um espaço dedicado ao zouk ou parceria ampliada com estúdio. Desenvolver Austin como âncora recorrente em turnês pelos EUA junto ao circuito ZoukMX no México. Posicionar Edghar &amp; Nadyne como os principais instrutores de zouk de Austin, aproveitando a marca "Capital da Música ao Vivo" da cidade para marketing.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 10: VERIFICAÇÃO DE DADOS -->
+  <section>
+    <h2>10. Verificação de Dados</h2>
+    <div class="section-content">
+
+      <details>
+        <summary>Notas de Verificação de Dados <span class="detail-count">8 itens</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><strong>Dados populacionais:</strong> Dados da população metropolitana e municipal de Austin provenientes das estimativas do Censo dos EUA (2024-2025) e projeções de planejamento urbano.</li>
+            <li><strong>Dados de renda:</strong> Renda familiar mediana ($91.461) da American Community Survey; renda familiar metropolitana ($126.000) dos dados de nível metropolitano do Censo.</li>
+            <li><strong>Contagem de estúdios de dança (170+):</strong> Agregada do Google Maps, Yelp, ClassPass e listagens do Mindbody para "estúdio de dança" na região metropolitana de Austin. Inclui todos os estilos e formatos.</li>
+            <li><strong>Estimativa de receita ($35-45M):</strong> Derivada da receita da indústria de estúdios de dança dos EUA ($5,0B / 14.622 empresas) ponderada pela proporção populacional e fatores de renda de Austin.</li>
+            <li><strong>Contagem de locais de zouk (2-3):</strong> Verificada através do calendário da comunidade ATX Zouk, sites de estúdios e listagens do Meetup até fevereiro de 2026.</li>
+            <li><strong>Estimativa de dançarinos sociais (~55.000):</strong> Baseada na taxa de participação em dança não-fitness de ~6% (BLS) aplicada à população em idade ativa de Austin. Esta é uma estimativa conservadora dado o perfil cultural de Austin.</li>
+            <li><strong>Preços de estúdios:</strong> Coletados de sites individuais dos estúdios, listagens do ClassPass e páginas do Yelp. Os preços refletem valores publicados no início de 2026 e podem variar.</li>
+            <li><strong>Impacto econômico de festivais:</strong> Dados do ACL ($534,8M) e SXSW ($380M) provenientes de relatórios oficiais de impacto econômico da cidade e comunicados de imprensa dos organizadores.</li>
+          </ul>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 11: FONTES -->
+  <section>
+    <h2>11. Fontes &amp; Citações</h2>
+    <div class="section-content">
+
+      <details>
+        <summary>Fontes Demográficas &amp; Econômicas <span class="detail-count">6 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://www.census.gov">US Census Bureau</a> -- População metropolitana de Austin (2.313.000), detalhamento demográfico, dados domiciliares</li>
+            <li><a href="https://data.census.gov">American Community Survey</a> -- Renda familiar mediana ($91.461), nível educacional, distribuição etária</li>
+            <li><a href="https://www.austintexas.gov">City of Austin</a> -- Projeções populacionais da cidade, dados de financiamento cultural ($25M+ artes/música)</li>
+            <li><a href="https://www.bls.gov">Bureau of Labor Statistics</a> -- Gastos do consumidor com entretenimento ($652/ano média), taxas de participação em dança</li>
+            <li><a href="https://www.austinchamber.com">Austin Chamber of Commerce</a> -- Dados de impacto econômico, emprego na indústria criativa (100.000+)</li>
+            <li><a href="https://www.ibisworld.com">IBISWorld</a> -- Receita da indústria de estúdios de dança dos EUA ($5,0B), contagem de empresas (14.622)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Fontes de Estúdios de Dança &amp; Comunidade <span class="detail-count">8 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://atxzouk.com">ATX Zouk Community</a> -- Calendário de zouk de Austin, informações da comunidade</li>
+            <li><a href="https://austininspiredmovement.com">Austin Inspired Movement</a> -- Grade de aulas, preços, programação de zouk</li>
+            <li><a href="https://esquinatango.com">Esquina Tango</a> -- Ofertas de aulas, preços, instrução de zouk/tango</li>
+            <li><a href="https://godancestudio.com">Go Dance Studio</a> -- Preços, pacotes de aulas, reconhecimento Austin Chronicle</li>
+            <li><a href="https://www.dancewithme.com">Dance With Me Austin</a> -- Localização de franquia, faixas de preço</li>
+            <li><a href="https://www.meetup.com">Meetup.com</a> -- Grupo Austin Bachata Salsa Zouk (1.162 membros)</li>
+            <li><a href="https://www.yelp.com">Yelp</a> -- Resenhas e avaliações de estúdios</li>
+            <li><a href="https://classpass.com">ClassPass</a> -- Avaliações de estúdios e disponibilidade de aulas</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Fontes de Festivais &amp; Eventos <span class="detail-count">5 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://www.aclfestival.com">Austin City Limits Music Festival</a> -- $534,8M de impacto econômico (recorde 2024)</li>
+            <li><a href="https://www.sxsw.com">SXSW</a> -- $380M de impacto econômico</li>
+            <li>Divergence Zouk Festival -- Primeiro festival de zouk de Austin, 26-28 de set 2025, Cambria Uptown Hotel</li>
+            <li><a href="https://sambaparty.com">Carnaval Brasileiro</a> -- Maior carnaval brasileiro nos EUA fora do Brasil</li>
+            <li><a href="https://zoukoc.com">ZoukOC</a> -- Referência de preços de workshops ($75-190 por aluno)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Fontes de Pesquisa do Setor <span class="detail-count">4 fontes</span></summary>
+        <div class="details-content">
+          <ul>
+            <li><a href="https://www.businessresearchinsights.com">Business Research Insights</a> -- Dimensionamento do mercado global de dança</li>
+            <li><a href="https://www.futuredatastats.com">FutureDataStats</a> -- Mercado de treinamento em dança, mercado de retiros de bem-estar</li>
+            <li><a href="https://theduoapp.com">The DUO App</a> -- Mapeamento da comunidade global de zouk (180+ cidades, 49 países)</li>
+            <li><a href="https://www.danceplace.com">Danceplace / BZDC</a> -- Dados do Brazilian Zouk Dance Council</li>
+          </ul>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Análise do Mercado de Dança de Austin: Edghar &amp; Nadyne</strong></p>
+    <p>Divisão de Pesquisa Integrity Studio | 12 de fevereiro de 2026</p>
+    <p class="source">Este relatório é baseado em informações publicamente disponíveis coletadas até fevereiro de 2026. Projeções de mercado são provenientes de empresas de pesquisa terceirizadas e devem ser validadas para tomada de decisão estratégica.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
