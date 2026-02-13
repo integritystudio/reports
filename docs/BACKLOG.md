@@ -354,6 +354,93 @@ Line 35 contains `--ink: #e4ebe f;` (space before `f`). This invalid color value
 
 ---
 
+## Translation & Localization
+
+### T1. Create `content-translator` skill
+
+**Impact:** Manual translation of HTML reports is error-prone and time-consuming. Three PT-BR translations already exist in `edgar_nadyne/` as manually created parallel files. A reusable skill would standardize the process and ensure structural parity between source and translated reports.
+
+**Affected files:** All report HTML files (potential translation targets); `~/.claude/` (skill definition)
+
+**Fix:** Build a `content-translator` skill with 5 phases:
+1. **Source extraction** — Separate CSS/structure from translatable text content
+2. **Translation** — Translate extracted text to target language
+3. **Localization** — Adapt numbers, dates, and currency formats for target locale (e.g., `1,234.56` → `1.234,56` for PT-BR)
+4. **Assembly** — Recombine translated text with original CSS/structure
+5. **QA validation** — Verify line count parity, CSS identity (no style changes), `lang` attribute set correctly, no English fragments remaining
+
+**Effort:** High
+
+---
+
+### T2. Translation file naming convention
+
+**Impact:** The existing PT-BR translations use fully translated Portuguese filenames (e.g., `analise_mercado_zouk.html` not `brazilian_zouk_market_analysis_pt-br.html`). This convention is undocumented and could lead to inconsistency as more translations are added.
+
+**Affected files:** `CLAUDE.md`, translated report files
+
+**Fix:** Document the existing naming pattern in CLAUDE.md. Add a source-tracking comment convention to all translated files:
+```html
+<!-- Source: brazilian_zouk_market_analysis.html | Lang: pt-BR -->
+```
+This enables automated tooling to map translations back to their source files.
+
+**Effort:** Low
+
+---
+
+### T3. Hub card generation for translations
+
+**Impact:** Translated reports currently have no corresponding cards on `index.html`. Users cannot discover PT-BR versions from the hub.
+
+**Affected files:** `index.html` (hub), translation workflow output
+
+**Fix:** Auto-generate localized hub cards as part of the translation workflow:
+- Add `(PT-BR)` category badge to translated cards
+- Translate the card description to the target language
+- Use localized link text (`Ver Relatório` instead of `View Report`)
+- Group translated cards alongside their English originals in the same `<section>`
+
+**Effort:** Medium
+
+---
+
+### T4. Translation completeness tracking
+
+**Impact:** No visibility into which reports have been translated and which haven't. Currently 3 of 19 audited reports (15.8%) have PT-BR translations.
+
+**Affected files:** `docs/TRANSLATION_STATUS.md` (new)
+
+**Fix:** Create a translation status matrix showing coverage per language per report:
+
+| Report | PT-BR | ES | FR |
+|--------|-------|----|----|
+| `edgar_nadyne/edghar_nadyne_artist_profile.html` | `edghar_nadyne_perfil_artista.html` | -- | -- |
+| `edgar_nadyne/brazilian_zouk_market_analysis.html` | `analise_mercado_zouk.html` | -- | -- |
+| `edgar_nadyne/austin_dance_market_analysis.html` | `analise_mercado_austin.html` | -- | -- |
+| *(16 other reports)* | -- | -- | -- |
+
+Update this document each time a translation is completed.
+
+**Effort:** Low-Medium
+
+---
+
+### T5. Multi-language support beyond PT-BR
+
+**Impact:** The T1 skill design must be extensible to languages beyond Portuguese. Number formats, date conventions, and currency symbols vary significantly across locales.
+
+**Affected files:** `content-translator` skill locale configuration
+
+**Fix:** Ensure the T1 design:
+- Accepts a `--lang` parameter (e.g., `pt-BR`, `es-MX`, `fr-FR`)
+- Externalizes locale-specific rules (number separators, date formats, currency symbols) into a configuration map
+- Defines hub card grouping strategy for 3+ languages (per-section language tabs vs. separate translated sections)
+
+**Effort:** Medium (deferred until T1 is validated with PT-BR)
+
+---
+
 ## Suggested Implementation Order
 
 ### Phase 1: Quick wins (1 session, high impact)
@@ -383,25 +470,32 @@ Line 35 contains `--ink: #e4ebe f;` (space before `f`). This invalid color value
 3. **L1** — Add skip-to-content links
 4. **L2** — Add print styles to Leora files
 
+### Phase 5: Translation & Localization tooling
+1. **T1** — Create content-translator skill (prerequisite for T2-T5)
+2. **T2** — Document file naming convention in CLAUDE.md
+3. **T3** — Add hub card auto-generation to translation workflow
+4. **T4** — Create translation status tracking document
+5. **T5** — Design multi-language locale rules (deferred until T1 validated)
+
 ---
 
 ## Scorecard
 
-| Directory | Dark Mode | Mobile | Tables | Accessibility | Overall |
-|-----------|-----------|--------|--------|---------------|---------|
-| `index.html` (hub) | Pass | Pass | N/A | Good | **A** |
-| `capital_city/` | Pass | Pass | Pass | Good | **A** |
-| `holliday_lighting/index.html` | Pass | Pass | N/A | Ext font dep | **B+** |
-| `holliday_lighting/` (reports) | Mixed | Mixed | Fail | Fair | **C+** |
-| `leora_research/index.html` | Pass | Pass | N/A | Good | **A-** |
-| `leora_research/` (forms) | Fail | Fail | N/A | px sizing | **D+** |
-| `balloon-collective/` | Fail | Fail | Fail | Fair | **D** |
-| `edgar_nadyne/` | Fail | Fail | Fail | Fair | **D** |
-| `integrity-studio-ai/` | Fail | Fail | Fail | Fair | **D** |
-| `trp-austin/` (research) | Fail | Fail | Fail | Fair | **D** |
-| `trp-austin/` (competitor) | Pass* | Partial | Pass | Good | **B** |
-| `zoukmx/` | Fail | Fail | Fail | Fair | **D** |
-| `ngo-market/` | Fail | Fail | N/A | Sidebar breaks | **D-** |
-| `PerformanceTest/` | Fail | Fail | N/A | px sizing | **D+** |
+| Directory | Dark Mode | Mobile | Tables | Accessibility | Translation | Overall |
+|-----------|-----------|--------|--------|---------------|-------------|---------|
+| `index.html` (hub) | Pass | Pass | N/A | Good | -- | **A** |
+| `capital_city/` | Pass | Pass | Pass | Good | -- | **A** |
+| `holliday_lighting/index.html` | Pass | Pass | N/A | Ext font dep | -- | **B+** |
+| `holliday_lighting/` (reports) | Mixed | Mixed | Fail | Fair | -- | **C+** |
+| `leora_research/index.html` | Pass | Pass | N/A | Good | -- | **A-** |
+| `leora_research/` (forms) | Fail | Fail | N/A | px sizing | -- | **D+** |
+| `balloon-collective/` | Fail | Fail | Fail | Fair | -- | **D** |
+| `edgar_nadyne/` | Fail | Fail | Fail | Fair | 3/3 PT-BR | **D** |
+| `integrity-studio-ai/` | Fail | Fail | Fail | Fair | -- | **D** |
+| `trp-austin/` (research) | Fail | Fail | Fail | Fair | -- | **D** |
+| `trp-austin/` (competitor) | Pass* | Partial | Pass | Good | -- | **B** |
+| `zoukmx/` | Fail | Fail | Fail | Fair | -- | **D** |
+| `ngo-market/` | Fail | Fail | N/A | Sidebar breaks | -- | **D-** |
+| `PerformanceTest/` | Fail | Fail | N/A | px sizing | -- | **D+** |
 
 *Pass with caveat: dark-first is inconsistent with repo convention
