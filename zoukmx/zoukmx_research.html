@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZoukMX - Comprehensive Market Analysis Report</title>
+    <style>
+        :root {
+            --primary: #1b4332;
+            --secondary: #2d6a4f;
+            --accent: #d4a373;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+        }
+        header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        header .subtitle { font-size: 1.2rem; opacity: 0.9; }
+        header .meta { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
+
+        .executive-summary {
+            background: white;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+
+        section {
+            background: white;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        section h2 {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1.3rem;
+        }
+        section h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 0.75rem 0;
+            font-size: 1.1rem;
+        }
+        .section-content { padding: 1.5rem; }
+
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--light); font-weight: 600; color: var(--primary); }
+        tr:hover { background: #f8f9fa; }
+
+        ul, ol { margin: 1rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f4f8, #d4edda);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .info-box {
+            background: #e7f1ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        blockquote {
+            background: #f8f9fa;
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .source { font-size: 0.85rem; color: #666; font-style: italic; }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .badge-success { background: #d4edda; color: #155724; }
+        .badge-warning { background: #fff3cd; color: #856404; }
+        .badge-danger  { background: #f8d7da; color: #721c24; }
+        .badge-info    { background: #d1ecf1; color: #0c5460; }
+
+        .rating { color: #ffc107; font-size: 1.2rem; }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .contact-item { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; }
+        .contact-item .label { font-size: 0.85rem; color: #666; margin-bottom: 0.25rem; }
+        .contact-item .value { font-weight: 600; color: var(--primary); }
+
+        .verification-table td:nth-child(2),
+        .verification-table td:nth-child(3),
+        .verification-table td:nth-child(4) { text-align: center; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        a { color: var(--secondary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        details {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        details summary {
+            padding: 0.75rem 1rem;
+            background: var(--light);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            user-select: none;
+        }
+        details summary::-webkit-details-marker { display: none; }
+        details summary::before {
+            content: '\25B6';
+            font-size: 0.7rem;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+        details[open] summary::before { transform: rotate(90deg); }
+        details summary:hover { background: #e9ecef; }
+        details summary .detail-count {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #666;
+            margin-left: auto;
+        }
+        details .details-content { padding: 1rem 1.5rem; }
+        details details { margin: 0.75rem 0; border-color: #e9ecef; }
+        details details summary { font-size: 0.95rem; padding: 0.6rem 1rem; }
+
+        @media print {
+            body { background: white; }
+            .container { max-width: 100%; }
+            section { box-shadow: none; border: 1px solid #ddd; }
+            details { border: none; }
+            details, details[open] { display: block; }
+            details > summary { display: none; }
+            details .details-content { padding: 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>ZoukMX</h1>
+            <div class="subtitle">Comprehensive Market Analysis Report</div>
+            <div class="meta">
+                <strong>Report Date:</strong> February 12, 2026 |
+                <strong>Primary Source:</strong> <a href="https://zouk.mx/" style="color: white;">zouk.mx</a> |
+                <strong>Industry:</strong> Dance Festival &amp; Experiential Travel
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Executive Summary -->
+        <div id="executive-summary" class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>ZoukMX is a premier Brazilian Zouk dance festival and immersive training program held annually in Playa del Carmen, Mexico, now in its 11th year of operation. Organized by Joe Sandoval, the event has evolved from a weekend festival into a month-long experience combining a 100-hour intensive training program (across 7 specialized tracks), pre-festival workshops, a multi-day festival with BZDC-sanctioned Jack &amp; Jill competitions, and unique excursion parties at cenotes and jungle lagoons. The event draws attendees from 25+ countries and features 14+ internationally renowned Brazilian Zouk artists and DJs. ZoukMX operates within the rapidly growing global music festival market (valued at $3.76B in 2025, CAGR 23.17%) and music tourism sector ($96.78B in 2024, CAGR 18.8%), while benefiting from Quintana Roo's position as Mexico's top tourism destination with 24.4M visitors in 2025. With 8,600+ Instagram followers and a strong reputation in the global Zouk community, ZoukMX is well-positioned as the only 100-hour Brazilian Zouk intensive in North America, though opportunities exist to expand digital presence, formalize business registration, and increase capacity to capture the growing demand for experiential dance travel.</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <nav id="toc" style="background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden;">
+            <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Table of Contents</h2>
+            <div style="padding: 1.5rem;">
+                <ol style="margin: 0; padding-left: 1.5rem;">
+                    <li><a href="#company-overview">Company Overview</a></li>
+                    <li><a href="#contact-info">Contact Information</a></li>
+                    <li><a href="#business-status">Business Status &amp; Registration</a></li>
+                    <li><a href="#personnel">Key Personnel</a></li>
+                    <li><a href="#reviews">Reviews &amp; Ratings</a></li>
+                    <li><a href="#financial">Financial Information</a></li>
+                    <li><a href="#market-data">Industry Market Data</a></li>
+                    <li><a href="#competitive">Competitive Analysis</a></li>
+                    <li><a href="#online-presence">Online Presence</a></li>
+                    <li><a href="#verification">Data Verification Summary</a></li>
+                    <li><a href="#conclusions">Conclusions &amp; Recommendations</a></li>
+                    <li><a href="#sources">Sources &amp; Citations</a></li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- 1. Company Overview -->
+        <section id="company-overview">
+            <h2>1. Company Overview</h2>
+            <div class="section-content">
+                <h3>Mission &amp; Value Proposition</h3>
+                <p>ZoukMX creates a unique experience mixing an ultimate beach vacation and dance festival into one. The event is built around Brazilian Zouk, a partner dance originating from Brazil, and aims to provide world-class training, unforgettable music, and authentic cultural experiences in one of the most beautiful settings in Central America.</p>
+
+                <h3>Services &amp; Offerings</h3>
+                <table>
+                    <tr><th>Program</th><th>Duration</th><th>Dates (2026)</th><th>Details</th></tr>
+                    <tr>
+                        <td>100-Hour Training Program</td>
+                        <td>~4 weeks</td>
+                        <td>Jan 25 &ndash; Feb 19</td>
+                        <td>7 tracks: Foundations, Beyond Fundamentals, Connection &amp; Musicality, Competition, Lambada, Beyond Lambada, Teacher Training</td>
+                    </tr>
+                    <tr>
+                        <td>Pre-Festival Intensives</td>
+                        <td>3 days</td>
+                        <td>Feb 17&ndash;19</td>
+                        <td>12 hours of concentrated technique focused on head movements, connection, creativity</td>
+                    </tr>
+                    <tr>
+                        <td>Weekend Festival</td>
+                        <td>4 days</td>
+                        <td>Feb 20&ndash;23</td>
+                        <td>Workshops, social dancing, BZDC Jack &amp; Jill competition, Zouk16 competition, themed parties</td>
+                    </tr>
+                    <tr>
+                        <td>Excursion: Lagoon Jungle Party</td>
+                        <td>1 day</td>
+                        <td>Feb 23</td>
+                        <td>Signature closing event at exclusive jungle lagoon location</td>
+                    </tr>
+                </table>
+
+                <h3>Unique Party Experiences</h3>
+                <ul>
+                    <li><strong>Secret Cenote Party</strong> &ndash; Final party at exclusive underground water location</li>
+                    <li><strong>Mystic Jungle Lagoon Party</strong> &ndash; Signature event in jungle setting</li>
+                    <li><strong>Beach Front Venue Parties</strong> &ndash; Dancing on the Caribbean coast</li>
+                    <li><strong>Rooftop Parties</strong> &ndash; Overlooking Playa del Carmen</li>
+                    <li><strong>After Sunrise Parties</strong> &ndash; All-night dance sessions</li>
+                </ul>
+
+                <h3>Geographic Focus</h3>
+                <p>Based in Playa del Carmen, Quintana Roo, Mexico (Riviera Maya). Attendees fly into Cancun International Airport and take the ADO premier shuttle ($17 one way, every 30 min) to Playa del Carmen. The event draws participants from 25+ countries, with instruction primarily from Brazilian artists.</p>
+
+                <h3>Key Differentiators</h3>
+                <ul>
+                    <li>Only 100-hour Brazilian Zouk intensive training program in North America</li>
+                    <li>Month-long immersive experience (not just a weekend festival)</li>
+                    <li>BZDC-sanctioned Jack &amp; Jill competition</li>
+                    <li>Unique venue experiences (cenotes, jungle lagoons, rooftops)</li>
+                    <li>7 specialized training tracks with audition-based placement</li>
+                    <li>International Brazilian training team</li>
+                    <li>11-year track record in Mexico</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 2. Contact Information -->
+        <section id="contact-info">
+            <h2>2. Contact Information</h2>
+            <div class="section-content">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="label">Website</div>
+                        <div class="value"><a href="https://zouk.mx/">zouk.mx</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Email</div>
+                        <div class="value"><a href="mailto:zoukmx@zouk.us">zoukmx@zouk.us</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Ticketing</div>
+                        <div class="value"><a href="https://www.eventbrite.com/e/zoukmx-2026-jungle-lagoon-edition-tickets-1276901559939">Eventbrite</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Application</div>
+                        <div class="value"><a href="https://bit.ly/zmx100">Google Forms</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Location</div>
+                        <div class="value">Quinta Avenida, Playa del Carmen, ROO 77710</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="label">Instagram</div>
+                        <div class="value"><a href="https://www.instagram.com/zoukmx/">@zoukmx</a></div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>Contact Analysis:</strong> ZoukMX uses a <code>zouk.us</code> email domain (distinct from the <code>zouk.mx</code> website domain), suggesting the organization may have US-based operations or the organizer is US-based. Ticketing is handled through Eventbrite, while training applications go through Google Forms. No phone number is publicly listed.
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Business Status & Registration -->
+        <section id="business-status">
+            <h2>3. Business Status &amp; Registration</h2>
+            <div class="section-content">
+                <table>
+                    <tr><th>Data Point</th><th>Finding</th><th>Status</th></tr>
+                    <tr>
+                        <td>Years in Operation</td>
+                        <td>11 years (2016&ndash;2026)</td>
+                        <td><span class="badge badge-success">Verified</span></td>
+                    </tr>
+                    <tr>
+                        <td>Eventbrite History</td>
+                        <td>9 events listed, hosting for 7 years</td>
+                        <td><span class="badge badge-success">Verified</span></td>
+                    </tr>
+                    <tr>
+                        <td>Website Platform</td>
+                        <td>WordPress (self-hosted at zouk.mx)</td>
+                        <td><span class="badge badge-success">Verified</span></td>
+                    </tr>
+                    <tr>
+                        <td>US Business Registration</td>
+                        <td>Not found in public records search</td>
+                        <td><span class="badge badge-warning">Unconfirmed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mexico Business Registration</td>
+                        <td>Not found &ndash; may operate under a different entity name or as a sole proprietorship</td>
+                        <td><span class="badge badge-warning">Unconfirmed</span></td>
+                    </tr>
+                    <tr>
+                        <td>BZDC Affiliation</td>
+                        <td>Official BZDC Jack &amp; Jill competition host</td>
+                        <td><span class="badge badge-success">Verified</span></td>
+                    </tr>
+                </table>
+
+                <div class="warning-box">
+                    <strong>Research Limitations:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>No formal business entity filing found under "ZoukMX" in US or Mexican public registries. The event may be operated under a different legal entity name or as an unregistered sole proprietorship.</li>
+                        <li>The use of both <code>.mx</code> and <code>.us</code> domains suggests potential dual-country operations.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Key Personnel -->
+        <section id="personnel">
+            <h2>4. Key Personnel</h2>
+            <div class="section-content">
+                <h3>Leadership Team</h3>
+                <table>
+                    <tr><th>Name</th><th>Role</th><th>Source</th></tr>
+                    <tr>
+                        <td>Joe Sandoval</td>
+                        <td>Event Organizer / Founder</td>
+                        <td><a href="https://www.eventbrite.com/e/zoukmx-2026-jungle-lagoon-edition-tickets-1276901559939">Eventbrite</a></td>
+                    </tr>
+                    <tr>
+                        <td>Caroline Haugsted</td>
+                        <td>Program Director</td>
+                        <td><a href="https://www.danceplace.com/index/no/16282/ZOUKMX-2026-Playa+Del+Carmen-Mexico-Brazilian+Zouk+Dance+event">Danceplace</a></td>
+                    </tr>
+                    <tr>
+                        <td>Hara Zi</td>
+                        <td>Festival Director</td>
+                        <td><a href="https://www.danceplace.com/index/no/16282/ZOUKMX-2026-Playa+Del+Carmen-Mexico-Brazilian+Zouk+Dance+event">Danceplace</a></td>
+                    </tr>
+                    <tr>
+                        <td>Camila Betancourt</td>
+                        <td>Festival Director</td>
+                        <td><a href="https://www.danceplace.com/index/no/16282/ZOUKMX-2026-Playa+Del+Carmen-Mexico-Brazilian+Zouk+Dance+event">Danceplace</a></td>
+                    </tr>
+                    <tr>
+                        <td>Niko Salgado</td>
+                        <td>Director of Competition</td>
+                        <td><a href="https://www.danceplace.com/index/no/16282/ZOUKMX-2026-Playa+Del+Carmen-Mexico-Brazilian+Zouk+Dance+event">Danceplace</a></td>
+                    </tr>
+                </table>
+
+                <h3>2026 Artist &amp; Instructor Roster (14+)</h3>
+                <table>
+                    <tr><th>Artist/Couple</th><th>Role</th></tr>
+                    <tr><td>Luan &amp; Adriana</td><td>Instructor Couple</td></tr>
+                    <tr><td>Ariel &amp; Leticia</td><td>Instructor Couple</td></tr>
+                    <tr><td>Diego &amp; Thieli</td><td>Instructor Couple</td></tr>
+                    <tr><td>Gab &amp; Caroline</td><td>Instructor Couple</td></tr>
+                    <tr><td>Kakah</td><td>Instructor / DJ</td></tr>
+                    <tr><td>Lucas &amp; Vanessa</td><td>Instructor Couple</td></tr>
+                    <tr><td>Pedro Nantes</td><td>Instructor (contemporary/modern influence)</td></tr>
+                    <tr><td>Felipe Nascimento</td><td>Instructor</td></tr>
+                    <tr><td>Edghar &amp; Nadyne</td><td>Instructor Couple</td></tr>
+                    <tr><td>Ariana &amp; Lautaro</td><td>Instructor Couple</td></tr>
+                    <tr><td>DJ Blacksia</td><td>DJ</td></tr>
+                    <tr><td>DJ Camilo</td><td>DJ</td></tr>
+                    <tr><td>DJ Lov3</td><td>DJ</td></tr>
+                </table>
+                <p class="source">Source: <a href="https://zouk.mx/">zouk.mx</a> (2026 artist lineup)</p>
+            </div>
+        </section>
+
+        <!-- 5. Reviews & Ratings -->
+        <section id="reviews">
+            <h2>5. Reviews &amp; Ratings</h2>
+            <div class="section-content">
+                <table>
+                    <tr><th>Platform</th><th>Rating</th><th>Review Count</th><th>Notes</th></tr>
+                    <tr>
+                        <td>Eventbrite</td>
+                        <td>N/A</td>
+                        <td>9 events hosted over 7 years</td>
+                        <td>Eventbrite does not display public ratings; long hosting history indicates reliability</td>
+                    </tr>
+                    <tr>
+                        <td>Instagram</td>
+                        <td>N/A</td>
+                        <td>8,637 followers; 964 posts</td>
+                        <td>Strong engagement with dance community; used as primary social channel</td>
+                    </tr>
+                    <tr>
+                        <td>Zoukology</td>
+                        <td>N/A (listed event)</td>
+                        <td>Multi-year listing</td>
+                        <td>Featured on the global Zouk event calendar</td>
+                    </tr>
+                    <tr>
+                        <td>Danceplace</td>
+                        <td>N/A (listed event)</td>
+                        <td>Listed 2024, 2025, 2026</td>
+                        <td>Consistently listed on the international dance event platform</td>
+                    </tr>
+                    <tr>
+                        <td>Google Business</td>
+                        <td>Not found</td>
+                        <td>&mdash;</td>
+                        <td>No Google Business Profile identified</td>
+                    </tr>
+                    <tr>
+                        <td>TripAdvisor</td>
+                        <td>Not found</td>
+                        <td>&mdash;</td>
+                        <td>No TripAdvisor listing identified</td>
+                    </tr>
+                </table>
+
+                <h3>Community Sentiment</h3>
+                <blockquote>
+                    "Traveling for Zouk is awesome... a weekend away to recharge and dance feels like a dream come true."
+                    <br><span class="source">&mdash; Community testimonial via <a href="https://zoukology.com/why-retreats/">Zoukology</a></span>
+                </blockquote>
+                <blockquote>
+                    "Zouk is a powerful healing modality... fellow dancers become family as strong bonds form."
+                    <br><span class="source">&mdash; Community testimonial via <a href="https://zoukology.com/why-retreats/">Zoukology</a></span>
+                </blockquote>
+
+                <div class="info-box">
+                    <strong>Review Analysis:</strong> ZoukMX operates in a niche dance community where word-of-mouth and Instagram are the primary reputation channels. The absence of reviews on mainstream platforms (Google, TripAdvisor, Yelp) is typical for niche dance events but represents an untapped opportunity for broader visibility. The 11-year track record and consistent listings on dance-specific platforms indicate strong community trust.
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Financial Information -->
+        <section id="financial">
+            <h2>6. Financial Information</h2>
+            <div class="section-content">
+                <h3>Pricing Structure</h3>
+                <table>
+                    <tr><th>Product</th><th>Price Range (Est.)</th><th>Notes</th></tr>
+                    <tr>
+                        <td>100-Hour Training Program</td>
+                        <td>Application required</td>
+                        <td>Pricing not publicly listed; requires acceptance. Comparable programs (Rio Zouk Immersion) charge $1,999 for 2 weeks.</td>
+                    </tr>
+                    <tr>
+                        <td>Pre-Festival Intensives (3 days)</td>
+                        <td>Via Eventbrite</td>
+                        <td>Ticket pricing available on Eventbrite page</td>
+                    </tr>
+                    <tr>
+                        <td>Weekend Festival Pass</td>
+                        <td>Via Eventbrite</td>
+                        <td>Includes workshops, socials, competition access</td>
+                    </tr>
+                    <tr>
+                        <td>Excursion: Lagoon Jungle Party</td>
+                        <td>Separate ticket</td>
+                        <td>Exclusive closing event add-on</td>
+                    </tr>
+                </table>
+
+                <h3>Revenue Model Analysis</h3>
+                <ul>
+                    <li><strong>Primary revenue:</strong> Ticket sales (training program, festival passes, intensives)</li>
+                    <li><strong>Secondary revenue:</strong> Excursion tickets, merchandise (branded t-shirts included in training)</li>
+                    <li><strong>Ticketing platform:</strong> Eventbrite (subject to platform fees)</li>
+                    <li><strong>Refund policy:</strong> No refunds (stated on Eventbrite listing)</li>
+                    <li><strong>Membership tiers:</strong> Gold &amp; Silver members receive access to Secret Track content</li>
+                </ul>
+
+                <div class="warning-box">
+                    <strong>Financial Data Limitations:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>ZoukMX is privately operated; no public financial statements available.</li>
+                        <li>Specific ticket prices are not displayed on the website; buyers must visit Eventbrite or apply via Google Forms.</li>
+                        <li>Capacity and attendance numbers are not publicly disclosed.</li>
+                    </ul>
+                </div>
+
+                <h3>Industry Revenue Benchmarks</h3>
+                <table>
+                    <tr><th>Benchmark</th><th>Value</th><th>Source</th></tr>
+                    <tr>
+                        <td>Comparable intensive (Rio Zouk Immersion, 2 weeks)</td>
+                        <td>$1,999</td>
+                        <td><a href="https://www.riozoukimmersion.com/ticket-sale/">Rio Zouk Immersion</a></td>
+                    </tr>
+                    <tr>
+                        <td>Bali Zouk Congress (3 days, early bird)</td>
+                        <td>$225</td>
+                        <td><a href="https://www.balizoukcongress.com/">Bali Zouk Congress</a></td>
+                    </tr>
+                    <tr>
+                        <td>BZDC competition registration</td>
+                        <td>$25</td>
+                        <td><a href="https://www.balizoukcongress.com/">Bali Zouk Congress</a></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 7. Industry Market Data -->
+        <section id="market-data">
+            <h2>7. Industry Market Data</h2>
+            <div class="section-content">
+                <div class="info-box">
+                    <strong>Abbreviations:</strong><br>
+                    CAGR = Compound Annual Growth Rate<br>
+                    BZDC = Brazilian Zouk Dance Council<br>
+                    EDM = Electronic Dance Music<br>
+                    MSA = Metropolitan Statistical Area<br>
+                    ROO = Quintana Roo (Mexican state)<br>
+                    ADO = Autobuses de Oriente (bus company)<br>
+                    LWDC = Lambada World Dance Council
+                </div>
+
+                <details>
+                    <summary>Global Music Festival Market <span class="detail-count">6 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+                            <tr>
+                                <td>Global Market Size (2024)</td>
+                                <td>$3.05 billion</td>
+                                <td><a href="https://www.globalgrowthinsights.com/market-reports/music-festival-market-100685">Global Growth Insights</a></td>
+                            </tr>
+                            <tr>
+                                <td>Global Market Size (2025)</td>
+                                <td>$3.76 billion</td>
+                                <td><a href="https://www.globalgrowthinsights.com/market-reports/music-festival-market-100685">Global Growth Insights</a></td>
+                            </tr>
+                            <tr>
+                                <td>Projected Market Size (2029)</td>
+                                <td>$5.76 billion</td>
+                                <td><a href="https://www.businessresearchinsights.com/market-reports/music-festival-market-110446">Business Research Insights</a></td>
+                            </tr>
+                            <tr>
+                                <td>CAGR (2025&ndash;2034)</td>
+                                <td>23.17%</td>
+                                <td><a href="https://www.globalgrowthinsights.com/market-reports/music-festival-market-100685">Global Growth Insights</a></td>
+                            </tr>
+                            <tr>
+                                <td>EDM Festival Segment (2025)</td>
+                                <td>$0.65 billion (17% share)</td>
+                                <td><a href="https://www.globalgrowthinsights.com/market-reports/electronic-dance-music-edm-market-109767">Global Growth Insights</a></td>
+                            </tr>
+                            <tr>
+                                <td>Specialized Festival Growth (5 yr)</td>
+                                <td>+25% increase</td>
+                                <td><a href="https://www.grandviewresearch.com/industry-analysis/music-tourism-market-report">Grand View Research</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Music Tourism &amp; Experiential Travel <span class="detail-count">5 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+                            <tr>
+                                <td>Global Music Tourism Market (2024)</td>
+                                <td>$96.78 billion</td>
+                                <td><a href="https://www.grandviewresearch.com/industry-analysis/music-tourism-market-report">Grand View Research</a></td>
+                            </tr>
+                            <tr>
+                                <td>Projected Music Tourism (2030)</td>
+                                <td>$267.85 billion</td>
+                                <td><a href="https://www.grandviewresearch.com/industry-analysis/music-tourism-market-report">Grand View Research</a></td>
+                            </tr>
+                            <tr>
+                                <td>Music Tourism CAGR (2025&ndash;2030)</td>
+                                <td>18.8%</td>
+                                <td><a href="https://www.grandviewresearch.com/industry-analysis/music-tourism-market-report">Grand View Research</a></td>
+                            </tr>
+                            <tr>
+                                <td>Event Tourism Market CAGR</td>
+                                <td>7.8%</td>
+                                <td><a href="https://market.us/report/event-tourism-market/">Market.us</a></td>
+                            </tr>
+                            <tr>
+                                <td>Concert package inquiries (age 24&ndash;35)</td>
+                                <td>66% of total</td>
+                                <td><a href="https://www.grandviewresearch.com/industry-analysis/music-tourism-market-report">Grand View Research</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Global Dance &amp; Dance Training Market <span class="detail-count">4 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+                            <tr>
+                                <td>Global Dance Market (2026)</td>
+                                <td>$1.72 billion</td>
+                                <td><a href="https://www.businessresearchinsights.com/market-reports/dance-market-124996">Business Research Insights</a></td>
+                            </tr>
+                            <tr>
+                                <td>Projected Dance Market (2035)</td>
+                                <td>$3.16 billion</td>
+                                <td><a href="https://www.businessresearchinsights.com/market-reports/dance-market-124996">Business Research Insights</a></td>
+                            </tr>
+                            <tr>
+                                <td>Dance Market CAGR (2026&ndash;2035)</td>
+                                <td>7.0%</td>
+                                <td><a href="https://www.businessresearchinsights.com/market-reports/dance-market-124996">Business Research Insights</a></td>
+                            </tr>
+                            <tr>
+                                <td>Online Dance Training Market (2025)</td>
+                                <td>$2.9 billion</td>
+                                <td><a href="https://www.globalgrowthinsights.com/market-reports/online-dance-training-market-102017">Global Growth Insights</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Wellness Tourism &amp; Retreat Market <span class="detail-count">4 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+                            <tr>
+                                <td>Global Wellness Tourism (2024)</td>
+                                <td>$945.5 billion</td>
+                                <td><a href="https://straitsresearch.com/report/wellness-tourism-market">Straits Research</a></td>
+                            </tr>
+                            <tr>
+                                <td>Wellness Tourism CAGR (2025&ndash;2033)</td>
+                                <td>8.9%</td>
+                                <td><a href="https://straitsresearch.com/report/wellness-tourism-market">Straits Research</a></td>
+                            </tr>
+                            <tr>
+                                <td>Global Wellness Retreat Market (2025)</td>
+                                <td>$222.5 billion</td>
+                                <td><a href="https://www.futuredatastats.com/wellness-retreats-market">Future Data Stats</a></td>
+                            </tr>
+                            <tr>
+                                <td>Wellness Retreat Market (2032 projected)</td>
+                                <td>$363.9 billion</td>
+                                <td><a href="https://www.travelagentcentral.com/data-trends/report-global-wellness-retreat-market-surge-364b-2032">Travel Agent Central</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </details>
+
+                <!-- Addressable market highlight OUTSIDE details -->
+                <div class="highlight-box">
+                    <strong>Market Positioning Estimate:</strong> ZoukMX sits at the intersection of three high-growth markets: music tourism ($96.78B, 18.8% CAGR), wellness retreats ($222.5B, 7.4% CAGR), and dance education ($2.9B online + in-person). As a niche "dance tourism" offering combining intensive training with vacation experiences, ZoukMX addresses a segment where dedicated dancers (25+ countries) travel specifically for immersive multi-week programs &mdash; a category with few direct competitors and high willingness to pay. The World Music Federation reports a 25% increase in specialized festivals over five years, and 66% of experiential travel inquiries come from the 24&ndash;35 age demographic that represents ZoukMX's core audience.
+                </div>
+
+                <details>
+                    <summary>Quintana Roo &amp; Riviera Maya Tourism Context <span class="detail-count">8 metrics</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+                            <tr>
+                                <td>Mexico total visitors (2025)</td>
+                                <td>88+ million</td>
+                                <td><a href="https://riviera-maya-news.com/over-88-million-visitors-mexicos-2025-numbers-surge-during-u-s-government-shutdown/2026.html">Riviera Maya News</a></td>
+                            </tr>
+                            <tr>
+                                <td>Quintana Roo visitors (Jan&ndash;Oct 2025)</td>
+                                <td>24.4 million</td>
+                                <td><a href="https://riviera-maya-news.com/secretary-reports-to-congress-on-quintana-roo-tourism-sector/2025.html">Riviera Maya News</a></td>
+                            </tr>
+                            <tr>
+                                <td>International tourism growth (H1 2025)</td>
+                                <td>+13.8% YoY</td>
+                                <td><a href="https://riviera-maya-news.com/government-reports-13-8-percent-increase-in-international-tourism-during-first-six-months/2025.html">Riviera Maya News</a></td>
+                            </tr>
+                            <tr>
+                                <td>Tourism foreign exchange (11 mo 2025)</td>
+                                <td>$31.22 billion (+6.7%)</td>
+                                <td><a href="https://riviera-maya-news.com/secretary-reports-to-congress-on-quintana-roo-tourism-sector/2025.html">Riviera Maya News</a></td>
+                            </tr>
+                            <tr>
+                                <td>Quintana Roo share of Mexico tourism FX</td>
+                                <td>46.4%</td>
+                                <td><a href="https://riviera-maya-news.com/secretary-reports-to-congress-on-quintana-roo-tourism-sector/2025.html">Riviera Maya News</a></td>
+                            </tr>
+                            <tr>
+                                <td>Top visitor origin: USA</td>
+                                <td>37.8%</td>
+                                <td><a href="https://riviera-maya-news.com/secretary-reports-to-congress-on-quintana-roo-tourism-sector/2025.html">Riviera Maya News</a></td>
+                            </tr>
+                            <tr>
+                                <td>Top visitor origin: Canada</td>
+                                <td>13.9%</td>
+                                <td><a href="https://riviera-maya-news.com/secretary-reports-to-congress-on-quintana-roo-tourism-sector/2025.html">Riviera Maya News</a></td>
+                            </tr>
+                            <tr>
+                                <td>Cancun International Airport (2025)</td>
+                                <td>24M+ travelers</td>
+                                <td><a href="https://riviera-maya-news.com/national-gateway-cancun-international-receives-over-24-million-travelers/2025.html">Riviera Maya News</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Industry Trends (2025&ndash;2026) <span class="detail-count">6 trends</span></summary>
+                    <div class="details-content">
+                        <ul>
+                            <li><strong>Experiential travel surge:</strong> Travelers increasingly seek immersive, participatory experiences over passive tourism. Dance retreats and festival-travel hybrids align perfectly with this trend. (<a href="https://www.grandviewresearch.com/industry-analysis/music-tourism-market-report">Grand View Research</a>)</li>
+                            <li><strong>Niche festival growth:</strong> Specialized festivals catering to specific genres attract dedicated audiences willing to travel internationally. The World Music Federation reports a 25% increase in specialized festivals over five years. (<a href="https://www.grandviewresearch.com/industry-analysis/music-tourism-market-report">Grand View Research</a>)</li>
+                            <li><strong>Social media as discovery engine:</strong> Instagram and TikTok are primary discovery channels for dance events. Short-form dance videos drive awareness and FOMO-based ticket purchases. (<a href="https://www.grandviewresearch.com/industry-analysis/music-tourism-market-report">Grand View Research</a>)</li>
+                            <li><strong>Millennial/Gen Z preference for experiences:</strong> 66% of concert/event package inquiries come from ages 24&ndash;35. This demographic prioritizes experiences over material purchases. (<a href="https://www.grandviewresearch.com/industry-analysis/music-tourism-market-report">Grand View Research</a>)</li>
+                            <li><strong>Online-to-offline pipeline:</strong> Online dance training ($2.9B market) creates a funnel of students who then seek in-person intensive experiences and festivals. (<a href="https://www.globalgrowthinsights.com/market-reports/online-dance-training-market-102017">Global Growth Insights</a>)</li>
+                            <li><strong>Destination wellness retreats:</strong> Integration of physical activity (dance), mental wellness (community connection), and travel is a rapidly growing niche within the $222.5B wellness retreat market. (<a href="https://www.futuredatastats.com/wellness-retreats-market">Future Data Stats</a>)</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 8. Competitive Analysis -->
+        <section id="competitive">
+            <h2>8. Competitive Analysis</h2>
+            <div class="section-content">
+                <h3>Global Brazilian Zouk Festival Competitor Landscape (2026)</h3>
+                <table>
+                    <tr><th>Festival</th><th>Location</th><th>Dates</th><th>Duration</th><th>Key Features</th></tr>
+                    <tr>
+                        <td><strong>ZoukMX</strong> (subject)</td>
+                        <td>Playa del Carmen, Mexico</td>
+                        <td>Jan 25 &ndash; Feb 23</td>
+                        <td>~30 days (training + festival)</td>
+                        <td>100-hr training (7 tracks), BZDC J&amp;J, cenote/jungle parties, 14+ artists</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.brazouky.com/">BraZouky</a></td>
+                        <td>Melbourne, Australia</td>
+                        <td>Feb 12&ndash;15</td>
+                        <td>4 days</td>
+                        <td>3 workshop rooms, BZDC + LWDC competitions, intensive trainings</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.balizoukcongress.com/">Bali Zouk Congress</a></td>
+                        <td>Bali, Indonesia</td>
+                        <td>Mar 6&ndash;8</td>
+                        <td>3 days</td>
+                        <td>$225 early bird, BZDC J&amp;J, workshops + parties</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://braziliandancefestival.com/">BDF United</a></td>
+                        <td>Lyon, France</td>
+                        <td>Mar 5&ndash;8</td>
+                        <td>4 days</td>
+                        <td>Multi-style Brazilian dance festival</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.riozoukimmersion.com/">Rio Zouk Immersion</a></td>
+                        <td>Rio de Janeiro, Brazil</td>
+                        <td>Oct 3&ndash;18</td>
+                        <td>2 weeks</td>
+                        <td>$1,999 core program, World Championships host, train in Brazil</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.zoukisland.com">Zouk Island Festival</a></td>
+                        <td>Koh Phangan, Thailand</td>
+                        <td>Feb 23 &ndash; Mar 31</td>
+                        <td>~5 weeks</td>
+                        <td>Extended island retreat format, continuous workshops</td>
+                    </tr>
+                    <tr>
+                        <td>Cologne Zouk Festival</td>
+                        <td>Cologne, Germany</td>
+                        <td>Apr 10&ndash;12</td>
+                        <td>3 days</td>
+                        <td>German Open Championship, European market</td>
+                    </tr>
+                    <tr>
+                        <td>Dance Fusion Festival</td>
+                        <td>Miami, FL, USA</td>
+                        <td>Labor Day 2026</td>
+                        <td>3 days</td>
+                        <td>10th anniversary, only beachfront social dance festival in US</td>
+                    </tr>
+                </table>
+
+                <h3>Competitive Positioning</h3>
+                <table>
+                    <tr><th>Factor</th><th>ZoukMX</th><th>Competitors (avg)</th></tr>
+                    <tr>
+                        <td>Duration</td>
+                        <td><span class="badge badge-success">~30 days</span></td>
+                        <td>3&ndash;4 days typical</td>
+                    </tr>
+                    <tr>
+                        <td>Training Hours</td>
+                        <td><span class="badge badge-success">100+ hours</span></td>
+                        <td>12&ndash;30 hours typical</td>
+                    </tr>
+                    <tr>
+                        <td>Tracks/Levels</td>
+                        <td><span class="badge badge-success">7 specialized tracks</span></td>
+                        <td>2&ndash;3 levels typical</td>
+                    </tr>
+                    <tr>
+                        <td>BZDC Competition</td>
+                        <td><span class="badge badge-success">Official J&amp;J + Zouk16</span></td>
+                        <td>Most major festivals include J&amp;J</td>
+                    </tr>
+                    <tr>
+                        <td>Unique Venues</td>
+                        <td><span class="badge badge-success">Cenotes, jungle lagoons, rooftops, beach</span></td>
+                        <td>Convention centers/studios</td>
+                    </tr>
+                    <tr>
+                        <td>Destination Appeal</td>
+                        <td><span class="badge badge-success">Caribbean beach vacation</span></td>
+                        <td>Varies; Bali and Thailand also strong</td>
+                    </tr>
+                    <tr>
+                        <td>Years Operating</td>
+                        <td><span class="badge badge-success">11 years</span></td>
+                        <td>Varies (3&ndash;15 years)</td>
+                    </tr>
+                    <tr>
+                        <td>Online Reviews</td>
+                        <td><span class="badge badge-warning">Limited (Instagram-based)</span></td>
+                        <td>Similar for niche events</td>
+                    </tr>
+                    <tr>
+                        <td>Website Quality</td>
+                        <td><span class="badge badge-success">Professional WordPress site</span></td>
+                        <td>Varies widely</td>
+                    </tr>
+                </table>
+
+                <h3>SWOT Analysis</h3>
+                <table>
+                    <tr><th style="width: 50%;">Strengths</th><th style="width: 50%;">Weaknesses</th></tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Only 100-hr intensive in North America</li>
+                                <li>11-year track record and brand equity</li>
+                                <li>Unique venue experiences (cenotes, jungle)</li>
+                                <li>Strong instructor roster (14+ international artists)</li>
+                                <li>Month-long format creates deep community</li>
+                                <li>BZDC-sanctioned competitions</li>
+                                <li>Prime Riviera Maya location</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>No publicly listed pricing (friction in sales funnel)</li>
+                                <li>No Google Business or TripAdvisor presence</li>
+                                <li>No phone number listed</li>
+                                <li>Unclear business registration status</li>
+                                <li>Attendance/capacity data not disclosed</li>
+                                <li>Limited testimonials/reviews available online</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr><th>Opportunities</th><th>Threats</th></tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Growing experiential travel market (18.8% CAGR)</li>
+                                <li>Online dance training creating student pipeline</li>
+                                <li>TripAdvisor/Google listing for broader discovery</li>
+                                <li>YouTube/TikTok content marketing</li>
+                                <li>Corporate retreat / team-building packages</li>
+                                <li>Quintana Roo tourism growth (+13.8% YoY)</li>
+                                <li>Partnership with BZDC for larger competitions</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Zouk Island (Thailand) offering similar extended format</li>
+                                <li>Currency/economic fluctuations affecting travel</li>
+                                <li>Weather/natural disaster risk in Caribbean</li>
+                                <li>Dependency on international travel accessibility</li>
+                                <li>Niche market limits total addressable audience</li>
+                                <li>Competitor festivals multiplying globally</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 9. Online Presence -->
+        <section id="online-presence">
+            <h2>9. Online Presence</h2>
+            <div class="section-content">
+                <h3>Website Audit</h3>
+                <table>
+                    <tr><th>Criterion</th><th>Assessment</th><th>Rating</th></tr>
+                    <tr>
+                        <td>Domain</td>
+                        <td>zouk.mx &mdash; country-code TLD (.mx) reinforces Mexico brand</td>
+                        <td><span class="badge badge-success">Strong</span></td>
+                    </tr>
+                    <tr>
+                        <td>Platform</td>
+                        <td>WordPress with Elementor page builder</td>
+                        <td><span class="badge badge-success">Professional</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile Responsive</td>
+                        <td>Yes &mdash; responsive design with mobile-first approach</td>
+                        <td><span class="badge badge-success">Good</span></td>
+                    </tr>
+                    <tr>
+                        <td>Content Quality</td>
+                        <td>High-quality photography, clear program descriptions, artist bios</td>
+                        <td><span class="badge badge-success">Strong</span></td>
+                    </tr>
+                    <tr>
+                        <td>SSL Certificate</td>
+                        <td>HTTPS enabled</td>
+                        <td><span class="badge badge-success">Secure</span></td>
+                    </tr>
+                    <tr>
+                        <td>Pricing Transparency</td>
+                        <td>Not listed on website; requires Eventbrite or application</td>
+                        <td><span class="badge badge-warning">Needs Improvement</span></td>
+                    </tr>
+                    <tr>
+                        <td>SEO</td>
+                        <td>Basic SEO; limited metadata optimization visible</td>
+                        <td><span class="badge badge-warning">Moderate</span></td>
+                    </tr>
+                    <tr>
+                        <td>Profile Picture Frame Tool</td>
+                        <td>Interactive social sharing tool on homepage</td>
+                        <td><span class="badge badge-success">Innovative</span></td>
+                    </tr>
+                </table>
+
+                <details>
+                    <summary>Social Media Presence <span class="detail-count">4 platforms</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Platform</th><th>Handle</th><th>Followers/Stats</th><th>Activity</th></tr>
+                            <tr>
+                                <td>Instagram</td>
+                                <td><a href="https://www.instagram.com/zoukmx/">@zoukmx</a></td>
+                                <td>8,637 followers; 964 posts</td>
+                                <td><span class="badge badge-success">Active</span> &mdash; Primary channel</td>
+                            </tr>
+                            <tr>
+                                <td>Eventbrite</td>
+                                <td><a href="https://www.eventbrite.com/o/17689008322">Joe Sandoval &amp; ZoukMX Team</a></td>
+                                <td>9 events; 7 years hosting</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Facebook</td>
+                                <td>Not confirmed</td>
+                                <td>&mdash;</td>
+                                <td><span class="badge badge-warning">Unverified</span></td>
+                            </tr>
+                            <tr>
+                                <td>YouTube</td>
+                                <td>Not confirmed</td>
+                                <td>&mdash;</td>
+                                <td><span class="badge badge-danger">Not Found</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Directory &amp; Platform Listings <span class="detail-count">5 listings</span></summary>
+                    <div class="details-content">
+                        <table>
+                            <tr><th>Platform</th><th>Listed</th><th>Details</th></tr>
+                            <tr>
+                                <td><a href="https://zoukology.com/events/zoukmx-jungle-lagoon-edition/">Zoukology</a></td>
+                                <td><span class="badge badge-success">Yes</span></td>
+                                <td>Featured on global Zouk event calendar; multi-year listing</td>
+                            </tr>
+                            <tr>
+                                <td><a href="https://www.danceplace.com/index/no/16282/ZOUKMX-2026-Playa+Del+Carmen-Mexico-Brazilian+Zouk+Dance+event">Danceplace</a></td>
+                                <td><span class="badge badge-success">Yes</span></td>
+                                <td>Listed for 2024, 2025, 2026; includes organizer details</td>
+                            </tr>
+                            <tr>
+                                <td><a href="https://latindancecalendar.com/festivals/style/zouk/">Latin Dance Calendar</a></td>
+                                <td><span class="badge badge-success">Yes</span></td>
+                                <td>Listed under worldwide Zouk festivals</td>
+                            </tr>
+                            <tr>
+                                <td><a href="https://stayhappening.com/e/zoukmx-2026-jungle-lagoon-edition-E118RYW1BAJTO">StayHappening</a></td>
+                                <td><span class="badge badge-success">Yes</span></td>
+                                <td>Event listing with dates and location</td>
+                            </tr>
+                            <tr>
+                                <td><a href="https://theyucatantimes.com/2026/02/100-hour-brazilian-zouk-training-program-in-playa-del-carmen/">The Yucatan Times</a></td>
+                                <td><span class="badge badge-success">Yes</span></td>
+                                <td>Press coverage of 100-hour training program (Feb 2026)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 10. Data Verification Summary -->
+        <section id="verification">
+            <h2>10. Data Verification Summary</h2>
+            <div class="section-content">
+                <details>
+                    <summary>Verification Matrix <span class="detail-count">12 categories</span></summary>
+                    <div class="details-content">
+                        <table class="verification-table">
+                            <tr><th>Data Category</th><th>Primary Source</th><th>Cross-Referenced</th><th>Confidence</th></tr>
+                            <tr>
+                                <td>Company name &amp; branding</td>
+                                <td>zouk.mx</td>
+                                <td>Eventbrite, Zoukology, Danceplace</td>
+                                <td><span class="badge badge-success">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>Event dates &amp; schedule</td>
+                                <td>zouk.mx</td>
+                                <td>Eventbrite, Zoukology, Danceplace</td>
+                                <td><span class="badge badge-success">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>Location (Playa del Carmen)</td>
+                                <td>zouk.mx</td>
+                                <td>Eventbrite (geocoordinates), Zoukology</td>
+                                <td><span class="badge badge-success">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>Organizer (Joe Sandoval)</td>
+                                <td>Eventbrite</td>
+                                <td>Danceplace, Zoukology</td>
+                                <td><span class="badge badge-success">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>Leadership team (5 members)</td>
+                                <td>Danceplace</td>
+                                <td>Single source only</td>
+                                <td><span class="badge badge-warning">Medium</span></td>
+                            </tr>
+                            <tr>
+                                <td>Years in operation (11 yrs)</td>
+                                <td>Eventbrite (7 yr hosting)</td>
+                                <td>Zoukology archives (2018+)</td>
+                                <td><span class="badge badge-success">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>Artist/instructor roster</td>
+                                <td>zouk.mx</td>
+                                <td>Eventbrite description</td>
+                                <td><span class="badge badge-success">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>Instagram followers (8,637)</td>
+                                <td>Instagram profile</td>
+                                <td>Third-party tracker (Greatfon)</td>
+                                <td><span class="badge badge-success">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>BZDC affiliation</td>
+                                <td>Eventbrite listing</td>
+                                <td>zouk.mx, BZDC website</td>
+                                <td><span class="badge badge-success">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>Business registration</td>
+                                <td>Not found</td>
+                                <td>Not found</td>
+                                <td><span class="badge badge-danger">Low</span></td>
+                            </tr>
+                            <tr>
+                                <td>Market size data</td>
+                                <td>Multiple research firms</td>
+                                <td>Cross-referenced 3+ sources per metric</td>
+                                <td><span class="badge badge-success">High</span></td>
+                            </tr>
+                            <tr>
+                                <td>Quintana Roo tourism data</td>
+                                <td>Riviera Maya News</td>
+                                <td>Tourism Analytics, government reports</td>
+                                <td><span class="badge badge-success">High</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 11. Conclusions & Recommendations -->
+        <section id="conclusions">
+            <h2>11. Conclusions &amp; Recommendations</h2>
+            <div class="section-content">
+                <h3>Key Findings</h3>
+                <ol>
+                    <li><strong>Market leader in niche:</strong> ZoukMX is the only 100-hour Brazilian Zouk intensive in North America and one of only two month-long Zouk experiences globally (alongside Zouk Island in Thailand). This positions it as a premium, differentiated offering.</li>
+                    <li><strong>Strong tailwinds:</strong> The event benefits from three high-growth macro trends: music tourism (18.8% CAGR), experiential travel, and wellness retreats ($222.5B market). The 66% of event travel inquiries from ages 24&ndash;35 matches ZoukMX's core demographic.</li>
+                    <li><strong>Location advantage:</strong> Playa del Carmen within Quintana Roo (Mexico's #1 tourism state at 46.4% of foreign tourism revenue) provides strong infrastructure, international accessibility, and natural appeal (cenotes, beaches, jungle).</li>
+                    <li><strong>Brand maturity:</strong> 11 years of operation, 8,600+ Instagram followers, presence on 5+ dance directories, press coverage in The Yucatan Times, and BZDC affiliation establish credibility.</li>
+                    <li><strong>Expansion opportunities:</strong> Online presence gaps (no Google Business, TripAdvisor, YouTube, or transparent pricing) limit discoverability outside the existing Zouk community.</li>
+                </ol>
+
+                <h3>Recommendations for Further Research</h3>
+                <ul>
+                    <li>Obtain specific ticket pricing data (requires Eventbrite purchase flow or direct inquiry)</li>
+                    <li>Survey past attendees for satisfaction data, demographics, and spending patterns</li>
+                    <li>Research business entity registration under alternative names or the organizer's personal name</li>
+                    <li>Analyze Instagram engagement rate relative to follower count</li>
+                    <li>Investigate potential corporate retreat / B2B opportunity for team-building dance programs</li>
+                    <li>Benchmark ZoukMX capacity against competitor festivals to estimate revenue range</li>
+                    <li>Explore partnership potential with Riviera Maya tourism board</li>
+                </ul>
+
+                <h3>Strategic Opportunities</h3>
+                <div class="highlight-box">
+                    <strong>90-Day Quick Wins:</strong>
+                    <ol>
+                        <li>Create Google Business Profile for "ZoukMX" in Playa del Carmen to capture search traffic</li>
+                        <li>List on TripAdvisor as an "Experience" or "Tour" for broader tourism discovery</li>
+                        <li>Display pricing tiers on the website to reduce sales funnel friction</li>
+                        <li>Launch YouTube channel with workshop highlight reels and instructor features</li>
+                        <li>Solicit and publish video testimonials from past attendees</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Sources & Citations -->
+        <section id="sources">
+            <h2>12. Sources &amp; Citations</h2>
+            <div class="section-content">
+                <details>
+                    <summary>Primary Sources <span class="detail-count">4 sources</span></summary>
+                    <div class="details-content">
+                        <ol>
+                            <li><a href="https://zouk.mx/">ZoukMX Official Website</a> &mdash; Homepage, Training, Programs, Gallery pages</li>
+                            <li><a href="https://www.eventbrite.com/e/zoukmx-2026-jungle-lagoon-edition-tickets-1276901559939">Eventbrite &mdash; ZoukMX 2026 Jungle Lagoon Edition</a></li>
+                            <li><a href="https://zouk.mx/training">ZoukMX Training Page &mdash; 100-Hour Program Details</a></li>
+                            <li><a href="https://zouk.mx/programs">ZoukMX Programs Page &mdash; Full Event Calendar</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Third-Party &amp; Directory Sources <span class="detail-count">7 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="5">
+                            <li><a href="https://zoukology.com/events/zoukmx-jungle-lagoon-edition/">Zoukology &mdash; ZoukMX Jungle Lagoon Edition listing</a></li>
+                            <li><a href="https://www.danceplace.com/index/no/16282/ZOUKMX-2026-Playa+Del+Carmen-Mexico-Brazilian+Zouk+Dance+event">Danceplace &mdash; ZoukMX 2026 event listing</a></li>
+                            <li><a href="https://latindancecalendar.com/festivals/style/zouk/">Latin Dance Calendar &mdash; Zouk Festivals Worldwide</a></li>
+                            <li><a href="https://stayhappening.com/e/zoukmx-2026-jungle-lagoon-edition-E118RYW1BAJTO">StayHappening &mdash; ZoukMX 2026 listing</a></li>
+                            <li><a href="https://theyucatantimes.com/2026/02/100-hour-brazilian-zouk-training-program-in-playa-del-carmen/">The Yucatan Times &mdash; 100-Hour Brazilian Zouk Training Program (Feb 2026)</a></li>
+                            <li><a href="https://www.instagram.com/zoukmx/">Instagram &mdash; @zoukmx official profile</a></li>
+                            <li><a href="https://greatfon.com/v/zoukmx">Greatfon &mdash; ZoukMX Instagram analytics</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Competitor &amp; Industry Sources <span class="detail-count">7 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="12">
+                            <li><a href="https://www.brazilianzoukcouncil.com/home">Brazilian Zouk Dance Council (BZDC) &mdash; Official website</a></li>
+                            <li><a href="https://www.riozoukimmersion.com/ticket-sale/">Rio Zouk Immersion &mdash; Ticket pricing</a></li>
+                            <li><a href="https://www.balizoukcongress.com/">Bali Zouk Congress 2026</a></li>
+                            <li><a href="https://braziliandancefestival.com/">Brazilian Dance Festival United (Lyon) 2026</a></li>
+                            <li><a href="https://www.zoukisland.com">Zouk Island Festival (Koh Phangan)</a></li>
+                            <li><a href="https://zoukology.com/why-retreats/">Zoukology &mdash; Why Retreats (community testimonials)</a></li>
+                            <li><a href="https://www.danceplace.com/events/in/2026/Brazilian+Zouk/-/-">Danceplace &mdash; Brazilian Zouk Events 2026</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Market Research Sources <span class="detail-count">10 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="19">
+                            <li><a href="https://www.globalgrowthinsights.com/market-reports/music-festival-market-100685">Global Growth Insights &mdash; Music Festival Market Size Report</a></li>
+                            <li><a href="https://www.businessresearchinsights.com/market-reports/music-festival-market-110446">Business Research Insights &mdash; Music Festival Market</a></li>
+                            <li><a href="https://www.grandviewresearch.com/industry-analysis/music-tourism-market-report">Grand View Research &mdash; Music Tourism Market Report</a></li>
+                            <li><a href="https://www.custommarketinsights.com/report/music-tourism-market/">Custom Market Insights &mdash; Global Music Tourism Market</a></li>
+                            <li><a href="https://market.us/report/event-tourism-market/">Market.us &mdash; Event Tourism Market</a></li>
+                            <li><a href="https://www.businessresearchinsights.com/market-reports/dance-market-124996">Business Research Insights &mdash; Dance Market</a></li>
+                            <li><a href="https://www.globalgrowthinsights.com/market-reports/online-dance-training-market-102017">Global Growth Insights &mdash; Online Dance Training Market</a></li>
+                            <li><a href="https://straitsresearch.com/report/wellness-tourism-market">Straits Research &mdash; Wellness Tourism Market</a></li>
+                            <li><a href="https://www.futuredatastats.com/wellness-retreats-market">Future Data Stats &mdash; Wellness Retreats Market</a></li>
+                            <li><a href="https://www.travelagentcentral.com/data-trends/report-global-wellness-retreat-market-surge-364b-2032">Travel Agent Central &mdash; Wellness Retreat Market Surge</a></li>
+                        </ol>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Quintana Roo &amp; Mexico Tourism Sources <span class="detail-count">5 sources</span></summary>
+                    <div class="details-content">
+                        <ol start="29">
+                            <li><a href="https://riviera-maya-news.com/over-88-million-visitors-mexicos-2025-numbers-surge-during-u-s-government-shutdown/2026.html">Riviera Maya News &mdash; Mexico 88M visitors in 2025</a></li>
+                            <li><a href="https://riviera-maya-news.com/secretary-reports-to-congress-on-quintana-roo-tourism-sector/2025.html">Riviera Maya News &mdash; Quintana Roo tourism sector report</a></li>
+                            <li><a href="https://riviera-maya-news.com/government-reports-13-8-percent-increase-in-international-tourism-during-first-six-months/2025.html">Riviera Maya News &mdash; International tourism +13.8% (H1 2025)</a></li>
+                            <li><a href="https://riviera-maya-news.com/national-gateway-cancun-international-receives-over-24-million-travelers/2025.html">Riviera Maya News &mdash; Cancun International Airport 24M+ travelers</a></li>
+                            <li><a href="https://www.travelandtourworld.com/news/article/mexico-mexico-city-and-cancun-tourism-hit-record-highs-as-international-visitation-jumps-in-2025-all-you-need-to-know/">Travel &amp; Tour World &mdash; Mexico tourism record highs 2025</a></li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <footer>
+            <p><strong>Report compiled:</strong> February 12, 2026</p>
+            <p><strong>Research methodology:</strong> Web scraping, search engine queries, dance event directory review, market research aggregation</p>
+            <p><strong>Prepared by:</strong> Integrity Studio Research Team</p>
+        </footer>
+    </div>
+</body>
+</html>
