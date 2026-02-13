@@ -4,3 +4,6 @@
 [submodule "calender-updates"]
 	path = calender-updates
 	url = ./calender-updates
+[submodule "micah_lindsey"]
+	path = micah_lindsey
+	url = git@github.com:integritystudio/micah-lindsey.git
