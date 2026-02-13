@@ -2,7 +2,9 @@
 
 Tracks unfinished backlog items from the 2026-02-13 readability audit. See `docs/BACKLOG.md` for full descriptions.
 
-**Completed:** L4, H2, M5, M2, C3, M1, C1, H3, C2 (research templates only)
+**Completed:** L4, H2, M5, M2, C3, M1, C1, H3, C2 (research templates only), R1, R2, H1 (pre-existing)
+
+**In progress:** H4 (partially applied — forms done, `PerformanceTest/leora_referral_dashboard.html` remains)
 
 ---
 
@@ -16,21 +18,27 @@ Tracks unfinished backlog items from the 2026-02-13 readability audit. See `docs
 - `PerformanceTest/leora_referral_form.html`
 - `PerformanceTest/leora_referral_dashboard.html`
 
-**Fix:** Add `@media (max-width: 768px)` to collapse `.stats-grid` to single column, reduce header font size, and reduce form padding.
-
-### H1. ngo-market sidebar — already resolved
-**Status:** Pre-existing fix found during implementation. The file already has `@media (max-width: 768px)` collapsing the sidebar to `position: relative; width: 100%`. No action needed.
+**Fix:** Add `@media (max-width: 768px)` to collapse `.stats-grid` to single column, reduce header font size, and reduce form padding. Note: dashboard files already have a 768px breakpoint for stats-grid; forms have a 600px breakpoint that should be enhanced.
 
 ### H4. Leora forms/dashboards use px-based font sizing
-**Status:** Not started
-**Files:** Same 4 Leora files as C2 above.
-**Fix:** Convert px values to rem: `12px→0.75rem`, `14px→0.875rem`, `16px→1rem`, `20px→1.25rem`, `28px→1.75rem`, `36px→2.25rem`.
+**Status:** In progress
+**Done:**
+- `leora_research/leora_referral_form.html` — all px converted to rem
+- `PerformanceTest/leora_referral_form.html` — all px converted to rem
+- `leora_research/leora_referral_dashboard.html` — all px converted to rem
+
+**Remaining:**
+- `PerformanceTest/leora_referral_dashboard.html` — still uses px font sizes
+
+**Mapping:** `11px→0.6875rem`, `12px→0.75rem`, `13px→0.8125rem`, `14px→0.875rem`, `16px→1rem`, `18px→1.125rem`, `20px→1.25rem`, `22px→1.375rem`, `28px→1.75rem`, `36px→2.25rem`, `64px→4rem`.
 
 ### M6. Inline grid layouts break on mobile (edgar_nadyne)
 **Status:** Not started
 **Files:**
 - `edgar_nadyne/brazilian_zouk_market_analysis.html`
 - `edgar_nadyne/austin_dance_market_analysis.html`
+- `edgar_nadyne/edghar_nadyne_artist_profile.html`
+- `edgar_nadyne/edghar_nadyne_perfil_artista.html`
 - PT-BR counterparts: `analise_mercado_zouk.html`, `analise_mercado_austin.html`
 
 **Fix:** Replace inline `style="display: grid; grid-template-columns: 1fr 1fr; ..."` with a CSS class:
@@ -79,27 +87,20 @@ Tracks unfinished backlog items from the 2026-02-13 readability audit. See `docs
 ## Code Review Findings (from Phase 2 review)
 
 ### R1. Source citation contrast fails WCAG AA in dark mode
-**Priority:** High
+**Status:** Completed (commit `ea0325e`)
 **Files:** All 13 research template files with dark mode
-**Issue:** `.source { color: #999; }` against `#1a1a2e` background = 4.2:1 (needs 4.5:1).
-**Fix:** Change to `color: #aaa;` (5.5:1 contrast).
+**Fix applied:** Changed `.source { color: #999; }` to `color: #aaa;` (5.5:1 contrast vs previous 4.2:1).
 
 ### R2. Missing dark mode overrides in Leora forms
-**Priority:** Medium
+**Status:** Completed (commit `0ee0ade`)
 **Files:** `leora_research/leora_referral_form.html`, `PerformanceTest/leora_referral_form.html`
-**Issue:** `.bonus-info` (light green background) and `.checkbox-group` (#f8f9fa) lack dark mode overrides.
-**Fix:**
-```css
-.bonus-info { background: #1a2e1a; border-color: #34d399; }
-.bonus-info h3 { color: #34d399; }
-.checkbox-group { background: #252540; }
-```
+**Fix applied:** Added `.bonus-info`, `.bonus-info h3`, `.bonus-info ul`, and `.checkbox-group` dark mode overrides.
 
 ---
 
 ## Phase 5: Translation & Localization (deferred)
 
-Items T1–T5 are tooling/documentation tasks, not HTML fixes. See `docs/BACKLOG.md` for details.
+Items T1-T5 are tooling/documentation tasks, not HTML fixes. See `docs/BACKLOG.md` for details.
 
 | ID | Item | Status |
 |----|------|--------|
