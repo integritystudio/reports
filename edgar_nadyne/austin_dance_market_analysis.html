@@ -73,6 +73,24 @@
     .stat-item { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border); }
     .stat-item .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
     .stat-item .stat-label { font-size: 0.8rem; color: #666; margin-top: 0.25rem; }
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.6rem; }
+      header .subtitle { font-size: 1rem; }
+      .container { padding: 1rem; }
+      .section-content { padding: 1rem; }
+      section h2 { font-size: 1.1rem; padding: 0.75rem 1rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      table { font-size: 0.85rem; }
+      th, td { padding: 0.5rem; }
+    }
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.3rem; }
+      header { padding: 2rem 1rem; }
+      .stat-grid { grid-template-columns: 1fr; }
+      table { font-size: 0.8rem; }
+      th, td { padding: 0.4rem; }
+    }
     @media print { body { background: white; } .container { max-width: 100%; } section { box-shadow: none; border: 1px solid #ddd; } details { border: none; } details, details[open] { display: block; } details > summary { display: none; } details .details-content { padding: 0; } }
   </style>
 </head>

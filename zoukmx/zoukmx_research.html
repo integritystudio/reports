@@ -196,6 +196,26 @@
         details details { margin: 0.75rem 0; border-color: #e9ecef; }
         details details summary { font-size: 0.95rem; padding: 0.6rem 1rem; }
 
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.6rem; }
+            header .subtitle { font-size: 1rem; }
+            .container { padding: 1rem; }
+            .section-content { padding: 1rem; }
+            section h2 { font-size: 1.1rem; padding: 0.75rem 1rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+            table { font-size: 0.85rem; }
+            th, td { padding: 0.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            header h1 { font-size: 1.3rem; }
+            header { padding: 2rem 1rem; }
+            .stat-grid { grid-template-columns: 1fr; }
+            table { font-size: 0.8rem; }
+            th, td { padding: 0.4rem; }
+        }
+
         @media print {
             body { background: white; }
             .container { max-width: 100%; }
