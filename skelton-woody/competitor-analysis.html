@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skelton &amp; Woody PLLC - Competitive Landscape Analysis</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #f0f1f5;
+      --border: #d8dbe5;
+      --text: #1a1d27;
+      --text-muted: #6b7085;
+      --accent: #2563eb;
+      --accent2: #6d28d9;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --cyan: #0891b2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface2: #242836;
+        --border: #2e3345;
+        --text: #e4e6ed;
+        --text-muted: #8b8fa3;
+        --accent: #4f8ff7;
+        --accent2: #7c5cfc;
+        --green: #34d399;
+        --amber: #f59e0b;
+        --red: #ef4444;
+        --cyan: #22d3ee;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .subtitle { color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem;
+      color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+    }
+    h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    p, li { font-size: 0.92rem; margin-bottom: 0.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem; text-align: center;
+    }
+    .stat-card .number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-card .label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 2px solid var(--accent); border-radius: 16px;
+      padding: 2rem; margin-bottom: 2rem;
+    }
+    .profile-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+    @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-item .label {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .profile-item .value { font-size: 0.95rem; font-weight: 500; }
+
+    .table-wrap {
+      overflow-x: auto; margin-bottom: 2rem;
+      border-radius: 12px; border: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1100px; }
+    thead { background: var(--surface2); }
+    th {
+      padding: 0.75rem 1rem; text-align: left; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem;
+      letter-spacing: 0.05em; white-space: nowrap; border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+      vertical-align: top; background: var(--surface);
+    }
+    tr:hover td { background: var(--surface2); }
+    .badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-direct { background: rgba(79,143,247,0.15); color: var(--accent); }
+    .badge-midsize { background: rgba(124,92,252,0.15); color: var(--accent2); }
+    .badge-large { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-insurance { background: rgba(52,211,153,0.15); color: var(--green); }
+
+    .services-list { list-style: none; padding: 0; margin: 0; }
+    .services-list li {
+      font-size: 0.78rem; margin-bottom: 0.15rem;
+      padding-left: 0.75rem; position: relative;
+    }
+    .services-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--accent); }
+
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) { .swot-grid { grid-template-columns: 1fr; } }
+    .swot-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .swot-card.strengths { border-left: 4px solid var(--green); }
+    .swot-card.weaknesses { border-left: 4px solid var(--red); }
+    .swot-card.opportunities { border-left: 4px solid var(--accent); }
+    .swot-card.threats { border-left: 4px solid var(--amber); }
+    .swot-card h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .swot-card.strengths h4 { color: var(--green); }
+    .swot-card.weaknesses h4 { color: var(--red); }
+    .swot-card.opportunities h4 { color: var(--accent); }
+    .swot-card.threats h4 { color: var(--amber); }
+    .swot-card li { font-size: 0.85rem; }
+
+    .insight-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .insight-box h4 {
+      font-size: 0.85rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.5rem;
+    }
+    .sources {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-top: 2rem;
+    }
+    .sources h3 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .sources a { display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: var(--text-muted); }
+    .sources a:hover { color: var(--accent); }
+    .na { color: var(--text-muted); font-style: italic; }
+    .rating { color: var(--amber); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Skelton &amp; Woody PLLC - Competitive Landscape Analysis</h1>
+    <p class="subtitle">Boutique Litigation Law Firm | Insurance Defense &amp; Business Litigation | Austin, TX 78746</p>
+    <p class="date">Research Date: February 13, 2026</p>
+
+    <!-- Summary Stats -->
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="number">6</div>
+        <div class="label">Key Competitors Analyzed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">35</div>
+        <div class="label">Years in Practice</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$473M+</div>
+        <div class="label">Austin Litigation Market</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$293.9B</div>
+        <div class="label">TX Insurance Premiums</div>
+      </div>
+    </div>
+
+    <!-- Company Profile -->
+    <h2>Skelton &amp; Woody PLLC (Subject Company)</h2>
+    <div class="profile-card">
+      <h3>Firm Profile</h3>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <div class="label">Website</div>
+          <div class="value"><a href="https://skeltonwoody.com" target="_blank">skeltonwoody.com</a></div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Location</div>
+          <div class="value">248 Addie Roy Rd, Ste B-302, Austin, TX 78746</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Founded</div>
+          <div class="value">September 1991 (35 years)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Team Size</div>
+          <div class="value">~17 attorneys, 8+ paralegals</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Managing Partner</div>
+          <div class="value">J. Hampton &ldquo;Hamp&rdquo; Skelton (Princeton BA, UT Law JD; 44+ yrs licensed)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Co-Founder</div>
+          <div class="value">Robert J. Woody (1953-2023; Baylor Law, Simpson Thacher alum)</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Core Practice Areas</div>
+          <div class="value">Business Litigation, Insurance Coverage &amp; Bad Faith (1,000+ cases defended), Insurance Regulatory Litigation, Appeals, Banking Litigation, Class Actions, Construction Litigation, Employment Law (defense), Securities Fraud, IP Litigation, Local Counsel Services</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Notable Results</div>
+          <div class="value">$106M take-nothing verdict; multiple Texas Supreme Court victories; AV Preeminent rating (5.0/5.0 Martindale-Hubbell); TX Super Lawyer 2009-2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Competitors -->
+    <h2>Direct &amp; Adjacent Competitors</h2>
+    <p style="margin-bottom: 1rem;">Austin-area litigation firms with overlapping practice in business litigation, insurance defense/coverage, and appellate work.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Firm</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Size</th>
+            <th>Practice Focus</th>
+            <th>Differentiators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Burns Anderson Jury &amp; Brenner</strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>Austin, TX</td>
+            <td>~18 attorneys</td>
+            <td>
+              <ul class="services-list">
+                <li>Insurance defense</li>
+                <li>Business litigation</li>
+                <li>Construction litigation</li>
+                <li>Employment law</li>
+                <li>Personal injury defense</li>
+              </ul>
+            </td>
+            <td>Most similar size and practice overlap; comparable boutique insurance defense focus; strong Austin presence</td>
+          </tr>
+          <tr>
+            <td><strong>Hanna &amp; Plaut LLP</strong></td>
+            <td><span class="badge badge-insurance">Insurance</span></td>
+            <td>Austin, TX</td>
+            <td>10-13 attorneys</td>
+            <td>
+              <ul class="services-list">
+                <li>Insurance coverage disputes</li>
+                <li>Insurance defense</li>
+                <li>Bad faith litigation</li>
+                <li>Business disputes</li>
+              </ul>
+            </td>
+            <td>Insurance-centric boutique; smaller size means more direct overlap on coverage/bad faith; strong reputation in TX insurance bar</td>
+          </tr>
+          <tr>
+            <td><strong>Thompson Coe (Austin office)</strong></td>
+            <td><span class="badge badge-midsize">Mid-Size</span></td>
+            <td>Austin, TX (HQ: Dallas)</td>
+            <td>~40 attorneys (Austin); 260+ nationally</td>
+            <td>
+              <ul class="services-list">
+                <li>Insurance coverage &amp; litigation</li>
+                <li>Commercial litigation</li>
+                <li>Products liability</li>
+                <li>Employment</li>
+                <li>Appellate</li>
+              </ul>
+            </td>
+            <td>National insurance defense platform gives scale advantage; dedicated appellate practice; broader geographic reach for multi-state matters</td>
+          </tr>
+          <tr>
+            <td><strong>McGinnis Lochridge</strong></td>
+            <td><span class="badge badge-large">Large</span></td>
+            <td>Austin, TX (also Houston)</td>
+            <td>70+ attorneys</td>
+            <td>
+              <ul class="services-list">
+                <li>Business &amp; commercial litigation</li>
+                <li>Insurance</li>
+                <li>Energy</li>
+                <li>Real estate</li>
+                <li>Government contracts</li>
+              </ul>
+            </td>
+            <td>Chambers-ranked; much larger team; broader practice coverage; higher institutional visibility; competes on complex business litigation</td>
+          </tr>
+          <tr>
+            <td><strong>Scott Douglass &amp; McConnico</strong></td>
+            <td><span class="badge badge-large">Large</span></td>
+            <td>Austin, TX</td>
+            <td>~44 attorneys</td>
+            <td>
+              <ul class="services-list">
+                <li>Complex commercial litigation</li>
+                <li>Insurance coverage</li>
+                <li>IP litigation</li>
+                <li>Appellate</li>
+                <li>Government investigations</li>
+              </ul>
+            </td>
+            <td>Chambers-ranked trial boutique; strong appellate practice; higher-profile trial verdicts and press coverage; competes for same insurance and IP litigation</td>
+          </tr>
+          <tr>
+            <td><strong>Graves Dougherty Hearon &amp; Moody</strong></td>
+            <td><span class="badge badge-large">Large</span></td>
+            <td>Austin, TX</td>
+            <td>30+ attorneys</td>
+            <td>
+              <ul class="services-list">
+                <li>Business litigation</li>
+                <li>Real estate</li>
+                <li>Tax</li>
+                <li>Government relations</li>
+                <li>Estate planning</li>
+              </ul>
+            </td>
+            <td>Chambers-ranked; Austin institution since 1946; broader transactional and regulatory practice; political connections through government relations arm</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SWOT -->
+    <h2>Skelton &amp; Woody PLLC - Competitive SWOT Analysis</h2>
+    <div class="swot-grid">
+      <div class="swot-card strengths">
+        <h4>Strengths</h4>
+        <ul>
+          <li>35 years of continuous practice &mdash; one of Austin's longest-operating litigation boutiques</li>
+          <li>1,000+ bad faith lawsuits defended; unmatched insurance defense depth in Austin boutique market</li>
+          <li>$106M take-nothing verdict and multiple Texas Supreme Court victories</li>
+          <li>AV Preeminent (5.0/5.0) and Texas Super Lawyer designation (2009-2025)</li>
+          <li>Managing partner trained at Vinson &amp; Elkins and Akin Gump (elite pedigree)</li>
+          <li>Broad practice spanning 13+ areas while maintaining boutique client attention</li>
+          <li>Local counsel services create referral pipeline from national firms</li>
+        </ul>
+      </div>
+      <div class="swot-card weaknesses">
+        <h4>Weaknesses</h4>
+        <ul>
+          <li>Co-founder Robert Woody passed away in 2023 &mdash; potential knowledge and relationship gap</li>
+          <li>Smaller team (~17 attorneys) limits capacity for high-volume or multi-front engagements</li>
+          <li>Competes against Chambers-ranked firms (McGinnis Lochridge, Scott Douglass, Graves Dougherty) with greater institutional visibility</li>
+          <li>No Chambers, Best Lawyers, or U.S. News rankings identified in research</li>
+          <li>Limited digital marketing or content presence compared to larger competitors</li>
+        </ul>
+      </div>
+      <div class="swot-card opportunities">
+        <h4>Opportunities</h4>
+        <ul>
+          <li>Texas insurance market ($293.9B in premiums, 2nd largest in US) generates strong litigation demand</li>
+          <li>Austin metro addressable litigation market estimated at $473M-$1.26B annually</li>
+          <li>Growing corporate relocations to Austin create demand for business litigation counsel</li>
+          <li>National firms seeking Texas local counsel as out-of-state litigation increases</li>
+          <li>Insurance regulatory changes and bad faith reform bills create new case demand</li>
+          <li>Pursue Chambers and Best Lawyers recognition to close institutional visibility gap</li>
+        </ul>
+      </div>
+      <div class="swot-card threats">
+        <h4>Threats</h4>
+        <ul>
+          <li>Thompson Coe's 260+ attorney national platform captures multi-state insurance defense work</li>
+          <li>Chambers-ranked firms attract larger institutional clients and higher-profile matters</li>
+          <li>Large firm Austin offices (Baker Botts, Norton Rose, Jackson Walker) expanding litigation teams</li>
+          <li>Succession planning risk: managing partner has 44+ years of practice experience</li>
+          <li>Alternative legal service providers and litigation funding changing economics of disputes</li>
+          <li>AI-powered legal tools may commoditize lower-complexity litigation over time</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Key Insights -->
+    <h2>Key Competitive Insights</h2>
+
+    <div class="insight-box">
+      <h4>1. Closest Competitor by Size &amp; Practice Overlap</h4>
+      <p><strong>Burns Anderson Jury &amp; Brenner</strong> (~18 attorneys) is the most directly comparable firm in Austin. Both are boutique insurance defense firms with overlapping practice areas in business litigation, construction, and employment. The key differentiator for Skelton &amp; Woody is the depth of bad faith defense experience (1,000+ cases) and Texas Supreme Court track record.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>2. Insurance Defense Niche Dominance</h4>
+      <p>Within the Austin boutique market, only Hanna &amp; Plaut directly competes on insurance coverage and bad faith. Skelton &amp; Woody's 35-year track record with 1,000+ bad faith cases creates a significant moat. The $293.9 billion Texas insurance premium market (2nd largest in the US) ensures sustained demand for this specialization.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>3. Institutional Visibility Gap</h4>
+      <p>Three competitors hold Chambers rankings (McGinnis Lochridge, Scott Douglass &amp; McConnico, Graves Dougherty), which drive institutional client selection. Pursuing Chambers, Best Lawyers, and U.S. News rankings would help Skelton &amp; Woody compete more effectively for larger engagements. The Super Lawyer designation and AV Preeminent rating provide a foundation.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>4. Austin Market Billing Context</h4>
+      <ul>
+        <li><strong>TX avg civil litigation rate:</strong> $355/hr</li>
+        <li><strong>Austin boutique partner estimate:</strong> $450-$900/hr</li>
+        <li><strong>Austin boutique associate estimate:</strong> $250-$500/hr</li>
+        <li><strong>Austin metro median household income:</strong> $99,897</li>
+      </ul>
+      <p>Skelton &amp; Woody's boutique positioning allows competitive pricing versus large firms while maintaining premium rates justified by specialization depth and results.</p>
+    </div>
+
+    <!-- Sources -->
+    <div class="sources">
+      <h3>Sources &amp; References</h3>
+      <a href="https://skeltonwoody.com" target="_blank">Skelton &amp; Woody PLLC - Official Website</a>
+      <a href="https://www.martindale.com/" target="_blank">Martindale-Hubbell (AV Preeminent Ratings)</a>
+      <a href="https://www.superlawyers.com/" target="_blank">Super Lawyers - Texas Business Litigation</a>
+      <a href="https://chambers.com/" target="_blank">Chambers and Partners - Texas Rankings</a>
+      <a href="https://www.tdi.texas.gov/" target="_blank">Texas Department of Insurance ($293.9B Premium Market)</a>
+    </div>
+  </div>
+</body>
+</html>

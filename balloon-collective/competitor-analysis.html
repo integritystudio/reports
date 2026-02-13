@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Balloon Collective - Competitive Landscape Analysis</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #f0f1f5;
+      --border: #d8dbe5;
+      --text: #1a1d27;
+      --text-muted: #6b7085;
+      --accent: #2563eb;
+      --accent2: #6d28d9;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --cyan: #0891b2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface2: #242836;
+        --border: #2e3345;
+        --text: #e4e6ed;
+        --text-muted: #8b8fa3;
+        --accent: #4f8ff7;
+        --accent2: #7c5cfc;
+        --green: #34d399;
+        --amber: #f59e0b;
+        --red: #ef4444;
+        --cyan: #22d3ee;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .subtitle { color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem;
+      color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+    }
+    h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    p, li { font-size: 0.92rem; margin-bottom: 0.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem; text-align: center;
+    }
+    .stat-card .number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-card .label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 2px solid var(--accent); border-radius: 16px;
+      padding: 2rem; margin-bottom: 2rem;
+    }
+    .profile-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+    @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-item .label {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .profile-item .value { font-size: 0.95rem; font-weight: 500; }
+
+    .table-wrap {
+      overflow-x: auto; margin-bottom: 2rem;
+      border-radius: 12px; border: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1100px; }
+    thead { background: var(--surface2); }
+    th {
+      padding: 0.75rem 1rem; text-align: left; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem;
+      letter-spacing: 0.05em; white-space: nowrap; border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+      vertical-align: top; background: var(--surface);
+    }
+    tr:hover td { background: var(--surface2); }
+    .badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-direct { background: rgba(79,143,247,0.15); color: var(--accent); }
+    .badge-volume { background: rgba(124,92,252,0.15); color: var(--accent2); }
+    .badge-luxury { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .badge-legacy { background: rgba(52,211,153,0.15); color: var(--green); }
+
+    .services-list { list-style: none; padding: 0; margin: 0; }
+    .services-list li {
+      font-size: 0.78rem; margin-bottom: 0.15rem;
+      padding-left: 0.75rem; position: relative;
+    }
+    .services-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--accent); }
+
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) { .swot-grid { grid-template-columns: 1fr; } }
+    .swot-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .swot-card.strengths { border-left: 4px solid var(--green); }
+    .swot-card.weaknesses { border-left: 4px solid var(--red); }
+    .swot-card.opportunities { border-left: 4px solid var(--accent); }
+    .swot-card.threats { border-left: 4px solid var(--amber); }
+    .swot-card h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .swot-card.strengths h4 { color: var(--green); }
+    .swot-card.weaknesses h4 { color: var(--red); }
+    .swot-card.opportunities h4 { color: var(--accent); }
+    .swot-card.threats h4 { color: var(--amber); }
+    .swot-card li { font-size: 0.85rem; }
+
+    .insight-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .insight-box h4 {
+      font-size: 0.85rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.5rem;
+    }
+    .sources {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-top: 2rem;
+    }
+    .sources h3 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .sources a { display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: var(--text-muted); }
+    .sources a:hover { color: var(--accent); }
+    .na { color: var(--text-muted); font-style: italic; }
+    .rating { color: var(--amber); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>The Balloon Collective - Competitive Landscape Analysis</h1>
+    <p class="subtitle">The Balloon Collective, LLC | Luxury Balloon Design &amp; Installation | South Austin, TX</p>
+    <p class="date">Research Date: February 13, 2026</p>
+
+    <!-- Summary Stats -->
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="number">9</div>
+        <div class="label">Austin Competitors Analyzed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">18+</div>
+        <div class="label">Years Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$6.3M-$15.1M</div>
+        <div class="label">Austin Market (Est.)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$500</div>
+        <div class="label">Minimum Spend</div>
+      </div>
+    </div>
+
+    <!-- Company Profile -->
+    <h2>The Balloon Collective (Subject Company)</h2>
+    <div class="profile-card">
+      <h3>Company Profile</h3>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <div class="label">Website</div>
+          <div class="value"><a href="https://theballooncollective.com" target="_blank">theballooncollective.com</a></div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Location</div>
+          <div class="value">South Austin, TX (studio pickup Mon-Fri 8AM-8PM)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Founded</div>
+          <div class="value">2019 (LLC); 18+ years individual operations</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Team</div>
+          <div class="value">Nate &ldquo;the Great&rdquo; Culpepper &amp; Stacy &ldquo;Pineapple&rdquo; Wheeler</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Services</div>
+          <div class="value">Large-scale sculptural installations, Balloon arches &amp; garlands, Balloon twisting, Private party decor (birthdays, weddings, corporate), Balloon deliveries &amp; yard art, Couture balloon costumes</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Notable Projects</div>
+          <div class="value">Human-sized balloon labyrinth (China), The Balloon Wedding (Australia), Molly Balloons Fashion Shows, Hopscotch immersive art, ABC Kite Festival (275-balloon rainbow arch), Austin Pride Parade</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h4>Key Differentiator - Art &amp; International Portfolio</h4>
+      <p>The Balloon Collective occupies a unique luxury/high-art tier in Austin. No competitor matches their international portfolio (China, Australia), convention teaching credentials, or immersive art installation capability. The $500 minimum spend positions them above the volume-focused market where most competitors operate at $18-$45 per linear foot.</p>
+    </div>
+
+    <!-- Competitors -->
+    <h2>Austin Balloon Decor Competitors</h2>
+    <p style="margin-bottom: 1rem;">Local Austin-area balloon decor companies competing for event, party, and corporate installation work.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Category</th>
+            <th>Founded</th>
+            <th>Reviews / Rating</th>
+            <th>Pricing</th>
+            <th>Key Services</th>
+            <th>Differentiators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Balloon Boutique</strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>2020</td>
+            <td><span class="rating">22 Yelp reviews</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Balloon-floral fusion arrangements</li>
+                <li>Event decor</li>
+                <li>Custom installations</li>
+              </ul>
+            </td>
+            <td>Unique floral-balloon hybrid designs; newer entrant with growing Yelp presence; creative crossover appeal</td>
+          </tr>
+          <tr>
+            <td><strong>ATX Bubbles</strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>N/A</td>
+            <td>16 Yelp reviews</td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Corporate events</li>
+                <li>Balloon installations</li>
+                <li>Custom designs</li>
+              </ul>
+            </td>
+            <td>Corporate client roster includes UT, Apple, and Dell; established B2B relationships; tech industry focus</td>
+          </tr>
+          <tr>
+            <td><strong>Pop &amp; Drop</strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>N/A</td>
+            <td><span class="na">N/A</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Corporate installations</li>
+                <li>Event decor</li>
+                <li>Social media content decor</li>
+              </ul>
+            </td>
+            <td>Major tech clients (TikTok, Meta, Reddit); strong social media and brand event positioning</td>
+          </tr>
+          <tr>
+            <td><strong>Starr of Texas</strong></td>
+            <td><span class="badge badge-volume">Volume</span></td>
+            <td>2017</td>
+            <td><span class="na">N/A</span></td>
+            <td>$28-$45/ft</td>
+            <td>
+              <ul class="services-list">
+                <li>Balloon garlands &amp; arches</li>
+                <li>Bounce castle rentals</li>
+                <li>Party decor packages</li>
+              </ul>
+            </td>
+            <td>Diversified with bounce castle rentals; published pricing; broader party supply approach; mid-range positioning</td>
+          </tr>
+          <tr>
+            <td><strong>Austin Moments</strong></td>
+            <td><span class="badge badge-volume">Volume</span></td>
+            <td>N/A</td>
+            <td><span class="na">N/A</span></td>
+            <td>$25-$30/ft</td>
+            <td>
+              <ul class="services-list">
+                <li>Balloon garlands</li>
+                <li>Party decor</li>
+                <li>Event installations</li>
+              </ul>
+            </td>
+            <td>Transparent pricing on website; competitive per-foot rates; volume-friendly approach; lower price point</td>
+          </tr>
+          <tr>
+            <td><strong>Balloon People TX</strong></td>
+            <td><span class="badge badge-legacy">Legacy</span></td>
+            <td>~1998</td>
+            <td><span class="rating">219 Yelp photos</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Full-service balloon decor</li>
+                <li>Corporate events</li>
+                <li>Custom sculptures</li>
+              </ul>
+            </td>
+            <td>28+ years in Austin market (longest-operating); massive Yelp photo gallery; deep local reputation; established client relationships</td>
+          </tr>
+          <tr>
+            <td><strong>Ballooms of Texas</strong></td>
+            <td><span class="badge badge-volume">Volume</span></td>
+            <td>N/A</td>
+            <td>29 Yelp reviews</td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Balloon decor</li>
+                <li>Event installations</li>
+                <li>Multi-city service</li>
+              </ul>
+            </td>
+            <td>Multi-city coverage across Texas; volume-oriented; broader geographic reach than most competitors</td>
+          </tr>
+          <tr>
+            <td><strong>Balloonatiks</strong></td>
+            <td><span class="badge badge-legacy">Legacy</span></td>
+            <td>2009</td>
+            <td><span class="na">N/A</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Balloon sculptures</li>
+                <li>Event decor</li>
+                <li>Custom designs</li>
+              </ul>
+            </td>
+            <td>16+ years in market; established local presence; sculpture specialization</td>
+          </tr>
+          <tr>
+            <td><strong>Austin Balloon Co</strong></td>
+            <td><span class="badge badge-luxury">Luxury</span></td>
+            <td>N/A</td>
+            <td><span class="na">N/A</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Luxury installations</li>
+                <li>Corporate events</li>
+                <li>Custom design</li>
+              </ul>
+            </td>
+            <td>Luxury positioning similar to TBC; competes for high-end event work; less established portfolio</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SWOT -->
+    <h2>The Balloon Collective - Competitive SWOT Analysis</h2>
+    <div class="swot-grid">
+      <div class="swot-card strengths">
+        <h4>Strengths</h4>
+        <ul>
+          <li>18+ years experience &mdash; among the most experienced in Austin alongside Balloon People TX</li>
+          <li>International portfolio (China, Australia) that no competitor can match</li>
+          <li>Convention teachers with recognized professional credentials in the balloon community</li>
+          <li>Immersive art installation capability (Hopscotch, fashion shows) elevates beyond standard decor</li>
+          <li>Media coverage: Austin Chronicle, KXAN</li>
+          <li>$500 minimum spend positions firmly in luxury tier</li>
+          <li>Couture balloon costumes &mdash; unique offering no local competitor provides</li>
+        </ul>
+      </div>
+      <div class="swot-card weaknesses">
+        <h4>Weaknesses</h4>
+        <ul>
+          <li>No Google Business Profile or Yelp listing &mdash; critical online visibility gap</li>
+          <li>Minimal website (Squarespace) with limited service pages and no pricing transparency</li>
+          <li>About page references outdated COVID-era services</li>
+          <li>Two-person team limits capacity for concurrent large-scale events</li>
+          <li>No published pricing while competitors (Austin Moments, Starr of Texas) offer transparency</li>
+          <li>Competitors like ATX Bubbles and Pop &amp; Drop have established tech company client rosters</li>
+        </ul>
+      </div>
+      <div class="swot-card opportunities">
+        <h4>Opportunities</h4>
+        <ul>
+          <li>Claim Google Business Profile to capture local search traffic (most competitors have one)</li>
+          <li>Corporate event market via Austin's growing tech sector (Apple, Google, Meta events)</li>
+          <li>Wedding market growth &mdash; luxury balloon decor trending as floral alternative</li>
+          <li>Content marketing with installation process videos for social media</li>
+          <li>Partner with Austin event venues and wedding planners for referral pipeline</li>
+          <li>Festival and public art commissions (SXSW, ACL, Trail of Lights)</li>
+        </ul>
+      </div>
+      <div class="swot-card threats">
+        <h4>Threats</h4>
+        <ul>
+          <li>Balloon People TX has 28+ years and 219 Yelp photos &mdash; strongest legacy competitor</li>
+          <li>ATX Bubbles and Pop &amp; Drop capturing major tech corporate accounts</li>
+          <li>New entrants (Balloon Boutique, 2020) with creative differentiation (floral-balloon fusion)</li>
+          <li>Volume competitors (Austin Moments at $25-$30/ft) undercut on price</li>
+          <li>DIY balloon kits and tutorials reducing demand for simpler installations</li>
+          <li>Seasonal demand concentration around holidays limits year-round revenue</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Key Insights -->
+    <h2>Key Competitive Insights</h2>
+
+    <div class="insight-box">
+      <h4>1. Online Presence Is the #1 Competitive Gap</h4>
+      <p>The Balloon Collective has no Google Business Profile and no Yelp listing, while 6 of 9 competitors have review presence on at least one platform. Balloon People TX leads with 219 Yelp photos and 28+ years of searchable history. Creating and optimizing a Google Business Profile is the single highest-impact action for competitive positioning.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>2. Market Segmentation</h4>
+      <p>The Austin balloon decor market segments into three tiers:</p>
+      <ul>
+        <li><strong>Volume/Budget ($25-$45/ft):</strong> Austin Moments, Starr of Texas, Ballooms of Texas &mdash; competing on price and convenience</li>
+        <li><strong>Mid-Tier (event-based):</strong> Balloon Boutique, ATX Bubbles, Balloonatiks, Balloon People TX &mdash; established brands with review presence</li>
+        <li><strong>Luxury/Art ($500+ minimum):</strong> The Balloon Collective, Austin Balloon Co &mdash; premium positioning, bespoke designs</li>
+      </ul>
+      <p>The Balloon Collective is well-positioned in the luxury tier but needs digital presence to capture the clients searching for premium services.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>3. Corporate Tech Market Opportunity</h4>
+      <p>ATX Bubbles (UT, Apple, Dell) and Pop &amp; Drop (TikTok, Meta, Reddit) have captured significant corporate accounts. The Balloon Collective's immersive installation capability and international portfolio would be compelling to these same clients &mdash; but discovery requires online visibility that currently doesn't exist.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>4. Market Sizing</h4>
+      <ul>
+        <li><strong>Austin metro balloon decor market:</strong> $6.3M-$15.1M annually (estimated)</li>
+        <li><strong>Global decorative balloon market:</strong> $3.29B (2024), projected $4.5B by 2032 (4.01% CAGR)</li>
+        <li><strong>Austin garland pricing range:</strong> $18-$45 per linear foot</li>
+        <li><strong>Small garland (6ft):</strong> $150-$200 | <strong>Large garland (16-20ft):</strong> $400-$700</li>
+      </ul>
+    </div>
+
+    <!-- Sources -->
+    <div class="sources">
+      <h3>Sources &amp; References</h3>
+      <a href="https://theballooncollective.com" target="_blank">The Balloon Collective - Official Website</a>
+      <a href="https://www.yelp.com/search?find_desc=balloon+decor&find_loc=Austin%2C+TX" target="_blank">Yelp - Austin Balloon Decor Search</a>
+      <a href="https://www.instagram.com/theballooncollective/" target="_blank">The Balloon Collective - Instagram</a>
+    </div>
+  </div>
+</body>
+</html>

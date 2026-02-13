@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrity Studio - NGO AI Consulting Competitive Landscape</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #f0f1f5;
+      --border: #d8dbe5;
+      --text: #1a1d27;
+      --text-muted: #6b7085;
+      --accent: #2563eb;
+      --accent2: #6d28d9;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --cyan: #0891b2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface2: #242836;
+        --border: #2e3345;
+        --text: #e4e6ed;
+        --text-muted: #8b8fa3;
+        --accent: #4f8ff7;
+        --accent2: #7c5cfc;
+        --green: #34d399;
+        --amber: #f59e0b;
+        --red: #ef4444;
+        --cyan: #22d3ee;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .subtitle { color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem;
+      color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+    }
+    h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    p, li { font-size: 0.92rem; margin-bottom: 0.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem; text-align: center;
+    }
+    .stat-card .number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-card .label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 2px solid var(--accent); border-radius: 16px;
+      padding: 2rem; margin-bottom: 2rem;
+    }
+    .profile-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+    @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-item .label {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .profile-item .value { font-size: 0.95rem; font-weight: 500; }
+
+    .table-wrap {
+      overflow-x: auto; margin-bottom: 2rem;
+      border-radius: 12px; border: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1100px; }
+    thead { background: var(--surface2); }
+    th {
+      padding: 0.75rem 1rem; text-align: left; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem;
+      letter-spacing: 0.05em; white-space: nowrap; border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+      vertical-align: top; background: var(--surface);
+    }
+    tr:hover td { background: var(--surface2); }
+    .badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-boutique { background: rgba(79,143,247,0.15); color: var(--accent); }
+    .badge-nptechfirm { background: rgba(124,92,252,0.15); color: var(--accent2); }
+    .badge-bigfirm { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-platform { background: rgba(52,211,153,0.15); color: var(--green); }
+    .badge-education { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .badge-ethics { background: rgba(34,211,238,0.15); color: var(--cyan); }
+
+    .services-list { list-style: none; padding: 0; margin: 0; }
+    .services-list li {
+      font-size: 0.78rem; margin-bottom: 0.15rem;
+      padding-left: 0.75rem; position: relative;
+    }
+    .services-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--accent); }
+
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) { .swot-grid { grid-template-columns: 1fr; } }
+    .swot-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .swot-card.strengths { border-left: 4px solid var(--green); }
+    .swot-card.weaknesses { border-left: 4px solid var(--red); }
+    .swot-card.opportunities { border-left: 4px solid var(--accent); }
+    .swot-card.threats { border-left: 4px solid var(--amber); }
+    .swot-card h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .swot-card.strengths h4 { color: var(--green); }
+    .swot-card.weaknesses h4 { color: var(--red); }
+    .swot-card.opportunities h4 { color: var(--accent); }
+    .swot-card.threats h4 { color: var(--amber); }
+    .swot-card li { font-size: 0.85rem; }
+
+    .insight-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .insight-box h4 {
+      font-size: 0.85rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.5rem;
+    }
+    .sources {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-top: 2rem;
+    }
+    .sources h3 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .sources a { display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: var(--text-muted); }
+    .sources a:hover { color: var(--accent); }
+    .na { color: var(--text-muted); font-style: italic; }
+    .threat-badge {
+      display: inline-block; padding: 0.15rem 0.4rem; border-radius: 4px;
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+    }
+    .threat-low { background: rgba(52,211,153,0.15); color: var(--green); }
+    .threat-med { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .threat-high { background: rgba(239,68,68,0.15); color: var(--red); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Nonprofit AI Consulting - Competitive Landscape Analysis</h1>
+    <p class="subtitle">Integrity Studio LLC | AI Consulting for Nonprofit Organizations | Austin, TX</p>
+    <p class="date">Research Date: February 13, 2026</p>
+
+    <!-- Summary Stats -->
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="number">6</div>
+        <div class="label">Competitor Categories</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">85%+</div>
+        <div class="label">Nonprofits Using AI</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">65-70%</div>
+        <div class="label">Lack AI Policy</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$150M+</div>
+        <div class="label">AI Grants Available</div>
+      </div>
+    </div>
+
+    <!-- Company Profile -->
+    <h2>Integrity Studio LLC - NGO Practice (Subject Company)</h2>
+    <div class="profile-card">
+      <h3>Nonprofit AI Consulting Practice</h3>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <div class="label">Target Market</div>
+          <div class="value">Nonprofit organizations seeking AI implementation, governance, and training</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Value Proposition</div>
+          <div class="value">&ldquo;Enterprise AI capabilities at nonprofit-accessible pricing, with governance built in&rdquo;</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Services</div>
+          <div class="value">AI Readiness Assessments, AI Policy Development, AI Implementation &amp; Governance, Grant Application Support, AI Training &amp; Capacity Building, Fractional CTO Services</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Pricing</div>
+          <div class="value">90-Day Pilot (Small): $15K-$25K | 90-Day Pilot (Mid): $25K-$40K | Full Implementation: $75K-$150K | Fractional CTO: $5K-$10K/mo | Workshops: $2K-$10K</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Competitor Categories -->
+    <h2>Competitive Landscape by Category</h2>
+    <p style="margin-bottom: 1rem;">The nonprofit AI consulting market includes six distinct competitor categories, each with different threat levels and service overlaps. This reflects the market's evolution from Jan 2025 to Feb 2026.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Competitor Category</th>
+            <th>Type</th>
+            <th>Jan 2025 Status</th>
+            <th>Feb 2026 Status</th>
+            <th>Threat Level</th>
+            <th>Key Players</th>
+            <th>Service Overlap</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Boutique AI Consultants</strong></td>
+            <td><span class="badge badge-boutique">Boutique</span></td>
+            <td>&lt;5 identifiable</td>
+            <td>10-20+ entering market</td>
+            <td><span class="threat-badge threat-med">Medium</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Small firms targeting nonprofit AI</li>
+                <li>Solo consultants with AI backgrounds</li>
+                <li>Former tech employees pivoting to consulting</li>
+              </ul>
+            </td>
+            <td>High: direct service overlap; lower on governance depth and grant support</td>
+          </tr>
+          <tr>
+            <td><strong>Nonprofit Tech Firms</strong></td>
+            <td><span class="badge badge-nptechfirm">NP Tech</span></td>
+            <td>AI as bolt-on service</td>
+            <td>Dedicated AI practice areas</td>
+            <td><span class="threat-badge threat-med">Medium</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Heller Consulting (Salesforce + AI)</li>
+                <li>Build Consulting (nonprofit ops + AI)</li>
+                <li>Cathexis Partners (data + AI strategy)</li>
+              </ul>
+            </td>
+            <td>Medium: established NP relationships; adding AI to existing tech consulting; less AI-native expertise</td>
+          </tr>
+          <tr>
+            <td><strong>Large Consulting Firms</strong></td>
+            <td><span class="badge badge-bigfirm">Enterprise</span></td>
+            <td>Serving large nonprofits only</td>
+            <td>Unchanged &mdash; still inaccessible</td>
+            <td><span class="threat-badge threat-low">Low</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Accenture (large nonprofit engagements)</li>
+                <li>Deloitte (enterprise AI strategy)</li>
+                <li>McKinsey (AI transformation)</li>
+              </ul>
+            </td>
+            <td>Low: pricing excludes small/mid nonprofits ($500K+ engagements); different market tier entirely</td>
+          </tr>
+          <tr>
+            <td><strong>Embedded Platform AI</strong></td>
+            <td><span class="badge badge-platform">Platform</span></td>
+            <td>Early features</td>
+            <td>Deeply integrated, reducing basic tool consulting</td>
+            <td><span class="threat-badge threat-high">High</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Microsoft Copilot (M365/Dynamics)</li>
+                <li>Google Gemini (Workspace)</li>
+                <li>Salesforce Einstein (CRM AI)</li>
+              </ul>
+            </td>
+            <td>High for basic tool consulting; Low for governance, policy, training, and data readiness</td>
+          </tr>
+          <tr>
+            <td><strong>AI Ethics Consultancies</strong></td>
+            <td><span class="badge badge-ethics">Ethics</span></td>
+            <td>Academic focus</td>
+            <td>Targeting nonprofit sector</td>
+            <td><span class="threat-badge threat-med">Medium</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Responsible AI firms pivoting from academia</li>
+                <li>Ethics-focused consultancies adding NP clients</li>
+                <li>University research centers offering services</li>
+              </ul>
+            </td>
+            <td>Medium: governance/ethics overlap; less implementation capability; higher credentialing</td>
+          </tr>
+          <tr>
+            <td><strong>Nonprofit Education Orgs</strong></td>
+            <td><span class="badge badge-education">Education</span></td>
+            <td>Basic webinars</td>
+            <td>Expanded AI training offerings</td>
+            <td><span class="threat-badge threat-med">Low-Med</span></td>
+            <td>
+              <ul class="services-list">
+                <li>NTEN (AI training workshops)</li>
+                <li>TechSoup (AI resources &amp; guides)</li>
+                <li>Nonprofit Learning Lab (online courses)</li>
+              </ul>
+            </td>
+            <td>Low-Medium: education overlap; don't offer implementation or governance; often referral partners</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SWOT -->
+    <h2>Integrity Studio NGO Practice - Competitive SWOT Analysis</h2>
+    <div class="swot-grid">
+      <div class="swot-card strengths">
+        <h4>Strengths</h4>
+        <ul>
+          <li>Nonprofit-first approach with mission-driven pricing ($15K pilots vs. $500K+ at large firms)</li>
+          <li>Full-stack services from policy to implementation &mdash; most competitors offer one or the other</li>
+          <li>Grant application support bundled into engagements ($150M+ in AI grants available)</li>
+          <li>AI governance expertise addresses 65-70% policy gap (now a funder requirement)</li>
+          <li>Education-centric model builds client capacity rather than consultant dependency</li>
+          <li>Dual platform/consulting offering &mdash; can provide both tools and strategy</li>
+          <li>Only 28% of nonprofits have formal AI training &mdash; massive addressable gap</li>
+        </ul>
+      </div>
+      <div class="swot-card weaknesses">
+        <h4>Weaknesses</h4>
+        <ul>
+          <li>New entrant with limited nonprofit sector track record</li>
+          <li>No published case studies or client testimonials in nonprofit space</li>
+          <li>Small team limits capacity for concurrent engagements</li>
+          <li>Competing against firms with established nonprofit relationships (Heller, Build, Cathexis)</li>
+          <li>Not yet a recognized name in NTEN or nonprofit tech community</li>
+          <li>Dual focus (platform + consulting) may confuse nonprofit buyers</li>
+        </ul>
+      </div>
+      <div class="swot-card opportunities">
+        <h4>Opportunities</h4>
+        <ul>
+          <li>AI grant funding tripled to $150M+ &mdash; bundle grant strategy into every engagement</li>
+          <li>Demand shifting from &ldquo;What is AI?&rdquo; to &ldquo;How do we govern it?&rdquo; &mdash; aligns with core offering</li>
+          <li>Board engagement on AI jumped from 29% to 45% &mdash; new buyer audience</li>
+          <li>Regulatory tightening (EU AI Act, state laws) making compliance mandatory</li>
+          <li>Funders now requiring AI ethics in grant applications</li>
+          <li>68% data infrastructure gap creates demand for readiness assessments</li>
+          <li>NTEN membership and NTC 2027 speaking could establish authority rapidly</li>
+        </ul>
+      </div>
+      <div class="swot-card threats">
+        <h4>Threats</h4>
+        <ul>
+          <li>Embedded platform AI (Copilot, Gemini, Einstein) reduces basic tool consulting demand</li>
+          <li>10-20+ boutique AI consultants entering market (up from &lt;5 in Jan 2025)</li>
+          <li>Established NP tech firms (Heller, Build, Cathexis) adding dedicated AI practices</li>
+          <li>NTEN and TechSoup expanding free/low-cost AI education, compressing training revenue</li>
+          <li>AI ethics consultancies pivoting from academia to nonprofit sector</li>
+          <li>Sales cycle compressing (6-12 weeks to 3-6 weeks) benefits established brands</li>
+          <li>Buyer motivation shifting from curiosity to compliance &mdash; requires regulatory credibility</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Key Insights -->
+    <h2>Key Competitive Insights</h2>
+
+    <div class="insight-box">
+      <h4>1. Biggest Disruption: Embedded Platform AI</h4>
+      <p>The highest-threat competitor is not another consultancy but embedded AI in major platforms (Copilot, Gemini, Einstein). These tools reduce demand for basic &ldquo;how to use AI&rdquo; consulting but <em>increase</em> demand for strategic guidance, governance, training, and data readiness. Integrity Studio should reposition messaging away from tool selection toward governance and organizational readiness.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>2. Grant Funding as Competitive Moat</h4>
+      <p>AI grant funding tripled from $50M+ to $150M+ between Jan 2025 and Feb 2026:</p>
+      <ul>
+        <li><strong>Google.org AI Opportunity Fund:</strong> $17M &rarr; $75M+ globally (4.4x increase)</li>
+        <li><strong>Microsoft AI for Good:</strong> ~$25M &rarr; $50M+ (2x increase)</li>
+        <li><strong>Patrick J. McGovern Foundation:</strong> New entrant at $40M+</li>
+        <li><strong>Community Foundations:</strong> Austin ($1M), Silicon Valley, Cleveland, Chicago</li>
+      </ul>
+      <p>No competitor bundles grant application support with AI consulting. This is Integrity Studio's most defensible competitive advantage &mdash; the &ldquo;grant-ready governance&rdquo; package.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>3. Market Demand Shift (Jan 2025 &rarr; Feb 2026)</h4>
+      <ul>
+        <li><strong>Phase shift:</strong> Experimentation &rarr; Operationalization</li>
+        <li><strong>Top question:</strong> &ldquo;What is AI?&rdquo; &rarr; &ldquo;AI governance &amp; policy&rdquo;</li>
+        <li><strong>Buyer motivation:</strong> Curious early adopter &rarr; Board mandate / funder requirement</li>
+        <li><strong>Budget source:</strong> Discretionary &rarr; Compliance / strategic investment</li>
+        <li><strong>Sales cycle:</strong> Education-led (6-12 weeks) &rarr; Problem-led (3-6 weeks)</li>
+      </ul>
+      <p>This shift favors Integrity Studio's governance-first positioning over competitors offering only tool implementation.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>4. Strategic Differentiation Matrix</h4>
+      <p>Only Integrity Studio occupies the intersection of all five differentiators:</p>
+      <ul>
+        <li><strong>Nonprofit-first approach:</strong> vs. Accenture/Deloitte (enterprise-first)</li>
+        <li><strong>Responsible AI / governance:</strong> vs. Heller/Build/Cathexis (tech implementation focus)</li>
+        <li><strong>Accessible pricing:</strong> vs. large firms ($500K+); sliding scale and grant support</li>
+        <li><strong>Education-centric:</strong> vs. consultant dependency models</li>
+        <li><strong>Technical + strategic:</strong> vs. AI ethics consultancies (policy only) or tech firms (tools only)</li>
+      </ul>
+    </div>
+
+    <div class="insight-box">
+      <h4>5. Recommended Competitive Actions</h4>
+      <ul>
+        <li><strong>Lead with compliance messaging</strong> &mdash; demand has shifted from curiosity to mandate</li>
+        <li><strong>Bundle grant strategy into every engagement</strong> &mdash; unique and highly valued</li>
+        <li><strong>Create &ldquo;grant-ready governance&rdquo; package</strong> &mdash; funders now require AI ethics</li>
+        <li><strong>Add data readiness assessment offering</strong> &mdash; 68% infrastructure gap</li>
+        <li><strong>Expand training/workshop revenue line</strong> &mdash; only 28% have formal training</li>
+        <li><strong>Create board-specific education products</strong> &mdash; board engagement up to 45%</li>
+        <li><strong>Join NTEN and submit NTC 2027 speaking proposals</strong> &mdash; fastest authority-building path</li>
+      </ul>
+    </div>
+
+    <!-- Sources -->
+    <div class="sources">
+      <h3>Sources &amp; References</h3>
+      <a href="https://integritystudio.ai" target="_blank">Integrity Studio - Official Website</a>
+      <a href="https://www.nten.org/" target="_blank">NTEN - Nonprofit Technology Enterprise Network</a>
+      <a href="https://www.techsoup.org/" target="_blank">TechSoup - Technology for Nonprofits</a>
+      <a href="https://www.hellerconsulting.com/" target="_blank">Heller Consulting - Nonprofit Technology</a>
+      <a href="https://www.buildconsulting.com/" target="_blank">Build Consulting - Nonprofit Operations</a>
+      <a href="https://www.cathexispartners.com/" target="_blank">Cathexis Partners - Nonprofit Data Strategy</a>
+      <a href="https://openai.com/blog/people-first-ai" target="_blank">OpenAI People-First AI Fund</a>
+      <a href="https://blog.google/outreach-initiatives/google-org/google-org-ai-opportunity-fund/" target="_blank">Google.org AI Opportunity Fund</a>
+      <a href="https://www.mcgovern.org/" target="_blank">Patrick J. McGovern Foundation</a>
+    </div>
+  </div>
+</body>
+</html>

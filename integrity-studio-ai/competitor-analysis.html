@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrity Studio AI - Competitive Landscape Analysis</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #f0f1f5;
+      --border: #d8dbe5;
+      --text: #1a1d27;
+      --text-muted: #6b7085;
+      --accent: #2563eb;
+      --accent2: #6d28d9;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --cyan: #0891b2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface2: #242836;
+        --border: #2e3345;
+        --text: #e4e6ed;
+        --text-muted: #8b8fa3;
+        --accent: #4f8ff7;
+        --accent2: #7c5cfc;
+        --green: #34d399;
+        --amber: #f59e0b;
+        --red: #ef4444;
+        --cyan: #22d3ee;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .subtitle { color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem;
+      color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+    }
+    h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    p, li { font-size: 0.92rem; margin-bottom: 0.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem; text-align: center;
+    }
+    .stat-card .number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-card .label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 2px solid var(--accent); border-radius: 16px;
+      padding: 2rem; margin-bottom: 2rem;
+    }
+    .profile-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+    @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-item .label {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .profile-item .value { font-size: 0.95rem; font-weight: 500; }
+
+    .table-wrap {
+      overflow-x: auto; margin-bottom: 2rem;
+      border-radius: 12px; border: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1100px; }
+    thead { background: var(--surface2); }
+    th {
+      padding: 0.75rem 1rem; text-align: left; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem;
+      letter-spacing: 0.05em; white-space: nowrap; border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+      vertical-align: top; background: var(--surface);
+    }
+    tr:hover td { background: var(--surface2); }
+    .badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-direct { background: rgba(79,143,247,0.15); color: var(--accent); }
+    .badge-platform { background: rgba(124,92,252,0.15); color: var(--accent2); }
+    .badge-enterprise { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-oss { background: rgba(52,211,153,0.15); color: var(--green); }
+
+    .services-list { list-style: none; padding: 0; margin: 0; }
+    .services-list li {
+      font-size: 0.78rem; margin-bottom: 0.15rem;
+      padding-left: 0.75rem; position: relative;
+    }
+    .services-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--accent); }
+
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) { .swot-grid { grid-template-columns: 1fr; } }
+    .swot-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .swot-card.strengths { border-left: 4px solid var(--green); }
+    .swot-card.weaknesses { border-left: 4px solid var(--red); }
+    .swot-card.opportunities { border-left: 4px solid var(--accent); }
+    .swot-card.threats { border-left: 4px solid var(--amber); }
+    .swot-card h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .swot-card.strengths h4 { color: var(--green); }
+    .swot-card.weaknesses h4 { color: var(--red); }
+    .swot-card.opportunities h4 { color: var(--accent); }
+    .swot-card.threats h4 { color: var(--amber); }
+    .swot-card li { font-size: 0.85rem; }
+
+    .insight-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .insight-box h4 {
+      font-size: 0.85rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.5rem;
+    }
+    .sources {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-top: 2rem;
+    }
+    .sources h3 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .sources a { display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: var(--text-muted); }
+    .sources a:hover { color: var(--accent); }
+    .na { color: var(--text-muted); font-style: italic; }
+    .rating { color: var(--amber); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Integrity Studio AI - Competitive Landscape Analysis</h1>
+    <p class="subtitle">Integrity Studio LLC | AI Observability &amp; Compliance Platform | Austin, TX</p>
+    <p class="date">Research Date: February 13, 2026</p>
+
+    <!-- Summary Stats -->
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="number">8</div>
+        <div class="label">Direct Competitors Analyzed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$510M</div>
+        <div class="label">LLM Observability Market (2024)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">31.8%</div>
+        <div class="label">Market CAGR to 2034</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$99/mo</div>
+        <div class="label">IS Pro Pricing</div>
+      </div>
+    </div>
+
+    <!-- Company Profile -->
+    <h2>Integrity Studio LLC (Subject Company)</h2>
+    <div class="profile-card">
+      <h3>Integrity Studio AI - Company Profile</h3>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <div class="label">Website</div>
+          <div class="value"><a href="https://integritystudio.ai" target="_blank">integritystudio.ai</a></div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Location</div>
+          <div class="value">Austin, TX 78746</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Founded</div>
+          <div class="value">2024</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Team Size</div>
+          <div class="value">2-10 employees</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Leadership</div>
+          <div class="value">Alyshia Ledlie (Founder &amp; CEO), Chase Hoffman (Co-Founder &amp; President)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Contact</div>
+          <div class="value">+1-512-829-1644 | contact@integritystudio.ai</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Core Platform Services</div>
+          <div class="value">LLM Monitoring &amp; Performance Tracking, Distributed Tracing (OpenTelemetry-native), Cost Attribution, Anomaly Detection &amp; Alerting, EU AI Act Compliance, PII Detection &amp; Masking, Session &amp; Conversation Tracking, 6+ Month Log Retention</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Pricing Tiers</div>
+          <div class="value">Free: $0/mo (dev/testing) | Pro: $99/mo (production) | Enterprise: Custom</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h4>Key Differentiator - Dual Positioning</h4>
+      <p>Integrity Studio uniquely combines AI observability tooling with EU AI Act compliance capabilities &mdash; a combination no other competitor in this space offers. The nonprofit consultancy arm further differentiates the company by addressing an underserved market where 85%+ of organizations use AI but only 28% have formal training programs.</p>
+    </div>
+
+    <!-- Direct Competitors -->
+    <h2>Direct &amp; Adjacent Competitors</h2>
+    <p style="margin-bottom: 1rem;">LLM observability and monitoring platforms that compete for the same budget and use cases as Integrity Studio's core platform.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Category</th>
+            <th>Funding / Scale</th>
+            <th>Pricing</th>
+            <th>Key Services</th>
+            <th>Differentiators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong><a href="https://www.datadoghq.com/" target="_blank">Datadog LLM Monitoring</a></strong></td>
+            <td><span class="badge badge-enterprise">Enterprise</span></td>
+            <td>$2.1B revenue (2024); public company</td>
+            <td>$20K-$100K+/yr</td>
+            <td>
+              <ul class="services-list">
+                <li>LLM observability</li>
+                <li>Full-stack APM integration</li>
+                <li>Infrastructure monitoring</li>
+                <li>Log management</li>
+                <li>Security monitoring</li>
+              </ul>
+            </td>
+            <td>Massive existing customer base; full-stack integration; brand trust; overkill for LLM-only use cases; expensive entry point</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://arize.com/" target="_blank">Arize AI / Phoenix</a></strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>$40M+ raised (Series B)</td>
+            <td>$50K-$100K/yr (enterprise); Phoenix OSS free</td>
+            <td>
+              <ul class="services-list">
+                <li>LLM tracing &amp; evaluation</li>
+                <li>Model performance monitoring</li>
+                <li>Drift detection</li>
+                <li>Embedding analysis</li>
+                <li>Phoenix open-source toolkit</li>
+              </ul>
+            </td>
+            <td>ML-native; strong evaluation tooling; Phoenix OSS builds community; enterprise-first pricing excludes SMBs; no compliance focus</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://smith.langchain.com/" target="_blank">LangSmith (LangChain)</a></strong></td>
+            <td><span class="badge badge-platform">Platform</span></td>
+            <td>LangChain ecosystem; $25M+ raised</td>
+            <td>$39/user/mo</td>
+            <td>
+              <ul class="services-list">
+                <li>LLM tracing &amp; debugging</li>
+                <li>Prompt management</li>
+                <li>Evaluation &amp; testing</li>
+                <li>Dataset management</li>
+                <li>Playground / hub</li>
+              </ul>
+            </td>
+            <td>Deep LangChain integration; per-user pricing scales with team; limited outside LangChain ecosystem; no compliance tooling</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://langfuse.com/" target="_blank">Langfuse</a></strong></td>
+            <td><span class="badge badge-oss">Open Source</span></td>
+            <td>Seed-funded; growing community</td>
+            <td>Self-host free; Cloud $500+/mo</td>
+            <td>
+              <ul class="services-list">
+                <li>LLM tracing</li>
+                <li>Prompt management</li>
+                <li>Evaluation</li>
+                <li>Cost tracking</li>
+                <li>Framework-agnostic</li>
+              </ul>
+            </td>
+            <td>Open-source flexibility; self-host option; framework-agnostic; growing fast; cloud pricing scales steeply; no compliance features</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://helicone.ai/" target="_blank">Helicone</a></strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>Seed-funded; YC-backed</td>
+            <td>$25/mo flat (starter)</td>
+            <td>
+              <ul class="services-list">
+                <li>Request logging &amp; analytics</li>
+                <li>Cost tracking</li>
+                <li>Rate limiting</li>
+                <li>Caching</li>
+                <li>User tracking</li>
+              </ul>
+            </td>
+            <td>Simple proxy-based integration; competitive pricing; lightweight; limited tracing depth; no compliance features</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.agentops.ai/" target="_blank">AgentOps</a></strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>Seed-funded</td>
+            <td>$40/mo</td>
+            <td>
+              <ul class="services-list">
+                <li>Agent session replay</li>
+                <li>LLM analytics</li>
+                <li>Error tracking</li>
+                <li>Cost monitoring</li>
+                <li>Multi-agent support</li>
+              </ul>
+            </td>
+            <td>Agent-first design; session replay unique feature; early stage; narrow focus on agent workflows; no compliance</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.braintrustdata.com/" target="_blank">Braintrust</a></strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>$36M+ raised (a16z-backed)</td>
+            <td>Free tier; usage-based scaling</td>
+            <td>
+              <ul class="services-list">
+                <li>LLM evaluation</li>
+                <li>Logging &amp; tracing</li>
+                <li>Prompt playground</li>
+                <li>Dataset management</li>
+                <li>CI/CD integration</li>
+              </ul>
+            </td>
+            <td>Evaluation-first approach; strong CI/CD integration; generous free tier; less focus on production monitoring; no compliance</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://lunary.ai/" target="_blank">Lunary</a></strong></td>
+            <td><span class="badge badge-oss">Open Source</span></td>
+            <td>Seed-funded</td>
+            <td>Free tier; $120/mo pro</td>
+            <td>
+              <ul class="services-list">
+                <li>LLM analytics</li>
+                <li>Prompt management</li>
+                <li>User tracking</li>
+                <li>Guardrails</li>
+                <li>Template management</li>
+              </ul>
+            </td>
+            <td>Open-source; guardrails feature; affordable; smaller community than Langfuse; no compliance certification tooling</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SWOT -->
+    <h2>Integrity Studio AI - Competitive SWOT Analysis</h2>
+    <div class="swot-grid">
+      <div class="swot-card strengths">
+        <h4>Strengths</h4>
+        <ul>
+          <li>Unique dual positioning: observability platform + EU AI Act compliance tooling</li>
+          <li>OpenTelemetry-native architecture (open standard, vendor-neutral)</li>
+          <li>Competitive pricing ($99/mo Pro) undercuts enterprise incumbents by 10-100x</li>
+          <li>Nonprofit consultancy arm addresses underserved market (85%+ using AI, 28% trained)</li>
+          <li>PII detection and masking built-in (most competitors lack this)</li>
+          <li>6+ month log retention exceeds most competitor defaults</li>
+          <li>Austin location: access to 7,400+ AI specialists and 203,000+ tech workers</li>
+        </ul>
+      </div>
+      <div class="swot-card weaknesses">
+        <h4>Weaknesses</h4>
+        <ul>
+          <li>Early-stage company (founded 2024) with limited brand recognition</li>
+          <li>Small team (2-10) limits capacity for enterprise sales and support</li>
+          <li>No publicly visible case studies or customer testimonials yet</li>
+          <li>Competing against well-funded startups ($25M-$40M+ raised) and public companies ($2B+ revenue)</li>
+          <li>Dual focus (platform + consulting) may dilute resources</li>
+          <li>Limited open-source community compared to Langfuse, Phoenix</li>
+        </ul>
+      </div>
+      <div class="swot-card opportunities">
+        <h4>Opportunities</h4>
+        <ul>
+          <li>EU AI Act enforcement creating mandatory compliance demand (Articles 12, 19, 53, 55)</li>
+          <li>$150M+ in AI grant funding available for nonprofits (3x growth from 2025)</li>
+          <li>No competitor combines observability + compliance &mdash; first-mover advantage</li>
+          <li>US state-level AI legislation (Colorado, California) expanding compliance market</li>
+          <li>Insurance carriers and funders now requiring AI governance policies</li>
+          <li>OpenTelemetry adoption growing rapidly as industry standard</li>
+          <li>Nonprofit market largely unaddressed by existing observability vendors</li>
+        </ul>
+      </div>
+      <div class="swot-card threats">
+        <h4>Threats</h4>
+        <ul>
+          <li>Datadog, New Relic, or Splunk could add LLM-specific compliance features</li>
+          <li>Arize AI and Langfuse growing rapidly with strong funding</li>
+          <li>Cloud providers (AWS, Azure, GCP) bundling AI monitoring into existing services</li>
+          <li>Embedded platform AI (Copilot, Gemini, Einstein) reducing need for external monitoring</li>
+          <li>Open-source alternatives (Langfuse, Phoenix) competing on price</li>
+          <li>10-20+ boutique AI consultants entering the nonprofit market</li>
+          <li>Regulatory landscape still evolving &mdash; compliance features may need frequent updates</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Key Insights -->
+    <h2>Key Competitive Insights</h2>
+
+    <div class="insight-box">
+      <h4>1. Compliance Gap in the Market</h4>
+      <p>None of the 8 competitors analyzed offer EU AI Act compliance tooling alongside observability. As AI regulation tightens globally &mdash; the EU AI Act is in effect, Colorado and California have active AI legislation, and funders increasingly require AI governance policies &mdash; this represents a significant first-mover opportunity. Integrity Studio should lead with compliance messaging to differentiate from the crowded observability-only market.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>2. Pricing Advantage</h4>
+      <p>At $99/month, Integrity Studio's Pro tier is dramatically more accessible than enterprise options:</p>
+      <ul>
+        <li><strong>Datadog:</strong> $20K-$100K+/yr (200x-1000x more expensive)</li>
+        <li><strong>Arize AI:</strong> $50K-$100K/yr (500x-1000x more expensive)</li>
+        <li><strong>LangSmith:</strong> $39/user/mo (comparable per-user but scales with team size)</li>
+        <li><strong>Langfuse Cloud:</strong> $500+/mo (5x more expensive)</li>
+        <li><strong>Helicone:</strong> $25/mo (cheaper but far less feature-rich)</li>
+      </ul>
+      <p>The Pro tier is optimally positioned between free/lightweight tools and enterprise platforms, targeting production workloads at SMB-accessible pricing.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>3. Open Source Competitive Pressure</h4>
+      <p>Langfuse and Phoenix (Arize) offer open-source alternatives that compete on price (free self-hosted). However, neither provides compliance features, PII detection, or managed long-term retention. Integrity Studio should emphasize these production-ready capabilities that self-hosted solutions lack.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>4. Enterprise Incumbent Risk</h4>
+      <p>Datadog's LLM monitoring module leverages its existing 26,800+ customer base. The biggest risk is not a startup competitor but Datadog adding compliance features to its existing platform. Mitigation: move fast on compliance, build deep EU AI Act expertise, and target the mid-market where Datadog's pricing is prohibitive.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>5. Nonprofit Market White Space</h4>
+      <p>No observability vendor specifically targets nonprofits. With 85%+ of nonprofits using AI tools and only 28% providing formal training, this market needs both the tooling and the consulting that Integrity Studio offers. The $150M+ in available AI grants can fund adoption, and Integrity Studio's grant application support creates a unique go-to-market channel.</p>
+    </div>
+
+    <!-- Sources -->
+    <div class="sources">
+      <h3>Sources &amp; References</h3>
+      <a href="https://integritystudio.ai" target="_blank">Integrity Studio AI - Official Website</a>
+      <a href="https://www.datadoghq.com/product/llm-observability/" target="_blank">Datadog - LLM Observability</a>
+      <a href="https://arize.com/" target="_blank">Arize AI</a>
+      <a href="https://smith.langchain.com/" target="_blank">LangSmith</a>
+      <a href="https://langfuse.com/" target="_blank">Langfuse</a>
+      <a href="https://helicone.ai/" target="_blank">Helicone</a>
+      <a href="https://www.agentops.ai/" target="_blank">AgentOps</a>
+      <a href="https://www.braintrustdata.com/" target="_blank">Braintrust</a>
+      <a href="https://lunary.ai/" target="_blank">Lunary</a>
+      <a href="https://www.precedenceresearch.com/llm-observability-market" target="_blank">Precedence Research - LLM Observability Market ($510.5M, 31.8% CAGR)</a>
+    </div>
+  </div>
+</body>
+</html>
