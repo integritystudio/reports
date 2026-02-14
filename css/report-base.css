@@ -89,6 +89,7 @@ header .meta { margin-top: 1rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
+.executive-summary p + p { margin-top: 1rem; }
 
 section {
     background: white;
