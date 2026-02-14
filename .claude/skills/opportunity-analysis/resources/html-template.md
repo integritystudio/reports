@@ -1,28 +1,15 @@
 # Opportunity Analysis HTML Template Reference
 
+> **DEPRECATED inline CSS.** Reports now use the unified brand theme system.
+> Link `report-base.css` + `css/theme.css` instead of inlining styles.
+> Action cards, badges, timeline, and success boxes are in `css/theme.css`.
+> See [docs/BRAND_THEME.md](../../../../docs/BRAND_THEME.md) for the current architecture.
+
 CSS and structural template for Austin Resources & Opportunities reports. Extends the base market-analysis template with action cards, priority badges, timeline, and success boxes.
 
 ## Color Palette Strategy
 
-**Always match the companion research report's palette.** Read the existing `*_research.html` file in the project directory to extract `--primary`, `--secondary`, `--accent` values.
-
-If no research report exists, use the default:
-```css
---primary: #1a5f7a;
---secondary: #159895;
---accent: #57c5b6;
---light: #f8f9fa;
---dark: #212529;
---border: #dee2e6;
-```
-
-### Palette Examples by Report
-
-| Report | Primary | Secondary | Accent |
-|--------|---------|-----------|--------|
-| Balloon Collective | #7b2d8e | #c44569 | #f78fb3 |
-| Holiday Lighting | #1a5f7a | #159895 | #57c5b6 |
-| Default | #1a5f7a | #159895 | #57c5b6 |
+**Match the companion research report's brand.** Use the same `data-brand` attribute. All brand palettes are defined in `css/theme.css` — see [docs/BRAND_THEME.md](../../../../docs/BRAND_THEME.md) for the full brand table.
 
 ## Additional CSS Components (Beyond Base Template)
 

@@ -1,12 +1,17 @@
 # Growth Strategy HTML Template Reference
 
+> **DEPRECATED inline CSS.** Reports now use the unified brand theme system.
+> Link `report-base.css` + `css/theme.css` instead of inlining styles.
+> Opportunity cards, badges, and priority components are in `css/theme.css`.
+> See [docs/BRAND_THEME.md](../../../../docs/BRAND_THEME.md) for the current architecture.
+
 CSS and structural template for Growth & Opportunities reports. Extends the base market-analysis template with opportunity cards, priority badges, dealer comparison tables, and 90-day action plan.
 
 ## Color Palette Strategy
 
-**Always match the companion research report's palette.** Read the existing `*_research.html` file in the project directory to extract `--primary`, `--secondary`, `--accent` values.
+**Match the companion research report's brand.** Use the same `data-brand` attribute. Brand palettes are defined in `css/theme.css`.
 
-Default:
+Legacy reference (now in css/theme.css per-brand):
 ```css
 --primary: #1a5f7a;
 --secondary: #159895;

@@ -138,57 +138,25 @@ Place in the same directory as the companion research report.
 
 ### HTML Requirements
 
-Self-contained HTML with inline CSS. **Match the color palette of the existing research report** in the same directory. If no research report exists, use the default palette from `resources/html-template.md`.
+Use the unified brand theme system. See [docs/BRAND_THEME.md](../../../docs/BRAND_THEME.md) for full architecture reference. **Match the brand of the existing research report** in the same directory.
 
-**Required CSS components** (in addition to base template):
-
-```css
-/* Priority borders for action cards */
-.priority-high { border-left: 4px solid #dc3545; }
-.priority-medium { border-left: 4px solid #ffc107; }
-.priority-low { border-left: 4px solid #28a745; }
-
-/* Action cards */
-.action-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem;
-    margin: 0.75rem 0;
-    transition: box-shadow 0.2s ease;
-}
-.action-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-.action-card .card-title { font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; }
-.action-card .card-meta { font-size: 0.85rem; color: #666; margin-bottom: 0.5rem; }
-.action-card .card-link { display: inline-block; margin-top: 0.5rem; color: var(--secondary); font-weight: 500; }
-
-/* Success box for outcomes */
-.success-box {
-    background: #d4edda;
-    border-left: 4px solid #28a745;
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    border-radius: 0 8px 8px 0;
-}
-
-/* Timeline */
-.timeline-item {
-    position: relative;
-    padding-left: 1.5rem;
-    margin-bottom: 1.25rem;
-    border-left: 2px solid var(--accent);
-}
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -5px;
-    top: 0.5rem;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--secondary);
-}
+**CSS linking** (no inline color definitions):
+```html
+<html lang="en" data-brand="client-name">
+<head>
+    <link rel="stylesheet" href="../css/report-base.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
 ```
+
+For a new client, add a brand palette to `css/theme.css` first (see BRAND_THEME.md "Adding a New Brand").
+
+**Shared components available from theme.css** (do not redefine inline):
+- Priority borders: `.priority-high`, `.priority-medium`, `.priority-low`
+- Action cards: `.action-card`, `.card-title`, `.card-meta`, `.card-link`
+- Success box: `.success-box`
+- Timeline: `.timeline-item`
+- Badges: `.badge-success`, `.badge-warning`, `.badge-danger`, `.badge-info`
 
 ### Hub Integration
 

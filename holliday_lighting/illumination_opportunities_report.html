@@ -1,90 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-brand="holliday-lighting">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Illumination Holiday Lighting - Growth &amp; Opportunities Report</title>
-    <style>
-        :root {
-            --primary: #1a5f7a;
-            --secondary: #159895;
-            --accent: #57c5b6;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --border: #dee2e6;
-            --high: #28a745;
-            --medium: #ffc107;
-            --low: #6c757d;
-        }
-        @media (prefers-color-scheme: dark) {
-            :root { --light: #1a1a2e; --dark: #e0e0e0; --border: #333; }
-            body { background: #0f0f23; }
-            section, .executive-summary { background: #1a1a2e; }
-            th { background: #222; }
-            tr:hover { background: #252535; }
-            .highlight-box { background: linear-gradient(135deg, #1a2a2a, #1a2a1a); }
-            .warning-box { background: #2a2210; }
-            .info-box { background: #1a1a2e; }
-            blockquote { background: #1a1a2e; color: #aaa; }
-            .source { color: #aaa; }
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; font-size: 1rem; line-height: 1.6; color: var(--dark); background: var(--light); }
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
-        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 2rem; margin-bottom: 2rem; }
-        header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-        header .subtitle { font-size: 1.2rem; opacity: 0.9; }
-        header .meta { margin-top: 1rem; font-size: 0.9rem; opacity: 0.8; }
-        .executive-summary { background: white; border-left: 4px solid var(--accent); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .executive-summary h2 { color: var(--primary); margin-bottom: 1rem; }
-        .toc { background: white; padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .toc h2 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
-        .toc ol { padding-left: 1.5rem; }
-        .toc li { margin-bottom: 0.4rem; }
-        .toc a { color: var(--secondary); text-decoration: none; }
-        .toc a:hover { text-decoration: underline; }
-        section { background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden; }
-        section h2 { background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem; }
-        section h3 { color: var(--secondary); margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; }
-        section h4 { color: var(--primary); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
-        .section-content { padding: 1.5rem; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.92rem; }
-        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: var(--light); font-weight: 600; color: var(--primary); }
-        tr:hover { background: #f8f9fa; }
-        ul, ol { margin: 0.75rem 0; padding-left: 1.5rem; }
-        li { margin-bottom: 0.4rem; }
-        .highlight-box { background: linear-gradient(135deg, #e8f4f8, #d4edda); border-radius: 8px; padding: 1rem 1.5rem; margin: 1rem 0; }
-        .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
-        .info-box { background: #e7f1ff; border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
-        .action-box { background: #d4edda; border-left: 4px solid var(--high); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
-        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        .badge-high { background: #d4edda; color: #155724; }
-        .badge-medium { background: #fff3cd; color: #856404; }
-        .badge-low { background: #e2e3e5; color: #383d41; }
-        .badge-quick { background: #d1ecf1; color: #0c5460; }
-        .badge-longterm { background: #e7e0f7; color: #4a306d; }
-        .opp-card { border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 1rem 0; transition: box-shadow 0.2s; }
-        .opp-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .opp-card .opp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
-        .opp-card .opp-title { font-weight: 600; color: var(--primary); font-size: 1.05rem; }
-        .opp-card .opp-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-        .opp-card .opp-details { font-size: 0.92rem; }
-        .opp-card .opp-details dt { font-weight: 600; color: var(--secondary); margin-top: 0.5rem; }
-        .opp-card .opp-details dd { margin-left: 0; margin-bottom: 0.25rem; }
-        a { color: var(--secondary); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .source { font-size: 0.9rem; color: #555; font-style: italic; }
-        .sources-section { font-size: 0.88rem; }
-        .sources-section li { margin-bottom: 0.3rem; word-break: break-word; }
-        .priority-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
-        .priority-card { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; }
-        .priority-card .count { font-size: 2rem; font-weight: 700; color: var(--primary); }
-        .priority-card .label { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
-        @media (max-width: 768px) { header h1 { font-size: 1.6rem; } .container { padding: 1rem; } .section-content { padding: 1rem; } section h2 { font-size: 1.1rem; padding: 0.75rem 1rem; } .contact-grid { grid-template-columns: 1fr; } .stat-grid { grid-template-columns: repeat(2, 1fr); } table { font-size: 0.85rem; } th, td { padding: 0.5rem; } }
-        @media (max-width: 480px) { header h1 { font-size: 1.3rem; } header { padding: 2rem 1rem; } .stat-grid { grid-template-columns: 1fr; } table { font-size: 0.8rem; } th, td { padding: 0.4rem; } }
-        @media (prefers-color-scheme: dark) { :root { --light: #1a1a2e; --dark: #e0e0e0; --border: #333; } body { background: #0f0f23; } section, .executive-summary, .toc { background: #1a1a2e; } .opp-card { border-color: #333; } th { background: #222; } tr:hover { background: #222; } .priority-card { background: #222; } }
-    </style>
+    <link rel="stylesheet" href="../css/report-base.css">
+    <link rel="stylesheet" href="../css/theme.css">
 </head>
 <body>
 <header>

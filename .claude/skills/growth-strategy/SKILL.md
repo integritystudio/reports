@@ -168,6 +168,19 @@ Every growth strategy report includes:
 
 ## HTML Template
 
+Use the unified brand theme system. See [docs/BRAND_THEME.md](../../../docs/BRAND_THEME.md) for full architecture reference.
+
+**CSS linking** (no inline color definitions):
+```html
+<html lang="en" data-brand="client-name">
+<head>
+    <link rel="stylesheet" href="../css/report-base.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
+```
+
+For a new client, add a brand palette to `css/theme.css` first (see BRAND_THEME.md "Adding a New Brand"). Opportunity cards, badges, priority summaries, and action boxes are already defined in theme.css sections 4-5.
+
 ### Opportunity Card Pattern
 
 The primary content unit. Each opportunity gets a card with header, badges, and detail list.
@@ -193,64 +206,17 @@ The primary content unit. Each opportunity gets a card with header, badges, and 
 </div>
 ```
 
-### Additional CSS (Beyond Base Template)
+### Shared Components (from theme.css)
 
-```css
-/* Priority badges */
-.badge-high { background: #d4edda; color: #155724; }
-.badge-medium { background: #fff3cd; color: #856404; }
-.badge-low { background: #e2e3e5; color: #383d41; }
-.badge-quick { background: #d1ecf1; color: #0c5460; }
-.badge-longterm { background: #e7e0f7; color: #4a306d; }
+The following components are already defined in `css/theme.css` and do not need inline CSS:
 
-/* Opportunity cards */
-.opp-card {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem;
-    margin: 1rem 0;
-    transition: box-shadow 0.2s;
-}
-.opp-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-.opp-card .opp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.75rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-.opp-card .opp-title { font-weight: 600; color: var(--primary); font-size: 1.05rem; }
-.opp-card .opp-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-.opp-card .opp-details { font-size: 0.92rem; }
-.opp-card .opp-details dt { font-weight: 600; color: var(--secondary); margin-top: 0.5rem; }
-.opp-card .opp-details dd { margin-left: 0; margin-bottom: 0.25rem; }
+- **Priority badges**: `.badge-high`, `.badge-medium`, `.badge-low`, `.badge-quick`, `.badge-longterm`
+- **Opportunity cards**: `.opp-card`, `.opp-header`, `.opp-title`, `.opp-badges`, `.opp-details`
+- **Action boxes**: `.action-box`
+- **Priority summary grid**: `.priority-summary`, `.priority-card`
+- **TOC**: `.toc` (opportunity table of contents)
 
-/* Action boxes */
-.action-box {
-    background: #d4edda;
-    border-left: 4px solid #28a745;
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    border-radius: 0 8px 8px 0;
-}
-
-/* Priority summary grid */
-.priority-summary {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 1rem 0;
-}
-.priority-card {
-    background: var(--light);
-    padding: 1rem;
-    border-radius: 8px;
-    text-align: center;
-}
-.priority-card .count { font-size: 2rem; font-weight: 700; color: var(--primary); }
-.priority-card .label { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
-```
+Do not redefine these in generated HTML. They are available when linking `css/theme.css`.
 
 ### File Naming
 

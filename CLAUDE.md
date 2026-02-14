@@ -24,6 +24,16 @@ index.html                  # Hub landing (self-contained, inline CSS)
 - `isabel_budenz/PersonalSite` — Personal site (Jekyll)
 - `john_skelton` — John Skelton site
 
+## CSS Architecture
+
+Unified brand theme system. See [docs/BRAND_THEME.md](docs/BRAND_THEME.md) for full reference.
+
+- **Base CSS**: `css/report-base.css`, `css/portal-base.css`, `css/competitor-base.css`
+- **Theme**: `css/theme.css` — all brand palettes via `[data-brand="X"]` selectors
+- **Activation**: `<html lang="en" data-brand="client-name">` on every HTML file
+- New reports: link base CSS + `css/theme.css`, set `data-brand` on `<html>`
+- New clients: add palette to `css/theme.css`, then create HTML files
+
 ## Guidelines
 
 - `index.html` is self-contained: inline CSS, no external deps, no JS frameworks
@@ -32,7 +42,7 @@ index.html                  # Hub landing (self-contained, inline CSS)
 - Group cards by client/project under `<section>` with `.section-title`
 - Responsive: CSS grid `auto-fit minmax(320px, 1fr)`, dark/light via `prefers-color-scheme`
 - Do not modify submodule contents from this repo
-- Keep report HTML files self-contained (inline styles preferred)
+- Report HTML links external CSS (base + theme.css), not inline styles
 
 ## Hosting
 

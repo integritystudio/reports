@@ -168,9 +168,20 @@ Every report must include these sections in order:
 
 ### HTML Requirements
 
-Generate self-contained HTML with inline CSS. Reference `resources/html-template.md` for the base CSS design system.
+Use the unified brand theme system. See [docs/BRAND_THEME.md](../../../docs/BRAND_THEME.md) for full architecture reference.
 
-Key design elements:
+**CSS linking** (no inline styles):
+```html
+<html lang="en" data-brand="client-name">
+<head>
+    <link rel="stylesheet" href="../css/report-base.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
+```
+
+For a new client, add a brand palette to `css/theme.css` first (see BRAND_THEME.md "Adding a New Brand").
+
+Key design elements (provided by report-base.css + theme.css):
 - CSS custom properties for theming (primary, secondary, accent, light, dark, border)
 - Gradient header with company name, subtitle "Comprehensive Research Report", date, primary source URL
 - Executive summary with left accent border
@@ -253,12 +264,13 @@ Before delivering the report, verify:
 
 ## Color Palette Reference
 
-Customize per report. Default scheme:
+Brand palettes are defined in `css/theme.css` and activated via `data-brand` on `<html>`. See [docs/BRAND_THEME.md](../../../docs/BRAND_THEME.md) for the full brand table and variable namespaces.
+
+For new clients, add a `[data-brand="new-client"]` block to `css/theme.css` with:
 ```css
---primary: #1a5f7a;    /* Deep teal - section headers, links */
---secondary: #159895;  /* Medium teal - subheadings, accents */
---accent: #57c5b6;     /* Light teal - highlights, borders */
---light: #f8f9fa;      /* Off-white - backgrounds */
---dark: #212529;       /* Near-black - body text */
---border: #dee2e6;     /* Light gray - table borders */
+--primary: #...;    /* Section headers, links */
+--secondary: #...;  /* Subheadings, accents */
+--accent: #...;     /* Highlights, borders */
 ```
+
+Do not define colors inline in generated HTML.

@@ -1,10 +1,15 @@
 # HTML Report Template Reference
 
+> **DEPRECATED inline CSS.** Reports now use the unified brand theme system.
+> Link `report-base.css` + `css/theme.css` instead of inlining styles.
+> See [docs/BRAND_THEME.md](../../../../docs/BRAND_THEME.md) for the current architecture.
+
 Base CSS and structural template extracted from the Illumination Holiday Lighting report.
 
 ## Base CSS
 
 ```css
+/* These defaults are now in css/report-base.css — do not inline */
 :root {
     --primary: #1a5f7a;
     --secondary: #159895;
