@@ -34,6 +34,7 @@ Scope: All HTML reports excluding submodules (`ai-news`, `ai-observability/html`
 ## Critical Issues
 
 ### C1. No dark mode on 14 of 22 files
+**Status: Done** — Dark mode in report-base.css covers all research template files; Leora/ngo-market already link report-base.css + theme.css
 
 **Impact:** Users navigating from the dark-mode hub (`index.html`) into a report get a jarring flash of bright white. System dark mode preference is ignored.
 
@@ -80,6 +81,7 @@ Scope: All HTML reports excluding submodules (`ai-news`, `ai-observability/html`
 ---
 
 ### C2. No mobile responsive breakpoints on 13 files
+**Status: Done** — Responsive breakpoints in report-base.css; Leora responsive in theme.css; ngo-market in marketing-plan.css
 
 **Impact:** Tables overflow the viewport on mobile. Text is readable due to the 900px max-width container, but tables, grids, and two-column layouts break on screens < 768px.
 
@@ -122,6 +124,7 @@ For Leora forms/dashboards, add:
 ---
 
 ### C3. Tables lack overflow-x wrappers on 18 files
+**Status: Done** — `overflow-x: auto` on `.section-content` in report-base.css
 
 **Impact:** On narrow viewports, wide tables extend past the viewport edge. Users cannot scroll to see right columns.
 
@@ -146,6 +149,7 @@ Wrap each `<table>` in `<div class="table-wrap">` and add:
 ## High Priority Issues
 
 ### H1. `ngo-market/index.html` - Fixed sidebar unusable on mobile
+**Status: Done** — Sidebar collapse in marketing-plan.css responsive breakpoint
 
 **Impact:** The sidebar uses `position: fixed; width: 320px;` with no responsive override. On screens < 768px, the sidebar consumes nearly half the viewport and the main content is clipped behind it.
 
@@ -169,6 +173,7 @@ Wrap each `<table>` in `<div class="table-wrap">` and add:
 ---
 
 ### H2. `holliday_lighting/index.html` - External Google Fonts dependency
+**Status: Done** — Google Fonts import already removed
 
 **Impact:** Violates CLAUDE.md guideline: "index.html is self-contained: inline CSS, no external deps." The `@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:...')` causes a render-blocking external request and will fail offline.
 
@@ -183,6 +188,7 @@ Wrap each `<table>` in `<div class="table-wrap">` and add:
 ---
 
 ### H3. `trp-austin/competitor-analysis.html` - Dark-first design is inconsistent
+**Status: Done** — competitor-base.css already light-first
 
 **Impact:** This is the only report that defaults to dark theme with a `prefers-color-scheme: light` override. Every other file is light-first. Users on light mode see a dark report; users on dark mode see consistent styling, but navigating between this and `trp-austin/texas_realty_partners_research.html` (light-only) is visually jarring.
 
@@ -195,6 +201,7 @@ Wrap each `<table>` in `<div class="table-wrap">` and add:
 ---
 
 ### H4. Leora forms/dashboards use px-based font sizing
+**Status: Done** — Font sizes converted to rem in theme.css
 
 **Impact:** Pixel-based sizes (`font-size: 14px`, `12px`, `36px`, `28px`) do not scale when users adjust their browser's default font size — an accessibility concern for vision-impaired users.
 
@@ -221,6 +228,7 @@ Wrap each `<table>` in `<div class="table-wrap">` and add:
 ## Medium Priority Issues
 
 ### M1. No `<main>` element in research template reports (9 files)
+**Status: Done** — All research files use `<main class="container">`
 
 **Impact:** Screen readers cannot identify the primary content region. The hub (`index.html`) and Capital City reports use proper `<header>`, `<main>`, `<footer>` landmarks.
 
@@ -233,6 +241,7 @@ Wrap each `<table>` in `<div class="table-wrap">` and add:
 ---
 
 ### M2. Small source citation text across research template
+**Status: Done** — `.source` updated to 0.9rem/#555 in report-base.css
 
 **Impact:** `.source { font-size: 0.85rem; color: #666; }` renders at ~13.6px. On the Sources & Citations sections (which are often long lists), this creates a wall of small text.
 
@@ -248,6 +257,7 @@ Wrap each `<table>` in `<div class="table-wrap">` and add:
 ---
 
 ### M3. Header meta text uses opacity for contrast reduction
+**Status: Done** — Opacity replaced with explicit rgba colors
 
 **Impact:** `header .meta { opacity: 0.8; }` on white text over gradient backgrounds can push contrast below WCAG AA minimums (4.5:1 for normal text). Opacity-based contrast is unpredictable across different gradient colors.
 
@@ -265,6 +275,7 @@ Or better, test the specific gradient midpoint and choose a color that guarantee
 ---
 
 ### M4. Long unbroken executive summary paragraphs
+**Status: Done** — Long paragraphs broken in balloon-collective and trp-austin
 
 **Impact:** Several executive summaries are single paragraphs exceeding 80-100 words with dense data. Readers scanning for key takeaways struggle with the wall of text.
 
@@ -280,6 +291,7 @@ Or better, test the specific gradient midpoint and choose a color that guarantee
 ---
 
 ### M5. No explicit `body { font-size }` in research template
+**Status: Done** — `font-size: 1rem` on body in report-base.css
 
 **Impact:** Research template files omit `font-size` on `body`, relying on browser default (16px). While this works in practice, it's less reliable than an explicit declaration and creates inconsistency with Capital City (which sets `font-size: 16px`).
 
@@ -292,6 +304,7 @@ Or better, test the specific gradient midpoint and choose a color that guarantee
 ---
 
 ### M6. Two-column grid layouts break on mobile without breakpoints
+**Status: Done** — Inline grids replaced with .two-col class in 6 edgar_nadyne files
 
 **Impact:** Several edgar_nadyne reports use inline `style="display: grid; grid-template-columns: 1fr 1fr;"` for SWOT analysis and comparison boxes. These don't collapse to single-column on mobile.
 
@@ -313,6 +326,7 @@ Then replace `style="display: grid; grid-template-columns: 1fr 1fr; ..."` with `
 ## Low Priority Issues
 
 ### L1. No skip-to-content links on any report
+**Status: Done** — Skip-to-content links added to 11 research template files
 
 **Impact:** Keyboard-only users must tab through the entire header/nav before reaching content. Low priority because most reports have minimal navigation elements.
 
@@ -335,6 +349,7 @@ And `id="main-content"` on the main content container.
 ---
 
 ### L3. Details/summary custom arrow inconsistency
+**Status: Done** — Already handled in report-base.css
 
 **Impact:** The custom arrow (`\25B6` triangle) replaces the native disclosure triangle via `list-style: none` and `::before`. Some browsers may still show the native marker alongside the custom one. Minor visual issue.
 
@@ -345,6 +360,7 @@ And `id="main-content"` on the main content container.
 ---
 
 ### L4. `holliday_lighting/index.html` dark mode has a CSS typo
+**Status: Done** — CSS typo already fixed
 
 Line 35 contains `--ink: #e4ebe f;` (space before `f`). This invalid color value will cause the variable to be ignored in dark mode.
 
@@ -499,3 +515,326 @@ Update this document each time a translation is completed.
 | `PerformanceTest/` | Fail | Fail | N/A | px sizing | -- | **D+** |
 
 *Pass with caveat: dark-first is inconsistent with repo convention
+
+---
+---
+
+# CSS/HTML DRY Review Backlog
+
+Audit conducted: February 14, 2026
+Scope: All CSS and HTML files excluding submodules (`ai-news`, `ai-observability/html`, `calender-updates`, `isabel_budenz/PersonalSite`, `john_skelton`)
+Files analyzed: 10 CSS files (~3,250 lines), 48 HTML files
+
+**Estimated total reduction: 600-800 lines of CSS**
+
+---
+
+## Critical Issues
+
+### D1. Duplicate portal layout systems (~300 LOC)
+
+**Impact:** Two files redefine complete layout systems (body, typography, cards, nav) already in `portal-base.css` and `report-base.css`. Maintenance changes must be applied in 3+ places.
+
+**Affected files:**
+- `holliday_lighting/portal-layout.css` (359 lines)
+- `capital_city/analysis-layout.css` (471 lines)
+
+**Evidence:**
+
+`holliday_lighting/portal-layout.css` lines 8-14:
+```css
+body {
+    font-family: var(--sans);
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+```
+
+`portal-base.css` lines 49-55:
+```css
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+```
+
+**Fix:**
+- Move Holliday Lighting's unique components (`.strand`, `.header-label`, `.context`, `.card-badge`) to `css/theme.css` under `[data-brand="holliday-lighting"]`
+- Eliminate `holliday_lighting/portal-layout.css` entirely (~250 lines saved)
+- Refactor `capital_city/analysis-layout.css` to only contain document-specific layout (`.doc-header`, `.nav-bar`, `.timeline`) — remove duplicated typography, table, and callout rules
+
+**Effort:** High | **Reduction:** 300-350 lines
+
+---
+
+### D2. Font family duplication (6+ declarations)
+**Status: Done** — --font-sans variable standardized across 4 CSS files
+
+**Impact:** Font stacks are hardcoded inconsistently across 6+ files. Changing the brand font stack requires editing every file.
+
+**Affected files:**
+- `css/report-base.css` line 39 — `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif`
+- `css/portal-base.css` line 50 — `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif`
+- `css/competitor-base.css` line 42 — `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`
+- `ngo-market/marketing-plan.css` line 20 — `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`
+- `capital_city/report-style.css` line 26 — `"Helvetica Neue", Helvetica, Arial, sans-serif`
+- `holliday_lighting/portal-layout.css` line 111 — `--sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif`
+
+**Fix:** Define standardized font variables in each base CSS `:root`:
+```css
+:root {
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Roboto, sans-serif;
+    --font-serif: Georgia, 'Times New Roman', serif;
+    --font-mono: 'SF Mono', Monaco, 'Courier New', monospace;
+}
+```
+Then replace all hardcoded stacks with `font-family: var(--font-sans);`.
+
+**Effort:** Low | **Reduction:** 15-20 lines + consistency improvement
+
+---
+
+### D3. Hardcoded colors not using theme variables
+**Status: Done** — Duplicate vars removed from analysis-layout.css
+
+**Impact:** Color values duplicated between per-directory CSS and `css/theme.css`. Theme changes don't propagate.
+
+**Affected files:**
+- `capital_city/analysis-layout.css` lines 8-14 — re-declares `--color-star-filled`, `--color-star-empty`, `--color-recommended`, `--color-warning` already in `css/theme.css` lines 124-136 under `[data-brand="capital-city"]`
+- `ngo-market/marketing-plan.css` lines 6-15 — defines its own `--primary`, `--bg`, `--text`, `--border` outside the theme system entirely
+
+**Fix:**
+- Remove duplicate variable declarations from `analysis-layout.css` lines 8-14
+- Move `marketing-plan.css` color variables to `css/theme.css` under `[data-brand="ngo-market"]`
+- Update `ngo-market/integrity-studio-marketing-plan.html` to link `css/theme.css`
+
+**Effort:** Low | **Reduction:** 25-30 lines
+
+---
+
+## Major Issues
+
+### D4. Duplicate table styling (~100 LOC across 4 files)
+
+**Impact:** Nearly identical `table`, `th`, `td`, `tr:hover` rules in 4 CSS files. Bug fixes or style updates must be applied 4 times.
+
+**Affected files:**
+- `css/report-base.css` lines 88-91
+- `css/competitor-base.css` lines 125-144
+- `capital_city/analysis-layout.css` lines 227-253
+- `ngo-market/marketing-plan.css` lines 139-153
+
+**Fix:** Consolidate into base CSS with shared defaults. Use brand overrides in `css/theme.css` for differences (e.g., competitor tables need `min-width`, `text-transform: uppercase` on headers).
+
+**Effort:** Medium | **Reduction:** 50-70 lines
+
+---
+
+### D5. Duplicate badge system
+**Status: Done** — Badge aliases consolidated in report-base.css
+
+**Impact:** Badge color definitions repeated across 2 files with identical hex values. Multiple class names map to the same colors.
+
+**Affected files:**
+- `css/report-base.css` lines 130-144 — `.badge-success`, `.badge-warning`, `.badge-danger`, `.badge-info`, `.badge-verified`, `.badge-inferred`, `.badge-unverified`
+- `css/theme.css` lines 320-326 — `.badge-high`, `.badge-medium`, `.badge-low`, `.badge-quick`, `.badge-longterm`
+
+**Duplicates:** `.badge-verified` = `.badge-success` = `.badge-high` (`#d4edda`/`#155724`); `.badge-inferred` = `.badge-warning` = `.badge-medium` (`#fff3cd`/`#856404`); `.badge-unverified` = `.badge-danger` (`#f8d7da`/`#721c24`); `.badge-info` = `.badge-quick` (`#d1ecf1`/`#0c5460`)
+
+**Fix:** Single badge definition in `css/report-base.css` using semantic names (`.badge-success`, `.badge-warning`, `.badge-info`, `.badge-danger`). Alias classes in `css/theme.css` only where needed.
+
+**Effort:** Low | **Reduction:** 20-30 lines
+
+---
+
+### D6. Duplicate responsive breakpoints
+
+**Impact:** `768px` and `480px` media queries repeated across 4 base CSS files with overlapping rules for typography, spacing, and grid collapse.
+
+**Affected files:**
+- `css/report-base.css` lines 219-237
+- `css/portal-base.css` lines 234-250
+- `css/competitor-base.css` (similar breakpoints)
+- `capital_city/analysis-layout.css` (own breakpoints)
+
+**Fix:** Standardize responsive patterns per base CSS. Document breakpoint strategy in `docs/BRAND_THEME.md`.
+
+**Effort:** Medium | **Reduction:** 30-40 lines
+
+---
+
+## Minor Issues
+
+### D7. Inline styles in HTML files
+**Status: Done** — Inline grid-column replaced with .profile-item-full class
+
+**Impact:** Several HTML files use inline `style` attributes for layout that should be CSS classes.
+
+**Affected files:**
+- `balloon-collective/competitor-analysis.html` lines 57, 61 — `style="grid-column: 1 / -1;"`
+- `balloon-collective/competitor-analysis.html` line 75 — `style="margin-bottom: 1rem;"`
+- `balloon-collective/the_balloon_collective_austin_resources.html`
+- `balloon-collective/the_balloon_collective_research.html`
+- `capital_city/capital-city-village-analysis.html`
+
+**Fix:** Add utility classes to `css/competitor-base.css`:
+```css
+.profile-item-full { grid-column: 1 / -1; }
+```
+
+**Effort:** Very low | **Reduction:** 10-15 inline attributes removed
+
+---
+
+### D8. Duplicate dark mode overrides (~80-100 LOC)
+**Status: Done** — Duplicate dark mode rules removed for edgar-nadyne and sound-sight-tarot
+
+**Impact:** `css/theme.css` lines 1062-1217 repeat identical dark mode rules for multiple brands (`background: #0f0f23`, `th { background: #222 }`, `tr:hover { background: #252535 }`).
+
+**Fix:** Create a shared dark mode base block, then only override for brands with unique dark mode requirements:
+```css
+@media (prefers-color-scheme: dark) {
+    body { background: #0f0f23; }
+    section, .executive-summary { background: #1a1a2e; }
+    th { background: #222; }
+    tr:hover { background: #252535; }
+    /* brand-specific exceptions only */
+}
+```
+
+**Effort:** Medium | **Reduction:** 80-100 lines
+
+---
+
+### D9. Possibly unused `capital_city/report-style.css` (179 lines)
+**Status: Done** — Unused report-style.css deleted
+
+**Impact:** Print-specific CSS for a Pandoc/Markdown workflow. May not be referenced by any HTML file in the directory.
+
+**Fix:** Verify if any HTML file links this CSS. If not, delete the file (179 lines). If yes, consolidate print rules into `analysis-layout.css`.
+
+**Effort:** Very low | **Reduction:** 179 lines (if unused)
+
+---
+
+### D10. Inconsistent spacing token usage
+
+**Impact:** `css/portal-base.css` defines `--spacing-xs` through `--spacing-xl` but other files use hardcoded `rem`/`px` values for the same spacing.
+
+**Affected files:**
+- `holliday_lighting/portal-layout.css` — `padding: 3.5rem 2rem 2.5rem`, `gap: 1.5rem`
+- `capital_city/analysis-layout.css` — hardcoded spacing throughout
+- `css/report-base.css` — no spacing tokens defined
+- `css/competitor-base.css` — no spacing tokens defined
+
+**Fix:** Define spacing tokens in all base CSS `:root` blocks. Update per-directory CSS to reference tokens.
+
+**Effort:** Medium | **Reduction:** 0 (maintainability improvement)
+
+---
+
+## Optimization Opportunities
+
+### D11. CSS file loading inconsistency
+**Status: Done** — theme.css link added to ngo-market marketing plan
+
+**Impact:** Not all HTML files link the unified theme system.
+
+**Missing theme.css:**
+- `ngo-market/integrity-studio-marketing-plan.html` — only links `marketing-plan.css`
+
+**Fix:** Update to follow standard pattern:
+```html
+<link rel="stylesheet" href="../css/[base].css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="[custom].css"> <!-- only if needed -->
+```
+
+**Effort:** Very low
+
+---
+
+### D12. Extract Leora form/dashboard components from theme.css
+
+**Impact:** `css/theme.css` lines 408-601 (~200 lines) define form and dashboard components used exclusively by 3 Leora HTML pages.
+
+**Fix:** Extract to `css/leora-referral.css`, link only from affected pages:
+- `leora_research/leora_referral_dashboard.html`
+- `leora_research/leora_referral_form.html`
+- `PerformanceTest/leora_referral_*.html`
+
+**Effort:** Low | **Impact:** Reduces theme.css from ~1,293 to ~1,100 lines
+
+---
+
+### D13. Extract opportunity report components from theme.css
+
+**Impact:** `css/theme.css` lines 328-407 (~80 lines) define `.toc`, `.opp-card`, `.priority-summary` components used by only 2 brands.
+
+**Fix:** Extract to `css/opportunity-components.css`, link only from affected pages.
+
+**Effort:** Low | **Impact:** Reduces theme.css payload for non-opportunity pages
+
+---
+
+## DRY Review Summary Table
+
+| Issue | Severity | Files | Est. LOC Reduction | Priority |
+|-------|----------|-------|--------------------|----------|
+| D1. Duplicate portal layouts | Critical | 2 | 300-350 | 1 |
+| D2. Font family duplication | Critical | 6+ | 15-20 | 2 |
+| D3. Hardcoded colors | Critical | 3 | 25-30 | 3 |
+| D4. Duplicate table styling | Major | 4 | 50-70 | 4 |
+| D5. Duplicate badge system | Major | 2 | 20-30 | 5 |
+| D6. Duplicate breakpoints | Major | 4 | 30-40 | 6 |
+| D7. Inline HTML styles | Minor | 4 | 10-15 attrs | 7 |
+| D8. Duplicate dark mode | Minor | 1 | 80-100 | 8 |
+| D9. Unused report-style.css | Minor | 1 | 179 | 9 |
+| D10. Inconsistent spacing | Minor | 3 | 0 (quality) | 10 |
+| D11. CSS loading inconsistency | Optimization | 1 | 0 | 11 |
+| D12. Extract Leora components | Optimization | 1 | 0 (perf) | 12 |
+| D13. Extract opportunity components | Optimization | 1 | 0 (perf) | 13 |
+
+---
+
+## DRY Implementation Phases
+
+### Phase D1: Quick wins (low risk)
+1. **D2** — Define `--font-sans`, `--font-serif`, `--font-mono` in base CSS `:root`, replace all hardcoded stacks
+2. **D3** — Remove duplicate color vars from `analysis-layout.css`, migrate `marketing-plan.css` to theme system
+3. **D9** — Verify and delete unused `capital_city/report-style.css`
+4. **D7** — Replace inline styles with utility classes
+5. **D11** — Fix CSS loading in `ngo-market/integrity-studio-marketing-plan.html`
+
+### Phase D2: Consolidation (moderate risk)
+1. **D4** — Consolidate table styling into base CSS with brand overrides
+2. **D5** — Unify badge system in `report-base.css`
+3. **D8** — Shared dark mode base, brand-specific exceptions only
+
+### Phase D3: Layout refactor (higher risk)
+1. **D1** — Eliminate `holliday_lighting/portal-layout.css`, move unique styles to `theme.css`
+2. **D1** — Refactor `capital_city/analysis-layout.css` to document-specific layout only
+3. **D12** — Extract Leora form/dashboard components to separate CSS file
+
+### Phase D4: Polish
+1. **D6** — Standardize responsive breakpoint patterns
+2. **D10** — Implement spacing token system across all base CSS
+3. **D13** — Extract opportunity report components to optional file
+
+---
+
+## Testing Checklist (DRY changes)
+
+- [ ] All portal index pages render correctly (balloon-collective, capital-city, holliday-lighting)
+- [ ] All report pages maintain brand theming (spot-check 2-3 per brand)
+- [ ] Competitor analysis tables display correctly
+- [ ] Dark mode switches properly on all pages
+- [ ] Responsive breakpoints work at 768px and 480px
+- [ ] Print styles maintain formatting
+- [ ] Leora referral form and dashboard still function
+- [ ] No visual regressions in badge styling
