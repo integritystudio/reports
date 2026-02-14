@@ -160,6 +160,13 @@ blockquote {
     gap: 1rem;
     margin: 1rem 0;
 }
+
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+}
 .contact-item { background: var(--light); padding: 1rem; border-radius: 8px; text-align: center; }
 .contact-item .label { font-size: 0.85rem; color: #666; margin-bottom: 0.25rem; }
 .contact-item .value { font-weight: 600; color: var(--primary); }
@@ -227,6 +234,7 @@ details details summary { font-size: 0.95rem; padding: 0.6rem 1rem; }
     section h2 { font-size: 1.1rem; padding: 0.75rem 1rem; }
     .stat-grid { grid-template-columns: repeat(2, 1fr); }
     .contact-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
     table { font-size: 0.85rem; }
     th, td { padding: 0.5rem; }
 }
