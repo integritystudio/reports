@@ -1119,16 +1119,8 @@ body.form-page .container {
 
     [data-brand="balloon-collective"] .highlight-box { background: linear-gradient(135deg, #2a1a2e, #2e1a2a); }
 
-    [data-brand="edgar-nadyne"] body { background: #0f0f23; }
-    [data-brand="edgar-nadyne"] section,
-    [data-brand="edgar-nadyne"] .executive-summary { background: #1a1a2e; }
-    [data-brand="edgar-nadyne"] th { background: #222; }
-    [data-brand="edgar-nadyne"] tr:hover { background: #252535; }
+    /* edgar-nadyne: only unique dark overrides (base dark rules inherited from report-base.css) */
     [data-brand="edgar-nadyne"] .highlight-box { background: linear-gradient(135deg, #2a1a2e, #1a2a2a); }
-    [data-brand="edgar-nadyne"] .warning-box { background: #2a2210; }
-    [data-brand="edgar-nadyne"] .info-box { background: #1a1a2e; }
-    [data-brand="edgar-nadyne"] blockquote { background: #1a1a2e; color: #aaa; }
-    [data-brand="edgar-nadyne"] .source { color: #aaa; }
 
     [data-brand="trp-austin"] .executive-summary h2 { color: #90cdf4; }
     [data-brand="trp-austin"] section h3 { color: #63b3ed; }
@@ -1143,20 +1135,9 @@ body.form-page .container {
     [data-brand="trp-austin"] details summary .detail-count { color: #aaa; }
     [data-brand="trp-austin"] #toc { background: #1a1a2e !important; }
 
-    [data-brand="sound-sight-tarot"] body { background: #0f0f23; }
-    [data-brand="sound-sight-tarot"] section,
-    [data-brand="sound-sight-tarot"] .executive-summary { background: #1a1a2e; }
-    [data-brand="sound-sight-tarot"] th { background: #222; }
-    [data-brand="sound-sight-tarot"] tr:hover { background: #252535; }
+    /* sound-sight-tarot: only unique dark overrides (base dark rules inherited from report-base.css) */
     [data-brand="sound-sight-tarot"] .highlight-box { background: linear-gradient(135deg, #2a1a3a, #251a35); }
-    [data-brand="sound-sight-tarot"] .info-box { background: #1a1a2e; }
-    [data-brand="sound-sight-tarot"] blockquote { background: #1a1a2e; color: #aaa; }
-    [data-brand="sound-sight-tarot"] .source { color: #aaa; }
-    [data-brand="sound-sight-tarot"] .badge-success { background: #1a3a2a; color: #7dcea0; }
-    [data-brand="sound-sight-tarot"] .badge-warning { background: #3a3020; color: #f0c040; }
-    [data-brand="sound-sight-tarot"] .badge-danger { background: #3a1a1e; color: #e08090; }
     [data-brand="sound-sight-tarot"] .badge-info { background: #2a1a3a; color: #c0a0e0; }
-    [data-brand="sound-sight-tarot"] .warning-box { background: #2a2210; }
 
     [data-brand="integrity-studio"] .highlight-box { background: linear-gradient(135deg, #1a2a3e, #1a3a2e); }
     [data-brand="integrity-studio"] .warning-box { background: #3a3520; }
