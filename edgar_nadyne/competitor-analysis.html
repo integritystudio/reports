@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edghar &amp; Nadyne - Competitive Landscape Analysis</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #f0f1f5;
+      --border: #d8dbe5;
+      --text: #1a1d27;
+      --text-muted: #6b7085;
+      --accent: #2563eb;
+      --accent2: #6d28d9;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --cyan: #0891b2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface2: #242836;
+        --border: #2e3345;
+        --text: #e4e6ed;
+        --text-muted: #8b8fa3;
+        --accent: #4f8ff7;
+        --accent2: #7c5cfc;
+        --green: #34d399;
+        --amber: #f59e0b;
+        --red: #ef4444;
+        --cyan: #22d3ee;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .subtitle { color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem;
+      color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+    }
+    h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    p, li { font-size: 0.92rem; margin-bottom: 0.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem; text-align: center;
+    }
+    .stat-card .number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-card .label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 2px solid var(--accent); border-radius: 16px;
+      padding: 2rem; margin-bottom: 2rem;
+    }
+    .profile-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+    @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-item .label {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .profile-item .value { font-size: 0.95rem; font-weight: 500; }
+
+    .table-wrap {
+      overflow-x: auto; margin-bottom: 2rem;
+      border-radius: 12px; border: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1100px; }
+    thead { background: var(--surface2); }
+    th {
+      padding: 0.75rem 1rem; text-align: left; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem;
+      letter-spacing: 0.05em; white-space: nowrap; border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+      vertical-align: top; background: var(--surface);
+    }
+    tr:hover td { background: var(--surface2); }
+    .badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-direct { background: rgba(79,143,247,0.15); color: var(--accent); }
+    .badge-multi { background: rgba(124,92,252,0.15); color: var(--accent2); }
+    .badge-franchise { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-community { background: rgba(52,211,153,0.15); color: var(--green); }
+    .badge-adjacent { background: rgba(245,158,11,0.15); color: var(--amber); }
+
+    .services-list { list-style: none; padding: 0; margin: 0; }
+    .services-list li {
+      font-size: 0.78rem; margin-bottom: 0.15rem;
+      padding-left: 0.75rem; position: relative;
+    }
+    .services-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--accent); }
+
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) { .swot-grid { grid-template-columns: 1fr; } }
+    .swot-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .swot-card.strengths { border-left: 4px solid var(--green); }
+    .swot-card.weaknesses { border-left: 4px solid var(--red); }
+    .swot-card.opportunities { border-left: 4px solid var(--accent); }
+    .swot-card.threats { border-left: 4px solid var(--amber); }
+    .swot-card h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .swot-card.strengths h4 { color: var(--green); }
+    .swot-card.weaknesses h4 { color: var(--red); }
+    .swot-card.opportunities h4 { color: var(--accent); }
+    .swot-card.threats h4 { color: var(--amber); }
+    .swot-card li { font-size: 0.85rem; }
+
+    .insight-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .insight-box h4 {
+      font-size: 0.85rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.5rem;
+    }
+    .sources {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-top: 2rem;
+    }
+    .sources h3 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .sources a { display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: var(--text-muted); }
+    .sources a:hover { color: var(--accent); }
+    .na { color: var(--text-muted); font-style: italic; }
+    .rating { color: var(--amber); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Edghar &amp; Nadyne - Competitive Landscape Analysis</h1>
+    <p class="subtitle">International Brazilian Zouk Artists &amp; Instructors | Austin, TX Market Entry</p>
+    <p class="date">Research Date: February 13, 2026</p>
+
+    <!-- Summary Stats -->
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="number">11</div>
+        <div class="label">Austin Studios Analyzed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">2-3</div>
+        <div class="label">Venues Offering Zouk</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$1.3-4.9M</div>
+        <div class="label">Addressable Zouk Market</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">170+</div>
+        <div class="label">Total Austin Dance Studios</div>
+      </div>
+    </div>
+
+    <!-- Artist Profile -->
+    <h2>Edghar &amp; Nadyne (Subject Artists)</h2>
+    <div class="profile-card">
+      <h3>Artist &amp; Instructor Profile</h3>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <div class="label">Artists</div>
+          <div class="value">Edghar Fhernandes &amp; Nadyne Cruz</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Home Base</div>
+          <div class="value">S&atilde;o Paulo, Brazil (OMNE Studio de Dan&ccedil;a)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Combined Experience</div>
+          <div class="value">20+ years; 10,000+ students taught</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">International Reach</div>
+          <div class="value">9+ countries across 4 continents</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Social Following</div>
+          <div class="value">~21,800 combined (Instagram)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Partnership Formed</div>
+          <div class="value">2017</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Key Credentials</div>
+          <div class="value">Brazilian ballroom champion (Edghar); Got Talent Brasil &amp; Dancing with the Stars Brasil (Edghar); Jaime Aroxa mentee (Nadyne &mdash; Aroxa is a co-creator of Brazilian Zouk); Psychology-informed pedagogy (Nadyne); ZoukMX 100-hr program recurring instructors</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Signature Style</div>
+          <div class="value">Counterbalances, playful head movements, technical precision; human-centered teaching approach</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h4>Key Differentiator &mdash; Zouk Market Gap</h4>
+      <p>Brazilian Zouk is the most underserved partner dance style in Austin relative to its global growth trajectory. Only 2-3 venues offer zouk (1-2 nights/week) while salsa and bachata are saturated with daily classes at 8-10+ venues. Edghar &amp; Nadyne bring elite-tier credentials &mdash; including direct lineage to a co-creator of the art form &mdash; to a market with no dedicated zouk studio and an estimated $1.3-4.9M annual revenue opportunity.</p>
+    </div>
+
+    <!-- Competitors: Tier 1 Latin/Partner Dance -->
+    <h2>Austin Dance Studio Competitive Landscape</h2>
+    <p style="margin-bottom: 1rem;">Studios and instructors competing in the Latin/partner dance ecosystem, organized by market relevance to Brazilian Zouk instruction.</p>
+
+    <h3>Tier 1 &mdash; Direct Zouk / Latin Partner Dance Studios</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Studio</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Rating / Reviews</th>
+            <th>Pricing</th>
+            <th>Styles</th>
+            <th>Differentiators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Austin Inspired Movement</strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>4201 S Congress Ave #108</td>
+            <td><span class="rating">4.9 (ClassPass)</span></td>
+            <td>$35 drop-in; $150/mo unlimited</td>
+            <td>
+              <ul class="services-list">
+                <li>Salsa, Bachata</li>
+                <li><strong>Zouk</strong> (Wed 7-8:30pm)</li>
+                <li>Kizomba</li>
+              </ul>
+            </td>
+            <td>Primary zouk venue in Austin; Wed night zouk is the main weekly event; established Latin dance community</td>
+          </tr>
+          <tr>
+            <td><strong>Esquina Tango</strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>209 Pedernales St</td>
+            <td><span class="rating">41 reviews (Yelp)</span></td>
+            <td>$62/mo unlimited (promo); $85-95/hr private</td>
+            <td>
+              <ul class="services-list">
+                <li>Tango, Salsa, Bachata</li>
+                <li><strong>Zouk</strong>, Samba, Kizomba</li>
+              </ul>
+            </td>
+            <td>Multi-style Latin studio; zouk on schedule but secondary offering; strong tango/salsa core</td>
+          </tr>
+          <tr>
+            <td><strong>The Art of Movement</strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>South Austin</td>
+            <td><span class="na">N/A</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li><strong>Zouk</strong>, Lambada</li>
+                <li>Salsa, Bachata</li>
+              </ul>
+            </td>
+            <td>Founded Austin Brazilian Zouk Safety Committee (2021); zouk-forward identity; workshops and events</td>
+          </tr>
+          <tr>
+            <td><strong>Dance U2</strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>Central + North Austin</td>
+            <td><span class="na">N/A</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Salsa, Bachata</li>
+                <li>Kizomba, Country, Swing</li>
+              </ul>
+            </td>
+            <td>Multi-location coverage; broad style range; potential zouk crossover audience</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tier 2 &mdash; Multi-Style Studios (Zouk Crossover Audience)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Studio</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Rating / Reviews</th>
+            <th>Pricing</th>
+            <th>Styles</th>
+            <th>Differentiators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Go Dance Studio</strong></td>
+            <td><span class="badge badge-multi">Multi-Style</span></td>
+            <td>2525 W Anderson Ln #530</td>
+            <td><span class="rating">71 reviews (Yelp); "Best Dance Lessons" Austin Chronicle</span></td>
+            <td>$20 drop-in; $145/mo; $115/40min private</td>
+            <td>
+              <ul class="services-list">
+                <li>Ballroom, Latin, Swing</li>
+                <li>Country</li>
+              </ul>
+            </td>
+            <td>Austin Chronicle award; high review volume; comprehensive pricing published; strong brand recognition</td>
+          </tr>
+          <tr>
+            <td><strong>Austin Uptown Dance</strong></td>
+            <td><span class="badge badge-multi">Multi-Style</span></td>
+            <td>8868 Research Blvd #706</td>
+            <td><span class="na">N/A</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Country, Swing, Ballroom</li>
+                <li>Hosts Zouk weekends</li>
+              </ul>
+            </td>
+            <td>Has hosted zouk weekend events; bridge between country/swing and Latin audiences</td>
+          </tr>
+          <tr>
+            <td><strong>Balance Dance Studios</strong></td>
+            <td><span class="badge badge-multi">Multi-Style</span></td>
+            <td>4544 S Lamar Blvd</td>
+            <td><span class="rating">38 Yelp / 173 Birdeye reviews</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>WCS, Ballroom, Latin</li>
+              </ul>
+            </td>
+            <td>Strong review presence; WCS community overlap; South Austin location</td>
+          </tr>
+          <tr>
+            <td><strong>Blue Moon Dance Co</strong></td>
+            <td><span class="badge badge-multi">Multi-Style</span></td>
+            <td>South Austin</td>
+            <td><span class="na">N/A</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Country, Ballroom</li>
+                <li>Swing, Latin</li>
+              </ul>
+            </td>
+            <td>South Austin presence; broader partner dance community</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tier 3 &mdash; National Franchise Studios</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Studio</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Pricing</th>
+            <th>Styles</th>
+            <th>Differentiators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Dance With Me Austin</strong></td>
+            <td><span class="badge badge-franchise">Franchise</span></td>
+            <td>11600 Rock Rose (Domain)</td>
+            <td>$49 intro; $123-155/lesson</td>
+            <td>
+              <ul class="services-list">
+                <li>Ballroom, Salsa, Bachata, Swing</li>
+              </ul>
+            </td>
+            <td>4th TX location; premium Domain district address; high per-lesson pricing; brand name recognition</td>
+          </tr>
+          <tr>
+            <td><strong>Arthur Murray Austin</strong></td>
+            <td><span class="badge badge-franchise">Franchise</span></td>
+            <td>13945 US-183 #C1</td>
+            <td><span class="na">Contract-based</span></td>
+            <td>
+              <ul class="services-list">
+                <li>30+ styles</li>
+              </ul>
+            </td>
+            <td>Global franchise brand; structured curriculum; contract-based model</td>
+          </tr>
+          <tr>
+            <td><strong>Fred Astaire Austin</strong></td>
+            <td><span class="badge badge-franchise">Franchise</span></td>
+            <td>Austin</td>
+            <td><span class="na">Contract-based</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Ballroom, Latin, Country, Swing</li>
+              </ul>
+            </td>
+            <td>National franchise; established brand; structured progression</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Market Saturation -->
+    <h2>Dance Style Market Saturation</h2>
+    <div class="table-wrap">
+      <table style="min-width: 600px;">
+        <thead>
+          <tr>
+            <th>Dance Style</th>
+            <th># Venues</th>
+            <th>Class Frequency</th>
+            <th>Market Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Salsa</td><td>8-10+</td><td>Daily</td><td><span class="badge badge-adjacent">Saturated</span></td></tr>
+          <tr><td>Bachata</td><td>8-10+</td><td>Daily</td><td><span class="badge badge-adjacent">Saturated</span></td></tr>
+          <tr><td>West Coast Swing</td><td>3-4</td><td>Multiple weekly</td><td><span class="badge badge-multi">Established</span></td></tr>
+          <tr><td>Argentine Tango</td><td>3-4</td><td>Multiple weekly</td><td><span class="badge badge-multi">Established</span></td></tr>
+          <tr><td>Kizomba/UrbanKiz</td><td>3-4</td><td>Weekly</td><td><span class="badge badge-community">Growing</span></td></tr>
+          <tr><td>Country Two-Step</td><td>4-5</td><td>Multiple weekly</td><td><span class="badge badge-multi">Established</span></td></tr>
+          <tr><td>Ballroom</td><td>5+</td><td>Multiple weekly</td><td><span class="badge badge-multi">Established</span></td></tr>
+          <tr style="background: rgba(79,143,247,0.08);"><td><strong>Brazilian Zouk</strong></td><td><strong>2-3</strong></td><td><strong>1-2x weekly</strong></td><td><span class="badge badge-direct"><strong>Underserved</strong></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SWOT -->
+    <h2>Edghar &amp; Nadyne &mdash; Competitive SWOT Analysis (Austin Market Entry)</h2>
+    <div class="swot-grid">
+      <div class="swot-card strengths">
+        <h4>Strengths</h4>
+        <ul>
+          <li>20+ years combined experience; 10,000+ students taught across 9 countries</li>
+          <li>Direct lineage to Jaime Aroxa (co-creator of Brazilian Zouk) through Nadyne</li>
+          <li>Broadcast media credentials: Got Talent Brasil, Dancing with the Stars Brasil</li>
+          <li>Brazilian ballroom championship pedigree (Edghar)</li>
+          <li>Psychology-informed pedagogy (Nadyne) &mdash; uncommon in dance instruction</li>
+          <li>~21,800 combined Instagram followers; established international brand</li>
+          <li>ZoukMX 100-hour program recurring instructors (proven curriculum)</li>
+          <li>Bilingual (Portuguese/English) &mdash; connects with Austin's 32.5% Hispanic/Latino population</li>
+        </ul>
+      </div>
+      <div class="swot-card weaknesses">
+        <h4>Weaknesses</h4>
+        <ul>
+          <li>No established Austin presence or local student base</li>
+          <li>International relocation from S&atilde;o Paulo requires building community from zero</li>
+          <li>No dedicated studio space in Austin (capital expenditure required)</li>
+          <li>Austin zouk community is nascent &mdash; small initial student pool (est. 1,100-2,750)</li>
+          <li>Pricing at international-instructor level may exceed local market norms</li>
+          <li>No local referral network, venue partnerships, or event planner connections</li>
+        </ul>
+      </div>
+      <div class="swot-card opportunities">
+        <h4>Opportunities</h4>
+        <ul>
+          <li>Brazilian Zouk is the most underserved partner dance in Austin &mdash; no dedicated studio exists</li>
+          <li>$1.3-4.9M addressable annual zouk market with minimal competition</li>
+          <li>55,000+ estimated active social dancers provide natural crossover audience</li>
+          <li>Austin's 39.7% adults aged 25-44 is the prime dance demographic (vs ~30% nationally)</li>
+          <li>Carnaval Brasileiro (largest outside Brazil in the US) creates direct cultural connection</li>
+          <li>Festival scene (SXSW, ACL, Divergence Zouk Fest) provides performance and workshop opportunities</li>
+          <li>$91,461 median household income supports premium instruction pricing</li>
+          <li>Existing Latin dance infrastructure (8-10+ salsa/bachata studios) creates natural feeder pipeline</li>
+        </ul>
+      </div>
+      <div class="swot-card threats">
+        <h4>Threats</h4>
+        <ul>
+          <li>Austin Inspired Movement owns the current zouk night (Wed) and has ClassPass 4.9 rating</li>
+          <li>The Art of Movement founded the Austin Zouk Safety Committee &mdash; established community credibility</li>
+          <li>Nascent zouk community means slower ramp-up vs. established dance markets</li>
+          <li>Franchise studios (Dance With Me, Arthur Murray, Fred Astaire) dominate intro market at premium prices</li>
+          <li>Go Dance Studio has strongest brand recognition (Austin Chronicle award, 71 Yelp reviews)</li>
+          <li>Austin rent costs may make dedicated studio space financially challenging initially</li>
+          <li>Zouk's niche status means smaller total addressable market vs. salsa/bachata</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Key Insights -->
+    <h2>Key Competitive Insights</h2>
+
+    <div class="insight-box">
+      <h4>1. Blue Ocean Opportunity</h4>
+      <p>Brazilian Zouk in Austin is a textbook blue ocean market. While salsa and bachata are saturated (8-10+ venues, daily classes), zouk has only 2-3 venues offering 1-2 nights per week, no dedicated studio, and the city's first zouk festival only launched in September 2025. Edghar &amp; Nadyne would be the first international-caliber, full-time zouk instructors in the Austin market.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>2. Pricing Positioning</h4>
+      <p>Austin's dance market supports premium pricing that aligns with Edghar &amp; Nadyne's international instructor tier:</p>
+      <ul>
+        <li><strong>Group classes:</strong> $15-35 drop-in; $62-150/month unlimited</li>
+        <li><strong>Private lessons:</strong> $50-155/session (franchise studios command $123-155)</li>
+        <li><strong>Weekend workshops:</strong> $130-190 per participant</li>
+      </ul>
+      <p>Their credentials justify positioning at the upper range ($35 drop-in, $150/mo, $100+/private), particularly given zero local competition at their level.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>3. Competitive Moat: Lineage + Credentials</h4>
+      <p>No Austin instructor can match the combination of: (a) direct mentorship under Jaime Aroxa (co-creator of Brazilian Zouk), (b) national TV competition credits, (c) Brazilian ballroom championship titles, and (d) a 100-hour structured curriculum proven at ZoukMX. This creates a credential moat that local competitors cannot replicate.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>4. Go-to-Market via Existing Infrastructure</h4>
+      <p>Rather than launching a studio immediately, the optimal entry strategy leverages existing venues:</p>
+      <ul>
+        <li><strong>Phase 1:</strong> Guest workshops at Austin Inspired Movement, Esquina Tango, Austin Uptown Dance</li>
+        <li><strong>Phase 2:</strong> Weekly classes at a partner studio; build 50-100 regular students</li>
+        <li><strong>Phase 3:</strong> Dedicated studio space once demand justifies fixed costs</li>
+      </ul>
+      <p>The ATX Zouk community (1,162 Meetup members) and Divergence Zouk Festival organizers are natural early partners.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>5. Cultural Moment: Austin + Brazil Connection</h4>
+      <p>Austin hosts Carnaval Brasileiro &mdash; the largest Brazilian carnival celebration outside of Brazil in the United States. Combined with 32.5% Hispanic/Latino population, the "Live Music Capital" identity, and 100,000+ creative industry employees, Austin's cultural DNA is uniquely receptive to Brazilian dance art forms. The 2025 launch of Divergence Zouk Festival signals the community is ready for more.</p>
+    </div>
+
+    <!-- Sources -->
+    <div class="sources">
+      <h3>Sources &amp; References</h3>
+      <a href="https://www.instagram.com/edghar.e.nadyne/" target="_blank">Edghar &amp; Nadyne - Instagram (@edghar.e.nadyne)</a>
+      <a href="https://www.instagram.com/dance.edghar/" target="_blank">Edghar Fhernandes - Instagram (@dance.edghar)</a>
+      <a href="https://www.instagram.com/nadyne.cruz/" target="_blank">Nadyne Cruz - Instagram (@nadyne.cruz)</a>
+      <a href="https://atxzouk.com" target="_blank">ATX Zouk Community - Austin Zouk Calendar</a>
+      <a href="https://www.austininspiredmovement.com/" target="_blank">Austin Inspired Movement</a>
+      <a href="https://www.esquinatango.com/" target="_blank">Esquina Tango</a>
+      <a href="https://www.godancestudio.com/" target="_blank">Go Dance Studio</a>
+      <a href="https://www.ibisworld.com/united-states/market-research-reports/dance-studios-industry/" target="_blank">IBISWorld - US Dance Studio Industry ($5.0B, 14,622 businesses)</a>
+      <a href="https://www.census.gov/" target="_blank">US Census Bureau - Austin MSA Demographics (2.31M, 39.7% age 25-44)</a>
+    </div>
+  </div>
+</body>
+</html>

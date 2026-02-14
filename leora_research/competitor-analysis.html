@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leora Home Health - Competitive Landscape Analysis</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #f0f1f5;
+      --border: #d8dbe5;
+      --text: #1a1d27;
+      --text-muted: #6b7085;
+      --accent: #2563eb;
+      --accent2: #6d28d9;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --cyan: #0891b2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface2: #242836;
+        --border: #2e3345;
+        --text: #e4e6ed;
+        --text-muted: #8b8fa3;
+        --accent: #4f8ff7;
+        --accent2: #7c5cfc;
+        --green: #34d399;
+        --amber: #f59e0b;
+        --red: #ef4444;
+        --cyan: #22d3ee;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .subtitle { color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem;
+      color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+    }
+    h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    p, li { font-size: 0.92rem; margin-bottom: 0.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem; text-align: center;
+    }
+    .stat-card .number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-card .label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 2px solid var(--accent); border-radius: 16px;
+      padding: 2rem; margin-bottom: 2rem;
+    }
+    .profile-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+    @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-item .label {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .profile-item .value { font-size: 0.95rem; font-weight: 500; }
+
+    .table-wrap {
+      overflow-x: auto; margin-bottom: 2rem;
+      border-radius: 12px; border: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1100px; }
+    thead { background: var(--surface2); }
+    th {
+      padding: 0.75rem 1rem; text-align: left; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem;
+      letter-spacing: 0.05em; white-space: nowrap; border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+      vertical-align: top; background: var(--surface);
+    }
+    tr:hover td { background: var(--surface2); }
+    .badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-direct { background: rgba(79,143,247,0.15); color: var(--accent); }
+    .badge-system { background: rgba(124,92,252,0.15); color: var(--accent2); }
+    .badge-national { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-specialty { background: rgba(52,211,153,0.15); color: var(--green); }
+    .badge-local { background: rgba(245,158,11,0.15); color: var(--amber); }
+
+    .services-list { list-style: none; padding: 0; margin: 0; }
+    .services-list li {
+      font-size: 0.78rem; margin-bottom: 0.15rem;
+      padding-left: 0.75rem; position: relative;
+    }
+    .services-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--accent); }
+
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) { .swot-grid { grid-template-columns: 1fr; } }
+    .swot-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .swot-card.strengths { border-left: 4px solid var(--green); }
+    .swot-card.weaknesses { border-left: 4px solid var(--red); }
+    .swot-card.opportunities { border-left: 4px solid var(--accent); }
+    .swot-card.threats { border-left: 4px solid var(--amber); }
+    .swot-card h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .swot-card.strengths h4 { color: var(--green); }
+    .swot-card.weaknesses h4 { color: var(--red); }
+    .swot-card.opportunities h4 { color: var(--accent); }
+    .swot-card.threats h4 { color: var(--amber); }
+    .swot-card li { font-size: 0.85rem; }
+
+    .insight-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .insight-box h4 {
+      font-size: 0.85rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.5rem;
+    }
+    .sources {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-top: 2rem;
+    }
+    .sources h3 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .sources a { display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: var(--text-muted); }
+    .sources a:hover { color: var(--accent); }
+    .na { color: var(--text-muted); font-style: italic; }
+    .rating { color: var(--amber); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Leora Home Health - Competitive Landscape Analysis</h1>
+    <p class="subtitle">Leora Home Health | Home Health Care Services | Central Texas</p>
+    <p class="date">Research Date: February 13, 2026</p>
+
+    <!-- Summary Stats -->
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="number">8</div>
+        <div class="label">Key Competitors Analyzed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">50+</div>
+        <div class="label">Austin Home Care Agencies</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$222.6B</div>
+        <div class="label">US Home Health Market (2025)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">7.4%</div>
+        <div class="label">Market CAGR to 2032</div>
+      </div>
+    </div>
+
+    <!-- Company Profile -->
+    <h2>Leora Home Health (Subject Company)</h2>
+    <div class="profile-card">
+      <h3>Company Profile</h3>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <div class="label">Website</div>
+          <div class="value"><a href="https://www.leorahomehealth.com/" target="_blank">leorahomehealth.com</a></div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Service Area</div>
+          <div class="value">Central Texas (Austin metro)</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Services</div>
+          <div class="value">Personal Attendant Services (PAS), Home Health Aide (HHA), Skilled Nursing (CNA, LVN, RN)</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Employee Referral Program</div>
+          <div class="value">CNA: $750 ($250/$250/$250 at hire/90d/180d) | LVN: $1,000 ($300/$350/$350) | RN: $1,500 ($500/$500/$500) | Specialized: $2,000 ($600/$700/$700)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h4>Key Differentiator &mdash; Structured Referral Program</h4>
+      <p>Leora's tiered employee referral program with milestone-based payouts (hire, 90-day, 180-day) is well-structured for retention. The $750-$2,000 referral bonus range is competitive in the Austin market and addresses the industry's #1 challenge: staffing. The 60-day employment eligibility requirement and good-standing criteria help ensure quality referrals.</p>
+    </div>
+
+    <!-- Competitors -->
+    <h2>Austin Home Health Competitors</h2>
+    <p style="margin-bottom: 1rem;">Home health agencies serving the Austin/Central Texas area, spanning hospital-affiliated systems, regional agencies, national brands, and local independents.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Category</th>
+            <th>Est.</th>
+            <th>Coverage</th>
+            <th>Key Services</th>
+            <th>Differentiators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong><a href="https://www.stdavids.com/specialties/healthcare-at-home" target="_blank">St. David's Healthcare at Home</a></strong></td>
+            <td><span class="badge badge-system">Health System</span></td>
+            <td>1924*</td>
+            <td>Multi-county Austin &amp; Central TX</td>
+            <td>
+              <ul class="services-list">
+                <li>Skilled nursing</li>
+                <li>Physical/occupational therapy</li>
+                <li>Social work services</li>
+                <li>Hospital-to-home transitions</li>
+              </ul>
+            </td>
+            <td>Part of HCA Healthcare (largest US hospital system); seamless hospital discharge pipeline; payer relationships; brand trust</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://capitolhomehealthcare.com/" target="_blank">Capitol Home Health</a></strong></td>
+            <td><span class="badge badge-direct">Regional</span></td>
+            <td>1998</td>
+            <td>Austin, Temple, San Antonio</td>
+            <td>
+              <ul class="services-list">
+                <li>Skilled nursing</li>
+                <li>Physical therapy</li>
+                <li>Occupational therapy</li>
+                <li>Speech therapy</li>
+                <li>Medical social work</li>
+              </ul>
+            </td>
+            <td>28 years in Central Texas; 3-city coverage; established physician referral network; comprehensive therapy services</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://halcyonhome.com/" target="_blank">Halcyon Home</a></strong></td>
+            <td><span class="badge badge-specialty">Specialty</span></td>
+            <td>Recent</td>
+            <td>Austin metro</td>
+            <td>
+              <ul class="services-list">
+                <li>Specialized in-home care</li>
+                <li>Continuity of care</li>
+                <li>Dementia/memory care</li>
+                <li>Companionship</li>
+              </ul>
+            </td>
+            <td>Founded by a Physician Assistant; clinical-first approach; continuity-of-care model; specialized dementia focus</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://mgahomecare.com/locations/tx/austin/" target="_blank">MGA Homecare</a></strong></td>
+            <td><span class="badge badge-national">National</span></td>
+            <td>2016</td>
+            <td>Austin + 7 states</td>
+            <td>
+              <ul class="services-list">
+                <li>Skilled nursing (RN/LVN)</li>
+                <li>Therapy services</li>
+                <li>Personal care</li>
+                <li>Pediatric home health</li>
+              </ul>
+            </td>
+            <td>Multi-state coverage; pediatric specialty differentiates; growth-phase company; strong employer brand for recruitment</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://provistahealthcare.com/" target="_blank">Provista Healthcare</a></strong></td>
+            <td><span class="badge badge-direct">Regional</span></td>
+            <td>N/A</td>
+            <td>Texas (multiple locations)</td>
+            <td>
+              <ul class="services-list">
+                <li>Skilled nursing</li>
+                <li>Home health aides</li>
+                <li>Therapy services</li>
+                <li>Medical social work</li>
+              </ul>
+            </td>
+            <td>Texas-focused multi-location provider; scale advantages in staffing and payer negotiations</td>
+          </tr>
+          <tr>
+            <td><strong>Assisting Hands Austin</strong></td>
+            <td><span class="badge badge-national">Franchise</span></td>
+            <td>2006*</td>
+            <td>Austin metro</td>
+            <td>
+              <ul class="services-list">
+                <li>Personal care</li>
+                <li>Companionship</li>
+                <li>Skilled nursing</li>
+                <li>Respite care</li>
+              </ul>
+            </td>
+            <td>National franchise brand; standardized processes; marketing support from parent; competes on brand recognition</td>
+          </tr>
+          <tr>
+            <td><strong>TheKey (formerly Home Care Assistance)</strong></td>
+            <td><span class="badge badge-national">National</span></td>
+            <td>2002</td>
+            <td>Austin + nationwide</td>
+            <td>
+              <ul class="services-list">
+                <li>Premium home care</li>
+                <li>Live-in care</li>
+                <li>Alzheimer's &amp; dementia</li>
+                <li>Post-surgical care</li>
+              </ul>
+            </td>
+            <td>Premium positioning; Balanced Care Method (proprietary); live-in care capability; largest private-pay home care provider</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.outreachhealth.com/" target="_blank">Outreach Health Services</a></strong></td>
+            <td><span class="badge badge-direct">Regional</span></td>
+            <td>1975</td>
+            <td>Austin + Texas-wide</td>
+            <td>
+              <ul class="services-list">
+                <li>Attendant care (PAS)</li>
+                <li>Skilled nursing</li>
+                <li>Therapy services</li>
+                <li>Pediatric care</li>
+              </ul>
+            </td>
+            <td>50+ years in Texas; one of the state's largest home health providers; PAS program expertise aligns with Leora's service mix</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SWOT -->
+    <h2>Leora Home Health - Competitive SWOT Analysis</h2>
+    <div class="swot-grid">
+      <div class="swot-card strengths">
+        <h4>Strengths</h4>
+        <ul>
+          <li>Structured employee referral program ($750-$2,000) with milestone-based retention incentives</li>
+          <li>Multi-tier staffing (CNA, LVN, RN, Specialized) provides full spectrum of care levels</li>
+          <li>PAS + HHA + skilled nursing covers both Medicaid attendant care and Medicare home health</li>
+          <li>Central Texas focus allows deep local market knowledge and community relationships</li>
+          <li>Referral bonus structure (hire/90d/180d) incentivizes long-term employee retention</li>
+          <li>Specialized/hard-to-fill position bonus ($2,000) addresses acute shortage roles</li>
+        </ul>
+      </div>
+      <div class="swot-card weaknesses">
+        <h4>Weaknesses</h4>
+        <ul>
+          <li>Competing against hospital-affiliated providers (St. David's/HCA) with built-in referral pipelines</li>
+          <li>National brands (TheKey, Assisting Hands) have greater marketing reach and brand recognition</li>
+          <li>Capitol Home Health has 28 years and 3-city coverage advantage</li>
+          <li>Outreach Health Services has 50+ years of Texas market depth</li>
+          <li>Limited publicly available company information (founding date, team size, ratings not found)</li>
+          <li>No visible Yelp, Google, or Caring.com reviews in search results</li>
+        </ul>
+      </div>
+      <div class="swot-card opportunities">
+        <h4>Opportunities</h4>
+        <ul>
+          <li>US home health market growing from $222.6B (2025) to $692.3B by 2035 (CAGR 7.4%+)</li>
+          <li>12 million Americans receive home health services annually; 86% are 65+</li>
+          <li>Austin's senior population growing faster than national average; Baby Boomer aging wave</li>
+          <li>Texas identified as a key growth state for home health demand</li>
+          <li>Industry-wide CNA/LVN shortage makes Leora's referral program a recruiting competitive advantage</li>
+          <li>Value-based care models increasingly favor home health over institutional settings</li>
+          <li>Build online review presence on Caring.com, Google, and Yelp to compete with established agencies</li>
+          <li>Hospital discharge planning partnerships (beyond St. David's) for referral pipeline</li>
+        </ul>
+      </div>
+      <div class="swot-card threats">
+        <h4>Threats</h4>
+        <ul>
+          <li>St. David's/HCA Healthcare controls hospital discharge-to-home pipeline in Austin</li>
+          <li>50+ home care agencies in Austin metro create intense competition for patients and staff</li>
+          <li>National home health staffing shortage: RN vacancy rates 15-20% industry-wide</li>
+          <li>Medicare reimbursement rate changes and PDGM payment model compress margins</li>
+          <li>Large providers (Outreach, Provista) can offer higher wages and benefits packages</li>
+          <li>TheKey and franchise brands spend significantly more on digital marketing and SEO</li>
+          <li>Telehealth and remote monitoring reducing some in-home visit frequency</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Key Insights -->
+    <h2>Key Competitive Insights</h2>
+
+    <div class="insight-box">
+      <h4>1. Staffing Is the Strategic Battleground</h4>
+      <p>In the Austin home health market, the primary competitive battle is not for patients &mdash; it's for staff. With 50+ agencies competing for the same CNA, LVN, and RN talent pool, and national RN vacancy rates at 15-20%, recruitment is the #1 constraint on growth. Leora's structured referral program is a strong retention tool, but competitors like MGA Homecare, TheKey, and hospital systems can often offer higher base pay, better benefits, and career advancement paths.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>2. Hospital System Pipeline Advantage</h4>
+      <p>St. David's Healthcare at Home (part of HCA, the largest US hospital system) has a structural advantage: direct access to hospital discharge referrals. When patients leave St. David's hospitals, the default home health recommendation often goes to their own at-home division. Building relationships with independent physicians, clinics, and non-HCA hospitals (Seton/Ascension, Baylor Scott &amp; White) is essential for competing against this pipeline.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>3. PAS Program Niche</h4>
+      <p>Leora's Personal Attendant Services (PAS) and HHA offerings position it in the Medicaid-funded attendant care segment, which has fewer competitors than the Medicare skilled nursing market. Outreach Health Services is the primary PAS competitor with 50+ years of experience. Specializing in PAS quality and reliability could differentiate Leora from agencies focused primarily on Medicare home health.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>4. Online Presence Gap</h4>
+      <p>Leora Home Health did not appear prominently in Caring.com's "10 Best Home Health Agencies in Austin" or Yelp's "Best 10 Home Health Care in Austin" listings. With 50+ agencies competing, online visibility directly drives patient and referral source decisions. Claiming and optimizing profiles on Caring.com, Google Business, Yelp, and AgingCare.com would improve competitive positioning at minimal cost.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>5. Market Sizing</h4>
+      <ul>
+        <li><strong>US home health market:</strong> $222.6B (2025); projected $692.3B by 2035</li>
+        <li><strong>Market CAGR:</strong> 7.4% (2025-2032)</li>
+        <li><strong>Americans receiving home health:</strong> 12 million annually</li>
+        <li><strong>Patients 65+:</strong> 86% of home health recipients</li>
+        <li><strong>US 65+ population:</strong> 61.2 million (2024), growing 3.1% annually</li>
+        <li><strong>Austin metro agencies:</strong> 50+ (AgingCare.com count)</li>
+      </ul>
+    </div>
+
+    <!-- Sources -->
+    <div class="sources">
+      <h3>Sources &amp; References</h3>
+      <a href="https://www.leorahomehealth.com/" target="_blank">Leora Home Health - Official Website</a>
+      <a href="https://www.caring.com/senior-care/home-health-agencies/texas/austin" target="_blank">Caring.com - Best Home Health Agencies in Austin, TX (2025)</a>
+      <a href="https://www.agingcare.com/local/in-home-care/austin-tx" target="_blank">AgingCare.com - 50 Home Care Agencies in Austin, TX</a>
+      <a href="https://www.fortunebusinessinsights.com/u-s-home-healthcare-services-market-105568" target="_blank">Fortune Business Insights - US Home Healthcare Market ($222.6B)</a>
+      <a href="https://www.precedenceresearch.com/us-home-healthcare-market" target="_blank">Precedence Research - US Home Healthcare Market to $692.3B by 2035</a>
+      <a href="https://boosthomehealth.com/home-health-statistics/" target="_blank">Boost Home Health - 52 Home Health Statistics (2025)</a>
+      <a href="https://www.stdavids.com/specialties/healthcare-at-home" target="_blank">St. David's Healthcare at Home</a>
+      <a href="https://capitolhomehealthcare.com/" target="_blank">Capitol Home Health</a>
+      <a href="https://halcyonhome.com/" target="_blank">Halcyon Home</a>
+      <a href="https://mgahomecare.com/locations/tx/austin/" target="_blank">MGA Homecare - Austin</a>
+    </div>
+  </div>
+</body>
+</html>

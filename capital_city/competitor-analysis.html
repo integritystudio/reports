@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capital City Village - Competitive Landscape Analysis</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #f0f1f5;
+      --border: #d8dbe5;
+      --text: #1a1d27;
+      --text-muted: #6b7085;
+      --accent: #2563eb;
+      --accent2: #6d28d9;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --cyan: #0891b2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface2: #242836;
+        --border: #2e3345;
+        --text: #e4e6ed;
+        --text-muted: #8b8fa3;
+        --accent: #4f8ff7;
+        --accent2: #7c5cfc;
+        --green: #34d399;
+        --amber: #f59e0b;
+        --red: #ef4444;
+        --cyan: #22d3ee;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .subtitle { color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem;
+      color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+    }
+    h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    p, li { font-size: 0.92rem; margin-bottom: 0.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem; text-align: center;
+    }
+    .stat-card .number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-card .label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 2px solid var(--accent); border-radius: 16px;
+      padding: 2rem; margin-bottom: 2rem;
+    }
+    .profile-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+    @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-item .label {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .profile-item .value { font-size: 0.95rem; font-weight: 500; }
+
+    .table-wrap {
+      overflow-x: auto; margin-bottom: 2rem;
+      border-radius: 12px; border: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1100px; }
+    thead { background: var(--surface2); }
+    th {
+      padding: 0.75rem 1rem; text-align: left; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem;
+      letter-spacing: 0.05em; white-space: nowrap; border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+      vertical-align: top; background: var(--surface);
+    }
+    tr:hover td { background: var(--surface2); }
+    .badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-village { background: rgba(79,143,247,0.15); color: var(--accent); }
+    .badge-nonprofit { background: rgba(52,211,153,0.15); color: var(--green); }
+    .badge-government { background: rgba(124,92,252,0.15); color: var(--accent2); }
+    .badge-forprofit { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .badge-community { background: rgba(34,211,238,0.15); color: var(--cyan); }
+
+    .services-list { list-style: none; padding: 0; margin: 0; }
+    .services-list li {
+      font-size: 0.78rem; margin-bottom: 0.15rem;
+      padding-left: 0.75rem; position: relative;
+    }
+    .services-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--accent); }
+
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) { .swot-grid { grid-template-columns: 1fr; } }
+    .swot-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .swot-card.strengths { border-left: 4px solid var(--green); }
+    .swot-card.weaknesses { border-left: 4px solid var(--red); }
+    .swot-card.opportunities { border-left: 4px solid var(--accent); }
+    .swot-card.threats { border-left: 4px solid var(--amber); }
+    .swot-card h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .swot-card.strengths h4 { color: var(--green); }
+    .swot-card.weaknesses h4 { color: var(--red); }
+    .swot-card.opportunities h4 { color: var(--accent); }
+    .swot-card.threats h4 { color: var(--amber); }
+    .swot-card li { font-size: 0.85rem; }
+
+    .insight-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .insight-box h4 {
+      font-size: 0.85rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.5rem;
+    }
+    .sources {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-top: 2rem;
+    }
+    .sources h3 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .sources a { display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: var(--text-muted); }
+    .sources a:hover { color: var(--accent); }
+    .na { color: var(--text-muted); font-style: italic; }
+    .rating { color: var(--amber); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Capital City Village - Competitive Landscape Analysis</h1>
+    <p class="subtitle">Capital City Village | 501(c)(3) Senior Aging-in-Place Nonprofit | Austin, TX 78705</p>
+    <p class="date">Research Date: February 13, 2026</p>
+
+    <!-- Summary Stats -->
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="number">8</div>
+        <div class="label">Competitor Organizations</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">300+</div>
+        <div class="label">Villages Nationwide</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">61.2M</div>
+        <div class="label">US Adults 65+ (2024)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">17.5%</div>
+        <div class="label">US Population 65+</div>
+      </div>
+    </div>
+
+    <!-- Organization Profile -->
+    <h2>Capital City Village (Subject Organization)</h2>
+    <div class="profile-card">
+      <h3>Organization Profile</h3>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <div class="label">Website</div>
+          <div class="value"><a href="https://capitalcityvillage.org" target="_blank">capitalcityvillage.org</a></div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Location</div>
+          <div class="value">3710 Cedar St, Suite 283, Austin, TX 78705</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Founded</div>
+          <div class="value">2011 (501(c)(3))</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">EIN</div>
+          <div class="value">27-0539952</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Phone</div>
+          <div class="value">512-524-2709</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Network</div>
+          <div class="value">Village-to-Village Network member</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Services</div>
+          <div class="value">Social activities &amp; programs, volunteer transportation, technology help, minor home repairs, referrals to vetted service providers (handypersons, plumbers, home care), health &amp; wellbeing programs, community engagement</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Membership</div>
+          <div class="value">Income-based sliding scale (6 tiers, guided by federal poverty level); payment plans available; up to 2 volunteer services per week; member-recommended provider discounts</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h4>Key Differentiator &mdash; Village Model</h4>
+      <p>Capital City Village is the only Village Movement organization in Austin. The village model is unique in that it is member-driven, volunteer-powered, and community-based &mdash; a peer-support network rather than a service provider. Unlike for-profit home care agencies or government programs, CCV creates social connections and mutual aid among seniors, addressing the isolation that accelerates aging. With 300+ villages nationwide and growing, the model is proven but CCV is the sole Austin presence.</p>
+    </div>
+
+    <!-- Competitors -->
+    <h2>Austin Senior Services Competitive Landscape</h2>
+    <p style="margin-bottom: 1rem;">Organizations and services that compete for the same senior demographic, funding sources, or member attention as Capital City Village, organized by category.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Organization</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Services</th>
+            <th>Pricing</th>
+            <th>Differentiators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong><a href="https://www.aipsolutions.org/" target="_blank">Aging in Place Solutions</a></strong></td>
+            <td><span class="badge badge-nonprofit">Nonprofit</span></td>
+            <td>Austin, TX</td>
+            <td>
+              <ul class="services-list">
+                <li>Home safety assessments</li>
+                <li>Aging-in-place planning</li>
+                <li>Resource navigation</li>
+                <li>Personalized care plans</li>
+              </ul>
+            </td>
+            <td>501(c)(3); service-based</td>
+            <td>Assessment-focused model; personalized aging plans; professional home safety evaluation &mdash; more clinical than village model</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.austinup.org/" target="_blank">AustinUP</a></strong></td>
+            <td><span class="badge badge-nonprofit">Nonprofit</span></td>
+            <td>Austin, TX</td>
+            <td>
+              <ul class="services-list">
+                <li>Senior advocacy</li>
+                <li>Community programs</li>
+                <li>Age-friendly city initiatives</li>
+                <li>Resource directories</li>
+              </ul>
+            </td>
+            <td>Free programs</td>
+            <td>Advocacy and policy focus; age-friendly Austin initiatives; broader systemic approach vs. CCV's direct member services</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.agingservicescouncil.org/" target="_blank">Aging Services Council of Central TX</a></strong></td>
+            <td><span class="badge badge-community">Community</span></td>
+            <td>Central Texas</td>
+            <td>
+              <ul class="services-list">
+                <li>Provider coordination</li>
+                <li>Resource referrals</li>
+                <li>Community education</li>
+                <li>Advocacy</li>
+              </ul>
+            </td>
+            <td>Free</td>
+            <td>Coordination body for aging service providers; referral network rather than direct services; potential CCV referral partner</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.capcog.org/divisions/area-agency-on-aging/adrc/" target="_blank">ADRC (CAPCOG)</a></strong></td>
+            <td><span class="badge badge-government">Government</span></td>
+            <td>10-county Central TX</td>
+            <td>
+              <ul class="services-list">
+                <li>Benefits screening</li>
+                <li>Long-term care options</li>
+                <li>Caregiver support</li>
+                <li>Medicare counseling</li>
+              </ul>
+            </td>
+            <td>Free (government-funded)</td>
+            <td>Government resource center; comprehensive benefits navigation; 10-county coverage; information hub rather than community builder</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.mealsonwheelscentraltexas.org/" target="_blank">Meals on Wheels Central TX</a></strong></td>
+            <td><span class="badge badge-nonprofit">Nonprofit</span></td>
+            <td>Travis County + region</td>
+            <td>
+              <ul class="services-list">
+                <li>Home-delivered meals</li>
+                <li>Congregate dining</li>
+                <li>Wellness checks</li>
+                <li>Pet food program</li>
+              </ul>
+            </td>
+            <td>Donation-based</td>
+            <td>Largest senior-serving nonprofit in region; daily contact with isolated seniors; nutrition-focused; strong brand recognition and donor base</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://halcyonhome.com/" target="_blank">Halcyon Home</a></strong></td>
+            <td><span class="badge badge-forprofit">For-Profit</span></td>
+            <td>Austin, TX</td>
+            <td>
+              <ul class="services-list">
+                <li>In-home care (ADL support)</li>
+                <li>Companionship</li>
+                <li>Specialized dementia care</li>
+                <li>Continuity of care</li>
+              </ul>
+            </td>
+            <td>$25-35/hr (est.)</td>
+            <td>PA-founded; clinical approach; paid professional caregivers vs. CCV's volunteer model; direct care competitor for higher-need seniors</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.voponioncreek.com/" target="_blank">Village on the Park (Onion Creek)</a></strong></td>
+            <td><span class="badge badge-forprofit">For-Profit</span></td>
+            <td>South Austin</td>
+            <td>
+              <ul class="services-list">
+                <li>Luxury retirement living</li>
+                <li>Independent &amp; assisted living</li>
+                <li>Memory care</li>
+                <li>On-site amenities</li>
+              </ul>
+            </td>
+            <td>$3K-7K+/mo (est.)</td>
+            <td>Facility-based alternative to aging in place; amenity-rich environment; competes for seniors considering leaving their homes</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.villageatthetriangle.com/" target="_blank">The Village at The Triangle</a></strong></td>
+            <td><span class="badge badge-forprofit">For-Profit</span></td>
+            <td>Austin (Central)</td>
+            <td>
+              <ul class="services-list">
+                <li>Senior living community</li>
+                <li>Independent living</li>
+                <li>Social programming</li>
+                <li>Dining &amp; wellness</li>
+              </ul>
+            </td>
+            <td>$2.5K-6K+/mo (est.)</td>
+            <td>Central Austin location; "Village" branding creates naming confusion; facility-based competitor to aging-in-place model</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SWOT -->
+    <h2>Capital City Village - Competitive SWOT Analysis</h2>
+    <div class="swot-grid">
+      <div class="swot-card strengths">
+        <h4>Strengths</h4>
+        <ul>
+          <li>Only Village Movement organization in Austin &mdash; no direct model competitor</li>
+          <li>15+ years established (founded 2011); deep community roots</li>
+          <li>Village-to-Village Network membership provides national resources, best practices, and peer learning</li>
+          <li>Income-based sliding scale makes membership accessible across all income levels</li>
+          <li>Volunteer-powered model keeps operating costs low (no paid caregivers)</li>
+          <li>Peer-support and social programming address isolation &mdash; a key aging risk factor</li>
+          <li>Background-checked volunteers and vetted provider referrals build trust</li>
+          <li>Member-recommended provider discounts add tangible financial value</li>
+        </ul>
+      </div>
+      <div class="swot-card weaknesses">
+        <h4>Weaknesses</h4>
+        <ul>
+          <li>Website has critical issues: broken images, dead links, unprofessional first impression</li>
+          <li>Limited to 2 volunteer services per week &mdash; insufficient for higher-need seniors</li>
+          <li>Helpful Village platform creates URL confusion (capitalcityvillage.org vs. capitalcity.helpfulvillage.com)</li>
+          <li>Small staff and volunteer pool limits scalability</li>
+          <li>No Chambers rankings, awards, or institutional visibility markers</li>
+          <li>Poor mobile experience (60%+ of seniors now use smartphones)</li>
+          <li>SEO limitations reduce visibility in "Austin senior services" searches</li>
+          <li>"Village" naming competes with for-profit senior living facilities using "Village" branding</li>
+        </ul>
+      </div>
+      <div class="swot-card opportunities">
+        <h4>Opportunities</h4>
+        <ul>
+          <li>US 65+ population grew 3.1% to 61.2M in 2024; Austin's senior population growing faster than national average</li>
+          <li>Texas State Plan on Aging 2026-2028 creates new funding streams and policy support</li>
+          <li>Aging Texas Well initiative aligns with village model goals</li>
+          <li>Website hybrid approach (Squarespace + Helpful Village) would dramatically improve digital presence</li>
+          <li>Stripe nonprofit discount + Zeffy events could save $1K-1.5K/year on $50K transaction volume</li>
+          <li>Amplify Austin Day and local giving campaigns for fundraising visibility</li>
+          <li>Partnership with Aging Services Council, ADRC, and Meals on Wheels for cross-referrals</li>
+          <li>Growing awareness that social isolation accelerates cognitive decline increases village model relevance</li>
+        </ul>
+      </div>
+      <div class="swot-card threats">
+        <h4>Threats</h4>
+        <ul>
+          <li>For-profit senior living facilities (Village on the Park, Village at The Triangle) compete for the same demographic with "Village" branding</li>
+          <li>Aging in Place Solutions offers professional assessment services CCV cannot match with volunteers</li>
+          <li>Halcyon Home and other paid home care agencies address higher-acuity needs beyond CCV's scope</li>
+          <li>Government-funded ADRC provides free comprehensive navigation services</li>
+          <li>Broken website risks losing potential members and donors to better-presented alternatives</li>
+          <li>Volunteer recruitment and retention challenges in a tight labor market</li>
+          <li>Donor fatigue in competitive Austin nonprofit landscape</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Key Insights -->
+    <h2>Key Competitive Insights</h2>
+
+    <div class="insight-box">
+      <h4>1. No Direct Village Model Competitor in Austin</h4>
+      <p>Capital City Village is the only Village Movement organization serving the Austin metro area. With 300+ villages nationwide, the model is well-established, but CCV has no peer-model competitor locally. The closest alternatives are either government-funded resource centers (ADRC), advocacy organizations (AustinUP), or for-profit care providers &mdash; none of which offer the peer-support, volunteer-driven community model that defines the village approach.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>2. Website Is the #1 Competitive Liability</h4>
+      <p>The analysis report identified critical website issues: broken images on the homepage, dead links, mixed URL patterns (capitalcityvillage.org vs. helpfulvillage.com), and poor mobile responsiveness. In a market where seniors and their adult children increasingly search online for services, this creates a significant credibility gap. The recommended hybrid approach (modern marketing site + Helpful Village backend) would address this at $500-$1,500/year.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>3. "Village" Brand Confusion</h4>
+      <p>Two for-profit senior living facilities in Austin use "Village" in their names &mdash; Village on the Park (Onion Creek) and The Village at The Triangle. This creates search confusion and may dilute CCV's brand. Optimizing for specific search terms like "aging in place Austin," "senior volunteer services Austin," and "village movement Austin" would help differentiate from facility-based competitors.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>4. Referral Partnership Ecosystem</h4>
+      <p>Several organizations in the Austin senior services landscape are natural referral partners rather than competitors:</p>
+      <ul>
+        <li><strong>Aging Services Council:</strong> Coordination body that can direct seniors to CCV</li>
+        <li><strong>ADRC/CAPCOG:</strong> Government resource center that can refer lower-need seniors</li>
+        <li><strong>Meals on Wheels:</strong> Daily contact with isolated seniors who may benefit from CCV's social programs</li>
+        <li><strong>Home care agencies:</strong> CCV members who need professional care can be referred out</li>
+      </ul>
+      <p>Building formal referral relationships with these organizations would expand CCV's reach without increasing competition.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>5. Payment Processing Savings</h4>
+      <ul>
+        <li><strong>Stripe nonprofit discount:</strong> Save 0.7% per transaction (apply this week, no cost)</li>
+        <li><strong>Zeffy for events:</strong> 0% fees on event tickets</li>
+        <li><strong>PayPal Giving Fund:</strong> Already in use, 0% fees</li>
+        <li><strong>Projected savings:</strong> $1,000-$1,500/year on $50,000 transaction volume</li>
+      </ul>
+    </div>
+
+    <!-- Sources -->
+    <div class="sources">
+      <h3>Sources &amp; References</h3>
+      <a href="https://capitalcityvillage.org" target="_blank">Capital City Village - Official Website</a>
+      <a href="https://www.capitalcityvillage.org/pages/6-member-benefits" target="_blank">Capital City Village - Membership Benefits</a>
+      <a href="https://www.guidestar.org/profile/27-0539952" target="_blank">GuideStar - Capital City Village Profile (EIN: 27-0539952)</a>
+      <a href="https://www.helpfulvillage.com/the-village-movement" target="_blank">Village-to-Village Network - The Village Movement</a>
+      <a href="https://www.aarp.org/pri/topics/livable-communities/housing/the-village-model-current-trends-challenges-opportunities/" target="_blank">AARP - The Village Model: Trends, Challenges, Opportunities</a>
+      <a href="https://www.aipsolutions.org/" target="_blank">Aging in Place Solutions</a>
+      <a href="https://www.austinup.org/" target="_blank">AustinUP</a>
+      <a href="https://www.capcog.org/divisions/area-agency-on-aging/adrc/" target="_blank">ADRC - Capital Area Council of Governments</a>
+      <a href="https://www.hhs.texas.gov/sites/default/files/documents/proposed-texas-state-plan-aging-2026-2028.pdf" target="_blank">Texas State Plan on Aging 2026-2028</a>
+    </div>
+  </div>
+</body>
+</html>

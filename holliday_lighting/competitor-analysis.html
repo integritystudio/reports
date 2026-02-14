@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Illumination Holiday Lighting - Competitive Landscape Analysis</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #f0f1f5;
+      --border: #d8dbe5;
+      --text: #1a1d27;
+      --text-muted: #6b7085;
+      --accent: #2563eb;
+      --accent2: #6d28d9;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --cyan: #0891b2;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface2: #242836;
+        --border: #2e3345;
+        --text: #e4e6ed;
+        --text-muted: #8b8fa3;
+        --accent: #4f8ff7;
+        --accent2: #7c5cfc;
+        --green: #34d399;
+        --amber: #f59e0b;
+        --red: #ef4444;
+        --cyan: #22d3ee;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 {
+      font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .subtitle { color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.4rem; font-weight: 600; margin: 2.5rem 0 1rem;
+      color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;
+    }
+    h3 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+    p, li { font-size: 0.92rem; margin-bottom: 0.5rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem; text-align: center;
+    }
+    .stat-card .number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-card .label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .profile-card {
+      background: linear-gradient(135deg, var(--surface), var(--surface2));
+      border: 2px solid var(--accent); border-radius: 16px;
+      padding: 2rem; margin-bottom: 2rem;
+    }
+    .profile-card h3 { color: var(--accent); margin-top: 0; font-size: 1.3rem; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2rem; }
+    @media (max-width: 768px) { .profile-grid { grid-template-columns: 1fr; } }
+    .profile-item .label {
+      font-size: 0.75rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .profile-item .value { font-size: 0.95rem; font-weight: 500; }
+
+    .table-wrap {
+      overflow-x: auto; margin-bottom: 2rem;
+      border-radius: 12px; border: 1px solid var(--border);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 1100px; }
+    thead { background: var(--surface2); }
+    th {
+      padding: 0.75rem 1rem; text-align: left; font-weight: 600;
+      color: var(--text-muted); text-transform: uppercase; font-size: 0.72rem;
+      letter-spacing: 0.05em; white-space: nowrap; border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+      vertical-align: top; background: var(--surface);
+    }
+    tr:hover td { background: var(--surface2); }
+    .badge {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 6px;
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-direct { background: rgba(79,143,247,0.15); color: var(--accent); }
+    .badge-premium { background: rgba(124,92,252,0.15); color: var(--accent2); }
+    .badge-enterprise { background: rgba(239,68,68,0.15); color: var(--red); }
+    .badge-permanent { background: rgba(52,211,153,0.15); color: var(--green); }
+    .badge-new { background: rgba(245,158,11,0.15); color: var(--amber); }
+
+    .services-list { list-style: none; padding: 0; margin: 0; }
+    .services-list li {
+      font-size: 0.78rem; margin-bottom: 0.15rem;
+      padding-left: 0.75rem; position: relative;
+    }
+    .services-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--accent); }
+
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) { .swot-grid { grid-template-columns: 1fr; } }
+    .swot-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .swot-card.strengths { border-left: 4px solid var(--green); }
+    .swot-card.weaknesses { border-left: 4px solid var(--red); }
+    .swot-card.opportunities { border-left: 4px solid var(--accent); }
+    .swot-card.threats { border-left: 4px solid var(--amber); }
+    .swot-card h4 { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .swot-card.strengths h4 { color: var(--green); }
+    .swot-card.weaknesses h4 { color: var(--red); }
+    .swot-card.opportunities h4 { color: var(--accent); }
+    .swot-card.threats h4 { color: var(--amber); }
+    .swot-card li { font-size: 0.85rem; }
+
+    .insight-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;
+    }
+    .insight-box h4 {
+      font-size: 0.85rem; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.5rem;
+    }
+    .sources {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; margin-top: 2rem;
+    }
+    .sources h3 { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+    .sources a { display: block; font-size: 0.8rem; margin-bottom: 0.3rem; color: var(--text-muted); }
+    .sources a:hover { color: var(--accent); }
+    .na { color: var(--text-muted); font-style: italic; }
+    .rating { color: var(--amber); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Illumination Holiday Lighting - Competitive Landscape Analysis</h1>
+    <p class="subtitle">Illumination Holiday Lighting, LLC | Professional Holiday Lighting | Austin, TX 78704</p>
+    <p class="date">Research Date: February 13, 2026</p>
+
+    <!-- Summary Stats -->
+    <div class="summary-grid">
+      <div class="stat-card">
+        <div class="number">10</div>
+        <div class="label">Austin Competitors Analyzed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">~10</div>
+        <div class="label">Years in Business</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">$30-75M</div>
+        <div class="label">Austin Market (Est.)</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">#1</div>
+        <div class="label">Most Festive US City (4yr)</div>
+      </div>
+    </div>
+
+    <!-- Company Profile -->
+    <h2>Illumination Holiday Lighting (Subject Company)</h2>
+    <div class="profile-card">
+      <h3>Company Profile</h3>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <div class="label">Website</div>
+          <div class="value"><a href="https://illuminationholidaylighting.com" target="_blank">illuminationholidaylighting.com</a></div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Location</div>
+          <div class="value">1701 A Garner Ave, Austin, TX 78704 (Zilker)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Founded</div>
+          <div class="value">~2014-2016 (est. 10 years)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Owner/Operator</div>
+          <div class="value">Dan (last name not publicly disclosed)</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Phone</div>
+          <div class="value">(737) 471-9627</div>
+        </div>
+        <div class="profile-item">
+          <div class="label">Rating</div>
+          <div class="value">5.0 / 5.0 (HomeAdvisor); Screened &amp; Approved</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Services</div>
+          <div class="value">Commercial &amp; residential holiday lighting design/installation, garlands &amp; wreaths, commercial-grade LED products, seasonal takedown &amp; storage, maintenance throughout season, free design consultations</div>
+        </div>
+        <div class="profile-item" style="grid-column: 1 / -1;">
+          <div class="label">Key Features</div>
+          <div class="value">100% satisfaction guarantee, bilingual service, commercial-grade equipment (heavier gauge wire, industrial sockets), LED products (brighter, energy efficient, waterproof), free custom design plans</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Competitors -->
+    <h2>Austin Holiday Lighting Competitors</h2>
+    <p style="margin-bottom: 1rem;">Professional holiday lighting companies serving the Austin metro area, spanning seasonal specialists, permanent lighting providers, and multi-service enterprises.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Category</th>
+            <th>Est.</th>
+            <th>Rating</th>
+            <th>Pricing</th>
+            <th>Key Services</th>
+            <th>Differentiators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong><a href="https://holidaylightingcreations.com/" target="_blank">Holiday Lighting &amp; Creations</a></strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>2022</td>
+            <td><span class="rating">5.0</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Residential rooflines</li>
+                <li>Commercial displays</li>
+                <li>Event &amp; wedding lighting</li>
+              </ul>
+            </td>
+            <td>Owner won ABC's "Great Christmas Light Fight" (2019, youngest winner); TV credibility drives brand</td>
+          </tr>
+          <tr>
+            <td><strong>Premier Austin Holiday Lighting</strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>Unknown</td>
+            <td><span class="rating">4.4</span></td>
+            <td><span class="na">Not published</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Residential &amp; commercial</li>
+                <li>24-hour availability</li>
+                <li>Comprehensive services</li>
+              </ul>
+            </td>
+            <td>24/7 availability; broader service window than competitors</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.illumination-concepts.com/" target="_blank">Illumination Concepts</a></strong></td>
+            <td><span class="badge badge-premium">Premium</span></td>
+            <td>~1999</td>
+            <td><span class="rating">4.9 (11 Yelp reviews)</span></td>
+            <td>Premium</td>
+            <td>
+              <ul class="services-list">
+                <li>Low-voltage LED landscape</li>
+                <li>Permanent holiday lighting</li>
+                <li>Custom design systems</li>
+              </ul>
+            </td>
+            <td>26+ years experience; family-owned; Angi Super Service Award every year since 2011; landscape lighting focus</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://austintrimlight.com/" target="_blank">Trimlight Austin</a></strong></td>
+            <td><span class="badge badge-permanent">Permanent</span></td>
+            <td>2010*</td>
+            <td><span class="rating">4.9 (10+ Yelp; 141 photos)</span></td>
+            <td>$25-35/ft; avg $3K-6K</td>
+            <td>
+              <ul class="services-list">
+                <li>Permanent LED systems</li>
+                <li>App-controlled RGB</li>
+                <li>Lifetime warranty</li>
+              </ul>
+            </td>
+            <td>PE-backed (Valesco Industries, May 2025); 300+ dealers nationwide; app control; eliminates annual install cycle</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.ezhlaustin.com/" target="_blank">EZ Holiday Lights</a></strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>2004</td>
+            <td><span class="rating">4.4</span></td>
+            <td>$500 deposit; all-inclusive</td>
+            <td>
+              <ul class="services-list">
+                <li>Residential &amp; commercial</li>
+                <li>HOAs &amp; apartments</li>
+                <li>Physical retail location</li>
+              </ul>
+            </td>
+            <td>22 years in market (longest-tenured specialist); City of Austin preferred vendor (Second Street District); employees avg 10yr experience</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.warriorsforlight.com/" target="_blank">Warriors for Light</a></strong></td>
+            <td><span class="badge badge-new">New</span></td>
+            <td>~2020</td>
+            <td><span class="rating">5.0 (Angi); 17 Yelp</span></td>
+            <td>Claims "best rates"</td>
+            <td>
+              <ul class="services-list">
+                <li>Seasonal &amp; permanent LED</li>
+                <li>Instant online quoting</li>
+                <li>Turn-key service</li>
+              </ul>
+            </td>
+            <td>BBB accredited (2022); 60-second online booking; aggressive value positioning; strong digital presence</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://fullcolorchristmaslights.com/" target="_blank">Full Color Christmas Lights</a></strong></td>
+            <td><span class="badge badge-new">New</span></td>
+            <td>2020</td>
+            <td><span class="rating">5.0 (300+ reviews)</span></td>
+            <td>$1K-2K avg project</td>
+            <td>
+              <ul class="services-list">
+                <li>Residential &amp; commercial</li>
+                <li>CLIPA certified</li>
+                <li>Cross-sold from cleaning</li>
+              </ul>
+            </td>
+            <td>300+ reviews (highest volume); CLIPA certification; diversified revenue from cleaning services parent brand</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://thelightguysaustintx.com/" target="_blank">The Light Guys</a></strong></td>
+            <td><span class="badge badge-direct">Direct</span></td>
+            <td>2008</td>
+            <td>Positive</td>
+            <td>Value-positioned</td>
+            <td>
+              <ul class="services-list">
+                <li>Holiday lighting</li>
+                <li>Landscape lighting</li>
+                <li>Wedding/event lighting</li>
+              </ul>
+            </td>
+            <td>17 years in market; year-round revenue via landscape &amp; event lighting; "more affordable than anyone else"</td>
+          </tr>
+          <tr>
+            <td><strong><a href="https://www.abchomeandcommercial.com/austin/holiday-lighting" target="_blank">ABC Home &amp; Commercial</a></strong></td>
+            <td><span class="badge badge-enterprise">Enterprise</span></td>
+            <td>1949</td>
+            <td>Mixed</td>
+            <td>Premium</td>
+            <td>
+              <ul class="services-list">
+                <li>Holiday lighting</li>
+                <li>Pest, HVAC, lawn (multi-service)</li>
+                <li>Commercial &amp; residential</li>
+              </ul>
+            </td>
+            <td>77-year Texas institution; "Best in Austin" (Austin Chronicle 2025); massive brand + customer base for cross-selling; higher pricing</td>
+          </tr>
+          <tr>
+            <td><strong>Lights Up Austin</strong></td>
+            <td><span class="badge badge-new">New</span></td>
+            <td>2025</td>
+            <td><span class="na">New entrant</span></td>
+            <td><span class="na">Unknown</span></td>
+            <td>
+              <ul class="services-list">
+                <li>Turnkey Christmas displays</li>
+                <li>Residential &amp; commercial</li>
+              </ul>
+            </td>
+            <td>Expansion startup model; entered Austin June 2025; signals market attractiveness</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SWOT -->
+    <h2>Illumination Holiday Lighting - Competitive SWOT Analysis</h2>
+    <div class="swot-grid">
+      <div class="swot-card strengths">
+        <h4>Strengths</h4>
+        <ul>
+          <li>Perfect 5.0 rating on HomeAdvisor; screened and approved</li>
+          <li>~10 years of experience in the Austin market</li>
+          <li>Owner-operated personal service approach &mdash; high touch, responsive</li>
+          <li>Bilingual services (English/Spanish) &mdash; differentiator in Austin's 32.5% Hispanic market</li>
+          <li>Commercial-grade equipment with heavier gauge wire, industrial sockets</li>
+          <li>Free design consultations with no obligation &mdash; low friction for prospects</li>
+          <li>100% satisfaction guarantee</li>
+          <li>Zilker neighborhood location (central Austin, affluent area)</li>
+        </ul>
+      </div>
+      <div class="swot-card weaknesses">
+        <h4>Weaknesses</h4>
+        <ul>
+          <li>Only 1 verified review on HomeAdvisor vs. Full Color's 300+</li>
+          <li>No Google Business Profile, Yelp listing, or BBB profile</li>
+          <li>No social media presence (Instagram, Facebook not found)</li>
+          <li>Minimal website (Squarespace) with no pricing transparency</li>
+          <li>Small-scale, owner-operated limits capacity during peak season</li>
+          <li>LLC registration not verifiable through standard public searches</li>
+          <li>No industry certifications (competitors have CLIPA, BBB accreditation)</li>
+        </ul>
+      </div>
+      <div class="swot-card opportunities">
+        <h4>Opportunities</h4>
+        <ul>
+          <li>Austin ranked #1 most festive US city for 4th consecutive year (Thumbtack 2025)</li>
+          <li>$30-75M estimated addressable market in Austin metro (400K-500K single-family homes)</li>
+          <li>Permanent lighting segment growing 45-60% annually &mdash; year-round revenue opportunity</li>
+          <li>Create Google Business Profile to capture local search traffic immediately</li>
+          <li>Bilingual advantage: target Austin's growing Hispanic homeowner demographic</li>
+          <li>Smart lighting / IoT integration ($22.98B market, 19.77% CAGR) for premium offerings</li>
+          <li>Expand into landscape and event lighting for year-round revenue (The Light Guys model)</li>
+          <li>New home construction in Austin metro creates fresh customer pipeline</li>
+        </ul>
+      </div>
+      <div class="swot-card threats">
+        <h4>Threats</h4>
+        <ul>
+          <li>Trimlight backed by PE ($434M fund) with 300+ dealers &mdash; well-capitalized permanent lighting competitor</li>
+          <li>Full Color Christmas Lights has 300+ reviews and growing brand dominance</li>
+          <li>EZ Holiday Lights has 22 years + City of Austin vendor status</li>
+          <li>ABC Home &amp; Commercial leverages 77-year brand and massive cross-sell customer base</li>
+          <li>New entrants (Warriors for Light, Lights Up Austin) with modern digital booking</li>
+          <li>Permanent lighting systems could cannibalize seasonal install demand over time</li>
+          <li>LED market is 72% of lighting market &mdash; commoditization pressure on basic installs</li>
+          <li>Holiday Lighting &amp; Creations TV-winner credential creates outsized marketing advantage</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Key Insights -->
+    <h2>Key Competitive Insights</h2>
+
+    <div class="insight-box">
+      <h4>1. Online Presence Is the Critical Gap</h4>
+      <p>Illumination Holiday Lighting has no Google Business Profile, no Yelp listing, no BBB profile, and no social media presence. In a market where Austin is ranked the #1 most festive city in the US and consumers actively search for installers, this represents the single largest competitive disadvantage. Competitors like Full Color Christmas Lights (300+ reviews), Warriors for Light (60-second online booking), and EZ Holiday Lights (City of Austin vendor) dominate digital discovery.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>2. Market Positioning &mdash; Three Tiers Emerging</h4>
+      <ul>
+        <li><strong>Value tier:</strong> Warriors for Light, The Light Guys &mdash; compete on price and convenience</li>
+        <li><strong>Mid-market:</strong> Holiday Lighting &amp; Creations, EZ Holiday Lights, Full Color, Premier Austin &mdash; established brands with review presence</li>
+        <li><strong>Premium/Permanent:</strong> Trimlight Austin, Illumination Concepts, ABC Home &amp; Commercial &mdash; higher-end, year-round systems</li>
+      </ul>
+      <p>Illumination Holiday Lighting's 10-year experience, commercial-grade equipment, and bilingual service position it well for the mid-market, but it's invisible to customers who search online.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>3. Permanent Lighting Disruption</h4>
+      <p>Permanent LED lighting (Trimlight, Illumination Concepts) is the fastest-growing segment, with year-round installs projected to grow 45-60% annually. Trimlight's PE acquisition ($434M fund, May 2025) signals institutional capital entering the market. Seasonal-only businesses face long-term disruption unless they add permanent lighting to their service mix. Average permanent install ($3K-6K) generates higher per-customer revenue than seasonal ($1K-2K).</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>4. Bilingual Advantage Is Underutilized</h4>
+      <p>Illumination Holiday Lighting is the only competitor in the Austin market that explicitly offers bilingual (English/Spanish) service. With 32.5% Hispanic/Latino population in Austin (460,000+ in the metro) and a growing Hispanic homeownership rate, this is a significant competitive advantage that should be featured prominently in marketing and local SEO.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>5. Market Sizing</h4>
+      <ul>
+        <li><strong>Austin metro single-family homes:</strong> ~400K-500K</li>
+        <li><strong>Estimated addressable market:</strong> $30M-$75M (5-10% professional install at $1,500 avg)</li>
+        <li><strong>National market:</strong> $8.07B (2024) growing to $10.89B by 2033 (3.5% CAGR)</li>
+        <li><strong>Average Austin install:</strong> $220-$675 (basic); $1K-2K (full-service seasonal); $3K-6K (permanent)</li>
+        <li><strong>Smart lighting overlay:</strong> $22.98B market (2025), 19.77% CAGR to $56.63B by 2030</li>
+      </ul>
+    </div>
+
+    <!-- Sources -->
+    <div class="sources">
+      <h3>Sources &amp; References</h3>
+      <a href="https://illuminationholidaylighting.com" target="_blank">Illumination Holiday Lighting - Official Website</a>
+      <a href="https://www.kxan.com/news/local/austin/list-ranks-austin-at-no-1-city-with-most-festive-homes-for-the-holidays/" target="_blank">KXAN - Austin #1 Most Festive City (4th consecutive year)</a>
+      <a href="https://www.verifiedmarketresearch.com/product/christmas-lights-and-decorations-market/" target="_blank">Verified Market Research - Christmas Lights &amp; Decorations ($8.07B, 2024)</a>
+      <a href="https://www.mordorintelligence.com/industry-reports/smart-lighting-market" target="_blank">Mordor Intelligence - Smart Lighting Market ($22.98B)</a>
+      <a href="https://peprofessional.com/2025/05/valesco-and-corinthian-own-the-night-with-trimlight-buy/" target="_blank">PE Professional - Trimlight PE Acquisition ($434M Fund)</a>
+      <a href="https://austintrimlight.com/" target="_blank">Trimlight Austin</a>
+      <a href="https://www.ezhlaustin.com/" target="_blank">EZ Holiday Lights</a>
+      <a href="https://www.warriorsforlight.com/" target="_blank">Warriors for Light</a>
+      <a href="https://fullcolorchristmaslights.com/" target="_blank">Full Color Christmas Lights</a>
+      <a href="https://thelightguysaustintx.com/" target="_blank">The Light Guys</a>
+      <a href="https://www.angi.com/articles/how-much-does-christmas-light-installation-cost/tx/austin" target="_blank">Angi - Christmas Light Installation Cost (Austin)</a>
+    </div>
+  </div>
+</body>
+</html>
