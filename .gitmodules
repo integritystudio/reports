@@ -15,4 +15,4 @@
 	url = git@github.com:integritystudio/john_skelton.git
 [submodule "ai-observability/html"]
 	path = ai-observability/html
-	url = git@github.com:aledlie/ai-observability-html.git
+	url = git@github.com:integritystudio/ai-observability-html.git
