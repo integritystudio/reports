@@ -4,25 +4,6 @@
  * Loads after portal-base.css + theme.css.
  */
 
-/* Additional variables for analysis report */
-:root {
-    --color-star-filled: #2b6cb0;
-    --color-star-empty: #d1d5db;
-    --color-recommended: #059669;
-    --color-recommended-bg: #f0fdf4;
-    --color-warning: #dc2626;
-    --color-warning-bg: #fef2f2;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-star-filled: #60a5fa;
-        --color-star-empty: #475569;
-        --color-recommended-bg: rgba(5, 150, 105, 0.1);
-        --color-warning-bg: rgba(220, 38, 38, 0.1);
-    }
-}
-
 /* Document Header */
 .doc-header {
     background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
