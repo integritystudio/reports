@@ -317,11 +317,10 @@
 .threat-med { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
 .threat-high { background: rgba(239, 68, 68, 0.15); color: var(--red); }
 
-/* --- Report priority/status badges --- */
-.badge-high { background: #d4edda; color: #155724; }
-.badge-medium { background: #fff3cd; color: #856404; }
+/* --- Report priority/status badges ---
+   .badge-high, .badge-medium, .badge-quick aliased in report-base.css
+   Only unique badges remain here */
 .badge-low { background: #e2e3e5; color: #383d41; }
-.badge-quick { background: #d1ecf1; color: #0c5460; }
 .badge-longterm { background: #e7e0f7; color: #4a306d; }
 
 
