@@ -125,7 +125,7 @@ blockquote {
     color: #555;
 }
 
-.source { font-size: 0.85rem; color: #666; font-style: italic; }
+.source { font-size: 0.9rem; color: #555; font-style: italic; }
 
 .badge {
     display: inline-block;
