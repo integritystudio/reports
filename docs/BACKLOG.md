@@ -880,7 +880,7 @@ Scope: CSS theme correctness, accessibility, dark mode, hub readability
 ## Unresolved: High Priority
 
 ### F1. Skip link HTML markup missing from portal/competitor pages
-**Status:** Open
+**Status:** Done
 **Priority:** High
 **Source:** Code review finding H1
 
@@ -912,7 +912,7 @@ Add `id="main"` to the `<main>` element (or create `<main id="main">` wrapper).
 ## Unresolved: Medium Priority
 
 ### F2. `.source` color defined in 3 locations (fragile cascade)
-**Status:** Open
+**Status:** Done
 **Priority:** Medium
 **Source:** Code review finding M2
 
@@ -931,7 +931,7 @@ Relies on CSS load order. Future edits to one file may not propagate.
 ---
 
 ### F3. Sound-sight-tarot dark mode missing portal variables
-**Status:** Open
+**Status:** Done
 **Priority:** Medium
 **Source:** Code review finding M1
 
@@ -952,7 +952,7 @@ Dark mode defines `--primary`, `--secondary`, `--accent`, `--light` but not port
 ---
 
 ### F4. No CSS variable fallbacks on critical properties
-**Status:** Open
+**Status:** Done
 **Priority:** Medium
 **Source:** Code review finding M3
 
