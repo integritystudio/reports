@@ -44,6 +44,16 @@ Unified brand theme system. See [docs/BRAND_THEME.md](docs/BRAND_THEME.md) for f
 - Do not modify submodule contents from this repo
 - Report HTML links external CSS (base + theme.css), not inline styles
 
+## Translations
+
+- Translated reports use localized filenames (e.g., `analise_mercado_zouk.html` not `brazilian_zouk_market_analysis_pt-br.html`)
+- Set `<html lang="pt-BR">` (or appropriate BCP-47 tag) on translated files
+- Add a source-tracking comment after `<head>` in every translated file:
+  ```html
+  <!-- Source: original_filename.html | Lang: pt-BR -->
+  ```
+- Add a hub card for each translated report (see T3 in backlog for card format)
+
 ## Hosting
 
 - GitHub Pages (Actions workflow) on `main` branch at `integritystudio.io`

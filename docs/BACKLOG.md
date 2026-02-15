@@ -390,7 +390,7 @@ Line 35 contains `--ink: #e4ebe f;` (space before `f`). This invalid color value
 
 ---
 
-### T2. Translation file naming convention
+### T2. Translation file naming convention — Done
 
 **Impact:** The existing PT-BR translations use fully translated Portuguese filenames (e.g., `analise_mercado_zouk.html` not `brazilian_zouk_market_analysis_pt-br.html`). This convention is undocumented and could lead to inconsistency as more translations are added.
 
@@ -403,6 +403,8 @@ Line 35 contains `--ink: #e4ebe f;` (space before `f`). This invalid color value
 This enables automated tooling to map translations back to their source files.
 
 **Effort:** Low
+
+**Resolution:** Added Translations section to CLAUDE.md documenting naming convention, lang attribute, and source-tracking comment format. Added source-tracking comments to all 3 existing PT-BR translations.
 
 ---
 
