@@ -38,6 +38,11 @@
 /* --- Hub (root index.html) --- */
 [data-brand="hub"] {
     --color-primary-dark: #1d4ed8;
+    --color-primary-medium: #3b82f6;
+    --color-primary-light: #60a5fa;
+    --primary: #1d4ed8;
+    --secondary: #3b82f6;
+    --accent: #60a5fa;
 }
 
 /* --- Skelton & Woody PLLC --- */
@@ -125,6 +130,11 @@
 /* --- Integrity Studio (NGO Market) --- */
 [data-brand="ngo-market"] {
     --color-primary-dark: #1e40af;
+    --color-primary-medium: #3b82f6;
+    --color-primary-light: #60a5fa;
+    --primary: #1e40af;
+    --secondary: #3b82f6;
+    --accent: #60a5fa;
 }
 
 /* --- Capital City Village --- */
