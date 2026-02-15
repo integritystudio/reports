@@ -111,6 +111,14 @@ These components are defined once and available to any brand:
 - **Portal components** (section 8): brand-specific portal extras (leora sticky-header, capital-city hero/stat-row)
 - **Report components** (section 9): brand-specific report extras (edgar-nadyne testimonial, balloon-collective timeline)
 
+## Extracted Component Files
+
+Component CSS extracted from theme.css for pages that need them. Load after theme.css.
+
+| File | Used By | Purpose |
+|------|---------|---------|
+| `css/leora-referral.css` | `leora_research/leora_referral_*.html`, `PerformanceTest/leora_referral_*.html` | Dashboard, form, status badges, milestone tracker (+ dark/responsive/print) |
+
 ## Extracted Layout Files
 
 Two pages have unique layouts that don't fit in base CSS or theme.css:

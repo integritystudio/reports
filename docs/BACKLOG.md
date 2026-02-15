@@ -764,7 +764,7 @@ Then replace all hardcoded stacks with `font-family: var(--font-sans);`.
 
 ---
 
-### D12. Extract Leora form/dashboard components from theme.css
+### D12. Extract Leora form/dashboard components from theme.css — Done
 
 **Impact:** `css/theme.css` lines 408-601 (~200 lines) define form and dashboard components used exclusively by 3 Leora HTML pages.
 
@@ -774,6 +774,8 @@ Then replace all hardcoded stacks with `font-family: var(--font-sans);`.
 - `PerformanceTest/leora_referral_*.html`
 
 **Effort:** Low | **Impact:** Reduces theme.css from ~1,293 to ~1,100 lines
+
+**Resolution:** Extracted dashboard (section 6), form (section 7), plus their dark mode, responsive, and print rules to `css/leora-referral.css`. Linked from all 4 referral HTML pages. theme.css reduced by ~340 lines.
 
 ---
 
