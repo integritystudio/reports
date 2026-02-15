@@ -1,17 +1,9 @@
 /* portal-layout.css — Illumination Holiday Lighting custom portal design
- * Unique strand/card/context layout for the holliday_lighting index page.
- * Brand colors defined in ../css/theme.css via [data-brand="holliday-lighting"].
+ * Unique strand/header/context/card-badge layout for holliday_lighting index page.
+ * Brand colors + portal-base variable mappings in ../css/theme.css [data-brand="holliday-lighting"].
+ * Card/footer base overrides also in theme.css; this file contains unique components only.
  * Loads after portal-base.css + theme.css.
  */
-
-/* Portal body override */
-body {
-    font-family: var(--sans);
-    background: var(--surface);
-    color: var(--ink);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-}
 
 /* Light strand decorative border */
 .strand {
@@ -201,51 +193,8 @@ body {
     margin-bottom: 2.5rem;
 }
 
-.card {
-    display: flex;
-    flex-direction: column;
-    background: var(--surface-raised);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius);
-    padding: 1.75rem;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: var(--shadow-sm);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--accent);
-}
-
-/* Top glow bar on hover */
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.35s ease;
-}
-.card:hover::before { transform: scaleX(1); }
-
-/* Subtle corner glow */
-.card::after {
-    content: '';
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 120px; height: 120px;
-    background: radial-gradient(circle, var(--glow-strong), transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-.card:hover::after { opacity: 1; }
+/* Card base, hover, ::before, ::after, and focus-visible overrides
+   are in theme.css under [data-brand="holliday-lighting"] */
 
 .card-badge {
     display: inline-block;
@@ -318,18 +267,7 @@ body {
 }
 .card:hover .card-link svg { transform: translateX(2px); }
 
-/* Portal footer */
-.footer {
-    text-align: center;
-    padding: 1.5rem 2rem;
-    font-size: 0.78rem;
-    color: var(--ink-faint);
-    border-top: 1px solid var(--border-light);
-}
-.footer a {
-    color: var(--secondary);
-    text-decoration: none;
-}
+/* Footer overrides in theme.css under [data-brand="holliday-lighting"] */
 
 /* Portal responsive */
 @media (max-width: 640px) {
@@ -338,22 +276,12 @@ body {
     .tagline { font-size: 0.95rem; }
     .container { padding: 0 1.25rem 2rem; }
     .cards { grid-template-columns: 1fr; gap: 1.25rem; }
-    .card { padding: 1.35rem; }
     .context { flex-direction: column; gap: 0.75rem; }
     .header-meta { flex-direction: column; align-items: center; gap: 0.25rem; }
     .header-meta span::before { display: none; }
 }
 
-/* Portal print */
+/* Portal print (card print rules in theme.css) */
 @media print {
-    body { background: white; }
-    .card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
-    .card::before, .card::after { display: none; }
     .strand { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-}
-
-/* Portal focus states */
-.card:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
 }

@@ -94,6 +94,13 @@
     --primary: #1a5f7a;
     --secondary: #159895;
     --accent: #57c5b6;
+    /* Portal-base variable mappings (eliminates body override in portal-layout.css) */
+    --color-bg: #faf9f7;
+    --color-bg-secondary: #ffffff;
+    --color-text-primary: #1c2a35;
+    --color-text-secondary: #5a6b78;
+    --color-border: #eeebe6;
+    --color-card-bg: #ffffff;
     /* Custom portal tokens */
     --surface: #faf9f7;
     --surface-raised: #ffffff;
@@ -872,6 +879,48 @@ body.form-page .container {
     flex-shrink: 0;
 }
 
+/* --- Holliday Lighting portal: body, card + footer overrides (base in portal-layout.css) --- */
+
+[data-brand="holliday-lighting"] body { -webkit-font-smoothing: antialiased; }
+
+[data-brand="holliday-lighting"] .card {
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+[data-brand="holliday-lighting"] .card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+}
+[data-brand="holliday-lighting"] .card::before {
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+    transition: transform 0.35s ease;
+}
+[data-brand="holliday-lighting"] .card::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, var(--glow-strong), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+[data-brand="holliday-lighting"] .card:hover::after { opacity: 1; }
+
+[data-brand="holliday-lighting"] .card:focus-visible {
+    outline-color: var(--accent);
+    outline-offset: 3px;
+}
+
+[data-brand="holliday-lighting"] footer {
+    padding: 1.5rem 2rem;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    background-color: transparent;
+    margin-top: 0;
+}
+
 /* --- Capital City portal: hero + stat-row + footer-nav --- */
 
 [data-brand="capital-city"] .hero {
@@ -1064,6 +1113,21 @@ body.form-page .container {
 
     [data-brand="hub"] { --color-primary-dark: #93c5fd; }
 
+    [data-brand="holliday-lighting"] {
+        --color-bg: #0f172a;
+        --color-bg-secondary: #1e293b;
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #cbd5e1;
+        --color-border: #334155;
+        --color-card-bg: #1e293b;
+        --surface: #0f172a;
+        --surface-raised: #1e293b;
+        --ink: #f1f5f9;
+        --ink-muted: #cbd5e1;
+        --ink-faint: #94a3b8;
+        --border-light: #334155;
+    }
+
     [data-brand="balloon-collective"] {
         --color-primary-dark: #c4b5fd;
         --color-primary-medium: #a78bfa;
@@ -1237,6 +1301,11 @@ body.form-page .container {
     [data-brand="leora"] .card-description { font-size: 0.9rem; }
 }
 
+/* --- Holliday Lighting portal responsive --- */
+@media (max-width: 640px) {
+    [data-brand="holliday-lighting"] .card { padding: 1.35rem; }
+}
+
 /* --- Capital City portal responsive --- */
 @media (max-width: 768px) {
     [data-brand="capital-city"] .hero { padding: 0 var(--spacing-md); margin: var(--spacing-lg) auto; }
@@ -1254,6 +1323,17 @@ body.form-page .container {
     [data-brand="capital-city"] .card::before { display: none; }
     [data-brand="capital-city"] footer { background: none; }
     [data-brand="capital-city"] a { color: #2b6cb0; }
+}
+
+/* --- Holliday Lighting portal print --- */
+@media print {
+    [data-brand="holliday-lighting"] .card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+    [data-brand="holliday-lighting"] .card::before,
+    [data-brand="holliday-lighting"] .card::after { display: none; }
 }
 
 /* --- Edghar & Nadyne stat-item print --- */
