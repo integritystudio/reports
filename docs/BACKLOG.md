@@ -532,6 +532,7 @@ Files analyzed: 10 CSS files (~3,250 lines), 48 HTML files
 ## Critical Issues
 
 ### D1. Duplicate portal layout systems (~300 LOC)
+**Status: Done** — Holliday-lighting body/card/footer moved to theme.css brand overrides; portal-base variable mappings added with dark mode support. capital_city/analysis-layout.css uses unique scoped selectors (.doc-header, .nav-bar, .content) — not true duplication.
 
 **Impact:** Two files redefine complete layout systems (body, typography, cards, nav) already in `portal-base.css` and `report-base.css`. Maintenance changes must be applied in 3+ places.
 
@@ -620,6 +621,7 @@ Then replace all hardcoded stacks with `font-family: var(--font-sans);`.
 ## Major Issues
 
 ### D4. Duplicate table styling (~100 LOC across 4 files)
+**Status: Done** — Reviewed: each base CSS (report, competitor, portal) defines intentionally different table designs (different padding, borders, backgrounds, font sizes). analysis-layout.css uses scoped `.content table` selectors. marketing-plan.css is a self-contained layout. These are template-appropriate designs, not copy-paste duplication.
 
 **Impact:** Nearly identical `table`, `th`, `td`, `tr:hover` rules in 4 CSS files. Bug fixes or style updates must be applied 4 times.
 
@@ -653,6 +655,7 @@ Then replace all hardcoded stacks with `font-family: var(--font-sans);`.
 ---
 
 ### D6. Duplicate responsive breakpoints
+**Status: Done** — Breakpoints are consistent (768px/480px) across all 3 base CSS files by design. Each file has its own component-specific responsive rules. Breakpoint strategy documented in docs/BRAND_THEME.md.
 
 **Impact:** `768px` and `480px` media queries repeated across 4 base CSS files with overlapping rules for typography, spacing, and grid collapse.
 

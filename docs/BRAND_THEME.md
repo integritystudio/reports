@@ -128,6 +128,20 @@ These load after theme.css and use CSS variables from the brand palette.
 |------|---------|
 | `ngo-market/marketing-plan.css` | Sidebar doc layout for marketing plan (self-contained) |
 
+## Responsive Breakpoints
+
+Each base CSS defines responsive rules for its own components at standardized breakpoints:
+
+| Breakpoint | Usage |
+|-----------|-------|
+| `768px` | Primary mobile breakpoint — single-column cards, smaller headings, reduced padding |
+| `480px` | Small mobile — further typography/spacing reductions |
+| `640px` | Holliday-lighting portal, integrity-studio opportunity grid (custom layouts) |
+| `600px` | Form pages — reduced padding |
+| `1024px` | NGO marketing plan sidebar narrowing |
+
+Base CSS breakpoints (768px, 480px) are consistent across `report-base.css`, `portal-base.css`, and `competitor-base.css`. Brand-specific responsive overrides are in `theme.css` section 11.
+
 ## Dark Mode
 
 Dark mode activates via `@media (prefers-color-scheme: dark)` in theme.css section 10. Each brand has dark palette overrides where needed. Base CSS files also have their own dark mode defaults.
