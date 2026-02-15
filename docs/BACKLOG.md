@@ -726,6 +726,7 @@ Then replace all hardcoded stacks with `font-family: var(--font-sans);`.
 ---
 
 ### D10. Inconsistent spacing token usage
+**Status: Done** — Spacing tokens (--spacing-xs through --spacing-xl) and radius tokens added to report-base.css and competitor-base.css :root blocks, matching portal-base.css. Existing hardcoded values left in place to avoid visual regressions; new rules should use tokens.
 
 **Impact:** `css/portal-base.css` defines `--spacing-xs` through `--spacing-xl` but other files use hardcoded `rem`/`px` values for the same spacing.
 
