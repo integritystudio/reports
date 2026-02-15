@@ -47,6 +47,28 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    background: var(--color-primary-dark);
+    color: white;
+    border-radius: 4px;
+    z-index: 1000;
+    font-weight: 600;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
