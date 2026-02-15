@@ -332,83 +332,10 @@
 
 
 /* ==========================================================================
-   5. OPPORTUNITY REPORT COMPONENTS
-   Shared between: holliday-lighting, integrity-studio
+   5. OPPORTUNITY REPORT COMPONENTS → css/opportunity-components.css
+   Extracted to reduce bundle size for non-opportunity pages.
+   Linked only by opportunity report HTML pages.
    ========================================================================== */
-
-/* TOC box */
-.toc {
-    background: white;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.toc h2 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
-.toc h3 { color: var(--primary); margin-bottom: 0.75rem; }
-.toc ol { padding-left: 1.5rem; }
-.toc li { margin-bottom: 0.3rem; }
-.toc a { color: var(--secondary); text-decoration: none; }
-.toc a:hover { text-decoration: underline; }
-
-/* Opportunity cards */
-.opp-card {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem;
-    margin: 1rem 0;
-    transition: box-shadow 0.2s;
-}
-.opp-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-.opp-card .opp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.75rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-.opp-card .opp-title { font-weight: 600; color: var(--primary); font-size: 1.05rem; }
-.opp-card .opp-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-.opp-card .opp-details { font-size: 0.92rem; }
-.opp-card .opp-details dt { font-weight: 600; color: var(--secondary); margin-top: 0.5rem; }
-.opp-card .opp-details dd { margin-left: 0; margin-bottom: 0.25rem; }
-
-/* Priority summary grid */
-.priority-summary {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 1rem 0;
-}
-.priority-card {
-    background: var(--light);
-    padding: 1rem;
-    border-radius: 8px;
-    text-align: center;
-}
-.priority-card .count { font-size: 2rem; font-weight: 700; color: var(--primary); }
-.priority-card .label { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
-
-/* Action box */
-.action-box {
-    background: #d4edda;
-    border-left: 4px solid #28a745;
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    border-radius: 0 8px 8px 0;
-}
-
-/* Sources section */
-.sources-section { font-size: 0.88rem; }
-.sources-section li { margin-bottom: 0.3rem; word-break: break-word; }
-
-/* Opportunity report table font-size */
-.section-content table { font-size: 0.92rem; }
-
-/* Integrity-studio: opp-card TOC uses --accent for link color */
-[data-brand="integrity-studio"] .toc a { color: var(--accent); }
-[data-brand="integrity-studio"] .priority-summary { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin: 1.5rem 0; }
 
 
 /* ==========================================================================
@@ -877,11 +804,7 @@
 
     [data-brand="zoukmx"] .highlight-box { background: linear-gradient(135deg, #1a2a1a, #1a2a2a); }
 
-    /* --- Opportunity component dark --- */
-    .toc { background: #1a1a2e; }
-    .opp-card { border-color: #333; }
-    .priority-card { background: #222; }
-    .action-box { background: #1a2a1a; }
+    /* Opportunity component dark → css/opportunity-components.css */
 
     /* Dashboard & Form dark → css/leora-referral.css */
 
@@ -905,10 +828,7 @@
 
 /* Dashboard & Form responsive → css/leora-referral.css */
 
-/* --- Opportunity responsive --- */
-@media (max-width: 640px) {
-    [data-brand="integrity-studio"] .priority-summary { grid-template-columns: repeat(2, 1fr); }
-}
+/* Opportunity responsive → css/opportunity-components.css */
 
 /* --- Leora portal responsive --- */
 @media (max-width: 768px) {
@@ -973,10 +893,6 @@
     [data-brand="edgar-nadyne"] .stat-item .stat-number { color: var(--primary); }
 }
 
-/* --- Integrity Studio opportunities print --- */
-@media print {
-    [data-brand="integrity-studio"] .opp-card { break-inside: avoid; }
-    [data-brand="integrity-studio"] header { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-}
+/* Integrity Studio opportunities print → css/opportunity-components.css */
 
 /* Leora dashboard & form print → css/leora-referral.css */

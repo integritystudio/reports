@@ -779,13 +779,15 @@ Then replace all hardcoded stacks with `font-family: var(--font-sans);`.
 
 ---
 
-### D13. Extract opportunity report components from theme.css
+### D13. Extract opportunity report components from theme.css — Done
 
 **Impact:** `css/theme.css` lines 328-407 (~80 lines) define `.toc`, `.opp-card`, `.priority-summary` components used by only 2 brands.
 
 **Fix:** Extract to `css/opportunity-components.css`, link only from affected pages.
 
 **Effort:** Low | **Impact:** Reduces theme.css payload for non-opportunity pages
+
+**Resolution:** Extracted opportunity components (section 5) plus dark mode, responsive, print, and brand-specific rules to `css/opportunity-components.css`. Only `holliday_lighting/illumination_opportunities_report.html` links theme.css; the integrity-studio opportunities page uses inline styles. theme.css reduced by ~80 lines.
 
 ---
 

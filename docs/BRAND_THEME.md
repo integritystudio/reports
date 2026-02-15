@@ -118,6 +118,7 @@ Component CSS extracted from theme.css for pages that need them. Load after them
 | File | Used By | Purpose |
 |------|---------|---------|
 | `css/leora-referral.css` | `leora_research/leora_referral_*.html`, `PerformanceTest/leora_referral_*.html` | Dashboard, form, status badges, milestone tracker (+ dark/responsive/print) |
+| `css/opportunity-components.css` | `holliday_lighting/illumination_opportunities_report.html` | TOC, opp-cards, priority summary, action box (+ dark/responsive/print) |
 
 ## Extracted Layout Files
 
