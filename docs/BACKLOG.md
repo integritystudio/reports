@@ -408,7 +408,7 @@ This enables automated tooling to map translations back to their source files.
 
 ---
 
-### T3. Hub card generation for translations
+### T3. Hub card generation for translations — Done
 
 **Impact:** Translated reports currently have no corresponding cards on `index.html`. Users cannot discover PT-BR versions from the hub.
 
@@ -421,6 +421,8 @@ This enables automated tooling to map translations back to their source files.
 - Group translated cards alongside their English originals in the same `<section>`
 
 **Effort:** Medium
+
+**Resolution:** Added PT-BR hub card in Edghar & Nadyne section with Portuguese category badge, localized description, and "Ver Relatórios" link text. Card deep-links to `edgar_nadyne/index.html#portuguese`. Added `id="portuguese"` anchor to the portal page's Portuguese section.
 
 ---
 
