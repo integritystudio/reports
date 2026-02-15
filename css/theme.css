@@ -714,7 +714,29 @@
 
     /* --- Brand palette dark overrides --- */
 
-    [data-brand="hub"] { --color-primary-dark: #93c5fd; }
+    [data-brand="hub"] {
+        --color-primary-dark: #93c5fd;
+        --color-primary-medium: #60a5fa;
+        --color-primary-light: #3b82f6;
+    }
+
+    [data-brand="ngo-market"] {
+        --color-primary-dark: #93c5fd;
+        --color-primary-medium: #60a5fa;
+        --color-primary-light: #3b82f6;
+        --primary: #60a5fa;
+        --secondary: #93c5fd;
+        --accent: #bfdbfe;
+    }
+
+    [data-brand="skelton-woody"] {
+        --color-primary-dark: #93c5fd;
+        --color-primary-medium: #60a5fa;
+        --color-primary-light: #3b82f6;
+        --primary: #60a5fa;
+        --secondary: #93c5fd;
+        --accent: #bfdbfe;
+    }
 
     [data-brand="holliday-lighting"] {
         --color-bg: #0f172a;
@@ -785,6 +807,8 @@
     /* --- Brand report element dark overrides --- */
 
     [data-brand="skelton-woody"] .highlight-box { background: linear-gradient(135deg, #1a2a35, #1a2e2a); }
+    [data-brand="skelton-woody"] .info-box { background: #1a1a2e; }
+    [data-brand="skelton-woody"] .warning-box { background: #2a2210; }
 
     [data-brand="balloon-collective"] .highlight-box { background: linear-gradient(135deg, #2a1a2e, #2e1a2a); }
 
@@ -804,9 +828,20 @@
     [data-brand="trp-austin"] details summary .detail-count { color: #aaa; }
     [data-brand="trp-austin"] #toc { background: #1a1a2e !important; }
 
-    /* sound-sight-tarot: only unique dark overrides (base dark rules inherited from report-base.css) */
+    [data-brand="sound-sight-tarot"] {
+        --primary: #c0a0e0;
+        --secondary: #d4b8f0;
+        --accent: #e0c98e;
+        --light: #1a1a2e;
+    }
     [data-brand="sound-sight-tarot"] .highlight-box { background: linear-gradient(135deg, #2a1a3a, #251a35); }
     [data-brand="sound-sight-tarot"] .badge-info { background: #2a1a3a; color: #c0a0e0; }
+    [data-brand="sound-sight-tarot"] .info-box { background: #1a1a2e; }
+    [data-brand="sound-sight-tarot"] .rating { color: #e0c98e; }
+
+    [data-brand="ngo-market"] .highlight-box { background: linear-gradient(135deg, #1a2a3e, #1a2a2a); }
+    [data-brand="ngo-market"] .info-box { background: #1a1a2e; }
+    [data-brand="ngo-market"] .warning-box { background: #2a2210; }
 
     [data-brand="integrity-studio"] .highlight-box { background: linear-gradient(135deg, #1a2a3e, #1a3a2e); }
     [data-brand="integrity-studio"] .warning-box { background: #3a3520; }
@@ -824,11 +859,11 @@
     [data-brand="balloon-collective"] .action-card { background: #1a1a2e; }
 
     [data-brand="edgar-nadyne"] .stat-item {
-        border: 1px solid #ddd;
+        border: 1px solid #333;
         color: var(--dark);
-        background: white;
+        background: #1a1a2e;
     }
-    [data-brand="edgar-nadyne"] .stat-item .stat-number { color: var(--primary); }
+    [data-brand="edgar-nadyne"] .stat-item .stat-number { color: #f9a8d4; }
 }
 
 
