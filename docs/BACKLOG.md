@@ -341,6 +341,7 @@ And `id="main-content"` on the main content container.
 ---
 
 ### L2. No `@media print` in Leora forms/dashboards
+**Status: Done** — Print styles added to theme.css for both dashboard (white backgrounds, no shadows, hide interactive buttons, break-inside avoid) and form (white body, visible borders on inputs, hide submit button)
 
 **Impact:** Printing forms or dashboards produces suboptimal output. Low priority since these are interactive prototypes.
 

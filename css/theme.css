@@ -1353,3 +1353,50 @@ body.form-page .container {
     [data-brand="integrity-studio"] .opp-card { break-inside: avoid; }
     [data-brand="integrity-studio"] header { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* --- Leora dashboard print --- */
+@media print {
+    .dashboard { padding: 0; }
+    .dashboard .header {
+        background: #667eea !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        box-shadow: none;
+    }
+    .stat-card {
+        background: white;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    .stat-card:hover { transform: none; }
+    .referrals-section {
+        background: white;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    .referral-card { break-inside: avoid; }
+    .new-referral-btn { display: none; }
+    .milestone-tracker { background: #f8f9fa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* --- Leora form print --- */
+@media print {
+    body.form-page {
+        background: white;
+        padding: 0;
+    }
+    body.form-page .container {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    .form-page .header {
+        background: #667eea !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .form-page .section { break-inside: avoid; }
+    .submit-btn { display: none; }
+    .form-page input,
+    .form-page textarea,
+    .form-page select { border: 1px solid #ccc; }
+}
