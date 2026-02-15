@@ -426,7 +426,7 @@ This enables automated tooling to map translations back to their source files.
 
 ---
 
-### T4. Translation completeness tracking
+### T4. Translation completeness tracking — Done
 
 **Impact:** No visibility into which reports have been translated and which haven't. Currently 3 of 19 audited reports (15.8%) have PT-BR translations.
 
@@ -444,6 +444,8 @@ This enables automated tooling to map translations back to their source files.
 Update this document each time a translation is completed.
 
 **Effort:** Low-Medium
+
+**Resolution:** Created `docs/TRANSLATION_STATUS.md` with full translation matrix covering all 19 unique English reports, current PT-BR coverage (3/19 = 15.8%), naming convention reference, and exclusion list for non-report files.
 
 ---
 
