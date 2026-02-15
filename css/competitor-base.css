@@ -64,7 +64,7 @@
     width: auto;
     height: auto;
     padding: 0.5rem 1rem;
-    background: var(--accent);
+    background: var(--accent, #2563eb);
     color: white;
     border-radius: 4px;
     z-index: 1000;
@@ -73,8 +73,8 @@
 
 body {
     font-family: var(--font-sans);
-    background: var(--bg);
-    color: var(--text);
+    background: var(--bg, #f5f6fa);
+    color: var(--text, #1a1d27);
     line-height: 1.6;
     padding: 2rem;
 }

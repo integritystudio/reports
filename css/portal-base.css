@@ -62,7 +62,7 @@
     width: auto;
     height: auto;
     padding: 0.5rem 1rem;
-    background: var(--color-primary-dark);
+    background: var(--color-primary-dark, #2563eb);
     color: white;
     border-radius: 4px;
     z-index: 1000;
@@ -73,8 +73,8 @@ html { scroll-behavior: smooth; }
 
 body {
     font-family: var(--font-sans);
-    background-color: var(--color-bg);
-    color: var(--color-text-primary);
+    background-color: var(--color-bg, #ffffff);
+    color: var(--color-text-primary, #1a1a1a);
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
 }

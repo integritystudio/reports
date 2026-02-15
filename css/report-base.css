@@ -61,7 +61,7 @@
     width: auto;
     height: auto;
     padding: 0.5rem 1rem;
-    background: var(--primary);
+    background: var(--primary, #1a5f7a);
     color: white;
     border-radius: 4px;
     z-index: 1000;
@@ -72,8 +72,8 @@ body {
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.6;
-    color: var(--dark);
-    background: var(--light);
+    color: var(--dark, #212529);
+    background: var(--light, #f8f9fa);
 }
 
 .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
