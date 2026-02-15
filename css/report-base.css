@@ -37,7 +37,7 @@
     .warning-box { background: #2a2210; }
     .info-box { background: #1a1a2e; }
     blockquote { background: #1a1a2e; color: #aaa; }
-    .source { color: #b0b0b0; }
+    .source { color: #cccccc; }
     .badge-success, .badge-verified, .badge-high { background: #1a3a2a; color: #7dcea0; }
     .badge-warning, .badge-inferred, .badge-medium { background: #3a3020; color: #f0c040; }
     .badge-danger, .badge-unverified { background: #3a1a1e; color: #e08090; }
