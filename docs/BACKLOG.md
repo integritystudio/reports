@@ -853,3 +853,154 @@ Then replace all hardcoded stacks with `font-family: var(--font-sans);`.
 - [ ] Print styles maintain formatting
 - [ ] Leora referral form and dashboard still function
 - [ ] No visual regressions in badge styling
+
+---
+---
+
+# Frontend Design Review — Bugfix Session
+
+Session: February 15, 2026
+Source: `~/dev/active/bugfix-reports-2026-02-15/plan.md`
+Scope: CSS theme correctness, accessibility, dark mode, hub readability
+
+**Resolved this session (10 items):**
+- #1 Skip link CSS added to portal-base.css and competitor-base.css (P0)
+- #2 Low-contrast `.source` text fixed for WCAG AA — light #4a4a4a, dark #cccccc (P0)
+- #3 Incomplete palettes filled for `ngo-market` and `hub` brands (P0)
+- #4 `balloon-collective` duplicate `--color-primary-dark`/`--color-primary-medium` fixed (P0)
+- #5 Card descriptions rewritten — Flesch RE improved from ~5.8 to ~45 (P1)
+- #6 `integrity-studio` primary/secondary contrast improved (P1)
+- #7 `ngo-market` dark mode overrides added (P2)
+- #8 `edgar-nadyne` `.stat-item` dark mode fixed — no longer white background (P2)
+- #9 `skelton-woody` dark mode palette + component overrides added (P2)
+- #10 `sound-sight-tarot` dark mode palette + component overrides added (P2)
+
+---
+
+## Unresolved: High Priority
+
+### F1. Skip link HTML markup missing from portal/competitor pages
+**Status:** Open
+**Priority:** High
+**Source:** Code review finding H1
+
+Skip link CSS (`.skip-link`, `.skip-link:focus`) was added to `portal-base.css` and `competitor-base.css`, but no HTML files include the actual `<a class="skip-link">` element or `id="main"` target.
+
+**Affected files (~15-20):**
+- `index.html`
+- `balloon-collective/index.html`
+- `edgar_nadyne/index.html`
+- `holliday_lighting/index.html`
+- `leora_research/index.html`
+- `ngo-market/index.html`
+- `skelton-woody/index.html`
+- `trp-austin/index.html`
+- `capital_city/index.html`
+- `zoukmx/index.html`
+- All competitor analysis HTML files (`*/competitor-analysis.html`)
+
+**Fix:** Add after `<body>` in each file:
+```html
+<a href="#main" class="skip-link">Skip to main content</a>
+```
+Add `id="main"` to the `<main>` element (or create `<main id="main">` wrapper).
+
+**Effort:** Low (mechanical, ~2 min per file)
+
+---
+
+## Unresolved: Medium Priority
+
+### F2. `.source` color defined in 3 locations (fragile cascade)
+**Status:** Open
+**Priority:** Medium
+**Source:** Code review finding M2
+
+`.source` color is set in:
+1. `report-base.css` line 162 — `color: #4a4a4a` (light)
+2. `report-base.css` dark mode block — `color: #cccccc` (dark)
+3. `theme.css` line 271 — `color: #4a4a4a` (shared override)
+4. `theme.css` holliday-lighting brand override — `color: #4a4a4a`
+
+Relies on CSS load order. Future edits to one file may not propagate.
+
+**Fix:** Remove `.source` from `report-base.css` body (keep only in dark mode block). Consolidate light-mode `.source` in `theme.css` only.
+
+**Effort:** Low
+
+---
+
+### F3. Sound-sight-tarot dark mode missing portal variables
+**Status:** Open
+**Priority:** Medium
+**Source:** Code review finding M1
+
+Dark mode defines `--primary`, `--secondary`, `--accent`, `--light` but not portal variables (`--color-primary-dark`, `--color-primary-medium`, `--color-primary-light`). If a sound-sight-tarot portal page exists, it would use generic blue instead of brand purple/gold.
+
+**Fix:** Add portal variable overrides to the dark mode block:
+```css
+[data-brand="sound-sight-tarot"] {
+    --color-primary-dark: #c0a0e0;
+    --color-primary-medium: #a080c0;
+    --color-primary-light: #7b4b94;
+    /* existing --primary, --secondary, --accent, --light */
+}
+```
+
+**Effort:** Low
+
+---
+
+### F4. No CSS variable fallbacks on critical properties
+**Status:** Open
+**Priority:** Medium
+**Source:** Code review finding M3
+
+All CSS variable references lack fallback values (e.g., `color: var(--primary)` instead of `color: var(--primary, #1a5f7a)`). If a `data-brand` attribute has a typo or is missing, elements render with no color.
+
+**Fix:** Add fallback values to critical properties (color, background, border-color) in base CSS files.
+
+**Effort:** Medium (many rules to update across 3 base files)
+
+---
+
+## Unresolved: Deferred (P3-P4)
+
+### F5. Generic font stack across all base files
+**Status:** Deferred
+**Priority:** P3
+**Source:** Bugfix plan item #11
+
+All three base CSS files use the same generic system font stack. Consider distinctive typefaces (DM Sans for portals, Source Serif Pro for reports) to differentiate content types.
+
+**Note:** Related to existing backlog item D2 (font family duplication, marked Done for variable consolidation). This item is about introducing new typefaces, not deduplication.
+
+**Effort:** Medium
+
+---
+
+### F6. Hub layout monotony
+**Status:** Deferred
+**Priority:** P4
+**Source:** Bugfix plan item #12
+
+`index.html` has 10 sections, most with only 1 card. The layout is repetitive. Consider grouping related brands, adding visual hierarchy, or using different card sizes.
+
+**Effort:** High (design + implementation)
+
+---
+
+### F7. CSS variable namespace consolidation
+**Status:** Deferred
+**Priority:** P4
+**Source:** Bugfix plan item #13
+
+Four parallel CSS variable namespaces exist across the base files:
+- Portal: `--color-primary-dark`, `--color-primary-medium`, `--color-primary-light`
+- Report: `--primary`, `--secondary`, `--accent`, `--light`, `--dark`, `--border`
+- Competitor: `--bg`, `--surface`, `--text`, `--accent`, `--accent2`
+- Holliday-lighting: `--surface`, `--ink`, `--glow`, custom tokens
+
+Unifying would reduce cognitive overhead but risks breaking existing pages.
+
+**Effort:** High (cross-cutting refactor with regression risk)
