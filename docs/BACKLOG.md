@@ -1004,3 +1004,43 @@ Four parallel CSS variable namespaces exist across the base files:
 Unifying would reduce cognitive overhead but risks breaking existing pages.
 
 **Effort:** High (cross-cutting refactor with regression risk)
+
+---
+
+## Follow-up from Final Review (Feb 15, Session 2)
+
+### F8. Standardize skip link target ID across all pages
+**Status:** Open
+**Priority:** High
+**Source:** Final review finding H1
+
+Research/report pages use `id="main-content"` with `href="#main-content"`, while portal/competitor pages use `id="main"` with `href="#main"`. Standardize on `id="main"` site-wide.
+
+**Effort:** Low
+
+---
+
+### F9. Add skip links to remaining 12 HTML files
+**Status:** Open
+**Priority:** High
+**Source:** Final review finding H2
+
+F1 covered 20 portal/competitor pages. Still missing:
+- 3 PT-BR translations (edgar_nadyne/)
+- 2 competitor analyses (integrity-studio-ai/, capital_city/)
+- 2 opportunities reports
+- 1 marketing plan (ngo-market/)
+- 4 dashboard/form pages (leora_research/, PerformanceTest/)
+
+**Effort:** Low (mechanical)
+
+---
+
+### F10. Standardize skip link text to "Skip to main content"
+**Status:** Open
+**Priority:** Medium
+**Source:** Final review finding H3
+
+Pre-existing research pages use "Skip to content" while newer pages use "Skip to main content". Standardize all to "Skip to main content".
+
+**Effort:** Low
