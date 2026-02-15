@@ -37,7 +37,7 @@
     .warning-box { background: #2a2210; }
     .info-box { background: #1a1a2e; }
     blockquote { background: #1a1a2e; color: #aaa; }
-    .source { color: #aaa; }
+    .source { color: #b0b0b0; }
     .badge-success, .badge-verified, .badge-high { background: #1a3a2a; color: #7dcea0; }
     .badge-warning, .badge-inferred, .badge-medium { background: #3a3020; color: #f0c040; }
     .badge-danger, .badge-unverified { background: #3a1a1e; color: #e08090; }
@@ -159,7 +159,7 @@ blockquote {
     color: #555;
 }
 
-.source { font-size: 0.9rem; color: #555; font-style: italic; }
+.source { font-size: 0.9rem; color: #4a4a4a; font-style: italic; }
 
 .badge {
     display: inline-block;

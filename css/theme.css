@@ -220,7 +220,7 @@
 [data-brand="trp-austin"] details details { border-color: #edf2f7; }
 
 /* --- Holliday Lighting — report element overrides --- */
-[data-brand="holliday-lighting"] .source { font-size: 0.9rem; color: #555; font-style: italic; }
+[data-brand="holliday-lighting"] .source { font-size: 0.9rem; color: #4a4a4a; font-style: italic; }
 [data-brand="holliday-lighting"] section h4 { color: var(--primary); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
 [data-brand="holliday-lighting"] .section-content table { font-size: 0.92rem; }
 
@@ -258,7 +258,7 @@
    ========================================================================== */
 
 /* Source text — consistent across all report themes */
-.source { font-size: 0.9rem; color: #555; }
+.source { font-size: 0.9rem; color: #4a4a4a; }
 
 
 /* ==========================================================================
