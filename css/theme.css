@@ -827,6 +827,9 @@
     [data-brand="trp-austin"] #toc { background: #1a1a2e !important; }
 
     [data-brand="sound-sight-tarot"] {
+        --color-primary-dark: #c0a0e0;
+        --color-primary-medium: #a080c0;
+        --color-primary-light: #7b4b94;
         --primary: #c0a0e0;
         --secondary: #d4b8f0;
         --accent: #e0c98e;
