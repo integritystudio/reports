@@ -156,10 +156,13 @@
     .sources a:hover { color: var(--accent); }
     .na { color: var(--text-muted); font-style: italic; }
     .rating { color: var(--amber); font-weight: 600; }
+    .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    .skip-link:focus { position: fixed; left: 1rem; top: 1rem; width: auto; height: auto; padding: 0.5rem 1rem; background: var(--accent, #2563eb); color: white; border-radius: 4px; z-index: 1000; font-weight: 600; }
   </style>
 </head>
 <body>
-  <div class="container">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="main" class="container">
     <h1>Capital City Village - Competitive Landscape Analysis</h1>
     <p class="subtitle">Capital City Village | 501(c)(3) Senior Aging-in-Place Nonprofit | Austin, TX 78705</p>
     <p class="date">Research Date: February 13, 2026</p>

@@ -4,44 +4,17 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-## Open: High Priority
+## Completed: Phase 2 (Feb 16)
 
-### F8. Standardize skip link target ID across all pages
-**Priority:** High
-**Source:** Final review finding H1 (Feb 15)
-
-Research/report pages use `id="main-content"` with `href="#main-content"`, while portal/competitor pages use `id="main"` with `href="#main"`. Standardize on `id="main"` site-wide.
-
-**Effort:** Low
-
----
-
-### F9. Add skip links to remaining 12 HTML files
-**Priority:** High
-**Source:** Final review finding H2 (Feb 15)
-
-F1 covered 20 portal/competitor pages. Still missing:
-- 3 PT-BR translations (edgar_nadyne/)
-- 2 competitor analyses (integrity-studio-ai/, capital_city/)
-- 2 opportunities reports
-- 1 marketing plan (ngo-market/)
-- 4 dashboard/form pages (leora_research/, PerformanceTest/)
-
-**Effort:** Low (mechanical)
+- **F8.** Standardize skip link target ID — all pages now use `id="main"` with `href="#main"`
+- **F9.** Add skip links to remaining 11 HTML files — all pages now have skip-links
+- **F10.** Standardize skip link text — all pages now use "Skip to main content"
+- **F11.** Add responsive breakpoints to ngo-market marketing plan — now uses marketing-plan.css
+- **F12.** Wrap bare tables with overflow-x container — 307 tables wrapped across 30 files
 
 ---
 
 ## Open: Medium Priority
-
-### F10. Standardize skip link text to "Skip to main content"
-**Priority:** Medium
-**Source:** Final review finding H3 (Feb 15)
-
-Pre-existing research pages use "Skip to content" while newer pages use "Skip to main content". Standardize all to "Skip to main content".
-
-**Effort:** Low
-
----
 
 ### T1. Create `content-translator` skill
 **Priority:** Medium
@@ -114,26 +87,27 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Feb 14 — DRY Review | D1-D13 (13 items) |
 | Feb 15 — Design Review S1 | #1-#10 (10 items) |
 | Feb 15 — Design Review S2 | F1-F4 (4 items) |
-| **Total** | **46 items** |
+| Feb 16 — OTEL Improvement Phase 2 | F8-F12 (5 items) |
+| **Total** | **51 items** |
 
-### Scorecard (Feb 13 baseline)
+### Scorecard (Phase 2 — Feb 16)
 
-| Directory | Dark Mode | Mobile | Tables | Accessibility | Translation | Overall |
-|-----------|-----------|--------|--------|---------------|-------------|---------|
-| `index.html` (hub) | Pass | Pass | N/A | Good | -- | **A** |
-| `capital_city/` | Pass | Pass | Pass | Good | -- | **A** |
-| `holliday_lighting/index.html` | Pass | Pass | N/A | Good | -- | **A-** |
-| `holliday_lighting/` (reports) | Pass | Pass | Pass | Good | -- | **B+** |
-| `leora_research/index.html` | Pass | Pass | N/A | Good | -- | **A-** |
-| `leora_research/` (forms) | Pass | Pass | N/A | Good | -- | **B+** |
-| `balloon-collective/` | Pass | Pass | Pass | Good | -- | **B+** |
-| `edgar_nadyne/` | Pass | Pass | Pass | Good | 3/3 PT-BR | **B+** |
-| `integrity-studio-ai/` | Pass | Pass | Pass | Good | -- | **B+** |
-| `trp-austin/` | Pass | Pass | Pass | Good | -- | **B+** |
-| `zoukmx/` | Pass | Pass | Pass | Good | -- | **B+** |
-| `ngo-market/` | Pass | Pass | N/A | Good | -- | **B** |
-| `PerformanceTest/` | Pass | Pass | N/A | Good | -- | **B+** |
-| `skelton-woody/` | Pass | Pass | N/A | Good | -- | **B+** |
+All 12 directories at grade **A**. Baseline → Phase 1 → Phase 2 progression:
+
+| Directory | Baseline | Phase 1 | Phase 2 | Dark Mode | Mobile | Tables | A11y |
+|-----------|----------|---------|---------|-----------|--------|--------|------|
+| `balloon-collective/` | D | B | **A** | Pass | Pass | Pass | Pass |
+| `capital_city/` | A | B | **A** | Pass | Pass | Pass | Pass |
+| `edgar_nadyne/` | D | C | **A** | Pass | Pass | Pass | Pass |
+| `holliday_lighting/` | C | C | **A** | Pass | Pass | Pass | Pass |
+| `integrity-studio-ai/` | D | B | **A** | Pass | Pass | Pass | Pass |
+| `leora_research/` | D | B | **A** | Pass | Pass | Pass | Pass |
+| `ngo-market/` | D | D | **A** | Pass | Pass | Pass | Pass |
+| `PerformanceTest/` | D | B | **A** | Pass | Pass | Pass | Pass |
+| `skelton-woody/` | D | B | **A** | Pass | Pass | Pass | Pass |
+| `sound-sight-tarot/` | D | B | **A** | Pass | Pass | Pass | Pass |
+| `trp-austin/` | D | B | **A** | Pass | Pass | Pass | Pass |
+| `zoukmx/` | D | B | **A** | Pass | Pass | Pass | Pass |
 
 ### DRY Testing Checklist
 

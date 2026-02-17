@@ -233,9 +233,12 @@
             header h1 { font-size: 1.6rem; }
             .priority-summary { grid-template-columns: repeat(2, 1fr); }
         }
+    .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    .skip-link:focus { position: fixed; left: 1rem; top: 1rem; width: auto; height: auto; padding: 0.5rem 1rem; background: var(--accent, #2563eb); color: white; border-radius: 4px; z-index: 1000; font-weight: 600; }
     </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to main content</a>
 <header>
     <div class="container">
         <h1>Integrity Studio AI</h1>
@@ -247,7 +250,7 @@
     </div>
 </header>
 
-<main class="container">
+<main id="main" class="container">
 
     <div class="executive-summary">
         <h2>Executive Summary</h2>
@@ -365,6 +368,7 @@
             </div>
 
             <h3>Austin Market Target Segments</h3>
+            <div style="overflow-x:auto">
             <table>
                 <tr><th>Segment</th><th>Austin Presence</th><th>Why Target</th></tr>
                 <tr><td>Enterprise AI Teams</td><td>Dell, Oracle, IBM, Apple, Meta</td><td>Large LLM deployments needing compliance</td></tr>
@@ -458,6 +462,7 @@
             </div>
 
             <h3>SEO Target Keywords</h3>
+            <div style="overflow-x:auto">
             <table>
                 <tr><th>Keyword</th><th>Intent</th><th>Competition</th><th>Priority</th></tr>
                 <tr><td>EU AI Act compliance tools</td><td>Commercial</td><td>Medium (growing)</td><td><span class="badge badge-high">High</span></td></tr>
@@ -468,8 +473,10 @@
                 <tr><td>nonprofit AI governance</td><td>Niche</td><td>Very Low</td><td><span class="badge badge-medium">Medium</span></td></tr>
                 <tr><td>AI compliance audit</td><td>Commercial</td><td>Medium</td><td><span class="badge badge-medium">Medium</span></td></tr>
             </table>
+            </div>
 
             <h3>Seasonal Marketing Calendar</h3>
+            <div style="overflow-x:auto">
             <table>
                 <tr><th>Period</th><th>Focus</th><th>Activities</th></tr>
                 <tr><td>Feb&ndash;Mar 2026</td><td>SXSW &amp; NTC season</td><td>Conference presence, Austin community engagement, Product Hunt launch prep</td></tr>
@@ -479,6 +486,7 @@
                 <tr><td>Sep&ndash;Oct 2026</td><td>Conference season</td><td>KubeCon, AI conferences, partnership announcements</td></tr>
                 <tr><td>Nov&ndash;Dec 2026</td><td>Annual planning</td><td>Year-in-review content, 2027 compliance outlook, enterprise renewals</td></tr>
             </table>
+            </div>
 
             <div class="opp-card">
                 <div class="opp-header">
@@ -565,6 +573,7 @@
             </div>
 
             <h3>Named Partnership Targets</h3>
+            <div style="overflow-x:auto">
             <table>
                 <tr><th>Category</th><th>Target</th><th>Approach</th><th>Cost</th></tr>
                 <tr><td>MLOps Platform</td><td>Weights &amp; Biases, MLflow, Neptune.ai</td><td>Integration partnership &mdash; complementary products</td><td>$0</td></tr>
@@ -642,6 +651,7 @@
             </div>
 
             <h3>Certification Roadmap</h3>
+            <div style="overflow-x:auto">
             <table>
                 <tr><th>Certification</th><th>Cost</th><th>Timeline</th><th>Priority</th><th>Unlocks</th></tr>
                 <tr><td>SOC 2 Type II</td><td>$20K&ndash;$35K</td><td>3&ndash;6 months</td><td><span class="badge badge-high">High</span></td><td>Enterprise sales, marketplace listings</td></tr>
@@ -660,6 +670,7 @@
         <div class="section-content">
 
             <h3>Review &amp; Directory Platform Comparison</h3>
+            <div style="overflow-x:auto">
             <table>
                 <tr><th>Platform</th><th>Signup</th><th>Lead Cost</th><th>Details</th><th>Priority</th></tr>
                 <tr>
@@ -747,6 +758,7 @@
                     <td><span class="badge badge-high">High</span></td>
                 </tr>
             </table>
+            </div>
 
             <div class="opp-card">
                 <div class="opp-header">
@@ -818,6 +830,7 @@
             </div>
 
             <h3>Industry Trend Assessment</h3>
+            <div style="overflow-x:auto">
             <table>
                 <tr><th>Trend</th><th>Impact on Integrity Studio</th><th>Action</th></tr>
                 <tr>
@@ -851,8 +864,10 @@
                     <td>Roadmap multimodal trace support for 2027.</td>
                 </tr>
             </table>
+            </div>
 
             <h3>Competitive Landscape Update (2026)</h3>
+            <div style="overflow-x:auto">
             <table>
                 <tr><th>Competitor</th><th>Recent Development</th><th>Implication</th></tr>
                 <tr><td>Langfuse</td><td>Acquired by ClickHouse (Jan 2026). 2,000+ customers, 26M SDK installs/mo.</td><td>No longer independent. Migration opportunity.</td></tr>
@@ -920,6 +935,7 @@
             </ol>
 
             <h3>Investment Summary</h3>
+            <div style="overflow-x:auto">
             <table>
                 <tr><th>Investment</th><th>Cost</th><th>Expected ROI</th><th>Timeline</th></tr>
                 <tr><td>Platform listings (G2, Capterra, Built In, etc.)</td><td>$0</td><td>Highest &mdash; enterprise discoverability</td><td>Same day</td></tr>
