@@ -19,6 +19,21 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## Open: Accessibility (Remaining)
+
+### A11. Report-level external links missing new-window indicator
+**Priority:** Moderate (WCAG 3.2.5 best practice)
+**Source:** Code review finding H1 (Feb 18)
+**Files:** All `competitor-analysis.html` and `*_research.html` files
+
+233 `target="_blank"` links in report-level HTML files lack `(opens in new tab)` sr-only text. The `.sr-only` class is defined in `portal-base.css` but not in `report-base.css` or `competitor-base.css`.
+
+**Fix:** Add `.sr-only` to `report-base.css` and `competitor-base.css`, then add sr-only spans to report-level external links.
+
+**Effort:** High (233 links across ~30 files)
+
+---
+
 ## Open: Medium Priority
 
 ### T1. Create `content-translator` skill

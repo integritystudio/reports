@@ -4,6 +4,39 @@ All completed backlog items, organized by session.
 
 ---
 
+## February 18, 2026 — Accessibility Audit Implementation
+
+Source: `docs/BACKLOG.md` items A1-A10
+
+| Item | Description |
+|------|-------------|
+| A1 | Skip link + `id="main"` added to `ai-observability/index.html` |
+| A2 | `<div>` landmarks replaced with `<header>`, `<main>`, `<footer>` in `holliday_lighting/index.html` |
+| A3 | `aria-hidden="true"` added to 10 decorative SVGs in `holliday_lighting/index.html` |
+| A4 | Removed `a { outline: none; }` from `portal-base.css` (`:focus-visible` rule sufficient) |
+| A5 | `lang="pt-BR"` added to Portuguese `<section>` in `edgar_nadyne/index.html` |
+| A6 | `scroll-behavior: smooth` wrapped in `prefers-reduced-motion: no-preference` guard |
+| A7 | Global `prefers-reduced-motion: reduce` block added to `portal-base.css` and `report-base.css` |
+| A8 | `.sr-only` class defined; `(opens in new tab)` added to `target="_blank"` portal link |
+| A9 | `aria-label="Site navigation"` added to `.back-nav` on 10 portals |
+| A10 | `aria-label` (matching card title) added to 60+ card links across hub + 12 portals |
+
+---
+
+## February 16, 2026 — OTEL Improvement Phase 2
+
+Source: `docs/BACKLOG.md` items F8-F12
+
+| Item | Description |
+|------|-------------|
+| F8 | Standardize skip link target ID — all pages now use `id="main"` with `href="#main"` |
+| F9 | Add skip links to remaining 11 HTML files — all pages now have skip-links |
+| F10 | Standardize skip link text — all pages now use "Skip to main content" |
+| F11 | Add responsive breakpoints to ngo-market marketing plan — now uses marketing-plan.css |
+| F12 | Wrap bare tables with overflow-x container — 307 tables wrapped across 30 files |
+
+---
+
 ## February 15, 2026 — Frontend Design Review (Session 2)
 
 Source: `docs/BACKLOG.md` items F1-F4
