@@ -275,6 +275,14 @@ details details summary { font-size: 0.95rem; padding: 0.6rem 1rem; }
     th, td { padding: 0.4rem; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 @media print {
     body { background: white; }
     .container { max-width: 100%; }
