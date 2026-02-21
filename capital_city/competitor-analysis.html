@@ -158,6 +158,7 @@
     .rating { color: var(--amber); font-weight: 600; }
     .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
     .skip-link:focus { position: fixed; left: 1rem; top: 1rem; width: auto; height: auto; padding: 0.5rem 1rem; background: var(--accent, #2563eb); color: white; border-radius: 4px; z-index: 1000; font-weight: 600; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   </style>
 </head>
 <body>
@@ -194,7 +195,7 @@
       <div class="profile-grid">
         <div class="profile-item">
           <div class="label">Website</div>
-          <div class="value"><a href="https://capitalcityvillage.org" target="_blank">capitalcityvillage.org</a></div>
+          <div class="value"><a href="https://capitalcityvillage.org" target="_blank">capitalcityvillage.org <span class="sr-only">(opens in new tab)</span></a></div>
         </div>
         <div class="profile-item">
           <div class="label">Location</div>
@@ -250,7 +251,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong><a href="https://www.aipsolutions.org/" target="_blank">Aging in Place Solutions</a></strong></td>
+            <td><strong><a href="https://www.aipsolutions.org/" target="_blank">Aging in Place Solutions <span class="sr-only">(opens in new tab)</span></a></strong></td>
             <td><span class="badge badge-nonprofit">Nonprofit</span></td>
             <td>Austin, TX</td>
             <td>
@@ -265,7 +266,7 @@
             <td>Assessment-focused model; personalized aging plans; professional home safety evaluation &mdash; more clinical than village model</td>
           </tr>
           <tr>
-            <td><strong><a href="https://www.austinup.org/" target="_blank">AustinUP</a></strong></td>
+            <td><strong><a href="https://www.austinup.org/" target="_blank">AustinUP <span class="sr-only">(opens in new tab)</span></a></strong></td>
             <td><span class="badge badge-nonprofit">Nonprofit</span></td>
             <td>Austin, TX</td>
             <td>
@@ -280,7 +281,7 @@
             <td>Advocacy and policy focus; age-friendly Austin initiatives; broader systemic approach vs. CCV's direct member services</td>
           </tr>
           <tr>
-            <td><strong><a href="https://www.agingservicescouncil.org/" target="_blank">Aging Services Council of Central TX</a></strong></td>
+            <td><strong><a href="https://www.agingservicescouncil.org/" target="_blank">Aging Services Council of Central TX <span class="sr-only">(opens in new tab)</span></a></strong></td>
             <td><span class="badge badge-community">Community</span></td>
             <td>Central Texas</td>
             <td>
@@ -295,7 +296,7 @@
             <td>Coordination body for aging service providers; referral network rather than direct services; potential CCV referral partner</td>
           </tr>
           <tr>
-            <td><strong><a href="https://www.capcog.org/divisions/area-agency-on-aging/adrc/" target="_blank">ADRC (CAPCOG)</a></strong></td>
+            <td><strong><a href="https://www.capcog.org/divisions/area-agency-on-aging/adrc/" target="_blank">ADRC (CAPCOG) <span class="sr-only">(opens in new tab)</span></a></strong></td>
             <td><span class="badge badge-government">Government</span></td>
             <td>10-county Central TX</td>
             <td>
@@ -310,7 +311,7 @@
             <td>Government resource center; comprehensive benefits navigation; 10-county coverage; information hub rather than community builder</td>
           </tr>
           <tr>
-            <td><strong><a href="https://www.mealsonwheelscentraltexas.org/" target="_blank">Meals on Wheels Central TX</a></strong></td>
+            <td><strong><a href="https://www.mealsonwheelscentraltexas.org/" target="_blank">Meals on Wheels Central TX <span class="sr-only">(opens in new tab)</span></a></strong></td>
             <td><span class="badge badge-nonprofit">Nonprofit</span></td>
             <td>Travis County + region</td>
             <td>
@@ -325,7 +326,7 @@
             <td>Largest senior-serving nonprofit in region; daily contact with isolated seniors; nutrition-focused; strong brand recognition and donor base</td>
           </tr>
           <tr>
-            <td><strong><a href="https://halcyonhome.com/" target="_blank">Halcyon Home</a></strong></td>
+            <td><strong><a href="https://halcyonhome.com/" target="_blank">Halcyon Home <span class="sr-only">(opens in new tab)</span></a></strong></td>
             <td><span class="badge badge-forprofit">For-Profit</span></td>
             <td>Austin, TX</td>
             <td>
@@ -340,7 +341,7 @@
             <td>PA-founded; clinical approach; paid professional caregivers vs. CCV's volunteer model; direct care competitor for higher-need seniors</td>
           </tr>
           <tr>
-            <td><strong><a href="https://www.voponioncreek.com/" target="_blank">Village on the Park (Onion Creek)</a></strong></td>
+            <td><strong><a href="https://www.voponioncreek.com/" target="_blank">Village on the Park (Onion Creek) <span class="sr-only">(opens in new tab)</span></a></strong></td>
             <td><span class="badge badge-forprofit">For-Profit</span></td>
             <td>South Austin</td>
             <td>
@@ -355,7 +356,7 @@
             <td>Facility-based alternative to aging in place; amenity-rich environment; competes for seniors considering leaving their homes</td>
           </tr>
           <tr>
-            <td><strong><a href="https://www.villageatthetriangle.com/" target="_blank">The Village at The Triangle</a></strong></td>
+            <td><strong><a href="https://www.villageatthetriangle.com/" target="_blank">The Village at The Triangle <span class="sr-only">(opens in new tab)</span></a></strong></td>
             <td><span class="badge badge-forprofit">For-Profit</span></td>
             <td>Austin (Central)</td>
             <td>
@@ -472,15 +473,15 @@
     <!-- Sources -->
     <div class="sources">
       <h3>Sources &amp; References</h3>
-      <a href="https://capitalcityvillage.org" target="_blank">Capital City Village - Official Website</a>
-      <a href="https://www.capitalcityvillage.org/pages/6-member-benefits" target="_blank">Capital City Village - Membership Benefits</a>
-      <a href="https://www.guidestar.org/profile/27-0539952" target="_blank">GuideStar - Capital City Village Profile (EIN: 27-0539952)</a>
-      <a href="https://www.helpfulvillage.com/the-village-movement" target="_blank">Village-to-Village Network - The Village Movement</a>
-      <a href="https://www.aarp.org/pri/topics/livable-communities/housing/the-village-model-current-trends-challenges-opportunities/" target="_blank">AARP - The Village Model: Trends, Challenges, Opportunities</a>
-      <a href="https://www.aipsolutions.org/" target="_blank">Aging in Place Solutions</a>
-      <a href="https://www.austinup.org/" target="_blank">AustinUP</a>
-      <a href="https://www.capcog.org/divisions/area-agency-on-aging/adrc/" target="_blank">ADRC - Capital Area Council of Governments</a>
-      <a href="https://www.hhs.texas.gov/sites/default/files/documents/proposed-texas-state-plan-aging-2026-2028.pdf" target="_blank">Texas State Plan on Aging 2026-2028</a>
+      <a href="https://capitalcityvillage.org" target="_blank">Capital City Village - Official Website <span class="sr-only">(opens in new tab)</span></a>
+      <a href="https://www.capitalcityvillage.org/pages/6-member-benefits" target="_blank">Capital City Village - Membership Benefits <span class="sr-only">(opens in new tab)</span></a>
+      <a href="https://www.guidestar.org/profile/27-0539952" target="_blank">GuideStar - Capital City Village Profile (EIN: 27-0539952) <span class="sr-only">(opens in new tab)</span></a>
+      <a href="https://www.helpfulvillage.com/the-village-movement" target="_blank">Village-to-Village Network - The Village Movement <span class="sr-only">(opens in new tab)</span></a>
+      <a href="https://www.aarp.org/pri/topics/livable-communities/housing/the-village-model-current-trends-challenges-opportunities/" target="_blank">AARP - The Village Model: Trends, Challenges, Opportunities <span class="sr-only">(opens in new tab)</span></a>
+      <a href="https://www.aipsolutions.org/" target="_blank">Aging in Place Solutions <span class="sr-only">(opens in new tab)</span></a>
+      <a href="https://www.austinup.org/" target="_blank">AustinUP <span class="sr-only">(opens in new tab)</span></a>
+      <a href="https://www.capcog.org/divisions/area-agency-on-aging/adrc/" target="_blank">ADRC - Capital Area Council of Governments <span class="sr-only">(opens in new tab)</span></a>
+      <a href="https://www.hhs.texas.gov/sites/default/files/documents/proposed-texas-state-plan-aging-2026-2028.pdf" target="_blank">Texas State Plan on Aging 2026-2028 <span class="sr-only">(opens in new tab)</span></a>
     </div>
   </div>
 </body>
