@@ -5,7 +5,7 @@
 
 :root {
     --primary: #1a5f7a;
-    --secondary: #159895;
+    --secondary: #0f766e;
     --accent: #57c5b6;
     --light: #f8f9fa;
     --dark: #212529;
@@ -28,6 +28,7 @@
         --light: #1a1a2e;
         --dark: #e0e0e0;
         --border: #333;
+        --secondary: #14b8a6;
     }
     body { background: #0f0f23; }
     section, .executive-summary { background: #1a1a2e; }

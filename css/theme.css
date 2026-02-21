@@ -38,10 +38,10 @@
 /* --- Hub (root index.html) --- */
 [data-brand="hub"] {
     --color-primary-dark: #1d4ed8;
-    --color-primary-medium: #3b82f6;
+    --color-primary-medium: #2563eb;
     --color-primary-light: #60a5fa;
     --primary: #1d4ed8;
-    --secondary: #3b82f6;
+    --secondary: #2563eb;
     --accent: #60a5fa;
 }
 
@@ -94,10 +94,10 @@
 /* --- Illumination Holiday Lighting --- */
 [data-brand="holliday-lighting"] {
     --color-primary-dark: #1a5f7a;
-    --color-primary-medium: #159895;
+    --color-primary-medium: #0f766e;
     --color-primary-light: #57c5b6;
     --primary: #1a5f7a;
-    --secondary: #159895;
+    --secondary: #0f766e;
     --accent: #57c5b6;
     /* Portal-base variable mappings (eliminates body override in portal-layout.css) */
     --color-bg: #faf9f7;
@@ -130,10 +130,10 @@
 /* --- Integrity Studio (NGO Market) --- */
 [data-brand="ngo-market"] {
     --color-primary-dark: #1e40af;
-    --color-primary-medium: #3b82f6;
+    --color-primary-medium: #2563eb;
     --color-primary-light: #60a5fa;
     --primary: #1e40af;
-    --secondary: #3b82f6;
+    --secondary: #2563eb;
     --accent: #60a5fa;
 }
 
@@ -163,7 +163,7 @@
 /* --- PerformanceTest (Leora perf variants) --- */
 [data-brand="performancetest"] {
     --color-primary-dark: #065f46;
-    --color-primary-medium: #059669;
+    --color-primary-medium: #047857;
     --color-primary-light: #10b981;
 }
 
@@ -189,9 +189,9 @@
 /* --- Leora Home Health --- */
 [data-brand="leora"] {
     --color-primary-dark: #0d9488;
-    --color-primary-medium: #0d9488;
+    --color-primary-medium: #0f766e;
     --color-primary-light: #14b8a6;
-    --color-accent: #0d9488;
+    --color-accent: #0f766e;
     --color-accent-light: #f0fdfa;
     --color-shadow: rgba(0, 0, 0, 0.08);
     --color-shadow-hover: rgba(0, 0, 0, 0.12);
@@ -324,7 +324,7 @@
     display: inline-block;
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
 }
@@ -716,6 +716,7 @@
         --color-primary-dark: #93c5fd;
         --color-primary-medium: #60a5fa;
         --color-primary-light: #3b82f6;
+        --secondary: #60a5fa;
     }
 
     [data-brand="ngo-market"] {
@@ -751,6 +752,7 @@
         --border-light: #334155;
         --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
         --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15);
+        --secondary: #14b8a6;
     }
 
     [data-brand="balloon-collective"] {

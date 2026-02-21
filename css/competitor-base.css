@@ -164,7 +164,7 @@ th {
     font-weight: 600;
     color: var(--text-muted);
     text-transform: uppercase;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     letter-spacing: 0.05em;
     white-space: nowrap;
     border-bottom: 2px solid var(--border);
@@ -182,7 +182,7 @@ tr:hover td { background: var(--surface2); }
     display: inline-block;
     padding: 0.15rem 0.5rem;
     border-radius: 6px;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.03em;

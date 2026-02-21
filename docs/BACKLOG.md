@@ -34,6 +34,37 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+### A12. Dark mode `--secondary` contrast for remaining brands
+**Priority:** Moderate (WCAG 1.4.3)
+**Source:** Contrast readability audit (Feb 20)
+**Files:** `css/theme.css` dark mode section
+
+Brands without dark-mode `--secondary` overrides may fail WCAG AA (4.5:1) for links and h3 text on dark section backgrounds (`#1a1a2e`):
+- `balloon-collective`: `#c44569` → 3.58:1
+- `edgar-nadyne`: `#A0456E` → ~4.0:1
+- `zoukmx`: `#2d6a4f` → ~3.3:1
+- `performancetest`: no `--secondary` defined (inherits base `#0f766e` which gets dark override `#14b8a6` — OK)
+- `trp-austin`: `#2b6cb0` → 3.16:1 (mitigated by explicit dark CSS rules for `a` and `h3` targeting `#63b3ed`)
+
+**Fix:** Add `--secondary` dark-mode overrides in the `@media (prefers-color-scheme: dark)` block of `theme.css` for balloon-collective, edgar-nadyne, and zoukmx. TRP-Austin is partially mitigated.
+
+**Effort:** Low (3 variable additions)
+
+---
+
+### A13. Legacy inline-style pages bypass theme system contrast fixes
+**Priority:** Moderate (WCAG 1.4.3)
+**Source:** Contrast readability audit (Feb 20)
+**Files:** `ai-observability/ai-observability-product-strategy.html`, `capital_city/competitor-analysis.html`, and other pages using inline `<style>` blocks
+
+Several report pages use hardcoded inline CSS instead of the external `report-base.css` + `theme.css` system. These pages do not benefit from the contrast fixes applied in this session and may still have sub-4.5:1 text/background ratios.
+
+**Fix:** Migrate inline-style pages to the external CSS architecture (add `data-brand`, link base + theme CSS, remove inline `<style>` blocks). Audit migrated colors for AA compliance.
+
+**Effort:** Medium (per-page migration + verification)
+
+---
+
 ## Open: Medium Priority
 
 ### T1. Create `content-translator` skill
@@ -109,7 +140,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Feb 15 — Design Review S2 | F1-F4 (4 items) |
 | Feb 16 — OTEL Improvement Phase 2 | F8-F12 (5 items) |
 | Feb 18 — Accessibility Audit | A1-A10 (10 items) |
-| **Total** | **61 completed, 5 open** |
+| **Total** | **61 completed, 7 open** |
 
 ### Scorecard (Phase 2 — Feb 16)
 
