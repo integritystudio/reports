@@ -759,12 +759,14 @@
         --color-primary-dark: #c4b5fd;
         --color-primary-medium: #a78bfa;
         --color-primary-light: #8b5cf6;
+        --secondary: #f472b6;
     }
 
     [data-brand="edgar-nadyne"] {
         --color-primary-dark: #f9a8d4;
         --color-primary-medium: #f472b6;
         --color-primary-light: #ec4899;
+        --secondary: #d4a0b8;
         --light: #1a1a2e;
         --dark: #e0e0e0;
         --border: #333;
@@ -792,6 +794,7 @@
         --color-primary-dark: #f9a8d4;
         --color-primary-medium: #f472b6;
         --color-primary-light: #ec4899;
+        --secondary: #52b788;
     }
 
     [data-brand="leora"] {
