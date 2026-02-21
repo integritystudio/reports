@@ -9,6 +9,8 @@
     "neural-network-builder@claude-code-plugins-plus": true,
     "market-movers-scanner@claude-code-plugins-plus": true,
     "market-sentiment-analyzer@claude-code-plugins-plus": true,
-    "gdpr-compliance-scanner@claude-code-plugins-plus": true
+    "gdpr-compliance-scanner@claude-code-plugins-plus": true,
+    "accessibility-test-scanner@claude-code-plugins-plus": true,
+    "apm-dashboard-creator@claude-code-plugins-plus": true
   }
 }
