@@ -199,15 +199,15 @@
 
 /* --- Strong Towns --- */
 [data-brand="strong-towns"] {
-    --color-primary-dark: #1a3c34;
-    --color-primary-medium: #2d6a4f;
-    --color-primary-light: #40916c;
-    --primary: #1a3c34;
-    --secondary: #2d6a4f;
-    --accent: #d4a373;
-    --light: #f8f6f2;
-    --dark: #1a1a1a;
-    --border: #d5cec3;
+    --color-primary-dark: #143028;
+    --color-primary-medium: #1e5740;
+    --color-primary-light: #2d6a4f;
+    --primary: #143028;
+    --secondary: #1e5740;
+    --accent: #c4873e;
+    --light: #f5f3ef;
+    --dark: #111111;
+    --border: #c8c0b4;
 }
 
 
@@ -243,15 +243,21 @@
 [data-brand="trp-austin"] details details { border-color: #edf2f7; }
 
 /* --- Strong Towns — earth/civic tones --- */
-[data-brand="strong-towns"] tr:hover { background: #f5f0ea; }
-[data-brand="strong-towns"] .highlight-box { background: linear-gradient(135deg, #e8f5e9, #f1f0e2); }
-[data-brand="strong-towns"] .warning-box { background: #fff8e1; border-left-color: #d4a373; }
-[data-brand="strong-towns"] .info-box { background: #e8f0e8; }
-[data-brand="strong-towns"] blockquote { background: #f5f0ea; }
-[data-brand="strong-towns"] .badge-success { background: #c8e6c9; color: #1b5e20; }
-[data-brand="strong-towns"] .badge-warning { background: #fff3e0; color: #e65100; }
-[data-brand="strong-towns"] .badge-danger { background: #ffcdd2; color: #b71c1c; }
-[data-brand="strong-towns"] .badge-info { background: #dcedc8; color: #1a3c34; }
+[data-brand="strong-towns"] tr:hover { background: #efeae3; }
+[data-brand="strong-towns"] .highlight-box { background: linear-gradient(135deg, #e0efe1, #ede9dc); color: #111; }
+[data-brand="strong-towns"] .warning-box { background: #fef5e0; border-left-color: #c4873e; color: #111; }
+[data-brand="strong-towns"] .info-box { background: #e0ece0; color: #111; }
+[data-brand="strong-towns"] blockquote { background: #efeae3; color: #333; }
+[data-brand="strong-towns"] .section-content { color: #111; }
+[data-brand="strong-towns"] .section-content p,
+[data-brand="strong-towns"] .section-content li { color: #1a1a1a; }
+[data-brand="strong-towns"] .executive-summary p { color: #1a1a1a; }
+[data-brand="strong-towns"] td { color: #1a1a1a; }
+[data-brand="strong-towns"] footer { color: #555; }
+[data-brand="strong-towns"] .badge-success { background: #c8e6c9; color: #0d3b12; }
+[data-brand="strong-towns"] .badge-warning { background: #fff3e0; color: #bf360c; }
+[data-brand="strong-towns"] .badge-danger { background: #ffcdd2; color: #7f0000; }
+[data-brand="strong-towns"] .badge-info { background: #dcedc8; color: #143028; }
 
 /* --- Holliday Lighting — report element overrides --- */
 [data-brand="holliday-lighting"] section h4 { color: var(--primary); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
@@ -832,15 +838,15 @@
     }
 
     [data-brand="strong-towns"] {
-        --color-primary-dark: #81c784;
-        --color-primary-medium: #66bb6a;
-        --color-primary-light: #4caf50;
-        --primary: #66bb6a;
-        --secondary: #81c784;
+        --color-primary-dark: #a5d6a7;
+        --color-primary-medium: #81c784;
+        --color-primary-light: #66bb6a;
+        --primary: #81c784;
+        --secondary: #a5d6a7;
         --accent: #e6b980;
         --light: #1a1a2e;
-        --dark: #e0e0e0;
-        --border: #333;
+        --dark: #ececec;
+        --border: #3a3a3a;
     }
 
     /* --- Brand report element dark overrides --- */
@@ -891,13 +897,20 @@
 
     [data-brand="zoukmx"] .highlight-box { background: linear-gradient(135deg, #1a2a1a, #1a2a2a); }
 
-    [data-brand="strong-towns"] .highlight-box { background: linear-gradient(135deg, #1a2a1a, #1a2a2a); }
-    [data-brand="strong-towns"] .info-box { background: #1a2a1a; }
-    [data-brand="strong-towns"] .warning-box { background: #2a2210; }
-    [data-brand="strong-towns"] .badge-success { background: #1a3a2a; color: #7dcea0; }
-    [data-brand="strong-towns"] .badge-warning { background: #3a3020; color: #f0c040; }
-    [data-brand="strong-towns"] .badge-danger { background: #3a1a1e; color: #e08090; }
-    [data-brand="strong-towns"] .badge-info { background: #1a2a1a; color: #81c784; }
+    [data-brand="strong-towns"] .highlight-box { background: linear-gradient(135deg, #1a2a1a, #1a2a2a); color: #e0e0e0; }
+    [data-brand="strong-towns"] .info-box { background: #1a2a1a; color: #e0e0e0; }
+    [data-brand="strong-towns"] .warning-box { background: #2a2210; color: #e0e0e0; }
+    [data-brand="strong-towns"] .section-content { color: #e0e0e0; }
+    [data-brand="strong-towns"] .section-content p,
+    [data-brand="strong-towns"] .section-content li { color: #d8d8d8; }
+    [data-brand="strong-towns"] .executive-summary p { color: #d8d8d8; }
+    [data-brand="strong-towns"] td { color: #d8d8d8; }
+    [data-brand="strong-towns"] blockquote { color: #bbb; }
+    [data-brand="strong-towns"] footer { color: #aaa; }
+    [data-brand="strong-towns"] .badge-success { background: #1a3a2a; color: #a5d6a7; }
+    [data-brand="strong-towns"] .badge-warning { background: #3a3020; color: #ffcc80; }
+    [data-brand="strong-towns"] .badge-danger { background: #3a1a1e; color: #ef9a9a; }
+    [data-brand="strong-towns"] .badge-info { background: #1a2a1a; color: #a5d6a7; }
 
     /* Opportunity component dark → css/opportunity-components.css */
 
