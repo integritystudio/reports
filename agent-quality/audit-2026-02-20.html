@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent &amp; Skill Quality Audit &mdash; 2026-02-20</title>
+    <link rel="stylesheet" href="../css/report-base.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <header>
+        <div class="container">
+            <h1>Agent &amp; Skill Quality Audit</h1>
+            <div class="subtitle">Consolidated Scorecard &amp; Findings</div>
+            <div class="meta">
+                <strong>Date:</strong> February 20, 2026 |
+                <strong>Audited:</strong> 25 definitions (6 agents, 4 skill-embedded, 15 skills) |
+                <strong>Method:</strong> agent-auditor rubric (6 dimensions, max 60)
+            </div>
+        </div>
+    </header>
+
+    <main id="main" class="container">
+
+        <!-- Executive Summary -->
+        <div id="executive-summary" class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>This audit scores 25 agent and skill definitions across 6 dimensions using the agent-auditor rubric. Two definitions earned <strong>A</strong> grades (code-reviewer, auto-error-resolver), thirteen scored <strong>B</strong>, six scored <strong>C</strong>, and none scored <strong>D</strong>. Four critical issues were identified: a runtime-breaking typo in otel-quality-reporting, a security gap in git-commit-smart, a 100% error rate on agent-auditor, and zero telemetry for two OTEL skills.</p>
+            <p><strong>Grade scale:</strong> A = 48&ndash;60 | B = 36&ndash;47 | C = 24&ndash;35 | D = &lt;24</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <nav id="toc" style="background: white; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden;">
+            <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Table of Contents</h2>
+            <div style="padding: 1.5rem;">
+                <ol style="margin: 0; padding-left: 1.5rem;">
+                    <li><a href="#scorecard-agents">Active Agents Scorecard</a></li>
+                    <li><a href="#scorecard-embedded">Skill-Embedded Agents</a></li>
+                    <li><a href="#scorecard-skills">Skills Scorecard</a></li>
+                    <li><a href="#grade-distribution">Grade Distribution</a></li>
+                    <li><a href="#dimensions">Scoring Dimensions Reference</a></li>
+                    <li><a href="#findings">Cross-Cutting Findings</a></li>
+                    <li><a href="#actions">Priority Action Items</a></li>
+                    <li><a href="#detail-a">A-Grade Detail</a></li>
+                    <li><a href="#detail-b-agents">B-Grade Agents</a></li>
+                    <li><a href="#detail-c-agent">C-Grade Agent</a></li>
+                    <li><a href="#detail-b-skills">B-Grade Skills</a></li>
+                    <li><a href="#detail-c-skills">C-Grade Skills</a></li>
+                    <li><a href="#appendix">Appendix: Telemetry Sources</a></li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- 1. Active Agents Scorecard -->
+        <section id="scorecard-agents">
+            <h2>1. Active Agents Scorecard</h2>
+            <div class="section-content">
+                <div style="overflow-x:auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Agent</th>
+                            <th>Telemetry</th>
+                            <th>Definition</th>
+                            <th>Prompting</th>
+                            <th>Overlap</th>
+                            <th>Alignment</th>
+                            <th>Efficiency</th>
+                            <th>Total</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>code-reviewer</td>
+                            <td>9</td><td>9</td><td>9</td><td>8</td><td>7</td><td>8</td>
+                            <td><strong>50</strong></td>
+                            <td><span class="badge-success">A</span></td>
+                        </tr>
+                        <tr>
+                            <td>auto-error-resolver</td>
+                            <td>7</td><td>10</td><td>10</td><td>8</td><td>10</td><td>6</td>
+                            <td><strong>49</strong></td>
+                            <td><span class="badge-success">A</span></td>
+                        </tr>
+                        <tr>
+                            <td>genai-quality-monitor</td>
+                            <td>9</td><td>10</td><td>10</td><td>5</td><td>4</td><td>9</td>
+                            <td><strong>47</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>webscraping-research-analyst</td>
+                            <td>5</td><td>10</td><td>10</td><td>5</td><td>9</td><td>7</td>
+                            <td><strong>46</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>code-simplifier</td>
+                            <td>4</td><td>10</td><td>10</td><td>5</td><td>8</td><td>8</td>
+                            <td><strong>45</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>agent-auditor</td>
+                            <td>1</td><td>8</td><td>9</td><td>9</td><td>0</td><td>2</td>
+                            <td><strong>29</strong></td>
+                            <td><span class="badge-warning">C</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Skill-Embedded Agents -->
+        <section id="scorecard-embedded">
+            <h2>2. Skill-Embedded Agents</h2>
+            <div class="section-content">
+                <div class="info-box">
+                    <strong>Note:</strong> Skill-embedded agents score 0/10 on Telemetry, Alignment, and Efficiency (no separate spans emitted). Adjusted grade uses deterministic dimensions only (/30 scale: A-eq = 24&ndash;30, B-eq = 18&ndash;23, C-eq = 12&ndash;17).
+                </div>
+                <div style="overflow-x:auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Agent</th>
+                            <th>Definition</th>
+                            <th>Prompting</th>
+                            <th>Overlap</th>
+                            <th>Det /30</th>
+                            <th>Adj Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>html-auditor</td>
+                            <td>9</td><td>8</td><td>5</td>
+                            <td><strong>22</strong></td>
+                            <td><span class="badge-success">A-eq</span></td>
+                        </tr>
+                        <tr>
+                            <td>code-reviewer (skill)</td>
+                            <td>9</td><td>5.5</td><td>5</td>
+                            <td><strong>19.5</strong></td>
+                            <td><span class="badge-info">B-eq</span></td>
+                        </tr>
+                        <tr>
+                            <td>code-explorer (skill)</td>
+                            <td>9</td><td>5</td><td>5</td>
+                            <td><strong>19</strong></td>
+                            <td><span class="badge-info">B-eq</span></td>
+                        </tr>
+                        <tr>
+                            <td>code-architect (skill)</td>
+                            <td>9</td><td>5</td><td>5</td>
+                            <td><strong>19</strong></td>
+                            <td><span class="badge-info">B-eq</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Skills Scorecard -->
+        <section id="scorecard-skills">
+            <h2>3. Skills Scorecard</h2>
+            <div class="section-content">
+                <div style="overflow-x:auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Skill</th>
+                            <th>Telemetry</th>
+                            <th>Definition</th>
+                            <th>Prompting</th>
+                            <th>Overlap</th>
+                            <th>Alignment</th>
+                            <th>Efficiency</th>
+                            <th>Total</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>content-creator</td>
+                            <td>8</td><td>9</td><td>8</td><td>8</td><td>7</td><td>7</td>
+                            <td><strong>47</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>otel-session-summary</td>
+                            <td>7</td><td>9</td><td>9</td><td>6</td><td>7</td><td>8</td>
+                            <td><strong>46</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>session-backlog</td>
+                            <td>4</td><td>8</td><td>9</td><td>8</td><td>7</td><td>8</td>
+                            <td><strong>44</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>otel-quality-reporting</td>
+                            <td>8</td><td>8</td><td>9</td><td>5</td><td>8</td><td>5</td>
+                            <td><strong>43</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>backlog-implementer</td>
+                            <td>4</td><td>7</td><td>9</td><td>7</td><td>7</td><td>7</td>
+                            <td><strong>41</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>bug-detective</td>
+                            <td>7</td><td>6</td><td>8</td><td>7</td><td>7</td><td>6</td>
+                            <td><strong>41</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>git-commit-smart</td>
+                            <td>7</td><td>5</td><td>4</td><td>8</td><td>8</td><td>7</td>
+                            <td><strong>39</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>frontend-design</td>
+                            <td>7</td><td>4</td><td>6</td><td>8</td><td>8</td><td>5</td>
+                            <td><strong>38</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>ralph-wiggum</td>
+                            <td>8</td><td>5</td><td>5</td><td>8</td><td>6</td><td>5</td>
+                            <td><strong>37</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>cicd-cross-platform</td>
+                            <td>6</td><td>6</td><td>6</td><td>8</td><td>5</td><td>5</td>
+                            <td><strong>36</strong></td>
+                            <td><span class="badge-info">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>otel-improvement</td>
+                            <td>0</td><td>10</td><td>10</td><td>7</td><td>0</td><td>8</td>
+                            <td><strong>35</strong></td>
+                            <td><span class="badge-warning">C</span></td>
+                        </tr>
+                        <tr>
+                            <td>codebase-analyzer</td>
+                            <td>5</td><td>5</td><td>6</td><td>7</td><td>6</td><td>6</td>
+                            <td><strong>35</strong></td>
+                            <td><span class="badge-warning">C</span></td>
+                        </tr>
+                        <tr>
+                            <td>feature-dev</td>
+                            <td>6</td><td>5</td><td>6</td><td>6</td><td>5</td><td>6</td>
+                            <td><strong>34</strong></td>
+                            <td><span class="badge-warning">C</span></td>
+                        </tr>
+                        <tr>
+                            <td>agent-improvement</td>
+                            <td>1</td><td>9</td><td>8</td><td>7</td><td>1</td><td>7</td>
+                            <td><strong>33</strong></td>
+                            <td><span class="badge-warning">C</span></td>
+                        </tr>
+                        <tr>
+                            <td>otel-output-provenance</td>
+                            <td>0</td><td>9</td><td>9</td><td>6</td><td>0</td><td>7</td>
+                            <td><strong>31</strong></td>
+                            <td><span class="badge-warning">C</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Grade Distribution -->
+        <section id="grade-distribution">
+            <h2>4. Grade Distribution</h2>
+            <div class="section-content">
+                <div style="overflow-x:auto">
+                <table>
+                    <thead>
+                        <tr><th>Grade</th><th>Count</th><th>Definitions</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge-success">A</span></td>
+                            <td>2</td>
+                            <td>code-reviewer (50), auto-error-resolver (49)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-info">B</span></td>
+                            <td>13</td>
+                            <td>genai-quality-monitor (47), content-creator (47), webscraping-research-analyst (46), otel-session-summary (46), code-simplifier (45), session-backlog (44), otel-quality-reporting (43), backlog-implementer (41), bug-detective (41), git-commit-smart (39), frontend-design (38), ralph-wiggum (37), cicd-cross-platform (36)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-warning">C</span></td>
+                            <td>6</td>
+                            <td>otel-improvement (35), codebase-analyzer (35), feature-dev (34), agent-improvement (33), otel-output-provenance (31), agent-auditor (29)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-danger">D</span></td>
+                            <td>0</td>
+                            <td>&mdash;</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+
+                <h3>Skill-Embedded Agents (Adjusted /30 Scale)</h3>
+                <div style="overflow-x:auto">
+                <table>
+                    <thead>
+                        <tr><th>Adj Grade</th><th>Count</th><th>Definitions</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge-success">A-eq</span></td>
+                            <td>1</td>
+                            <td>html-auditor (22/30)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge-info">B-eq</span></td>
+                            <td>3</td>
+                            <td>code-reviewer-skill (19.5/30), code-explorer (19/30), code-architect (19/30)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Scoring Dimensions Reference -->
+        <section id="dimensions">
+            <h2>5. Scoring Dimensions Reference</h2>
+            <div class="section-content">
+                <div style="overflow-x:auto">
+                <table>
+                    <thead>
+                        <tr><th>#</th><th>Dimension</th><th>Max</th><th>Method</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Telemetry Health</td><td>10</td><td>Usage frequency (35%), error rate (25%), trend (20%), session diversity (20%) from OTEL traces</td></tr>
+                        <tr><td>2</td><td>Definition Quality</td><td>10</td><td>10-point checklist: name, description, tools, model, description length, ## sections, ## When, output format, line count 30&ndash;200, tools restricted</td></tr>
+                        <tr><td>3</td><td>Prompt Engineering</td><td>10</td><td>Role statement (1), numbered steps (1.5), guardrails (1), examples (1), tables (1), output spec (1.5), markdown structure (1), scope boundaries (1)</td></tr>
+                        <tr><td>4</td><td>Overlap &amp; Redundancy</td><td>10</td><td>Jaccard similarity on tool sets and description keywords; flag if tool-Jaccard &gt;0.8 AND keyword-Jaccard &gt;0.5</td></tr>
+                        <tr><td>5</td><td>Usage Alignment</td><td>10</td><td>Match expected category from description vs actual agent.category / plugin.category in OTEL</td></tr>
+                        <tr><td>6</td><td>Efficiency &amp; Cost</td><td>10</td><td>Duration percentile (30%), retry/error amplification (25%), output density (25%), background appropriateness (20%)</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Cross-Cutting Findings -->
+        <section id="findings">
+            <h2>6. Cross-Cutting Findings</h2>
+            <div class="section-content">
+
+                <h3>Universal Gaps</h3>
+                <ul>
+                    <li><strong>Missing <code>model</code> field:</strong> 0/15 skills specify a model in frontmatter &mdash; all should add one</li>
+                    <li><strong>Missing <code>allowed-tools</code>:</strong> 7 skills lack tool restrictions (feature-dev, bug-detective, cicd-cross-platform, ralph-wiggum, codebase-analyzer, frontend-design, backlog-implementer)</li>
+                    <li><strong>No role statements:</strong> 0/15 skills open with &ldquo;You are&hellip;&rdquo; &mdash; all use functional/descriptive openings</li>
+                </ul>
+
+                <h3>Critical Issues</h3>
+                <div class="warning-box">
+                    <strong><span class="badge-danger">P0</span> Runtime failure:</strong> <code>otel-quality-reporting</code> has a typo in Phase 1&ndash;2 script paths (<code>otel-quality-reportinging</code> &mdash; double &ldquo;ing&rdquo;) that causes <code>FileNotFoundError</code>.
+                </div>
+                <div class="warning-box">
+                    <strong><span class="badge-danger">P0</span> Security risk:</strong> <code>git-commit-smart</code> uses <code>git add -A</code> with no guardrail against staging <code>.env</code>, credentials, or secrets.
+                </div>
+                <div class="warning-box">
+                    <strong><span class="badge-warning">P1</span> 100% error rate:</strong> <code>agent-auditor</code> has 100% error rate on all 5 observed spans (Feb 21); 307 lines exceeds its own 200-line guideline.
+                </div>
+                <div class="warning-box">
+                    <strong><span class="badge-warning">P1</span> Zero telemetry:</strong> <code>otel-improvement</code> and <code>otel-output-provenance</code> have 0 plugin invocations despite references in traces &mdash; likely invocation mechanism mismatch.
+                </div>
+
+                <h3>Structural Observations</h3>
+                <ul>
+                    <li><strong>Telemetry blind spot:</strong> Skill-embedded agents (feature-dev/agents/*, otel-improvement/agents/*) emit no separate spans; 3/6 scoring dimensions are structurally unavailable for them.</li>
+                    <li><strong>Overlap cluster:</strong> otel-session-summary / otel-quality-reporting / otel-output-provenance share tools and domain; <code>## When</code> sections need clearer disambiguation.</li>
+                    <li><strong>Pattern mismatch:</strong> <code>cicd-cross-platform</code> functions as injected reference context (280 keyword matches) rather than an interactive skill (6 explicit invocations) &mdash; should be documented accordingly.</li>
+                    <li><strong>Declining trends:</strong> bug-detective, ralph-wiggum, content-creator, and feature-dev show declining usage in last 7 days.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 7. Priority Action Items -->
+        <section id="actions">
+            <h2>7. Priority Action Items</h2>
+            <div class="section-content">
+                <div style="overflow-x:auto">
+                <table>
+                    <thead>
+                        <tr><th>Priority</th><th>Action</th><th>Target</th><th>Impact</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><span class="badge-danger">P0</span></td><td>Fix <code>otel-quality-reportinging</code> script path typo</td><td>otel-quality-reporting</td><td>Runtime failures in Phase 1&ndash;2</td></tr>
+                        <tr><td><span class="badge-danger">P0</span></td><td>Add sensitive-file guardrail (never stage .env/credentials)</td><td>git-commit-smart</td><td>Security risk from <code>git add -A</code></td></tr>
+                        <tr><td><span class="badge-warning">P1</span></td><td>Add <code>model</code> to all 15 skills</td><td>All skills</td><td>Routing reliability, cost control</td></tr>
+                        <tr><td><span class="badge-warning">P1</span></td><td>Add <code>allowed-tools</code> to 7 skills missing it</td><td>feature-dev, bug-detective, cicd-cross-platform, ralph-wiggum, codebase-analyzer, frontend-design, backlog-implementer</td><td>Tool scope control</td></tr>
+                        <tr><td><span class="badge-warning">P1</span></td><td>Investigate agent-auditor 100% error rate</td><td>agent-auditor</td><td>Reliability</td></tr>
+                        <tr><td><span class="badge-warning">P1</span></td><td>Trim agent-auditor to &lt;200 lines</td><td>agent-auditor</td><td>Self-consistency</td></tr>
+                        <tr><td><span class="badge-info">P2</span></td><td>Investigate zero telemetry for otel-improvement, otel-output-provenance</td><td>Invocation mechanism</td><td>Observability gap</td></tr>
+                        <tr><td><span class="badge-info">P2</span></td><td>Add <code>## When</code> sections to skills missing them</td><td>session-backlog, frontend-design, git-commit-smart</td><td>Auto-routing accuracy</td></tr>
+                        <tr><td><span class="badge-info">P2</span></td><td>Add <code>## When</code> routing to all 4 skill-embedded agents</td><td>feature-dev/agents/*, otel-improvement/agents/*</td><td>Routing reliability</td></tr>
+                        <tr><td><span class="badge-info">P3</span></td><td>Add role statements (&ldquo;You are&hellip;&rdquo;) to all skills</td><td>All skills</td><td>Prompt engineering consistency</td></tr>
+                        <tr><td><span class="badge-info">P3</span></td><td>Add numbered workflow steps to ralph-wiggum</td><td>ralph-wiggum</td><td>Operational clarity</td></tr>
+                        <tr><td><span class="badge-info">P3</span></td><td>Disambiguate otel-session-summary vs otel-quality-reporting in <code>## When</code></td><td>Both skills</td><td>Reduce routing confusion</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. A-Grade Detail -->
+        <section id="detail-a">
+            <h2>8. A-Grade Agents</h2>
+            <div class="section-content">
+
+                <h3>code-reviewer &mdash; <span class="badge-success">A</span> (50/60)</h3>
+                <div class="highlight-box">
+                    <strong>Strengths:</strong> Highest usage (322 invocations/Feb, 20 active days), clean read-only tool set, stable week-over-week trend, near-zero error rate (4%).
+                </div>
+                <ul>
+                    <li><strong>Issues:</strong> Description too terse for reliable auto-routing (&ldquo;Expert code reviewer. Use proactively after code changes.&rdquo; &mdash; lacks TypeScript/React/Node.js signal); category split between <code>review</code> and <code>code</code>.</li>
+                    <li><strong>Action:</strong> Expand description to include stack keywords.</li>
+                </ul>
+
+                <h3>auto-error-resolver &mdash; <span class="badge-success">A</span> (49/60)</h3>
+                <div class="highlight-box">
+                    <strong>Strengths:</strong> Perfect definition quality (10/10) and prompt engineering (10/10), 100% category alignment (<code>error-handling</code>), rising usage (4x week-over-week).
+                </div>
+                <ul>
+                    <li><strong>Issues:</strong> 7.1% error rate in the 5&ndash;15% penalty band (3 errors on Feb 17); session diversity borderline at ~3 sessions.</li>
+                    <li><strong>Action:</strong> Investigate Feb 17 error cluster.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 9. B-Grade Agents -->
+        <section id="detail-b-agents">
+            <h2>9. B-Grade Agents</h2>
+            <div class="section-content">
+
+                <h3>genai-quality-monitor &mdash; <span class="badge-info">B</span> (47/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Rising usage (2x week-over-week), zero errors, domain-specific evaluation tables, Analysis Commands section with real bash queries.</li>
+                    <li><strong>Issues:</strong> Categorized as <code>general</code> 67% of the time instead of <code>observability</code> &mdash; 1 point from A-grade.</li>
+                    <li><strong>Action:</strong> Add &ldquo;OTEL&rdquo; or &ldquo;observability&rdquo; to description field for stronger categorizer signal.</li>
+                </ul>
+
+                <h3>webscraping-research-analyst &mdash; <span class="badge-info">B</span> (46/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Best output density (14,728 bytes), excellent session diversity (7 sessions), perfect category alignment.</li>
+                    <li><strong>Issues:</strong> 25% error rate on instrumented spans (Feb 17 error with <code>has_actions:true</code>); declining trend.</li>
+                    <li><strong>Action:</strong> Investigate Feb 17 error (session <code>40dc9c66</code>); check if agent crossed into implementation despite guardrails.</li>
+                </ul>
+
+                <h3>code-simplifier &mdash; <span class="badge-info">B</span> (45/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Perfect definition and prompting (10/10 each), zero errors, well-scoped Simplification Patterns table.</li>
+                    <li><strong>Issues:</strong> Near-zero usage (1 confirmed invocation in Jan); high tool Jaccard (0.857) with lazy <code>code-refactor-agent</code>.</li>
+                    <li><strong>Action:</strong> Update description to include routing keywords like &ldquo;cleanup&rdquo; or &ldquo;readability.&rdquo;</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 10. C-Grade Agent -->
+        <section id="detail-c-agent">
+            <h2>10. C-Grade Agent</h2>
+            <div class="section-content">
+
+                <h3>agent-auditor &mdash; <span class="badge-warning">C</span> (29/60)</h3>
+                <div class="warning-box">
+                    <strong>Critical:</strong> 100% error rate on all 5 observed invocations; 307 lines exceeds 200-line guideline; miscategorized as <code>security</code> instead of <code>observability</code>; zero usage before Feb 21.
+                </div>
+                <ul>
+                    <li><strong>Strengths:</strong> Exceptional prompt engineering (9/10) with phases, tables, guardrails, and output templates; appropriate background usage.</li>
+                    <li><strong>Action:</strong> Trim to &lt;200 lines; fix category routing; investigate error root cause.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 11. B-Grade Skills -->
+        <section id="detail-b-skills">
+            <h2>11. B-Grade Skills</h2>
+            <div class="section-content">
+
+                <h3>content-creator &mdash; <span class="badge-info">B</span> (47/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Highest telemetry among skills (114 spans), comprehensive frontmatter with MCP tools, excellent voice/tone templates.</li>
+                    <li><strong>Issues:</strong> Missing <code>model</code>; declining trend (4 spans last 7d vs 46 prior).</li>
+                    <li><strong>Action:</strong> Add <code>model: claude-sonnet-4-6</code>; investigate usage decline.</li>
+                </ul>
+
+                <h3>otel-session-summary &mdash; <span class="badge-info">B</span> (46/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Tight 3-tool footprint (Bash, Read, Glob), leanest complete skill, rising usage, clear scope boundaries.</li>
+                    <li><strong>Issues:</strong> Missing <code>model</code>; overlap with otel-quality-reporting on LLM-as-Judge metrics.</li>
+                    <li><strong>Action:</strong> Add <code>model: claude-haiku-4-5</code>; add disambiguation note to <code>## When</code> section.</li>
+                </ul>
+
+                <h3>session-backlog &mdash; <span class="badge-info">B</span> (44/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Excellent Rules section, clear deduplication logic, well-specified output format.</li>
+                    <li><strong>Issues:</strong> Missing <code>model</code>; missing <code>## When</code> routing section; no role statement.</li>
+                    <li><strong>Action:</strong> Add <code>model</code> and <code>## When to Use</code>.</li>
+                </ul>
+
+                <h3>otel-quality-reporting &mdash; <span class="badge-info">B</span> (43/60)</h3>
+                <div class="warning-box">
+                    <strong><span class="badge-danger">P0</span></strong> Critical typo in script paths (<code>otel-quality-reportinging</code>) causes runtime failure.
+                </div>
+                <ul>
+                    <li><strong>Strengths:</strong> Most complete output specification, quality checklist for self-verification, well-defined publish pipeline.</li>
+                    <li><strong>Issues:</strong> Description 274 chars (over 200 limit); missing <code>model</code>; overlap with otel-session-summary.</li>
+                    <li><strong>Action:</strong> Fix script path typo immediately; trim description; add <code>model: claude-sonnet-4-6</code>.</li>
+                </ul>
+
+                <h3>backlog-implementer &mdash; <span class="badge-info">B</span> (41/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Best workflow detail (8 sub-steps in Phase 2), unique memory compaction protocol, code review integration per commit.</li>
+                    <li><strong>Issues:</strong> Missing <code>allowed-tools</code> and <code>model</code>; description slightly over 200 chars.</li>
+                    <li><strong>Action:</strong> Add <code>allowed-tools</code> and <code>model: claude-sonnet-4-6</code>; trim description.</li>
+                </ul>
+
+                <h3>bug-detective &mdash; <span class="badge-info">B</span> (41/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Best DO/DON&rsquo;T examples, P0&ndash;P3 priority matrix, time allocation table, Quick Start entry point.</li>
+                    <li><strong>Issues:</strong> Missing <code>allowed-tools</code>, <code>model</code>, output section; declining usage; 277 lines near upper bound.</li>
+                    <li><strong>Action:</strong> Add frontmatter fields; promote &ldquo;When to use&rdquo; to <code>## When to Use</code> heading.</li>
+                </ul>
+
+                <h3>git-commit-smart &mdash; <span class="badge-info">B</span> (39/60)</h3>
+                <div class="warning-box">
+                    <strong><span class="badge-danger">P0</span></strong> No guardrail against staging secrets with <code>git add -A</code>. Only 28 lines (below 30-line minimum).
+                </div>
+                <ul>
+                    <li><strong>Strengths:</strong> Most-used skill (tied at 18 invocations), minimal tool list, clear commit format spec.</li>
+                    <li><strong>Action:</strong> Add sensitive-file guardrail; expand to 30+ lines; add <code>model</code> and constraints section.</li>
+                </ul>
+
+                <h3>frontend-design &mdash; <span class="badge-info">B</span> (38/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> High usage (18 invocations, rising), excellent guardrails against generic AI aesthetics.</li>
+                    <li><strong>Issues:</strong> Missing <code>allowed-tools</code>, <code>model</code>, <code>## When</code>; description 215 chars (over limit); no workflow phases.</li>
+                    <li><strong>Action:</strong> Add light workflow (2&ndash;3 phases); add <code>## When to Use</code>; trim description.</li>
+                </ul>
+
+                <h3>ralph-wiggum &mdash; <span class="badge-info">B</span> (37/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Unique Stop-hook feedback loop pattern; clear Good for/Not good for guidance.</li>
+                    <li><strong>Issues:</strong> Lowest prompt engineering among B-grade (5/10); no role statement, workflow steps, tables, or output spec.</li>
+                    <li><strong>Action:</strong> Add role statement, numbered iteration steps, output format, <code>allowed-tools</code>, and <code>model</code>.</li>
+                </ul>
+
+                <h3>cicd-cross-platform &mdash; <span class="badge-info">B</span> (36/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> High-quality code examples; recommendation matrix; wide keyword coverage (280 ambient matches).</li>
+                    <li><strong>Issues:</strong> Reference document, not workflow skill; no role statement, workflow, <code>allowed-tools</code>, <code>model</code>, or output section.</li>
+                    <li><strong>Action:</strong> Add brief workflow section or document as reference-injection skill; add <code>model: claude-haiku-4-5</code>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 12. C-Grade Skills -->
+        <section id="detail-c-skills">
+            <h2>12. C-Grade Skills</h2>
+            <div class="section-content">
+
+                <h3>otel-improvement &mdash; <span class="badge-warning">C</span> (35/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Best-in-class definition (10/10) and prompting (10/10); closed-loop design with state file; grade calculation tables.</li>
+                    <li><strong>Issues:</strong> Zero telemetry invocations &mdash; possible invocation mechanism mismatch; missing <code>model</code>.</li>
+                    <li><strong>Action:</strong> Investigate why <code>plugin.name: otel-improvement</code> never appears in traces; add <code>model</code>.</li>
+                </ul>
+
+                <h3>codebase-analyzer &mdash; <span class="badge-warning">C</span> (35/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Good <code>## When to Use</code> with concrete scenarios; Mermaid diagram generation; safety guidelines.</li>
+                    <li><strong>Issues:</strong> Missing <code>allowed-tools</code> and <code>model</code>; no role statement; hardcoded <code>code-refactor-agent</code> subagent may not exist; <code>rm -f</code> in Phase 4 without confirmation.</li>
+                    <li><strong>Action:</strong> Add frontmatter fields; verify subagent name; strengthen Phase 4 guardrails.</li>
+                </ul>
+
+                <h3>feature-dev &mdash; <span class="badge-warning">C</span> (34/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Logical 7-phase structure; user confirmation gates; &ldquo;understand before acting&rdquo; principle.</li>
+                    <li><strong>Issues:</strong> Missing <code>allowed-tools</code>, <code>model</code>, <code>## When</code>, output format, examples, tables.</li>
+                    <li><strong>Action:</strong> Add all missing frontmatter fields and structural sections.</li>
+                </ul>
+
+                <h3>agent-improvement &mdash; <span class="badge-warning">C</span> (33/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Best-structured prompt among new skills; comprehensive error handling; EMA state persistence.</li>
+                    <li><strong>Issues:</strong> Brand new (zero telemetry, untracked in git); missing <code>model</code>; no role statement.</li>
+                    <li><strong>Action:</strong> Add <code>model: claude-sonnet-4-6</code> and role statement; monitor after first use.</li>
+                </ul>
+
+                <h3>otel-output-provenance &mdash; <span class="badge-warning">C</span> (31/60)</h3>
+                <ul>
+                    <li><strong>Strengths:</strong> Excellent definition completeness (9/10); unique multi-session lineage tracking; threshold mapping table.</li>
+                    <li><strong>Issues:</strong> Zero telemetry; missing <code>model</code>; significant functional overlap with otel-quality-reporting; 201 lines (1 over limit).</li>
+                    <li><strong>Action:</strong> Investigate zero invocations; move differentiation statement into description; add <code>model</code>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 13. Appendix -->
+        <section id="appendix">
+            <h2>13. Appendix: Telemetry Data Sources</h2>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Trace files:</strong> <code>~/.claude/telemetry/traces-2026-02-*.jsonl</code> (21 files, Feb 1&ndash;21)</li>
+                    <li><strong>Span types:</strong> <code>hook:agent-post-tool</code>, <code>hook:agent-pre-tool</code>, <code>hook:plugin-pre-tool</code>, <code>hook:plugin-post-tool</code>, <code>hook:skill-activation-prompt</code></li>
+                    <li><strong>Extraction:</strong> No Bash pipelines used for telemetry extraction; all queries via Grep/Read on JSONL files</li>
+                    <li><strong>Error rate:</strong> Derived from <code>agent.has_error</code> / <code>plugin.has_error</code> span attributes</li>
+                    <li><strong>Usage alignment:</strong> From <code>agent.category</code> / <code>plugin.category</code> in pre-tool spans</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Agent &amp; Skill Quality Audit &mdash; Generated February 20, 2026 by agent-auditor</p>
+        <p>&copy; 2026 Integrity Studio. All rights reserved.</p>
+    </footer>
+</body>
+</html>
