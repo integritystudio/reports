@@ -29,6 +29,32 @@
     --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Roboto, sans-serif;
     --font-serif: Georgia, 'Times New Roman', serif;
     --font-mono: 'SF Mono', Monaco, 'Courier New', monospace;
+    --radius-xs: 4px;
+    --content-width: 1200px;
+    --font-size-h1: 2.5rem;
+    --font-size-h1-md: 2rem;
+    --font-size-h1-sm: 1.5rem;
+    --font-size-subtitle: 1.0625rem;
+    --font-size-subtitle-md: 0.9375rem;
+    --font-size-subtitle-sm: 0.875rem;
+    --font-size-section-title: 1.5rem;
+    --font-size-section-title-md: 1.25rem;
+    --font-size-section-title-sm: 1.125rem;
+    --font-size-card-title: 1.1875rem;
+    --font-size-card-desc: 0.9375rem;
+    --font-size-card-category: 0.75rem;
+    --font-size-card-link: 0.9375rem;
+    --font-size-back-link: 0.9375rem;
+    --font-size-footer: 0.875rem;
+    --card-grid-min: 320px;
+    --section-title-bar-width: 4px;
+    --card-top-bar-height: 3px;
+    --card-hover-lift: -2px;
+    --card-link-arrow-shift: 4px;
+    --transition-standard: 0.3s ease;
+    --transition-fast: 0.2s ease;
+    --letter-spacing-h1: -0.02em;
+    --letter-spacing-category: 0.05em;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,7 +90,7 @@
     padding: 0.5rem 1rem;
     background: var(--color-primary-dark, #2563eb);
     color: white;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     z-index: 1000;
     font-weight: 600;
 }
@@ -78,15 +104,15 @@ body {
     background-color: var(--color-bg, #ffffff);
     color: var(--color-text-primary, #1a1a1a);
     line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color var(--transition-standard), color var(--transition-standard);
 }
 
 /* Back navigation */
 .back-nav { max-width: 1200px; margin: 0 auto; padding: var(--spacing-md) var(--spacing-lg) 0; }
 .back-link {
     display: inline-flex; align-items: center; gap: var(--spacing-xs);
-    color: var(--color-primary-medium); font-weight: 600; font-size: 0.9375rem;
-    text-decoration: none; transition: gap 0.2s ease;
+    color: var(--color-primary-medium); font-weight: 600; font-size: var(--font-size-back-link);
+    text-decoration: none; transition: gap var(--transition-fast);
 }
 .back-link:hover { gap: var(--spacing-sm); }
 
@@ -97,17 +123,17 @@ header {
     border-bottom: 1px solid var(--color-border);
     background-color: var(--color-bg-secondary);
 }
-.header-content { max-width: 1200px; margin: 0 auto; }
+.header-content { max-width: var(--content-width); margin: 0 auto; }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: var(--font-size-h1);
     font-weight: 700;
     color: var(--color-primary-dark);
     margin-bottom: var(--spacing-sm);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--letter-spacing-h1);
 }
 .subtitle {
-    font-size: 1.0625rem;
+    font-size: var(--font-size-subtitle);
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-md);
     font-weight: 400;
@@ -115,7 +141,7 @@ h1 {
 
 /* Main content */
 main {
-    max-width: 1200px;
+    max-width: var(--content-width);
     margin: 0 auto;
     padding: var(--spacing-xl) var(--spacing-lg);
 }
@@ -123,7 +149,7 @@ main {
 /* Section titles */
 section { margin-bottom: var(--spacing-xl); }
 .section-title {
-    font-size: 1.5rem;
+    font-size: var(--font-size-section-title);
     font-weight: 600;
     margin-bottom: var(--spacing-lg);
     color: var(--color-text-primary);
@@ -134,7 +160,7 @@ section { margin-bottom: var(--spacing-xl); }
 .section-title::before {
     content: '';
     display: inline-block;
-    width: 4px;
+    width: var(--section-title-bar-width);
     height: 1.5rem;
     background-color: var(--color-primary-medium);
     border-radius: var(--radius-sm);
@@ -144,14 +170,14 @@ section { margin-bottom: var(--spacing-xl); }
 .card-grid {
     display: grid;
     gap: var(--spacing-lg);
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-grid-min), 1fr));
 }
 .card {
     background-color: var(--color-card-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
-    transition: all 0.3s ease;
+    transition: all var(--transition-standard);
     box-shadow: var(--shadow-sm);
     display: flex;
     flex-direction: column;
@@ -165,38 +191,38 @@ section { margin-bottom: var(--spacing-xl); }
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
+    height: var(--card-top-bar-height);
     background: linear-gradient(90deg, var(--color-primary-medium), var(--color-primary-light));
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-standard);
 }
 .card:hover {
     border-color: var(--color-primary-medium);
     box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
+    transform: translateY(var(--card-hover-lift));
 }
 .card:hover::before { transform: scaleX(1); }
 
 .card-header { margin-bottom: var(--spacing-md); }
 .card-category {
     display: inline-block;
-    font-size: 0.75rem;
+    font-size: var(--font-size-card-category);
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-category);
     text-transform: uppercase;
     color: var(--color-primary-medium);
     margin-bottom: var(--spacing-xs);
     opacity: 0.9;
 }
 .card-title {
-    font-size: 1.1875rem;
+    font-size: var(--font-size-card-title);
     font-weight: 600;
     margin-bottom: var(--spacing-sm);
     color: var(--color-text-primary);
 }
 .card-description {
-    font-size: 0.9375rem;
+    font-size: var(--font-size-card-desc);
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-md);
     flex-grow: 1;
@@ -208,13 +234,13 @@ section { margin-bottom: var(--spacing-xl); }
     gap: var(--spacing-xs);
     color: var(--color-primary-medium);
     font-weight: 600;
-    font-size: 0.9375rem;
-    transition: gap 0.3s ease;
+    font-size: var(--font-size-card-link);
+    transition: gap var(--transition-standard);
     width: fit-content;
     margin-top: auto;
 }
-.card-link::after { content: '\2192'; transition: transform 0.3s ease; }
-.card:hover .card-link::after { transform: translateX(4px); }
+.card-link::after { content: '\2192'; transition: transform var(--transition-standard); }
+.card:hover .card-link::after { transform: translateX(var(--card-link-arrow-shift)); }
 
 .card-links {
     display: flex;
@@ -228,12 +254,12 @@ section { margin-bottom: var(--spacing-xl); }
     gap: var(--spacing-xs);
     color: var(--color-primary-medium);
     font-weight: 600;
-    font-size: 0.9375rem;
+    font-size: var(--font-size-card-link);
     text-decoration: none;
     width: fit-content;
 }
-.card-links a::after { content: '\2192'; transition: transform 0.3s ease; }
-.card-links a:hover::after { transform: translateX(4px); }
+.card-links a::after { content: '\2192'; transition: transform var(--transition-standard); }
+.card-links a:hover::after { transform: translateX(var(--card-link-arrow-shift)); }
 
 /* Footer */
 footer {
@@ -241,11 +267,11 @@ footer {
     padding: var(--spacing-lg);
     text-align: center;
     color: var(--color-text-secondary);
-    font-size: 0.875rem;
+    font-size: var(--font-size-footer);
     margin-top: var(--spacing-xl);
     background-color: var(--color-bg-secondary);
 }
-.footer-content { max-width: 1200px; margin: 0 auto; }
+.footer-content { max-width: var(--content-width); margin: 0 auto; }
 footer a { color: var(--color-primary-medium); text-decoration: none; }
 
 /* Accessibility */
@@ -269,21 +295,21 @@ a:focus-visible {
 
 /* Responsive */
 @media (max-width: 768px) {
-    h1 { font-size: 2rem; }
-    .subtitle { font-size: 0.9375rem; }
+    h1 { font-size: var(--font-size-h1-md); }
+    .subtitle { font-size: var(--font-size-subtitle-md); }
     header { padding: var(--spacing-lg) var(--spacing-md); }
     main { padding: var(--spacing-lg) var(--spacing-md); }
     .card-grid { grid-template-columns: 1fr; }
-    .section-title { font-size: 1.25rem; }
+    .section-title { font-size: var(--font-size-section-title-md); }
 }
 
 @media (max-width: 480px) {
-    h1 { font-size: 1.5rem; }
-    .subtitle { font-size: 0.875rem; }
+    h1 { font-size: var(--font-size-h1-sm); }
+    .subtitle { font-size: var(--font-size-subtitle-sm); }
     header { padding: var(--spacing-md) var(--spacing-sm); }
     main { padding: var(--spacing-md) var(--spacing-sm); }
     .card { padding: var(--spacing-md); }
-    .section-title { font-size: 1.125rem; }
+    .section-title { font-size: var(--font-size-section-title-sm); }
 }
 
 @media (prefers-reduced-motion: reduce) {
