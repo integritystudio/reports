@@ -3,6 +3,20 @@
  * Extracted from theme.css section 5 to reduce bundle size for non-opportunity pages.
  */
 
+/* Additional tokens (complements report-base.css :root) */
+:root {
+    --font-size-opp-title: 1.05rem;
+    --font-size-opp-details: 0.92rem;
+    --font-size-sources: 0.88rem;
+    --font-size-priority-count: 2rem;
+    --color-action-bg: #d4edda;
+    --color-action-border: #28a745;
+    --color-priority-label: #666;
+    --letter-spacing-priority: 0.5px;
+    --spacing-opp-gap: 0.4rem;
+    --spacing-tiny: 0.3rem;
+}
+
 
 /* ==========================================================================
    TOC BOX
@@ -10,15 +24,15 @@
 
 .toc {
     background: white;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
 }
-.toc h2 { color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem; }
-.toc h3 { color: var(--primary); margin-bottom: 0.75rem; }
-.toc ol { padding-left: 1.5rem; }
-.toc li { margin-bottom: 0.3rem; }
+.toc h2 { color: var(--primary); margin-bottom: var(--spacing-sm); font-size: var(--font-size-h2); }
+.toc h3 { color: var(--primary); margin-bottom: var(--spacing-table-cell); }
+.toc ol { padding-left: var(--spacing-md); }
+.toc li { margin-bottom: var(--spacing-tiny); }
 .toc a { color: var(--secondary); text-decoration: none; }
 .toc a:hover { text-decoration: underline; }
 
@@ -29,24 +43,24 @@
 
 .opp-card {
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem;
-    margin: 1rem 0;
+    border-radius: var(--radius-lg);
+    padding: var(--padding-card, 1.25rem);
+    margin: var(--spacing-sm) 0;
     transition: box-shadow 0.2s;
 }
-.opp-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.opp-card:hover { box-shadow: var(--shadow-lg); }
 .opp-card .opp-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 0.75rem;
+    margin-bottom: var(--spacing-table-cell);
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: var(--spacing-xs);
 }
-.opp-card .opp-title { font-weight: 600; color: var(--primary); font-size: 1.05rem; }
-.opp-card .opp-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-.opp-card .opp-details { font-size: 0.92rem; }
-.opp-card .opp-details dt { font-weight: 600; color: var(--secondary); margin-top: 0.5rem; }
+.opp-card .opp-title { font-weight: 600; color: var(--primary); font-size: var(--font-size-opp-title); }
+.opp-card .opp-badges { display: flex; gap: var(--spacing-opp-gap); flex-wrap: wrap; }
+.opp-card .opp-details { font-size: var(--font-size-opp-details); }
+.opp-card .opp-details dt { font-weight: 600; color: var(--secondary); margin-top: var(--spacing-xs); }
 .opp-card .opp-details dd { margin-left: 0; margin-bottom: 0.25rem; }
 
 
@@ -57,17 +71,17 @@
 .priority-summary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 1rem 0;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
 }
 .priority-card {
     background: var(--light);
-    padding: 1rem;
-    border-radius: 8px;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-lg);
     text-align: center;
 }
-.priority-card .count { font-size: 2rem; font-weight: 700; color: var(--primary); }
-.priority-card .label { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+.priority-card .count { font-size: var(--font-size-priority-count); font-weight: 700; color: var(--primary); }
+.priority-card .label { font-size: var(--font-size-xs); color: var(--color-priority-label); text-transform: uppercase; letter-spacing: var(--letter-spacing-priority); }
 
 
 /* ==========================================================================
@@ -75,18 +89,18 @@
    ========================================================================== */
 
 .action-box {
-    background: #d4edda;
-    border-left: 4px solid #28a745;
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    border-radius: 0 8px 8px 0;
+    background: var(--color-action-bg);
+    border-left: var(--border-accent-width) solid var(--color-action-border);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-sm) 0;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
 }
 
-.sources-section { font-size: 0.88rem; }
-.sources-section li { margin-bottom: 0.3rem; word-break: break-word; }
+.sources-section { font-size: var(--font-size-sources); }
+.sources-section li { margin-bottom: var(--spacing-tiny); word-break: break-word; }
 
 /* Opportunity report table font-size */
-.section-content table { font-size: 0.92rem; }
+.section-content table { font-size: var(--font-size-opp-details); }
 
 
 /* ==========================================================================
@@ -94,7 +108,7 @@
    ========================================================================== */
 
 [data-brand="integrity-studio"] .toc a { color: var(--accent); }
-[data-brand="integrity-studio"] .priority-summary { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin: 1.5rem 0; }
+[data-brand="integrity-studio"] .priority-summary { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin: var(--spacing-md) 0; }
 
 
 /* ==========================================================================
