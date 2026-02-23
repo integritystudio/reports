@@ -74,6 +74,14 @@
     --transition-standard: 0.3s;
     --lift-hover: -5px;
     --lift-hover-sm: -2px;
+    --button-padding: 12px 24px;
+    --status-badge-padding: 6px 12px;
+    --status-badge-radius: 20px;
+    --input-padding: 12px;
+    --submit-padding: 15px 40px;
+    --form-section-margin: 35px;
+    --form-textarea-min-height: 100px;
+    --empty-state-padding-v: 60px;
 }
 
 
@@ -170,7 +178,7 @@
 .new-referral-btn {
     background: var(--leora-gradient);
     color: white;
-    padding: 12px 24px;
+    padding: var(--button-padding);
     border: none;
     border-radius: var(--radius-xs);
     cursor: pointer;
@@ -201,8 +209,8 @@
 .referral-id { font-size: var(--font-size-sm); color: var(--color-text-faint); }
 
 .status-badge {
-    padding: 6px 12px;
-    border-radius: 20px;
+    padding: var(--status-badge-padding);
+    border-radius: var(--status-badge-radius);
     font-size: var(--font-size-sm);
     font-weight: 600;
 }
@@ -266,7 +274,7 @@
 .milestone-label { font-size: var(--font-size-milestone-label); color: var(--color-text-muted); }
 .milestone-amount { font-size: var(--font-size-milestone); font-weight: 600; color: var(--color-text-primary); margin-top: var(--spacing-xxs); }
 
-.empty-state { text-align: center; padding: 60px var(--spacing-lg); color: var(--color-text-faint); }
+.empty-state { text-align: center; padding: var(--empty-state-padding-v) var(--spacing-lg); color: var(--color-text-faint); }
 .empty-state-icon { font-size: var(--font-size-empty-icon); margin-bottom: var(--spacing-lg); }
 
 
@@ -310,7 +318,7 @@ body.form-page .container {
 
 .form-content { padding: var(--spacing-xxxl); }
 
-.form-page .section { margin-bottom: 35px; }
+.form-page .section { margin-bottom: var(--form-section-margin); }
 
 .form-page .section-title {
     font-size: var(--font-size-xl);
@@ -341,7 +349,7 @@ body.form-page .container {
 .form-page select,
 .form-page textarea {
     width: 100%;
-    padding: 12px;
+    padding: var(--input-padding);
     border: 2px solid var(--color-border);
     border-radius: var(--radius-xs);
     font-size: var(--font-size-md);
@@ -357,7 +365,7 @@ body.form-page .container {
     border-color: var(--leora-primary);
 }
 
-.form-page textarea { resize: vertical; min-height: 100px; }
+.form-page textarea { resize: vertical; min-height: var(--form-textarea-min-height); }
 
 .helper-text {
     font-size: var(--font-size-sm);
@@ -388,7 +396,7 @@ body.form-page .container {
 .submit-btn {
     background: var(--leora-gradient);
     color: white;
-    padding: 15px 40px;
+    padding: var(--submit-padding);
     border: none;
     border-radius: var(--radius-xs);
     font-size: var(--font-size-base);
