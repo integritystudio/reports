@@ -1,7 +1,7 @@
 ---
 name: translation-improvement
 description: Continuous translation quality improvement loop. Fixes factual hallucinations while preserving colloquial embellishments. Runs OTEL checks and web research iteratively until quality thresholds pass.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch, WebSearch
 model: sonnet
 color: green
 resources:
@@ -40,6 +40,7 @@ Phase 1 file discovery: could use **haiku** for simple grep/baseline extraction.
 - When translation consistency issues are reported
 - For periodic translation quality sweeps
 - When new source reports are created that have existing translations
+- Do NOT use for initial translation — only for improving existing translations
 
 ## Improvement Loop Workflow
 
