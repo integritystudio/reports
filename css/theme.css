@@ -212,6 +212,36 @@
 
 
 /* ==========================================================================
+   THEME TOKENS
+   Additional tokens used in component sections (shared across all base files)
+   ========================================================================== */
+
+:root {
+    /* Component-specific spacing/sizing tokens */
+    --theme-hero-max-width: 800px;
+    --theme-leora-header-max-width: 1200px;
+    --theme-stat-font-size: 2rem;
+    --theme-stat-number-font-size: 1.8rem;
+    --theme-card-title-font-size: 1.05rem;
+    --theme-action-card-padding: 1.25rem;
+    --theme-holliday-card-padding: 1.75rem;
+    --theme-holliday-glow-offset: -40px;
+    --theme-holliday-glow-size: 120px;
+    --theme-holliday-footer-font-size: 0.78rem;
+    --theme-timeline-dot-size: 8px;
+    --theme-timeline-dot-offset: -5px;
+    --theme-caption-font-size: 0.875rem;
+    --theme-caption-sm-font-size: 0.8125rem;
+    --theme-testimonial-font-size: 0.9rem;
+    --theme-testimonial-quote-color: #444;
+    --theme-action-meta-color: #666;
+    --theme-edgar-stat-grid-min: 150px;
+    --theme-leora-h1-font-size: 1.875rem;
+    --theme-subtitle-font-size: 1.0625rem;
+}
+
+
+/* ==========================================================================
    2. BRAND REPORT ELEMENT OVERRIDES
    Per-brand color adjustments for report-base.css elements
    ========================================================================== */
@@ -398,7 +428,7 @@
 }
 
 [data-brand="leora"] .header-container {
-    max-width: 1200px;
+    max-width: var(--theme-leora-header-max-width);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -412,7 +442,7 @@
 }
 
 [data-brand="leora"] .header-content h1 {
-    font-size: 1.875rem;
+    font-size: var(--theme-leora-h1-font-size);
     font-weight: 700;
     margin-bottom: var(--spacing-xs);
 }
@@ -516,7 +546,7 @@
 
 [data-brand="holliday-lighting"] .card {
     border-radius: var(--radius);
-    padding: 1.75rem;
+    padding: var(--theme-holliday-card-padding);
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 [data-brand="holliday-lighting"] .card:hover {
@@ -530,8 +560,8 @@
 [data-brand="holliday-lighting"] .card::after {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 120px; height: 120px;
+    top: var(--theme-holliday-glow-offset); right: var(--theme-holliday-glow-offset);
+    width: var(--theme-holliday-glow-size); height: var(--theme-holliday-glow-size);
     background: radial-gradient(circle, var(--glow-strong), transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -545,8 +575,8 @@
 }
 
 [data-brand="holliday-lighting"] footer {
-    padding: 1.5rem 2rem;
-    font-size: 0.78rem;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--theme-holliday-footer-font-size);
     color: var(--ink-faint);
     background-color: transparent;
     margin-top: 0;
@@ -555,14 +585,14 @@
 /* --- Capital City portal: hero + stat-row + footer-nav --- */
 
 [data-brand="capital-city"] .hero {
-    max-width: 800px;
+    max-width: var(--theme-hero-max-width);
     margin: var(--spacing-xl) auto;
     padding: 0 var(--spacing-lg);
     text-align: center;
 }
 
 [data-brand="capital-city"] .hero-text {
-    font-size: 1.0625rem;
+    font-size: var(--theme-subtitle-font-size);
     color: var(--color-text-secondary);
     line-height: 1.7;
     margin-bottom: var(--spacing-lg);
@@ -582,16 +612,16 @@
 }
 
 [data-brand="capital-city"] .stat-value {
-    font-size: 2rem;
+    font-size: var(--theme-stat-font-size);
     font-weight: 700;
     color: var(--color-primary-medium);
     line-height: 1.2;
 }
 
 [data-brand="capital-city"] .stat-label {
-    font-size: 0.875rem;
+    font-size: var(--theme-caption-font-size);
     color: var(--color-text-secondary);
-    margin-top: 0.25rem;
+    margin-top: var(--spacing-xs);
 }
 
 [data-brand="capital-city"] .header-meta {
@@ -599,7 +629,7 @@
     flex-wrap: wrap;
     gap: var(--spacing-sm) var(--spacing-lg);
     justify-content: center;
-    font-size: 0.875rem;
+    font-size: var(--theme-caption-font-size);
     color: var(--color-text-secondary);
     margin-top: var(--spacing-sm);
 }
@@ -607,11 +637,11 @@
 [data-brand="capital-city"] .header-meta span {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: var(--spacing-xs);
 }
 
 [data-brand="capital-city"] .card-highlight {
-    font-size: 0.8125rem;
+    font-size: var(--theme-caption-sm-font-size);
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-sm);
     padding-top: var(--spacing-sm);
@@ -633,8 +663,8 @@
 
 [data-brand="capital-city"] .footer-nav a:hover { text-decoration: underline; }
 [data-brand="capital-city"] .footer-nav a:focus-visible {
-    outline: 2px solid var(--color-primary-medium);
-    outline-offset: 2px;
+    outline: var(--focus-outline-width, 2px) solid var(--color-primary-medium);
+    outline-offset: var(--focus-outline-offset, 2px);
     border-radius: var(--radius-sm);
 }
 
@@ -649,43 +679,43 @@
 [data-brand="edgar-nadyne"] .testimonial {
     background: white;
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem;
-    margin: 1rem 0;
+    border-radius: var(--radius-md);
+    padding: var(--theme-action-card-padding);
+    margin: var(--spacing-sm) 0;
 }
 [data-brand="edgar-nadyne"] .testimonial .quote {
     font-style: italic;
-    color: #444;
-    margin-bottom: 0.75rem;
+    color: var(--theme-testimonial-quote-color);
+    margin-bottom: var(--spacing-table-cell, 0.75rem);
 }
 [data-brand="edgar-nadyne"] .testimonial .attribution {
     font-weight: 600;
     color: var(--primary);
-    font-size: 0.9rem;
+    font-size: var(--theme-testimonial-font-size);
 }
 
 [data-brand="edgar-nadyne"] .stat-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    margin: 1rem 0 2rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(var(--theme-edgar-stat-grid-min), 1fr));
+    margin: var(--spacing-sm) 0 var(--spacing-lg) 0;
 }
 [data-brand="edgar-nadyne"] .stat-item {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
-    padding: 1.25rem;
-    border-radius: 8px;
+    padding: var(--theme-action-card-padding);
+    border-radius: var(--radius-md);
     text-align: center;
 }
-[data-brand="edgar-nadyne"] .stat-item .stat-number { font-size: 1.8rem; font-weight: 700; }
-[data-brand="edgar-nadyne"] .stat-item .stat-label { font-size: 0.85rem; opacity: 0.9; margin-top: 0.25rem; }
+[data-brand="edgar-nadyne"] .stat-item .stat-number { font-size: var(--theme-stat-number-font-size); font-weight: 700; }
+[data-brand="edgar-nadyne"] .stat-item .stat-label { font-size: var(--font-size-xs, 0.85rem); opacity: 0.9; margin-top: var(--spacing-xs); }
 
 /* --- Balloon Collective: action cards + timeline --- */
 
 [data-brand="balloon-collective"] .success-box {
-    background: #d4edda;
-    border-left: 4px solid #28a745;
-    padding: 1rem 1.5rem;
-    margin: 1rem 0;
-    border-radius: 0 8px 8px 0;
+    background: var(--color-badge-success-bg, #d4edda);
+    border-left: var(--border-accent-width, 4px) solid var(--color-action-border, #28a745);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-sm) 0;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
 [data-brand="balloon-collective"] .badge-primary {
@@ -693,41 +723,41 @@
     color: var(--primary);
 }
 
-[data-brand="balloon-collective"] .priority-high { border-left: 4px solid #dc3545; }
-[data-brand="balloon-collective"] .priority-medium { border-left: 4px solid #ffc107; }
-[data-brand="balloon-collective"] .priority-low { border-left: 4px solid #28a745; }
+[data-brand="balloon-collective"] .priority-high { border-left: var(--border-accent-width, 4px) solid #dc3545; }
+[data-brand="balloon-collective"] .priority-medium { border-left: var(--border-accent-width, 4px) solid #ffc107; }
+[data-brand="balloon-collective"] .priority-low { border-left: var(--border-accent-width, 4px) solid #28a745; }
 
 [data-brand="balloon-collective"] .action-card {
     background: white;
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem;
-    margin: 0.75rem 0;
+    border-radius: var(--radius-md);
+    padding: var(--theme-action-card-padding);
+    margin: var(--spacing-table-cell, 0.75rem) 0;
     transition: box-shadow 0.2s ease;
 }
-[data-brand="balloon-collective"] .action-card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-[data-brand="balloon-collective"] .action-card .card-title { font-weight: 600; color: var(--primary); margin-bottom: 0.5rem; font-size: 1.05rem; }
-[data-brand="balloon-collective"] .action-card .card-meta { font-size: 0.85rem; color: #666; margin-bottom: 0.5rem; }
+[data-brand="balloon-collective"] .action-card:hover { box-shadow: var(--shadow-lg, 0 4px 8px rgba(0,0,0,0.1)); }
+[data-brand="balloon-collective"] .action-card .card-title { font-weight: 600; color: var(--primary); margin-bottom: var(--spacing-xs); font-size: var(--theme-card-title-font-size); }
+[data-brand="balloon-collective"] .action-card .card-meta { font-size: var(--font-size-xs, 0.85rem); color: var(--theme-action-meta-color); margin-bottom: var(--spacing-xs); }
 [data-brand="balloon-collective"] .action-card .card-body { font-size: 0.95rem; }
-[data-brand="balloon-collective"] .action-card .card-link { display: inline-block; margin-top: 0.5rem; color: var(--secondary); font-weight: 500; font-size: 0.9rem; }
+[data-brand="balloon-collective"] .action-card .card-link { display: inline-block; margin-top: var(--spacing-xs); color: var(--secondary); font-weight: 500; font-size: var(--font-size-sm, 0.9rem); }
 
 [data-brand="balloon-collective"] .timeline-item {
     position: relative;
-    padding-left: 1.5rem;
-    margin-bottom: 1.25rem;
+    padding-left: var(--spacing-md);
+    margin-bottom: var(--theme-action-card-padding);
     border-left: 2px solid var(--accent);
 }
 [data-brand="balloon-collective"] .timeline-item::before {
     content: '';
     position: absolute;
-    left: -5px;
-    top: 0.5rem;
-    width: 8px;
-    height: 8px;
+    left: var(--theme-timeline-dot-offset);
+    top: var(--spacing-xs);
+    width: var(--theme-timeline-dot-size);
+    height: var(--theme-timeline-dot-size);
     border-radius: 50%;
     background: var(--secondary);
 }
-[data-brand="balloon-collective"] .timeline-item .timeline-label { font-weight: 600; color: var(--primary); font-size: 0.9rem; }
+[data-brand="balloon-collective"] .timeline-item .timeline-label { font-weight: 600; color: var(--primary); font-size: var(--font-size-sm, 0.9rem); }
 
 /* --- TRP Austin: profile value color override --- */
 [data-brand="trp-austin"] .profile-item .value { color: var(--text); }
