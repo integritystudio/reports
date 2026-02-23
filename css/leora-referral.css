@@ -82,6 +82,8 @@
     --form-section-margin: 35px;
     --form-textarea-min-height: 100px;
     --empty-state-padding-v: 60px;
+    --border-accent-width: 4px;
+    --font-size-h1-responsive: 1.5rem;
 }
 
 
@@ -413,7 +415,7 @@ body.form-page .container {
 
 .bonus-info {
     background: var(--color-success-bg);
-    border-left: 4px solid var(--color-success);
+    border-left: var(--border-accent-width) solid var(--color-success);
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     border-radius: var(--radius-xs);
@@ -477,7 +479,7 @@ body.form-page .container {
 /* --- Form responsive --- */
 @media (max-width: 600px) {
     .form-content { padding: var(--spacing-lg); }
-    .form-page .header h1 { font-size: 1.5rem; }
+    .form-page .header h1 { font-size: var(--font-size-h1-responsive); }
 }
 
 
