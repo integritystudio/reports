@@ -238,6 +238,36 @@
     --theme-edgar-stat-grid-min: 150px;
     --theme-leora-h1-font-size: 1.875rem;
     --theme-subtitle-font-size: 1.0625rem;
+    /* Holliday Lighting portal/report tokens */
+    --theme-holliday-h4-font-size: 1rem;
+    --theme-table-font-size: 0.92rem;
+    --theme-holliday-card-transition-duration: 0.25s;
+    --theme-holliday-before-transition-duration: 0.35s;
+    --theme-holliday-card-hover-translate: -3px;
+    --theme-holliday-card-focus-offset: 3px;
+    --theme-holliday-card-padding-sm: 1.35rem;
+    /* Subtitle override token */
+    --theme-subtitle-override-font-size: 1.125rem;
+    /* Leora portal tokens */
+    --theme-leora-body-font-size: 1rem;
+    --theme-leora-back-link-font-size: 0.875rem;
+    --theme-leora-back-link-translate: -2px;
+    --theme-leora-card-title-font-size: 1.25rem;
+    --theme-leora-card-desc-font-size: 0.95rem;
+    --theme-leora-h1-font-size-md: 1.5rem;
+    --theme-leora-h1-font-size-sm: 1.25rem;
+    --theme-leora-p-font-size-sm: 0.875rem;
+    --theme-leora-card-title-font-size-sm: 1.1rem;
+    --theme-leora-card-desc-font-size-sm: 0.9rem;
+    /* Markdown note component tokens */
+    --theme-markdown-note-font-size: 0.85rem;
+    --theme-markdown-note-icon-size: 1.2rem;
+    --theme-markdown-note-icon-font: 0.7rem;
+    /* Threat badge tokens */
+    --theme-threat-badge-padding-v: 0.15rem;
+    --theme-threat-badge-padding-h: 0.4rem;
+    /* Balloon Collective action card */
+    --theme-action-card-body-font-size: 0.95rem;
 }
 
 
@@ -290,8 +320,8 @@
 [data-brand="strong-towns"] .badge-info { background: #dcedc8; color: #143028; }
 
 /* --- Holliday Lighting — report element overrides --- */
-[data-brand="holliday-lighting"] section h4 { color: var(--primary); margin: 1rem 0 0.5rem 0; font-size: 1rem; }
-[data-brand="holliday-lighting"] .section-content table { font-size: 0.92rem; }
+[data-brand="holliday-lighting"] section h4 { color: var(--primary); margin: var(--spacing-sm) 0 var(--spacing-xs) 0; font-size: var(--theme-holliday-h4-font-size); }
+[data-brand="holliday-lighting"] .section-content table { font-size: var(--theme-table-font-size); }
 
 /* --- Sound Sight Tarot — purple/gold tones --- */
 [data-brand="sound-sight-tarot"] .highlight-box { background: linear-gradient(135deg, #f0e6f6, #e8daf0); }
@@ -306,15 +336,15 @@
 [data-brand="integrity-studio"] section h3 { color: var(--accent); }
 [data-brand="integrity-studio"] a { color: var(--accent); }
 [data-brand="integrity-studio"] header .meta a { color: #a8e6cf; }
-[data-brand="integrity-studio"] .section-content details { margin: 0.5rem 0; }
-[data-brand="integrity-studio"] .section-content details summary { cursor: pointer; font-weight: 600; color: var(--primary); padding: 0.5rem 0; }
+[data-brand="integrity-studio"] .section-content details { margin: var(--spacing-xs, 0.5rem) 0; }
+[data-brand="integrity-studio"] .section-content details summary { cursor: pointer; font-weight: 600; color: var(--primary); padding: var(--spacing-xs, 0.5rem) 0; }
 
 /* --- Subtitle size override for select brands --- */
 [data-brand="ngo-market"] .subtitle,
 [data-brand="performancetest"] .subtitle,
 [data-brand="integrity-studio"] .subtitle,
 [data-brand="zoukmx"] .subtitle {
-    font-size: 1.125rem;
+    font-size: var(--theme-subtitle-override-font-size);
 }
 
 /* --- Balloon Collective portal h1 margin tweak --- */
@@ -382,9 +412,9 @@
 /* NGO Market threat badges */
 .threat-badge {
     display: inline-block;
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
+    padding: var(--theme-threat-badge-padding-v) var(--theme-threat-badge-padding-h);
+    border-radius: var(--radius-xs, 4px);
+    font-size: var(--font-size-badge, 0.75rem);
     font-weight: 600;
     text-transform: uppercase;
 }
@@ -448,7 +478,7 @@
 }
 
 [data-brand="leora"] .header-content p {
-    font-size: 1rem;
+    font-size: var(--theme-leora-body-font-size);
     color: var(--color-text-secondary);
 }
 
@@ -458,7 +488,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     color: var(--color-text-primary);
-    font-size: 0.875rem;
+    font-size: var(--theme-leora-back-link-font-size);
     font-weight: 500;
 }
 
@@ -466,7 +496,7 @@
     background-color: var(--color-accent);
     color: #ffffff;
     border-color: var(--color-accent);
-    transform: translateX(-2px);
+    transform: translateX(var(--theme-leora-back-link-translate));
 }
 
 [data-brand="leora"] .section-title {
@@ -506,9 +536,9 @@
     opacity: 1;
 }
 
-[data-brand="leora"] .card-title { font-size: 1.25rem; font-weight: 700; line-height: 1.4; }
-[data-brand="leora"] .card-description { flex: 1; font-size: 0.95rem; line-height: 1.6; }
-[data-brand="leora"] .card-link { color: var(--color-accent); font-size: 0.95rem; }
+[data-brand="leora"] .card-title { font-size: var(--theme-leora-card-title-font-size); font-weight: 700; line-height: 1.4; }
+[data-brand="leora"] .card-description { flex: 1; font-size: var(--theme-leora-card-desc-font-size); line-height: 1.6; }
+[data-brand="leora"] .card-link { color: var(--color-accent); font-size: var(--theme-leora-card-desc-font-size); }
 [data-brand="leora"] .card-link:hover { color: var(--color-text-primary); }
 
 /* Markdown file note component */
@@ -521,7 +551,7 @@
     background-color: var(--color-bg-secondary);
     border-left: 2px solid var(--color-accent);
     border-radius: var(--radius-sm);
-    font-size: 0.85rem;
+    font-size: var(--theme-markdown-note-font-size);
     color: var(--color-text-secondary);
 }
 
@@ -530,12 +560,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: var(--theme-markdown-note-icon-size);
+    height: var(--theme-markdown-note-icon-size);
     background-color: var(--color-accent);
     color: #ffffff;
     border-radius: 50%;
-    font-size: 0.7rem;
+    font-size: var(--theme-markdown-note-icon-font);
     font-weight: 700;
     flex-shrink: 0;
 }
@@ -547,15 +577,15 @@
 [data-brand="holliday-lighting"] .card {
     border-radius: var(--radius);
     padding: var(--theme-holliday-card-padding);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    transition: transform var(--theme-holliday-card-transition-duration) ease, box-shadow var(--theme-holliday-card-transition-duration) ease, border-color var(--theme-holliday-card-transition-duration) ease;
 }
 [data-brand="holliday-lighting"] .card:hover {
-    transform: translateY(-3px);
+    transform: translateY(var(--theme-holliday-card-hover-translate));
     border-color: var(--accent);
 }
 [data-brand="holliday-lighting"] .card::before {
     background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-    transition: transform 0.35s ease;
+    transition: transform var(--theme-holliday-before-transition-duration) ease;
 }
 [data-brand="holliday-lighting"] .card::after {
     content: '';
@@ -564,14 +594,14 @@
     width: var(--theme-holliday-glow-size); height: var(--theme-holliday-glow-size);
     background: radial-gradient(circle, var(--glow-strong), transparent 70%);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity var(--transition-standard, 0.3s ease);
     pointer-events: none;
 }
 [data-brand="holliday-lighting"] .card:hover::after { opacity: 1; }
 
 [data-brand="holliday-lighting"] .card:focus-visible {
     outline-color: var(--accent);
-    outline-offset: 3px;
+    outline-offset: var(--theme-holliday-card-focus-offset);
 }
 
 [data-brand="holliday-lighting"] footer {
@@ -738,7 +768,7 @@
 [data-brand="balloon-collective"] .action-card:hover { box-shadow: var(--shadow-lg, 0 4px 8px rgba(0,0,0,0.1)); }
 [data-brand="balloon-collective"] .action-card .card-title { font-weight: 600; color: var(--primary); margin-bottom: var(--spacing-xs); font-size: var(--theme-card-title-font-size); }
 [data-brand="balloon-collective"] .action-card .card-meta { font-size: var(--font-size-xs, 0.85rem); color: var(--theme-action-meta-color); margin-bottom: var(--spacing-xs); }
-[data-brand="balloon-collective"] .action-card .card-body { font-size: 0.95rem; }
+[data-brand="balloon-collective"] .action-card .card-body { font-size: var(--theme-action-card-body-font-size); }
 [data-brand="balloon-collective"] .action-card .card-link { display: inline-block; margin-top: var(--spacing-xs); color: var(--secondary); font-weight: 500; font-size: var(--font-size-sm, 0.9rem); }
 
 [data-brand="balloon-collective"] .timeline-item {
@@ -975,20 +1005,20 @@
         align-items: flex-start;
         gap: var(--spacing-md);
     }
-    [data-brand="leora"] .header-content h1 { font-size: 1.5rem; }
+    [data-brand="leora"] .header-content h1 { font-size: var(--theme-leora-h1-font-size-md); }
     [data-brand="leora"] .card-grid { gap: var(--spacing-md); }
 }
 
 @media (max-width: 480px) {
-    [data-brand="leora"] .header-content h1 { font-size: 1.25rem; }
-    [data-brand="leora"] .header-content p { font-size: 0.875rem; }
-    [data-brand="leora"] .card-title { font-size: 1.1rem; }
-    [data-brand="leora"] .card-description { font-size: 0.9rem; }
+    [data-brand="leora"] .header-content h1 { font-size: var(--theme-leora-h1-font-size-sm); }
+    [data-brand="leora"] .header-content p { font-size: var(--theme-leora-p-font-size-sm); }
+    [data-brand="leora"] .card-title { font-size: var(--theme-leora-card-title-font-size-sm); }
+    [data-brand="leora"] .card-description { font-size: var(--theme-leora-card-desc-font-size-sm); }
 }
 
 /* --- Holliday Lighting portal responsive --- */
 @media (max-width: 640px) {
-    [data-brand="holliday-lighting"] .card { padding: 1.35rem; }
+    [data-brand="holliday-lighting"] .card { padding: var(--theme-holliday-card-padding-sm); }
 }
 
 /* --- Capital City portal responsive --- */
