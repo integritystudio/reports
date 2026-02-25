@@ -65,9 +65,12 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --light: #1a1a2e;
-        --dark: #e0e0e0;
+        --dark: #f0f0f0;
         --border: #333;
         --secondary: #14b8a6;
+        --color-text-muted: #d0d0d0;
+        --color-text-secondary: #e0e0e0;
+        --color-text-body: #ececec;
     }
     body { background: #0f0f23; }
     section, .executive-summary, #toc { background: #1a1a2e; }
@@ -76,17 +79,17 @@
     .highlight-box { background: linear-gradient(135deg, #1a2a2a, #1a2a1a); }
     .warning-box { background: #2a2210; }
     .info-box { background: #1a1a2e; }
-    blockquote { background: #1a1a2e; color: #ddd; }
-    .source { color: #dedede; }
-    footer { color: #ccc; }
-    .contact-item .label { color: #ccc; }
-    details summary .detail-count { color: #ccc; }
+    blockquote { background: #1a1a2e; color: #ececec; }
+    .source { color: #e0e0e0; }
+    footer { color: #d8d8d8; }
+    .contact-item .label { color: #d8d8d8; }
+    details summary .detail-count { color: #d8d8d8; }
     details summary:hover { background: #252535; }
 
-    .badge-success, .badge-verified, .badge-high { background: #1a3a2a; color: #7dcea0; }
-    .badge-warning, .badge-inferred, .badge-medium { background: #3a3020; color: #f0c040; }
-    .badge-danger, .badge-unverified { background: #3a1a1e; color: #e08090; }
-    .badge-info, .badge-quick { background: #1a2a35; color: #70b8d0; }
+    .badge-success, .badge-verified, .badge-high { background: #1a3a2a; color: #90dab0; }
+    .badge-warning, .badge-inferred, .badge-medium { background: #3a3020; color: #f5d060; }
+    .badge-danger, .badge-unverified { background: #3a1a1e; color: #f0a0a8; }
+    .badge-info, .badge-quick { background: #1a2a35; color: #88cce0; }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }

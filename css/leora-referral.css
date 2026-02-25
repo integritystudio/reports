@@ -433,34 +433,39 @@ body.form-page .container {
 @media (prefers-color-scheme: dark) {
     /* --- Dashboard dark --- */
     .dashboard .header { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); }
-    .stat-card { background: var(--color-surface-dark); color: #e0e0e0; }
+    .stat-card { background: var(--color-surface-dark); color: #f0f0f0; }
     .stat-card:hover { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); }
-    .stat-label { color: var(--color-text-faint); }
+    .stat-label { color: #c0c0c0; }
     .referrals-section { background: var(--color-surface-dark); }
-    .section-header h2 { color: #e0e0e0; }
+    .section-header h2 { color: #f0f0f0; }
     .section-header { border-color: #333; }
     .referral-card { border-color: #333; }
     .referral-card:hover { border-color: var(--leora-primary); }
-    .candidate-name { color: #e0e0e0; }
-    .detail-value { color: #e0e0e0; }
+    .candidate-name { color: #f0f0f0; }
+    .detail-label { color: #c0c0c0; }
+    .detail-value { color: #f0f0f0; }
     .milestone-tracker { background: var(--color-surface-dark2); }
-    .milestone-amount { color: #e0e0e0; }
+    .milestone-label { color: #c0c0c0; }
+    .milestone-amount { color: #f0f0f0; }
+    .empty-state { color: #c0c0c0; }
+    .referral-id { color: #b0b0b0; }
+    .helper-text { color: #b0b0b0; }
 
     /* --- Form dark --- */
     body.form-page { background: var(--leora-gradient-dark); }
-    body.form-page .container { background: var(--color-surface-dark); color: #e0e0e0; }
+    body.form-page .container { background: var(--color-surface-dark); color: #f0f0f0; }
     .form-content { background: var(--color-surface-dark); }
-    .form-page .section-title { color: #8899ee; border-color: #333; }
-    .form-page label { color: #ccc; }
+    .form-page .section-title { color: #a0b0f0; border-color: #333; }
+    .form-page label { color: #e0e0e0; }
     .form-page input,
     .form-page textarea,
-    .form-page select { background: var(--color-surface-dark2); color: #e0e0e0; border-color: #444; }
+    .form-page select { background: var(--color-surface-dark2); color: #f0f0f0; border-color: #444; }
     .form-page input:focus,
     .form-page textarea:focus,
     .form-page select:focus { border-color: var(--leora-primary); }
     .bonus-info { background: #1a2e1a; border-color: #34d399; }
-    .bonus-info h3 { color: #34d399; }
-    .bonus-info ul { color: #e0e0e0; }
+    .bonus-info h3 { color: #50e0a0; }
+    .bonus-info ul { color: #f0f0f0; }
     .checkbox-group { background: var(--color-surface-dark2); }
 }
 
