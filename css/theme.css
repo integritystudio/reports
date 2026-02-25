@@ -921,6 +921,17 @@
         --border: #3a3a3a;
     }
 
+    /* --- Section h2 brand-tinted dark backgrounds --- */
+    [data-brand="skelton-woody"] section h2 { background: #142040; }
+    [data-brand="trp-austin"] section h2 { background: #142040; }
+    [data-brand="ngo-market"] section h2 { background: #142040; }
+    [data-brand="integrity-studio"] section h2 { background: #111830; }
+    [data-brand="sound-sight-tarot"] section h2 { background: #1e1428; }
+    [data-brand="strong-towns"] section h2 { background: #142418; }
+    [data-brand="balloon-collective"] section h2 { background: #201430; }
+    [data-brand="edgar-nadyne"] section h2 { background: #281420; }
+    [data-brand="zoukmx"] section h2 { background: #142418; }
+
     /* --- Brand report element dark overrides --- */
 
     [data-brand="skelton-woody"] .highlight-box { background: linear-gradient(135deg, #1a2a35, #1a2e2a); }
