@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RFC 8478 — Zstandard Compression and the application/zstd Media Type</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>RFC 8478</h1>
+      <div class="subtitle">Zstandard Compression and the application/zstd Media Type</div>
+      <div class="meta">
+        <strong>IETF RFC (Informational)</strong> | <strong>Authors:</strong> Y. Collet &amp; M. Kucherawy, Ed. (Facebook) | <strong>Published:</strong> October 2018 | <strong>ISSN:</strong> 2070-1721
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+
+    <div class="executive-summary">
+      <h2>Abstract</h2>
+      <p>Zstandard, or "zstd" (pronounced "zee standard"), is a data compression mechanism. This document describes the mechanism and registers a media type and content encoding to be used when transporting zstd-compressed content via Multipurpose Internet Mail Extensions (MIME).</p>
+      <p>Despite use of the word "standard" as part of its name, readers are advised that this document is not an Internet Standards Track specification; it is being published for informational purposes only.</p>
+
+      <div class="info-box">
+        <strong>Status of This Memo:</strong> This document is a product of the Internet Engineering Task Force (IETF). It represents the consensus of the IETF community. It has been approved for publication by the Internet Engineering Steering Group (IESG). Information about the current status of this document, errata, and feedback: <a href="https://www.rfc-editor.org/info/rfc8478">https://www.rfc-editor.org/info/rfc8478</a>
+      </div>
+    </div>
+
+    <nav id="toc">
+      <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Table of Contents</h2>
+      <div style="padding: 1.5rem;">
+        <ol style="margin: 0; padding-left: 1.5rem;">
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#definitions">Definitions</a></li>
+          <li><a href="#compression-algorithm">Compression Algorithm</a>
+            <ol style="padding-left: 1.5rem; margin-top: 0.5rem;">
+              <li><a href="#frames">Frames</a>
+                <ol style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                  <li><a href="#zstandard-frames">Zstandard Frames</a>
+                    <ol style="padding-left: 1.5rem; margin-top: 0.5rem;">
+                      <li><a href="#frame-header">Frame Header</a></li>
+                      <li><a href="#blocks">Blocks</a></li>
+                      <li><a href="#compressed-blocks">Compressed Blocks</a></li>
+                      <li><a href="#sequence-execution">Sequence Execution</a></li>
+                      <li><a href="#repeat-offsets">Repeat Offsets</a></li>
+                    </ol>
+                  </li>
+                  <li><a href="#skippable-frames">Skippable Frames</a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li><a href="#entropy-encoding">Entropy Encoding</a>
+            <ol style="padding-left: 1.5rem; margin-top: 0.5rem;">
+              <li><a href="#fse">FSE (Finite State Entropy)</a></li>
+              <li><a href="#huffman">Huffman Coding</a></li>
+            </ol>
+          </li>
+          <li><a href="#dictionary-format">Dictionary Format</a></li>
+          <li><a href="#iana-considerations">IANA Considerations</a></li>
+          <li><a href="#security-considerations">Security Considerations</a></li>
+          <li><a href="#implementation-status">Implementation Status</a></li>
+          <li><a href="#references">References</a></li>
+          <li><a href="#appendix-a">Appendix A: Decoding Tables for Predefined Codes</a></li>
+        </ol>
+      </div>
+    </nav>
+
+    <section id="introduction">
+      <h2>1. Introduction</h2>
+      <div class="section-content">
+        <p>Zstandard, or "zstd" (pronounced "zee standard"), is a data compression mechanism, akin to gzip [RFC1952].</p>
+        <p>This document describes the Zstandard format. Also, to enable the transport of a data object compressed with Zstandard, this document registers a media type that can be used to identify such content when it is used in a payload encoded using Multipurpose Internet Mail Extensions (MIME).</p>
+      </div>
+    </section>
+
+    <section id="definitions">
+      <h2>2. Definitions</h2>
+      <div class="section-content">
+        <p>Some terms used elsewhere in this document are defined here for clarity.</p>
+        <dl>
+          <dt><strong>uncompressed</strong></dt>
+          <dd>Describes an arbitrary set of bytes in their original form, prior to being subjected to compression.</dd>
+
+          <dt><strong>compress, compression</strong></dt>
+          <dd>The act of processing a set of bytes via the compression mechanism described here.</dd>
+
+          <dt><strong>compressed</strong></dt>
+          <dd>Describes the result of passing a set of bytes through this mechanism. The original input has thus been compressed.</dd>
+
+          <dt><strong>decompress, decompression</strong></dt>
+          <dd>The act of processing a set of bytes through the inverse of the compression mechanism described here, in an attempt to recover the original set of bytes prior to compression.</dd>
+
+          <dt><strong>decompressed</strong></dt>
+          <dd>Describes the result of passing a set of bytes through the reverse of this mechanism. When successful, the decompressed payload and the uncompressed payload are indistinguishable.</dd>
+
+          <dt><strong>encode</strong></dt>
+          <dd>The process of translating data from one form to another; this may include compression or it may refer to other translations done as part of this specification.</dd>
+
+          <dt><strong>decode</strong></dt>
+          <dd>The reverse of "encode"; describes a process of reversing a prior encoding to recover the original content.</dd>
+
+          <dt><strong>frame</strong></dt>
+          <dd>Content compressed by Zstandard is transformed into a Zstandard frame. Multiple frames can be appended into a single file or stream. A frame is completely independent, has a defined beginning and end, and has a set of parameters that tells the decoder how to decompress it.</dd>
+
+          <dt><strong>block</strong></dt>
+          <dd>A frame encapsulates one or multiple blocks. Each block contains arbitrary content, described by its header, and has a guaranteed maximum content size depending on frame parameters. Unlike frames, each block depends on previous blocks for proper decoding. However, each block can be decompressed without waiting for its successor, allowing streaming operations.</dd>
+
+          <dt><strong>natural order</strong></dt>
+          <dd>A sequence or ordering of objects or values that is typical of that type. A set of unique integers is in "natural order" if when progressing from one element to the next, there is never a decrease in value.</dd>
+        </dl>
+        <p>The naming convention for identifiers within the specification is <code>Mixed_Case_With_Underscores</code>. Identifiers inside square brackets indicate that the identifier is optional in the presented context.</p>
+      </div>
+    </section>
+
+    <section id="compression-algorithm">
+      <h2>3. Compression Algorithm</h2>
+      <div class="section-content">
+        <p>This section describes the Zstandard algorithm.</p>
+        <p>The purpose of this document is to define a lossless compressed data format that is a) independent of the CPU type, operating system, file system, and character set and b) suitable for file compression and pipe and streaming compression, using the Zstandard algorithm.</p>
+        <p>The format uses the Zstandard compression method, and an optional xxHash-64 checksum method, for detection of data corruption. The data format does not attempt to allow random access to compressed data.</p>
+
+        <p>Compliance requirements:</p>
+        <ul>
+          <li>A compliant compressor must produce data sets that conform to the specifications presented here. It does not need to support all options.</li>
+          <li>A compliant decompressor must be able to decompress at least one working set of parameters that conforms to the specifications. It may also ignore informative fields such as the checksum. Whenever it does not support a parameter, it must produce a non-ambiguous error code and associated error message.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="frames">
+      <h2>3.1. Frames</h2>
+      <div class="section-content">
+        <p>Zstandard compressed data is made up of one or more frames. Each frame is independent and can be decompressed independently of other frames. The decompressed content of multiple concatenated frames is the concatenation of each frame's decompressed content.</p>
+        <p>There are two frame formats defined for Zstandard: <strong>Zstandard frames</strong> (contain compressed data) and <strong>skippable frames</strong> (contain custom user metadata).</p>
+      </div>
+    </section>
+
+    <section id="zstandard-frames">
+      <h2>3.1.1. Zstandard Frames</h2>
+      <div class="section-content">
+        <p>The structure of a single Zstandard frame:</p>
+        <pre><code>+--------------------+------------+
+|    Magic_Number    | 4 bytes    |
++--------------------+------------+
+|    Frame_Header    | 2-14 bytes |
++--------------------+------------+
+|     Data_Block     | n bytes    |
++--------------------+------------+
+| [More Data_Blocks] |            |
++--------------------+------------+
+| [Content_Checksum] | 0-4 bytes  |
++--------------------+------------+</code></pre>
+
+        <ul>
+          <li><strong>Magic_Number:</strong> 4 bytes, little-endian format. Value: <code>0xFD2FB528</code>. Selected to be less probable at the beginning of an arbitrary file — avoids trivial patterns, contains byte values outside ASCII range, and doesn't map into UTF-8 space.</li>
+          <li><strong>Frame_Header:</strong> 2 to 14 bytes. Detailed in Section 3.1.1.1.</li>
+          <li><strong>Data_Block:</strong> This is where data appears. Detailed in Section 3.1.1.2.</li>
+          <li><strong>Content_Checksum:</strong> Optional 32-bit checksum, only present if <code>Content_Checksum_Flag</code> is set. The result of the XXH64() hash function digesting the original (decoded) data with a seed of zero. The low 4 bytes stored in little-endian format.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="frame-header">
+      <h2>3.1.1.1. Frame Header</h2>
+      <div class="section-content">
+        <p>The frame header has a variable size, with a minimum of 2 bytes and up to 14 bytes depending on optional parameters:</p>
+
+        <pre><code>+-------------------------+-----------+
+| Frame_Header_Descriptor | 1 byte    |
++-------------------------+-----------+
+|   [Window_Descriptor]   | 0-1 byte  |
++-------------------------+-----------+
+|     [Dictionary_ID]     | 0-4 bytes |
++-------------------------+-----------+
+|  [Frame_Content_Size]   | 0-8 bytes |
++-------------------------+-----------+</code></pre>
+
+        <h3>Frame_Header_Descriptor</h3>
+        <p>A single byte encoding multiple flags. Key fields:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Bit(s)</th>
+              <th>Field</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>7–6</td>
+              <td>Frame_Content_Size_Flag</td>
+              <td>Determines number of bytes used for Frame_Content_Size field (0–3 → 0, 1, 2, 4 bytes, or special value for 8-byte size)</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Single_Segment_Flag</td>
+              <td>If set, Window_Descriptor is omitted and Frame_Content_Size must be present; entire frame must fit in a single buffer</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Unused_Bit</td>
+              <td>Reserved; must be zero</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Reserved_Bit</td>
+              <td>Reserved for future use</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Content_Checksum_Flag</td>
+              <td>If set, a 4-byte content checksum is appended after the last block</td>
+            </tr>
+            <tr>
+              <td>1–0</td>
+              <td>Dictionary_ID_Flag</td>
+              <td>Determines the number of bytes used for the Dictionary_ID field (0, 1, 2, or 4 bytes)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Window_Descriptor</h3>
+        <p>Present only when <code>Single_Segment_Flag</code> is not set. Encodes the minimum required decoder buffer size as a power of two, with a mantissa for fine-grained control. The window size must be at least 1 KB and at most 8 MB for non-dictionary content.</p>
+
+        <h3>Dictionary_ID</h3>
+        <p>Optional field. When present, it indicates the ID of a predefined dictionary that was used during compression. The decompressor must have this dictionary loaded before it can decompress the frame. Dictionary IDs in the range [32768, 2^31 - 1] are reserved for public use; IDs [1, 32767] are for private contexts.</p>
+
+        <h3>Frame_Content_Size</h3>
+        <p>Optional field indicating the original (decompressed) content size. This allows the decompressor to pre-allocate the right amount of output buffer. When present, the field is 1, 2, 4, or 8 bytes depending on <code>Frame_Content_Size_Flag</code>.</p>
+      </div>
+    </section>
+
+    <section id="blocks">
+      <h2>3.1.1.2. Blocks</h2>
+      <div class="section-content">
+        <p>Each block consists of a 3-byte header followed by block content:</p>
+        <pre><code>+------------+-----+
+| Block_Header | 3 bytes |
++--------------+
+| Block_Content | n bytes |
++-------------------+</code></pre>
+
+        <h3>Block_Header</h3>
+        <p>A 3-byte value encoding two fields:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Bit(s)</th>
+              <th>Field</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>23–3</td>
+              <td>Block_Size</td>
+              <td>Size of Block_Content in bytes (21 bits)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Last_Block</td>
+              <td>If set, this is the last block in the frame</td>
+            </tr>
+            <tr>
+              <td>1–0</td>
+              <td>Block_Type</td>
+              <td>0 = Raw_Block, 1 = RLE_Block, 2 = Compressed_Block, 3 = Reserved</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Block Types</h3>
+        <ul>
+          <li><strong>Raw_Block (type 0):</strong> Block content is raw data, stored as-is. Used when data cannot be compressed effectively.</li>
+          <li><strong>RLE_Block (type 1):</strong> Block content is a single byte, repeated <code>Block_Size</code> times in the output.</li>
+          <li><strong>Compressed_Block (type 2):</strong> Block content is compressed. Detailed in Section 3.1.1.3.</li>
+          <li><strong>Reserved (type 3):</strong> This value is reserved.</li>
+        </ul>
+
+        <p>The maximum content size of a block depends on whether the <code>Single_Segment_Flag</code> is set. For multi-segment frames, the maximum block size is the lesser of <code>Window_Size</code> and 128 KB. For single-segment frames, the maximum is the declared <code>Frame_Content_Size</code>.</p>
+      </div>
+    </section>
+
+    <section id="compressed-blocks">
+      <h2>3.1.1.3. Compressed Blocks</h2>
+      <div class="section-content">
+        <p>A compressed block consists of a <strong>Literals_Section</strong> followed by a <strong>Sequences_Section</strong>. This mirrors the LZ77 compression scheme: the literals section stores literal bytes (content not matched from earlier in the data), and the sequences section stores (offset, match_length, literal_length) tuples that reference previously decoded content.</p>
+
+        <h3>Literals Section</h3>
+        <p>The literals section header encodes the literals block type and associated size information:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Literals_Block_Type</th>
+              <th>Value</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Raw_Literals_Block</td>
+              <td>0</td>
+              <td>Literals are stored uncompressed</td>
+            </tr>
+            <tr>
+              <td>RLE_Literals_Block</td>
+              <td>1</td>
+              <td>A single byte repeated N times</td>
+            </tr>
+            <tr>
+              <td>Compressed_Literals_Block</td>
+              <td>2</td>
+              <td>Literals are Huffman-compressed (see Section 4.2)</td>
+            </tr>
+            <tr>
+              <td>Treeless_Literals_Block</td>
+              <td>3</td>
+              <td>Huffman-compressed using a table from a previous block in the same frame</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Sequences Section</h3>
+        <p>The sequences section encodes a series of commands, each consisting of:</p>
+        <ul>
+          <li><strong>Literal_Length:</strong> Number of literal bytes to copy from the literals section</li>
+          <li><strong>Match_Length:</strong> Number of bytes to copy from a previous position in the decoded output</li>
+          <li><strong>Offset:</strong> Distance back in the decoded output where the match begins</li>
+        </ul>
+        <p>The sequences header specifies the number of sequences and the compression modes for the three FSE tables (Literals_Lengths_Table, Match_Lengths_Table, Offsets_Table). Four compression modes are available:</p>
+        <ul>
+          <li><strong>Predefined_Mode (0):</strong> Use a predefined FSE table (specified in Appendix A)</li>
+          <li><strong>RLE_Mode (1):</strong> A single symbol with probability 1.0; stored as a single byte</li>
+          <li><strong>FSE_Compressed_Mode (2):</strong> A new FSE table is provided; used for the current block and subsequent blocks with Repeat_Mode</li>
+          <li><strong>Repeat_Mode (3):</strong> Reuse the FSE table from the previous block in the same frame</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sequence-execution">
+      <h2>3.1.1.4. Sequence Execution</h2>
+      <div class="section-content">
+        <p>To decode a compressed block, a decoder:</p>
+        <ol>
+          <li>Decodes the literals section to obtain the literals buffer</li>
+          <li>Reads and decodes the sequences section using the FSE bitstreams</li>
+          <li>Executes each sequence: copies Literal_Length bytes from the literals buffer, then copies Match_Length bytes from offset <code>output_position - Offset</code> in the output buffer</li>
+          <li>After all sequences, copies any remaining literals from the literals buffer</li>
+        </ol>
+        <p>Sequences are decoded in reverse order from the bitstream (the FSE decoder reads bits from the end of the stream towards the beginning), but executed in forward order to produce the decompressed output.</p>
+      </div>
+    </section>
+
+    <section id="repeat-offsets">
+      <h2>3.1.1.5. Repeat Offsets</h2>
+      <div class="section-content">
+        <p>Zstandard maintains a table of three recent offsets to improve compression of data with repetitive reference patterns. The three most recently used offsets are stored as <code>offset_1</code>, <code>offset_2</code>, and <code>offset_3</code>.</p>
+        <p>When an offset value of 1, 2, or 3 appears in the sequences bitstream, it does not mean a literal offset of 1, 2, or 3 bytes — instead it refers to the first, second, or third previously used offset. This "repeat offset" mechanism significantly compresses patterns where the same offset recurs frequently, which is common in structured data.</p>
+        <p>The repeat offset table is updated after each sequence according to specific rules that ensure the three most useful recent offsets are always available.</p>
+      </div>
+    </section>
+
+    <section id="skippable-frames">
+      <h2>3.1.2. Skippable Frames</h2>
+      <div class="section-content">
+        <p>A skippable frame allows custom user metadata to be stored alongside compressed data without affecting decompression. Any decompressor that encounters a skippable frame must skip over it without error.</p>
+        <pre><code>+--------------------+-----------+
+|  Magic_Number      | 4 bytes   |
++--------------------+-----------+
+|  Frame_Size        | 4 bytes   |
++--------------------+-----------+
+|  User_Data         | n bytes   |
++--------------------+-----------+</code></pre>
+        <p>The magic number for skippable frames is any value in the range <code>[0x184D2A50, 0x184D2A5F]</code> (16 possible values), giving users flexibility to tag different kinds of metadata. Frame_Size is a 4-byte little-endian value indicating the size of User_Data in bytes.</p>
+        <p>Use cases include embedding seek tables, index structures, or application-specific metadata alongside compressed data without requiring a separate file.</p>
+      </div>
+    </section>
+
+    <section id="entropy-encoding">
+      <h2>4. Entropy Encoding</h2>
+      <div class="section-content">
+        <p>Zstandard uses two entropy encoding schemes: FSE (Finite State Entropy) for sequences and Huffman coding for literals.</p>
+      </div>
+    </section>
+
+    <section id="fse">
+      <h2>4.1. FSE (Finite State Entropy)</h2>
+      <div class="section-content">
+        <p>FSE is a fast and efficient entropy coder based on Asymmetric Numeral Systems (ANS), developed by Yann Collet (the same author as Zstandard). It provides near-optimal entropy coding at significantly higher speed than arithmetic coding.</p>
+
+        <h3>How FSE Works</h3>
+        <p>FSE encodes a sequence of symbols using a state machine with a table of size <code>2^Accuracy_Log</code> entries. Each state encodes a symbol and a transition to the next state. The state is maintained as an integer, and symbols are packed/unpacked by writing/reading bits to/from the bitstream.</p>
+
+        <h3>4.1.1. FSE Table Description</h3>
+        <p>The FSE table describes the probability distribution of symbols. It encodes normalized symbol frequencies using a compact bitstream format. For each symbol with nonzero probability, the table provides:</p>
+        <ul>
+          <li><strong>Number_of_States:</strong> How many states are assigned to this symbol; proportional to its probability</li>
+          <li><strong>Baseline:</strong> The minimum state value for this symbol's transitions</li>
+          <li><strong>Nb_Bits:</strong> How many bits to read when transitioning out of a state for this symbol</li>
+        </ul>
+        <p>The <code>Accuracy_Log</code> parameter (6–9 bits for sequences, 5–11 for literals) controls the table size and precision. Higher accuracy logs allow finer probability distinctions but increase table memory.</p>
+
+        <p><strong>Decoding process:</strong></p>
+        <ol>
+          <li>Initialize the FSE state by reading <code>Accuracy_Log</code> bits from the bitstream</li>
+          <li>Read the current symbol from the table at position <code>state</code></li>
+          <li>Read <code>Nb_Bits[state]</code> bits from the stream to get <code>low_bits</code></li>
+          <li>Update state: <code>state = Baseline[state] + low_bits</code></li>
+          <li>Repeat from step 2 until all symbols are decoded</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="huffman">
+      <h2>4.2. Huffman Coding</h2>
+      <div class="section-content">
+        <p>Huffman coding is used to compress the literals section. Zstandard's Huffman implementation supports up to 255 symbols (byte values) and prefix codes of up to 11 bits.</p>
+
+        <h3>4.2.1. Huffman Tree Description</h3>
+        <p>The Huffman tree is described by the set of weights (code lengths) for each symbol. Only symbols with nonzero weight are included. Symbols with higher frequencies receive shorter codes.</p>
+
+        <h4>4.2.1.1. Huffman Tree Header</h4>
+        <p>The header byte determines how the tree weights are encoded:</p>
+        <ul>
+          <li>If the header byte value is <code>&gt;= 128</code>: the weights for all symbols follow in direct 4-bit-per-symbol encoding. The number of symbols is <code>header_byte - 127</code>.</li>
+          <li>If the header byte value is <code>&lt; 128</code>: the header byte encodes the compressed size of an FSE-encoded weight table. The weights are encoded using FSE compression.</li>
+        </ul>
+
+        <h4>4.2.1.2. FSE Compression of Huffman Weights</h4>
+        <p>When weights are FSE-compressed, they use a specialized FSE table with <code>Accuracy_Log</code> in the range [5, 6]. The FSE table for weights is itself encoded using an interleaved representation at the beginning of the compressed weights data.</p>
+
+        <h4>4.2.1.3. Conversion from Weights to Huffman Prefix Codes</h4>
+        <p>Given the weight array <code>Weight[symbol]</code> for each symbol, the Huffman prefix code for each symbol is computed using the standard algorithm: assign shorter codes to symbols with higher weights (lower code lengths). Symbols with <code>Weight = 0</code> are not used and have no code.</p>
+
+        <h3>4.2.2. Huffman-Coded Streams</h3>
+        <p>Literals are encoded using the Huffman tree, with the bitstream written in little-endian bit order. The literals section may contain 1 or 4 Huffman-coded streams. When 4 streams are used, they are decoded in parallel (4 independent streams with pre-computed offsets), allowing SIMD acceleration on modern CPUs — this is a key source of Zstandard's high decompression throughput.</p>
+      </div>
+    </section>
+
+    <section id="dictionary-format">
+      <h2>5. Dictionary Format</h2>
+      <div class="section-content">
+        <p>A Zstandard dictionary is a file that provides pre-shared context to improve compression of small data. Dictionaries are especially effective for data under 64 KB where LZ77-family compressors would otherwise have little past context to exploit.</p>
+
+        <pre><code>+------------------------+----------+
+|  Dictionary_Magic      | 4 bytes  |
++------------------------+----------+
+|  Dictionary_ID         | 4 bytes  |
++------------------------+----------+
+|  Entropy_Tables        | variable |
++------------------------+----------+
+|  Content               | variable |
++------------------------+----------+</code></pre>
+
+        <ul>
+          <li><strong>Dictionary_Magic:</strong> Value <code>0xEC30A437</code>, identifies this as a Zstandard dictionary.</li>
+          <li><strong>Dictionary_ID:</strong> 4-byte identifier, matched against the <code>Dictionary_ID</code> field in frame headers. The decompressor uses this to look up the correct dictionary.</li>
+          <li><strong>Entropy_Tables:</strong> Pre-trained Huffman and FSE tables. These seed the entropy coders with symbol probability distributions derived from the training corpus, eliminating the need to transmit tables for each compressed frame.</li>
+          <li><strong>Content:</strong> Raw bytes that form the "virtual history" prepended to the data being compressed. Back-references in the LZ77 stage can point into this content, allowing the compressor to reference common byte sequences from the training corpus.</li>
+        </ul>
+
+        <h3>Dictionary IDs</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Range</th>
+              <th>Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>[0]</td>
+              <td>Reserved; indicates no dictionary</td>
+            </tr>
+            <tr>
+              <td>[1, 32767]</td>
+              <td>Reserved for private/internal use</td>
+            </tr>
+            <tr>
+              <td>[32768, 2^31 - 1]</td>
+              <td>Public use; registered or ad hoc</td>
+            </tr>
+            <tr>
+              <td>[2^31, 2^32 - 1]</td>
+              <td>Reserved</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="iana-considerations">
+      <h2>6. IANA Considerations</h2>
+      <div class="section-content">
+
+        <h3>6.1. The 'application/zstd' Media Type</h3>
+        <p>This document registers the <code>application/zstd</code> media type for Zstandard-compressed data:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Type name</td>
+              <td>application</td>
+            </tr>
+            <tr>
+              <td>Subtype name</td>
+              <td>zstd</td>
+            </tr>
+            <tr>
+              <td>Required parameters</td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <td>Optional parameters</td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <td>Encoding considerations</td>
+              <td>Binary</td>
+            </tr>
+            <tr>
+              <td>Security considerations</td>
+              <td>See Section 7</td>
+            </tr>
+            <tr>
+              <td>Interoperability considerations</td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <td>Published specification</td>
+              <td>RFC 8478</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>6.2. Content Encoding</h3>
+        <p>This document registers the "zstd" HTTP Content Encoding token in the IANA "HTTP Content Coding Registry". This encoding is suitable for use in the <code>Content-Encoding</code> and <code>Accept-Encoding</code> HTTP headers.</p>
+
+        <h3>6.3. Dictionaries</h3>
+        <p>No IANA registry is defined for Zstandard dictionaries; dictionary IDs are uncoordinated. Public dictionary IDs should use values in the range [32768, 2^31 - 1]. Applications sharing dictionaries must ensure both parties have the same dictionary by means outside the scope of this specification.</p>
+      </div>
+    </section>
+
+    <section id="security-considerations">
+      <h2>7. Security Considerations</h2>
+      <div class="section-content">
+        <p>As with any compression algorithm, several security considerations apply:</p>
+
+        <ul>
+          <li><strong>Decompression bomb / zip bomb:</strong> A malicious actor could create a small compressed file that expands to a very large decompressed output, exhausting the decompressor's memory or disk space. Implementations should impose limits on decompressed output size. The <code>Frame_Content_Size</code> field, when present, allows the decompressor to pre-check whether the output would exceed available resources.</li>
+          <li><strong>Malformed input:</strong> Compressed data may be malformed, either by accident (transmission error) or by deliberate manipulation. Implementations must handle all invalid input gracefully by returning an error rather than crashing or producing incorrect output. The xxHash-64 content checksum provides detection of accidental corruption.</li>
+          <li><strong>Dictionary handling:</strong> Dictionaries contain pre-shared content and entropy tables. Applications that load dictionaries from untrusted sources must validate them appropriately; a malformed dictionary could cause a compliant implementation to produce incorrect output.</li>
+          <li><strong>Information leakage via compression:</strong> Compression ratios can leak information about the content being compressed (the "CRIME" attack class in HTTP). Applications should be aware that compressing attacker-controlled data alongside sensitive data may allow the attacker to infer sensitive content based on the compressed size.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="implementation-status">
+      <h2>8. Implementation Status</h2>
+      <div class="section-content">
+        <p>At the time of RFC 8478 publication (October 2018), Zstandard had been deployed at scale across Meta (Facebook) infrastructure and was actively used in production systems including Linux kernel compression (v4.14+), Firefox update packages, the Python standard library (<code>zstandard</code> module), FoundationDB, Hadoop, and many other projects.</p>
+        <p>As of 2025–2026, Zstandard v1.5.7 is the reference implementation. The library has been continuously fuzzed by Google's oss-fuzz project since 2016 with no known security vulnerabilities in the decompression path. Language bindings exist for 30+ languages including C, C++, Go, Rust, Python, Java, JavaScript, Ruby, PHP, and others.</p>
+      </div>
+    </section>
+
+    <section id="references">
+      <h2>9. References</h2>
+      <div class="section-content">
+        <h3>Normative References</h3>
+        <ul>
+          <li><strong>RFC 1952</strong> — GZIP file format specification version 4.3</li>
+          <li><strong>XXHASH</strong> — Collet, Y., "xxHash — Extremely fast non-cryptographic hash algorithm", <a href="https://github.com/Cyan4973/xxHash">https://github.com/Cyan4973/xxHash</a></li>
+        </ul>
+        <h3>Informative References</h3>
+        <ul>
+          <li><strong>ZSTD</strong> — Collet, Y., "Zstandard source repository", <a href="https://github.com/facebook/zstd">https://github.com/facebook/zstd</a></li>
+          <li><strong>RFC 7841</strong> — RFC Streams, Headers, and Boilerplate</li>
+        </ul>
+        <h3>Related Documents in This Collection</h3>
+        <ul>
+          <li><a href="zstd-condense-report.html">Zstandard Condense Report</a> — Benchmarks, build systems, dictionary training how-to, and language bindings reference</li>
+          <li><a href="otel_telemetry_data_compression.html">OTEL Telemetry Data Compression</a> — Practical use of zstd for OpenTelemetry pipelines</li>
+          <li><a href="sql_kv_data_compression.html">SQL &amp; KV Data Compression</a> — zstd codec selection for databases and KV stores</li>
+          <li><a href="repomix_to_condense_with_additional_integrations.html">Repomix-to-Condense Pipeline</a> — zstd in code compression pipelines</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="appendix-a">
+      <h2>Appendix A: Decoding Tables for Predefined Codes</h2>
+      <div class="section-content">
+        <p>This appendix specifies the predefined FSE decoding tables used when sequences use <code>Predefined_Mode</code>. These tables encode fixed probability distributions that were chosen to work reasonably well across a variety of data types without requiring table transmission in the frame. There are three predefined tables:</p>
+
+        <h3>A.1. Literal Length Code Table</h3>
+        <p>Accuracy_Log = 6 (table size = 64). Encodes the distribution of literal length codes used in sequence commands. Shorter literal lengths (0–15) are assigned much higher probabilities reflecting their frequency in typical compressed data; longer literal lengths (16–35) receive lower probabilities.</p>
+
+        <h3>A.2. Match Length Code Table</h3>
+        <p>Accuracy_Log = 6 (table size = 64). Encodes the distribution of match length codes. Short matches (3–8 bytes) are most common and receive the highest probabilities. The distribution reflects typical LZ77 match-length statistics observed across diverse data corpora.</p>
+
+        <h3>A.3. Offset Code Table</h3>
+        <p>Accuracy_Log = 5 (table size = 32). Encodes the distribution of offset codes. Small offsets (recent back-references) receive higher probability, reflecting the principle of temporal locality in data. The three implicit "repeat offset" codes (values 1, 2, 3) are handled separately by the repeat offsets mechanism and do not appear in this table.</p>
+
+        <div class="info-box">
+          <strong>Note:</strong> The full numeric values for all three tables are specified in the RFC text. Implementors must use the exact table values to ensure bitstream compatibility with other Zstandard implementations. See <a href="https://datatracker.ietf.org/doc/html/rfc8478#appendix-A">RFC 8478 Appendix A</a> for the complete predefined code tables.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="index.html">← Code Condensation Whitepaper</a> &nbsp;|&nbsp; RFC 8478 — IETF 2018 &nbsp;|&nbsp; &copy; 2026 Integrity Studio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

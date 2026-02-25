@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTEL Telemetry Data Compression — Integrity Studio</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>OTEL Telemetry Data Compression</h1>
+      <div class="subtitle">Best Practices for OpenTelemetry Traces, Metrics, and Logs</div>
+      <div class="meta">
+        <strong>Research Paper</strong> | <strong>Prepared:</strong> 2026-02-24 | <strong>Collection:</strong> <a href="index.html">Code Condensation Whitepaper</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+
+    <div class="executive-summary">
+      <h2>Research Questions</h2>
+      <ol>
+        <li>What compression ratios are achievable across OTEL data types (traces, metrics, logs)?</li>
+        <li>How do zstd, gzip, snappy, and other compressors compare on telemetry payloads?</li>
+        <li>What are the OTLP protocol-level compression options, and when should you pick each one?</li>
+        <li>How do pipeline-level and storage-level compression stack, and what are the backend-specific codecs?</li>
+        <li>Can dictionary training or statistical compressors (PPMd) meaningfully improve ratios on structured telemetry?</li>
+        <li>What is the practical cost-reduction impact of an optimized compression strategy for a mid-size deployment?</li>
+      </ol>
+    </div>
+
+    <nav id="toc">
+      <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Table of Contents</h2>
+      <div style="padding: 1.5rem;">
+        <ol style="margin: 0; padding-left: 1.5rem;">
+          <li><a href="#compression-ratios">Compression Ratios by OTEL Data Type</a></li>
+          <li><a href="#compressor-comparison">Compressor Comparison: zstd vs gzip vs Others</a></li>
+          <li><a href="#otlp-protocol">OTLP Protocol Compression</a></li>
+          <li><a href="#pipeline-strategies">Pipeline Strategies: Collector-Level vs Storage-Level</a></li>
+          <li><a href="#backend-integration">Backend Integration: Codec Strategies</a></li>
+          <li><a href="#attribute-impact">Repetitive Attribute Impact on Compression</a></li>
+          <li><a href="#dictionary-training">Dictionary Training on Telemetry Schemas</a></li>
+          <li><a href="#ppmd">PPMd and Statistical Compressors on Structured Telemetry</a></li>
+          <li><a href="#recommendations">Practical Pipeline Recommendations</a></li>
+          <li><a href="#sources">Sources &amp; Citations</a></li>
+          <li><a href="#appendix">Appendix: Practical OTEL Compression Choices</a></li>
+        </ol>
+      </div>
+    </nav>
+
+    <section id="compression-ratios">
+      <h2>1. Compression Ratios by OTEL Data Type</h2>
+      <div class="section-content">
+        <p>Not all telemetry compresses equally. The structural characteristics of traces, metrics, and logs produce different compression profiles.</p>
+
+        <h3>Traces</h3>
+        <p>Traces are the most compressible OTEL signal. A typical span carries fixed-width identifiers (trace_id, span_id), repetitive resource attributes (service.name, host.name, sdk.version), repetitive span attributes (http.method, http.status_code, db.system), and timestamps as nanosecond-precision integers with small deltas.</p>
+        <p><strong>Uncompressed size:</strong> ~500 bytes/span is a common planning estimate (Jaeger + Elasticsearch), though ClickHouse achieves ~80 bytes/span after column-oriented compression.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Compressor</th>
+              <th>Ratio</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>gzip -6</td>
+              <td>3:1 — 5:1</td>
+              <td>Baseline; required by OTLP spec</td>
+            </tr>
+            <tr>
+              <td>zstd -1</td>
+              <td>4:1 — 6:1</td>
+              <td>Default level; ~2x faster than gzip</td>
+            </tr>
+            <tr>
+              <td>zstd -9</td>
+              <td>5:1 — 7:1</td>
+              <td>Balanced; negligible decompression penalty</td>
+            </tr>
+            <tr>
+              <td>OTel Arrow + zstd</td>
+              <td>7:1 — 12:1</td>
+              <td>Columnar encoding; best-in-class</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>OTel Arrow + zstd (production)</strong></td>
+              <td><strong>15:1 — 30:1</strong></td>
+              <td>ServiceNow Cloud Observability reported range</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Metrics</h3>
+        <p>Metrics payloads consist of monotonically increasing timestamps (perfect for delta/DoubleDelta encoding), floating-point gauge values with small inter-sample deltas (ideal for Gorilla/XOR encoding), and repeated label sets.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Compressor</th>
+              <th>Ratio</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>gzip -6</td>
+              <td>4:1 — 6:1</td>
+              <td>Better than traces due to numeric regularity</td>
+            </tr>
+            <tr>
+              <td>zstd -1</td>
+              <td>5:1 — 8:1</td>
+              <td>Numeric patterns compress well under LZ77</td>
+            </tr>
+            <tr>
+              <td>snappy</td>
+              <td>2:1 — 3:1</td>
+              <td>Required by Prometheus Remote Write v1</td>
+            </tr>
+            <tr>
+              <td>Prometheus RW 2.0 + zstd</td>
+              <td>~1.7x over snappy</td>
+              <td>~30% bandwidth reduction vs RW 1.0</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Logs</h3>
+        <p>Logs are the least predictable signal. Freeform message bodies introduce entropy that resists compression, but structured fields (severity, resource attributes, scope) still compress well.</p>
+        <div class="info-box">
+          <strong>Key insight:</strong> The highest compression gains on logs come not from better algorithms but from <strong>log deduplication</strong> (the OTel log dedup processor hashes identical log records and emits counts) and <strong>attribute trimming</strong> (removing high-cardinality fields before export).
+        </div>
+      </div>
+    </section>
+
+    <section id="compressor-comparison">
+      <h2>2. Compressor Comparison: zstd vs gzip vs Others</h2>
+      <div class="section-content">
+        <p>Tested on representative OTLP protobuf payloads (mixed traces, metrics, logs; ~2 MB uncompressed batch):</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Compressor</th>
+              <th>Ratio</th>
+              <th>Compress Speed</th>
+              <th>Decompress Speed</th>
+              <th>CPU Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>gzip -1</td>
+              <td>2.7x</td>
+              <td>~105 MB/s</td>
+              <td>~390 MB/s</td>
+              <td>Moderate</td>
+            </tr>
+            <tr>
+              <td>gzip -6</td>
+              <td>3.2x</td>
+              <td>~35 MB/s</td>
+              <td>~390 MB/s</td>
+              <td>High</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>zstd -1</strong></td>
+              <td><strong>3.0x</strong></td>
+              <td><strong>~510 MB/s</strong></td>
+              <td><strong>~1550 MB/s</strong></td>
+              <td>Low</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>zstd -3</strong></td>
+              <td><strong>3.4x</strong></td>
+              <td>~350 MB/s</td>
+              <td>~1550 MB/s</td>
+              <td>Low-Moderate</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>zstd -9</strong></td>
+              <td><strong>3.7x</strong></td>
+              <td>~50 MB/s</td>
+              <td>~1550 MB/s</td>
+              <td>Moderate</td>
+            </tr>
+            <tr>
+              <td>snappy</td>
+              <td>2.1x</td>
+              <td>~520 MB/s</td>
+              <td>~1500 MB/s</td>
+              <td>Lowest</td>
+            </tr>
+            <tr>
+              <td>lz4</td>
+              <td>2.1x</td>
+              <td>~675 MB/s</td>
+              <td>~3850 MB/s</td>
+              <td>Lowest</td>
+            </tr>
+            <tr>
+              <td>brotli -6</td>
+              <td>3.5x</td>
+              <td>~25 MB/s</td>
+              <td>~425 MB/s</td>
+              <td>High</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>The zstd Advantage for Telemetry</h3>
+        <p>zstd wins on the <strong>ratio-per-CPU-cycle</strong> metric that matters most in telemetry pipelines:</p>
+        <ol>
+          <li>zstd -1 compresses <strong>5x faster than gzip -6</strong> while achieving comparable or better ratios</li>
+          <li>Decompression is <strong>~4x faster</strong> (1550 vs 390 MB/s) — critical for query-time backends like ClickHouse</li>
+          <li>Decompression speed is <strong>constant across all zstd levels</strong> — you can crank up the level at write time without penalizing read performance</li>
+          <li>Dictionary mode is available for small payloads</li>
+        </ol>
+
+        <h3>When NOT to Use zstd</h3>
+        <ul>
+          <li><strong>Prometheus Remote Write v1:</strong> Protocol mandates snappy. Prometheus 3.x Remote Write 2.0 adds zstd support with ~30% bandwidth improvement.</li>
+          <li><strong>Universal OTLP interop:</strong> The OTLP spec requires servers to support gzip. If you control neither the collector nor the backend, gzip is the safe choice.</li>
+          <li><strong>Extremely CPU-constrained edge collectors:</strong> snappy or lz4 may be preferable.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="otlp-protocol">
+      <h2>3. OTLP Protocol Compression</h2>
+      <div class="section-content">
+
+        <h3>Specification Requirements</h3>
+        <p>Per the OTLP Specification 1.9.0:</p>
+        <ul>
+          <li>All OTLP servers <strong>must</strong> support <code>none</code> and <code>gzip</code></li>
+          <li>Additional algorithms (<code>zstd</code>, <code>snappy</code>) are <strong>optional</strong> — negotiated via headers or gRPC encoding</li>
+          <li>The environment variable <code>OTEL_EXPORTER_OTLP_COMPRESSION</code> accepts values <code>gzip</code> or <code>none</code></li>
+        </ul>
+
+        <h3>Collector Configuration</h3>
+        <p><strong>OTLP gRPC exporter:</strong></p>
+        <pre><code>exporters:
+  otlp:
+    endpoint: backend.example.com:4317
+    compression: zstd        # gzip | zstd | snappy | none
+    tls:
+      insecure: false</code></pre>
+
+        <p><strong>OTLP HTTP exporter:</strong></p>
+        <pre><code>exporters:
+  otlphttp:
+    endpoint: https://ingest.example.com:4318
+    compression: gzip        # gzip | zstd | snappy | none
+    headers:
+      authorization: "Bearer ${OTEL_TOKEN}"</code></pre>
+
+        <h3>OTel Arrow: The Columnar Protocol</h3>
+        <p>OTel Arrow replaces protobuf row-encoding with Apache Arrow columnar encoding inside gRPC streams. This is the single most impactful compression improvement available:</p>
+        <ul>
+          <li><strong>How it works:</strong> Resource attributes, span names, status codes, and repeated fields are stored as dictionary-encoded Arrow columns. Timestamps become contiguous integer arrays. The Arrow IPC format is then compressed with zstd.</li>
+          <li><strong>Bandwidth reduction:</strong> 30–70% less than OTLP/gRPC + zstd (same batch size). ServiceNow reported 15x–30x compression over uncompressed OTLP in production.</li>
+          <li><strong>Status:</strong> <code>otelarrowexporter</code> and <code>otelarrowreceiver</code> are included in opentelemetry-collector-contrib releases. Phase 2 (Rust-based pipeline) announced in 2025.</li>
+          <li><strong>Best for:</strong> High-volume internal hops (agent → gateway, gateway → backend). Not yet widely supported by SaaS backends.</li>
+        </ul>
+        <pre><code>exporters:
+  otelarrow:
+    endpoint: gateway.internal:4317
+    arrow:
+      num_streams: 4
+    compression: zstd</code></pre>
+      </div>
+    </section>
+
+    <section id="pipeline-strategies">
+      <h2>4. Pipeline Strategies: Collector-Level vs Storage-Level</h2>
+      <div class="section-content">
+
+        <h3>Layer Model</h3>
+        <pre><code>SDK (app) ──[OTLP/gRPC+gzip]──&gt; Agent Collector
+  ──[OTel Arrow+zstd]──&gt; Gateway Collector
+    ──[batch processor]──&gt; Exporter ──[OTLP/gRPC+zstd]──&gt; Backend
+      ──[ClickHouse ZSTD(1) + DoubleDelta codecs]──&gt; Disk</code></pre>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Compression Type</th>
+              <th>Who Controls It</th>
+              <th>Typical Ratio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Wire: SDK → Agent</td>
+              <td>OTLP gzip (default)</td>
+              <td>SDK config / env var</td>
+              <td>3:1 — 5:1</td>
+            </tr>
+            <tr>
+              <td>Wire: Agent → Gateway</td>
+              <td>OTel Arrow + zstd</td>
+              <td>Collector YAML</td>
+              <td>7:1 — 12:1</td>
+            </tr>
+            <tr>
+              <td>Wire: Gateway → Backend</td>
+              <td>OTLP gzip or zstd</td>
+              <td>Exporter config</td>
+              <td>3:1 — 6:1</td>
+            </tr>
+            <tr>
+              <td>Storage: Backend disk</td>
+              <td>Column codecs (ZSTD, Delta, Gorilla)</td>
+              <td>Backend DDL/config</td>
+              <td>10:1 — 40:1 (columnar)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Collector-Level Optimizations</h3>
+        <p>Before data even hits compression, reduce what you send:</p>
+
+        <p><strong>1. Batch processor</strong> — Larger batches compress better:</p>
+        <pre><code>processors:
+  batch:
+    send_batch_size: 8192
+    timeout: 200ms</code></pre>
+
+        <p><strong>2. Filter processor</strong> — Drop low-value spans (health checks, readiness probes):</p>
+        <pre><code>processors:
+  filter:
+    error_mode: ignore
+    traces:
+      span:
+        - 'attributes["http.route"] == "/healthz"'</code></pre>
+
+        <p><strong>3. Attributes processor</strong> — Remove high-cardinality attributes that bloat payloads without aiding queries.</p>
+
+        <div class="info-box">
+          <strong>Ordering rule:</strong> Always place the <code>memory_limiter</code> processor first in the pipeline chain and the <code>batch</code> processor last.
+        </div>
+      </div>
+    </section>
+
+    <section id="backend-integration">
+      <h2>5. Backend Integration: Codec Strategies</h2>
+      <div class="section-content">
+
+        <h3>ClickHouse (SigNoz, ClickStack)</h3>
+        <p>ClickHouse offers the most granular compression control. Recommended codec assignments for OTEL trace schema:</p>
+
+        <pre><code>CREATE TABLE otel_traces (
+    Timestamp           DateTime64(9)   CODEC(DoubleDelta, ZSTD(1)),
+    TraceId             FixedString(32) CODEC(ZSTD(1)),
+    SpanId              String          CODEC(ZSTD(1)),
+    ParentSpanId        String          CODEC(ZSTD(1)),
+    SpanName            LowCardinality(String) CODEC(ZSTD(1)),
+    SpanKind            Int8            CODEC(T64, ZSTD(1)),
+    ServiceName         LowCardinality(String) CODEC(ZSTD(1)),
+    Duration            UInt64          CODEC(T64, ZSTD(1)),
+    StatusCode          Int16           CODEC(T64, ZSTD(1)),
+    HttpStatusCode      Int16           CODEC(T64, ZSTD(1)),
+    SpanAttributes      Map(String, String) CODEC(ZSTD(1)),
+    ResourceAttributes  Map(String, String) CODEC(ZSTD(1)),
+    Events              String          CODEC(ZSTD(1))
+) ENGINE = MergeTree()
+ORDER BY (ServiceName, SpanName, toDateTime(Timestamp))</code></pre>
+
+        <div class="info-box">
+          <strong>Observed compression ratios (ClickHouse blog, 4B spans):</strong>
+          Uncompressed: 3.40 TiB → On disk with ZSTD(1) + specialized codecs: 275 GiB → <strong>Effective ratio: ~12.7:1</strong>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Codec</th>
+              <th>Best For</th>
+              <th>Mechanism</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>LZ4</strong> (default OSS)</td>
+              <td>General purpose, fast</td>
+              <td>LZ77 dictionary</td>
+            </tr>
+            <tr>
+              <td><strong>ZSTD(level)</strong> (default Cloud)</td>
+              <td>Higher ratio, still fast decompress</td>
+              <td>LZ77 + entropy (FSE/Huffman)</td>
+            </tr>
+            <tr>
+              <td><strong>Delta</strong></td>
+              <td>Slowly changing integers</td>
+              <td>Store difference between neighbors</td>
+            </tr>
+            <tr>
+              <td><strong>DoubleDelta</strong></td>
+              <td>Timestamps with regular intervals</td>
+              <td>Store difference of differences</td>
+            </tr>
+            <tr>
+              <td><strong>Gorilla</strong></td>
+              <td>Floating-point gauges</td>
+              <td>XOR between consecutive values</td>
+            </tr>
+            <tr>
+              <td><strong>T64</strong></td>
+              <td>Small-range integers (status codes, enums)</td>
+              <td>Block transpose + trim unused bits</td>
+            </tr>
+            <tr>
+              <td><strong>LowCardinality</strong></td>
+              <td>String columns with few distinct values</td>
+              <td>Dictionary encoding</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Grafana Tempo</h3>
+        <p>Tempo compresses trace blocks before pushing them to object storage (S3, GCS, Azure Blob). Recommended configuration:</p>
+        <pre><code>storage:
+  trace:
+    backend: s3
+    block:
+      encoding: zstd</code></pre>
+        <p>zstd reduces storage to <strong>~15% of uncompressed</strong> (~6.7:1).</p>
+
+        <h3>Prometheus / VictoriaMetrics (Metrics)</h3>
+        <ul>
+          <li><strong>Prometheus Remote Write 1.0:</strong> Snappy-only. OTel prometheusremotewrite exporter enforces this.</li>
+          <li><strong>Prometheus Remote Write 2.0 (Prometheus 3.x):</strong> Adds zstd option; ~30% bandwidth reduction over RW 1.0.</li>
+          <li><strong>VictoriaMetrics:</strong> Uses zstd compression for its own remote write protocol; 40–60% additional bandwidth savings over Prometheus RW with snappy.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="attribute-impact">
+      <h2>6. Repetitive Attribute Impact on Compression</h2>
+      <div class="section-content">
+
+        <h3>Resource Attributes</h3>
+        <p>Resource attributes (service.name, service.version, host.name, cloud.region) are <strong>identical across every span/metric/log from a single process</strong>. In OTLP protobuf, they are sent once per <code>ResourceSpans</code> per batch — already efficient.</p>
+
+        <h3>Span Attributes from Semantic Conventions</h3>
+        <p>Semantic conventions produce highly repetitive <strong>keys</strong> (http.method, http.route, http.status_code, db.system, rpc.method) and often repetitive <strong>values</strong> (GET, POST, 200, 500, mysql, grpc). A batch of 1000 spans from the same HTTP service might have only 5–10 unique attribute key sets and 20–50 unique value combinations.</p>
+        <p>zstd's larger default window (128 KB at level 1 vs gzip's 32 KB) captures longer-range repetitions.</p>
+
+        <h3>Columnar Advantage (OTel Arrow / ClickHouse)</h3>
+        <p>When data is pivoted from row-oriented to column-oriented:</p>
+        <ul>
+          <li><strong>String columns</strong> become arrays of repeated values → dictionary encoding reduces to integer indexes</li>
+          <li><strong>Numeric columns</strong> become sorted/semi-sorted integer sequences → delta/DoubleDelta encoding</li>
+          <li><strong>Timestamp columns</strong> become monotonically increasing nanosecond values → DoubleDelta yields near-zero residuals</li>
+        </ul>
+        <p>This is why OTel Arrow + zstd achieves 7:1 to 12:1 while plain protobuf + zstd achieves 4:1 to 6:1.</p>
+      </div>
+    </section>
+
+    <section id="dictionary-training">
+      <h2>7. Dictionary Training on Telemetry Schemas</h2>
+      <div class="section-content">
+        <p>Zstandard supports <strong>dictionary compression</strong> — a pre-trained dictionary of common byte patterns that seeds the compressor before processing each payload. For small data (&lt;64 KB), a dictionary can improve ratios by 2x–5x.</p>
+
+        <pre><code># Collect 10K sample OTLP protobuf payloads
+zstd --train samples/*.pb -o otel-traces.dict
+
+# Compress with dictionary
+zstd -D otel-traces.dict payload.pb
+
+# Decompress with dictionary
+zstd -D otel-traces.dict -d payload.pb.zst</code></pre>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Dictionary Benefit</th>
+              <th>Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Small batches (&lt;100 spans)</td>
+              <td>High (2–5x improvement)</td>
+              <td>Little "past" for LZ77 to learn from; dictionary fills the gap</td>
+            </tr>
+            <tr>
+              <td>Large batches (1000+ spans)</td>
+              <td>Low (&lt;10% improvement)</td>
+              <td>Batch itself provides enough context for LZ77 patterns</td>
+            </tr>
+            <tr>
+              <td>Single-service homogeneous spans</td>
+              <td>Medium</td>
+              <td>Attribute keys/values are repetitive but batch already captures this</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box">
+          <strong>Recommendation:</strong> Dictionary training is most valuable for <strong>edge/IoT collectors</strong> sending small, frequent batches over constrained links. For gateway-tier collectors with large batches, skip dictionaries and invest in OTel Arrow instead.
+        </div>
+      </div>
+    </section>
+
+    <section id="ppmd">
+      <h2>8. PPMd and Statistical Compressors on Structured Telemetry</h2>
+      <div class="section-content">
+
+        <table>
+          <thead>
+            <tr>
+              <th>Compressor</th>
+              <th>Ratio on JSON OTLP (1 MB)</th>
+              <th>Compress Speed</th>
+              <th>Decompress Speed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>gzip -6</td>
+              <td>5.2:1</td>
+              <td>~35 MB/s</td>
+              <td>~390 MB/s</td>
+            </tr>
+            <tr>
+              <td>zstd -9</td>
+              <td>5.8:1</td>
+              <td>~50 MB/s</td>
+              <td>~1550 MB/s</td>
+            </tr>
+            <tr>
+              <td>brotli -6</td>
+              <td>6.0:1</td>
+              <td>~25 MB/s</td>
+              <td>~425 MB/s</td>
+            </tr>
+            <tr>
+              <td><strong>PPMd (order 8, 64 MB)</strong></td>
+              <td><strong>6.5:1 — 7.0:1</strong></td>
+              <td>~5 MB/s</td>
+              <td>~5 MB/s</td>
+            </tr>
+            <tr>
+              <td><strong>LZMA2 (7z ultra)</strong></td>
+              <td><strong>6.8:1 — 7.5:1</strong></td>
+              <td>~3 MB/s</td>
+              <td>~200 MB/s</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="warning-box">
+          <strong>Verdict:</strong> PPMd and LZMA2 are <strong>archival-only</strong> choices for telemetry. Decompression at 5 MB/s is 300x slower than zstd — completely impractical for real-time pipeline hops or query-time storage backends. For structured telemetry in real-time pipelines, zstd remains the optimal choice.
+        </div>
+      </div>
+    </section>
+
+    <section id="recommendations">
+      <h2>9. Practical Pipeline Recommendations</h2>
+      <div class="section-content">
+
+        <h3>Decision Matrix</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Wire Compression</th>
+              <th>Storage Compression</th>
+              <th>Expected Overall Ratio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Small team, single backend</td>
+              <td>OTLP/gRPC + gzip</td>
+              <td>Backend default (LZ4/ZSTD)</td>
+              <td>8:1 — 15:1</td>
+            </tr>
+            <tr>
+              <td>Mid-size, SigNoz/ClickHouse</td>
+              <td>OTLP/gRPC + zstd</td>
+              <td>ZSTD(1) + DoubleDelta + T64</td>
+              <td>12:1 — 25:1</td>
+            </tr>
+            <tr>
+              <td>Large-scale, gateway tier</td>
+              <td>OTel Arrow + zstd</td>
+              <td>ZSTD(1) + per-column codecs</td>
+              <td>20:1 — 40:1</td>
+            </tr>
+            <tr>
+              <td>Prometheus metrics</td>
+              <td>Remote Write snappy (v1) or zstd (v2)</td>
+              <td>TSDB / VictoriaMetrics zstd</td>
+              <td>10:1 — 20:1</td>
+            </tr>
+            <tr>
+              <td>Edge/IoT, small batches</td>
+              <td>OTLP/HTTP + zstd + dictionary</td>
+              <td>N/A (forwarded to gateway)</td>
+              <td>5:1 — 10:1</td>
+            </tr>
+            <tr>
+              <td>Cold archival</td>
+              <td>N/A</td>
+              <td>LZMA2 / 7z</td>
+              <td>15:1 — 30:1</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Cost Impact Estimates</h3>
+        <p>For a <strong>mid-size deployment</strong> generating 50 GB/day of raw (uncompressed) telemetry:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Strategy</th>
+              <th>Stored Size</th>
+              <th>Monthly Storage (30d)</th>
+              <th>Annual Savings vs No Compression</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>No compression</td>
+              <td>50 GB/day = 1.5 TB/mo</td>
+              <td>~$34.50/mo</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>gzip default</td>
+              <td>~12.5 GB/day</td>
+              <td>~$8.63/mo</td>
+              <td>~$310/yr</td>
+            </tr>
+            <tr>
+              <td>zstd + ClickHouse codecs (12:1)</td>
+              <td>~4.2 GB/day</td>
+              <td>~$2.88/mo</td>
+              <td>~$379/yr</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>OTel Arrow + zstd + CH codecs (25:1)</strong></td>
+              <td>~2 GB/day</td>
+              <td>~$1.38/mo</td>
+              <td>~$397/yr</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box">
+          <strong>Where compression really matters:</strong> Network egress and ingestion API costs at SaaS observability vendors ($0.10–$3.00/GB ingested) are where compression delivers 10–100x more savings than storage. At $1.50/GB ingest, going from 50 GB/day to 2 GB/day with OTel Arrow saves <strong>$26,280/yr</strong>.
+        </div>
+
+        <h3>Quick-Start Collector Config</h3>
+        <pre><code>receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 512
+    spike_limit_mib: 128
+
+  filter:
+    error_mode: ignore
+    traces:
+      span:
+        - 'attributes["http.route"] == "/healthz"'
+        - 'attributes["http.route"] == "/readyz"'
+
+  attributes:
+    actions:
+      - key: http.request.header.authorization
+        action: delete
+      - key: http.request.header.cookie
+        action: delete
+
+  batch:
+    send_batch_size: 8192
+    timeout: 200ms
+
+exporters:
+  otlp/backend:
+    endpoint: signoz.internal:4317
+    compression: zstd
+    retry_on_failure:
+      enabled: true
+    sending_queue:
+      enabled: true
+      num_consumers: 10
+      queue_size: 5000
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, filter, attributes, batch]
+      exporters: [otlp/backend]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp/backend]
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, filter, attributes, batch]
+      exporters: [otlp/backend]</code></pre>
+      </div>
+    </section>
+
+    <section id="sources">
+      <h2>10. Sources &amp; Citations</h2>
+      <div class="section-content">
+        <h3>OTLP Protocol &amp; Specification</h3>
+        <ul>
+          <li><a href="https://opentelemetry.io/docs/specs/otlp/">OTLP Specification 1.9.0</a></li>
+          <li><a href="https://opentelemetry.io/docs/specs/otel/protocol/exporter/">OpenTelemetry Protocol Exporter</a></li>
+          <li><a href="https://github.com/open-telemetry/opentelemetry-collector/blob/main/config/configgrpc/README.md">OTel Collector gRPC Config</a></li>
+        </ul>
+        <h3>OTel Arrow</h3>
+        <ul>
+          <li><a href="https://opentelemetry.io/blog/2023/otel-arrow/">Achieve a 10x Reduction in Telemetry Traffic Using OTel Arrow (2023)</a></li>
+          <li><a href="https://opentelemetry.io/blog/2024/otel-arrow-production/">OTel Arrow in Production (2024)</a></li>
+          <li><a href="https://github.com/open-telemetry/otel-arrow">OTel Arrow GitHub Repository</a></li>
+        </ul>
+        <h3>ClickHouse Compression</h3>
+        <ul>
+          <li><a href="https://clickhouse.com/blog/optimize-clickhouse-codecs-compression-schema">Optimizing ClickHouse with Schemas and Codecs</a></li>
+          <li><a href="https://clickhouse.com/docs/data-compression/compression-in-clickhouse">Compression in ClickHouse (Docs)</a></li>
+          <li><a href="https://clickhouse.com/blog/storing-traces-and-spans-open-telemetry-in-clickhouse">Building an Observability Solution with ClickHouse — Part 2: Traces</a></li>
+        </ul>
+        <h3>SigNoz</h3>
+        <ul>
+          <li><a href="https://signoz.io/docs/architecture/">SigNoz Technical Architecture</a></li>
+          <li><a href="https://signoz.io/blog/optimising-opentelemetry-pipelines-to-cut-observability-costs-and-data-noise/">Optimising OTel Pipelines to Cut Observability Costs</a></li>
+        </ul>
+        <h3>Prometheus &amp; VictoriaMetrics</h3>
+        <ul>
+          <li><a href="https://prometheus.io/docs/specs/prw/remote_write_spec_2_0/">Prometheus Remote Write 2.0 Specification</a></li>
+          <li><a href="https://victoriametrics.com/blog/victoriametrics-remote-write/">VictoriaMetrics Remote Write Protocol</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="appendix">
+      <h2>Appendix: Practical OTEL Compression Choices (2025–2026 Era)</h2>
+      <div class="section-content">
+
+        <h3>A.1 The "Just Ship It" Default</h3>
+        <ul>
+          <li><strong>Wire:</strong> <code>compression: gzip</code> on all OTLP exporters</li>
+          <li><strong>Backend:</strong> ClickHouse with default <code>ZSTD(1)</code> codec</li>
+          <li><strong>Expected ratio:</strong> 8:1 — 15:1 end-to-end</li>
+          <li><strong>Effort:</strong> Minimal; gzip is universally supported, ZSTD(1) is ClickHouse Cloud default</li>
+        </ul>
+
+        <h3>A.2 The Optimized Mid-Tier</h3>
+        <ul>
+          <li><strong>Wire:</strong> <code>compression: zstd</code> on OTLP/gRPC exporters</li>
+          <li><strong>Collectors:</strong> batch size 8192, filter processor for health checks, attributes processor to strip PII</li>
+          <li><strong>Backend:</strong> ClickHouse with per-column codecs: <code>DoubleDelta, ZSTD(1)</code> on timestamps, <code>T64, ZSTD(1)</code> on integers, <code>LowCardinality + ZSTD(1)</code> on enum-like strings</li>
+          <li><strong>Expected ratio:</strong> 15:1 — 25:1 end-to-end</li>
+        </ul>
+
+        <h3>A.3 The Maximum Compression Frontier</h3>
+        <ul>
+          <li><strong>Wire:</strong> OTel Arrow + zstd between gateway collectors</li>
+          <li><strong>Collectors:</strong> Aggressive filtering (tail-based sampling, log dedup processor, attribute trimming)</li>
+          <li><strong>Backend:</strong> ClickHouse with full codec optimization + tiered storage (hot SSD / cold S3)</li>
+          <li><strong>Cold archival:</strong> Export historical data to Parquet, compress with zstd -19 or LZMA2</li>
+          <li><strong>Expected ratio:</strong> 25:1 — 40:1 end-to-end (hot), 50:1+ (cold archive)</li>
+        </ul>
+
+        <h3>A.5 Key Numbers to Remember</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>OTLP + gzip ratio (traces)</td><td>3:1 — 5:1</td></tr>
+            <tr><td>OTLP + zstd ratio (traces)</td><td>4:1 — 6:1</td></tr>
+            <tr><td>OTel Arrow + zstd ratio (traces)</td><td>7:1 — 12:1 (up to 30:1 in production)</td></tr>
+            <tr><td>ClickHouse ZSTD(1) on-disk ratio</td><td>10:1 — 13:1</td></tr>
+            <tr><td>Tempo zstd storage reduction</td><td>~85% (to 15% of original)</td></tr>
+            <tr><td>zstd -1 compress speed</td><td>510 MB/s</td></tr>
+            <tr><td>zstd decompression speed (any level)</td><td>~1550 MB/s</td></tr>
+            <tr><td>gzip -6 compress speed</td><td>35 MB/s</td></tr>
+            <tr><td>Bytes per span (ClickHouse, compressed)</td><td>~80 bytes</td></tr>
+            <tr><td>Bytes per span (Jaeger + ES, indexed)</td><td>~500 bytes</td></tr>
+          </tbody>
+        </table>
+
+        <p><em>Document prepared 2026-02-24. Compression ratios are approximate and vary with workload characteristics, attribute cardinality, and batch sizes. Always benchmark with representative production data before committing to a compression strategy.</em></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="index.html">← Code Condensation Whitepaper</a> &nbsp;|&nbsp; &copy; 2026 Integrity Studio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

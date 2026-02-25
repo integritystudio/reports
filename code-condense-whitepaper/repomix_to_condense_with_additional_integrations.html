@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repomix-to-Condense Pipeline — Integrity Studio</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>Repomix-to-Condense Pipeline</h1>
+      <div class="subtitle">Compression Analysis &amp; Tool Integrations</div>
+      <div class="meta">
+        <strong>Research Paper</strong> | <strong>Collection:</strong> <a href="index.html">Code Condensation Whitepaper</a> | <strong>Integrity Studio</strong>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+
+    <div class="executive-summary">
+      <h2>Research Questions</h2>
+      <p>How much does repomix losslessly condense? How much additional benefit would a <code>code → repomix → zstd</code> pipeline add, and what about the round-trip back? Then: a deeper dive on integrations with PPM, ast-grep, custom Makefiles, and other tools for polyglot repos.</p>
+    </div>
+
+    <nav id="toc">
+      <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Table of Contents</h2>
+      <div style="padding: 1.5rem;">
+        <ol style="margin: 0; padding-left: 1.5rem;">
+          <li><a href="#how-much-repomix">How Much Does Repomix Condense?</a></li>
+          <li><a href="#pipeline">The code → repomix → zstd Pipeline</a></li>
+          <li><a href="#integrations">Deep Dive: Additional Tools &amp; Integrations</a></li>
+          <li><a href="#summary">Summary: Optimal Pipelines by Use Case</a></li>
+          <li><a href="#sources">Sources</a></li>
+          <li><a href="#appendix">Appendix: Practical Repomix Pipeline Choices</a></li>
+        </ol>
+      </div>
+    </nav>
+
+    <section id="how-much-repomix">
+      <h2>1. How Much Does Repomix Condense?</h2>
+      <div class="section-content">
+        <p>Repomix operates at two distinct levels:</p>
+
+        <h3>1a. Lossless Packing (default, no <code>--compress</code>)</h3>
+        <p>Repomix concatenates all source files into a single structured document (XML, Markdown, JSON, or plain text). This step is <strong>not compression</strong> in the traditional sense — the output is typically <em>larger</em> than the sum of individual files because it adds XML/Markdown wrapper tags, directory structure metadata, file summary / token count header, and security check metadata.</p>
+        <p><strong>Estimated overhead:</strong> +5–15% over raw file concatenation, depending on output style. XML adds the most overhead; plain text the least.</p>
+
+        <div class="info-box">
+          <strong>Effective reduction for AI consumption:</strong>
+          <ul>
+            <li><strong>Ignore filtering:</strong> Stripping <code>node_modules/</code>, <code>dist/</code>, <code>.git/</code>, lockfiles, binaries — which in many repos account for 80–95% of total disk size</li>
+            <li><strong>Comment removal</strong> (<code>--remove-comments</code>): Typically saves 10–25% of source-only content</li>
+            <li><strong>Empty line removal</strong> (<code>--remove-empty-lines</code>): Saves another 3–8%</li>
+          </ul>
+        </div>
+
+        <p><strong>Net result (lossless):</strong> For a typical Node.js/Python project, repomix with <code>--remove-comments --remove-empty-lines</code> produces output that is roughly <strong>60–80% of the raw source file content</strong>. Relative to total repo size on disk (including node_modules, .git, etc.), the reduction is <strong>90–98%</strong>.</p>
+
+        <h3>1b. Lossy Compression (<code>--compress</code>)</h3>
+        <p>Using Tree-sitter, repomix extracts structural signatures and strips function bodies:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Content</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Preserves</strong></td>
+              <td>Function/method signatures, class structures, interface/type definitions, imports, exports, docstrings</td>
+            </tr>
+            <tr>
+              <td><strong>Removes</strong></td>
+              <td>Function bodies, loop/conditional internals, local variable assignments</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong>Reported reduction:</strong> ~70% token count reduction vs. full source. Combined with comment and empty-line removal, the total reduction from source → compressed repomix output is typically <strong>75–85% fewer tokens</strong>.</p>
+      </div>
+    </section>
+
+    <section id="pipeline">
+      <h2>2. The code → repomix → zstd Pipeline</h2>
+      <div class="section-content">
+
+        <h3>2a. What zstd Adds on Top of Repomix Output</h3>
+        <p>Repomix output is structured text (XML/Markdown) with high redundancy — repeated tag names, indentation patterns, and boilerplate. This makes it an excellent candidate for general-purpose compression.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>zstd Level</th>
+              <th>Compression Ratio</th>
+              <th>Compress Speed</th>
+              <th>Decompress Speed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>-1</code> (default)</td>
+              <td>2.5–3.0x</td>
+              <td>~500 MB/s</td>
+              <td>~1500 MB/s</td>
+            </tr>
+            <tr>
+              <td><code>-9</code> (balanced)</td>
+              <td>3.0–3.5x</td>
+              <td>~50 MB/s</td>
+              <td>~1500 MB/s</td>
+            </tr>
+            <tr>
+              <td><code>-19</code> (high)</td>
+              <td>3.5–4.0x</td>
+              <td>~5 MB/s</td>
+              <td>~1500 MB/s</td>
+            </tr>
+            <tr>
+              <td><code>--ultra -22</code> (max)</td>
+              <td>3.8–4.2x</td>
+              <td>~2 MB/s</td>
+              <td>~1500 MB/s</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box">
+          <strong>Key insight:</strong> Decompression speed is essentially constant across all levels (~1500 MB/s). This is critical for the use case of reloading condensed repos into AI tools.
+        </div>
+
+        <h3>2b. Combined Pipeline Numbers</h3>
+        <p>For a <strong>10 MB polyglot source tree</strong> (after .gitignore filtering):</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Size</th>
+              <th>Cumulative Reduction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Raw source files</td>
+              <td>10 MB</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>repomix (lossless, <code>--remove-comments --remove-empty-lines</code>)</td>
+              <td>~7 MB</td>
+              <td>30%</td>
+            </tr>
+            <tr>
+              <td>repomix (<code>--compress</code>)</td>
+              <td>~2.5 MB</td>
+              <td>75%</td>
+            </tr>
+            <tr>
+              <td>+ zstd -9</td>
+              <td>~0.7–0.9 MB</td>
+              <td><strong>91–93%</strong></td>
+            </tr>
+            <tr>
+              <td>+ zstd --ultra -22</td>
+              <td>~0.6–0.8 MB</td>
+              <td><strong>92–94%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>For comparison, raw source → zstd -9 (no repomix) would yield ~2.5–3.3 MB. The repomix <code>--compress</code> step provides the dominant reduction because it is <em>semantic</em> — it understands code structure — whereas zstd is purely statistical/lexical.</p>
+
+        <h3>2c. The Round-Trip</h3>
+        <p><strong>zstd is fully lossless.</strong> Decompressing a <code>.zst</code> file yields the exact repomix output byte-for-byte. So the round-trip question is really about repomix:</p>
+        <ul>
+          <li><strong>Without <code>--compress</code>:</strong> The round-trip is lossless. You can extract individual files from the output (though repomix doesn't provide an "unpack" tool).</li>
+          <li><strong>With <code>--compress</code>:</strong> The round-trip is <strong>lossy</strong>. Function bodies are gone. This is a one-way transformation suitable for AI analysis, not archival.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="integrations">
+      <h2>3. Deep Dive: Additional Tools &amp; Integrations</h2>
+      <div class="section-content">
+
+        <h3>3a. Prediction by Partial Matching (PPMd)</h3>
+        <p>PPM is an adaptive statistical compression technique using Markov context models + arithmetic coding. PPMd (by Dmitry Shkarin) is the most practical implementation, used in RAR and 7-Zip.</p>
+
+        <p><strong>PPMd vs. zstd on text/code</strong> (Large Text Compression Benchmark — enwik9, 1 GB Wikipedia XML):</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Compressor</th>
+              <th>Compressed Size</th>
+              <th>Ratio</th>
+              <th>Compress Time</th>
+              <th>Memory</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FreeArc PPMd (order 13, 1012 MB)</td>
+              <td>175 MB</td>
+              <td>5.7x</td>
+              <td>1175s</td>
+              <td>1046 MB</td>
+            </tr>
+            <tr>
+              <td>7zip PPMd (order 10, 1630 MB)</td>
+              <td>179 MB</td>
+              <td>5.6x</td>
+              <td>503s</td>
+              <td>1630 MB</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>zstd --ultra -22</strong></td>
+              <td>216 MB</td>
+              <td>4.6x</td>
+              <td>701s</td>
+              <td>792 MB</td>
+            </tr>
+            <tr>
+              <td>xz -9 -e (LZMA2)</td>
+              <td>248 MB</td>
+              <td>4.0x</td>
+              <td>2310s</td>
+              <td>690 MB</td>
+            </tr>
+            <tr>
+              <td>bzip2 -9</td>
+              <td>254 MB</td>
+              <td>3.9x</td>
+              <td>379s</td>
+              <td>8 MB</td>
+            </tr>
+            <tr>
+              <td>gzip -9</td>
+              <td>323 MB</td>
+              <td>3.1x</td>
+              <td>101s</td>
+              <td>1.6 MB</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Key takeaway:</strong> PPMd achieves 15–25% better compression than zstd's maximum on text-heavy content, but at the cost of 5–10x slower decompression, higher memory requirements (1–2 GB vs. &lt;1 GB), and no streaming/dictionary support.</p>
+
+        <h4>Integration with repomix pipeline:</h4>
+        <pre><code># Active use (fast decompress for AI tools):
+repomix --compress | zstd -9 > repo.xml.zst
+
+# Archival (maximum squeeze):
+repomix --compress -o repo.xml
+7z a -m0=PPMd -mx=9 -mmem=1024m repo.7z repo.xml</code></pre>
+
+        <h3>3b. ast-grep (Structural Code Search &amp; Rewriting)</h3>
+        <p><strong>ast-grep</strong> (12.6k GitHub stars, MIT license) is a Rust CLI tool for AST-based code structural search, lint, and rewriting. It uses Tree-sitter — the same parser repomix uses for <code>--compress</code>.</p>
+
+        <h4>1. Pre-compression normalization</h4>
+        <pre><code># Normalize all arrow functions to consistent style
+sg --pattern 'function $NAME($ARGS) { return $EXPR }' \
+   --rewrite 'const $NAME = ($ARGS) =&gt; $EXPR' --lang ts</code></pre>
+
+        <h4>2. Selective extraction</h4>
+        <pre><code># Extract only exported API surfaces
+sg --pattern 'export $$$' --lang ts -r . &gt; api-surface.txt</code></pre>
+
+        <h4>3. Full pipeline</h4>
+        <pre><code># Normalize → strip dead code → pack → compress
+sg --pattern 'console.log($$$)' --rewrite '' --lang ts -r src/
+repomix --compress --remove-comments -o packed.xml src/
+zstd -9 packed.xml</code></pre>
+
+        <p>ast-grep supports 20+ languages via Tree-sitter grammars — matching repomix's polyglot capability but with surgical precision.</p>
+
+        <h3>3c. Custom Makefiles for Polyglot Pipelines</h3>
+        <p>For repos with mixed languages and file types, a Makefile can orchestrate per-filetype optimal compression:</p>
+        <pre><code>SRCDIR := src
+OUTDIR := .condense
+ZSTD_LEVEL := 9
+
+CODE_FILES := $(shell find $(SRCDIR) -name '*.ts' -o -name '*.py' -o -name '*.rs' -o -name '*.go' -o -name '*.java')
+CONFIG_FILES := $(shell find $(SRCDIR) -name '*.json' -o -name '*.yaml' -o -name '*.toml' -o -name '*.xml')
+TEXT_FILES := $(shell find $(SRCDIR) -name '*.md' -o -name '*.txt' -o -name '*.rst')
+IMAGE_FILES := $(shell find $(SRCDIR) -name '*.png' -o -name '*.jpg' -o -name '*.svg')
+
+# Code: semantic compress via repomix
+$(OUTDIR)/code.xml.zst: $(CODE_FILES)
+	repomix --compress --remove-comments --include "**/*.{ts,py,rs,go,java}" \
+		-o $(OUTDIR)/code.xml
+	zstd -$(ZSTD_LEVEL) --rm $(OUTDIR)/code.xml
+
+# Config: lossless pack (structure matters)
+$(OUTDIR)/config.xml.zst: $(CONFIG_FILES)
+	repomix --remove-empty-lines --include "**/*.{json,yaml,toml,xml}" \
+		-o $(OUTDIR)/config.xml
+	zstd -$(ZSTD_LEVEL) --rm $(OUTDIR)/config.xml
+
+# Text: PPMd for maximum ratio (compress once, read rarely)
+$(OUTDIR)/docs.7z: $(TEXT_FILES)
+	repomix --include "**/*.{md,txt,rst}" -o $(OUTDIR)/docs.xml
+	7z a -m0=PPMd -mx=9 $(OUTDIR)/docs.7z $(OUTDIR)/docs.xml
+	rm $(OUTDIR)/docs.xml
+
+# Images: already compressed, just archive
+$(OUTDIR)/assets.tar.zst: $(IMAGE_FILES)
+	tar cf - $(IMAGE_FILES) | zstd -1 &gt; $(OUTDIR)/assets.tar.zst
+
+condense: $(OUTDIR)/code.xml.zst $(OUTDIR)/config.xml.zst $(OUTDIR)/docs.7z $(OUTDIR)/assets.tar.zst
+
+clean:
+	rm -rf $(OUTDIR)
+
+.PHONY: condense clean</code></pre>
+
+        <h4>Why per-type strategies matter:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>File Type</th>
+              <th>Best Strategy</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Code (.ts, .py, .rs)</td>
+              <td>repomix <code>--compress</code> + zstd</td>
+              <td>AST extraction removes 70% before statistical compression</td>
+            </tr>
+            <tr>
+              <td>Config (.json, .yaml)</td>
+              <td>repomix lossless + zstd</td>
+              <td>Structure must be preserved; high redundancy benefits zstd</td>
+            </tr>
+            <tr>
+              <td>Text (.md, .txt)</td>
+              <td>repomix + PPMd</td>
+              <td>Natural language is PPMd's sweet spot (15–25% better than zstd)</td>
+            </tr>
+            <tr>
+              <td>Images (.png, .jpg)</td>
+              <td>tar + zstd -1</td>
+              <td>Already compressed; fast archive only</td>
+            </tr>
+            <tr>
+              <td>SVG</td>
+              <td>repomix lossless + zstd -19</td>
+              <td>XML text; compresses very well</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>3d. Dictionary Training for Polyglot Repos</h3>
+        <pre><code># Train a dictionary on your codebase's file samples
+zstd --train src/**/*.ts src/**/*.py -o code.dict
+
+# Compress with the trained dictionary
+zstd -D code.dict -9 packed-output.xml</code></pre>
+        <p>For repos with consistent coding style, a trained dictionary can improve compression ratios by <strong>10–30% on small-to-medium files</strong> (under 100 KB). Best for microservices repos, monorepos with many similarly-structured small files, configuration file collections.</p>
+
+        <h3>3e. BWT (Burrows-Wheeler Transform) Preprocessing</h3>
+        <p>bzip2 uses BWT + MTF + Huffman. From the Large Text Compression Benchmark (enwik9, 1 GB Wikipedia XML):</p>
+        <ul>
+          <li><strong>bzip2 -9:</strong> 254 MB (3.9x ratio), 379s, 8 MB memory</li>
+          <li><strong>zstd --ultra -22:</strong> 216 MB (4.6x ratio), 701s, 792 MB memory</li>
+          <li><strong>PPMd (7zip, order 10):</strong> 179 MB (5.6x ratio), 503s, 1630 MB memory</li>
+        </ul>
+        <p>BWT could theoretically be used as a preprocessing stage before entropy coding, but no production tool currently chains BWT → zstd cleanly.</p>
+
+        <h3>3f. Tree-sitter Grammar-Aware Tokenization</h3>
+        <p>A theoretical pipeline enhancement using both repomix and ast-grep's shared Tree-sitter infrastructure:</p>
+        <ol>
+          <li><strong>Tree-sitter parse</strong> → extract AST</li>
+          <li><strong>AST normalization</strong> → canonical variable names, consistent formatting</li>
+          <li><strong>AST serialization</strong> → compact binary or S-expression format</li>
+          <li><strong>zstd compression</strong> → on the normalized output</li>
+        </ol>
+        <p>This theoretical pipeline could achieve better compression than repomix's current approach because AST normalization eliminates cosmetic variation (naming, whitespace, brace style) that wastes entropy. No production tool implements this full pipeline today, but the components exist.</p>
+      </div>
+    </section>
+
+    <section id="summary">
+      <h2>4. Summary: Optimal Pipelines by Use Case</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Use Case</th>
+              <th>Pipeline</th>
+              <th>Expected Reduction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>AI chat (fast reload)</strong></td>
+              <td>repomix <code>--compress</code> → zstd -3</td>
+              <td>~90% tokens, instant decompress</td>
+            </tr>
+            <tr>
+              <td><strong>AI deep analysis</strong></td>
+              <td>repomix (lossless) → zstd -9</td>
+              <td>~70% size, preserves all logic</td>
+            </tr>
+            <tr>
+              <td><strong>Cold archival</strong></td>
+              <td>repomix → PPMd via 7z</td>
+              <td>~93–95% size, slow decompress</td>
+            </tr>
+            <tr>
+              <td><strong>Polyglot repo (mixed types)</strong></td>
+              <td>Makefile with per-type strategy</td>
+              <td>~90–95% overall</td>
+            </tr>
+            <tr>
+              <td><strong>Monorepo (many small files)</strong></td>
+              <td>zstd dictionary training + repomix</td>
+              <td>~92% with trained dict</td>
+            </tr>
+            <tr>
+              <td><strong>CI artifact storage</strong></td>
+              <td>repomix → zstd --fast=3</td>
+              <td>~80% size, minimal CPU cost</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="sources">
+      <h2>Sources</h2>
+      <div class="section-content">
+        <ul>
+          <li><a href="https://repomix.com/guide/code-compress">Repomix documentation — Code Compression</a></li>
+          <li><a href="https://repomix.com/guide/configuration">Repomix configuration reference</a></li>
+          <li><a href="https://github.com/facebook/zstd">facebook/zstd — GitHub</a> (26.7k stars, v1.5.7)</li>
+          <li><a href="https://facebook.github.io/zstd/#benchmarks">Zstandard benchmarks</a></li>
+          <li><a href="https://mattmahoney.net/dc/text.html">Matt Mahoney — Large Text Compression Benchmark</a></li>
+          <li><a href="https://github.com/ast-grep/ast-grep">ast-grep/ast-grep — GitHub</a> (12.6k stars, v0.41.0)</li>
+          <li><a href="https://en.wikipedia.org/wiki/Prediction_by_partial_matching">Wikipedia — Prediction by Partial Matching</a></li>
+          <li><a href="https://github.com/yamadashy/repomix/issues?q=compress+token">Repomix GitHub issues — compress/token discussions</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="appendix">
+      <h2>Appendix: Practical Repomix Pipeline Choices (2025–2026 Era)</h2>
+      <div class="section-content">
+        <p>Most people choose zstd (often level 3–9 for balance, or <code>--ultra -19</code>–<code>22</code> when squeezing harder) because the decompression speed advantage is huge when reloading the condensed repo into tools like Continue.dev, Cursor, Aider, or Claude.</p>
+        <p>PPMd shines in offline archival scenarios (e.g., yearly repo snapshots, cold storage) where you compress once and rarely decompress.</p>
+
+        <div class="info-box">
+          <strong>Hybrid tip:</strong> <code>repomix --compress</code> → zstd (fast, everyday) for active use; <code>repomix --compress</code> → PPMd (via <code>7z a -m0=PPMd -mx=9 archive.7z</code>) for maximum squeeze when archiving.
+        </div>
+
+        <h3>Related Research</h3>
+        <ul>
+          <li><a href="otel_telemetry_data_compression.html">OTEL Telemetry Data Compression</a> — Compression best practices for OpenTelemetry traces, metrics, and logs; OTLP protocol compression; ClickHouse codecs; collector and storage-level strategies.</li>
+          <li><a href="sql_kv_data_compression.html">SQL &amp; KV Data Storage Compression</a> — Compression best practices for SQL databases (PostgreSQL, ClickHouse, MySQL) and KV stores (RocksDB, Redis, Cloudflare KV); per-column codec selection; write amplification tradeoffs.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="index.html">← Code Condensation Whitepaper</a> &nbsp;|&nbsp; &copy; 2026 Integrity Studio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

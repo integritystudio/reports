@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Condensation Whitepaper — Integrity Studio</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>Code Condensation Whitepaper</h1>
+      <div class="subtitle">Data compression strategies for code, telemetry, and storage</div>
+      <div class="meta">
+        <strong>Research Collection</strong> | <strong>Era:</strong> 2025–2026 | <strong>Integrity Studio</strong>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+
+    <div class="executive-summary">
+      <h2>Overview</h2>
+      <p>A research collection on data compression strategies for code, telemetry, and storage — covering algorithms, pipelines, and practical tooling for the 2025–2026 ecosystem.</p>
+      <p>The collection spans three core areas: code condensation via repomix and semantic compression tools, observability pipeline compression for OpenTelemetry data, and storage-level codec selection for SQL databases and key-value stores.</p>
+    </div>
+
+    <section id="key-findings">
+      <h2>Key Findings at a Glance</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Pipeline</th>
+              <th>Reduction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AI chat (fast reload)</td>
+              <td><code>repomix --compress</code> → zstd -3</td>
+              <td>~90% tokens</td>
+            </tr>
+            <tr>
+              <td>AI deep analysis</td>
+              <td>repomix lossless → zstd -9</td>
+              <td>~70% size</td>
+            </tr>
+            <tr>
+              <td>Cold archival</td>
+              <td>repomix → PPMd via 7z</td>
+              <td>~93–95% size</td>
+            </tr>
+            <tr>
+              <td>OTEL hot path</td>
+              <td>zstd at collector + ClickHouse ZSTD(3)</td>
+              <td>85–95% vs raw</td>
+            </tr>
+            <tr>
+              <td>OTEL archival</td>
+              <td>OTel Arrow + ClickHouse DoubleDelta + ZSTD</td>
+              <td>up to 30:1</td>
+            </tr>
+            <tr>
+              <td>SQL time-series</td>
+              <td>Delta + ZSTD codec chain</td>
+              <td>10–50x vs uncompressed</td>
+            </tr>
+            <tr>
+              <td>KV small records</td>
+              <td>zstd dictionary training</td>
+              <td>+10–30% over base</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="research-papers">
+      <h2>Research Papers</h2>
+      <div class="section-content">
+
+        <div class="highlight-box" style="margin-bottom: 1.5rem; padding: 1.5rem;">
+          <h3><a href="repomix_to_condense_with_additional_integrations.html">Repomix-to-Condense Pipeline: Compression Analysis &amp; Tool Integrations</a></h3>
+          <p>The core document. Answers how much repomix losslessly condenses a codebase, what a <code>code → repomix → zstd</code> pipeline adds, and whether the round-trip is recoverable. Includes a deep dive on integrations with PPM, ast-grep, and custom Makefiles for polyglot repos with mixed file types — with per-type compression strategy tables and concrete pipeline examples.</p>
+        </div>
+
+        <div class="highlight-box" style="margin-bottom: 1.5rem; padding: 1.5rem;">
+          <h3><a href="otel_telemetry_data_compression.html">OTEL Telemetry Data Compression</a></h3>
+          <p>Compression best practices for OpenTelemetry traces, metrics, and logs. Covers OTLP protocol compression options (gzip mandatory, zstd/snappy optional), OTel Arrow's 30–70% bandwidth reduction, ClickHouse codec selection for SigNoz/ClickStack, collector pipeline configuration, and dictionary training on protobuf samples. Includes cost impact estimates for SaaS ingest at scale.</p>
+        </div>
+
+        <div class="highlight-box" style="margin-bottom: 1.5rem; padding: 1.5rem;">
+          <h3><a href="sql_kv_data_compression.html">SQL &amp; KV Data Storage Compression</a></h3>
+          <p>Compression best practices for relational databases and key-value stores. Covers PostgreSQL TOAST (pglz vs lz4), ClickHouse per-column codec selection (Delta, DoubleDelta, Gorilla, T64, ZSTD), RocksDB compression by level, Redis memory encoding (ziplist/listpack), and Cloudflare KV edge compression. Addresses write amplification tradeoffs across compression levels.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="reference-documents">
+      <h2>Reference Documents</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Document</th>
+              <th>Contents</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="prediction-by-partial-matching.html">Prediction by Partial Matching</a></td>
+              <td>PPM algorithm — context modeling, escape symbols, arithmetic coding; variants PPMC, PPMd, PPM*, PPM-Decay; open-source libraries across C, Python, Java, R</td>
+            </tr>
+            <tr>
+              <td><a href="repomix-command-line-cheat-sheet.html">Repomix CLI Cheat Sheet</a></td>
+              <td>Full CLI reference — output formats, file filtering, <code>--compress</code> lossy behavior, compression modes (Interface/Signature/Minimal), full <code>repomix.config.json</code> template</td>
+            </tr>
+            <tr>
+              <td><a href="zstd-condense-report.html">Zstandard Condense Report</a></td>
+              <td>zstd overview — benchmark tables vs brotli/zlib/lz4/snappy, dictionary training how-to, build systems (make/cmake/vcpkg/conan), language bindings across 30+ languages</td>
+            </tr>
+            <tr>
+              <td><a href="http-content-compression.html">HTTP Content Compression (RFC 8478)</a></td>
+              <td>Full text of RFC 8478 — Zstandard compression format specification, frame format, FSE and Huffman entropy encoding, IANA media type registration</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Integrity Studio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

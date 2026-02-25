@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repomix CLI Cheat Sheet — Integrity Studio</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>Repomix CLI Cheat Sheet</h1>
+      <div class="subtitle">Full Command-Line Reference for Codebase Packing</div>
+      <div class="meta">
+        <strong>Reference</strong> | <strong>Collection:</strong> <a href="index.html">Code Condensation Whitepaper</a> | <strong>Integrity Studio</strong>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+
+    <div class="executive-summary">
+      <h2>Overview</h2>
+      <p>Repomix is the tool used to pack codebases for AI consumption. It concatenates source files into a single structured document — removing noise (node_modules, dist, lockfiles) and optionally applying semantic compression via Tree-sitter. This reference covers the full CLI, compression behavior, and configuration template.</p>
+    </div>
+
+    <nav id="toc">
+      <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Contents</h2>
+      <div style="padding: 1.5rem;">
+        <ol style="margin: 0; padding-left: 1.5rem;">
+          <li><a href="#basic-usage">Basic Usage</a></li>
+          <li><a href="#output-formats">Output Formats &amp; Style</a></li>
+          <li><a href="#file-selection">File Selection &amp; Filtering</a></li>
+          <li><a href="#compression">Compression &amp; Token Management</a></li>
+          <li><a href="#remote">Remote Repositories</a></li>
+          <li><a href="#advanced">Advanced Options</a></li>
+          <li><a href="#compress-lossless">Is <code>--compress</code> Lossless?</a></li>
+          <li><a href="#compression-config">Compression Configuration</a></li>
+          <li><a href="#full-config">Full Configuration Template</a></li>
+        </ol>
+      </div>
+    </nav>
+
+    <section id="basic-usage">
+      <h2>Basic Usage</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Command</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>npx repomix</code></td>
+              <td>Packs the current directory using default settings.</td>
+            </tr>
+            <tr>
+              <td><code>repomix path/to/dir</code></td>
+              <td>Packs a specific local directory.</td>
+            </tr>
+            <tr>
+              <td><code>repomix --init</code></td>
+              <td>Generates a <code>repomix.config.json</code> file in the current directory.</td>
+            </tr>
+            <tr>
+              <td><code>repomix --copy</code></td>
+              <td>Automatically copies the generated output to your clipboard.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="output-formats">
+      <h2>Output Formats &amp; Style</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--style &lt;format&gt;</code></td>
+              <td>Set output format: <code>xml</code> (default), <code>markdown</code>, <code>json</code>, or <code>plain</code>.</td>
+            </tr>
+            <tr>
+              <td><code>-o, --output &lt;file&gt;</code></td>
+              <td>Specify a custom output filename (default: <code>repomix-output.xml</code>).</td>
+            </tr>
+            <tr>
+              <td><code>--stdout</code></td>
+              <td>Writes packed output directly to the terminal instead of a file.</td>
+            </tr>
+            <tr>
+              <td><code>--split-output &lt;size&gt;</code></td>
+              <td>Splits large output into multiple files (e.g., <code>--split-output 2mb</code>).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="file-selection">
+      <h2>File Selection &amp; Filtering</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--include "src/**/*.ts"</code></td>
+              <td>Only include files matching specific glob patterns.</td>
+            </tr>
+            <tr>
+              <td><code>--ignore "tests/**,*.log"</code></td>
+              <td>Exclude specific files or directories.</td>
+            </tr>
+            <tr>
+              <td><code>--stdin</code></td>
+              <td>Pipe a list of files from other commands (e.g., <code>git ls-files | repomix --stdin</code>).</td>
+            </tr>
+            <tr>
+              <td><code>--no-files</code></td>
+              <td>Generates metadata and directory structure without file contents.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="compression">
+      <h2>Compression &amp; Token Management</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--compress</code></td>
+              <td>Intelligent code structure extraction using Tree-sitter to reduce token count.</td>
+            </tr>
+            <tr>
+              <td><code>--remove-comments</code></td>
+              <td>Strips code comments to save space.</td>
+            </tr>
+            <tr>
+              <td><code>--remove-empty-lines</code></td>
+              <td>Removes blank lines from all files.</td>
+            </tr>
+            <tr>
+              <td><code>--token-count-tree [N]</code></td>
+              <td>Displays a file tree showing token counts for files over N tokens.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="remote">
+      <h2>Remote Repositories</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--remote &lt;url&gt;</code></td>
+              <td>Pack a remote GitHub repository directly.</td>
+            </tr>
+            <tr>
+              <td><code>--remote-branch &lt;name&gt;</code></td>
+              <td>Specify a branch, tag, or commit hash for remote packing.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="advanced">
+      <h2>Advanced Options</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--output-show-line-numbers</code></td>
+              <td>Adds line numbers to the output for easier referencing.</td>
+            </tr>
+            <tr>
+              <td><code>--instruction-file-path &lt;path&gt;</code></td>
+              <td>Includes custom AI instructions from a text file.</td>
+            </tr>
+            <tr>
+              <td><code>--verbose</code></td>
+              <td>Enables detailed debug logging.</td>
+            </tr>
+            <tr>
+              <td><code>--quiet</code></td>
+              <td>Suppresses all console output except for errors.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="compress-lossless">
+      <h2>Is <code>--compress</code> Lossless?</h2>
+      <div class="section-content">
+
+        <div class="warning-box">
+          <strong>No — the <code>--compress</code> flag is lossy.</strong> It uses Tree-sitter to intelligently parse your code and extract only the "essential" structures while removing implementation details (function bodies, internal logic, etc.) to reduce token counts by roughly 70%.
+        </div>
+
+        <h3>What is Lost vs. Preserved</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Content</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Lost</strong></td>
+              <td>Detailed function bodies, internal logic, local variable assignments, granular implementation details.</td>
+            </tr>
+            <tr>
+              <td><strong>Preserved</strong></td>
+              <td>Function and method signatures, class structures, interface/type definitions, imports, exports.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>When to Use It</h3>
+        <ul>
+          <li><strong>Architectural Overview:</strong> Use it when you want an AI to understand the "what" (API surface and structure) without getting bogged down in the "how" (detailed code).</li>
+          <li><strong>Context Limits:</strong> Use it for very large codebases that would otherwise exceed an LLM's context window.</li>
+        </ul>
+
+        <div class="info-box">
+          <strong>Pro Tip:</strong> If you need the AI to actually refactor or debug specific logic, do <strong>not</strong> use <code>--compress</code>, as the logic it needs to see will be stripped out and replaced with placeholders like <code>pass</code>.
+        </div>
+      </div>
+    </section>
+
+    <section id="compression-config">
+      <h2>Compression Configuration</h2>
+      <div class="section-content">
+        <p>Compression is controlled by a single boolean — there are no granular knobs for what gets kept or removed. Enable it in your config:</p>
+
+        <pre><code>{
+  "output": {
+    "compress": true
+  }
+}</code></pre>
+
+        <p>Or on the command line: <code>repomix --compress</code></p>
+
+        <p>The Tree-sitter-based compression preserves function/method signatures, class structures, interface/type definitions, imports, and exports. It removes function bodies, loop/conditional internals, and local variable assignments. There is no way to selectively keep or remove specific categories — it is all-or-nothing.</p>
+
+        <div class="info-box">
+          <strong>Note:</strong> Compression is marked as experimental by the Repomix team and may gain more granular controls in the future. See <a href="https://github.com/yamadashy/repomix/issues/561">Feature Request #561</a> and <a href="https://github.com/yamadashy/repomix/issues/516">#516</a> for open discussions on selective compression.
+        </div>
+
+        <h3>Pro Tips for Compression</h3>
+        <ul>
+          <li><strong>Selective inclusion:</strong> Use <code>--include</code> to compress only certain directories while leaving others out entirely, rather than trying to control what the compressor keeps.</li>
+          <li><strong>Combine with other reductions:</strong> <code>--compress --remove-comments --remove-empty-lines</code> stacks all three for maximum token reduction.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="full-config">
+      <h2>Full Configuration Template</h2>
+      <div class="section-content">
+        <p>This configuration combines compression with layered ignore rules to ensure the AI receives a structural overview while skipping irrelevant files. Save as <code>repomix.config.json</code> in your project root:</p>
+
+        <pre><code>{
+  "$schema": "https://repomix.com/schemas/latest/schema.json",
+  "output": {
+    "filePath": "packed-codebase.xml",
+    "style": "xml",
+    "compress": true,
+    "removeComments": true,
+    "removeEmptyLines": true,
+    "showLineNumbers": false,
+    "topFilesLength": 10
+  },
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": [
+      "**/tests/**",
+      "**/docs/**",
+      "package-lock.json",
+      "yarn.lock",
+      "*.log",
+      "dist/**/*",
+      "build/**/*"
+    ]
+  },
+  "security": {
+    "enableSecurityCheck": true
+  }
+}</code></pre>
+
+        <h3>Why This Setup Works</h3>
+        <ul>
+          <li><strong>Layered Filtering:</strong> Respects your <code>.gitignore</code> and built-in defaults (like <code>node_modules</code>), while <code>customPatterns</code> lets you prune project-specific noise like lockfiles or test suites.</li>
+          <li><strong>Structural Compression:</strong> With <code>compress: true</code>, the AI sees the entire project structure and API surface without wasting tokens on the actual logic inside functions.</li>
+          <li><strong>Security Built-in:</strong> The <code>enableSecurityCheck</code> ensures Secretlint runs automatically to prevent accidental exposure of API keys or credentials in the packed file.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="index.html">← Code Condensation Whitepaper</a> &nbsp;|&nbsp; &copy; 2026 Integrity Studio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

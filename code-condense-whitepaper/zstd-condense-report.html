@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zstandard (zstd) Condense Report — Integrity Studio</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>Zstandard (zstd)</h1>
+      <div class="subtitle">Fast Real-Time Compression Algorithm — Reference Report</div>
+      <div class="meta">
+        <strong>Reference</strong> | <strong>Release:</strong> v1.5.7 (Feb 19, 2025) | <strong>License:</strong> Dual BSD / GPLv2 | <strong>Collection:</strong> <a href="index.html">Code Condensation Whitepaper</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+
+    <div class="executive-summary">
+      <h2>Overview</h2>
+      <p>Zstandard (<code>zstd</code>) is a fast lossless compression algorithm targeting real-time compression scenarios at zlib-level and better compression ratios. It is backed by a very fast entropy stage provided by the Huff0 and FSE library (Finite State Entropy).</p>
+      <p>Zstandard's format is stable and documented in <a href="http-content-compression.html">RFC 8478</a>. The reference implementation is an open-source C library and CLI. Deployed across Meta and many other large cloud infrastructures. Continuously fuzzed by Google's oss-fuzz.</p>
+    </div>
+
+    <div class="section-content" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+      <div class="highlight-box" style="flex: 1; min-width: 160px; padding: 1rem; text-align: center;">
+        <div style="font-size: 2rem; font-weight: 700;">26.7k</div>
+        <div>GitHub Stars</div>
+      </div>
+      <div class="highlight-box" style="flex: 1; min-width: 160px; padding: 1rem; text-align: center;">
+        <div style="font-size: 2rem; font-weight: 700;">2.4k</div>
+        <div>Forks</div>
+      </div>
+      <div class="highlight-box" style="flex: 1; min-width: 160px; padding: 1rem; text-align: center;">
+        <div style="font-size: 2rem; font-weight: 700;">380</div>
+        <div>Contributors</div>
+      </div>
+      <div class="highlight-box" style="flex: 1; min-width: 160px; padding: 1rem; text-align: center;">
+        <div style="font-size: 2rem; font-weight: 700;">76%</div>
+        <div>Written in C</div>
+      </div>
+    </div>
+
+    <nav id="toc">
+      <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Contents</h2>
+      <div style="padding: 1.5rem;">
+        <ol style="margin: 0; padding-left: 1.5rem;">
+          <li><a href="#benchmarks">Benchmarks</a></li>
+          <li><a href="#dictionary-training">Small Data Compression (Dictionary Training)</a></li>
+          <li><a href="#build-systems">Build Systems</a></li>
+          <li><a href="#testing">Testing</a></li>
+          <li><a href="#key-links">Key Links</a></li>
+        </ol>
+      </div>
+    </nav>
+
+    <section id="benchmarks">
+      <h2>Benchmarks</h2>
+      <div class="section-content">
+        <p>Tested on Core i7-9700K @ 4.9GHz, Ubuntu 24.04, gcc 14.2.0, <a href="https://sun.aei.polsl.pl//~sdeor/index.php?page=silesia">Silesia compression corpus</a>:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Compressor</th>
+              <th>Ratio</th>
+              <th>Compression</th>
+              <th>Decompression</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>zstd 1.5.7 -1</strong></td>
+              <td><strong>2.896</strong></td>
+              <td>510 MB/s</td>
+              <td>1550 MB/s</td>
+            </tr>
+            <tr>
+              <td>brotli 1.1.0 -1</td>
+              <td>2.883</td>
+              <td>290 MB/s</td>
+              <td>425 MB/s</td>
+            </tr>
+            <tr>
+              <td>zlib 1.3.1 -1</td>
+              <td>2.743</td>
+              <td>105 MB/s</td>
+              <td>390 MB/s</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>zstd 1.5.7 --fast=1</strong></td>
+              <td>2.439</td>
+              <td>545 MB/s</td>
+              <td>1850 MB/s</td>
+            </tr>
+            <tr>
+              <td>quicklz 1.5.0 -1</td>
+              <td>2.238</td>
+              <td>520 MB/s</td>
+              <td>750 MB/s</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>zstd 1.5.7 --fast=4</strong></td>
+              <td>2.146</td>
+              <td>665 MB/s</td>
+              <td>2050 MB/s</td>
+            </tr>
+            <tr>
+              <td>lzo1x 2.10 -1</td>
+              <td>2.106</td>
+              <td>650 MB/s</td>
+              <td>780 MB/s</td>
+            </tr>
+            <tr>
+              <td>lz4 1.10.0</td>
+              <td>2.101</td>
+              <td>675 MB/s</td>
+              <td>3850 MB/s</td>
+            </tr>
+            <tr>
+              <td>snappy 1.2.1</td>
+              <td>2.089</td>
+              <td>520 MB/s</td>
+              <td>1500 MB/s</td>
+            </tr>
+            <tr>
+              <td>lzf 3.6 -1</td>
+              <td>2.077</td>
+              <td>410 MB/s</td>
+              <td>820 MB/s</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box">
+          <strong>Key insight:</strong> Negative compression levels (<code>--fast=#</code>) offer faster speed at the cost of ratio. Higher positive levels offer stronger ratios at the cost of compression speed. Decompression speed remains roughly constant across all settings — this is critical for the use case of reloading condensed repos into AI tools.
+        </div>
+      </div>
+    </section>
+
+    <section id="dictionary-training">
+      <h2>Small Data Compression (Dictionary Training)</h2>
+      <div class="section-content">
+        <p>Compression algorithms learn from past data to compress future data. At the beginning of a new data set, there is no "past" to build upon — making small data inherently harder to compress.</p>
+        <p>Zstd solves this with <strong>training mode</strong>: provide sample files to generate a "dictionary" that is loaded before compression/decompression.</p>
+
+        <h3>Dictionary How-To</h3>
+        <ol>
+          <li><strong>Create dictionary:</strong> <code>zstd --train FullPathToTrainingSet/* -o dictionaryName</code></li>
+          <li><strong>Compress:</strong> <code>zstd -D dictionaryName FILE</code></li>
+          <li><strong>Decompress:</strong> <code>zstd -D dictionaryName --decompress FILE.zst</code></li>
+        </ol>
+
+        <div class="info-box">
+          Using the <code>github-users</code> sample set (~10K records, ~1KB each), dictionary-based compression achieves dramatically better ratios with faster speeds. For structured KV data with repetitive key patterns, dictionary compression can yield <strong>3–4x improvement</strong> over non-dictionary ZSTD on small blocks.
+        </div>
+      </div>
+    </section>
+
+    <section id="build-systems">
+      <h2>Build Systems</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>System</th>
+              <th>Command</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>make</strong> (reference)</td>
+              <td><code>make</code> in root directory</td>
+            </tr>
+            <tr>
+              <td><strong>cmake</strong></td>
+              <td><code>cmake -S . -B build-cmake &amp;&amp; cmake --build build-cmake</code></td>
+            </tr>
+            <tr>
+              <td><strong>meson</strong></td>
+              <td>See <code>build/meson</code></td>
+            </tr>
+            <tr>
+              <td><strong>vcpkg</strong></td>
+              <td><code>vcpkg install zstd</code></td>
+            </tr>
+            <tr>
+              <td><strong>conan</strong></td>
+              <td><code>conan install --requires="zstd/[*]" --build=missing</code></td>
+            </tr>
+            <tr>
+              <td><strong>buck</strong></td>
+              <td><code>buck build programs:zstd</code></td>
+            </tr>
+            <tr>
+              <td><strong>bazel</strong></td>
+              <td>Via Bazel Central Repository</td>
+            </tr>
+            <tr>
+              <td><strong>Visual Studio</strong></td>
+              <td>Projects in <code>build/</code> dir or generate via cmake</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>macOS Universal2 (Fat) Build</h3>
+        <pre><code>cmake -S . -B build-cmake-debug -G Ninja -DCMAKE_OSX_ARCHITECTURES="x86_64;x86_64h;arm64"
+cd build-cmake-debug
+ninja
+sudo ninja install</code></pre>
+      </div>
+    </section>
+
+    <section id="testing">
+      <h2>Testing</h2>
+      <div class="section-content">
+        <ul>
+          <li>Quick smoke test: <code>make check</code></li>
+          <li>Script-based: <code>playTest.sh</code> from <code>src/tests</code> (set <code>$ZSTD_BIN</code> and <code>$DATAGEN_BIN</code>)</li>
+          <li>CI details: see <code>TESTING.md</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="key-links">
+      <h2>Key Links</h2>
+      <div class="section-content">
+        <ul>
+          <li><strong>Homepage:</strong> <a href="http://www.zstd.net">www.zstd.net</a></li>
+          <li><strong>RFC 8478:</strong> <a href="http-content-compression.html">HTTP Content Compression — Zstandard Specification</a></li>
+          <li><strong>Entropy library:</strong> <a href="https://github.com/Cyan4973/FiniteStateEntropy">github.com/Cyan4973/FiniteStateEntropy</a></li>
+          <li><strong>Language bindings:</strong> Available for 30+ languages — see zstd homepage</li>
+          <li><strong>Contributing:</strong> <code>dev</code> branch is the merge target; direct commits to <code>release</code> not permitted</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="index.html">← Code Condensation Whitepaper</a> &nbsp;|&nbsp; &copy; 2026 Integrity Studio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

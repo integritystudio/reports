@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL &amp; KV Data Compression — Integrity Studio</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>SQL &amp; KV Data Compression</h1>
+      <div class="subtitle">A Practitioner's Guide — 2025–2026 Era</div>
+      <div class="meta">
+        <strong>Research Paper</strong> | <strong>Scope:</strong> PostgreSQL, MySQL, ClickHouse, SQLite, RocksDB, Redis, Cloudflare KV, DynamoDB, etcd | <strong>Collection:</strong> <a href="index.html">Code Condensation Whitepaper</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+
+    <div class="executive-summary">
+      <h2>Research Questions</h2>
+      <p>How much do modern SQL databases compress data internally? What additional benefit comes from column-level codec selection? What about KV stores — how do RocksDB, LMDB, and Cloudflare KV handle compression, and which algorithms work best for different access patterns?</p>
+    </div>
+
+    <nav id="toc">
+      <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Table of Contents</h2>
+      <div style="padding: 1.5rem;">
+        <ol style="margin: 0; padding-left: 1.5rem;">
+          <li><a href="#sql-compression">SQL Database Compression</a></li>
+          <li><a href="#kv-compression">KV Store Compression</a></li>
+          <li><a href="#columnar-vs-row">Column-Oriented vs Row-Oriented Compression Ratios</a></li>
+          <li><a href="#codec-selection">Compression Codec Selection by Data Type</a></li>
+          <li><a href="#dictionary-training">Dictionary Training on Schema-Specific Data</a></li>
+          <li><a href="#write-amplification">Write Amplification Tradeoffs</a></li>
+          <li><a href="#algorithm-showdown">Algorithm Showdown: ZSTD vs LZ4 vs Snappy vs PPMd</a></li>
+          <li><a href="#pipeline-recommendations">Practical Pipeline Recommendations</a></li>
+          <li><a href="#sources">Sources and Citations</a></li>
+          <li><a href="#appendix">Appendix: Practical Database Compression Choices</a></li>
+        </ol>
+      </div>
+    </nav>
+
+    <section id="sql-compression">
+      <h2>1. SQL Database Compression</h2>
+      <div class="section-content">
+
+        <h3>1.1 PostgreSQL: TOAST Compression (pglz vs LZ4)</h3>
+        <p>PostgreSQL uses TOAST (The Oversized-Attribute Storage Technique) to compress and out-of-line store values exceeding roughly 2 KB. Two algorithms are available since PostgreSQL 14:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>pglz (default)</th>
+              <th>LZ4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Compression ratio</td>
+              <td>~2.23x</td>
+              <td>~2.07x</td>
+            </tr>
+            <tr>
+              <td>Compression speed</td>
+              <td>Baseline</td>
+              <td><strong>5x faster</strong> (~20% of pglz time)</td>
+            </tr>
+            <tr>
+              <td>Decompression speed</td>
+              <td>Baseline</td>
+              <td><strong>~60–70% faster</strong></td>
+            </tr>
+            <tr>
+              <td>Query time impact</td>
+              <td>Baseline</td>
+              <td><strong>20% faster</strong> queries</td>
+            </tr>
+            <tr>
+              <td>Full benchmark speedup</td>
+              <td>—</td>
+              <td><strong>37.32% faster</strong> end-to-end</td>
+            </tr>
+            <tr>
+              <td>CPU overhead</td>
+              <td>2x that of LZ4</td>
+              <td>Baseline</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="warning-box">
+          <strong>Critical finding under parallel load:</strong> pglz performance degrades and becomes <em>worse than uncompressed data</em> as parallel queries approach available CPU core count. LZ4 maintains consistent performance above uncompressed baselines even under saturation. For OLTP workloads, LZ4 is the clear default choice.
+        </div>
+
+        <p><strong>Configuration:</strong> <code>ALTER TABLE t ALTER COLUMN c SET COMPRESSION lz4;</code> or globally via <code>default_toast_compression = lz4</code></p>
+
+        <h4>Columnar Extensions: Citus and Hydra</h4>
+        <ul>
+          <li><strong>Citus Columnar:</strong> 3–10x compression ratios; benchmark data shows 5.4x for a typical mixed-type table vs heap storage.</li>
+          <li><strong>Hydra Columnar:</strong> Open-source; in ClickBench comparisons, Hydra outperformed Citus, TimescaleDB, Aurora, and standard PostgreSQL on the 42-query benchmark.</li>
+          <li><strong>TimescaleDB Hypercore:</strong> Achieves up to <strong>95% compression</strong> on time-series data using dictionary compression for high-repetition JSONB columns.</li>
+        </ul>
+
+        <h3>1.2 MySQL / InnoDB: Page Compression and Table Compression</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Algorithm</th>
+              <th>Compression Ratio</th>
+              <th>Performance Overhead</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Barracuda Table Compression (ROW_FORMAT=COMPRESSED)</td>
+              <td>zlib</td>
+              <td>50–75% size reduction</td>
+              <td><strong>~60%</strong> for write-heavy workloads</td>
+            </tr>
+            <tr>
+              <td>Transparent Page Compression (InnoDB page)</td>
+              <td>zlib or LZ4</td>
+              <td>Variable</td>
+              <td><strong>10–17%</strong> (dramatically lower)</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong>Guidance:</strong> For new deployments, transparent page compression with LZ4 provides the best latency-to-savings tradeoff. Reserve Barracuda table compression for cold/archival tables where write overhead is acceptable.</p>
+
+        <h3>1.3 ClickHouse: Per-Column Codec Selection</h3>
+        <p>ClickHouse provides the most granular compression control of any production database. Each column can be assigned a pipeline of pre-compression codecs followed by a general-purpose algorithm.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Codec</th>
+              <th>Best For</th>
+              <th>Mechanism</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Delta</strong></td>
+              <td>Monotonic sequences, timestamps</td>
+              <td>Stores difference between consecutive values</td>
+            </tr>
+            <tr>
+              <td><strong>DoubleDelta</strong></td>
+              <td>Periodic timestamps, increasing counters</td>
+              <td>Delta-of-deltas; exceptional for constant-interval series</td>
+            </tr>
+            <tr>
+              <td><strong>Gorilla</strong></td>
+              <td>Slowly changing floats, gauge metrics</td>
+              <td>XOR between consecutive values</td>
+            </tr>
+            <tr>
+              <td><strong>T64</strong></td>
+              <td>Sparse integers, values small relative to type range</td>
+              <td>64x64 bit matrix transpose + bit truncation</td>
+            </tr>
+            <tr>
+              <td><strong>FPC</strong></td>
+              <td>Float64 columns</td>
+              <td>Two-prediction finite context method</td>
+            </tr>
+            <tr>
+              <td><strong>LZ4</strong></td>
+              <td>General purpose, speed-critical</td>
+              <td>Default; fast compression and decompression</td>
+            </tr>
+            <tr>
+              <td><strong>ZSTD(level)</strong></td>
+              <td>General purpose, ratio-critical</td>
+              <td>30% better ratio than LZ4; higher CPU</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Real-World Benchmarks (NOAA Weather Dataset)</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Schema Stage</th>
+              <th>Compressed Size</th>
+              <th>Uncompressed Size</th>
+              <th>Ratio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Naive (all String)</td>
+              <td>4.07 GiB</td>
+              <td>131.58 GiB</td>
+              <td>32.36:1</td>
+            </tr>
+            <tr>
+              <td>Type-optimized</td>
+              <td>3.83 GiB</td>
+              <td>71.38 GiB</td>
+              <td>18.63:1</td>
+            </tr>
+            <tr>
+              <td>String/type refined</td>
+              <td>3.81 GiB</td>
+              <td>35.34 GiB</td>
+              <td>9.28:1</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>Optimal codecs</strong></td>
+              <td><strong>1.42 GiB</strong></td>
+              <td>36.05 GiB</td>
+              <td><strong>25.36:1</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Moving from naive types to optimal codecs reduced compressed storage by <strong>65%</strong> (4.07 GiB to 1.42 GiB). Standout: Date column with DoubleDelta reduced 2.24 GiB to 24.28 MiB (~99% reduction).</p>
+
+        <h3>1.4 SQLite: Page-Level Compression Options</h3>
+        <p>SQLite has no built-in compression. External strategies fill the gap:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Solution</th>
+              <th>Mechanism</th>
+              <th>Size Reduction</th>
+              <th>Query Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ZIPVFS</strong> (official, commercial)</td>
+              <td>Per-page compression</td>
+              <td>Variable</td>
+              <td>Low overhead</td>
+            </tr>
+            <tr>
+              <td><strong>sqlite-zstd</strong> (Rust extension)</td>
+              <td>Row-level zstd with dictionary</td>
+              <td><strong>75%</strong> (442 MB to 67 MB typical)</td>
+              <td>Sequential: -22%, Random: +34% faster</td>
+            </tr>
+            <tr>
+              <td><strong>sqlite_zstd_vfs</strong></td>
+              <td>Page-level VFS streaming</td>
+              <td>45–65%</td>
+              <td>-25% query throughput</td>
+            </tr>
+            <tr>
+              <td><strong>ZFS/Btrfs filesystem</strong></td>
+              <td>Transparent block-level</td>
+              <td>LZ4: ~67%, zstd: up to 90%</td>
+              <td>Minimal to none</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>1.5 Cross-Engine Compression Ratio Summary</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Engine</th>
+              <th>Strategy</th>
+              <th>Typical Ratio</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PostgreSQL (heap)</td>
+              <td>TOAST LZ4</td>
+              <td>2–2.2x</td>
+              <td>Row-level only</td>
+            </tr>
+            <tr>
+              <td>PostgreSQL (columnar)</td>
+              <td>Citus/Hydra</td>
+              <td>3–10x</td>
+              <td>Analytical tables</td>
+            </tr>
+            <tr>
+              <td>MySQL InnoDB</td>
+              <td>Transparent page (LZ4)</td>
+              <td>2–4x</td>
+              <td>10–17% overhead</td>
+            </tr>
+            <tr>
+              <td>ClickHouse</td>
+              <td>LZ4 default</td>
+              <td>5–15x</td>
+              <td>Column-oriented</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>ClickHouse</strong></td>
+              <td><strong>Optimal codecs + ZSTD</strong></td>
+              <td><strong>15–50x</strong></td>
+              <td>Per-column tuning</td>
+            </tr>
+            <tr>
+              <td>SQLite</td>
+              <td>sqlite-zstd + dictionary</td>
+              <td>4–6x</td>
+              <td>Extension required</td>
+            </tr>
+            <tr>
+              <td>TimescaleDB</td>
+              <td>Hypercore columnar</td>
+              <td>10–20x</td>
+              <td>Time-series optimized</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="kv-compression">
+      <h2>2. KV Store Compression</h2>
+      <div class="section-content">
+
+        <h3>2.1 RocksDB: Per-Level Compression Strategy</h3>
+        <p>RocksDB (LSM-tree) provides the most sophisticated KV compression architecture, with per-level algorithm selection.</p>
+
+        <h4>Facebook/Meta Production Configuration</h4>
+        <pre><code>compression_per_level = kNoCompression      # L0
+                       kNoCompression      # L1
+                       kLZ4Compression     # L2
+                       kLZ4Compression     # L3
+                       kLZ4Compression     # L4
+                       kZSTD               # L5
+                       kZSTD               # L6
+bottommost_compression = kZSTD</code></pre>
+        <p><strong>Rationale:</strong> L0 and L1 are frequently compacted; compression adds CPU load with minimal space benefit. The bottommost level holds the vast majority of data — ZSTD's higher ratio pays off there.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>Compression Speed</th>
+              <th>Decompression Speed</th>
+              <th>Ratio</th>
+              <th>Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>None</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>1.0x</td>
+              <td>L0–L1 (hot levels)</td>
+            </tr>
+            <tr>
+              <td>LZ4</td>
+              <td>~3.5 GB/s</td>
+              <td>~3.5 GB/s</td>
+              <td>~1.12x</td>
+              <td>Middle levels</td>
+            </tr>
+            <tr>
+              <td>LZ4HC</td>
+              <td>Slower than LZ4</td>
+              <td>Same as LZ4</td>
+              <td>~1.3x</td>
+              <td>Read-heavy middle levels</td>
+            </tr>
+            <tr>
+              <td>ZSTD-1</td>
+              <td>~1 GB/s</td>
+              <td>~1 GB/s</td>
+              <td>~1.5–2x</td>
+              <td>Good speed/ratio balance</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>ZSTD-3 (default)</strong></td>
+              <td>~800 MB/s</td>
+              <td>~1 GB/s</td>
+              <td>~2–3x</td>
+              <td>Bottommost level default</td>
+            </tr>
+            <tr>
+              <td>ZSTD-19</td>
+              <td>~50 MB/s</td>
+              <td>~1 GB/s</td>
+              <td>~3–4x</td>
+              <td>Cold/archival only</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2.2 LMDB: No Built-In Compression</h3>
+        <p>LMDB deliberately excludes compression from its B+tree engine. External compression strategies:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Strategy</th>
+              <th>Implementation</th>
+              <th>Performance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Application-level LZ4</td>
+              <td>Compress values before <code>mdb_put()</code></td>
+              <td>Best read speed</td>
+            </tr>
+            <tr>
+              <td>Application-level Snappy</td>
+              <td>Compress values before <code>mdb_put()</code></td>
+              <td>Best write speed, best space savings</td>
+            </tr>
+            <tr>
+              <td>Filesystem-level (ZFS/Btrfs)</td>
+              <td>Transparent to LMDB</td>
+              <td>Zero application changes</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong>When LMDB is appropriate:</strong> Single-writer/many-reader workloads where zero-copy reads matter more than storage density. If you need built-in compression, use RocksDB instead.</p>
+
+        <h3>2.3 Redis: Memory-Level Compression Encodings</h3>
+        <p>Redis compresses at the data-structure level rather than the page or block level:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Encoding</th>
+              <th>Data Structure</th>
+              <th>Memory Savings</th>
+              <th>Threshold</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ziplist</strong> (&lt; Redis 7)</td>
+              <td>Hashes, sorted sets, lists</td>
+              <td>5–10x vs pointer-based</td>
+              <td>hash-max-ziplist-entries: 512</td>
+            </tr>
+            <tr>
+              <td><strong>listpack</strong> (Redis 7+)</td>
+              <td>Replacement for ziplist</td>
+              <td>Similar to ziplist, safer</td>
+              <td>hash-max-listpack-entries: 128</td>
+            </tr>
+            <tr>
+              <td><strong>quicklist</strong></td>
+              <td>Lists</td>
+              <td>Ziplist nodes in doubly-linked list</td>
+              <td>list-max-listpack-size: -2 (8 KB)</td>
+            </tr>
+            <tr>
+              <td><strong>intset</strong></td>
+              <td>Sets of integers</td>
+              <td>Compact integer array</td>
+              <td>set-max-intset-entries: 512</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong>Application-level compression benchmarks (LogicMonitor study):</strong></p>
+        <ul>
+          <li>LZ4 on values: <strong>60% memory savings</strong> (39,739 bytes to 16,208 bytes)</li>
+          <li>Float16 + Blosc + ZLib + Base64 pipeline: <strong>85% savings</strong> (80,000 bytes to 11,383 bytes)</li>
+        </ul>
+
+        <h3>2.4 Cloudflare Workers KV: Edge Compression</h3>
+        <p>Cloudflare Workers KV is an eventually-consistent global KV store optimized for read-heavy, write-infrequent workloads.</p>
+        <ul>
+          <li><strong>2025 redesign:</strong> Hybrid storage — distributed database for small values, R2 object storage for large values</li>
+          <li><strong>p99 read latency</strong> improved from 200 ms to under 5 ms after the 2025 rearchitecture</li>
+          <li><strong>Internal compression</strong> is opaque; Cloudflare handles storage optimization at the infrastructure level</li>
+        </ul>
+        <p><strong>Best practice:</strong> Pre-compress with <code>CompressionStream</code> (Web Streams API) in the Worker itself, using gzip (broadest decompression support) or raw deflate.</p>
+
+        <h3>2.5 DynamoDB: Client-Side Attribute Compression</h3>
+        <p>DynamoDB provides no server-side compression. All compression is application-layer.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>Best For</th>
+              <th>WCU/RCU Savings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GZIP</td>
+              <td>Text-heavy items</td>
+              <td>Up to <strong>70%</strong> cost savings</td>
+            </tr>
+            <tr>
+              <td>LZO</td>
+              <td>Faster compression, lower ratio</td>
+              <td>40–50%</td>
+            </tr>
+            <tr>
+              <td>Snappy</td>
+              <td>Fast, moderate ratio</td>
+              <td>30–45%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="warning-box">
+          <strong>Important constraint:</strong> Compressed attributes cannot be used in filter expressions, key conditions, or projection expressions meaningfully. Design partition/sort keys and GSI attributes to remain uncompressed.
+        </div>
+
+        <h3>2.6 etcd / bbolt: Compaction, Not Compression</h3>
+        <p>etcd uses bbolt (B+tree store with 4 KB memory-mapped pages). bbolt has <strong>no compression</strong> capability.</p>
+        <p><strong>What etcd calls "compaction"</strong> is revision pruning: dropping superseded MVCC revisions to reclaim logical space. bbolt does not release freed pages back to the OS — only <code>etcd defrag</code> physically reclaims disk space.</p>
+        <p><strong>Practical guidance:</strong></p>
+        <ul>
+          <li>Run <code>etcd compaction</code> regularly to prune old revisions</li>
+          <li>Follow with <code>etcd defrag</code> to reclaim disk space</li>
+          <li>For storage-constrained environments, reduce <code>--snapshot-count</code> and enable auto-compaction</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="columnar-vs-row">
+      <h2>3. Column-Oriented vs Row-Oriented Compression Ratios</h2>
+      <div class="section-content">
+        <p>The fundamental difference: columns contain homogeneous data types, enabling specialized codecs that exploit type-specific patterns. Rows mix types, limiting compression to general-purpose algorithms.</p>
+
+        <h3>ClickBench Comparison (100M rows)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>System</th>
+              <th>Type</th>
+              <th>Storage Size</th>
+              <th>Relative</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>ClickHouse</strong></td>
+              <td>Columnar</td>
+              <td>9.26 GiB</td>
+              <td><strong>1x</strong></td>
+            </tr>
+            <tr>
+              <td>TimescaleDB (compressed)</td>
+              <td>Hybrid columnar</td>
+              <td>~20 GiB</td>
+              <td>~2x</td>
+            </tr>
+            <tr>
+              <td>PostgreSQL (heap)</td>
+              <td>Row-oriented</td>
+              <td>~100 GiB</td>
+              <td>~10x</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Why Columnar Compresses Better</h3>
+        <ol>
+          <li><strong>Run-Length Encoding (RLE):</strong> Sorted columns with repeated values compress to (value, count) pairs.</li>
+          <li><strong>Dictionary Encoding:</strong> Low-cardinality string columns replace strings with integer indices.</li>
+          <li><strong>Delta Encoding:</strong> Monotonic sequences store only differences. If timestamps increment by exactly 1 second, each value is 0 bits after double-delta.</li>
+          <li><strong>Bit-Packing / Frame-of-Reference:</strong> Integer values clustered in a narrow range are stored with minimal bits per value.</li>
+          <li><strong>Type-Specific Codecs:</strong> Gorilla for floats, DoubleDelta for timestamps — impossible in row stores that see each row as an opaque tuple.</li>
+        </ol>
+
+        <h3>Quantified Advantage</h3>
+        <ul>
+          <li>Row-oriented databases (PostgreSQL, MySQL): <strong>2–4x</strong> compression on typical OLTP data</li>
+          <li>Columnar databases (ClickHouse, DuckDB, Redshift): <strong>10–50x</strong> compression on analytical data</li>
+          <li>Hybrid approaches (TimescaleDB Hypercore, Citus Columnar): <strong>5–20x</strong>, bridging the gap</li>
+        </ul>
+        <p>The 10x storage difference between ClickHouse and PostgreSQL on the same 100M-row dataset represents real production cost: at S3 pricing ($0.023/GB/month), that is the difference between $0.21/month and $2.30/month per dataset — scaling to thousands of dollars at enterprise data volumes.</p>
+      </div>
+    </section>
+
+    <section id="codec-selection">
+      <h2>4. Compression Codec Selection by Data Type</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Data Type</th>
+              <th>Primary Codec</th>
+              <th>Secondary Codec</th>
+              <th>Expected Ratio</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Timestamps</strong> (periodic)</td>
+              <td>DoubleDelta</td>
+              <td>+LZ4</td>
+              <td>64:1 to 800:1</td>
+              <td>Constant intervals compress to ~1 bit/value</td>
+            </tr>
+            <tr>
+              <td><strong>Timestamps</strong> (irregular)</td>
+              <td>Delta</td>
+              <td>+ZSTD</td>
+              <td>4–10x</td>
+              <td>Variable deltas need general-purpose follow-up</td>
+            </tr>
+            <tr>
+              <td><strong>Auto-increment integers</strong></td>
+              <td>Delta</td>
+              <td>+LZ4</td>
+              <td>100–800:1</td>
+              <td>Monotonic sequences are ideal for delta</td>
+            </tr>
+            <tr>
+              <td><strong>Gauge integers</strong> (metrics)</td>
+              <td>T64</td>
+              <td>+ZSTD</td>
+              <td>3–8x</td>
+              <td>T64 truncates unused high bits</td>
+            </tr>
+            <tr>
+              <td><strong>Float64</strong> (slowly changing)</td>
+              <td>Gorilla</td>
+              <td>+LZ4</td>
+              <td>2–8x</td>
+              <td>XOR encoding exploits bit-level similarity</td>
+            </tr>
+            <tr>
+              <td><strong>Float64</strong> (volatile)</td>
+              <td>None</td>
+              <td>ZSTD</td>
+              <td>1.5–3x</td>
+              <td>Gorilla provides no benefit on random floats</td>
+            </tr>
+            <tr>
+              <td><strong>Low-cardinality strings</strong></td>
+              <td>Dictionary encoding</td>
+              <td>+LZ4</td>
+              <td>5–20x</td>
+              <td>Replace strings with integer indices</td>
+            </tr>
+            <tr>
+              <td><strong>JSON / JSONB</strong></td>
+              <td>Dictionary (if repetitive)</td>
+              <td>ZSTD</td>
+              <td>3–10x</td>
+              <td>Key names repeat; dictionary training excels</td>
+            </tr>
+            <tr>
+              <td><strong>UUIDs</strong> (binary 16-byte)</td>
+              <td>None</td>
+              <td>None</td>
+              <td>1x (already compact)</td>
+              <td>Store as UUID/BINARY(16), not TEXT</td>
+            </tr>
+            <tr>
+              <td><strong>Booleans</strong></td>
+              <td>Bit-packing / RLE</td>
+              <td>+LZ4</td>
+              <td>8–64x</td>
+              <td>1 bit vs 1 byte per value</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Key Principles</h3>
+        <ol>
+          <li><strong>Smallest type first:</strong> Use Int16 instead of Int64 when range permits.</li>
+          <li><strong>Pre-compression codecs before general-purpose:</strong> Delta, DoubleDelta, Gorilla, and T64 transform data into more compressible representations <em>before</em> LZ4/ZSTD processes it.</li>
+          <li><strong>Measure per column:</strong> Compression effectiveness varies dramatically across columns in the same table. Always benchmark with real data.</li>
+          <li><strong>UUIDs are compression-hostile:</strong> Their uniform distribution defeats all algorithms. Store as binary (16 bytes) rather than text (36 bytes) for a guaranteed 2.25x savings without compression.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="dictionary-training">
+      <h2>5. Dictionary Training on Schema-Specific Data</h2>
+      <div class="section-content">
+        <h3>How ZSTD Dictionary Training Works</h3>
+        <p>ZSTD dictionaries capture recurring byte patterns from a training corpus. During compression, each input block is encoded using references to dictionary fragments rather than raw literals. The dictionary is typically small (32–100 KiB) and is shared across all compressions of similar data.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Data Category</th>
+              <th>Without Dictionary</th>
+              <th>With Dictionary</th>
+              <th>Improvement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Small JSON objects (&lt;1 KB)</td>
+              <td>1.5–2x</td>
+              <td>5–8x</td>
+              <td><strong>3–4x better</strong></td>
+            </tr>
+            <tr>
+              <td>Database pages (4–16 KB)</td>
+              <td>2–3x</td>
+              <td>4–6x</td>
+              <td><strong>~2x better</strong></td>
+            </tr>
+            <tr>
+              <td>SSTable blocks (Cassandra)</td>
+              <td>2–3x</td>
+              <td>6–10x</td>
+              <td><strong>3–4x better</strong></td>
+            </tr>
+            <tr>
+              <td>Log lines (structured)</td>
+              <td>2–4x</td>
+              <td>6–12x</td>
+              <td><strong>3x better</strong></td>
+            </tr>
+            <tr>
+              <td>Large blobs (&gt;100 KB)</td>
+              <td>3–5x</td>
+              <td>3.5–5.5x</td>
+              <td>Marginal</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box">
+          <strong>Key insight:</strong> Dictionary gains are inversely proportional to input size. For data under 1 KB, dictionaries are transformational. For data over 100 KB, the input itself provides enough context that a dictionary adds little.
+        </div>
+
+        <h3>Dictionary Training Guidelines</h3>
+        <ul>
+          <li><strong>Corpus size:</strong> 100x the target dictionary size minimum (e.g., 10 MB of samples for a 100 KB dictionary)</li>
+          <li><strong>Dictionary size:</strong> 32–100 KiB (larger dictionaries offer diminishing returns)</li>
+          <li><strong>Retraining frequency:</strong> When data distribution shifts significantly (schema changes, new value patterns)</li>
+          <li><strong>Storage overhead:</strong> Dictionary must be available at decompression time; embed it alongside compressed data or store in metadata</li>
+        </ul>
+
+        <h3>Production Implementations</h3>
+        <ul>
+          <li><strong>RocksDB:</strong> Supports ZSTD dictionary training at the bottommost level during compaction. Enable with <code>CompressionOptions::zstd_max_train_bytes</code> and <code>CompressionOptions::max_dict_bytes</code>.</li>
+          <li><strong>Cassandra (CEP-54):</strong> Proposed per-table dictionary support for SSTable compression. Expected 3–4x improvement over non-dictionary ZSTD.</li>
+          <li><strong>sqlite-zstd:</strong> Trains dictionaries per-column at the SQLite table level. Benchmark: 2.0 GB database compressed to 528 MB (75%) with dictionary vs 1.63 GB (23%) without — a <strong>3.2x improvement</strong> from dictionary training alone.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="write-amplification">
+      <h2>6. Write Amplification Tradeoffs</h2>
+      <div class="section-content">
+        <p>In LSM-tree databases (RocksDB, LevelDB, Cassandra, CockroachDB), every logical write is physically written multiple times as data moves through compaction levels. Compression adds CPU cost to each of these writes.</p>
+
+        <h3>Compression Level vs Write Throughput</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Compression</th>
+              <th>Compaction CPU Cost</th>
+              <th>Bytes Written</th>
+              <th>Net Write Throughput</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>None</td>
+              <td>Lowest</td>
+              <td>Highest</td>
+              <td>Highest ingest rate</td>
+              <td>Burst ingestion, L0–L1</td>
+            </tr>
+            <tr>
+              <td>LZ4</td>
+              <td>Very low (+5–10%)</td>
+              <td>Moderate</td>
+              <td>Near-maximum</td>
+              <td>Hot levels, mixed workloads</td>
+            </tr>
+            <tr>
+              <td>ZSTD-1</td>
+              <td>Low (+15–20%)</td>
+              <td>Low</td>
+              <td>Good balance</td>
+              <td>Middle levels</td>
+            </tr>
+            <tr>
+              <td>ZSTD-3</td>
+              <td>Moderate (+30–40%)</td>
+              <td>Low</td>
+              <td>Good for read-heavy</td>
+              <td>Bottommost level default</td>
+            </tr>
+            <tr>
+              <td>ZSTD-9</td>
+              <td>High (+100–200%)</td>
+              <td>Very low</td>
+              <td>Write-limited</td>
+              <td>Archival, cold tiers</td>
+            </tr>
+            <tr>
+              <td>ZSTD-19</td>
+              <td>Very high (+500%+)</td>
+              <td>Lowest</td>
+              <td>Severely limited</td>
+              <td>Offline compaction only</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Decision Framework</h3>
+        <pre><code>If write_throughput_critical AND ssd_storage:
+    L0-L1: None, L2-L4: LZ4, Lmax: ZSTD-1
+If storage_cost_critical AND write_moderate:
+    L0: None, L1-L4: LZ4, Lmax: ZSTD-3
+If archival AND write_infrequent:
+    All levels: ZSTD-9 or ZSTD-19</code></pre>
+      </div>
+    </section>
+
+    <section id="algorithm-showdown">
+      <h2>7. Algorithm Showdown: ZSTD vs LZ4 vs Snappy vs PPMd</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>LZ4</th>
+              <th>Snappy</th>
+              <th>ZSTD-1</th>
+              <th>ZSTD-3</th>
+              <th>ZSTD-9</th>
+              <th>PPMd</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Compression speed</td>
+              <td>~3.5 GB/s</td>
+              <td>~3.5 GB/s</td>
+              <td>~1 GB/s</td>
+              <td>~800 MB/s</td>
+              <td>~200 MB/s</td>
+              <td>~20 MB/s</td>
+            </tr>
+            <tr>
+              <td>Decompression speed</td>
+              <td>~3.5 GB/s</td>
+              <td>~3.5 GB/s</td>
+              <td>~1 GB/s</td>
+              <td>~1 GB/s</td>
+              <td>~1 GB/s</td>
+              <td>~20 MB/s</td>
+            </tr>
+            <tr>
+              <td>Ratio (structured data)</td>
+              <td>1.5–2.5x</td>
+              <td>1.4–2.2x</td>
+              <td>2–3x</td>
+              <td>2.5–4x</td>
+              <td>3–5x</td>
+              <td>4–8x</td>
+            </tr>
+            <tr>
+              <td>Ratio (text data)</td>
+              <td>2–3x</td>
+              <td>1.8–2.5x</td>
+              <td>3–5x</td>
+              <td>4–6x</td>
+              <td>5–8x</td>
+              <td>6–12x</td>
+            </tr>
+            <tr>
+              <td>Dictionary support</td>
+              <td>No</td>
+              <td>No</td>
+              <td><strong>Yes</strong></td>
+              <td><strong>Yes</strong></td>
+              <td><strong>Yes</strong></td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Cost-at-Scale Comparison (500 TB/month, S3 eu-central-1 at $0.0235/GB)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>Effective Size</th>
+              <th>Monthly Cost</th>
+              <th>Savings vs None</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>None</td>
+              <td>500 TB</td>
+              <td>$11,750</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>LZ4</td>
+              <td>~333 TB (1.5x)</td>
+              <td>$7,833</td>
+              <td>$3,917/mo</td>
+            </tr>
+            <tr style="background: var(--color-info-bg);">
+              <td><strong>ZSTD-3</strong></td>
+              <td><strong>~167 TB (3x)</strong></td>
+              <td><strong>$3,917</strong></td>
+              <td><strong>$7,833/mo</strong></td>
+            </tr>
+            <tr>
+              <td>ZSTD-19</td>
+              <td>~125 TB (4x)</td>
+              <td>$2,938</td>
+              <td>$8,812/mo</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>ZSTD-3 delivers the sweet spot: 2x the savings of LZ4 with practical CPU overhead.</p>
+      </div>
+    </section>
+
+    <section id="pipeline-recommendations">
+      <h2>8. Practical Pipeline Recommendations</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Use Case</th>
+              <th>Database</th>
+              <th>Compression Strategy</th>
+              <th>Expected Ratio</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OLTP web app</td>
+              <td>PostgreSQL</td>
+              <td>TOAST LZ4</td>
+              <td>2x</td>
+              <td>Latency</td>
+            </tr>
+            <tr>
+              <td>Time-series metrics</td>
+              <td>ClickHouse</td>
+              <td>DoubleDelta+LZ4 (time), Gorilla+LZ4 (values)</td>
+              <td>15–50x</td>
+              <td>Storage + query speed</td>
+            </tr>
+            <tr>
+              <td>Log analytics</td>
+              <td>ClickHouse</td>
+              <td>Delta+ZSTD (timestamps), ZSTD (text)</td>
+              <td>10–30x</td>
+              <td>Storage</td>
+            </tr>
+            <tr>
+              <td>Embedded mobile DB</td>
+              <td>SQLite</td>
+              <td>sqlite-zstd with dictionary</td>
+              <td>4–6x</td>
+              <td>Storage + random read</td>
+            </tr>
+            <tr>
+              <td>KV cache (hot)</td>
+              <td>Redis</td>
+              <td>Listpack encoding + app-level LZ4</td>
+              <td>2–5x</td>
+              <td>Memory cost</td>
+            </tr>
+            <tr>
+              <td>KV persistent store</td>
+              <td>RocksDB</td>
+              <td>ZSTD with dictionary (bottom), LZ4 (mid)</td>
+              <td>3–6x</td>
+              <td>Storage</td>
+            </tr>
+            <tr>
+              <td>Global edge KV</td>
+              <td>Cloudflare KV</td>
+              <td>Client-side gzip/ZSTD pre-compression</td>
+              <td>2–4x</td>
+              <td>Egress cost</td>
+            </tr>
+            <tr>
+              <td>Serverless KV</td>
+              <td>DynamoDB</td>
+              <td>Client-side GZIP on large attributes</td>
+              <td>2–4x</td>
+              <td>WCU/RCU cost</td>
+            </tr>
+            <tr>
+              <td>Analytical warehouse</td>
+              <td>ClickHouse/DuckDB</td>
+              <td>Full codec optimization per column</td>
+              <td>15–50x</td>
+              <td>Query + storage</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Decision Flowchart</h3>
+        <pre><code>START
+  |
+  v
+Is latency the primary concern?
+  |-- YES --&gt; Use LZ4 everywhere. Measure. Stop.
+  |-- NO
+  v
+Is this columnar / analytical data?
+  |-- YES --&gt; Use type-specific codecs (Delta, DoubleDelta, Gorilla, T64) + ZSTD
+  |-- NO
+  v
+Is this an LSM-tree KV store?
+  |-- YES --&gt; No compression L0-L1, LZ4 L2-L4, ZSTD-3 Lmax
+  |-- NO
+  v
+Is this a row-oriented RDBMS?
+  |-- YES --&gt; PostgreSQL: TOAST LZ4 | MySQL: Transparent page compression LZ4
+  |-- NO
+  v
+Is this a managed KV service (DynamoDB, Workers KV)?
+  |-- YES --&gt; Client-side compression (GZIP for broadest compat, ZSTD for best ratio)
+  |-- NO
+  v
+Default: ZSTD-3 at the application layer. Always measure.</code></pre>
+      </div>
+    </section>
+
+    <section id="sources">
+      <h2>9. Sources and Citations</h2>
+      <div class="section-content">
+        <h3>PostgreSQL</h3>
+        <ul>
+          <li><a href="https://www.tigerdata.com/blog/optimizing-postgresql-performance-compression-pglz-vs-lz4">PostgreSQL Performance: pglz vs. LZ4 (TigerData/Timescale)</a></li>
+          <li><a href="https://www.postgresql.fastware.com/blog/what-is-the-new-lz4-toast-compression-in-postgresql-14">What is the new LZ4 TOAST compression in PostgreSQL 14 (Fujitsu)</a></li>
+          <li><a href="https://github.com/hydradatabase/columnar">Hydra Columnar (GitHub)</a></li>
+        </ul>
+        <h3>ClickHouse</h3>
+        <ul>
+          <li><a href="https://clickhouse.com/blog/optimize-clickhouse-codecs-compression-schema">Optimizing ClickHouse with Schemas and Codecs</a></li>
+          <li><a href="https://clickhouse.com/docs/data-compression/compression-in-clickhouse">Compression in ClickHouse (Docs)</a></li>
+          <li><a href="https://altinity.com/blog/2019-7-new-encodings-to-improve-clickhouse">New Encodings to Improve ClickHouse Efficiency (Altinity)</a></li>
+        </ul>
+        <h3>SQLite</h3>
+        <ul>
+          <li><a href="https://phiresky.github.io/blog/2022/sqlite-zstd/">sqlite-zstd: Transparent dictionary-based row-level compression (phiresky)</a></li>
+        </ul>
+        <h3>RocksDB</h3>
+        <ul>
+          <li><a href="https://github.com/facebook/rocksdb/wiki/Compression">RocksDB Compression Wiki (GitHub)</a></li>
+          <li><a href="https://rocksdb.org/blog/2025/10/08/parallel-compression-revamp.html">Parallel Compression Revamp (RocksDB Blog, Oct 2025)</a></li>
+        </ul>
+        <h3>Redis</h3>
+        <ul>
+          <li><a href="https://redis.io/docs/latest/operate/oss_and_stack/management/optimization/memory-optimization/">Redis Memory Optimization (Official Docs)</a></li>
+          <li><a href="https://www.logicmonitor.com/blog/redis-compression-benchmarking">Redis Compression Benchmarking: 85% Data Reduction (LogicMonitor)</a></li>
+        </ul>
+        <h3>Cloudflare Workers KV</h3>
+        <ul>
+          <li><a href="https://www.infoq.com/news/2025/08/cloudflare-workers-kv/">Cloudflare Rearchitects Workers KV, Achieves 40x Performance Gain (InfoQ, Aug 2025)</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="appendix">
+      <h2>Appendix: Practical Database Compression Choices (2025–2026 Era)</h2>
+      <div class="section-content">
+
+        <h3>What Changed Recently</h3>
+        <ol>
+          <li><strong>ZSTD is now the de facto standard.</strong> In 2020, Snappy and zlib dominated. By 2026, ZSTD has replaced both in most production systems.</li>
+          <li><strong>Dictionary compression matured.</strong> RocksDB's dictionary support is production-ready. sqlite-zstd demonstrates 3x improvement from dictionary training alone.</li>
+          <li><strong>LZ4 won the speed tier.</strong> Snappy has no remaining advantage. PostgreSQL 14+ made LZ4 TOAST a first-class option.</li>
+          <li><strong>Columnar compression in row databases.</strong> TimescaleDB Hypercore, Citus Columnar, and Hydra bring 10–20x compression to PostgreSQL without leaving the ecosystem.</li>
+          <li><strong>Edge KV stores are opaque.</strong> Cloudflare Workers KV and similar edge stores handle compression internally. The optimization lever for users is client-side pre-compression and efficient serialization.</li>
+        </ol>
+
+        <h3>Quick-Reference Decision Table</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Answer</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PostgreSQL and need compression?</td>
+              <td>Use LZ4 TOAST</td>
+              <td><code>SET default_toast_compression = lz4;</code></td>
+            </tr>
+            <tr>
+              <td>PostgreSQL and need 10x+ compression?</td>
+              <td>Add columnar extension</td>
+              <td>Citus Columnar or TimescaleDB Hypercore for cold data</td>
+            </tr>
+            <tr>
+              <td>ClickHouse and want optimal storage?</td>
+              <td>Tune codecs per column</td>
+              <td>Profile with <code>DESCRIBE TABLE ... SETTINGS describe_compact_output=0</code></td>
+            </tr>
+            <tr>
+              <td>RocksDB and need space savings?</td>
+              <td>Per-level compression</td>
+              <td><code>compression_per_level</code> + <code>bottommost_compression=kZSTD</code></td>
+            </tr>
+            <tr>
+              <td>SQLite and DB too large?</td>
+              <td>sqlite-zstd extension</td>
+              <td>Train dictionary per large text/JSON column</td>
+            </tr>
+            <tr>
+              <td>DynamoDB and high costs?</td>
+              <td>Client-side GZIP</td>
+              <td>Compress non-filterable attributes before PutItem</td>
+            </tr>
+            <tr>
+              <td>Need to choose one algorithm?</td>
+              <td>ZSTD-3</td>
+              <td>Best general-purpose balance of ratio, speed, and ecosystem support</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box">
+          <strong>The One Rule:</strong> Measure with your data. Compression ratios published in benchmarks are averages across specific datasets. Your schema, cardinality, value distributions, and access patterns will produce different numbers. Always benchmark candidate configurations against a representative sample of your production data before committing to a compression strategy.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="index.html">← Code Condensation Whitepaper</a> &nbsp;|&nbsp; &copy; 2026 Integrity Studio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

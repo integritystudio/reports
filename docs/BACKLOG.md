@@ -87,6 +87,56 @@ Ensure T1 skill accepts `--lang` parameter and externalizes locale-specific rule
 
 ---
 
+### W2. Whitepaper pipeline estimates lack empirical benchmarks
+**Priority:** Medium
+**Source:** OTEL session quality report (Feb 24), hallucination score 0.18
+**Files:** `code-condense-whitepaper/repomix_to_condense_with_additional_integrations.md` (lines 48–77), `code-condense-whitepaper/README.md` (key-findings table)
+
+The "Combined Pipeline Numbers" table (10 MB source tree → repomix → zstd) and the "Estimated zstd ratios on repomix output" table are modeled projections, not empirical measurements. The README key-findings table propagates these estimates. Should be validated by running actual benchmarks on a representative polyglot repo (e.g., this reports repo or repomix's own codebase).
+
+**Fix:** Run `repomix` on a real repo, measure token counts at each stage, compress with `zstd -1/-9/--ultra -22`, record actual sizes, and replace modeled estimates with measured data. Update README table to match.
+
+**Effort:** Medium (scripting + measurement + writeup)
+
+---
+
+### W3. OTEL and SQL/KV whitepaper documents not quality-evaluated
+**Priority:** Medium
+**Source:** OTEL session quality report (Feb 24)
+**Files:** `code-condense-whitepaper/otel_telemetry_data_compression.md`, `code-condense-whitepaper/sql_kv_data_compression.md`
+
+These two documents were produced by background research agents and were not included in the LLM-as-Judge evaluation (only 5 of 7 files were scored). They should be fact-checked for the same hallucination patterns found in the other documents: unsourced benchmark numbers, invented configuration schemas, and overreaching claims.
+
+**Fix:** Run `/otel-session-summary` targeting these files specifically, or manually verify key claims (ClickHouse codec ratios, RocksDB per-level config, OTel Arrow bandwidth reduction, PostgreSQL TOAST LZ4 benchmarks) against primary sources.
+
+**Effort:** Medium (verification pass)
+
+---
+
+### W4. Stale star/version counts in whitepaper documents
+**Priority:** Low
+**Source:** OTEL session quality report (Feb 24)
+**Files:** `code-condense-whitepaper/repomix_to_condense_with_additional_integrations.md`, `code-condense-whitepaper/zstd-condense-report.md`
+
+GitHub star counts (repomix 22.1k, zstd 26.7k, ast-grep 12.6k) and version numbers (zstd v1.5.7, ast-grep v0.41.0) are point-in-time snapshots from Feb 24, 2026. These will drift over time.
+
+**Fix:** Either remove specific counts or add a "as of Feb 2026" qualifier. Low priority — informational only.
+
+**Effort:** Low
+
+---
+
+### W1. Repomix granular compression config — track upstream
+**Priority:** Medium
+**Source:** Fact-check audit (Feb 24), code-condense-whitepaper session
+**Upstream:** [yamadashy/repomix #561](https://github.com/yamadashy/repomix/issues/561), [#516](https://github.com/yamadashy/repomix/issues/516)
+
+Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). Granular controls (e.g., `keep_signatures`, `keep_interfaces`, `keep_docstrings`, per-directory compress patterns) are discussed upstream but not yet implemented. When upstream support lands, update `code-condense-whitepaper/repomix-command-line-cheat-sheet.md` with the actual config schema and remove the "Future Granularity" placeholder section.
+
+**Effort:** Low (documentation update when upstream ships)
+
+---
+
 ## Deferred (P3-P4)
 
 ### F5. Distinctive typefaces per content type

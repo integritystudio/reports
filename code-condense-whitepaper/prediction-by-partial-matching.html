@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction by Partial Matching (PPM) — Integrity Studio</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>Prediction by Partial Matching</h1>
+      <div class="subtitle">PPM Algorithm — Reference Document</div>
+      <div class="meta">
+        <strong>Reference</strong> | <strong>Collection:</strong> <a href="index.html">Code Condensation Whitepaper</a> | <strong>Integrity Studio</strong>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+
+    <div class="executive-summary">
+      <h2>Overview</h2>
+      <p>Prediction by Partial Matching (PPM) is an adaptive statistical data compression technique that predicts the next symbol in a stream based on a set of previous symbols (the "context"). First proposed by Cleary and Witten in 1984, it is highly effective for lossless compression of natural language text.</p>
+    </div>
+
+    <nav id="toc">
+      <h2 style="background: var(--primary); color: white; padding: 1rem 1.5rem; font-size: 1.3rem;">Contents</h2>
+      <div style="padding: 1.5rem;">
+        <ol style="margin: 0; padding-left: 1.5rem;">
+          <li><a href="#core-mechanism">Core Mechanism</a></li>
+          <li><a href="#key-variants">Key Variants</a></li>
+          <li><a href="#applications">Applications</a></li>
+          <li><a href="#libraries">Open-Source PPM Libraries</a></li>
+        </ol>
+      </div>
+    </nav>
+
+    <section id="core-mechanism">
+      <h2>Core Mechanism</h2>
+      <div class="section-content">
+        <p>PPM uses three interlocking mechanisms to achieve high compression ratios on sequential data:</p>
+        <ul>
+          <li><strong>Context Modeling:</strong> The algorithm uses a Markov model of order <em>n</em>, where <em>n</em> is the number of previous symbols used for prediction.</li>
+          <li><strong>Blending &amp; Escape Symbols:</strong> If a symbol has not been seen in the current <em>n</em>-order context, an escape symbol is emitted, and the algorithm "escapes" to a shorter <em>(n-1)</em> context to attempt a new prediction. This continues until a match is found or it reaches a default order-0 or order-(-1) context.</li>
+          <li><strong>Arithmetic Coding:</strong> The final predicted probabilities are typically processed using an arithmetic coder to produce the compressed output.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="key-variants">
+      <h2>Key Variants</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PPMC</strong></td>
+              <td>A widely cited implementation by Alistair Moffat (1990) that became a standard benchmark for high compression ratios.</td>
+            </tr>
+            <tr>
+              <td><strong>PPMd</strong></td>
+              <td>An optimized version by Dmitry Shkarin used by default in the RAR file format and available in 7-Zip.</td>
+            </tr>
+            <tr>
+              <td><strong>PPM*</strong></td>
+              <td>An unbounded variant that allows contexts of any length.</td>
+            </tr>
+            <tr>
+              <td><strong>PPM-Decay</strong></td>
+              <td>A version that incorporates memory decay, often used in auditory cognition research to model how humans predict patterns.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="applications">
+      <h2>Applications</h2>
+      <div class="section-content">
+        <ul>
+          <li><strong>File Compression:</strong> Used by default in RAR and available in 7z. Also defined as method 98 in the ZIP file format specification, though most ZIP archivers (WinZip, Info-ZIP) default to Deflate.</li>
+          <li><strong>Assistive Technology:</strong> Powers Dasher, a gesture-based text-entry system for users with motor impairments.</li>
+          <li><strong>Web Prefetching:</strong> Used to predict the next webpage a user might visit to reduce loading times.</li>
+        </ul>
+
+        <div class="info-box">
+          <strong>Relevance to Code Compression:</strong> PPMd excels on polyglot codebases because code has strong byte-level patterns (indentation, keyword repetition, naming conventions) that PPM's adaptive context modeling captures better than LZ77-family algorithms. The advantage grows with homogeneous code style. On the Large Text Compression Benchmark (1 GB Wikipedia XML), PPMd achieves 5.6x compression vs zstd's 4.6x — at 15–25% better ratios, but 5–10x slower decompression.
+        </div>
+      </div>
+    </section>
+
+    <section id="libraries">
+      <h2>Open-Source PPM Libraries</h2>
+      <div class="section-content">
+        <p>Several open-source libraries and implementations of PPM are available across different programming languages, ranging from high-performance C versions to research-focused Python and R packages.</p>
+
+        <h3>High-Performance C/C++ Libraries</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Library</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>7-Zip / p7zip (PPMd)</strong></td>
+              <td>The most widely used implementation. PPMd (Variant H and I) is part of the open-source 7-Zip LZMA SDK. Highly optimized for both speed and compression ratio.</td>
+            </tr>
+            <tr>
+              <td><strong>PPMZ</strong></td>
+              <td>A specialized file-to-file compressor based on PPM, known for extremely high compression ratios. Slower and more memory-intensive than PPMd.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Python Libraries</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Library</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PyPPMd</strong></td>
+              <td>Python binding for the C-based PPMd implementation from p7zip. Supports PPMd Variant H and Variant I. Suitable for high-performance applications.</td>
+            </tr>
+            <tr>
+              <td><strong>ppmd-cffi</strong></td>
+              <td>Python wrapper using CFFI to interface with the p7zip PPMd code.</td>
+            </tr>
+            <tr>
+              <td><strong>pyppm</strong></td>
+              <td>Native Python implementation of PPM. Useful for learning or projects where a pure Python solution is preferred.</td>
+            </tr>
+            <tr>
+              <td><strong>Reference Arithmetic Coding (Nayuki)</strong></td>
+              <td>Clear, educational Python implementation of PPM combined with arithmetic coding.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Research &amp; Data Mining Libraries</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Library</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>SPMF (Java)</strong></td>
+              <td>Open-source data mining library including a PPM sequence prediction model. Often used for predicting the next symbol in a sequence rather than file compression.</td>
+            </tr>
+            <tr>
+              <td><strong>ppm (R Package)</strong></td>
+              <td>Specialized package for auditory cognition research implementing variants like PPM-Decay, which models how human memory fades over time.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Other Implementations</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Implementation</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>rene-puschinger/ppm (C++)</strong></td>
+              <td>Straightforward C++ implementation on GitHub designed for benchmarking against other compression tools like ZIP and 7-Zip.</td>
+            </tr>
+            <tr>
+              <td><strong>ppm-c (C)</strong></td>
+              <td>Student-led implementation from the Federal University of Paraiba. Useful for those studying the algorithm from an information theory perspective.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="index.html">← Code Condensation Whitepaper</a> &nbsp;|&nbsp; &copy; 2026 Integrity Studio. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
