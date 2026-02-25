@@ -103,15 +103,15 @@
     --color-bg: #faf9f7;
     --color-bg-secondary: #ffffff;
     --color-text-primary: #1c2a35;
-    --color-text-secondary: #5a6b78;
+    --color-text-secondary: #455460;
     --color-border: #eeebe6;
     --color-card-bg: #ffffff;
     /* Custom portal tokens */
     --surface: #faf9f7;
     --surface-raised: #ffffff;
     --ink: #1c2a35;
-    --ink-muted: #5a6b78;
-    --ink-faint: #697a87;
+    --ink-muted: #455460;
+    --ink-faint: #4e5f6c;
     --border-light: #eeebe6;
     --glow: rgba(87, 197, 182, 0.15);
     --glow-strong: rgba(87, 197, 182, 0.35);
@@ -234,7 +234,7 @@
     --theme-caption-sm-font-size: 0.8125rem;
     --theme-testimonial-font-size: 0.9rem;
     --theme-testimonial-quote-color: #444;
-    --theme-action-meta-color: #666;
+    --theme-action-meta-color: #4a4a4a;
     --theme-edgar-stat-grid-min: 150px;
     --theme-leora-h1-font-size: 1.875rem;
     --theme-subtitle-font-size: 1.0625rem;

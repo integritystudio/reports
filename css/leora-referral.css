@@ -14,8 +14,8 @@
     --color-surface-dark: #1a1a2e;
     --color-surface-dark2: #252540;
     --color-text-primary: #333;
-    --color-text-muted: #666;
-    --color-text-faint: #999;
+    --color-text-muted: #4a4a4a;
+    --color-text-faint: #666;
     --color-border: #e0e0e0;
     --color-bg-light: #f8f9fa;
     --color-success: #4caf50;
@@ -31,7 +31,7 @@
     --color-active-bg: #e1f5fe;
     --color-active-text: #0277bd;
     --color-inactive-bg: #f5f5f5;
-    --color-inactive-text: #757575;
+    --color-inactive-text: #5a5a5a;
     --color-required: #e74c3c;
     /* Spacing */
     --spacing-xxs: 3px;
