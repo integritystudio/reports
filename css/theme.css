@@ -902,6 +902,13 @@
         --color-shadow-hover: rgba(0, 0, 0, 0.5);
     }
 
+    [data-brand="integrity-studio"] {
+        --primary: #8eaadc;
+        --secondary: #7ba3cc;
+        --accent: #6fa8dc;
+        --highlight: #ff6b81;
+    }
+
     [data-brand="strong-towns"] {
         --color-primary-dark: #a5d6a7;
         --color-primary-medium: #81c784;
@@ -959,6 +966,9 @@
     [data-brand="integrity-studio"] .highlight-box { background: linear-gradient(135deg, #1a2a3e, #1a3a2e); }
     [data-brand="integrity-studio"] .warning-box { background: #3a3520; }
     [data-brand="integrity-studio"] header { background: linear-gradient(135deg, #0f0f23, #0f3460); }
+    [data-brand="integrity-studio"] a { color: #6fa8dc; }
+    [data-brand="integrity-studio"] section h3 { color: #7ba3cc; }
+    [data-brand="integrity-studio"] .executive-summary h2 { color: #8eaadc; }
 
     [data-brand="zoukmx"] .highlight-box { background: linear-gradient(135deg, #1a2a1a, #1a2a2a); }
 
