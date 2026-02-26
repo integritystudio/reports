@@ -111,7 +111,7 @@ body {
 }
 
 /* Back navigation */
-.back-nav { max-width: 1200px; margin: 0 auto; padding: var(--spacing-md) var(--spacing-lg) 0; }
+.back-nav { max-width: var(--content-width); margin: 0 auto; padding: var(--spacing-md) var(--spacing-lg) 0; }
 .back-link {
     display: inline-flex; align-items: center; gap: var(--spacing-xs);
     color: var(--color-primary-medium); font-weight: 600; font-size: var(--font-size-back-link);

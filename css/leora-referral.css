@@ -84,6 +84,8 @@
     --empty-state-padding-v: 60px;
     --border-accent-width: 4px;
     --font-size-h1-responsive: 1.5rem;
+    --color-print-border: #ddd;
+    --color-print-input-border: #ccc;
 }
 
 
@@ -431,50 +433,73 @@ body.form-page .container {
    ========================================================================== */
 
 @media (prefers-color-scheme: dark) {
+    :root {
+        --color-dark-text: #f0f0f0;
+        --color-dark-text-muted: #c0c0c0;
+        --color-dark-text-faint: #b0b0b0;
+        --color-dark-text-secondary: #e0e0e0;
+        --color-dark-border: #333;
+        --color-dark-input-border: #444;
+        --color-dark-accent-form: #a0b0f0;
+        --shadow-dark-md: 0 5px 20px rgba(0, 0, 0, 0.3);
+        --color-dark-bonus-bg: #1a2e1a;
+        --color-dark-bonus-border: #34d399;
+        --color-dark-bonus-text: #50e0a0;
+        --color-dark-status-submitted-bg: #1a2a3e;
+        --color-dark-status-info-text: #88cce0;
+        --color-dark-status-applied-bg: #2a2210;
+        --color-dark-status-applied-text: #f5d060;
+        --color-dark-status-interview-bg: #2a1a2e;
+        --color-dark-status-interview-text: #f0a0c0;
+        --color-dark-status-hired-bg: #1a2a1a;
+        --color-dark-status-hired-text: #90dab0;
+        --color-dark-status-active-bg: #1a2a35;
+        --color-dark-status-not-selected-bg: #2a2a2a;
+    }
     /* --- Dashboard dark --- */
-    .dashboard .header { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); }
-    .stat-card { background: var(--color-surface-dark); color: #f0f0f0; }
-    .stat-card:hover { box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); }
-    .stat-label { color: #c0c0c0; }
+    .dashboard .header { box-shadow: var(--shadow-dark-md); }
+    .stat-card { background: var(--color-surface-dark); color: var(--color-dark-text); }
+    .stat-card:hover { box-shadow: var(--shadow-dark-md); }
+    .stat-label { color: var(--color-dark-text-muted); }
     .referrals-section { background: var(--color-surface-dark); }
-    .section-header h2 { color: #f0f0f0; }
-    .section-header { border-color: #333; }
-    .referral-card { border-color: #333; }
+    .section-header h2 { color: var(--color-dark-text); }
+    .section-header { border-color: var(--color-dark-border); }
+    .referral-card { border-color: var(--color-dark-border); }
     .referral-card:hover { border-color: var(--leora-primary); }
-    .candidate-name { color: #f0f0f0; }
-    .detail-label { color: #c0c0c0; }
-    .detail-value { color: #f0f0f0; }
+    .candidate-name { color: var(--color-dark-text); }
+    .detail-label { color: var(--color-dark-text-muted); }
+    .detail-value { color: var(--color-dark-text); }
     .milestone-tracker { background: var(--color-surface-dark2); }
-    .milestone-label { color: #c0c0c0; }
-    .milestone-amount { color: #f0f0f0; }
-    .empty-state { color: #c0c0c0; }
-    .referral-id { color: #b0b0b0; }
-    .helper-text { color: #b0b0b0; }
+    .milestone-label { color: var(--color-dark-text-muted); }
+    .milestone-amount { color: var(--color-dark-text); }
+    .empty-state { color: var(--color-dark-text-muted); }
+    .referral-id { color: var(--color-dark-text-faint); }
+    .helper-text { color: var(--color-dark-text-faint); }
 
     /* --- Form dark --- */
     body.form-page { background: var(--leora-gradient-dark); }
-    body.form-page .container { background: var(--color-surface-dark); color: #f0f0f0; }
+    body.form-page .container { background: var(--color-surface-dark); color: var(--color-dark-text); }
     .form-content { background: var(--color-surface-dark); }
-    .form-page .section-title { color: #a0b0f0; border-color: #333; }
-    .form-page label { color: #e0e0e0; }
+    .form-page .section-title { color: var(--color-dark-accent-form); border-color: var(--color-dark-border); }
+    .form-page label { color: var(--color-dark-text-secondary); }
     .form-page input,
     .form-page textarea,
-    .form-page select { background: var(--color-surface-dark2); color: #f0f0f0; border-color: #444; }
+    .form-page select { background: var(--color-surface-dark2); color: var(--color-dark-text); border-color: var(--color-dark-input-border); }
     .form-page input:focus,
     .form-page textarea:focus,
     .form-page select:focus { border-color: var(--leora-primary); }
-    .bonus-info { background: #1a2e1a; border-color: #34d399; }
-    .bonus-info h3 { color: #50e0a0; }
-    .bonus-info ul { color: #f0f0f0; }
+    .bonus-info { background: var(--color-dark-bonus-bg); border-color: var(--color-dark-bonus-border); }
+    .bonus-info h3 { color: var(--color-dark-bonus-text); }
+    .bonus-info ul { color: var(--color-dark-text); }
     .checkbox-group { background: var(--color-surface-dark2); }
 
     /* --- Status badges dark --- */
-    .status-submitted { background: #1a2a3e; color: #88cce0; }
-    .status-applied { background: #2a2210; color: #f5d060; }
-    .status-interview { background: #2a1a2e; color: #f0a0c0; }
-    .status-hired { background: #1a2a1a; color: #90dab0; }
-    .status-active { background: #1a2a35; color: #88cce0; }
-    .status-not-selected { background: #2a2a2a; color: #c0c0c0; }
+    .status-submitted { background: var(--color-dark-status-submitted-bg); color: var(--color-dark-status-info-text); }
+    .status-applied { background: var(--color-dark-status-applied-bg); color: var(--color-dark-status-applied-text); }
+    .status-interview { background: var(--color-dark-status-interview-bg); color: var(--color-dark-status-interview-text); }
+    .status-hired { background: var(--color-dark-status-hired-bg); color: var(--color-dark-status-hired-text); }
+    .status-active { background: var(--color-dark-status-active-bg); color: var(--color-dark-status-info-text); }
+    .status-not-selected { background: var(--color-dark-status-not-selected-bg); color: var(--color-dark-text-muted); }
 }
 
 
@@ -512,13 +537,13 @@ body.form-page .container {
     .stat-card {
         background: white;
         box-shadow: none;
-        border: 1px solid #ddd;
+        border: 1px solid var(--color-print-border);
     }
     .stat-card:hover { transform: none; }
     .referrals-section {
         background: white;
         box-shadow: none;
-        border: 1px solid #ddd;
+        border: 1px solid var(--color-print-border);
     }
     .referral-card { break-inside: avoid; }
     .new-referral-btn { display: none; }
@@ -533,7 +558,7 @@ body.form-page .container {
     }
     body.form-page .container {
         box-shadow: none;
-        border: 1px solid #ddd;
+        border: 1px solid var(--color-print-border);
     }
     .form-page .header {
         background: var(--leora-primary) !important;
@@ -544,5 +569,5 @@ body.form-page .container {
     .submit-btn { display: none; }
     .form-page input,
     .form-page textarea,
-    .form-page select { border: 1px solid #ccc; }
+    .form-page select { border: 1px solid var(--color-print-input-border); }
 }

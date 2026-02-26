@@ -54,6 +54,16 @@
     --font-size-h1-responsive: 1.5rem;
     --margin-h2: 2.5rem;
     --table-min-width-mobile: 800px;
+    --letter-spacing-label: 0.05em;
+    --letter-spacing-badge: 0.03em;
+    --border-width-section: 2px;
+    --list-padding-left: 1.25rem;
+    --color-badge-direct-bg: rgba(79, 143, 247, 0.15);
+    --color-badge-volume-bg: rgba(124, 92, 252, 0.15);
+    --color-badge-luxury-bg: rgba(245, 158, 11, 0.15);
+    --color-badge-legacy-bg: rgba(52, 211, 153, 0.15);
+    --color-badge-niche-bg: rgba(8, 145, 178, 0.15);
+    --badge-padding: 0.15rem 0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -124,7 +134,7 @@ h2 {
     font-weight: 600;
     margin: var(--margin-h2) 0 var(--spacing-sm);
     color: var(--accent);
-    border-bottom: 2px solid var(--border);
+    border-bottom: var(--border-width-section) solid var(--border);
     padding-bottom: var(--spacing-xs);
 }
 h3 { font-size: var(--font-size-h3); font-weight: 600; margin: var(--spacing-md) 0 var(--spacing-xs); }
@@ -132,7 +142,7 @@ p, li { font-size: var(--font-size-body); margin-bottom: var(--spacing-xs); }
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
-ul { padding-left: 1.25rem; margin-bottom: var(--spacing-sm); }
+ul { padding-left: var(--list-padding-left); margin-bottom: var(--spacing-sm); }
 
 /* Summary grid */
 .summary-grid {
@@ -153,13 +163,13 @@ ul { padding-left: 1.25rem; margin-bottom: var(--spacing-sm); }
     font-size: var(--font-size-label);
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-label);
 }
 
 /* Profile card */
 .profile-card {
     background: linear-gradient(135deg, var(--surface), var(--surface2));
-    border: 2px solid var(--accent);
+    border: var(--border-width-section) solid var(--accent);
     border-radius: var(--radius-profile);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
@@ -170,7 +180,7 @@ ul { padding-left: 1.25rem; margin-bottom: var(--spacing-sm); }
     font-size: var(--font-size-label);
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-label);
 }
 .profile-item .value { font-size: var(--font-size-sm); font-weight: 500; }
 .profile-item-full { grid-column: 1 / -1; }
@@ -191,9 +201,9 @@ th {
     color: var(--text-muted);
     text-transform: uppercase;
     font-size: var(--font-size-label);
-    letter-spacing: 0.05em;
+    letter-spacing: var(--letter-spacing-label);
     white-space: nowrap;
-    border-bottom: 2px solid var(--border);
+    border-bottom: var(--border-width-section) solid var(--border);
 }
 td {
     padding: var(--spacing-table-cell) var(--spacing-sm);
@@ -206,18 +216,18 @@ tr:hover td { background: var(--surface2); }
 /* Badges */
 .badge {
     display: inline-block;
-    padding: 0.15rem 0.5rem;
+    padding: var(--badge-padding);
     border-radius: var(--badge-radius);
     font-size: var(--font-size-badge);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: var(--letter-spacing-badge);
 }
-.badge-direct  { background: rgba(79,143,247,0.15); color: var(--accent); }
-.badge-volume  { background: rgba(124,92,252,0.15); color: var(--accent2); }
-.badge-luxury  { background: rgba(245,158,11,0.15); color: var(--amber); }
-.badge-legacy  { background: rgba(52,211,153,0.15); color: var(--green); }
-.badge-niche   { background: rgba(8,145,178,0.15); color: var(--cyan); }
+.badge-direct  { background: var(--color-badge-direct-bg); color: var(--accent); }
+.badge-volume  { background: var(--color-badge-volume-bg); color: var(--accent2); }
+.badge-luxury  { background: var(--color-badge-luxury-bg); color: var(--amber); }
+.badge-legacy  { background: var(--color-badge-legacy-bg); color: var(--green); }
+.badge-niche   { background: var(--color-badge-niche-bg); color: var(--cyan); }
 
 /* Services list */
 .services-list { list-style: none; padding: 0; margin: 0; }
@@ -260,7 +270,7 @@ tr:hover td { background: var(--surface2); }
     font-size: var(--font-size-xs);
     color: var(--accent);
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: var(--letter-spacing-badge);
     margin-bottom: var(--spacing-xs);
 }
 

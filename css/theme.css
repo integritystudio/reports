@@ -63,6 +63,9 @@
     --primary: #7b2d8e;
     --secondary: #c44569;
     --accent: #f78fb3;
+    --color-highlight-start: #f3e5f5;
+    --color-highlight-end: #fce4ec;
+    --color-info-bg: #f3e5f5;
 }
 
 /* --- Edghar & Nadyne --- */
@@ -76,6 +79,13 @@
     --light: #FFF5F5;
     --dark: #1a1a1a;
     --border: #e8d5d5;
+    --tr-hover-bg: #fff5f5;
+    --color-highlight-start: #fff0f0;
+    --color-highlight-end: #fce4ec;
+    --color-info-bg: #fce4ec;
+    --badge-info-bg: #fce4ec;
+    --badge-info-text: #6B2D5B;
+    --details-hover-bg: #f5e0e0;
 }
 
 /* --- Texas Realty Partners --- */
@@ -89,6 +99,23 @@
     --light: #f7fafc;
     --dark: #1a202c;
     --border: #e2e8f0;
+    --tr-hover-bg: #f7fafc;
+    --color-highlight-start: #ebf8ff;
+    --color-highlight-end: #bee3f8;
+    --color-warning-bg-brand: #fffbeb;
+    --color-warning-border-brand: #f59e0b;
+    --color-info-bg: #eff6ff;
+    --blockquote-brand-bg: #f7fafc;
+    --badge-success-bg: #c6f6d5;
+    --badge-success-text: #22543d;
+    --badge-warning-bg: #fefcbf;
+    --badge-warning-text: #744210;
+    --badge-danger-bg: #fed7d7;
+    --badge-danger-text: #9b2c2c;
+    --badge-info-bg: #bee3f8;
+    --badge-info-text: #2a4365;
+    --color-rating: #ecc94b;
+    --details-hover-bg: #edf2f7;
 }
 
 /* --- Illumination Holiday Lighting --- */
@@ -158,6 +185,12 @@
     --secondary: #7b4b94;
     --accent: #c9a96e;
     --light: #f8f7fa;
+    --color-highlight-start: #f0e6f6;
+    --color-highlight-end: #e8daf0;
+    --color-info-bg: #f0e6f6;
+    --badge-info-bg: #e0d4f0;
+    --badge-info-text: #4a2c6e;
+    --color-rating: #c9a96e;
 }
 
 /* --- PerformanceTest (Leora perf variants) --- */
@@ -208,6 +241,25 @@
     --light: #f5f3ef;
     --dark: #111111;
     --border: #c8c0b4;
+    --tr-hover-bg: #efeae3;
+    --color-highlight-start: #e0efe1;
+    --color-highlight-end: #ede9dc;
+    --color-text-override: #111;
+    --color-warning-bg-brand: #fef5e0;
+    --color-warning-border-brand: #c4873e;
+    --color-info-bg: #e0ece0;
+    --blockquote-brand-bg: #efeae3;
+    --blockquote-brand-text: #333;
+    --color-content-text: #1a1a1a;
+    --color-footer-text: #444;
+    --badge-success-bg: #c8e6c9;
+    --badge-success-text: #0d3b12;
+    --badge-warning-bg: #fff3e0;
+    --badge-warning-text: #bf360c;
+    --badge-danger-bg: #ffcdd2;
+    --badge-danger-text: #7f0000;
+    --badge-info-bg: #dcedc8;
+    --badge-info-text: #143028;
 }
 
 
@@ -273,6 +325,31 @@
     /* Capital City typography */
     --theme-hero-line-height: 1.7;
     --theme-stat-line-height: 1.2;
+    /* Badge rgba background tokens (shared across all base files) */
+    --badge-accent-bg: rgba(79, 143, 247, 0.15);
+    --badge-accent2-bg: rgba(124, 92, 252, 0.15);
+    --badge-amber-bg: rgba(245, 158, 11, 0.15);
+    --badge-green-bg: rgba(52, 211, 153, 0.15);
+    --badge-red-bg: rgba(239, 68, 68, 0.15);
+    --badge-cyan-bg: rgba(34, 211, 238, 0.15);
+    /* Report priority/status badge colors */
+    --badge-low-bg: #e2e3e5;
+    --badge-low-text: #383d41;
+    --badge-longterm-bg: #e7e0f7;
+    --badge-longterm-text: #4a306d;
+    /* Balloon Collective priority border colors */
+    --balloon-priority-high: #dc3545;
+    --balloon-priority-medium: #ffc107;
+    --balloon-priority-low: #28a745;
+    /* Balloon Collective badge-primary */
+    --balloon-badge-primary-bg: #f3e5f5;
+    /* Integrity Studio header meta link */
+    --integrity-meta-link: #a8e6cf;
+    /* Capital City print colors */
+    --capital-city-print-h1: #1a365d;
+    --capital-city-print-border: #2b6cb0;
+    --capital-city-print-link: #2b6cb0;
+    --capital-city-print-card-border: #ccc;
 }
 
 
@@ -282,57 +359,57 @@
    ========================================================================== */
 
 /* --- Balloon Collective — purple/pink tones --- */
-[data-brand="balloon-collective"] .highlight-box { background: linear-gradient(135deg, #f3e5f5, #fce4ec); }
-[data-brand="balloon-collective"] .info-box { background: #f3e5f5; }
+[data-brand="balloon-collective"] .highlight-box { background: linear-gradient(135deg, var(--color-highlight-start), var(--color-highlight-end)); }
+[data-brand="balloon-collective"] .info-box { background: var(--color-info-bg); }
 
 /* --- Edghar & Nadyne — maroon/pink tones --- */
-[data-brand="edgar-nadyne"] tr:hover { background: #fff5f5; }
-[data-brand="edgar-nadyne"] .highlight-box { background: linear-gradient(135deg, #fff0f0, #fce4ec); }
-[data-brand="edgar-nadyne"] .info-box { background: #fce4ec; }
-[data-brand="edgar-nadyne"] .badge-info { background: #fce4ec; color: #6B2D5B; }
-[data-brand="edgar-nadyne"] .rating { color: #E8A87C; letter-spacing: var(--theme-edgar-rating-letter-spacing); }
-[data-brand="edgar-nadyne"] details summary:hover { background: #f5e0e0; }
+[data-brand="edgar-nadyne"] tr:hover { background: var(--tr-hover-bg); }
+[data-brand="edgar-nadyne"] .highlight-box { background: linear-gradient(135deg, var(--color-highlight-start), var(--color-highlight-end)); }
+[data-brand="edgar-nadyne"] .info-box { background: var(--color-info-bg); }
+[data-brand="edgar-nadyne"] .badge-info { background: var(--badge-info-bg); color: var(--badge-info-text); }
+[data-brand="edgar-nadyne"] .rating { color: var(--accent); letter-spacing: var(--theme-edgar-rating-letter-spacing); }
+[data-brand="edgar-nadyne"] details summary:hover { background: var(--details-hover-bg); }
 
 /* --- Texas Realty Partners — blue/cool tones --- */
-[data-brand="trp-austin"] tr:hover { background: #f7fafc; }
-[data-brand="trp-austin"] .highlight-box { background: linear-gradient(135deg, #ebf8ff, #bee3f8); }
-[data-brand="trp-austin"] .warning-box { background: #fffbeb; border-left-color: #f59e0b; }
-[data-brand="trp-austin"] .info-box { background: #eff6ff; }
-[data-brand="trp-austin"] blockquote { background: #f7fafc; }
-[data-brand="trp-austin"] .badge-success { background: #c6f6d5; color: #22543d; }
-[data-brand="trp-austin"] .badge-warning { background: #fefcbf; color: #744210; }
-[data-brand="trp-austin"] .badge-danger { background: #fed7d7; color: #9b2c2c; }
-[data-brand="trp-austin"] .badge-info { background: #bee3f8; color: #2a4365; }
-[data-brand="trp-austin"] .rating { color: #ecc94b; }
-[data-brand="trp-austin"] details summary:hover { background: #edf2f7; }
-[data-brand="trp-austin"] details details { border-color: #edf2f7; }
+[data-brand="trp-austin"] tr:hover { background: var(--tr-hover-bg); }
+[data-brand="trp-austin"] .highlight-box { background: linear-gradient(135deg, var(--color-highlight-start), var(--color-highlight-end)); }
+[data-brand="trp-austin"] .warning-box { background: var(--color-warning-bg-brand); border-left-color: var(--color-warning-border-brand); }
+[data-brand="trp-austin"] .info-box { background: var(--color-info-bg); }
+[data-brand="trp-austin"] blockquote { background: var(--blockquote-brand-bg); }
+[data-brand="trp-austin"] .badge-success { background: var(--badge-success-bg); color: var(--badge-success-text); }
+[data-brand="trp-austin"] .badge-warning { background: var(--badge-warning-bg); color: var(--badge-warning-text); }
+[data-brand="trp-austin"] .badge-danger { background: var(--badge-danger-bg); color: var(--badge-danger-text); }
+[data-brand="trp-austin"] .badge-info { background: var(--badge-info-bg); color: var(--badge-info-text); }
+[data-brand="trp-austin"] .rating { color: var(--color-rating); }
+[data-brand="trp-austin"] details summary:hover { background: var(--details-hover-bg); }
+[data-brand="trp-austin"] details details { border-color: var(--details-hover-bg); }
 
 /* --- Strong Towns — earth/civic tones --- */
-[data-brand="strong-towns"] tr:hover { background: #efeae3; }
-[data-brand="strong-towns"] .highlight-box { background: linear-gradient(135deg, #e0efe1, #ede9dc); color: #111; }
-[data-brand="strong-towns"] .warning-box { background: #fef5e0; border-left-color: #c4873e; color: #111; }
-[data-brand="strong-towns"] .info-box { background: #e0ece0; color: #111; }
-[data-brand="strong-towns"] blockquote { background: #efeae3; color: #333; }
-[data-brand="strong-towns"] .section-content { color: #111; }
+[data-brand="strong-towns"] tr:hover { background: var(--tr-hover-bg); }
+[data-brand="strong-towns"] .highlight-box { background: linear-gradient(135deg, var(--color-highlight-start), var(--color-highlight-end)); color: var(--color-text-override); }
+[data-brand="strong-towns"] .warning-box { background: var(--color-warning-bg-brand); border-left-color: var(--color-warning-border-brand); color: var(--color-text-override); }
+[data-brand="strong-towns"] .info-box { background: var(--color-info-bg); color: var(--color-text-override); }
+[data-brand="strong-towns"] blockquote { background: var(--blockquote-brand-bg); color: var(--blockquote-brand-text); }
+[data-brand="strong-towns"] .section-content { color: var(--color-text-override); }
 [data-brand="strong-towns"] .section-content p,
-[data-brand="strong-towns"] .section-content li { color: #1a1a1a; }
-[data-brand="strong-towns"] .executive-summary p { color: #1a1a1a; }
-[data-brand="strong-towns"] td { color: #1a1a1a; }
-[data-brand="strong-towns"] footer { color: #444; }
-[data-brand="strong-towns"] .badge-success { background: #c8e6c9; color: #0d3b12; }
-[data-brand="strong-towns"] .badge-warning { background: #fff3e0; color: #bf360c; }
-[data-brand="strong-towns"] .badge-danger { background: #ffcdd2; color: #7f0000; }
-[data-brand="strong-towns"] .badge-info { background: #dcedc8; color: #143028; }
+[data-brand="strong-towns"] .section-content li { color: var(--color-content-text); }
+[data-brand="strong-towns"] .executive-summary p { color: var(--color-content-text); }
+[data-brand="strong-towns"] td { color: var(--color-content-text); }
+[data-brand="strong-towns"] footer { color: var(--color-footer-text); }
+[data-brand="strong-towns"] .badge-success { background: var(--badge-success-bg); color: var(--badge-success-text); }
+[data-brand="strong-towns"] .badge-warning { background: var(--badge-warning-bg); color: var(--badge-warning-text); }
+[data-brand="strong-towns"] .badge-danger { background: var(--badge-danger-bg); color: var(--badge-danger-text); }
+[data-brand="strong-towns"] .badge-info { background: var(--badge-info-bg); color: var(--badge-info-text); }
 
 /* --- Holliday Lighting — report element overrides --- */
 [data-brand="holliday-lighting"] section h4 { color: var(--primary); margin: var(--spacing-sm) 0 var(--spacing-xs) 0; font-size: var(--theme-holliday-h4-font-size); }
 [data-brand="holliday-lighting"] .section-content table { font-size: var(--theme-table-font-size); }
 
 /* --- Sound Sight Tarot — purple/gold tones --- */
-[data-brand="sound-sight-tarot"] .highlight-box { background: linear-gradient(135deg, #f0e6f6, #e8daf0); }
-[data-brand="sound-sight-tarot"] .info-box { background: #f0e6f6; }
-[data-brand="sound-sight-tarot"] .badge-info { background: #e0d4f0; color: #4a2c6e; }
-[data-brand="sound-sight-tarot"] .rating { color: #c9a96e; }
+[data-brand="sound-sight-tarot"] .highlight-box { background: linear-gradient(135deg, var(--color-highlight-start), var(--color-highlight-end)); }
+[data-brand="sound-sight-tarot"] .info-box { background: var(--color-info-bg); }
+[data-brand="sound-sight-tarot"] .badge-info { background: var(--badge-info-bg); color: var(--badge-info-text); }
+[data-brand="sound-sight-tarot"] .rating { color: var(--color-rating); }
 
 /* --- Integrity Studio — dark navy/red theme --- */
 [data-brand="integrity-studio"] .executive-summary { border-left-color: var(--highlight); }
@@ -340,7 +417,7 @@
 [data-brand="integrity-studio"] header { background: linear-gradient(135deg, var(--primary), var(--accent)); }
 [data-brand="integrity-studio"] section h3 { color: var(--accent); }
 [data-brand="integrity-studio"] a { color: var(--accent); }
-[data-brand="integrity-studio"] header .meta a { color: #a8e6cf; }
+[data-brand="integrity-studio"] header .meta a { color: var(--integrity-meta-link); }
 [data-brand="integrity-studio"] .section-content details { margin: var(--spacing-xs, 0.5rem) 0; }
 [data-brand="integrity-studio"] .section-content details summary { cursor: pointer; font-weight: 600; color: var(--primary); padding: var(--spacing-xs, 0.5rem) 0; }
 
@@ -372,47 +449,47 @@
 /* --- Competitor badges (per-directory variants) --- */
 
 /* Skelton-Woody competitor badges */
-.badge-midsize { background: rgba(124, 92, 252, 0.15); color: var(--accent2); }
-.badge-large { background: rgba(239, 68, 68, 0.15); color: var(--red); }
-.badge-insurance { background: rgba(52, 211, 153, 0.15); color: var(--green); }
+.badge-midsize { background: var(--badge-accent2-bg); color: var(--accent2); }
+.badge-large { background: var(--badge-red-bg); color: var(--red); }
+.badge-insurance { background: var(--badge-green-bg); color: var(--green); }
 
 /* TRP Austin competitor badges */
-.badge-commercial { background: rgba(124, 92, 252, 0.15); color: var(--accent2); }
-.badge-investment { background: rgba(52, 211, 153, 0.15); color: var(--green); }
-.badge-luxury { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
-.badge-major { background: rgba(239, 68, 68, 0.15); color: var(--red); }
-.badge-westlake { background: rgba(34, 211, 238, 0.15); color: var(--cyan); }
+.badge-commercial { background: var(--badge-accent2-bg); color: var(--accent2); }
+.badge-investment { background: var(--badge-green-bg); color: var(--green); }
+.badge-luxury { background: var(--badge-amber-bg); color: var(--amber); }
+.badge-major { background: var(--badge-red-bg); color: var(--red); }
+.badge-westlake { background: var(--badge-cyan-bg); color: var(--cyan); }
 
 /* Holliday Lighting competitor badges */
-.badge-premium { background: rgba(124, 92, 252, 0.15); color: var(--accent2); }
-.badge-enterprise { background: rgba(239, 68, 68, 0.15); color: var(--red); }
-.badge-permanent { background: rgba(52, 211, 153, 0.15); color: var(--green); }
-.badge-new { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
+.badge-premium { background: var(--badge-accent2-bg); color: var(--accent2); }
+.badge-enterprise { background: var(--badge-red-bg); color: var(--red); }
+.badge-permanent { background: var(--badge-green-bg); color: var(--green); }
+.badge-new { background: var(--badge-amber-bg); color: var(--amber); }
 
 /* NGO Market competitor badges */
-.badge-boutique { background: rgba(79, 143, 247, 0.15); color: var(--accent); }
-.badge-nptechfirm { background: rgba(124, 92, 252, 0.15); color: var(--accent2); }
-.badge-bigfirm { background: rgba(239, 68, 68, 0.15); color: var(--red); }
-.badge-platform { background: rgba(52, 211, 153, 0.15); color: var(--green); }
-.badge-education { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
-.badge-ethics { background: rgba(34, 211, 238, 0.15); color: var(--cyan); }
+.badge-boutique { background: var(--badge-accent-bg); color: var(--accent); }
+.badge-nptechfirm { background: var(--badge-accent2-bg); color: var(--accent2); }
+.badge-bigfirm { background: var(--badge-red-bg); color: var(--red); }
+.badge-platform { background: var(--badge-green-bg); color: var(--green); }
+.badge-education { background: var(--badge-amber-bg); color: var(--amber); }
+.badge-ethics { background: var(--badge-cyan-bg); color: var(--cyan); }
 
 /* Capital City competitor badges */
-.badge-village { background: rgba(79, 143, 247, 0.15); color: var(--accent); }
-.badge-nonprofit { background: rgba(52, 211, 153, 0.15); color: var(--green); }
-.badge-government { background: rgba(124, 92, 252, 0.15); color: var(--accent2); }
-.badge-forprofit { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
-.badge-community { background: rgba(34, 211, 238, 0.15); color: var(--cyan); }
+.badge-village { background: var(--badge-accent-bg); color: var(--accent); }
+.badge-nonprofit { background: var(--badge-green-bg); color: var(--green); }
+.badge-government { background: var(--badge-accent2-bg); color: var(--accent2); }
+.badge-forprofit { background: var(--badge-amber-bg); color: var(--amber); }
+.badge-community { background: var(--badge-cyan-bg); color: var(--cyan); }
 
 /* Integrity Studio competitor badges */
-.badge-direct { background: rgba(79, 143, 247, 0.15); color: var(--accent); }
-.badge-oss { background: rgba(52, 211, 153, 0.15); color: var(--green); }
+.badge-direct { background: var(--badge-accent-bg); color: var(--accent); }
+.badge-oss { background: var(--badge-green-bg); color: var(--green); }
 
 /* Leora competitor badges */
-.badge-system { background: rgba(124, 92, 252, 0.15); color: var(--accent2); }
-.badge-national { background: rgba(239, 68, 68, 0.15); color: var(--red); }
-.badge-specialty { background: rgba(52, 211, 153, 0.15); color: var(--green); }
-.badge-local { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
+.badge-system { background: var(--badge-accent2-bg); color: var(--accent2); }
+.badge-national { background: var(--badge-red-bg); color: var(--red); }
+.badge-specialty { background: var(--badge-green-bg); color: var(--green); }
+.badge-local { background: var(--badge-amber-bg); color: var(--amber); }
 
 /* NGO Market threat badges */
 .threat-badge {
@@ -423,9 +500,9 @@
     font-weight: 600;
     text-transform: uppercase;
 }
-.threat-low { background: rgba(52, 211, 153, 0.15); color: var(--green); }
-.threat-med { background: rgba(245, 158, 11, 0.15); color: var(--amber); }
-.threat-high { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+.threat-low { background: var(--badge-green-bg); color: var(--green); }
+.threat-med { background: var(--badge-amber-bg); color: var(--amber); }
+.threat-high { background: var(--badge-red-bg); color: var(--red); }
 
 /* --- Report priority/status badges ---
    .badge-high, .badge-medium, .badge-quick aliased in report-base.css
