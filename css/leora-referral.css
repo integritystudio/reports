@@ -467,6 +467,14 @@ body.form-page .container {
     .bonus-info h3 { color: #50e0a0; }
     .bonus-info ul { color: #f0f0f0; }
     .checkbox-group { background: var(--color-surface-dark2); }
+
+    /* --- Status badges dark --- */
+    .status-submitted { background: #1a2a3e; color: #88cce0; }
+    .status-applied { background: #2a2210; color: #f5d060; }
+    .status-interview { background: #2a1a2e; color: #f0a0c0; }
+    .status-hired { background: #1a2a1a; color: #90dab0; }
+    .status-active { background: #1a2a35; color: #88cce0; }
+    .status-not-selected { background: #2a2a2a; color: #c0c0c0; }
 }
 
 

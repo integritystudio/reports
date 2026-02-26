@@ -118,7 +118,7 @@
 @media (prefers-color-scheme: dark) {
     .toc { background: #1a1a2e; }
     .toc h2, .toc h3 { color: #e0e0e0; }
-    .opp-card { border-color: #333; }
+    .opp-card { border-color: #333; background: #1a1a2e; }
     .opp-card .opp-title { color: #e0e0e0; }
     .opp-card .opp-details dt { color: #c0d0e0; }
     .priority-card { background: #222; }

@@ -939,15 +939,28 @@
     [data-brand="skelton-woody"] .warning-box { background: #2a2210; }
 
     [data-brand="balloon-collective"] .highlight-box { background: linear-gradient(135deg, #2a1a2e, #2e1a2a); }
+    [data-brand="balloon-collective"] .info-box { background: #2a1a2e; }
 
-    /* edgar-nadyne: only unique dark overrides (base dark rules inherited from report-base.css) */
+    /* edgar-nadyne dark overrides */
     [data-brand="edgar-nadyne"] .highlight-box { background: linear-gradient(135deg, #2a1a2e, #1a2a2a); }
+    [data-brand="edgar-nadyne"] .info-box { background: #2a1a2e; }
+    [data-brand="edgar-nadyne"] tr:hover { background: #252535; }
+    [data-brand="edgar-nadyne"] tr:hover td { background: #252535; }
+    [data-brand="edgar-nadyne"] details summary:hover { background: #252535; }
+    [data-brand="edgar-nadyne"] .testimonial { background: #1a1a2e; border-color: #333; }
+    [data-brand="edgar-nadyne"] .testimonial .quote { color: #e0e0e0; }
+    [data-brand="edgar-nadyne"] .testimonial .attribution { color: #d0a0b0; }
 
     [data-brand="trp-austin"] .executive-summary h2 { color: #a0d8f8; }
     [data-brand="trp-austin"] section h3 { color: #7ec8f0; }
     [data-brand="trp-austin"] a { color: #7ec8f0; }
     [data-brand="trp-austin"] th { color: #a0d8f8; }
+    [data-brand="trp-austin"] tr:hover { background: #252535; }
+    [data-brand="trp-austin"] tr:hover td { background: #252535; }
     [data-brand="trp-austin"] .highlight-box { background: linear-gradient(135deg, #1a1a2e, #1a2a3e); }
+    [data-brand="trp-austin"] .warning-box { background: #2a2210; }
+    [data-brand="trp-austin"] .info-box { background: #1a2a3e; }
+    [data-brand="trp-austin"] blockquote { background: #1a1a2e; color: #ececec; }
     [data-brand="trp-austin"] .contact-item .label { color: #d0d0d0; }
     [data-brand="trp-austin"] .contact-item .value { color: #a0d8f8; }
     [data-brand="trp-austin"] footer { color: #d0d0d0; }
@@ -980,12 +993,22 @@
     [data-brand="integrity-studio"] a { color: #8ec0f0; }
     [data-brand="integrity-studio"] section h3 { color: #a0c4e0; }
     [data-brand="integrity-studio"] .executive-summary h2 { color: #a8c8e8; }
+    [data-brand="integrity-studio"] .section-content { color: #f0f0f0; }
+    [data-brand="integrity-studio"] .section-content p,
+    [data-brand="integrity-studio"] .section-content li,
+    [data-brand="integrity-studio"] .section-content td { color: #ececec; }
+    [data-brand="integrity-studio"] .executive-summary p { color: #ececec; }
+    [data-brand="integrity-studio"] th { color: #a8c8e8; }
+    [data-brand="integrity-studio"] footer { color: #d8d8d8; }
 
     [data-brand="zoukmx"] .highlight-box { background: linear-gradient(135deg, #1a2a1a, #1a2a2a); }
 
+    [data-brand="strong-towns"] tr:hover { background: #252535; }
+    [data-brand="strong-towns"] tr:hover td { background: #252535; }
     [data-brand="strong-towns"] .highlight-box { background: linear-gradient(135deg, #1a2a1a, #1a2a2a); color: #f0f0f0; }
     [data-brand="strong-towns"] .info-box { background: #1a2a1a; color: #f0f0f0; }
     [data-brand="strong-towns"] .warning-box { background: #2a2210; color: #f0f0f0; }
+    [data-brand="strong-towns"] blockquote { background: #1a1a2e; color: #d8d8d8; }
     [data-brand="strong-towns"] .section-content { color: #f0f0f0; }
     [data-brand="strong-towns"] .section-content p,
     [data-brand="strong-towns"] .section-content li { color: #ececec; }

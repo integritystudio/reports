@@ -72,10 +72,13 @@
         --color-text-secondary: #e0e0e0;
         --color-text-body: #ececec;
     }
-    body { background: #0f0f23; }
+    body { background: #0f0f23; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     section, .executive-summary, #toc { background: #1a1a2e; }
+    .executive-summary, .executive-summary h2, .executive-summary p { background: #1a1a2e; color: #ececec; }
     section h2 { background: #1e293b; }
-    th { background: #222; }
+    th { background: #222; color: #e0e0e0; }
+    td { background: #1a1a2e; color: #ececec; }
+    tr:hover td { background: #252535; }
     tr:hover { background: #252535; }
     .highlight-box { background: linear-gradient(135deg, #1a2a2a, #1a2a1a); }
     .warning-box { background: #2a2210; }
