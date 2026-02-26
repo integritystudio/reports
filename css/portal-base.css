@@ -73,6 +73,9 @@
     --opacity-muted: 0.9;
     --opacity-category: 0.9;
     --border-width-1: 1px;
+    --offscreen-left: -9999px;
+    --sr-only-size: 1px;
+    --sr-only-margin: -1px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -93,19 +96,19 @@
 
 .skip-link {
     position: absolute;
-    left: -9999px;
+    left: var(--offscreen-left);
     top: auto;
-    width: 1px;
-    height: 1px;
+    width: var(--sr-only-size);
+    height: var(--sr-only-size);
     overflow: hidden;
 }
 .skip-link:focus {
     position: fixed;
-    left: 1rem;
-    top: 1rem;
+    left: var(--spacing-sm);
+    top: var(--spacing-sm);
     width: auto;
     height: auto;
-    padding: 0.5rem 1rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
     background: var(--color-primary-dark, #2563eb);
     color: var(--color-white);
     border-radius: var(--radius-xs);
@@ -138,7 +141,7 @@ body {
 header {
     padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
     text-align: center;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: var(--border-width-1) solid var(--color-border);
     background-color: var(--color-bg-secondary);
 }
 .header-content { max-width: var(--content-width); margin: 0 auto; }
@@ -192,7 +195,7 @@ section { margin-bottom: var(--spacing-xl); }
 }
 .card {
     background-color: var(--color-card-bg);
-    border: 1px solid var(--color-border);
+    border: var(--border-width-1) solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
     transition: all var(--transition-standard);
@@ -281,7 +284,7 @@ section { margin-bottom: var(--spacing-xl); }
 
 /* Footer */
 footer {
-    border-top: 1px solid var(--color-border);
+    border-top: var(--border-width-1) solid var(--color-border);
     padding: var(--spacing-lg);
     text-align: center;
     color: var(--color-text-secondary);
@@ -295,10 +298,10 @@ footer a { color: var(--color-primary-medium); text-decoration: none; }
 /* Accessibility */
 .sr-only {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    width: var(--sr-only-size);
+    height: var(--sr-only-size);
     padding: 0;
-    margin: -1px;
+    margin: var(--sr-only-margin);
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;

@@ -306,7 +306,7 @@
 
 body.form-page {
     background: var(--leora-gradient);
-    min-height: 100vh;
+    min-height: var(--min-height-full);
     padding: var(--spacing-lg);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -586,5 +586,5 @@ body.form-page .container {
     .submit-btn { display: none; }
     .form-page input,
     .form-page textarea,
-    .form-page select { border: 1px solid var(--color-print-input-border); }
+    .form-page select { border: var(--border-width-1) solid var(--color-print-input-border); }
 }
