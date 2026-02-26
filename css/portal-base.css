@@ -58,6 +58,21 @@
     --transition-fast: 0.2s ease;
     --letter-spacing-h1: -0.02em;
     --letter-spacing-category: 0.05em;
+    /* Layout constants */
+    --color-white: #ffffff;
+    --z-index-skip-link: 1000;
+    /* Typography constants */
+    --line-height-base: 1.6;
+    --line-height-snug: 1.5;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-size-base: 1rem;
+    /* Opacity constants */
+    --opacity-muted: 0.9;
+    --opacity-category: 0.9;
+    --border-width-1: 1px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -92,10 +107,10 @@
     height: auto;
     padding: 0.5rem 1rem;
     background: var(--color-primary-dark, #2563eb);
-    color: white;
+    color: var(--color-white);
     border-radius: var(--radius-xs);
-    z-index: 1000;
-    font-weight: 600;
+    z-index: var(--z-index-skip-link);
+    font-weight: var(--font-weight-semibold);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -106,7 +121,7 @@ body {
     font-family: var(--font-sans);
     background-color: var(--color-bg, #ffffff);
     color: var(--color-text-primary, #1a1a1a);
-    line-height: 1.6;
+    line-height: var(--line-height-base);
     transition: background-color var(--transition-standard), color var(--transition-standard);
 }
 
@@ -114,7 +129,7 @@ body {
 .back-nav { max-width: var(--content-width); margin: 0 auto; padding: var(--spacing-md) var(--spacing-lg) 0; }
 .back-link {
     display: inline-flex; align-items: center; gap: var(--spacing-xs);
-    color: var(--color-primary-medium); font-weight: 600; font-size: var(--font-size-back-link);
+    color: var(--color-primary-medium); font-weight: var(--font-weight-semibold); font-size: var(--font-size-back-link);
     text-decoration: none; transition: gap var(--transition-fast);
 }
 .back-link:hover { gap: var(--spacing-sm); }
@@ -130,7 +145,7 @@ header {
 
 h1 {
     font-size: var(--font-size-h1);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
     color: var(--color-primary-dark);
     margin-bottom: var(--spacing-sm);
     letter-spacing: var(--letter-spacing-h1);
@@ -139,7 +154,7 @@ h1 {
     font-size: var(--font-size-subtitle);
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-md);
-    font-weight: 400;
+    font-weight: var(--font-weight-normal);
 }
 
 /* Main content */
@@ -153,7 +168,7 @@ main {
 section { margin-bottom: var(--spacing-xl); }
 .section-title {
     font-size: var(--font-size-section-title);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     margin-bottom: var(--spacing-lg);
     color: var(--color-text-primary);
     display: flex;
@@ -211,16 +226,16 @@ section { margin-bottom: var(--spacing-xl); }
 .card-category {
     display: inline-block;
     font-size: var(--font-size-card-category);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
     letter-spacing: var(--letter-spacing-category);
     text-transform: uppercase;
     color: var(--color-primary-medium);
     margin-bottom: var(--spacing-xs);
-    opacity: 0.9;
+    opacity: var(--opacity-category);
 }
 .card-title {
     font-size: var(--font-size-card-title);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     margin-bottom: var(--spacing-sm);
     color: var(--color-text-primary);
 }
@@ -229,14 +244,14 @@ section { margin-bottom: var(--spacing-xl); }
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-md);
     flex-grow: 1;
-    line-height: 1.5;
+    line-height: var(--line-height-snug);
 }
 .card-link {
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
     color: var(--color-primary-medium);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-card-link);
     transition: gap var(--transition-standard);
     width: fit-content;
@@ -256,7 +271,7 @@ section { margin-bottom: var(--spacing-xl); }
     align-items: center;
     gap: var(--spacing-xs);
     color: var(--color-primary-medium);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-card-link);
     text-decoration: none;
     width: fit-content;

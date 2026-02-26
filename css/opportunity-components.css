@@ -15,6 +15,9 @@
     --letter-spacing-priority: 0.5px;
     --spacing-opp-gap: 0.4rem;
     --spacing-tiny: 0.3rem;
+    --color-white: #ffffff;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
 }
 
 
@@ -23,7 +26,7 @@
    ========================================================================== */
 
 .toc {
-    background: white;
+    background: var(--color-white);
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     border-radius: var(--radius-lg);
@@ -57,10 +60,10 @@
     flex-wrap: wrap;
     gap: var(--spacing-xs);
 }
-.opp-card .opp-title { font-weight: 600; color: var(--primary); font-size: var(--font-size-opp-title); }
+.opp-card .opp-title { font-weight: var(--font-weight-semibold); color: var(--primary); font-size: var(--font-size-opp-title); }
 .opp-card .opp-badges { display: flex; gap: var(--spacing-opp-gap); flex-wrap: wrap; }
 .opp-card .opp-details { font-size: var(--font-size-opp-details); }
-.opp-card .opp-details dt { font-weight: 600; color: var(--secondary); margin-top: var(--spacing-xs); }
+.opp-card .opp-details dt { font-weight: var(--font-weight-semibold); color: var(--secondary); margin-top: var(--spacing-xs); }
 .opp-card .opp-details dd { margin-left: 0; margin-bottom: var(--spacing-detail-gap); }
 
 
@@ -80,7 +83,7 @@
     border-radius: var(--radius-lg);
     text-align: center;
 }
-.priority-card .count { font-size: var(--font-size-priority-count); font-weight: 700; color: var(--primary); }
+.priority-card .count { font-size: var(--font-size-priority-count); font-weight: var(--font-weight-bold); color: var(--primary); }
 .priority-card .label { font-size: var(--font-size-xs); color: var(--color-priority-label); text-transform: uppercase; letter-spacing: var(--letter-spacing-priority); }
 
 

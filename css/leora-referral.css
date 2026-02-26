@@ -86,6 +86,23 @@
     --font-size-h1-responsive: 1.5rem;
     --color-print-border: #ddd;
     --color-print-input-border: #ccc;
+    /* Layout constants */
+    --color-white: #ffffff;
+    /* Typography constants */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: bold;
+    --font-size-base: 1rem;
+    --line-height-base: 1.6;
+    /* Opacity constants */
+    --opacity-muted: 0.9;
+    /* Border constants */
+    --border-width-1: 1px;
+    --border-width-2: 2px;
+    --border-radius-circle: 50%;
+    /* Misc */
+    --min-height-full: 100vh;
 }
 
 
@@ -101,7 +118,7 @@
 
 .dashboard .header {
     background: var(--leora-gradient);
-    color: white;
+    color: var(--color-white);
     padding: var(--spacing-xxl);
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-xxl);
@@ -113,11 +130,11 @@
 .dashboard .header h1 {
     font-size: var(--font-size-h1);
     margin-bottom: var(--spacing-sm);
-    color: white;
+    color: var(--color-white);
     letter-spacing: normal;
 }
 
-.dashboard .header p { opacity: 0.9; }
+.dashboard .header p { opacity: var(--opacity-muted); }
 
 .stats-grid {
     display: grid;
@@ -141,7 +158,7 @@
 
 .stat-value {
     font-size: var(--font-size-stat);
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
     color: var(--leora-primary);
     margin-bottom: var(--spacing-xs);
 }
@@ -155,7 +172,7 @@
     color: var(--color-success);
     font-size: var(--font-size-sm);
     margin-top: var(--spacing-sm);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
 }
 
 .referrals-section {
@@ -171,7 +188,7 @@
     align-items: center;
     margin-bottom: var(--spacing-xl);
     padding-bottom: var(--spacing-md);
-    border-bottom: 2px solid var(--color-border);
+    border-bottom: var(--border-width-2) solid var(--color-border);
 }
 
 .section-header h2 {
@@ -181,19 +198,19 @@
 
 .new-referral-btn {
     background: var(--leora-gradient);
-    color: white;
+    color: var(--color-white);
     padding: var(--button-padding);
     border: none;
     border-radius: var(--radius-xs);
     cursor: pointer;
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     transition: transform var(--transition-fast);
 }
 
 .new-referral-btn:hover { transform: translateY(var(--lift-hover-sm)); }
 
 .referral-card {
-    border: 2px solid var(--color-border);
+    border: var(--border-width-2) solid var(--color-border);
     border-radius: var(--radius-sm);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
@@ -209,14 +226,14 @@
     margin-bottom: var(--spacing-md);
 }
 
-.candidate-name { font-size: var(--font-size-lg); font-weight: 600; color: var(--color-text-primary); }
+.candidate-name { font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); color: var(--color-text-primary); }
 .referral-id { font-size: var(--font-size-sm); color: var(--color-text-faint); }
 
 .status-badge {
     padding: var(--status-badge-padding);
     border-radius: var(--status-badge-radius);
     font-size: var(--font-size-sm);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
 }
 
 .status-submitted { background: var(--color-info-bg); color: var(--color-info-text); }
@@ -235,7 +252,7 @@
 
 .detail-item { font-size: var(--font-size-md); }
 .detail-label { color: var(--color-text-faint); margin-bottom: var(--spacing-xxs); }
-.detail-value { color: var(--color-text-primary); font-weight: 500; }
+.detail-value { color: var(--color-text-primary); font-weight: var(--font-weight-medium); }
 
 .milestone-tracker {
     background: var(--color-bg-light);
@@ -246,7 +263,7 @@
 
 .milestone-title {
     font-size: var(--font-size-md);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     color: var(--leora-primary);
     margin-bottom: var(--spacing-sm);
 }
@@ -262,21 +279,21 @@
 .milestone-circle {
     width: var(--milestone-size);
     height: var(--milestone-size);
-    border-radius: 50%;
+    border-radius: var(--border-radius-circle, 50%);
     margin: 0 auto var(--spacing-xs);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
     font-size: var(--font-size-md);
 }
 
-.milestone-complete { background: var(--color-success); color: white; }
+.milestone-complete { background: var(--color-success); color: var(--color-white); }
 .milestone-pending { background: var(--color-border); color: var(--color-text-faint); }
 .milestone-upcoming { background: var(--color-warning-bg); color: var(--color-warning-text); }
 
 .milestone-label { font-size: var(--font-size-milestone-label); color: var(--color-text-muted); }
-.milestone-amount { font-size: var(--font-size-milestone); font-weight: 600; color: var(--color-text-primary); margin-top: var(--spacing-xxs); }
+.milestone-amount { font-size: var(--font-size-milestone); font-weight: var(--font-weight-semibold); color: var(--color-text-primary); margin-top: var(--spacing-xxs); }
 
 .empty-state { text-align: center; padding: var(--empty-state-padding-v) var(--spacing-lg); color: var(--color-text-faint); }
 .empty-state-icon { font-size: var(--font-size-empty-icon); margin-bottom: var(--spacing-lg); }
@@ -305,7 +322,7 @@ body.form-page .container {
 
 .form-page .header {
     background: var(--leora-gradient);
-    color: white;
+    color: var(--color-white);
     padding: var(--spacing-xxl);
     text-align: center;
     border-bottom: none;
@@ -314,11 +331,11 @@ body.form-page .container {
 .form-page .header h1 {
     font-size: var(--font-size-h1);
     margin-bottom: var(--spacing-sm);
-    color: white;
+    color: var(--color-white);
     letter-spacing: normal;
 }
 
-.form-page .header p { font-size: var(--font-size-base); opacity: 0.9; }
+.form-page .header p { font-size: var(--font-size-base); opacity: var(--opacity-muted); }
 
 .form-content { padding: var(--spacing-xxxl); }
 
@@ -329,7 +346,7 @@ body.form-page .container {
     color: var(--leora-primary);
     margin-bottom: var(--spacing-lg);
     padding-bottom: var(--spacing-sm);
-    border-bottom: 2px solid var(--color-border);
+    border-bottom: var(--border-width-2) solid var(--color-border);
     display: block;
 }
 
@@ -339,7 +356,7 @@ body.form-page .container {
 
 .form-page label {
     display: block;
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     color: var(--color-text-primary);
     margin-bottom: var(--spacing-xs);
     font-size: var(--font-size-md);
@@ -354,7 +371,7 @@ body.form-page .container {
 .form-page textarea {
     width: 100%;
     padding: var(--input-padding);
-    border: 2px solid var(--color-border);
+    border: var(--border-width-2) solid var(--color-border);
     border-radius: var(--radius-xs);
     font-size: var(--font-size-md);
     transition: border-color var(--transition-standard);
@@ -388,7 +405,7 @@ body.form-page .container {
 .checkbox-group label {
     display: flex;
     align-items: flex-start;
-    font-weight: 400;
+    font-weight: var(--font-weight-normal);
     margin-bottom: 0;
 }
 
@@ -399,12 +416,12 @@ body.form-page .container {
 
 .submit-btn {
     background: var(--leora-gradient);
-    color: white;
+    color: var(--color-white);
     padding: var(--submit-padding);
     border: none;
     border-radius: var(--radius-xs);
     font-size: var(--font-size-base);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     cursor: pointer;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     width: 100%;
@@ -535,15 +552,15 @@ body.form-page .container {
         box-shadow: none;
     }
     .stat-card {
-        background: white;
+        background: var(--color-white);
         box-shadow: none;
-        border: 1px solid var(--color-print-border);
+        border: var(--border-width-1) solid var(--color-print-border);
     }
     .stat-card:hover { transform: none; }
     .referrals-section {
-        background: white;
+        background: var(--color-white);
         box-shadow: none;
-        border: 1px solid var(--color-print-border);
+        border: var(--border-width-1) solid var(--color-print-border);
     }
     .referral-card { break-inside: avoid; }
     .new-referral-btn { display: none; }
@@ -553,12 +570,12 @@ body.form-page .container {
 /* --- Leora form print --- */
 @media print {
     body.form-page {
-        background: white;
+        background: var(--color-white);
         padding: 0;
     }
     body.form-page .container {
         box-shadow: none;
-        border: 1px solid var(--color-print-border);
+        border: var(--border-width-1) solid var(--color-print-border);
     }
     .form-page .header {
         background: var(--leora-primary) !important;
