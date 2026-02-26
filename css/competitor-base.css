@@ -5,6 +5,7 @@
  */
 
 :root {
+    /* Competitor defaults (overridden per-brand via theme.css) */
     --bg: #f5f6fa;
     --surface: #ffffff;
     --surface2: #f0f1f5;
@@ -17,17 +18,6 @@
     --amber: #d97706;
     --red: #dc2626;
     --cyan: #0891b2;
-    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Roboto, sans-serif;
-    --font-serif: Georgia, 'Times New Roman', serif;
-    --font-mono: 'SF Mono', Monaco, 'Courier New', monospace;
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 1.5rem;
-    --spacing-lg: 2rem;
-    --spacing-xl: 3rem;
-    --radius-sm: 0.375rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 0.75rem;
     --radius-card: 12px;
     --radius-profile: 16px;
     --content-width: 1400px;
@@ -41,12 +31,9 @@
     --font-size-label: 0.75rem;
     --font-size-badge: 0.75rem;
     --font-size-badge-service: 0.78rem;
-    --spacing-table-cell: 0.75rem;
     --table-min-width: 1100px;
     --badge-radius: 6px;
-    --border-accent-width: 4px;
     --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
-    --radius-xs: 4px;
     --spacing-xxs: 0.15rem;
     --padding-card: 1.25rem;
     --font-size-body: 0.92rem;
@@ -64,21 +51,6 @@
     --color-badge-legacy-bg: rgba(52, 211, 153, 0.15);
     --color-badge-niche-bg: rgba(8, 145, 178, 0.15);
     --badge-padding: 0.15rem 0.5rem;
-    /* Layout constants */
-    --color-white: #ffffff;
-    --z-index-skip-link: 1000;
-    /* Typography constants */
-    --line-height-base: 1.6;
-    --font-weight-normal: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    --border-width-1: 1px;
-    --border-width-2: 2px;
-    --offscreen-left: -9999px;
-    --sr-only-size: 1px;
-    --sr-only-margin: -1px;
-    --spacing-detail-gap: 0.25rem;
     --grid-summary-min: 200px;
 }
 

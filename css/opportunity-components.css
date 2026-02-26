@@ -3,7 +3,7 @@
  * Extracted from theme.css section 5 to reduce bundle size for non-opportunity pages.
  */
 
-/* Additional tokens (complements report-base.css :root) */
+/* Additional tokens (complements report-base.css + theme.css :root) */
 :root {
     --font-size-opp-title: 1.05rem;
     --font-size-opp-details: 0.92rem;
@@ -15,9 +15,6 @@
     --letter-spacing-priority: 0.5px;
     --spacing-opp-gap: 0.4rem;
     --spacing-tiny: 0.3rem;
-    --color-white: #ffffff;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
 }
 
 
