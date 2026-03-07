@@ -37,6 +37,10 @@
             background: #dcfce7;
             font-weight: 600;
         }
+        .info-box a,
+        .highlight-box a {
+            color: var(--primary, #1d4ed8);
+        }
         @media (prefers-color-scheme: dark) {
             .calc-card {
                 background: #1e293b;
@@ -53,6 +57,9 @@
             }
             .rate-best {
                 background: #14532d;
+            }
+            .rate-best a {
+                color: #86efac;
             }
         }
         @media print {
@@ -328,7 +335,7 @@
                 </tbody>
             </table>
 </div>
-            <p style="font-size:0.85em; color: var(--text-secondary, #666); margin-top: 0.5em;">Monthly Payment, Total Paid, and Total Interest are calculated using the standard amortization formula: P &times; r &times; (1+r)<sup>n</sup> / ((1+r)<sup>n</sup> &minus; 1) where P=$34,180, r=APR/12, n=72.<br>*Interpolated estimate: ~5.60% is derived from Experian Q4 2025 super-prime new-car average (4.66%) with two adjustments: (1) ~+0.50–0.65% for 72-month term premium vs. shorter terms (observed from lender rate tiers in this report), and (2) ~+0.30% for the mix of new/used/refi across all 72-month super-prime originations. No single published source reports this exact figure for this specific term and credit tier.</p>
+            <p style="font-size:0.85em; color: var(--color-text-secondary, #555); margin-top: 0.5em;">Monthly Payment, Total Paid, and Total Interest are calculated using the standard amortization formula: P &times; r &times; (1+r)<sup>n</sup> / ((1+r)<sup>n</sup> &minus; 1) where P=$34,180, r=APR/12, n=72.<br>*Interpolated estimate: ~5.60% is derived from Experian Q4 2025 super-prime new-car average (4.66%) with two adjustments: (1) ~+0.50–0.65% for 72-month term premium vs. shorter terms (observed from lender rate tiers in this report), and (2) ~+0.30% for the mix of new/used/refi across all 72-month super-prime originations. No single published source reports this exact figure for this specific term and credit tier.</p>
 
             <div class="highlight-box">
                 <h3>Savings Potential</h3>
