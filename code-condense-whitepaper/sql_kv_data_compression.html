@@ -51,7 +51,8 @@
         <h3>1.1 PostgreSQL: TOAST Compression (pglz vs LZ4)</h3>
         <p>PostgreSQL uses TOAST (The Oversized-Attribute Storage Technique) to compress and out-of-line store values exceeding roughly 2 KB. Two algorithms are available since PostgreSQL 14:</p>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Metric</th>
@@ -92,6 +93,7 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <div class="warning-box">
           <strong>Critical finding under parallel load:</strong> pglz performance degrades and becomes <em>worse than uncompressed data</em> as parallel queries approach available CPU core count. LZ4 maintains consistent performance above uncompressed baselines even under saturation. For OLTP workloads, LZ4 is the clear default choice.
@@ -107,7 +109,8 @@
         </ul>
 
         <h3>1.2 MySQL / InnoDB: Page Compression and Table Compression</h3>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Method</th>
@@ -131,12 +134,14 @@
             </tr>
           </tbody>
         </table>
+</div>
         <p><strong>Guidance:</strong> For new deployments, transparent page compression with LZ4 provides the best latency-to-savings tradeoff. Reserve Barracuda table compression for cold/archival tables where write overhead is acceptable.</p>
 
         <h3>1.3 ClickHouse: Per-Column Codec Selection</h3>
         <p>ClickHouse provides the most granular compression control of any production database. Each column can be assigned a pipeline of pre-compression codecs followed by a general-purpose algorithm.</p>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Codec</th>
@@ -182,9 +187,11 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <h4>Real-World Benchmarks (NOAA Weather Dataset)</h4>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Schema Stage</th>
@@ -220,11 +227,13 @@
             </tr>
           </tbody>
         </table>
+</div>
         <p>Moving from naive types to optimal codecs reduced compressed storage by <strong>65%</strong> (4.07 GiB to 1.42 GiB). Standout: Date column with DoubleDelta reduced 2.24 GiB to 24.28 MiB (~99% reduction).</p>
 
         <h3>1.4 SQLite: Page-Level Compression Options</h3>
         <p>SQLite has no built-in compression. External strategies fill the gap:</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Solution</th>
@@ -260,9 +269,11 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>1.5 Cross-Engine Compression Ratio Summary</h3>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Engine</th>
@@ -316,6 +327,7 @@
             </tr>
           </tbody>
         </table>
+</div>
       </div>
     </section>
 
@@ -337,7 +349,8 @@
 bottommost_compression = kZSTD</code></pre>
         <p><strong>Rationale:</strong> L0 and L1 are frequently compacted; compression adds CPU load with minimal space benefit. The bottommost level holds the vast majority of data — ZSTD's higher ratio pays off there.</p>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Algorithm</th>
@@ -392,10 +405,12 @@ bottommost_compression = kZSTD</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>2.2 LMDB: No Built-In Compression</h3>
         <p>LMDB deliberately excludes compression from its B+tree engine. External compression strategies:</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Strategy</th>
@@ -421,11 +436,13 @@ bottommost_compression = kZSTD</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
         <p><strong>When LMDB is appropriate:</strong> Single-writer/many-reader workloads where zero-copy reads matter more than storage density. If you need built-in compression, use RocksDB instead.</p>
 
         <h3>2.3 Redis: Memory-Level Compression Encodings</h3>
         <p>Redis compresses at the data-structure level rather than the page or block level:</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Encoding</th>
@@ -461,6 +478,7 @@ bottommost_compression = kZSTD</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
         <p><strong>Application-level compression benchmarks (LogicMonitor study):</strong></p>
         <ul>
           <li>LZ4 on values: <strong>60% memory savings</strong> (39,739 bytes to 16,208 bytes)</li>
@@ -478,7 +496,8 @@ bottommost_compression = kZSTD</code></pre>
 
         <h3>2.5 DynamoDB: Client-Side Attribute Compression</h3>
         <p>DynamoDB provides no server-side compression. All compression is application-layer.</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Algorithm</th>
@@ -504,6 +523,7 @@ bottommost_compression = kZSTD</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
         <div class="warning-box">
           <strong>Important constraint:</strong> Compressed attributes cannot be used in filter expressions, key conditions, or projection expressions meaningfully. Design partition/sort keys and GSI attributes to remain uncompressed.
         </div>
@@ -526,7 +546,8 @@ bottommost_compression = kZSTD</code></pre>
         <p>The fundamental difference: columns contain homogeneous data types, enabling specialized codecs that exploit type-specific patterns. Rows mix types, limiting compression to general-purpose algorithms.</p>
 
         <h3>ClickBench Comparison (100M rows)</h3>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>System</th>
@@ -556,6 +577,7 @@ bottommost_compression = kZSTD</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Why Columnar Compresses Better</h3>
         <ol>
@@ -579,7 +601,8 @@ bottommost_compression = kZSTD</code></pre>
     <section id="codec-selection">
       <h2>4. Compression Codec Selection by Data Type</h2>
       <div class="section-content">
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Data Type</th>
@@ -662,6 +685,7 @@ bottommost_compression = kZSTD</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Key Principles</h3>
         <ol>
@@ -679,7 +703,8 @@ bottommost_compression = kZSTD</code></pre>
         <h3>How ZSTD Dictionary Training Works</h3>
         <p>ZSTD dictionaries capture recurring byte patterns from a training corpus. During compression, each input block is encoded using references to dictionary fragments rather than raw literals. The dictionary is typically small (32–100 KiB) and is shared across all compressions of similar data.</p>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Data Category</th>
@@ -721,6 +746,7 @@ bottommost_compression = kZSTD</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <div class="info-box">
           <strong>Key insight:</strong> Dictionary gains are inversely proportional to input size. For data under 1 KB, dictionaries are transformational. For data over 100 KB, the input itself provides enough context that a dictionary adds little.
@@ -749,7 +775,8 @@ bottommost_compression = kZSTD</code></pre>
         <p>In LSM-tree databases (RocksDB, LevelDB, Cassandra, CockroachDB), every logical write is physically written multiple times as data moves through compaction levels. Compression adds CPU cost to each of these writes.</p>
 
         <h3>Compression Level vs Write Throughput</h3>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Compression</th>
@@ -804,6 +831,7 @@ bottommost_compression = kZSTD</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Decision Framework</h3>
         <pre><code>If write_throughput_critical AND ssd_storage:
@@ -818,7 +846,8 @@ If archival AND write_infrequent:
     <section id="algorithm-showdown">
       <h2>7. Algorithm Showdown: ZSTD vs LZ4 vs Snappy vs PPMd</h2>
       <div class="section-content">
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Metric</th>
@@ -878,9 +907,11 @@ If archival AND write_infrequent:
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Cost-at-Scale Comparison (500 TB/month, S3 eu-central-1 at $0.0235/GB)</h3>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Algorithm</th>
@@ -916,6 +947,7 @@ If archival AND write_infrequent:
             </tr>
           </tbody>
         </table>
+</div>
         <p>ZSTD-3 delivers the sweet spot: 2x the savings of LZ4 with practical CPU overhead.</p>
       </div>
     </section>
@@ -923,7 +955,8 @@ If archival AND write_infrequent:
     <section id="pipeline-recommendations">
       <h2>8. Practical Pipeline Recommendations</h2>
       <div class="section-content">
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Use Case</th>
@@ -999,6 +1032,7 @@ If archival AND write_infrequent:
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Decision Flowchart</h3>
         <pre><code>START
@@ -1078,7 +1112,8 @@ Default: ZSTD-3 at the application layer. Always measure.</code></pre>
         </ol>
 
         <h3>Quick-Reference Decision Table</h3>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Question</th>
@@ -1124,6 +1159,7 @@ Default: ZSTD-3 at the application layer. Always measure.</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <div class="info-box">
           <strong>The One Rule:</strong> Measure with your data. Compression ratios published in benchmarks are averages across specific datasets. Your schema, cardinality, value distributions, and access patterns will produce different numbers. Always benchmark candidate configurations against a representative sample of your production data before committing to a compression strategy.

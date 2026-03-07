@@ -62,7 +62,8 @@
 
         <h3>1b. Lossy Compression (<code>--compress</code>)</h3>
         <p>Using Tree-sitter, repomix extracts structural signatures and strips function bodies:</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Status</th>
@@ -80,6 +81,7 @@
             </tr>
           </tbody>
         </table>
+</div>
         <p><strong>Reported reduction:</strong> ~70% token count reduction vs. full source. Combined with comment and empty-line removal, the total reduction from source → compressed repomix output is typically <strong>75–85% fewer tokens</strong>.</p>
       </div>
     </section>
@@ -91,7 +93,8 @@
         <h3>2a. What zstd Adds on Top of Repomix Output</h3>
         <p>Repomix output is structured text (XML/Markdown) with high redundancy — repeated tag names, indentation patterns, and boilerplate. This makes it an excellent candidate for general-purpose compression.</p>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>zstd Level</th>
@@ -127,6 +130,7 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <div class="info-box">
           <strong>Key insight:</strong> Decompression speed is essentially constant across all levels (~1500 MB/s). This is critical for the use case of reloading condensed repos into AI tools.
@@ -134,7 +138,8 @@
 
         <h3>2b. Combined Pipeline Numbers</h3>
         <p>For a <strong>10 MB polyglot source tree</strong> (after .gitignore filtering):</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Stage</th>
@@ -170,6 +175,7 @@
             </tr>
           </tbody>
         </table>
+</div>
         <p>For comparison, raw source → zstd -9 (no repomix) would yield ~2.5–3.3 MB. The repomix <code>--compress</code> step provides the dominant reduction because it is <em>semantic</em> — it understands code structure — whereas zstd is purely statistical/lexical.</p>
 
         <h3>2c. The Round-Trip</h3>
@@ -189,7 +195,8 @@
         <p>PPM is an adaptive statistical compression technique using Markov context models + arithmetic coding. PPMd (by Dmitry Shkarin) is the most practical implementation, used in RAR and 7-Zip.</p>
 
         <p><strong>PPMd vs. zstd on text/code</strong> (Large Text Compression Benchmark — enwik9, 1 GB Wikipedia XML):</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Compressor</th>
@@ -244,6 +251,7 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <p><strong>Key takeaway:</strong> PPMd achieves 15–25% better compression than zstd's maximum on text-heavy content, but at the cost of 5–10x slower decompression, higher memory requirements (1–2 GB vs. &lt;1 GB), and no streaming/dictionary support.</p>
 
@@ -316,7 +324,8 @@ clean:
 .PHONY: condense clean</code></pre>
 
         <h4>Why per-type strategies matter:</h4>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>File Type</th>
@@ -352,6 +361,7 @@ clean:
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>3d. Dictionary Training for Polyglot Repos</h3>
         <pre><code># Train a dictionary on your codebase's file samples
@@ -385,7 +395,8 @@ zstd -D code.dict -9 packed-output.xml</code></pre>
     <section id="summary">
       <h2>4. Summary: Optimal Pipelines by Use Case</h2>
       <div class="section-content">
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Use Case</th>
@@ -426,6 +437,7 @@ zstd -D code.dict -9 packed-output.xml</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
       </div>
     </section>
 

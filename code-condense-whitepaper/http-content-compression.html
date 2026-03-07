@@ -183,7 +183,8 @@
 
         <h3>Frame_Header_Descriptor</h3>
         <p>A single byte encoding multiple flags. Key fields:</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Bit(s)</th>
@@ -224,6 +225,7 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Window_Descriptor</h3>
         <p>Present only when <code>Single_Segment_Flag</code> is not set. Encodes the minimum required decoder buffer size as a power of two, with a mantissa for fine-grained control. The window size must be at least 1 KB and at most 8 MB for non-dictionary content.</p>
@@ -248,7 +250,8 @@
 
         <h3>Block_Header</h3>
         <p>A 3-byte value encoding two fields:</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Bit(s)</th>
@@ -274,6 +277,7 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Block Types</h3>
         <ul>
@@ -294,7 +298,8 @@
 
         <h3>Literals Section</h3>
         <p>The literals section header encodes the literals block type and associated size information:</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Literals_Block_Type</th>
@@ -325,6 +330,7 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Sequences Section</h3>
         <p>The sequences section encodes a series of commands, each consisting of:</p>
@@ -466,7 +472,8 @@
         </ul>
 
         <h3>Dictionary IDs</h3>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Range</th>
@@ -492,6 +499,7 @@
             </tr>
           </tbody>
         </table>
+</div>
       </div>
     </section>
 
@@ -501,7 +509,8 @@
 
         <h3>6.1. The 'application/zstd' Media Type</h3>
         <p>This document registers the <code>application/zstd</code> media type for Zstandard-compressed data:</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Field</th>
@@ -543,6 +552,7 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>6.2. Content Encoding</h3>
         <p>This document registers the "zstd" HTTP Content Encoding token in the IANA "HTTP Content Coding Registry". This encoding is suitable for use in the <code>Content-Encoding</code> and <code>Accept-Encoding</code> HTTP headers.</p>

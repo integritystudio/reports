@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "phases": {
+    "baseline": {
+      "date": "2026-02-16",
+      "grades": {
+        "capital_city": "A",
+        "holliday_lighting": "C",
+        "leora_research": "D",
+        "balloon-collective": "D",
+        "edgar_nadyne": "D",
+        "integrity-studio-ai": "D",
+        "trp-austin": "D",
+        "zoukmx": "D",
+        "ngo-market": "D",
+        "PerformanceTest": "D",
+        "skelton-woody": "D",
+        "sound-sight-tarot": "D"
+      }
+    },
+    "phase1": {
+      "date": "2026-02-16",
+      "grades": {
+        "balloon-collective": "B",
+        "capital_city": "B",
+        "edgar_nadyne": "C",
+        "holliday_lighting": "C",
+        "integrity-studio-ai": "B",
+        "leora_research": "B",
+        "ngo-market": "D",
+        "PerformanceTest": "B",
+        "skelton-woody": "B",
+        "sound-sight-tarot": "B",
+        "trp-austin": "B",
+        "zoukmx": "B"
+      }
+    },
+    "phase2": {
+      "date": "2026-02-16",
+      "grades": {
+        "balloon-collective": "A",
+        "capital_city": "A",
+        "edgar_nadyne": "A",
+        "holliday_lighting": "A",
+        "integrity-studio-ai": "A",
+        "leora_research": "A",
+        "ngo-market": "A",
+        "PerformanceTest": "A",
+        "skelton-woody": "A",
+        "sound-sight-tarot": "A",
+        "trp-austin": "A",
+        "zoukmx": "A"
+      }
+    }
+  },
+  "current_phase": "phase2"
+}

@@ -61,7 +61,8 @@
         <p>Traces are the most compressible OTEL signal. A typical span carries fixed-width identifiers (trace_id, span_id), repetitive resource attributes (service.name, host.name, sdk.version), repetitive span attributes (http.method, http.status_code, db.system), and timestamps as nanosecond-precision integers with small deltas.</p>
         <p><strong>Uncompressed size:</strong> ~500 bytes/span is a common planning estimate (Jaeger + Elasticsearch), though ClickHouse achieves ~80 bytes/span after column-oriented compression.</p>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Compressor</th>
@@ -97,11 +98,13 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Metrics</h3>
         <p>Metrics payloads consist of monotonically increasing timestamps (perfect for delta/DoubleDelta encoding), floating-point gauge values with small inter-sample deltas (ideal for Gorilla/XOR encoding), and repeated label sets.</p>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Compressor</th>
@@ -132,6 +135,7 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Logs</h3>
         <p>Logs are the least predictable signal. Freeform message bodies introduce entropy that resists compression, but structured fields (severity, resource attributes, scope) still compress well.</p>
@@ -146,7 +150,8 @@
       <div class="section-content">
         <p>Tested on representative OTLP protobuf payloads (mixed traces, metrics, logs; ~2 MB uncompressed batch):</p>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Compressor</th>
@@ -215,6 +220,7 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>The zstd Advantage for Telemetry</h3>
         <p>zstd wins on the <strong>ratio-per-CPU-cycle</strong> metric that matters most in telemetry pipelines:</p>
@@ -290,7 +296,8 @@
     ──[batch processor]──&gt; Exporter ──[OTLP/gRPC+zstd]──&gt; Backend
       ──[ClickHouse ZSTD(1) + DoubleDelta codecs]──&gt; Disk</code></pre>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Layer</th>
@@ -326,6 +333,7 @@
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Collector-Level Optimizations</h3>
         <p>Before data even hits compression, reduce what you send:</p>
@@ -381,7 +389,8 @@ ORDER BY (ServiceName, SpanName, toDateTime(Timestamp))</code></pre>
           Uncompressed: 3.40 TiB → On disk with ZSTD(1) + specialized codecs: 275 GiB → <strong>Effective ratio: ~12.7:1</strong>
         </div>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Codec</th>
@@ -427,6 +436,7 @@ ORDER BY (ServiceName, SpanName, toDateTime(Timestamp))</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Grafana Tempo</h3>
         <p>Tempo compresses trace blocks before pushing them to object storage (S3, GCS, Azure Blob). Recommended configuration:</p>
@@ -482,7 +492,8 @@ zstd -D otel-traces.dict payload.pb
 # Decompress with dictionary
 zstd -D otel-traces.dict -d payload.pb.zst</code></pre>
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Scenario</th>
@@ -508,6 +519,7 @@ zstd -D otel-traces.dict -d payload.pb.zst</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <div class="info-box">
           <strong>Recommendation:</strong> Dictionary training is most valuable for <strong>edge/IoT collectors</strong> sending small, frequent batches over constrained links. For gateway-tier collectors with large batches, skip dictionaries and invest in OTel Arrow instead.
@@ -519,7 +531,8 @@ zstd -D otel-traces.dict -d payload.pb.zst</code></pre>
       <h2>8. PPMd and Statistical Compressors on Structured Telemetry</h2>
       <div class="section-content">
 
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Compressor</th>
@@ -561,6 +574,7 @@ zstd -D otel-traces.dict -d payload.pb.zst</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <div class="warning-box">
           <strong>Verdict:</strong> PPMd and LZMA2 are <strong>archival-only</strong> choices for telemetry. Decompression at 5 MB/s is 300x slower than zstd — completely impractical for real-time pipeline hops or query-time storage backends. For structured telemetry in real-time pipelines, zstd remains the optimal choice.
@@ -573,7 +587,8 @@ zstd -D otel-traces.dict -d payload.pb.zst</code></pre>
       <div class="section-content">
 
         <h3>Decision Matrix</h3>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Scenario</th>
@@ -621,10 +636,12 @@ zstd -D otel-traces.dict -d payload.pb.zst</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <h3>Cost Impact Estimates</h3>
         <p>For a <strong>mid-size deployment</strong> generating 50 GB/day of raw (uncompressed) telemetry:</p>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Strategy</th>
@@ -660,6 +677,7 @@ zstd -D otel-traces.dict -d payload.pb.zst</code></pre>
             </tr>
           </tbody>
         </table>
+</div>
 
         <div class="info-box">
           <strong>Where compression really matters:</strong> Network egress and ingestion API costs at SaaS observability vendors ($0.10–$3.00/GB ingested) are where compression delivers 10–100x more savings than storage. At $1.50/GB ingest, going from 50 GB/day to 2 GB/day with OTel Arrow saves <strong>$26,280/yr</strong>.
@@ -790,7 +808,8 @@ service:
         </ul>
 
         <h3>A.5 Key Numbers to Remember</h3>
-        <table>
+        <div style="overflow-x:auto">
+<table>
           <thead>
             <tr>
               <th>Metric</th>
@@ -810,6 +829,7 @@ service:
             <tr><td>Bytes per span (Jaeger + ES, indexed)</td><td>~500 bytes</td></tr>
           </tbody>
         </table>
+</div>
 
         <p><em>Document prepared 2026-02-24. Compression ratios are approximate and vary with workload characteristics, attribute cardinality, and batch sizes. Always benchmark with representative production data before committing to a compression strategy.</em></p>
       </div>
