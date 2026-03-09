@@ -4,7 +4,7 @@
 **Latest Release:** v1.5.7 (Feb 19, 2025)
 **License:** Dual BSD / GPLv2
 **Language:** C (76.3%), C++ (13.7%), Shell (3.1%), Python (2.5%)
-**Stars:** 26.7k | **Forks:** 2.4k | **Contributors:** 380
+**Stars:** 26.7k (as of Feb 2026) | **Forks:** 2.4k | **Contributors:** 380
 
 ---
 

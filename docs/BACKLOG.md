@@ -34,21 +34,7 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-### A12. Dark mode `--secondary` contrast for remaining brands
-**Priority:** Moderate (WCAG 1.4.3)
-**Source:** Contrast readability audit (Feb 20)
-**Files:** `css/theme.css` dark mode section
-
-Brands without dark-mode `--secondary` overrides may fail WCAG AA (4.5:1) for links and h3 text on dark section backgrounds (`#1a1a2e`):
-- `balloon-collective`: `#c44569` → 3.58:1
-- `edgar-nadyne`: `#A0456E` → ~4.0:1
-- `zoukmx`: `#2d6a4f` → ~3.3:1
-- `performancetest`: no `--secondary` defined (inherits base `#0f766e` which gets dark override `#14b8a6` — OK)
-- `trp-austin`: `#2b6cb0` → 3.16:1 (mitigated by explicit dark CSS rules for `a` and `h3` targeting `#63b3ed`)
-
-**Fix:** Add `--secondary` dark-mode overrides in the `@media (prefers-color-scheme: dark)` block of `theme.css` for balloon-collective, edgar-nadyne, and zoukmx. TRP-Austin is partially mitigated.
-
-**Effort:** Low (3 variable additions)
+- [x] **A12.** Dark mode `--secondary` contrast for remaining brands — `balloon-collective: #f472b6`, `edgar-nadyne: #d4a0b8`, `zoukmx: #52b788` already added to dark mode block in theme.css (lines 1052–1092). All pass WCAG AA 4.5:1.
 
 ---
 
@@ -66,6 +52,82 @@ Several report pages use hardcoded inline CSS instead of the external `report-ba
 ---
 
 ## Open: Medium Priority
+
+### H10. Refactor AI Observability detail pages into theme system
+**Priority:** Medium (architecture consistency)
+**Source:** CSS architecture audit (Mar 9)
+**Files:**
+- `ai-observability/ai-observability-business-analysis.html`
+- `ai-observability/ai-observability-growth-plan.html`
+- `ai-observability/ai-observability-market-research-2025.html`
+- `ai-observability/ai-observability-product-strategy.html`
+- `ai-observability/ai-observability-website-content.html`
+- `ai-observability/ai-observability-marketing-materials.html`
+
+Six AI Observability detail pages use completely custom styling with embedded `<style>` blocks and do not integrate with the theme system. They lack: `data-brand` attribute, CSS base link (report/portal/competitor-base.css), `theme.css` link, and skip-link. This creates maintenance overhead and prevents them from benefiting from global theme/accessibility fixes.
+
+**Fix:** Add `data-brand="integrity-studio"` to html element, link `css/report-base.css` and `css/theme.css`, add skip-link, move embedded styles to external CSS, audit inline styles for WCAG AA contrast (4.5:1).
+
+**Effort:** Medium (6 files, per-file migration + verification)
+
+---
+
+### H11. Extract inline styles from 50 report files
+**Priority:** Medium (code quality, maintainability)
+**Source:** CSS architecture audit (Mar 9)
+**Files:** All report-level detail pages across 14 brand directories (50/64 HTML files)
+
+Report detail pages (but not index pages) extensively use `style=` attributes for hardcoded colors, layout overrides, box styling, and typography emphasis. This violates the documented guideline "no inline styles" and prevents theme system updates from affecting these pages. Inline styles include `overflow-x:auto` (acceptable), hardcoded hex colors (should use CSS variables), and layout adjustments.
+
+**Fix:** Audit inline styles by category; move layout/grid overrides to component CSS classes in `css/opportunity-components.css` or brand-specific layout files; replace hardcoded colors with CSS variable references (e.g., `style="color: #a8e6cf"` → `style="color: var(--accent)"`); update brand palettes if needed.
+
+**Effort:** High (50 files, manual audit + remediation)
+
+---
+
+### H12. Move embedded <style> blocks to external CSS
+**Priority:** Medium (maintainability)
+**Source:** CSS architecture audit (Mar 9)
+**Files:** 10 files with embedded styles:
+- 6× AI Observability detail pages (covered by H10)
+- `auto_refinance_rate_analysis.html`
+- `capital_city/competitor-analysis.html`
+- `integrity-studio-ai/competitor-analysis.html`
+- `integrity-studio-ai/integrity_studio_ai_opportunities_report.html`
+
+10 HTML files contain embedded `<style>` blocks (29–38 lines each in AI observability reports; 1–5 lines in others). Embedded styles are harder to maintain, cannot leverage CSS variables, and bypass the theme system.
+
+**Fix:** Extract style blocks to external CSS files (create new files per report section or add to `css/opportunity-components.css`). Link externally. For AI Observability, this is part of H10 (theme system refactor).
+
+**Effort:** Medium (4 files + H10 dependency)
+
+---
+
+### H13. Define missing CSS variables for generated reports
+**Priority:** Low (cosmetic, fallback to browser defaults)
+**Source:** CSS architecture audit (Mar 9)
+**Files:** `ai-observability/` reports
+
+AI Observability reports reference undefined CSS variables: `--light-blue`, `--primary-blue`, `--primary-teal` (not defined in theme.css). These fall back to browser defaults (color: unset), resulting in unstyled text. Primarily affects data visualization and styled callout boxes.
+
+**Fix:** Add these 3 variables to theme.css `:root` block with sensible defaults, or update AI Observability reports to use existing brand variables (e.g., `--primary`, `--secondary`, `--accent`).
+
+**Effort:** Low (3 variable definitions + audit)
+
+---
+
+### H14. Add report-base.css to ngo-market marketing plan
+**Priority:** Low (consistency)
+**Source:** CSS architecture audit (Mar 9)
+**Files:** `ngo-market/integrity-studio-marketing-plan.html`
+
+One file links custom `marketing-plan.css` instead of the standard CSS base architecture. It has `data-brand="ngo-market"` and `theme.css` but skips `report-base.css`. This works but is inconsistent with all other report pages.
+
+**Fix:** Replace custom CSS setup with standard base CSS link. Verify custom layout still works; move any overrides to `css/opportunity-components.css` or merged into theme.css.
+
+**Effort:** Low (single file, verify no regression)
+
+---
 
 ### T1. Create `content-translator` skill
 **Priority:** Medium
@@ -113,16 +175,7 @@ These two documents were produced by background research agents and were not inc
 
 ---
 
-### W4. Stale star/version counts in whitepaper documents
-**Priority:** Low
-**Source:** OTEL session quality report (Feb 24)
-**Files:** `code-condense-whitepaper/repomix_to_condense_with_additional_integrations.md`, `code-condense-whitepaper/zstd-condense-report.md`
-
-GitHub star counts (repomix 22.1k, zstd 26.7k, ast-grep 12.6k) and version numbers (zstd v1.5.7, ast-grep v0.41.0) are point-in-time snapshots from Feb 24, 2026. These will drift over time.
-
-**Fix:** Either remove specific counts or add a "as of Feb 2026" qualifier. Low priority — informational only.
-
-**Effort:** Low
+- [x] **W4.** Stale star/version counts — added "as of Feb 2026" qualifier to all star counts in `repomix_to_condense_with_additional_integrations.md` and `zstd-condense-report.md`.
 
 ---
 

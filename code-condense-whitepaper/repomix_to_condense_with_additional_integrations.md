@@ -35,7 +35,7 @@ Using Tree-sitter, repomix extracts structural signatures and strips function bo
 
 **Reported reduction:** ~70% token count reduction vs. full source. Combined with comment and empty-line removal, the total reduction from source → compressed repomix output is typically **75–85% fewer tokens**.
 
-**Source:** [Repomix Code Compression Guide](https://repomix.com/guide/code-compress), repomix GitHub repository (22.1k stars, actively maintained)
+**Source:** [Repomix Code Compression Guide](https://repomix.com/guide/code-compress), repomix GitHub repository (22.1k stars as of Feb 2026, actively maintained)
 
 ---
 
@@ -125,7 +125,7 @@ repomix --compress -o repo.xml
 
 ### 3b. ast-grep (Structural Code Search & Rewriting)
 
-**ast-grep** (12.6k GitHub stars, MIT license) is a Rust CLI tool for AST-based code structural search, lint, and rewriting. It uses Tree-sitter (the same parser Repomix uses for `--compress`).
+**ast-grep** (12.6k GitHub stars as of Feb 2026, MIT license) is a Rust CLI tool for AST-based code structural search, lint, and rewriting. It uses Tree-sitter (the same parser Repomix uses for `--compress`).
 
 **Relevance to compression pipelines:**
 
@@ -274,10 +274,10 @@ No production tool implements this full pipeline today, but the components exist
 
 - [Repomix documentation — Code Compression](https://repomix.com/guide/code-compress)
 - [Repomix configuration reference](https://repomix.com/guide/configuration)
-- [facebook/zstd — GitHub](https://github.com/facebook/zstd) (26.7k stars, v1.5.7)
+- [facebook/zstd — GitHub](https://github.com/facebook/zstd) (26.7k stars as of Feb 2026, v1.5.7)
 - [Zstandard benchmarks](https://facebook.github.io/zstd/#benchmarks)
 - [Matt Mahoney — Large Text Compression Benchmark](https://mattmahoney.net/dc/text.html)
-- [ast-grep/ast-grep — GitHub](https://github.com/ast-grep/ast-grep) (12.6k stars, v0.41.0)
+- [ast-grep/ast-grep — GitHub](https://github.com/ast-grep/ast-grep) (12.6k stars as of Feb 2026, v0.41.0)
 - [Wikipedia — Prediction by Partial Matching](https://en.wikipedia.org/wiki/Prediction_by_partial_matching)
 - [Repomix GitHub issues — compress/token discussions](https://github.com/yamadashy/repomix/issues?q=compress+token)
 
