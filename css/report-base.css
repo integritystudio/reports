@@ -414,9 +414,10 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
     .box-success { background: var(--color-dark-badge-success-bg, #1a3a2a); }
     .box-warning { background: var(--color-dark-badge-warning-bg, #3a3020); }
     .box-danger  { background: var(--color-dark-badge-danger-bg, #3a1a1a); }
-    .color-success { color: var(--color-dark-badge-success-text, #90dab0); }
-    .color-warning { color: var(--color-dark-badge-warning-text, #f5d060); }
-    .color-danger  { color: var(--color-dark-badge-danger-text, #f0a0a8); }
+    .color-success          { color: var(--color-dark-badge-success-text, #90dab0); }
+    .color-warning          { color: var(--color-dark-badge-warning-text, #f5d060); }
+    .color-danger           { color: var(--color-dark-badge-danger-text, #f0a0a8); }
+    .color-swot-opportunity { color: var(--color-dark-swot-opportunity, #c49fe8); }
     .bg-info    { background: var(--color-dark-surface-raised, #1e293b); }
     .bg-warning { background: var(--color-dark-warning-bg, #2a2210); }
 }
