@@ -307,3 +307,6 @@ tr:hover td { background: var(--surface2); }
     white-space: nowrap;
     border: 0;
 }
+
+/* Spacing utilities shared with report-base.css */
+.mb-sm { margin-bottom: var(--spacing-sm); }

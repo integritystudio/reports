@@ -408,4 +408,6 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
     .color-success { color: var(--color-dark-badge-success-text, #90dab0); }
     .color-warning { color: var(--color-dark-badge-warning-text, #f5d060); }
     .color-danger  { color: var(--color-dark-badge-danger-text, #f0a0a8); }
+    .bg-info    { background: var(--color-dark-surface-raised, #1e293b); }
+    .bg-warning { background: var(--color-dark-warning-bg, #2a2210); }
 }
