@@ -30,13 +30,13 @@ Built `~/.claude/skills/content-translator/SKILL.md` — 5-phase workflow: sourc
 
 ---
 
-### T5. Multi-language support beyond PT-BR
+### T5. Multi-language support beyond PT-BR — Done
 **Priority:** Medium
 **Source:** Readability audit (Feb 13)
 
-Ensure T1 skill accepts `--lang` parameter and externalizes locale-specific rules. Deferred until T1 is validated with PT-BR.
+Added locale conventions table (19 BCP-47 tags: pt-BR, pt-PT, es, es-MX, es-ES, fr, fr-CA, de, he, it, ja, zh-CN, zh-TW, ko, ar, nl, pl, sv, tr) to `content-translator` SKILL.md. Covers date formats, decimal separators, currency symbols, quote marks, and RTL handling (ar, he). Replaces two ad-hoc inline bullet points with a structured, extensible reference table. Phase 3 localization table also updated with per-locale examples.
 
-**Effort:** Medium
+**[DONE]**
 
 ---
 
@@ -65,19 +65,13 @@ Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). G
 
 ---
 
-### F7. CSS variable namespace consolidation
+### F7. CSS variable namespace consolidation — Done
 **Priority:** P4
 **Source:** Bugfix plan item #13 (Feb 15)
 
-Four parallel CSS variable namespaces:
-- Portal: `--color-primary-dark`, `--color-primary-medium`, `--color-primary-light`
-- Report: `--primary`, `--secondary`, `--accent`, `--light`, `--dark`, `--border`
-- Competitor: `--bg`, `--surface`, `--text`, `--accent`, `--accent2`
-- Holliday-lighting: `--surface`, `--ink`, `--glow`, custom tokens
+Added ASCII namespace reference table to `theme.css` documenting all four parallel namespaces (portal-base, report-base, competitor-base, holliday portal-layout). Added `--color-*` bridge aliases to `report-base.css` and `competitor-base.css` so cross-namespace utilities can reference a consistent `--color-*` convention without renaming any existing variables. Portal-base needs no bridge (already uses `--color-*` natively). `--color-surface` intentionally scoped to competitor-base only (card surface concept vs. page background in report-base). Zero regression risk — purely additive.
 
-Unifying would reduce cognitive overhead but risks breaking existing pages.
-
-**Effort:** High (cross-cutting refactor with regression risk)
+**[DONE]**
 
 ---
 
@@ -100,7 +94,9 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Mar 9 — Backlog Implementer | A11, W2, W3, F5 (4 items) |
 | Mar 9 — Backlog Implementer (2) | H11-P3-A, H11-P3-B (2 items) |
 | Mar 9 — Backlog Implementer (3) | H11-P4, T1 (2 items) |
-| **Total** | **78 completed, 1 open** |
+| Mar 9 — Backlog Implementer (4) | T5 (1 item) |
+| Mar 9 — Backlog Implementer (5) | F7 (1 item) |
+| **Total** | **80 completed, 0 open** |
 
 ### Scorecard (Phase 2 — Feb 16)
 
