@@ -34,8 +34,23 @@
 /* ==========================================================================
    1. BRAND PALETTES
    Color variables per client, activated via data-brand on <html>.
-   Portal vars: --color-primary-dark, --color-primary-medium, --color-primary-light
-   Report vars: --primary, --secondary, --accent, --light, --dark, --border
+
+   NAMESPACE MAP — each page type loads exactly one base stylesheet:
+   ┌──────────────────┬───────────────────────┬────────────────────────────────────────────────────────────┐
+   │ Page type        │ Base sheet            │ Core variables                                             │
+   ├──────────────────┼───────────────────────┼────────────────────────────────────────────────────────────┤
+   │ Portal / hub     │ portal-base.css       │ --color-bg, --color-bg-secondary, --color-text-primary,    │
+   │                  │                       │ --color-text-secondary, --color-primary-dark/medium/light,  │
+   │                  │                       │ --color-border, --color-card-bg                            │
+   ├──────────────────┼───────────────────────┼────────────────────────────────────────────────────────────┤
+   │ Research report  │ report-base.css       │ --primary, --secondary, --accent, --light, --dark, --border │
+   ├──────────────────┼───────────────────────┼────────────────────────────────────────────────────────────┤
+   │ Competitor       │ competitor-base.css   │ --bg, --surface, --text, --text-muted, --accent, --accent2  │
+   ├──────────────────┼───────────────────────┼────────────────────────────────────────────────────────────┤
+   │ Holliday portal  │ portal-layout.css     │ --surface, --surface-raised, --ink, --ink-muted,            │
+   │ (bespoke)        │ (+ portal-base.css)   │ --ink-faint, --glow, --glow-strong, --border-light          │
+   └──────────────────┴───────────────────────┴────────────────────────────────────────────────────────────┘
+   Cross-namespace --color-* bridge aliases are defined at the bottom of each base sheet's :root block.
    ========================================================================== */
 
 /* --- Hub (root index.html) --- */

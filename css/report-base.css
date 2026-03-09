@@ -53,6 +53,13 @@
     --color-print-border: #ddd;
     --grid-cell-min: 200px;
     --spacing-nested-details-y: 0.6rem;
+    /* --color-* bridge aliases — aligns with portal-base and competitor-base naming convention */
+    --color-primary: var(--primary);
+    --color-secondary: var(--secondary);
+    --color-accent: var(--accent);
+    --color-surface: var(--light);
+    --color-on-surface: var(--dark);
+    --color-border-default: var(--border);
 }
 
 @media (prefers-color-scheme: dark) {
