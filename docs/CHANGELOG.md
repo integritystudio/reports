@@ -10,7 +10,7 @@ Source: `docs/BACKLOG.md` item H11 (Phase 2)
 
 | Item | Description | Commit |
 |------|-------------|--------|
-| H11 Phase 2 | Added 24 utility classes to `report-base.css` (spacing: `.mt-xs/sm/md/lg`, `.mb-sm/md`, `.p-sm/md`, `.pl-md`, `.nested-list`, `.nested-list-sm`; color: `.bg-info`, `.bg-warning`, `.box-success`, `.box-warning`, `.color-success/warning/danger`, `.text-white/primary/muted/sm`; layout: `.hidden`, `.w-full`). Replaced 150+ inline styles across 37 HTML files. Extracted SWOT hardcoded hex colors in edgar_nadyne (6 files) to semantic classes. | pending |
+| H11 Phase 2 | Added 25 utility classes to `report-base.css` (spacing: `.mt-xs/sm/md/lg`, `.mb-sm/md`, `.p-sm/md`, `.pl-md`, `.nested-list`, `.nested-list-sm`, `.nested-list-xs`; color: `.bg-info`, `.bg-warning`, `.box-success`, `.box-warning`, `.color-success/warning/danger`, `.text-white/primary/muted/sm`; layout: `.hidden`, `.w-full`). Replaced 150+ inline styles across 37 HTML files. Extracted SWOT hardcoded hex colors in edgar_nadyne (6 files) to semantic classes. Fixed `nested-list+p-sm` padding conflict → `.nested-list-xs`. | `7f1847d`, `e054ddf` |
 
 ---
 
