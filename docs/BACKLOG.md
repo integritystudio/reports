@@ -99,7 +99,8 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Mar 9 — CSS Refactor & Theme System | A12, A13, H10, H12, H13, H14, W4 (7 items) |
 | Mar 9 — Backlog Implementer | A11, W2, W3, F5 (4 items) |
 | Mar 9 — Backlog Implementer (2) | H11-P3-A, H11-P3-B (2 items) |
-| **Total** | **76 completed, 3 open** |
+| Mar 9 — Backlog Implementer (3) | H11-P4, T1 (2 items) |
+| **Total** | **78 completed, 1 open** |
 
 ### Scorecard (Phase 2 — Feb 16)
 

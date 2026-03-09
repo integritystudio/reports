@@ -81,6 +81,8 @@
         --color-dark-badge-danger-text: #f0a0a8;
         --color-dark-badge-info-bg: #1a2a35;
         --color-dark-badge-info-text: #88cce0;
+        --color-dark-swot-opportunity: #c49fe8;
+        --color-dark-swot-opportunity-bg: #2a1a3a;
     }
     body { background: var(--color-dark-body-bg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     section, .executive-summary, #toc { background: var(--color-dark-surface); }
@@ -400,9 +402,11 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
 .nested-list-xs { margin: 0; padding-left: var(--spacing-sm); }
 
 /* Semantic box variants (SWOT, status cards) — simpler than .warning-box/.highlight-box which add borders */
-.box-success { background: var(--color-badge-success-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
-.box-warning { background: var(--color-warning-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
-.box-danger  { background: var(--color-badge-danger-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
+.box-success          { background: var(--color-badge-success-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
+.box-warning          { background: var(--color-warning-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
+.box-danger           { background: var(--color-badge-danger-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
+.box-info             { background: var(--color-info-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
+.box-swot-opportunity { background: var(--color-swot-opportunity-bg, var(--color-info-bg)); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
 
 /* Text color semantics */
 .color-success           { color: var(--color-badge-success-text); }
@@ -411,9 +415,11 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
 .color-swot-opportunity  { color: var(--color-swot-opportunity, var(--primary)); }
 
 @media (prefers-color-scheme: dark) {
-    .box-success { background: var(--color-dark-badge-success-bg, #1a3a2a); }
-    .box-warning { background: var(--color-dark-badge-warning-bg, #3a3020); }
-    .box-danger  { background: var(--color-dark-badge-danger-bg, #3a1a1a); }
+    .box-success          { background: var(--color-dark-badge-success-bg, #1a3a2a); }
+    .box-warning          { background: var(--color-dark-badge-warning-bg, #3a3020); }
+    .box-danger           { background: var(--color-dark-badge-danger-bg, #3a1a1a); }
+    .box-info             { background: var(--color-dark-badge-info-bg, #1a2a35); }
+    .box-swot-opportunity { background: var(--color-dark-swot-opportunity-bg, #2a1a3a); }
     .color-success          { color: var(--color-dark-badge-success-text, #90dab0); }
     .color-warning          { color: var(--color-dark-badge-warning-text, #f5d060); }
     .color-danger           { color: var(--color-dark-badge-danger-text, #f0a0a8); }
