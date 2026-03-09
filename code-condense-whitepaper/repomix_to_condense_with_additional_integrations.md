@@ -61,7 +61,7 @@ Repomix output is structured text (XML/Markdown) with high redundancy — repeat
 - zstd -1: ratio 2.896, 510 MB/s compress, 1550 MB/s decompress
 - zstd --fast=1: ratio 2.439, 545 MB/s compress, 1850 MB/s decompress
 
-Source: [facebook/zstd README](https://github.com/facebook/zstd), [zstd.net benchmarks](https://facebook.github.io/zstd/#benchmarks); empirical measurements on integritystudio.io reports repo (233 HTML/CSS/MD files, 4.3 MB source)
+Source: [facebook/zstd README](https://github.com/facebook/zstd), [zstd.net benchmarks](https://facebook.github.io/zstd/#benchmarks); empirical measurements on integritystudio.io reports repo (233 HTML/CSS/MD files, 4.1 MB source)
 
 ### 2b. Combined Pipeline Numbers
 
@@ -69,7 +69,7 @@ Source: [facebook/zstd README](https://github.com/facebook/zstd), [zstd.net benc
 
 | Stage | Size | Cumulative Reduction |
 |---|---|---|
-| Raw source files | 4.2 MB | — |
+| Raw source files | 4.1 MB | — |
 | repomix lossless | 3.9 MB | 6% |
 | repomix `--compress` | 3.6 MB | 15% |
 | lossless + zstd -1 | 1.05 MB | 75% |
