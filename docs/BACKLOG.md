@@ -14,9 +14,11 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 **Phase 1 (Mar 9):** Extended `section h2, #toc h2` CSS selector; removed nav#toc and h2 redundant inline styles (29 instances); replaced `color: white` with `color: var(--color-white)` (11 files). ~290 inline styles remain (was ~367, excluding overflow-x:auto).
 **Phase 2 (Mar 9):** Added 24 utility classes to `report-base.css` (`.mt-xs`, `.mt-sm`, `.mt-md`, `.mb-sm`, `.p-md`, `.nested-list`, `.nested-list-sm`, `.box-success`, `.box-warning`, `.color-success`, `.color-warning`, `.color-danger`, etc.). Replaced 150+ inline styles across 37 files. Extracted hardcoded SWOT hex colors (#d4edda, #fff3cd, #155724, #856404, #721c24) to semantic CSS classes in edgar_nadyne files.
 
-**Remaining (~100 inline styles):** Table column widths (`width: 5%/15%/35%` etc.), JS-toggled `display:none`, and complex multi-property combos without clean variable equivalents. See Phase 3 for further extraction.
+**Phase 3 (Mar 9):** Added `--spacing-swot-gap`, `--spacing-list-sm` tokens and `.text-accent`, `.mt-detail`, `.mb-swot`, `.mb-swot` utilities. Extracted 30 more inline styles from 6 edgar_nadyne files (SWOT margins, label spacing, accent link colors).
 
-**Effort:** Medium (Phase 3 can address remaining widths and JS state)
+**Remaining (~70 inline styles):** Table column widths (`width: 5%/15%/35%` etc.), JS-toggled `display:none`, per-brand hex colors on SWOT opportunity/recommendation headings (#004085, #4a1a6b, #6B2D5B), and `margin-top: 5px` px-unit values.
+
+**Effort:** Medium (table widths need layout-specific handling; px values need px→rem decision)
 
 ---
 
@@ -55,23 +57,11 @@ Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). G
 
 ---
 
-### H11-P3-A. Replace `.nested-list-sm` magic number with CSS variable
-**Priority:** P3 (low impact, code quality)
-**Source:** H11 Phase 2 code review (Mar 9, fd63d0f)
-
-`css/report-base.css` line 393: `.nested-list-sm { margin: 0; padding-left: 1.25rem; }` hardcodes `1.25rem` instead of using a CSS variable like all other utilities. Violates project's token-only convention. Options: (1) add `--spacing-list-sm: 1.25rem` and use it, or (2) accept the minor indent difference and use `--spacing-md` (1.5rem).
-
-**Effort:** Low (trivial refactor)
+### ~~H11-P3-A. Replace `.nested-list-sm` magic number with CSS variable~~ [Done — df295d8]
 
 ---
 
-### H11-P3-B. Complete SWOT color extraction in edgar_nadyne
-**Priority:** P3 (code quality, deferred until Phase 2 closure)
-**Source:** H11 Phase 2 code review (Mar 9)
-
-Two `<p>` tags with residual hardcoded `color: #721c24` remain in edgar_nadyne files: `austin_dance_market_analysis.html:174` and `analise_mercado_austin.html:175`. Phase 2 extracted most SWOT colors but left these as part of larger `highlight-box` combos. Replace with `class="color-danger"` and remove hardcoded color.
-
-**Effort:** Low (2-file refactor)
+### ~~H11-P3-B. Complete SWOT color extraction in edgar_nadyne~~ [Done — 30423e4]
 
 ---
 
@@ -118,7 +108,8 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Feb 18 — Accessibility Audit | A1-A10 (10 items) |
 | Mar 9 — CSS Refactor & Theme System | A12, A13, H10, H12, H13, H14, W4 (7 items) |
 | Mar 9 — Backlog Implementer | A11, W2, W3, F5 (4 items) |
-| **Total** | **72 completed, 4 open** |
+| Mar 9 — Backlog Implementer (2) | H11-P3-A, H11-P3-B (2 items) |
+| **Total** | **74 completed, 3 open** |
 
 ### Scorecard (Phase 2 — Feb 16)
 
