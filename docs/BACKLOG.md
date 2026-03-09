@@ -103,16 +103,7 @@ Report detail pages (but not index pages) extensively use `style=` attributes fo
 
 ---
 
-### H13. Define missing CSS variables for generated reports
-**Priority:** Low (cosmetic, fallback to browser defaults)
-**Source:** CSS architecture audit (Mar 9)
-**Files:** `ai-observability/` reports
-
-AI Observability reports reference undefined CSS variables: `--light-blue`, `--primary-blue`, `--primary-teal` (not defined in theme.css). These fall back to browser defaults (color: unset), resulting in unstyled text. Primarily affects data visualization and styled callout boxes.
-
-**Fix:** Add these 3 variables to theme.css `:root` block with sensible defaults, or update AI Observability reports to use existing brand variables (e.g., `--primary`, `--secondary`, `--accent`).
-
-**Effort:** Low (3 variable definitions + audit)
+- [x] **H13.** Missing CSS variables for ai-observability — added `--primary-blue`, `--primary-teal`, `--light-blue`, `--light-teal` to `[data-brand="integrity-studio"]` in theme.css. Only `ai-observability-growth-plan.html` uses them; currently defined inline (overrides theme.css), will be available after H10 migration.
 
 ---
 
