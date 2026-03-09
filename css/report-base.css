@@ -53,11 +53,15 @@
     --color-print-border: #ddd;
     --grid-cell-min: 200px;
     --spacing-nested-details-y: 0.6rem;
-    /* --color-* bridge aliases — aligns with portal-base and competitor-base naming convention */
+    /* --color-* bridge aliases — aligns with portal-base and competitor-base naming convention.
+     * --color-primary/secondary/accent are intentionally not dark-mode overridden (brand hues are stable).
+     * --color-bg-page uses -page suffix to avoid collision with portal-base's --color-bg.
+     * Portal-base and portal-layout already use --color-* naming natively (no bridge needed). */
     --color-primary: var(--primary);
     --color-secondary: var(--secondary);
     --color-accent: var(--accent);
-    --color-surface: var(--light);
+    --color-bg-page: var(--light);
+    --color-text-primary: var(--dark);
     --color-on-surface: var(--dark);
     --color-border-default: var(--border);
 }

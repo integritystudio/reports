@@ -50,7 +50,10 @@
    │ Holliday portal  │ portal-layout.css     │ --surface, --surface-raised, --ink, --ink-muted,            │
    │ (bespoke)        │ (+ portal-base.css)   │ --ink-faint, --glow, --glow-strong, --border-light          │
    └──────────────────┴───────────────────────┴────────────────────────────────────────────────────────────┘
-   Cross-namespace --color-* bridge aliases are defined at the bottom of each base sheet's :root block.
+   Cross-namespace --color-* bridge aliases are defined in report-base.css and competitor-base.css.
+   Portal-base and portal-layout already use --color-* naming natively; no bridge needed there.
+   Note: --color-bg-page (not --color-bg) is used in both bridges to avoid collision with
+   portal-base's --color-bg. --color-surface is scoped to competitor-base only (card surface concept).
    ========================================================================== */
 
 /* --- Hub (root index.html) --- */
