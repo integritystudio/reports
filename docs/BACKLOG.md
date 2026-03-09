@@ -53,6 +53,28 @@ Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). G
 
 ## Deferred (P3-P4)
 
+---
+
+### H11-P3-A. Replace `.nested-list-sm` magic number with CSS variable
+**Priority:** P3 (low impact, code quality)
+**Source:** H11 Phase 2 code review (Mar 9, fd63d0f)
+
+`css/report-base.css` line 393: `.nested-list-sm { margin: 0; padding-left: 1.25rem; }` hardcodes `1.25rem` instead of using a CSS variable like all other utilities. Violates project's token-only convention. Options: (1) add `--spacing-list-sm: 1.25rem` and use it, or (2) accept the minor indent difference and use `--spacing-md` (1.5rem).
+
+**Effort:** Low (trivial refactor)
+
+---
+
+### H11-P3-B. Complete SWOT color extraction in edgar_nadyne
+**Priority:** P3 (code quality, deferred until Phase 2 closure)
+**Source:** H11 Phase 2 code review (Mar 9)
+
+Two `<p>` tags with residual hardcoded `color: #721c24` remain in edgar_nadyne files: `austin_dance_market_analysis.html:174` and `analise_mercado_austin.html:175`. Phase 2 extracted most SWOT colors but left these as part of larger `highlight-box` combos. Replace with `class="color-danger"` and remove hardcoded color.
+
+**Effort:** Low (2-file refactor)
+
+---
+
 ### F6. Hub layout monotony
 **Priority:** P4
 **Source:** Bugfix plan item #12 (Feb 15)
