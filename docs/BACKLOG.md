@@ -107,16 +107,7 @@ Report detail pages (but not index pages) extensively use `style=` attributes fo
 
 ---
 
-### H14. Add report-base.css to ngo-market marketing plan
-**Priority:** Low (consistency)
-**Source:** CSS architecture audit (Mar 9)
-**Files:** `ngo-market/integrity-studio-marketing-plan.html`
-
-One file links custom `marketing-plan.css` instead of the standard CSS base architecture. It has `data-brand="ngo-market"` and `theme.css` but skips `report-base.css`. This works but is inconsistent with all other report pages.
-
-**Fix:** Replace custom CSS setup with standard base CSS link. Verify custom layout still works; move any overrides to `css/opportunity-components.css` or merged into theme.css.
-
-**Effort:** Low (single file, verify no regression)
+- [x] **H14.** Add report-base.css to ngo-market marketing plan — added `../css/report-base.css` link before `marketing-plan.css` in `integrity-studio-marketing-plan.html`; added `max-width: none; padding: 0; margin: 0` override to `.container` in `marketing-plan.css` to prevent report-base layout conflict with sidebar.
 
 ---
 
