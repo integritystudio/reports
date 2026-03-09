@@ -28,7 +28,7 @@ Traces are the most compressible OTEL signal. A typical span carries:
 
 | Compressor | Ratio | Notes |
 |---|---|---|
-| gzip -6 | 3:1 -- 5:1 | Baseline; required by OTLP spec |
+| gzip -6 | 3:1 -- 5:1 | Baseline; OTLP servers must support gzip (clients may use any supported algorithm) |
 | zstd -1 | 4:1 -- 6:1 | Default level; ~2x faster than gzip |
 | zstd -9 | 5:1 -- 7:1 | Balanced; negligible decompression penalty |
 | OTel Arrow + zstd | 7:1 -- 12:1 | Columnar encoding; best-in-class |

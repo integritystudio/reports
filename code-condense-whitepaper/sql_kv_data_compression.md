@@ -31,7 +31,7 @@ PostgreSQL uses TOAST (The Oversized-Attribute Storage Technique) to compress an
 |---|---|---|
 | Compression ratio | ~2.23x | ~2.07x |
 | Compression speed | Baseline | **5x faster** (takes ~20% of pglz time) |
-| Decompression speed | Baseline | **~60-70% faster** |
+| Compression speed under parallel load | Baseline | **~60-70% faster** (parallel compression; SELECT impact is ~20% — see "Query time impact") |
 | Query time impact | Baseline | **20% faster** queries |
 | Full benchmark speedup | -- | **37.32% faster** end-to-end |
 | CPU overhead | 2x that of LZ4 | Baseline |

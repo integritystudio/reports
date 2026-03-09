@@ -19,18 +19,16 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-## Open: Accessibility (Remaining)
+## Done: Accessibility (Remaining)
 
-### A11. Report-level external links missing new-window indicator
-**Priority:** Moderate (WCAG 3.2.5 best practice)
-**Source:** Code review finding H1 (Feb 18)
-**Files:** All `competitor-analysis.html` and `*_research.html` files
+- [x] **A11.** Report-level external links missing new-window indicator — strong_towns (61 links) *(Moderate, WCAG 3.2.5)*
 
-233 `target="_blank"` links in report-level HTML files lack `(opens in new tab)` sr-only text. The `.sr-only` class is defined in `portal-base.css` but not in `report-base.css` or `competitor-base.css`.
+---
 
-**Fix:** Add `.sr-only` to `report-base.css` and `competitor-base.css`, then add sr-only spans to report-level external links.
+## Done: Medium Priority (Mar 9)
 
-**Effort:** High (233 links across ~30 files)
+- [x] **W2.** Whitepaper pipeline estimates replaced with empirical benchmarks (Mar 2026) *(Medium)*
+- [x] **F5.** Distinctive typefaces — DM Sans (portals/competitor), Source Serif 4 (reports) *(P3)*
 
 ---
 
@@ -71,19 +69,6 @@ Ensure T1 skill accepts `--lang` parameter and externalizes locale-specific rule
 
 ---
 
-### W2. Whitepaper pipeline estimates lack empirical benchmarks
-**Priority:** Medium
-**Source:** OTEL session quality report (Feb 24), hallucination score 0.18
-**Files:** `code-condense-whitepaper/repomix_to_condense_with_additional_integrations.md` (lines 48–77), `code-condense-whitepaper/README.md` (key-findings table)
-
-The "Combined Pipeline Numbers" table (10 MB source tree → repomix → zstd) and the "Estimated zstd ratios on repomix output" table are modeled projections, not empirical measurements. The README key-findings table propagates these estimates. Should be validated by running actual benchmarks on a representative polyglot repo (e.g., this reports repo or repomix's own codebase).
-
-**Fix:** Run `repomix` on a real repo, measure token counts at each stage, compress with `zstd -1/-9/--ultra -22`, record actual sizes, and replace modeled estimates with measured data. Update README table to match.
-
-**Effort:** Medium (scripting + measurement + writeup)
-
----
-
 ### W3. OTEL and SQL/KV whitepaper documents not quality-evaluated
 **Priority:** Medium
 **Source:** OTEL session quality report (Feb 24)
@@ -109,16 +94,6 @@ Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). G
 ---
 
 ## Deferred (P3-P4)
-
-### F5. Distinctive typefaces per content type
-**Priority:** P3
-**Source:** Bugfix plan item #11 (Feb 15)
-
-All base CSS files use the same generic system font stack. Consider DM Sans for portals, Source Serif Pro for reports. Related to completed D2 (variable consolidation); this is about introducing new typefaces.
-
-**Effort:** Medium
-
----
 
 ### F6. Hub layout monotony
 **Priority:** P4
@@ -162,7 +137,8 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Feb 16 — OTEL Improvement Phase 2 | F8-F12 (5 items) |
 | Feb 18 — Accessibility Audit | A1-A10 (10 items) |
 | Mar 9 — CSS Refactor & Theme System | A12, A13, H10, H12, H13, H14, W4 (7 items) |
-| **Total** | **68 completed, 7 open** |
+| Mar 9 — Backlog Implementer | A11, W2, F5 (3 items) |
+| **Total** | **71 completed, 6 open** |
 
 ### Scorecard (Phase 2 — Feb 16)
 
