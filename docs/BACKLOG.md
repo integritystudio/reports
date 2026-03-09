@@ -57,14 +57,6 @@ Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). G
 
 ---
 
-### ~~H11-P3-A. Replace `.nested-list-sm` magic number with CSS variable~~ [Done — df295d8]
-
----
-
-### ~~H11-P3-B. Complete SWOT color extraction in edgar_nadyne~~ [Done — 30423e4]
-
----
-
 ### F6. Hub layout monotony
 **Priority:** P4
 **Source:** Bugfix plan item #12 (Feb 15)
@@ -109,7 +101,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Mar 9 — CSS Refactor & Theme System | A12, A13, H10, H12, H13, H14, W4 (7 items) |
 | Mar 9 — Backlog Implementer | A11, W2, W3, F5 (4 items) |
 | Mar 9 — Backlog Implementer (2) | H11-P3-A, H11-P3-B (2 items) |
-| **Total** | **74 completed, 3 open** |
+| **Total** | **76 completed, 3 open** |
 
 ### Scorecard (Phase 2 — Feb 16)
 

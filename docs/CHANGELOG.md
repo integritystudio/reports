@@ -4,6 +4,18 @@ All completed backlog items, organized by session.
 
 ---
 
+## March 9, 2026 — Backlog Implementer Session 3
+
+Source: `docs/BACKLOG.md` items H11-P3-A, H11-P3-B
+
+| Item | Description | Commit |
+|------|-------------|--------|
+| H11-P3-A | Replace `.nested-list-sm` magic number with CSS variable — added `--spacing-list-sm: 1.25rem` token to `theme.css` and replaced hardcoded padding value in `.nested-list-sm` | `df295d8` |
+| H11-P3-B | Complete SWOT color extraction in edgar_nadyne — replaced 2 hardcoded `#721c24` color + margin inline styles with `class="color-danger mt-xs"` in austin_dance_market_analysis.html and analise_mercado_austin.html | `30423e4` |
+| H11 Phase 3 | Extract 30 inline styles to utility classes — added `--spacing-swot-gap` token; added `.text-accent`, `.mt-detail`, `.mb-swot`, `.box-danger`, `.text-lg` utilities to report-base.css. Extracted SWOT margins, label spacing, accent link colors, font sizes across 8 edgar_nadyne files. Fixed `.mb-swot` shorthand margin issue post-review | `f9e54cd`, `d5713b7` |
+
+---
+
 ## March 9, 2026 — Backlog Implementer Session 2
 
 Source: `docs/BACKLOG.md` item H11 (Phase 2)
