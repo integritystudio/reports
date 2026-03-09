@@ -85,7 +85,7 @@
     body { background: var(--color-dark-body-bg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     section, .executive-summary, #toc { background: var(--color-dark-surface); }
     .executive-summary, .executive-summary h2, .executive-summary p { background: var(--color-dark-surface); color: var(--color-text-body); }
-    section h2 { background: var(--color-dark-surface-raised); }
+    section h2, #toc h2 { background: var(--color-dark-surface-raised); }
     th { background: var(--color-dark-th-bg); color: var(--color-text-secondary); }
     td { background: var(--color-dark-surface); color: var(--color-text-body); }
     tr:hover td { background: var(--color-dark-hover); }
@@ -168,7 +168,7 @@ section, #toc {
     box-shadow: var(--shadow-sm);
     overflow: hidden;
 }
-section h2 {
+section h2, #toc h2 {
     background: var(--primary);
     color: var(--color-white);
     padding: var(--spacing-sm) var(--spacing-md);
@@ -321,7 +321,7 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
     header .subtitle { font-size: var(--font-size-sm); }
     .container { padding: var(--spacing-sm); }
     .section-content { padding: var(--spacing-sm); }
-    section h2 { font-size: var(--font-size-h3); padding: var(--spacing-table-cell) var(--spacing-sm); }
+    section h2, #toc h2 { font-size: var(--font-size-h3); padding: var(--spacing-table-cell) var(--spacing-sm); }
     .stat-grid { grid-template-columns: repeat(2, 1fr); }
     .contact-grid { grid-template-columns: 1fr; }
     .two-col { grid-template-columns: 1fr; }

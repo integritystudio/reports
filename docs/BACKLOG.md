@@ -28,6 +28,7 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 ## Done: Medium Priority (Mar 9)
 
 - [x] **W2.** Whitepaper pipeline estimates replaced with empirical benchmarks (Mar 2026) *(Medium)*
+- [x] **W3.** OTEL and SQL/KV whitepapers fact-checked; corrected 2 inaccuracies (OTLP gzip framing, PostgreSQL LZ4 60-70% label) *(Medium)*
 - [x] **F5.** Distinctive typefaces — DM Sans (portals/competitor), Source Serif 4 (reports) *(P3)*
 
 ---
@@ -66,19 +67,6 @@ Build a reusable skill for translating HTML reports with 5 phases: source extrac
 Ensure T1 skill accepts `--lang` parameter and externalizes locale-specific rules. Deferred until T1 is validated with PT-BR.
 
 **Effort:** Medium
-
----
-
-### W3. OTEL and SQL/KV whitepaper documents not quality-evaluated
-**Priority:** Medium
-**Source:** OTEL session quality report (Feb 24)
-**Files:** `code-condense-whitepaper/otel_telemetry_data_compression.md`, `code-condense-whitepaper/sql_kv_data_compression.md`
-
-These two documents were produced by background research agents and were not included in the LLM-as-Judge evaluation (only 5 of 7 files were scored). They should be fact-checked for the same hallucination patterns found in the other documents: unsourced benchmark numbers, invented configuration schemas, and overreaching claims.
-
-**Fix:** Run `/otel-session-summary` targeting these files specifically, or manually verify key claims (ClickHouse codec ratios, RocksDB per-level config, OTel Arrow bandwidth reduction, PostgreSQL TOAST LZ4 benchmarks) against primary sources.
-
-**Effort:** Medium (verification pass)
 
 ---
 
@@ -137,8 +125,8 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Feb 16 — OTEL Improvement Phase 2 | F8-F12 (5 items) |
 | Feb 18 — Accessibility Audit | A1-A10 (10 items) |
 | Mar 9 — CSS Refactor & Theme System | A12, A13, H10, H12, H13, H14, W4 (7 items) |
-| Mar 9 — Backlog Implementer | A11, W2, F5 (3 items) |
-| **Total** | **71 completed, 6 open** |
+| Mar 9 — Backlog Implementer | A11, W2, W3, F5 (4 items) |
+| **Total** | **72 completed, 5 open** |
 
 ### Scorecard (Phase 2 — Feb 16)
 
