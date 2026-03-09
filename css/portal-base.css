@@ -93,7 +93,7 @@
 }
 
 body {
-    font-family: var(--font-sans);
+    font-family: var(--font-portal, var(--font-sans));
     background-color: var(--color-bg, #ffffff);
     color: var(--color-text-primary, #1a1a1a);
     line-height: var(--line-height-base);
