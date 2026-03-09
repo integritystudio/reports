@@ -8,17 +8,15 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-### H11. Extract inline styles from 50 report files (Phase 2 done)
+### H11. Extract inline styles from 50 report files — Done (Phase 4)
 **Priority:** Medium (code quality, maintainability)
 **Source:** CSS architecture audit (Mar 9)
 **Phase 1 (Mar 9):** Extended `section h2, #toc h2` CSS selector; removed nav#toc and h2 redundant inline styles (29 instances); replaced `color: white` with `color: var(--color-white)` (11 files). ~290 inline styles remain (was ~367, excluding overflow-x:auto).
-**Phase 2 (Mar 9):** Added 24 utility classes to `report-base.css` (`.mt-xs`, `.mt-sm`, `.mt-md`, `.mb-sm`, `.p-md`, `.nested-list`, `.nested-list-sm`, `.box-success`, `.box-warning`, `.color-success`, `.color-warning`, `.color-danger`, etc.). Replaced 150+ inline styles across 37 files. Extracted hardcoded SWOT hex colors (#d4edda, #fff3cd, #155724, #856404, #721c24) to semantic CSS classes in edgar_nadyne files.
+**Phase 2 (Mar 9):** Added 24 utility classes to `report-base.css`. Replaced 150+ inline styles across 37 files. Extracted hardcoded SWOT hex colors to semantic CSS classes in edgar_nadyne files.
+**Phase 3 (Mar 9):** Added spacing tokens and SWOT utilities. Extracted 30 more inline styles from 6 edgar_nadyne files.
+**Phase 4 (Mar 9):** Added `--color-swot-opportunity` token to edgar-nadyne brand and `.color-swot-opportunity` utility (with dark mode override). Replaced `#4a1a6b`/`#6B2D5B` heading colors in artist profile files with `.color-swot-opportunity`/`.text-primary`. Replaced `margin-top: 5px` with `.mt-xs` in leora dashboards. Remaining: table column widths and `overflow-x:auto` wrappers intentionally left as-is (layout-critical, not extractable to shared utilities).
 
-**Phase 3 (Mar 9):** Added `--spacing-swot-gap`, `--spacing-list-sm` tokens and `.text-accent`, `.mt-detail`, `.mb-swot`, `.mb-swot` utilities. Extracted 30 more inline styles from 6 edgar_nadyne files (SWOT margins, label spacing, accent link colors).
-
-**Remaining (~70 inline styles):** Table column widths (`width: 5%/15%/35%` etc.), JS-toggled `display:none`, per-brand hex colors on SWOT opportunity/recommendation headings (#004085, #4a1a6b, #6B2D5B), and `margin-top: 5px` px-unit values.
-
-**Effort:** Medium (table widths need layout-specific handling; px values need px→rem decision)
+**[DONE]**
 
 ---
 
