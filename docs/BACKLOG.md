@@ -4,47 +4,19 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-## Done: Accessibility Audit (Feb 18)
-
-- [x] **A1.** Skip link and main landmark — ai-observability *(Critical, WCAG 2.4.1)*
-- [x] **A2.** Semantic landmarks — holliday_lighting *(Critical, WCAG 1.3.1)*
-- [x] **A3.** aria-hidden on decorative SVGs — holliday_lighting *(Critical, WCAG 1.1.1)*
-- [x] **A4.** Remove global outline:none — portal-base.css *(Serious, WCAG 2.4.7)*
-- [x] **A5.** lang="pt-BR" on Portuguese section — edgar_nadyne *(Serious, WCAG 3.1.2)*
-- [x] **A6.** Smooth scroll reduced-motion guard *(Serious, WCAG 2.3.3)*
-- [x] **A7.** Animation/transition reduced-motion guard *(Serious, WCAG 2.3.3)*
-- [x] **A8.** New-window indicator + .sr-only utility *(Moderate, WCAG 3.2.5)*
-- [x] **A9.** aria-label on nav elements — 10 portals *(Moderate, WCAG 1.3.1)*
-- [x] **A10.** aria-label on card links — hub + 12 portals *(Moderate, WCAG 2.4.4)*
-
----
-
-## Done: Accessibility (Remaining)
-
-- [x] **A11.** Report-level external links missing new-window indicator — strong_towns (61 links) *(Moderate, WCAG 3.2.5)*
-
----
-
-## Done: Medium Priority (Mar 9)
-
-- [x] **W2.** Whitepaper pipeline estimates replaced with empirical benchmarks (Mar 2026) *(Medium)*
-- [x] **W3.** OTEL and SQL/KV whitepapers fact-checked; corrected 2 inaccuracies (OTLP gzip framing, PostgreSQL LZ4 60-70% label) *(Medium)*
-- [x] **F5.** Distinctive typefaces — DM Sans (portals/competitor), Source Serif 4 (reports) *(P3)*
-
----
-
 ## Open: Medium Priority
 
 ---
 
-### H11. Extract inline styles from 50 report files (Phase 1 done)
+### H11. Extract inline styles from 50 report files (Phase 2 done)
 **Priority:** Medium (code quality, maintainability)
 **Source:** CSS architecture audit (Mar 9)
 **Phase 1 (Mar 9):** Extended `section h2, #toc h2` CSS selector; removed nav#toc and h2 redundant inline styles (29 instances); replaced `color: white` with `color: var(--color-white)` (11 files). ~290 inline styles remain (was ~367, excluding overflow-x:auto).
+**Phase 2 (Mar 9):** Added 24 utility classes to `report-base.css` (`.mt-xs`, `.mt-sm`, `.mt-md`, `.mb-sm`, `.p-md`, `.nested-list`, `.nested-list-sm`, `.box-success`, `.box-warning`, `.color-success`, `.color-warning`, `.color-danger`, etc.). Replaced 150+ inline styles across 37 files. Extracted hardcoded SWOT hex colors (#d4edda, #fff3cd, #155724, #856404, #721c24) to semantic CSS classes in edgar_nadyne files.
 
-**Remaining:** Spacing utility patterns (`margin-top: 1rem`, `padding: 1.5rem` etc.), hardcoded hex colors, and per-file layout patterns. See prior audit data for breakdown.
+**Remaining (~100 inline styles):** Table column widths (`width: 5%/15%/35%` etc.), JS-toggled `display:none`, and complex multi-property combos without clean variable equivalents. See Phase 3 for further extraction.
 
-**Effort:** High (further phases needed)
+**Effort:** Medium (Phase 3 can address remaining widths and JS state)
 
 ---
 

@@ -4,6 +4,29 @@ All completed backlog items, organized by session.
 
 ---
 
+## March 9, 2026 — Backlog Implementer Session 2
+
+Source: `docs/BACKLOG.md` item H11 (Phase 2)
+
+| Item | Description | Commit |
+|------|-------------|--------|
+| H11 Phase 2 | Added 24 utility classes to `report-base.css` (spacing: `.mt-xs/sm/md/lg`, `.mb-sm/md`, `.p-sm/md`, `.pl-md`, `.nested-list`, `.nested-list-sm`; color: `.bg-info`, `.bg-warning`, `.box-success`, `.box-warning`, `.color-success/warning/danger`, `.text-white/primary/muted/sm`; layout: `.hidden`, `.w-full`). Replaced 150+ inline styles across 37 HTML files. Extracted SWOT hardcoded hex colors in edgar_nadyne (6 files) to semantic classes. | pending |
+
+---
+
+## March 9, 2026 — Backlog Implementer Session
+
+Source: `docs/BACKLOG.md` items A11, W2, W3, F5
+
+| Item | Description | Commit |
+|------|-------------|--------|
+| A11 | Report-level external links missing new-window indicator — strong_towns (61 links) — added `<span class="sr-only"> (opens in new tab)</span>` to all `target="_blank"` links in `alternative_governance_models.html` and `infrastructure_privatization_white_paper.html` | `bb6a293` |
+| W2 | Whitepaper pipeline estimates replaced with empirical benchmarks — measured zstd compression ratios (3.73x, 5.31x, 5.90x) and combined pipeline reduction (4.1 MB source, 82-85% total) from actual repomix + zstd runs on reports repo | `5ec1cf7` |
+| W3 | OTEL and SQL/KV whitepapers fact-checked; corrected 2 inaccuracies — OTLP gzip framing (clients may use any supported algorithm, not required) and PostgreSQL LZ4 compression label correction | `b56d54f` |
+| F5 | Distinctive typefaces — DM Sans for portals/competitor, Source Serif 4 for reports — added Google Fonts import to theme.css; updated font-family vars in portal-base.css, report-base.css, competitor-base.css | `29dbb64` |
+
+---
+
 ## March 9, 2026 — CSS Refactor & Theme System Migration
 
 Source: `docs/BACKLOG.md` items A12, A13, H10, H12, H13, H14, W4
