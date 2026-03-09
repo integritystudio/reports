@@ -20,13 +20,13 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-### T1. Create `content-translator` skill
+### T1. Create `content-translator` skill — Done
 **Priority:** Medium
 **Source:** Readability audit (Feb 13)
 
-Build a reusable skill for translating HTML reports with 5 phases: source extraction, translation, localization, assembly, QA validation.
+Built `~/.claude/skills/content-translator/SKILL.md` — 5-phase workflow: source extraction, translation, localization, assembly, QA validation. Handles BCP-47 lang tags, source-tracking comments, skip-link translation, hub card and TRANSLATION_STATUS.md updates. Invoke via `/content-translator <file.html> --lang <BCP-47>`.
 
-**Effort:** High
+**[DONE]**
 
 ---
 
