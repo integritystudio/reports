@@ -1124,6 +1124,9 @@
         --highlight: #ff8090;
     }
 
+    [data-brand="integrity-studio"] .badge-low { background: rgba(200,200,200,0.15); color: #c8c8c8; }
+    [data-brand="integrity-studio"] .badge-longterm { background: rgba(160,100,220,0.15); color: #c4a0e0; }
+
     [data-brand="strong-towns"] {
         --color-primary-dark: #a5d6a7;
         --color-primary-medium: #81c784;
