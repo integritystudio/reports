@@ -6,67 +6,7 @@
     <title>Auto Loan Refinance Rate Analysis | March 2026</title>
     <link rel="stylesheet" href="css/report-base.css">
     <link rel="stylesheet" href="css/theme.css">
-    <style>
-        .calc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        .calc-card {
-            background: var(--light);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-        }
-        .calc-card .label {
-            font-size: var(--font-size-sm);
-            color: var(--color-text-muted);
-            margin-bottom: 0.25rem;
-        }
-        .calc-card .value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        .calc-card .value.savings {
-            color: #16a34a;
-        }
-        .rate-best {
-            background: #dcfce7;
-            font-weight: 600;
-        }
-        .info-box a,
-        .highlight-box a {
-            color: var(--primary, #1d4ed8);
-        }
-        @media (prefers-color-scheme: dark) {
-            .calc-card {
-                background: #1e293b;
-                border-color: #334155;
-            }
-            .calc-card .label {
-                color: #94a3b8;
-            }
-            .calc-card .value {
-                color: #60a5fa;
-            }
-            .calc-card .value.savings {
-                color: #4ade80;
-            }
-            .rate-best {
-                background: #14532d;
-            }
-            .rate-best a {
-                color: #86efac;
-            }
-        }
-        @media print {
-            details { display: block !important; }
-            details > summary { display: none !important; }
-        }
-    </style>
+    <link rel="stylesheet" href="auto-refinance-components.css">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>

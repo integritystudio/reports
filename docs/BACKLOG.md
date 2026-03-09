@@ -38,37 +38,13 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-### A13. Legacy inline-style pages bypass theme system contrast fixes
-**Priority:** Moderate (WCAG 1.4.3)
-**Source:** Contrast readability audit (Feb 20)
-**Files:** `ai-observability/ai-observability-product-strategy.html`, `capital_city/competitor-analysis.html`, and other pages using inline `<style>` blocks
-
-Several report pages use hardcoded inline CSS instead of the external `report-base.css` + `theme.css` system. These pages do not benefit from the contrast fixes applied in this session and may still have sub-4.5:1 text/background ratios.
-
-**Fix:** Migrate inline-style pages to the external CSS architecture (add `data-brand`, link base + theme CSS, remove inline `<style>` blocks). Audit migrated colors for AA compliance.
-
-**Effort:** Medium (per-page migration + verification)
+- [x] **A13.** Legacy inline-style pages bypass theme system — all report pages now link `report-base.css`/`theme.css`; remaining `<style>` block in `auto_refinance_rate_analysis.html` resolved by H12 (Mar 9)
 
 ---
 
 ## Open: Medium Priority
 
-### H10. Refactor AI Observability detail pages into theme system
-**Priority:** Medium (architecture consistency)
-**Source:** CSS architecture audit (Mar 9)
-**Files:**
-- `ai-observability/ai-observability-business-analysis.html`
-- `ai-observability/ai-observability-growth-plan.html`
-- `ai-observability/ai-observability-market-research-2025.html`
-- `ai-observability/ai-observability-product-strategy.html`
-- `ai-observability/ai-observability-website-content.html`
-- `ai-observability/ai-observability-marketing-materials.html`
-
-Six AI Observability detail pages use completely custom styling with embedded `<style>` blocks and do not integrate with the theme system. They lack: `data-brand` attribute, CSS base link (report/portal/competitor-base.css), `theme.css` link, and skip-link. This creates maintenance overhead and prevents them from benefiting from global theme/accessibility fixes.
-
-**Fix:** Add `data-brand="integrity-studio"` to html element, link `css/report-base.css` and `css/theme.css`, add skip-link, move embedded styles to external CSS, audit inline styles for WCAG AA contrast (4.5:1).
-
-**Effort:** Medium (6 files, per-file migration + verification)
+- [x] **H10.** Refactor AI Observability detail pages into theme system — all 6 files: `data-brand="integrity-studio"`, skip-link, `report-base.css` + `theme.css` links, embedded `<style>` blocks extracted to per-file `.css` files (commit 4b9d3bb, Mar 9)
 
 ---
 
@@ -92,8 +68,8 @@ Report detail pages (but not index pages) extensively use `style=` attributes fo
 - [x] `capital_city/competitor-analysis.html` — 5-line badge-type styles moved to theme.css under `[data-brand="capital-city"]`
 - [x] `integrity-studio-ai/competitor-analysis.html` — 3-line badge-type styles moved to theme.css under `[data-brand="integrity-studio"]`
 - [x] `integrity-studio-ai/integrity_studio_ai_opportunities_report.html` — 2-line badge styles moved to theme.css under `[data-brand="integrity-studio"]`
-- [ ] `auto_refinance_rate_analysis.html` — 61-line embedded style block for custom layout classes (.calc-grid, .calc-card, etc.); deferred, medium effort, no CSS variable conflicts
-- [ ] 6× AI Observability detail pages — deferred to H10
+- [x] `auto_refinance_rate_analysis.html` — 61-line embedded style block extracted to `auto-refinance-components.css` (Mar 9)
+- [x] 6× AI Observability detail pages — resolved by H10 (Mar 9)
 
 ---
 
