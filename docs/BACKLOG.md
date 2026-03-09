@@ -85,21 +85,15 @@ Report detail pages (but not index pages) extensively use `style=` attributes fo
 
 ---
 
-### H12. Move embedded <style> blocks to external CSS
+### H12. Move embedded &lt;style&gt; blocks to external CSS (partial)
 **Priority:** Medium (maintainability)
 **Source:** CSS architecture audit (Mar 9)
-**Files:** 10 files with embedded styles:
-- 6× AI Observability detail pages (covered by H10)
-- `auto_refinance_rate_analysis.html`
-- `capital_city/competitor-analysis.html`
-- `integrity-studio-ai/competitor-analysis.html`
-- `integrity-studio-ai/integrity_studio_ai_opportunities_report.html`
 
-10 HTML files contain embedded `<style>` blocks (29–38 lines each in AI observability reports; 1–5 lines in others). Embedded styles are harder to maintain, cannot leverage CSS variables, and bypass the theme system.
-
-**Fix:** Extract style blocks to external CSS files (create new files per report section or add to `css/opportunity-components.css`). Link externally. For AI Observability, this is part of H10 (theme system refactor).
-
-**Effort:** Medium (4 files + H10 dependency)
+- [x] `capital_city/competitor-analysis.html` — 5-line badge-type styles moved to theme.css under `[data-brand="capital-city"]`
+- [x] `integrity-studio-ai/competitor-analysis.html` — 3-line badge-type styles moved to theme.css under `[data-brand="integrity-studio"]`
+- [x] `integrity-studio-ai/integrity_studio_ai_opportunities_report.html` — 2-line badge styles moved to theme.css under `[data-brand="integrity-studio"]`
+- [ ] `auto_refinance_rate_analysis.html` — 61-line embedded style block for custom layout classes (.calc-grid, .calc-card, etc.); deferred, medium effort, no CSS variable conflicts
+- [ ] 6× AI Observability detail pages — deferred to H10
 
 ---
 

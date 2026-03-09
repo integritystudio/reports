@@ -459,6 +459,13 @@
 [data-brand="sound-sight-tarot"] .badge-info { background: var(--badge-info-bg); color: var(--badge-info-text); }
 [data-brand="sound-sight-tarot"] .rating { color: var(--color-rating); }
 
+/* --- Capital City — competitor-analysis badge types --- */
+[data-brand="capital-city"] .badge-village { background: rgba(79,143,247,0.15); color: var(--accent); }
+[data-brand="capital-city"] .badge-nonprofit { background: rgba(52,211,153,0.15); color: var(--green); }
+[data-brand="capital-city"] .badge-government { background: rgba(124,92,252,0.15); color: var(--accent2); }
+[data-brand="capital-city"] .badge-forprofit { background: rgba(245,158,11,0.15); color: var(--amber); }
+[data-brand="capital-city"] .badge-community { background: rgba(34,211,238,0.15); color: var(--cyan); }
+
 /* --- Integrity Studio — dark navy/red theme --- */
 [data-brand="integrity-studio"] .executive-summary { border-left-color: var(--highlight); }
 [data-brand="integrity-studio"] blockquote { border-left-color: var(--highlight); }
@@ -468,6 +475,11 @@
 [data-brand="integrity-studio"] header .meta a { color: var(--integrity-meta-link); }
 [data-brand="integrity-studio"] .section-content details { margin: var(--spacing-xs, 0.5rem) 0; }
 [data-brand="integrity-studio"] .section-content details summary { cursor: pointer; font-weight: var(--font-weight-semibold); color: var(--primary); padding: var(--spacing-xs, 0.5rem) 0; }
+[data-brand="integrity-studio"] .badge-platform { background: rgba(124,92,252,0.15); color: var(--accent2); }
+[data-brand="integrity-studio"] .badge-enterprise { background: rgba(239,68,68,0.15); color: var(--red); }
+[data-brand="integrity-studio"] .badge-oss { background: rgba(52,211,153,0.15); color: var(--green); }
+[data-brand="integrity-studio"] .badge-low { background: #e2e3e5; color: #383d41; }
+[data-brand="integrity-studio"] .badge-longterm { background: #e7e0f7; color: #4a306d; }
 
 /* --- Subtitle size override for select brands --- */
 [data-brand="ngo-market"] .subtitle,
