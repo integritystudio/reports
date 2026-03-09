@@ -405,9 +405,10 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
 .box-danger  { background: var(--color-badge-danger-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
 
 /* Text color semantics */
-.color-success { color: var(--color-badge-success-text); }
-.color-warning { color: var(--color-badge-warning-text); }
-.color-danger  { color: var(--color-badge-danger-text); }
+.color-success           { color: var(--color-badge-success-text); }
+.color-warning           { color: var(--color-badge-warning-text); }
+.color-danger            { color: var(--color-badge-danger-text); }
+.color-swot-opportunity  { color: var(--color-swot-opportunity, var(--primary)); }
 
 @media (prefers-color-scheme: dark) {
     .box-success { background: var(--color-dark-badge-success-bg, #1a3a2a); }
