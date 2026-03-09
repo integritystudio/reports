@@ -388,10 +388,11 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
 .text-accent  { color: var(--accent); }
 .text-muted   { color: var(--color-text-muted); }
 .text-sm    { font-size: var(--font-size-sm); }
+.text-lg    { font-size: var(--font-size-h3); }
 
 /* SWOT heading and label spacing utilities */
 .mt-detail { margin-top: var(--spacing-detail-gap); }
-.mb-swot   { margin: 0 0 var(--spacing-swot-gap) 0; }
+.mb-swot   { margin-bottom: var(--spacing-swot-gap); }
 
 /* Nested list reset — overrides ul/ol default margin so nested lists don't double-indent */
 .nested-list    { margin: 0; padding-left: var(--spacing-md); }
@@ -401,6 +402,7 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
 /* Semantic box variants (SWOT, status cards) — simpler than .warning-box/.highlight-box which add borders */
 .box-success { background: var(--color-badge-success-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
 .box-warning { background: var(--color-warning-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
+.box-danger  { background: var(--color-badge-danger-bg); padding: var(--spacing-sm); border-radius: var(--radius-lg); }
 
 /* Text color semantics */
 .color-success { color: var(--color-badge-success-text); }
@@ -410,6 +412,7 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
 @media (prefers-color-scheme: dark) {
     .box-success { background: var(--color-dark-badge-success-bg, #1a3a2a); }
     .box-warning { background: var(--color-dark-badge-warning-bg, #3a3020); }
+    .box-danger  { background: var(--color-dark-badge-danger-bg, #3a1a1a); }
     .color-success { color: var(--color-dark-badge-success-text, #90dab0); }
     .color-warning { color: var(--color-dark-badge-warning-text, #f5d060); }
     .color-danger  { color: var(--color-dark-badge-danger-text, #f0a0a8); }
