@@ -37,16 +37,14 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-### H11. Extract inline styles from 50 report files
+### H11. Extract inline styles from 50 report files (Phase 1 done)
 **Priority:** Medium (code quality, maintainability)
 **Source:** CSS architecture audit (Mar 9)
-**Files:** All report-level detail pages across 14 brand directories (50/64 HTML files)
+**Phase 1 (Mar 9):** Extended `section h2, #toc h2` CSS selector; removed nav#toc and h2 redundant inline styles (29 instances); replaced `color: white` with `color: var(--color-white)` (11 files). ~290 inline styles remain (was ~367, excluding overflow-x:auto).
 
-Report detail pages (but not index pages) extensively use `style=` attributes for hardcoded colors, layout overrides, box styling, and typography emphasis. This violates the documented guideline "no inline styles" and prevents theme system updates from affecting these pages. Inline styles include `overflow-x:auto` (acceptable), hardcoded hex colors (should use CSS variables), and layout adjustments.
+**Remaining:** Spacing utility patterns (`margin-top: 1rem`, `padding: 1.5rem` etc.), hardcoded hex colors, and per-file layout patterns. See prior audit data for breakdown.
 
-**Fix:** Audit inline styles by category; move layout/grid overrides to component CSS classes in `css/opportunity-components.css` or brand-specific layout files; replace hardcoded colors with CSS variable references (e.g., `style="color: #a8e6cf"` → `style="color: var(--accent)"`); update brand palettes if needed.
-
-**Effort:** High (50 files, manual audit + remediation)
+**Effort:** High (further phases needed)
 
 ---
 
