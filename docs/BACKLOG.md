@@ -61,15 +61,7 @@ Report detail pages (but not index pages) extensively use `style=` attributes fo
 
 ---
 
-### H12. Move embedded &lt;style&gt; blocks to external CSS (partial)
-**Priority:** Medium (maintainability)
-**Source:** CSS architecture audit (Mar 9)
-
-- [x] `capital_city/competitor-analysis.html` — 5-line badge-type styles moved to theme.css under `[data-brand="capital-city"]`
-- [x] `integrity-studio-ai/competitor-analysis.html` — 3-line badge-type styles moved to theme.css under `[data-brand="integrity-studio"]`
-- [x] `integrity-studio-ai/integrity_studio_ai_opportunities_report.html` — 2-line badge styles moved to theme.css under `[data-brand="integrity-studio"]`
-- [x] `auto_refinance_rate_analysis.html` — 61-line embedded style block extracted to `auto-refinance-components.css` (Mar 9)
-- [x] 6× AI Observability detail pages — resolved by H10 (Mar 9)
+- [x] **H12.** Move embedded `<style>` blocks to external CSS — all items complete (Mar 9): `capital_city/competitor-analysis.html`, `integrity-studio-ai/competitor-analysis.html`, `integrity-studio-ai/integrity_studio_ai_opportunities_report.html` (badge styles → theme.css); `auto_refinance_rate_analysis.html` (61 lines → `auto-refinance-components.css`); 6× AI Observability pages (→ H10)
 
 ---
 
