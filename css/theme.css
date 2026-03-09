@@ -284,6 +284,7 @@
     --font-report: 'Source Serif 4', var(--font-serif);
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
+    --spacing-list-sm: 1.25rem;
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;

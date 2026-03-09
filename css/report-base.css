@@ -390,7 +390,7 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
 
 /* Nested list reset — overrides ul/ol default margin so nested lists don't double-indent */
 .nested-list    { margin: 0; padding-left: var(--spacing-md); }
-.nested-list-sm { margin: 0; padding-left: 1.25rem; }
+.nested-list-sm { margin: 0; padding-left: var(--spacing-list-sm); }
 .nested-list-xs { margin: 0; padding-left: var(--spacing-sm); }
 
 /* Semantic box variants (SWOT, status cards) — simpler than .warning-box/.highlight-box which add borders */
