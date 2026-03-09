@@ -4,6 +4,22 @@ All completed backlog items, organized by session.
 
 ---
 
+## March 9, 2026 — CSS Refactor & Theme System Migration
+
+Source: `docs/BACKLOG.md` items A12, A13, H10, H12, H13, H14, W4
+
+| Item | Description | Commit |
+|------|-------------|--------|
+| A12 | Dark mode `--secondary` contrast for remaining brands — `balloon-collective: #f472b6`, `edgar-nadyne: #d4a0b8`, `zoukmx: #52b788` added to dark mode block in theme.css | `cb1c131` |
+| A13 | Legacy inline-style pages bypass theme system — all report pages now link `report-base.css`/`theme.css`; inline `<style>` block in `auto_refinance_rate_analysis.html` resolved by H12 | `934574d` |
+| H10 | Refactor AI Observability detail pages into theme system — all 6 files: `data-brand="integrity-studio"`, skip-link, `report-base.css` + `theme.css` links, embedded `<style>` blocks extracted to per-file `.css` files | `4b9d3bb` |
+| H12 | Move embedded `<style>` blocks to external CSS — all items complete: `capital_city/competitor-analysis.html`, `integrity-studio-ai/competitor-analysis.html`, `integrity-studio-ai/integrity_studio_ai_opportunities_report.html` (badge styles → theme.css); `auto_refinance_rate_analysis.html` (61 lines → `auto-refinance-components.css`); 6× AI Observability pages (→ H10) | `934574d` |
+| H13 | Missing CSS variables for ai-observability — added `--primary-blue`, `--primary-teal`, `--light-blue`, `--light-teal` to `[data-brand="integrity-studio"]` in theme.css | `4b9d3bb` |
+| H14 | Add report-base.css to ngo-market marketing plan — added `../css/report-base.css` link before `marketing-plan.css`; added `max-width: none; padding: 0; margin: 0` override to `.container` to prevent layout conflict with sidebar | `4b9d3bb` |
+| W4 | Stale star/version counts — added "as of Feb 2026" qualifier to all star counts in `repomix_to_condense_with_additional_integrations.md` and `zstd-condense-report.md` | session |
+
+---
+
 ## February 18, 2026 — Accessibility Audit Implementation
 
 Source: `docs/BACKLOG.md` items A1-A10

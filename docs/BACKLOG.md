@@ -34,17 +34,7 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-- [x] **A12.** Dark mode `--secondary` contrast for remaining brands — `balloon-collective: #f472b6`, `edgar-nadyne: #d4a0b8`, `zoukmx: #52b788` already added to dark mode block in theme.css (lines 1052–1092). All pass WCAG AA 4.5:1.
-
----
-
-- [x] **A13.** Legacy inline-style pages bypass theme system — all report pages now link `report-base.css`/`theme.css`; remaining `<style>` block in `auto_refinance_rate_analysis.html` resolved by H12 (Mar 9)
-
----
-
 ## Open: Medium Priority
-
-- [x] **H10.** Refactor AI Observability detail pages into theme system — all 6 files: `data-brand="integrity-studio"`, skip-link, `report-base.css` + `theme.css` links, embedded `<style>` blocks extracted to per-file `.css` files (commit 4b9d3bb, Mar 9)
 
 ---
 
@@ -58,18 +48,6 @@ Report detail pages (but not index pages) extensively use `style=` attributes fo
 **Fix:** Audit inline styles by category; move layout/grid overrides to component CSS classes in `css/opportunity-components.css` or brand-specific layout files; replace hardcoded colors with CSS variable references (e.g., `style="color: #a8e6cf"` → `style="color: var(--accent)"`); update brand palettes if needed.
 
 **Effort:** High (50 files, manual audit + remediation)
-
----
-
-- [x] **H12.** Move embedded `<style>` blocks to external CSS — all items complete (Mar 9): `capital_city/competitor-analysis.html`, `integrity-studio-ai/competitor-analysis.html`, `integrity-studio-ai/integrity_studio_ai_opportunities_report.html` (badge styles → theme.css); `auto_refinance_rate_analysis.html` (61 lines → `auto-refinance-components.css`); 6× AI Observability pages (→ H10)
-
----
-
-- [x] **H13.** Missing CSS variables for ai-observability — added `--primary-blue`, `--primary-teal`, `--light-blue`, `--light-teal` to `[data-brand="integrity-studio"]` in theme.css. Only `ai-observability-growth-plan.html` uses them; currently defined inline (overrides theme.css), will be available after H10 migration.
-
----
-
-- [x] **H14.** Add report-base.css to ngo-market marketing plan — added `../css/report-base.css` link before `marketing-plan.css` in `integrity-studio-marketing-plan.html`; added `max-width: none; padding: 0; margin: 0` override to `.container` in `marketing-plan.css` to prevent report-base layout conflict with sidebar.
 
 ---
 
@@ -116,10 +94,6 @@ These two documents were produced by background research agents and were not inc
 **Fix:** Run `/otel-session-summary` targeting these files specifically, or manually verify key claims (ClickHouse codec ratios, RocksDB per-level config, OTel Arrow bandwidth reduction, PostgreSQL TOAST LZ4 benchmarks) against primary sources.
 
 **Effort:** Medium (verification pass)
-
----
-
-- [x] **W4.** Stale star/version counts — added "as of Feb 2026" qualifier to all star counts in `repomix_to_condense_with_additional_integrations.md` and `zstd-condense-report.md`.
 
 ---
 
@@ -187,7 +161,8 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Feb 15 — Design Review S2 | F1-F4 (4 items) |
 | Feb 16 — OTEL Improvement Phase 2 | F8-F12 (5 items) |
 | Feb 18 — Accessibility Audit | A1-A10 (10 items) |
-| **Total** | **61 completed, 7 open** |
+| Mar 9 — CSS Refactor & Theme System | A12, A13, H10, H12, H13, H14, W4 (7 items) |
+| **Total** | **68 completed, 7 open** |
 
 ### Scorecard (Phase 2 — Feb 16)
 
