@@ -385,8 +385,13 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
 .bg-warning { background: var(--color-warning-bg); }
 .text-white   { color: var(--color-white); }
 .text-primary { color: var(--primary); }
+.text-accent  { color: var(--accent); }
 .text-muted   { color: var(--color-text-muted); }
 .text-sm    { font-size: var(--font-size-sm); }
+
+/* SWOT heading and label spacing utilities */
+.mt-detail { margin-top: var(--spacing-detail-gap); }
+.mb-swot   { margin: 0 0 var(--spacing-swot-gap) 0; }
 
 /* Nested list reset — overrides ul/ol default margin so nested lists don't double-indent */
 .nested-list    { margin: 0; padding-left: var(--spacing-md); }
