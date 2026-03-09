@@ -124,7 +124,7 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Feb 18 — Accessibility Audit | A1-A10 (10 items) |
 | Mar 9 — CSS Refactor & Theme System | A12, A13, H10, H12, H13, H14, W4 (7 items) |
 | Mar 9 — Backlog Implementer | A11, W2, W3, F5 (4 items) |
-| **Total** | **72 completed, 5 open** |
+| **Total** | **72 completed, 4 open** |
 
 ### Scorecard (Phase 2 — Feb 16)
 
