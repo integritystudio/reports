@@ -45,36 +45,43 @@ Using Tree-sitter, repomix extracts structural signatures and strips function bo
 
 Repomix output is structured text (XML/Markdown) with high redundancy — repeated tag names, indentation patterns, and boilerplate. This makes it an excellent candidate for general-purpose compression.
 
-**Estimated zstd ratios on repomix output (text-heavy, structured):**
+**Measured zstd ratios on repomix lossless output** (4.0 MB XML, HTML/CSS/MD-heavy repo, zstd 1.5.7, Apple M-series, Mar 2026):
 
-| zstd Level | Compression Ratio | Compress Speed | Decompress Speed |
+| zstd Level | Compression Ratio | Compress Time (4 MB) | Decompress Time (4 MB) |
 |---|---|---|---|
-| `-1` (default) | 2.5–3.0x | ~500 MB/s | ~1500 MB/s |
-| `-9` (balanced) | 3.0–3.5x | ~50 MB/s | ~1500 MB/s |
-| `-19` (high) | 3.5–4.0x | ~5 MB/s | ~1500 MB/s |
-| `--ultra -22` (max) | 3.8–4.2x | ~2 MB/s | ~1500 MB/s |
+| `-1` (default) | **3.73x** | ~0.02s user (~200 MB/s) | ~0.01s (~400 MB/s) |
+| `-9` (balanced) | **5.31x** | ~0.15s user (~27 MB/s) | ~0.01s (~400 MB/s) |
+| `--ultra -22` (max) | **5.90x** | ~2.8s user (~1.4 MB/s) | ~0.01s (~400 MB/s) |
 
-**Key insight:** Decompression speed is essentially constant across all levels (~1500 MB/s). This is critical for the use case of reloading condensed repos into AI tools.
+> **Note:** Ratios exceed the Silesia corpus estimates because repomix XML output has extreme structural redundancy (repeated file-path tags, XML boilerplate, consistent indentation). Actual ratios will vary by repo type — code-heavy repos (JS/TS) typically see slightly lower ratios than markup-heavy repos.
+
+**Key insight:** Decompression time is consistent across all levels (~0.01s for 4 MB). The cost is entirely at compression time. For AI tool workflows where you compress once and decompress frequently, even `--ultra -22` is asymptotically free on reload.
 
 **Reference benchmarks** (Silesia corpus, zstd 1.5.7, Core i7-9700K):
 - zstd -1: ratio 2.896, 510 MB/s compress, 1550 MB/s decompress
 - zstd --fast=1: ratio 2.439, 545 MB/s compress, 1850 MB/s decompress
 
-Source: [facebook/zstd README](https://github.com/facebook/zstd), [zstd.net benchmarks](https://facebook.github.io/zstd/#benchmarks)
+Source: [facebook/zstd README](https://github.com/facebook/zstd), [zstd.net benchmarks](https://facebook.github.io/zstd/#benchmarks); empirical measurements on integritystudio.io reports repo (233 HTML/CSS/MD files, 4.3 MB source)
 
 ### 2b. Combined Pipeline Numbers
 
-For a **10 MB polyglot source tree** (after .gitignore filtering):
+**Empirical measurements** — integritystudio.io reports repo (233 HTML/CSS/MD files, zstd 1.5.7, Apple M-series, Mar 2026):
 
 | Stage | Size | Cumulative Reduction |
 |---|---|---|
-| Raw source files | 10 MB | — |
-| repomix (lossless, `--remove-comments --remove-empty-lines`) | ~7 MB | 30% |
-| repomix (`--compress`) | ~2.5 MB | 75% |
-| + zstd -9 | ~0.7–0.9 MB | 91–93% |
-| + zstd --ultra -22 | ~0.6–0.8 MB | 92–94% |
+| Raw source files | 4.2 MB | — |
+| repomix lossless | 3.9 MB | 6% |
+| repomix `--compress` | 3.6 MB | 15% |
+| lossless + zstd -1 | 1.05 MB | 75% |
+| lossless + zstd -9 | 0.74 MB | 82% |
+| compress + zstd -9 | 0.69 MB | 84% |
+| compress + zstd --ultra -22 | 0.62 MB | 85% |
 
-For comparison, raw source → zstd -9 (no repomix) would yield ~2.5–3.3 MB. The repomix `--compress` step provides the dominant reduction because it is *semantic* — it understands code structure — whereas zstd is purely statistical/lexical.
+For comparison, raw source → zstd -9 (no repomix): **0.76 MB (82% reduction)**.
+
+> **HTML/CSS/MD caveat:** `--compress` shows only **15% reduction** for this markup-heavy repo because Tree-sitter's function-body stripping targets code constructs (functions, loops, conditionals) not present in HTML/CSS. For JS/TS/Python repos, `--compress` typically delivers 70–85% token reduction, making the combined pipeline significantly more effective. The zstd stage dominates size reduction regardless of repo type.
+
+**Prior modeled estimates** (replaced by above): The previous table projected 75% reduction from `--compress` and 91–93% cumulative. Those figures reflect JS/TS code-heavy repos where semantic compression is maximally effective; they do not apply to markup-heavy repos.
 
 ### 2c. The Round-Trip: code → repomix → zstd → unzstd → repomix-output
 

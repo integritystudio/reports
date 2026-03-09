@@ -32,8 +32,8 @@ Compression best practices for relational databases and key-value stores. Covers
 
 | Scenario | Pipeline | Reduction |
 |---|---|---|
-| AI chat (fast reload) | `repomix --compress` → zstd -3 | ~90% tokens |
-| AI deep analysis | repomix lossless → zstd -9 | ~70% size |
+| AI chat (fast reload) | `repomix --compress` → zstd -3 | ~85–90% tokens (code repos); ~84% (markup repos) |
+| AI deep analysis | repomix lossless → zstd -9 | ~82% size (measured, HTML/CSS repo); ~70% for code repos |
 | Cold archival | repomix → PPMd via 7z | ~93–95% size |
 | OTEL hot path | zstd at collector + ClickHouse ZSTD(3) | 85–95% vs raw |
 | OTEL archival | OTel Arrow + ClickHouse DoubleDelta + ZSTD | up to 30:1 |

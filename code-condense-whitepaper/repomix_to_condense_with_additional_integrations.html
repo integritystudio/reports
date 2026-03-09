@@ -93,51 +93,47 @@
         <h3>2a. What zstd Adds on Top of Repomix Output</h3>
         <p>Repomix output is structured text (XML/Markdown) with high redundancy — repeated tag names, indentation patterns, and boilerplate. This makes it an excellent candidate for general-purpose compression.</p>
 
+        <p><strong>Measured zstd ratios on repomix lossless output</strong> (4.0 MB XML, HTML/CSS/MD-heavy repo, zstd 1.5.7, Apple M-series, Mar 2026):</p>
         <div style="overflow-x:auto">
 <table>
           <thead>
             <tr>
               <th>zstd Level</th>
               <th>Compression Ratio</th>
-              <th>Compress Speed</th>
-              <th>Decompress Speed</th>
+              <th>Compress Time (4 MB)</th>
+              <th>Decompress Time (4 MB)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><code>-1</code> (default)</td>
-              <td>2.5–3.0x</td>
-              <td>~500 MB/s</td>
-              <td>~1500 MB/s</td>
+              <td><strong>3.73x</strong></td>
+              <td>~0.02s (~200 MB/s)</td>
+              <td>~0.01s (~400 MB/s)</td>
             </tr>
             <tr>
               <td><code>-9</code> (balanced)</td>
-              <td>3.0–3.5x</td>
-              <td>~50 MB/s</td>
-              <td>~1500 MB/s</td>
-            </tr>
-            <tr>
-              <td><code>-19</code> (high)</td>
-              <td>3.5–4.0x</td>
-              <td>~5 MB/s</td>
-              <td>~1500 MB/s</td>
+              <td><strong>5.31x</strong></td>
+              <td>~0.15s (~27 MB/s)</td>
+              <td>~0.01s (~400 MB/s)</td>
             </tr>
             <tr>
               <td><code>--ultra -22</code> (max)</td>
-              <td>3.8–4.2x</td>
-              <td>~2 MB/s</td>
-              <td>~1500 MB/s</td>
+              <td><strong>5.90x</strong></td>
+              <td>~2.8s (~1.4 MB/s)</td>
+              <td>~0.01s (~400 MB/s)</td>
             </tr>
           </tbody>
         </table>
 </div>
+        <p class="source">Note: Ratios exceed Silesia corpus estimates because repomix XML output has extreme structural redundancy. Actual ratios vary by repo type — code-heavy repos (JS/TS) typically see slightly lower ratios than markup-heavy repos. Source: integritystudio.io reports repo (233 HTML/CSS/MD files, 4.3 MB).</p>
 
         <div class="info-box">
-          <strong>Key insight:</strong> Decompression speed is essentially constant across all levels (~1500 MB/s). This is critical for the use case of reloading condensed repos into AI tools.
+          <strong>Key insight:</strong> Decompression time is consistent across all levels (~0.01s for 4 MB). The cost is entirely at compression time. For AI tool workflows where you compress once and decompress frequently, even <code>--ultra -22</code> is asymptotically free on reload.
         </div>
 
         <h3>2b. Combined Pipeline Numbers</h3>
-        <p>For a <strong>10 MB polyglot source tree</strong> (after .gitignore filtering):</p>
+        <p><strong>Empirical measurements</strong> — integritystudio.io reports repo (233 HTML/CSS/MD files, zstd 1.5.7, Apple M-series, Mar 2026):</p>
         <div style="overflow-x:auto">
 <table>
           <thead>
@@ -150,33 +146,46 @@
           <tbody>
             <tr>
               <td>Raw source files</td>
-              <td>10 MB</td>
+              <td>4.2 MB</td>
               <td>—</td>
             </tr>
             <tr>
-              <td>repomix (lossless, <code>--remove-comments --remove-empty-lines</code>)</td>
-              <td>~7 MB</td>
-              <td>30%</td>
+              <td>repomix lossless</td>
+              <td>3.9 MB</td>
+              <td>6%</td>
             </tr>
             <tr>
-              <td>repomix (<code>--compress</code>)</td>
-              <td>~2.5 MB</td>
+              <td>repomix <code>--compress</code></td>
+              <td>3.6 MB</td>
+              <td>15%</td>
+            </tr>
+            <tr>
+              <td>lossless + zstd -1</td>
+              <td>1.05 MB</td>
               <td>75%</td>
             </tr>
             <tr>
-              <td>+ zstd -9</td>
-              <td>~0.7–0.9 MB</td>
-              <td><strong>91–93%</strong></td>
+              <td>lossless + zstd -9</td>
+              <td>0.74 MB</td>
+              <td><strong>82%</strong></td>
             </tr>
             <tr>
-              <td>+ zstd --ultra -22</td>
-              <td>~0.6–0.8 MB</td>
-              <td><strong>92–94%</strong></td>
+              <td>compress + zstd -9</td>
+              <td>0.69 MB</td>
+              <td><strong>84%</strong></td>
+            </tr>
+            <tr>
+              <td>compress + zstd --ultra -22</td>
+              <td>0.62 MB</td>
+              <td><strong>85%</strong></td>
             </tr>
           </tbody>
         </table>
 </div>
-        <p>For comparison, raw source → zstd -9 (no repomix) would yield ~2.5–3.3 MB. The repomix <code>--compress</code> step provides the dominant reduction because it is <em>semantic</em> — it understands code structure — whereas zstd is purely statistical/lexical.</p>
+        <p>For comparison, raw source → zstd -9 (no repomix): <strong>0.76 MB (82% reduction)</strong>.</p>
+        <div class="warning-box">
+          <strong>HTML/CSS/MD caveat:</strong> <code>--compress</code> shows only <strong>15% reduction</strong> for this markup-heavy repo because Tree-sitter's function-body stripping targets code constructs not present in HTML/CSS. For JS/TS/Python repos, <code>--compress</code> typically delivers 70–85% token reduction, making the combined pipeline significantly more effective. The zstd stage dominates size reduction regardless of repo type.
+        </div>
 
         <h3>2c. The Round-Trip</h3>
         <p><strong>zstd is fully lossless.</strong> Decompressing a <code>.zst</code> file yields the exact repomix output byte-for-byte. So the round-trip question is really about repomix:</p>
