@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SXSW 2026 - Event Guide</title>
+    <link rel="stylesheet" href="../css/report-base.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <style>
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--spacing-md); margin-top: var(--spacing-sm); }
+        .nav-card {
+            background: var(--color-white, #fff);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .nav-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); text-decoration: none; }
+        .nav-card-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff; padding: var(--spacing-md);
+        }
+        .nav-card-header h2 { color: #fff; font-size: 1.3rem; margin-bottom: 0.25rem; }
+        .nav-card-header .card-subtitle { font-size: var(--font-size-sm); opacity: 0.9; }
+        .nav-card-body { padding: var(--spacing-md); }
+        .nav-card-body p { font-size: var(--font-size-sm); color: var(--color-text-muted); margin-bottom: var(--spacing-sm); }
+        .card-stats { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; }
+        .card-stat {
+            background: var(--light); padding: 0.35rem 0.75rem; border-radius: var(--badge-radius);
+            font-size: var(--font-size-xs); font-weight: 500; color: var(--primary);
+        }
+        .card-cta { display: inline-block; margin-top: var(--spacing-sm); font-weight: 600; color: var(--secondary); font-size: var(--font-size-sm); }
+        .card-cta::after { content: ' \2192'; }
+        .also-available { margin-top: var(--spacing-sm); }
+        .also-available a { display: inline-block; margin-right: var(--spacing-sm); font-size: var(--font-size-sm); }
+        @media (prefers-color-scheme: dark) {
+            .nav-card { background: var(--color-dark-surface, #1a1a2e); }
+            .nav-card-header { background: linear-gradient(135deg, var(--color-dark-surface-raised, #1e293b), var(--primary)); }
+            .card-stat { background: var(--color-dark-surface-raised, #1e293b); }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>SXSW 2026 Event Guide</h1>
+        <div class="subtitle">March 12-18, 2026 &middot; Austin, TX</div>
+        <div class="meta">40th Anniversary &middot; Generated March 10, 2026</div>
+    </header>
+    <main id="main" class="container">
+        <div class="executive-summary">
+            <h2>Your SXSW Guide</h2>
+            <p>Everything you need for SXSW 2026 in two reports: a comprehensive event overview with stats, speakers, and venue info, plus a curated list of 23 free events that don't require a badge.</p>
+        </div>
+
+        <div class="card-grid">
+            <a href="sxsw-summary-2026.html" class="nav-card">
+                <div class="nav-card-header">
+                    <h2>SXSW 2026 Summary</h2>
+                    <div class="card-subtitle">40th Anniversary &middot; Complete Overview</div>
+                </div>
+                <div class="nav-card-body">
+                    <p>Full event summary including conference tracks, featured speakers, venue changes, stats, and registration info.</p>
+                    <div class="card-stats">
+                        <span class="card-stat">850+ Sessions</span>
+                        <span class="card-stat">4,400 Musicians</span>
+                        <span class="card-stat">375+ Screenings</span>
+                        <span class="card-stat">8 Speakers</span>
+                    </div>
+                    <span class="card-cta">View full summary</span>
+                </div>
+            </a>
+
+            <a href="sxsw-free-events-2026.html" class="nav-card">
+                <div class="nav-card-header">
+                    <h2>Free Events</h2>
+                    <div class="card-subtitle">No Badge Required &middot; 23 Events</div>
+                </div>
+                <div class="nav-card-body">
+                    <p>Day-by-day guide to free music showcases, tech expos, brand activations, and community events during SXSW week.</p>
+                    <div class="card-stats">
+                        <span class="card-stat">23 Events</span>
+                        <span class="card-stat">7 Days</span>
+                        <span class="card-stat">Music</span>
+                        <span class="card-stat">Tech</span>
+                    </div>
+                    <span class="card-cta">Browse free events</span>
+                </div>
+            </a>
+        </div>
+
+        <section class="mt-lg">
+            <h2>Also Available</h2>
+            <div class="section-content also-available">
+                <a href="ai-networking-austin.html">AI Networking Events in Austin</a>
+                <a href="tech-innovation-conferences-march-2026.html">Tech &amp; Innovation Conferences - March 2026</a>
+            </div>
+        </section>
+    </main>
+    <footer>Generated March 10, 2026 &middot; Integrity Studio AI Events Research</footer>
+</body>
+</html>
