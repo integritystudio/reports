@@ -66,6 +66,8 @@
     --color-border-default: var(--border);
 }
 
+/* Dark mode :root variable overrides — element-level overrides are at end of file
+ * to ensure they win the cascade over light-mode rules with equal specificity. */
 @media (prefers-color-scheme: dark) {
     :root {
         --light: #1a1a2e;
@@ -95,28 +97,6 @@
         --color-dark-swot-opportunity: #c49fe8;
         --color-dark-swot-opportunity-bg: #2a1a3a;
     }
-    body { background: var(--color-dark-body-bg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    section, .executive-summary, #toc { background: var(--color-dark-surface); }
-    .executive-summary, .executive-summary h2, .executive-summary p { background: var(--color-dark-surface); color: var(--color-text-body); }
-    section h2, #toc h2 { background: var(--color-dark-surface-raised); }
-    th { background: var(--color-dark-th-bg); color: var(--color-text-secondary); }
-    td { background: var(--color-dark-surface); color: var(--color-text-body); }
-    tr:hover td { background: var(--color-dark-hover); }
-    tr:hover { background: var(--color-dark-hover); }
-    .highlight-box { background: linear-gradient(135deg, var(--color-dark-highlight-start), var(--color-dark-highlight-end)); }
-    .warning-box { background: var(--color-dark-warning-bg); }
-    .info-box { background: var(--color-dark-surface); }
-    blockquote { background: var(--color-dark-surface); color: var(--color-text-body); }
-    .source { color: var(--color-text-secondary); }
-    footer { color: var(--color-dark-footer-text); }
-    .contact-item .label { color: var(--color-dark-footer-text); }
-    details summary .detail-count { color: var(--color-dark-footer-text); }
-    details summary:hover { background: var(--color-dark-hover); }
-
-    .badge-success, .badge-verified, .badge-high { background: var(--color-dark-badge-success-bg); color: var(--color-dark-badge-success-text); }
-    .badge-warning, .badge-inferred, .badge-medium { background: var(--color-dark-badge-warning-bg); color: var(--color-dark-badge-warning-text); }
-    .badge-danger, .badge-unverified { background: var(--color-dark-badge-danger-bg); color: var(--color-dark-badge-danger-text); }
-    .badge-info, .badge-quick { background: var(--color-dark-badge-info-bg); color: var(--color-dark-badge-info-text); }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -425,7 +405,34 @@ details details summary { font-size: var(--font-size-details-sm); padding: var(-
 .color-danger            { color: var(--color-badge-danger-text); }
 .color-swot-opportunity  { color: var(--color-swot-opportunity, var(--primary)); }
 
+/* ==========================================================================
+   DARK MODE — Element-level overrides
+   Placed AFTER all light-mode rules so they win the cascade at equal specificity.
+   ========================================================================== */
 @media (prefers-color-scheme: dark) {
+    body { background: var(--color-dark-body-bg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    section, .executive-summary, #toc { background: var(--color-dark-surface); }
+    .executive-summary, .executive-summary h2, .executive-summary p { background: var(--color-dark-surface); color: var(--color-text-body); }
+    section h2, #toc h2 { background: var(--color-dark-surface-raised); }
+    th { background: var(--color-dark-th-bg); color: var(--color-text-secondary); }
+    td { background: var(--color-dark-surface); color: var(--color-text-body); }
+    tr:hover td { background: var(--color-dark-hover); }
+    tr:hover { background: var(--color-dark-hover); }
+    .highlight-box { background: linear-gradient(135deg, var(--color-dark-highlight-start), var(--color-dark-highlight-end)); }
+    .warning-box { background: var(--color-dark-warning-bg); }
+    .info-box { background: var(--color-dark-surface); }
+    blockquote { background: var(--color-dark-surface); color: var(--color-text-body); }
+    .source { color: var(--color-text-secondary); }
+    footer { color: var(--color-dark-footer-text); }
+    .contact-item .label { color: var(--color-dark-footer-text); }
+    details summary .detail-count { color: var(--color-dark-footer-text); }
+    details summary:hover { background: var(--color-dark-hover); }
+
+    .badge-success, .badge-verified, .badge-high { background: var(--color-dark-badge-success-bg); color: var(--color-dark-badge-success-text); }
+    .badge-warning, .badge-inferred, .badge-medium { background: var(--color-dark-badge-warning-bg); color: var(--color-dark-badge-warning-text); }
+    .badge-danger, .badge-unverified { background: var(--color-dark-badge-danger-bg); color: var(--color-dark-badge-danger-text); }
+    .badge-info, .badge-quick { background: var(--color-dark-badge-info-bg); color: var(--color-dark-badge-info-text); }
+
     .box-success          { background: var(--color-dark-badge-success-bg, #1a3a2a); }
     .box-warning          { background: var(--color-dark-badge-warning-bg, #3a3020); }
     .box-danger           { background: var(--color-dark-badge-danger-bg, #3a1a1a); }
