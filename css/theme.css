@@ -257,6 +257,28 @@
     --color-shadow-hover: rgba(0, 0, 0, 0.12);
 }
 
+/* --- Post Oak Group — navy/gold investment banking theme --- */
+[data-brand="post-oak-group"] {
+    --color-primary-dark: #1a2744;
+    --color-primary-medium: #2c4a7c;
+    --color-primary-light: #4a7ab5;
+    --primary: #1a2744;
+    --secondary: #2c4a7c;
+    --accent: #c9a84c;
+    --light: #f7f5f0;
+    --dark: #0f1a2e;
+    --border: #d4cfc5;
+    --tr-hover-bg: #eee9df;
+    --color-highlight-start: #e8e0ce;
+    --color-highlight-end: #f0ebe0;
+    --color-text-override: #111;
+    --color-warning-bg-brand: #fef5e0;
+    --color-info-bg: #e8eff8;
+    --color-rating: #c9a84c;
+    --badge-info-bg: #2c4a7c;
+    --badge-info-text: #fff;
+}
+
 /* --- Strong Towns --- */
 [data-brand="strong-towns"] {
     --color-primary-dark: #143028;
@@ -1165,6 +1187,7 @@
     [data-brand="integrity-studio"] section h2 { background: var(--dark-bg-integrity); }
     [data-brand="sound-sight-tarot"] section h2 { background: var(--dark-bg-tarot); }
     [data-brand="strong-towns"] section h2 { background: var(--dark-bg-towns); }
+    [data-brand="post-oak-group"] section h2 { background: #1a2744; }
     [data-brand="balloon-collective"] section h2 { background: var(--dark-bg-balloon); }
     [data-brand="edgar-nadyne"] section h2 { background: var(--dark-bg-edgar); }
     [data-brand="zoukmx"] section h2 { background: var(--dark-bg-towns); }
@@ -1257,6 +1280,19 @@
     [data-brand="strong-towns"] .badge-warning { background: var(--dark-towns-badge-warning-bg); color: var(--dark-towns-badge-warning-color); }
     [data-brand="strong-towns"] .badge-danger { background: var(--dark-towns-badge-danger-bg); color: var(--dark-towns-badge-danger-color); }
     [data-brand="strong-towns"] .badge-info { background: var(--dark-towns-badge-info-bg); color: var(--dark-towns-badge-success-color); }
+
+    /* --- Post Oak Group dark overrides --- */
+    [data-brand="post-oak-group"] { --primary: #4a7ab5; --secondary: #6b9fd4; --accent: #d4b565; --light: #1a1a2e; --dark: #e8e0ce; --border: #334155; --tr-hover-bg: #1e293b; --color-highlight-start: #1a2744; --color-highlight-end: #2c3a52; --color-info-bg: #1a2744; --color-warning-bg-brand: #2a2518; }
+    [data-brand="post-oak-group"] tr:hover { background: var(--tr-hover-bg); }
+    [data-brand="post-oak-group"] .highlight-box { background: linear-gradient(135deg, #1a2744, #2c3a52); color: #e2e8f0; }
+    [data-brand="post-oak-group"] .info-box { background: #1a2744; color: #e2e8f0; }
+    [data-brand="post-oak-group"] .warning-box { background: #2a2518; color: #e2e8f0; }
+    [data-brand="post-oak-group"] .section-content { color: #e2e8f0; }
+    [data-brand="post-oak-group"] .section-content p,
+    [data-brand="post-oak-group"] .section-content li { color: #cbd5e1; }
+    [data-brand="post-oak-group"] .executive-summary p { color: #cbd5e1; }
+    [data-brand="post-oak-group"] td { color: #cbd5e1; }
+    [data-brand="post-oak-group"] footer { color: #94a3b8; }
 
     /* Opportunity component dark → css/opportunity-components.css */
 
