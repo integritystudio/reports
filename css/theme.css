@@ -279,6 +279,28 @@
     --badge-info-text: #fff;
 }
 
+/* --- Kollective Group — coral/charcoal recruiting theme --- */
+[data-brand="kollective-group"] {
+    --color-primary-dark: #2d2d2d;
+    --color-primary-medium: #e85d4a;
+    --color-primary-light: #f08c7c;
+    --primary: #2d2d2d;
+    --secondary: #e85d4a;
+    --accent: #f08c7c;
+    --light: #faf8f6;
+    --dark: #1a1a1a;
+    --border: #e0dbd5;
+    --tr-hover-bg: #fdf0ed;
+    --color-highlight-start: #fdf0ed;
+    --color-highlight-end: #fce4df;
+    --color-text-override: #1a1a1a;
+    --color-warning-bg-brand: #fef5e0;
+    --color-info-bg: #f0f4f8;
+    --color-rating: #e85d4a;
+    --badge-info-bg: #e85d4a;
+    --badge-info-text: #fff;
+}
+
 /* --- Strong Towns --- */
 [data-brand="strong-towns"] {
     --color-primary-dark: #143028;
@@ -1188,6 +1210,7 @@
     [data-brand="sound-sight-tarot"] section h2 { background: var(--dark-bg-tarot); }
     [data-brand="strong-towns"] section h2 { background: var(--dark-bg-towns); }
     [data-brand="post-oak-group"] section h2 { background: #1a2744; }
+    [data-brand="kollective-group"] section h2 { background: #2d2d2d; }
     [data-brand="balloon-collective"] section h2 { background: var(--dark-bg-balloon); }
     [data-brand="edgar-nadyne"] section h2 { background: var(--dark-bg-edgar); }
     [data-brand="zoukmx"] section h2 { background: var(--dark-bg-towns); }
@@ -1293,6 +1316,19 @@
     [data-brand="post-oak-group"] .executive-summary p { color: #cbd5e1; }
     [data-brand="post-oak-group"] td { color: #cbd5e1; }
     [data-brand="post-oak-group"] footer { color: #94a3b8; }
+
+    /* --- Kollective Group dark overrides --- */
+    [data-brand="kollective-group"] { --primary: #f08c7c; --secondary: #e85d4a; --accent: #f5a899; --light: #1a1a1a; --dark: #f0ebe6; --border: #334155; --tr-hover-bg: #2a1f1c; --color-highlight-start: #2a1f1c; --color-highlight-end: #33221e; --color-info-bg: #1e2430; --color-warning-bg-brand: #2a2518; }
+    [data-brand="kollective-group"] tr:hover { background: var(--tr-hover-bg); }
+    [data-brand="kollective-group"] .highlight-box { background: linear-gradient(135deg, #2a1f1c, #33221e); color: #e2e8f0; }
+    [data-brand="kollective-group"] .info-box { background: #1e2430; color: #e2e8f0; }
+    [data-brand="kollective-group"] .warning-box { background: #2a2518; color: #e2e8f0; }
+    [data-brand="kollective-group"] .section-content { color: #e2e8f0; }
+    [data-brand="kollective-group"] .section-content p,
+    [data-brand="kollective-group"] .section-content li { color: #cbd5e1; }
+    [data-brand="kollective-group"] .executive-summary p { color: #cbd5e1; }
+    [data-brand="kollective-group"] td { color: #cbd5e1; }
+    [data-brand="kollective-group"] footer { color: #94a3b8; }
 
     /* Opportunity component dark → css/opportunity-components.css */
 
