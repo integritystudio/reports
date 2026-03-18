@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-Post Oak Group is a newly launched Houston-based middle-market investment bank, founded December 19, 2025. The firm offers four integrated service lines — M&A Advisory, Capital Markets, Wealth Advisory, and Institutional Research — targeting companies with $10M–$500M in revenue across 26 industry sectors. Led by four Managing Partners (Anthony Treistman, Alexander Treistman, Scott Schopen, and David Chua), the firm claims 300+ professionals across 12 countries with a combined $82.2 billion in historical transaction experience. Post Oak Group is headquartered at 2800 Post Oak Blvd., Houston, TX 77056 and competes across the Texas middle market. As a firm less than four months old at the time of this research, no independent third-party reviews, BBB listing, or FINRA broker-dealer registration could be confirmed through public searches. The middle-market investment banking sector is experiencing strong tailwinds, with global M&A deal volume reaching ~$3.5 trillion in 2025 and over $1 trillion in private equity dry powder targeting the segment.
+Post Oak Group is a newly launched Houston-based middle-market investment bank, founded December 19, 2025. The firm offers four integrated service lines — M&A Advisory, Capital Markets, Wealth Advisory, and Institutional Research — targeting companies with $10M–$500M in revenue across 26 industry sectors. Led by four Managing Partners (Anthony Treistman, Alexander Treistman, Scott Schopen, and David Chua), the firm claims 300+ professionals across 12 countries with a combined $82.2 billion in historical transaction experience. **Note:** these figures are self-reported; the $82.2B represents the combined prior-firm deal history of individual team members, not transactions executed by Post Oak Group itself, and LinkedIn data suggests a team of 81–200 (not 300+). Post Oak Group is headquartered at 2800 Post Oak Blvd., Houston, TX 77056 and competes across the Texas middle market. As a firm less than four months old at the time of this research, no independent third-party reviews, BBB listing, or FINRA broker-dealer registration could be confirmed through public searches. The middle-market investment banking sector is experiencing strong tailwinds, with global M&A deal volume reaching ~$3.5 trillion in 2025 and over $1 trillion in private equity dry powder targeting the segment.
 
 ---
 
@@ -127,15 +127,17 @@ Biotech, Aerospace, AI, Chemicals, Insurance, Technology/SaaS, Healthcare, Energ
 
 ## 6. Financial Information
 
+> **Disclosure:** All financial metrics below are self-reported by Post Oak Group. No independent verification was found for any claimed figure. The $82.2B transaction value represents *combined prior-firm deal history* of individual team members — not deals executed by Post Oak Group, which was founded December 2025 and has no publicly verifiable transaction record.
+
 | Metric | Claimed Value | Verification |
 |--------|---------------|--------------|
-| Total Transaction Value | $82.2 billion (combined team history) | ⚠️ Self-Reported |
-| Team Size | 300+ professionals | ⚠️ Conflicting (LinkedIn: 81–200) |
+| Total Transaction Value | $82.2 billion (combined team history) | ❌ Unverified — Prior-Firm Aggregate |
+| Team Size | 300+ professionals | ❌ Conflicting (LinkedIn: 81–200) |
 | Combined Experience | 250+ years across leadership | ⚠️ Self-Reported |
 | Countries of Operation | 12 | ⚠️ Self-Reported |
 | Revenue / AUM | Not disclosed | Private company |
 
-> **Note:** The $82.2B transaction value represents the combined historical deal experience of individual team members at prior firms, not transactions completed by Post Oak Group itself.
+> **Note:** The discrepancy between self-reported team size (300+) and LinkedIn data (81–200 employees) warrants further verification. As a firm founded in December 2025, the entity has no independent transaction track record.
 
 ---
 
@@ -286,7 +288,7 @@ Biotech, Aerospace, AI, Chemicals, Insurance, Technology/SaaS, Healthcare, Energ
 8. [Mordor Intelligence — IB Market 2030](https://www.globenewswire.com/news-release/2025/12/23/3209751/0/en/Investment-Banking-Market-to-Reach-USD-138-Bn-by-2030-as-M-A-Momentum-Strengthens-North-America-Dominates-Reports-Mordor-Intelligence.html)
 9. [Verified Market Reports — M&A Advisory](https://www.verifiedmarketreports.com/product/m-a-advisory-market/)
 10. [PwC — Global M&A Trends 2026](https://www.pwc.com/gx/en/services/deals/trends.html)
-11. [Goldman Sachs — 2026 M&A Outlook](https://www.goldmansachs.com/what-we-do/investment-banking/insights/articles/2026-ma-outlook/goldman-sachs-2026-global-ma-outlook.pdf)
+11. [Goldman Sachs — 2026 M&A Outlook](https://www.goldmansachs.com/what-we-do/investment-banking/insights/articles/2026-ma-outlook/)
 12. [McKinsey — CIB 2026](https://www.mckinsey.com/industries/financial-services/our-insights/cib-in-an-era-of-volatility-ai-and-nonbank-challengers)
 
 ### Austin Metro & Texas
@@ -295,7 +297,7 @@ Biotech, Aerospace, AI, Chemicals, Insurance, Technology/SaaS, Healthcare, Energ
 15. [City of Austin — HUD MFI 2025](https://www.austintexas.gov/sites/default/files/files/Housing_&_Planning/Income%20&%20Rent%20Limits/2025/HUD-HOME-MFI-Limits-and-Rent-Rates_2025.pdf)
 16. [CultureMap Austin — Dec 2025 Real Estate](https://austin.culturemap.com/news/real-estate/real-estate-report-december-2025/)
 17. [Opportunity Austin — Population Projections](https://opportunityaustin.com/austin-region-population-projection-insights-november-2025/)
-18. [TRERC at TAMU](https://www.recenter.tamu.edu/)
+18. [TRERC at TAMU](https://trerc.tamu.edu/)
 
 ### Competitors
 19. [Westlake Securities](https://westlakesecurities.com/)
