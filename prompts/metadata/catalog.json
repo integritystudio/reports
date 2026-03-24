@@ -1,0 +1,62 @@
+{
+  "developer_prompts": [
+    {
+      "title": "Linux Terminal",
+      "file": "dev/linux-terminal.md",
+      "contributor": "f"
+    },
+    {
+      "title": "Python Interpreter",
+      "file": "dev/python-interpreter.md",
+      "contributor": "ameya-2003"
+    },
+    {
+      "title": "Ethereum Developer",
+      "file": "dev/ethereum-developer.md",
+      "contributor": "developer1"
+    },
+    {
+      "title": "API Design Expert",
+      "file": "dev/api-design-expert.md",
+      "contributor": "dev-expert"
+    }
+  ],
+  "general_prompts": [
+    {
+      "title": "Storyteller",
+      "file": "general/storyteller.md",
+      "category": "creative",
+      "contributor": "creative1"
+    },
+    {
+      "title": "Life Coach",
+      "file": "general/life-coach.md",
+      "category": "lifestyle",
+      "contributor": "coach-pro"
+    },
+    {
+      "title": "English Translator",
+      "file": "general/english-translator.md",
+      "category": "language",
+      "contributor": "translator"
+    },
+    {
+      "title": "Stand-up Comedian",
+      "file": "general/stand-up-comedian.md",
+      "category": "entertainment",
+      "contributor": "comedy"
+    },
+    {
+      "title": "Public Speaking Coach",
+      "file": "general/public-speaking-coach.md",
+      "category": "professional",
+      "contributor": "speaker"
+    },
+    {
+      "title": "Writing Consultant",
+      "file": "general/writing-consultant.md",
+      "category": "writing",
+      "contributor": "writer"
+    }
+  ]
+}
