@@ -268,7 +268,7 @@ If yes, you're ready for Phase 3. If no, spend an extra 30 minutes re-reading Ka
 
 By end of Phase 3, you should be able to:
 - Set up basic OTEL instrumentation for a Python training script (3-5 lines)
-- Name the three OTEL signal types (metrics, traces, events) and explain when you'd use each
+- Name the three OTEL signal types (metrics, traces, logs) and explain when you'd use each
 - Identify at least 4 metric instruments worth emitting during model training
 - Explain what model drift is and describe one statistical approach for detecting it
 
@@ -700,7 +700,7 @@ These are the patterns most likely to waste your time if you don't recognize the
 
 **Root cause:** Emitting every intermediate value — every weight, every neuron activation — instead of aggregated signals.
 
-**Rule:** Don't instrument per-weight or per-parameter. Instrument aggregates: `gradient_norm` (not per-layer gradients), `activation_mean` per layer (not per neuron), `loss` (not per-sample loss values). Focus on the 8 metrics in the [OTEL bridge guide](../docs/neural-networks-otel-bridge.md#quick-reference-checklist).
+**Rule:** Don't instrument per-weight or per-parameter. Instrument aggregates: `gradient_norm` (not per-layer gradients), `activation_mean` per layer (not per neuron), `loss` (not per-sample loss values). Focus on the core metrics in the [OTEL bridge guide](../docs/neural-networks-otel-bridge.md#6-quick-reference-metric-checklist-for-training-observability).
 
 ---
 
