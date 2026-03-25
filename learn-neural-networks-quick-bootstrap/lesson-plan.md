@@ -346,6 +346,85 @@ If yes, you're ready for Phase 3. If no, spend an extra 30 minutes re-reading Ka
 
 ---
 
+## Phase 4 Capstone: Explaining LLM Behavior to Non-ML Colleagues
+
+After studying transformers, hallucinations, and interpretability tools, you'll need to translate these concepts for product managers, customer success, sales, and other teammates. This section prepares you for that critical communication task.
+
+### How to Explain Key Concepts Without the Math
+
+**Transformers (What They Actually Do):**
+- **For non-technical people:** "A transformer is like a very sophisticated pattern-matching engine. It reads all the words in your input at once, figures out which words are most important to pay attention to, and uses that to predict the next word. It repeats this millions of times with billions of parameters."
+- **Common misconception to correct:** "It doesn't understand meaning the way humans do. It's pattern-matching so advanced it *seems* intelligent, but it's really just predicting the most likely next token based on statistical patterns from training data."
+- **The analogy that works:** "If you've ever finished someone's sentence because you know them well, you're doing something similar—predicting what comes next based on patterns. Transformers do this with text at superhuman scale."
+
+**Hallucinations (Why They Happen):**
+- **For non-technical people:** "An LLM hallucinates when it confidently generates false information. This happens because the model was trained on internet text (which contains falsehoods) and learned to predict plausible-sounding next words, not to fact-check itself. It doesn't know what it doesn't know."
+- **Common misconception to correct:** "Hallucinations aren't glitches or bugs. They're a fundamental property of how these models work. You can reduce them but never eliminate them. A model that never hallucinates would be a model that never generates creative or uncertain outputs."
+- **The analogy that works:** "Imagine someone who's read thousands of books but has never been fact-checked. When asked a question they've never seen before, they'll confidently make up an answer that *sounds* like it could be from a book. That's an LLM hallucinating."
+
+**Explainability (Why It's Hard):**
+- **For non-technical people:** "When we ask 'why did the model say that?', there's no simple answer. The decision emerges from billions of mathematical operations. We have tools (saliency maps, attention visualizations) that show *which words mattered*, but not *how the model reasoned*. It's like asking someone why they made a snap decision—they can tell you what they paid attention to, but not the exact thought process."
+- **Common misconception to correct:** "We can't fully explain LLM decisions, but that's not because we're not trying hard enough. It's because the model works fundamentally differently from human reasoning. We can get better at *observing* what it attends to, not at *decoding* how it thinks."
+- **The analogy that works:** "It's like explaining how a chess grandmaster decides to move a piece. They can tell you they 'felt' it was the right move, they can point to board positions they considered, but they can't walk you through their exact thought process because it's intuitive, not explicit."
+
+### Common LLM Misconceptions Your Colleagues Will Have
+
+**Misconception 1: "If the model was trained on good data, it won't hallucinate"**
+- **Reality:** Even models trained on high-quality data hallucinate. The problem isn't training data quality; it's that prediction-based systems can't distinguish between patterns they've learned and facts they've verified.
+- **How to explain:** "The model learns patterns, not facts. If your training data has a pattern like 'scientists are called Dr. [NAME]', the model will confidently invent Dr. names it's never seen."
+
+**Misconception 2: "We can make LLMs completely transparent by adding more explainability tools"**
+- **Reality:** Explainability tools show correlation (which inputs mattered), not causation (how the model used them). A token can be high-attention but not directly causal to the output.
+- **How to explain:** "Attention visualization shows what the model looked at, not why it looked there or how that shaped the decision. It's like security camera footage—it tells you where someone was looking, not what they were thinking."
+
+**Misconception 3: "LLMs will get better with scale and eventually be trustworthy"**
+- **Reality:** Larger models hallucinate more confidently, not less frequently. Scale improves some capabilities but doesn't solve the hallucination problem.
+- **How to explain:** "Bigger models are better at writing convincing-sounding text. That can mean more fluent hallucinations, not fewer false statements."
+
+**Misconception 4: "If we can explain a model's decision, it's safe to deploy"**
+- **Reality:** Explainability ≠ safety. You can fully understand why a model made a decision and still have it be wrong or harmful.
+- **How to explain:** "Just because you can see what the model paid attention to doesn't mean its conclusion is correct. A doctor might look at the right medical charts and still misdiagnose. Transparency doesn't equal accuracy."
+
+**Misconception 5: "Attention maps show you exactly what the model is thinking"**
+- **Reality:** Attention is one mechanism; it's not the model's entire reasoning process. High attention to a token doesn't mean the model used that token to make the decision.
+- **How to explain:** "Attention visualization is like seeing which part of a picture a person looked at longest. But looking at something doesn't mean it's what made them decide."
+
+### Practical Guidance: Communicating With Different Roles
+
+**With Product/Business:**
+- Lead with: "What are users experiencing when the model hallucinates? That's the real problem we're solving, not 'making it more explainable.'"
+- Key phrase: "Hallucination risk is unavoidable; our job is to detect and mitigate it through monitoring and guardrails."
+- Avoid: "The model is a black box and we'll never understand it." (Wrong framing. Instead: "We can observe what it attends to and measure when it's uncertain.")
+
+**With Customer Success:**
+- Lead with: "Here are the patterns in how/when the model fails. Teach customers to expect these failure modes."
+- Key phrase: "Hallucination isn't a bug; it's a failure mode of the technology. We mitigate through [RAG/verification/guardrails]."
+- Avoid: "The model works perfectly when given good prompts." (It doesn't. Be honest about limitations.)
+
+**With Sales/Marketing:**
+- Lead with: "We're transparent about where LLMs work and where they fail. That's our competitive advantage."
+- Key phrase: "We monitor model confidence, detect hallucinations in real-time, and have guardrails to prevent false outputs."
+- Avoid: "Our model is explainable." (Instead: "Our model is observable—we measure its behavior continuously.")
+
+**With Engineering (building on top of LLMs):**
+- Lead with: "Assume hallucination. Design for it. Use RAG, verification, and observability as your defense."
+- Key phrase: "The model is a component with known failure modes. Treat it like any other system that can fail."
+- Avoid: "The model will figure it out if you prompt it right." (Prompt engineering has limits.)
+
+### Testing Your Understanding: Teach-Back Questions
+
+After Phase 4, you should be able to answer these for a non-ML colleague without looking back:
+
+1. **"Why does the model sometimes make up facts?"** (Distinguish between training data, pattern-matching, and hallucination.)
+2. **"Can we just make the model more transparent and call it solved?"** (No—explain why transparency ≠ accuracy.)
+3. **"If attention visualization shows which words mattered, doesn't that explain the decision?"** (No—explain the correlation vs. causation problem.)
+4. **"Will bigger models hallucinate less?"** (No—explain why scale makes confident hallucinations more common.)
+5. **"Should we stop using LLMs because we can't fully explain them?"** (No—explain risk mitigation vs. elimination.)
+
+If you can explain your answers clearly to someone without a math or ML background, you've mastered Phase 4.
+
+---
+
 ## Phase 5: Advanced Context (Month 2)
 
 ### Resource 12
