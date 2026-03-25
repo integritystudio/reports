@@ -32,6 +32,30 @@
 
 ## Phase 1: Quick Start (Day 1 Reading)
 
+### Learning Objectives
+
+By end of Phase 1, you should be able to:
+- Explain what a neuron is and why networks of neurons can learn patterns
+- Describe what a forward pass does in plain language
+- Draw a simple neural network (input → hidden layer → output) on paper and label the weights
+- Explain gradient descent using a non-mathematical analogy
+
+> **As an educator, you know** that building a mental model before encountering the math prevents the "symbol shock" that derails many self-taught ML beginners. Phase 1 is entirely about intuition first. The equations come later and will make more sense because of this foundation.
+
+### Phase 1 Glossary Callout
+
+| Term | Plain meaning |
+|------|--------------|
+| **AI** | Machines that perform tasks requiring human-like reasoning |
+| **ML** | Systems that learn patterns from data, rather than following explicit rules |
+| **DL** | Deep Learning — neural networks with many layers |
+| **NN** | Neural Network — a graph of connected "neurons" that transform inputs into outputs |
+| **Forward pass** | Running input data through the network to produce a prediction |
+| **Activation** | The output value of a neuron after applying a non-linear function (e.g., ReLU) |
+| **Weight** | A number that scales the signal between two neurons — what the network *learns* |
+
+---
+
 ### Resource 1
 **Title:** But What Is a Neural Network? (Chapter 1, Deep Learning)
 **Link:** [https://www.3blue1brown.com/topics/neural-networks](https://www.3blue1brown.com/topics/neural-networks)
@@ -82,9 +106,40 @@
 
 **Phase 1 Comparison Note:** These two resources are highly complementary rather than competitive. 3Blue1Brown builds visual-spatial intuition; Alammar provides interactive experimentation. Together they provide a strong conceptual foundation in under an hour. Neither requires any coding. Neither covers failure modes or observability — those are Phase 2 concerns.
 
+### Phase 1 Try This
+
+> **Try This:** After watching 3Blue1Brown Chapter 1, close the video and sketch a neural network on paper. Draw at least 2 hidden layers. Label each connection as a "weight" and each node as a "neuron." Show the direction of a forward pass with arrows. Then annotate: where does the network know it made a mistake? You don't need to know the math yet — just indicate *where* the error signal would come from.
+
+### Phase 1 Teach-Back
+
+> **Teach-Back:** Explain to a colleague (or write a paragraph as if explaining to one) why gradient descent is like walking downhill in the dark. The explanation should cover: what the "hill" represents, what "downhill" means for the model, and why you can only see the ground immediately beneath your feet. If you can do this without looking at the videos, you've built the mental model Phase 2 requires.
+
 ---
 
 ## Phase 2: Core Concepts (Week 1)
+
+### Learning Objectives
+
+By end of Phase 2, you should be able to:
+- Explain what backpropagation does (without needing to derive the chain rule)
+- Identify overfitting by looking at a train/validation loss plot
+- Describe what the learning rate controls and what happens when it's too high or too low
+- Write or follow a training loop in Python (even a simplified one)
+
+> **As an educator, you know** that hands-on exercises create retention in a way that reading cannot. Karpathy's approach of building from first principles is the LPTHW methodology applied to ML — you don't understand gradient descent until you've computed a gradient by hand.
+
+### Phase 2 Glossary Callout
+
+| Term | Plain meaning |
+|------|--------------|
+| **Backpropagation** | Algorithm that propagates the error signal backwards through the network to update weights |
+| **Gradient** | The direction and magnitude of the steepest increase in loss — you go the opposite direction |
+| **Loss** | A number measuring how wrong the model's predictions are — lower is better |
+| **Overfitting** | When a model memorizes training data instead of learning generalizable patterns |
+| **Regularization** | Techniques (dropout, weight decay) that prevent overfitting by constraining the model |
+| **Learning rate** | How big a step to take in the direction the gradient points — too large = overshoot, too small = slow |
+
+---
 
 ### Resource 3
 **Title:** Neural Networks: Zero to Hero
@@ -158,6 +213,18 @@
 
 **Phase 2 Comparison Note:** Karpathy (Resource 3) is the most important single resource in this phase — nothing else builds the same depth of understanding of what is actually happening during training. Resources 4 and 5 are best read together: V7 Labs for the practical how-to, Lil'Log for the conceptual nuance. Resource 5 is optional for Day 1 readers but becomes important once monitoring thresholds need to be discussed.
 
+### Phase 2 Try This
+
+> **Try This:** Write (or copy and annotate) a 50-line Python function that: (1) creates a small dataset with a known pattern, (2) initializes random weights, (3) computes a forward pass and a loss value, (4) prints the loss at each step as the weights improve. You don't need PyTorch. Pure Python + NumPy is the goal. If you run Karpathy's micrograd code, add a print statement that outputs the loss every 10 steps. Watch it go down.
+
+### Phase 2 Teach-Back
+
+> **Teach-Back:** Answer this without notes: "What does it mean when training loss drops but validation loss rises?" Your answer should include: what training loss vs. validation loss measure, what the divergence indicates about the model's behavior, and at least one concrete action you'd take in response. If you can answer this clearly, you're ready for Phase 3's monitoring content.
+
+### Phase 2 Production Example
+
+> **Real case:** A startup's training loop ran for 12 hours and produced a model that scored 95% on training data — but only 61% on new user data. The team hadn't tracked validation loss at all; they only monitored training loss. By the time they noticed the quality gap, they'd already shipped the model to 500 beta users. What monitoring would have caught this? (Answer: a validation loss metric emitted every N steps, with an alert when validation_loss / training_loss exceeds 1.3.)
+
 ---
 
 ## Bridge: From Training Concepts to OTEL Metrics (Phase 2 → 3)
@@ -196,6 +263,29 @@ If yes, you're ready for Phase 3. If no, spend an extra 30 minutes re-reading Ka
 ---
 
 ## Phase 3: OTEL and Observability (Week 2)
+
+### Learning Objectives
+
+By end of Phase 3, you should be able to:
+- Set up basic OTEL instrumentation for a Python training script (3-5 lines)
+- Name the three OTEL signal types (metrics, traces, events) and explain when you'd use each
+- Identify at least 4 metric instruments worth emitting during model training
+- Explain what model drift is and describe one statistical approach for detecting it
+
+> **As an educator, you know** that learners need to connect new abstractions to things they already understand. Phase 3's OTEL concepts are not new — they're the same observability patterns used for web services, applied to model training. If you've ever seen an HTTP dashboard with p99 latency, you already understand the shape of what we're building here.
+
+### Phase 3 Glossary Callout
+
+| Term | Plain meaning |
+|------|--------------|
+| **OTEL** | OpenTelemetry — an open standard for collecting telemetry from software systems |
+| **Metric** | A numeric measurement over time (e.g., `training_loss` at step 1000 = 0.23) |
+| **Trace** | A record of a single operation (e.g., one forward pass) showing how long each part took |
+| **Span** | One unit within a trace — like a function call with a start time, end time, and attributes |
+| **Observability** | The ability to understand what's happening inside a system from its external outputs |
+| **Drift** | When the model's behavior or input distribution changes from what it was trained on |
+
+---
 
 ### Resource 6
 **Title:** An Introduction to Observability for LLM-Based Applications Using OpenTelemetry
@@ -267,9 +357,45 @@ If yes, you're ready for Phase 3. If no, spend an extra 30 minutes re-reading Ka
 
 **Phase 3 Comparison Note:** Resources 6 and 7 are both from opentelemetry.io and are complementary — Resource 6 is the practical walkthrough, Resource 7 is the standards reference. Read both. Resource 8 stands apart because it covers drift — which neither OTEL resource addresses. The gap in this phase is a single resource that bridges neural network behavior, drift detection, AND OTEL instrumentation together; that synthesis currently does not exist as a single beginner-friendly article and would be useful to write internally.
 
+### Phase 3 Try This
+
+> **Try This:** Open the training script from Phase 2's Try This exercise. Add OTEL instrumentation in 3 lines: (1) initialize an OTEL meter, (2) create a `training_loss` gauge instrument, (3) emit the loss value at each step. If you don't have a running environment, write the 3 lines as pseudocode and explain what each line does. Bonus: add a second instrument for `validation_loss` and describe what alert rule you'd configure on it.
+
+### Phase 3 Teach-Back
+
+> **Teach-Back:** Answer this without notes: "Why would you monitor `gradient_norm` in OTEL, and when would high values be bad?" Your answer should cover: what gradient norm measures, what a high value indicates about training stability, and what you'd do when the alert fires. (See [neural-networks-otel-bridge.md](../docs/neural-networks-otel-bridge.md) for reference if needed.)
+
+### Phase 3 Production Example
+
+> **Real case:** A team monitored only final validation accuracy on their fine-tuning run. At step 8,000, accuracy looked fine — but `gradient_norm` had spiked to 47x its baseline at step 6,000 and then collapsed, indicating a training instability that the model partly recovered from. The final model underperformed in production edge cases. If they had been emitting `gradient_norm` as an OTEL metric with an alert at 10x baseline, they would have caught the instability mid-run and could have reduced the learning rate before the weights diverged.
+
 ---
 
 ## Phase 4: LLM and Explainability (Week 3)
+
+### Learning Objectives
+
+By end of Phase 4, you should be able to:
+- Describe the transformer architecture (encoder, decoder, attention mechanism) in plain language
+- Explain why LLMs hallucinate and name at least two detection approaches (e.g., SelfCheckGPT, consistency sampling)
+- Use BertViz or a similar tool to visualize attention weights on a short sentence
+- Explain the difference between interpretability (model mechanics) and explainability (external attribution tools)
+- Translate all of the above to a non-technical colleague without using math
+
+> **As an educator, you know** the difference between knowing something and being able to teach it. Phase 4's capstone tests exactly this: can you explain hallucinations to a product manager in a way that changes how they think about risk? That's the most valuable skill in this phase.
+
+### Phase 4 Glossary Callout
+
+| Term | Plain meaning |
+|------|--------------|
+| **Attention** | The mechanism that lets each token in a sequence "look at" and weight the relevance of all other tokens |
+| **Hallucination** | When an LLM generates confident, plausible-sounding text that is factually false |
+| **Interpretability** | Understanding the internal mechanics of a model (what the weights are doing) |
+| **Explainability** | External tools and methods to attribute model outputs to input features (SHAP, saliency maps) |
+| **Saliency** | Which input tokens contributed most to a specific output (a type of attribution score) |
+| **Embedding** | A dense numeric vector representing a token, word, or sentence in a learned vector space |
+
+---
 
 ### Resource 9
 **Title:** The Illustrated Transformer
@@ -345,6 +471,10 @@ If yes, you're ready for Phase 3. If no, spend an extra 30 minutes re-reading Ka
 - Substack format can be inconsistent in depth
 
 **Phase 4 Comparison Note:** Resources 9, 10, and 11 form a deliberate sequence: Illustrated Transformer (how it works) -> Hallucinations (how it fails) -> Explainability (how to see inside it). This sequence directly mirrors the startup's product concerns. Resource 10 is the highest-value single article in this phase because hallucination is both a common end-user concern and a measurement problem. Resource 11 is where the explainability-to-OTEL bridge becomes most concrete.
+
+### Phase 4 Try This
+
+> **Try This:** Install BertViz (`pip install bertviz`) and run the head view on the sentence "The cat sat on the mat because it was tired." Observe which attention heads in layer 1 focus on "it" — where does "it" attend to most? What does this tell you about what the model "knows" about pronoun resolution? If you can't run it locally, read the BertViz paper's Figure 2 and describe what you see. This exercise makes the abstract concept of attention visually concrete in under 15 minutes.
 
 ---
 
@@ -429,6 +559,29 @@ If you can explain your answers clearly to someone without a math or ML backgrou
 
 ## Phase 5: Advanced Context (Month 2)
 
+### Learning Objectives
+
+By end of Phase 5, you should be able to:
+- Explain the difference between fine-tuning, LoRA, and quantization — and when you'd choose each
+- Describe the latency/quality/cost trade-offs of deploying a quantized vs. full-precision model
+- Instrument a fine-tuning run with OTEL metrics (building on Phase 3)
+- Explain what an AI agent observability pipeline needs beyond single-model monitoring
+
+> **As an educator, you know** that Month 2 learning happens best when integrated into real work rather than treated as a separate curriculum. Use the fast.ai course as the depth resource, but apply lessons from Resources 13-14 directly to any deployment or fine-tuning work you encounter in sprint.
+
+### Phase 5 Glossary Callout
+
+| Term | Plain meaning |
+|------|--------------|
+| **Fine-tuning** | Further training a pre-trained model on a smaller, domain-specific dataset |
+| **LoRA** | Low-Rank Adaptation — fine-tuning with far fewer parameters using matrix decomposition |
+| **Quantization** | Reducing model weight precision (e.g., 32-bit → 4-bit) to shrink size and speed up inference |
+| **Inference** | Running the model forward to generate a prediction (as opposed to training) |
+| **Latency** | Time from input submission to response — a key SLO metric for deployed LLMs |
+| **Throughput** | How many requests per second the model can handle — capacity planning metric |
+
+---
+
 ### Resource 12
 **Title:** Practical Deep Learning for Coders
 **Link:** [https://course.fast.ai/](https://course.fast.ai/)
@@ -496,6 +649,58 @@ If you can explain your answers clearly to someone without a math or ML backgrou
 - Standards are still evolving; implementation details may change
 - Requires prior OTEL familiarity to get full value
 - No code examples or tutorials yet
+
+### Phase 5 Try This
+
+> **Try This:** Deploy a quantized model and benchmark it against the full-precision version. Use `llama.cpp`, HuggingFace `bitsandbytes`, or any quantization-enabled runtime. Measure three things: (1) inference latency (ms per token), (2) memory usage (GB), (3) response quality on 5 test prompts you score yourself 1-5. Record your findings in a table. This gives you real numbers to cite when discussing latency/quality trade-offs with engineering or product colleagues.
+
+### Phase 5 Teach-Back
+
+> **Teach-Back:** Explain to a non-technical colleague what LoRA is and why it matters for a startup. Your explanation should cover: why full fine-tuning is expensive, what LoRA does differently (conceptually, not mathematically), and what the practical benefit is for a team without A100s. If your colleague leaves the conversation understanding why they should care about model adaptation costs, you've done it right.
+
+---
+
+## Common Training Pitfalls
+
+These are the patterns most likely to waste your time if you don't recognize them early. Each maps to a specific OTEL signal that would surface it.
+
+### Training Instability: Loss Spikes
+
+**What you see:** Loss drops steadily, then spikes by 5–10x at a random step, then may partially recover.
+
+**Root cause:** Learning rate is too high for the current phase of training. Gradient magnitude exceeds what the optimizer can handle cleanly.
+
+**What OTEL would show:** `gradient_norm` spiking 5–10x its rolling average. If you don't emit gradient_norm, you only see the loss spike after the fact.
+
+**What to do:** Reduce learning rate by 10x and restart from the last checkpoint. Use gradient clipping (`max_norm=1.0`) as a preventive measure.
+
+### Dead Neurons: Activation Mean Collapse
+
+**What you see:** Loss stops improving after a certain point. Validation accuracy plateaus even with more training.
+
+**Root cause:** A layer's neurons have entered the "dead ReLU" state — their gradient is always zero, so they never update. They've been silenced.
+
+**What OTEL would show:** `activation_mean` for a specific layer approaching 0. `dead_neuron_ratio` above 20% for that layer.
+
+**What to do:** Switch to LeakyReLU or ELU activations. Reduce learning rate. Use batch normalization before activation layers.
+
+### Observability Gap: Missing the Signal That Matters
+
+**What you see:** Model ships with apparently good metrics, then underperforms in production. Post-mortem shows training looked fine.
+
+**Root cause:** You monitored the wrong thing. Training accuracy was high (overfit). Validation loss wasn't emitted. Or: validation set wasn't representative of production inputs.
+
+**What OTEL would show (if properly instrumented):** `validation_loss / training_loss` ratio > 1.3 triggers overfitting alert. Input distribution comparison (KL divergence between val set and production inputs) reveals dataset mismatch.
+
+**What to do:** Always emit validation_loss, not just training_loss. Validate that your validation set reflects what users will actually send.
+
+### OTEL Anti-patterns: Instrumenting Too Much
+
+**What you see:** Your telemetry pipeline is overwhelmed. Storage costs spike. Dashboards are cluttered with 200 metrics. No one uses them.
+
+**Root cause:** Emitting every intermediate value — every weight, every neuron activation — instead of aggregated signals.
+
+**Rule:** Don't instrument per-weight or per-parameter. Instrument aggregates: `gradient_norm` (not per-layer gradients), `activation_mean` per layer (not per neuron), `loss` (not per-sample loss values). Focus on the 8 metrics in the [OTEL bridge guide](../docs/neural-networks-otel-bridge.md#quick-reference-checklist).
 
 ---
 
