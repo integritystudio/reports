@@ -84,52 +84,40 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-### NN2. Bridge neural network training to OTEL instrumentation (Highest-Leverage)
+### NN2. Bridge neural network training to OTEL instrumentation (Highest-Leverage) — Done
 **Priority:** HIGH (core competency gap, competitive advantage)
 **Source:** Content review (Mar 25) — identified as critical missing bridge
-**Status:** Ready for implementation
+**Status:** ✅ COMPLETED (Mar 25)
 
 **Deliverable:** Internal guide "Instrumenting Neural Network Training for OTEL Observability"
 **Save location:** `docs/neural-networks-otel-bridge.md`
 
-**Content outline:**
-1. **Mapping table:** Phase 2 training concepts → OTEL signals
-   - Loss function → metrics (training_loss, validation_loss, loss_spike_rate)
-   - Gradient magnitude → metrics (gradient_norm, dead_neuron_ratio, activation_mean)
-   - Learning rate → observable parameters
-   - Overfitting signal → metric thresholds for alerts
-
-2. **Concrete walkthrough:** Instrumenting Karpathy's Zero to Hero code
+**Delivered:**
+1. ✅ **Mapping table:** Phase 2 training concepts → OTEL signals (8 rows: loss, gradients, backprop, neuron activation, learning rate, overfitting, timing, gradient flow)
+2. ✅ **Concrete walkthrough:** Instrumenting Karpathy's training loop
    - Before/after code snippets (Python + OpenTelemetry)
-   - Three lines of OTEL setup to capture training metrics
-   - Example: how to emit loss as a scalar metric at each step
-
-3. **Production patterns & alerting:**
-   - When to alert (gradient explosion, loss plateau, dead neurons)
-   - Thresholds for warning vs. critical (based on model size/architecture)
-   - Dashboard queries for monitoring training health in real-time
-
-4. **Failure case studies:**
-   - Training instability patterns and their OTEL signatures
-   - Overfitting detection via metric divergence
-   - How to distinguish learning rate issues from architecture problems
-
-5. **Why this matters for new hires:**
-   - Makes the abstract (Phase 2 backprop) concrete (Phase 3 dashboards)
-   - Bridges the gap between "understanding how networks learn" and "measuring if they're learning"
+   - 3-line OTEL setup + 4 metric instruments
+   - Instrumentation overhead noted as low (microseconds)
+3. ✅ **Production patterns & alerting:**
+   - Alert thresholds table (warning/critical levels)
+   - 2 example alert rules: overfitting detection, gradient explosion
+4. ✅ **Failure case studies with instrumentation fixes:**
+   - Case 1: Silent NaN divergence (caught by `gradient_nan_count` + `gradient_norm`)
+   - Case 2: Dead ReLU syndrome (caught by `dead_neuron_ratio` and layer-wise `activation_mean`)
+   - Case 3: Overfitting creep (caught by `loss_divergence` ratio monitoring)
+5. ✅ **Why this matters for new hires:** Bridges theory → practice, competitive advantage, onboarding path
+6. ✅ **Quick reference checklist:** 8-point metric checklist for training scripts
+7. ✅ **Extension to Phase 5:** Fine-tuning, inference, quantization scenarios
 
 **Why this is highest-leverage:**
-- No public article currently covers this specific bridge (verified via research)
-- Essential for OTEL-focused startup: ties training science to observability practice
-- Directly applicable to new hire's onboarding (can reference this after Karpathy/Phase 3)
-- Reusable for internal training, documentation, and knowledge transfer
+- ✓ No public article currently covers this specific bridge (verified via research)
+- ✓ Essential for OTEL-focused startup: ties training science to observability practice
+- ✓ Directly applicable to new hire's onboarding (cross-reference from lesson-plan Phase 2→3 bridge)
+- ✓ Reusable for internal training, documentation, and knowledge transfer
 
-**Effort estimate:**
-- Quick version: 2-3 hours (~2000 words, essentials only)
-- Comprehensive: 4-5 hours (~4000 words, production patterns + case studies)
-- Recommended: Comprehensive (this is a differentiator)
+**Effort:** 4-5 hours (~3500 words, comprehensive with production patterns + 3 case studies)
 
-**Ready to start on:** Next available session after lesson-plan distribution
+**[DONE]**
 
 ---
 
