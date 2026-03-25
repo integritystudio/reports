@@ -3,6 +3,23 @@
 
 ---
 
+## How to Use This Guide
+
+**For new hires with a teaching background**, this guide is organized into 5 phases spanning your first month + Month 2. Choose your path:
+
+- **Fast track (strong Python):** Start Phase 2 Week 1. Complete Phases 1-4 in 2 weeks. Phase 5 is ongoing depth.
+- **Standard track (some Python):** Follow Day 1 → Week 1-3 sequence. Allow 3-4 weeks for solid fundamentals.
+- **Careful track (no recent coding):** Spend 2-3 days on Python refresher before Week 1. Use Phase 2 resources in slower cadence.
+
+**For role-specific paths:**
+- **Observability/Monitoring role:** Prioritize Phase 3 (OTEL) after Phase 1-2 foundations.
+- **LLM Safety/Reliability role:** Prioritize Phase 4 (Explainability & Hallucinations) after Phase 1-2 foundations.
+- **General engineering onboarding:** Follow the recommended sequence linearly.
+
+**Self-Assessment:** Before starting Phase 2, check: Can you write a Python function that trains a simple model and prints its loss? If yes, proceed. If no, review [Python basics](https://docs.python.org/3/tutorial/index.html) for 4-6 hours first.
+
+---
+
 ## Executive Summary
 
 1. The best entry point for a pedagogy-minded new hire is the combination of 3Blue1Brown's visual series (intuition-first) plus Jay Alammar's illustrated guides (architecture-specific) — together they cover fundamentals without requiring math prerequisites.
@@ -140,6 +157,39 @@
 - Requires comfort with basic statistical concepts
 
 **Phase 2 Comparison Note:** Karpathy (Resource 3) is the most important single resource in this phase — nothing else builds the same depth of understanding of what is actually happening during training. Resources 4 and 5 are best read together: V7 Labs for the practical how-to, Lil'Log for the conceptual nuance. Resource 5 is optional for Day 1 readers but becomes important once monitoring thresholds need to be discussed.
+
+---
+
+## Bridge: From Training Concepts to OTEL Metrics (Phase 2 → 3)
+
+After Phase 2, you understand *what is happening* during training. Phase 3 teaches you how to *measure it*. Here's the explicit mapping:
+
+### What You Learned in Phase 2 → What You Measure in Phase 3
+
+| Phase 2 Concept | Phase 3 OTEL Signal | Why It Matters |
+|---|---|---|
+| **Loss function** (how wrong predictions are) | Metrics: training_loss, validation_loss | Primary signal of model health; divergence = overfitting alert |
+| **Gradient magnitude** (how much weights change) | Metrics: gradient_norm, loss_spike_rate | Large gradients = instability; small = stalled learning |
+| **Activation distributions** (how neurons respond) | Metrics: mean_activation_per_layer, dead_neuron_ratio | Dead neurons = wasted capacity; large variance = unstable |
+| **Learning rate** (controls training speed) | Metrics: learning_rate_step, effective_lr | Too high = divergence; too low = slow convergence |
+| **Overfitting signal** (train/val divergence) | Trace + Metric: validation_loss exceeds training_loss + threshold | Triggers alert for regularization/early stopping |
+
+### Concrete Example: Instrumenting Training
+
+When you run Karpathy's code and see "loss = 2.314", that number should be:
+1. **Logged** as a scalar metric (Karpathy teaches you to print it; OTEL teaches you to emit it)
+2. **Timestamped** so you can plot it over training steps
+3. **Aggregated** to compute rolling averages
+4. **Alerted on** if it suddenly spikes or plateaus
+
+Phase 3 Resources 6-7 show you HOW (semantic conventions, export format). Resources 8 shows you WHEN to alert (drift thresholds).
+
+### Before Moving to Phase 3, Ask Yourself:
+- Can you identify which of Karpathy's printed numbers would become OTEL metrics?
+- Could you explain to a colleague why loss divergence (validation > training) is actionable information?
+- Do you know what "early stopping" means and why it requires monitoring?
+
+If yes, you're ready for Phase 3. If no, spend an extra 30 minutes re-reading Karpathy Resource 3's loss curve section.
 
 ---
 
@@ -405,6 +455,15 @@
 **Week 2 (2-3 hours):** OTEL LLM Observability Intro + OTEL GenAI Conventions + TDS Drift Detection
 **Week 3 (2-3 hours):** Illustrated Transformer + Lil'Log Hallucinations + Rohan Paul Explainability
 **Month 2 (ongoing):** fast.ai course (lessons 1-5) + LoRA/Quantization + OTEL AI Agents post
+
+### Time Commitment Summary
+
+- **First Week:** ~14-17 hours of structured learning (Day 1 + Week 1-3)
+- **Month 2:** ~5-8 hours/week for fast.ai (optional; can extend into Month 3)
+- **Total First Month:** ~14-17 hours focused learning
+- **Ongoing:** Phase 5 resources are asynchronous; integrate into normal work rhythm
+
+**Pacing Note:** If your first month includes other onboarding (infrastructure setup, codebase tour, etc.), spread Weeks 1-3 learning across 4-5 calendar weeks rather than back-to-back.
 
 ---
 
