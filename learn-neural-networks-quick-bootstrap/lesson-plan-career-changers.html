@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="neural-networks">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Transition Path | Neural Networks Learning Paths</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>Career Transition Path</h1>
+      <div class="subtitle">For career changers with no CS background</div>
+      <div class="meta"><strong>Time:</strong> 5&ndash;6 weeks &middot; <strong>Pace:</strong> 1&ndash;2 hrs/wk</div>
+    </div>
+  </header>
+  <main id="main" class="container">
+
+    <nav id="toc">
+      <h2>Table of Contents</h2>
+      <ol>
+        <li><a href="#before-you-start-is-this-right-for-you">Before You Start: Is This Right For You?</a></li>
+        <li><a href="#how-to-use-this-guide">How to Use This Guide</a></li>
+        <li><a href="#executive-summary-read-this-first">Executive Summary (Read This First)</a></li>
+        <li><a href="#phase-1-building-your-intuition-day-1-2">Phase 1: Building Your Intuition (Day 1-2)</a></li>
+        <li><a href="#phase-2-why-things-break-week-1">Phase 2: Why Things Break (Week 1)</a></li>
+        <li><a href="#phase-3-detecting-when-things-break-week-2">Phase 3: Detecting When Things Break (Week 2)</a></li>
+        <li><a href="#phase-4-understanding-failures-week-3">Phase 4: Understanding Failures (Week 3)</a></li>
+        <li><a href="#phase-5-going-deeper-month-2">Phase 5: Going Deeper (Month 2+)</a></li>
+        <li><a href="#common-mistakes-career-changers-make-and-how-to-avoid-them">Common Mistakes Career Changers Make (And How to Avoid Them)</a></li>
+        <li><a href="#recommended-sequence">Recommended Sequence</a></li>
+        <li><a href="#your-support-system">Your Support System</a></li>
+        <li><a href="#key-takeaways">Key Takeaways</a></li>
+        <li><a href="#next-steps">Next Steps</a></li>
+      </ol>
+    </nav>
+
+    <section id="before-you-start-is-this-right-for-you">
+      <h2>Before You Start: Is This Right For You?</h2>
+      <div class="section-content">
+        <p><strong>This guide is designed for you if:</strong></p>
+        <ul>
+          <li>You're switching careers into AI/ML or a tech role</li>
+          <li>You have <strong>no computer science background</strong> (and that's OK!)</li>
+          <li>You're willing to spend 1-2 hours per week learning for 4-6 weeks</li>
+          <li>You're comfortable with curiosity; you'll encounter concepts you don't immediately understand, and that's normal</li>
+        </ul>
+        <p><strong>You don't need:</strong></p>
+        <ul>
+          <li>Programming experience (this guide has ZERO coding assignments)</li>
+          <li>Math beyond high school (no calculus required)</li>
+          <li>Existing knowledge of machine learning</li>
+          <li>Any special equipment (a web browser is enough)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="how-to-use-this-guide">
+      <h2>How to Use This Guide</h2>
+      <div class="section-content">
+        <p>Think of this as a <strong>scaffolded learning path</strong>. Each phase builds on the previous one. You'll encounter three types of activities:</p>
+        <ol>
+          <li><strong>Watch/Read</strong> &mdash; absorb concepts</li>
+          <li><strong>Reflect</strong> &mdash; think about what you learned</li>
+          <li><strong>Discuss</strong> &mdash; talk about it with others (or write about it)</li>
+        </ol>
+
+        <h3>Choosing Your Track</h3>
+        <p><strong>Slow and steady (5-6 weeks, recommended for career changers):</strong></p>
+        <ul>
+          <li>Spend 1-2 hours per week</li>
+          <li>Go through phases in order: 1 &rarr; 2 &rarr; 3 &rarr; 4 &rarr; 5</li>
+          <li>Spend extra time on sections that confuse you (rewatch videos, reread articles)</li>
+          <li>Do all the reflection and discussion exercises</li>
+          <li>Result: You understand LLMs deeply and can speak confidently about them</li>
+        </ul>
+        <p><strong>Moderate pace (3-4 weeks):</strong></p>
+        <ul>
+          <li>Spend 2-3 hours per week</li>
+          <li>Focus on Phases 1-4; skip Phase 5 (deepening)</li>
+          <li>Result: You understand fundamentals and failures; ready to specialize</li>
+        </ul>
+        <p><strong>Honest check-in:</strong></p>
+        <ul>
+          <li>Does this topic excite you, or does it feel like obligation?</li>
+          <li>Career changers thrive when intrinsic motivation is there</li>
+          <li>If you're forcing it, it's OK to step back and ask: "Is ML/AI right for me?"</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="executive-summary-read-this-first">
+      <h2>Executive Summary (Read This First)</h2>
+      <div class="section-content">
+        <p><strong>What you're about to learn:</strong></p>
+        <ol>
+          <li><strong>How neural networks learn</strong> &mdash; They're not magic. They adjust millions of tiny weights to minimize error. It's math, but you don't need to understand the equations.</li>
+          <li><strong>Why they fail</strong> &mdash; They memorize training data instead of learning generalizable patterns. They hallucinate (confidently say false things). They break when the real world doesn't match their training environment.</li>
+          <li><strong>How to detect failures</strong> &mdash; Through observability: measuring what the model does, alerting when behavior changes.</li>
+          <li><strong>Why transparency matters</strong> &mdash; The future of AI in business is teams that openly state where models work and fail, then build systems assuming failure will happen.</li>
+          <li><strong>How to communicate about AI</strong> &mdash; The most valuable skill in your new career: translating technical concepts to non-technical colleagues.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="phase-1-building-your-intuition-day-1-2">
+      <h2>Phase 1: Building Your Intuition (Day 1-2)</h2>
+      <div class="section-content">
+        <p><strong>Time commitment:</strong> 1-2 hours total</p>
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 1, you should be able to:</p>
+        <ul>
+          <li>Explain what a neural network does using an analogy</li>
+          <li>Describe why networks need more than one layer to learn complex patterns</li>
+          <li>Understand the concept of "learning from examples"</li>
+          <li>Feel comfortable saying "I don't understand yet" without shame</li>
+        </ul>
+
+        <blockquote>
+          <p><strong>Real talk:</strong> You might feel confused after Phase 1. That's normal. You're encountering ideas for the first time. Confusion is the signal that learning is happening. Don't expect mastery; expect "I have a rough mental model."</p>
+        </blockquote>
+
+        <h3>Resource 1: Visual Foundation (No Background Needed)</h3>
+        <p><strong>Title:</strong> But What Is a Neural Network? (Chapter 1, Deep Learning)<br>
+        <strong>Link:</strong> <a href="https://www.3blue1brown.com/topics/neural-networks">https://www.3blue1brown.com/topics/neural-networks</a><br>
+        <strong>Time:</strong> 19 minutes (video)</p>
+        <p><strong>How to watch:</strong></p>
+        <ol>
+          <li>Pick a quiet time when you can focus</li>
+          <li>Watch without distractions (phone away)</li>
+          <li>It's OK to rewatch &mdash; once isn't enough for a career changer</li>
+          <li>Pause if something confuses you; it's fine to be slow</li>
+        </ol>
+        <p><strong>What to notice:</strong></p>
+        <ul>
+          <li>The network learns by adjusting weights (small numbers)</li>
+          <li>It starts with random weights and improves through feedback</li>
+          <li>The animation showing the decision boundary is the core insight</li>
+          <li>The network can recognize patterns it's never seen before (generalization)</li>
+        </ul>
+        <p><strong>Beginner questions (write answers, even if rough):</strong></p>
+        <ul>
+          <li>Why would random weights at the start ever improve? (What's providing feedback?)</li>
+          <li>What does it mean to "overfit"? (Why is the network's learned pattern sometimes too specific?)</li>
+        </ul>
+
+        <h3>Resource 2: Interactive Experiment (You're In Control)</h3>
+        <p><strong>Title:</strong> A Visual and Interactive Guide to the Basics of Neural Networks<br>
+        <strong>Link:</strong> <a href="https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/">https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/</a><br>
+        <strong>Time:</strong> 20-30 minutes (interactive article)</p>
+        <p><strong>How to approach this:</strong></p>
+        <ol>
+          <li>Don't just read &mdash; <strong>interact</strong>. Drag the sliders.</li>
+          <li>Make predictions: "If I increase this weight, what will happen?"</li>
+          <li>Test your prediction. Were you right?</li>
+          <li>If confused, re-read that section and try again</li>
+        </ol>
+        <p><strong>What this builds:</strong></p>
+        <ul>
+          <li>Hands-on intuition for how weights affect predictions</li>
+          <li>Visceral understanding of the tradeoff between underfitting and overfitting</li>
+          <li>Confidence: "I can predict what the network will do"</li>
+        </ul>
+        <p><strong>Write down:</strong></p>
+        <ul>
+          <li>One situation where you'd want a simple network (few weights)</li>
+          <li>One situation where you'd want a complex network (many weights)</li>
+        </ul>
+
+        <h3>Phase 1 Glossary Callout (No Pressure to Memorize)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Think of it as...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>AI</strong></td><td>A machine trying to do something intelligent (recognize photos, write text)</td></tr>
+            <tr><td><strong>Machine Learning</strong></td><td>The machine improves at the task by seeing examples, not by being explicitly programmed</td></tr>
+            <tr><td><strong>Neural Network</strong></td><td>A mathematical system inspired by brains; learns patterns from data</td></tr>
+            <tr><td><strong>Training</strong></td><td>Showing the network examples and measuring how wrong it is</td></tr>
+            <tr><td><strong>Learning</strong></td><td>The network adjusting its internal numbers to get less wrong</td></tr>
+            <tr><td><strong>Weights</strong></td><td>The learnable internal numbers; what training adjusts</td></tr>
+            <tr><td><strong>Loss</strong></td><td>A number measuring "how wrong is the network?" Lower is better</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phase 1 Try This</h3>
+        <blockquote>
+          <p><strong>Reflection (Write 3-4 sentences):</strong></p>
+          <p>"After watching 3Blue1Brown, explain to yourself: How does a network learn? What role does the error (loss) play? Why would it start random and gradually improve?"</p>
+          <p>Don't worry about perfect answers. Write your honest understanding, even if incomplete.</p>
+        </blockquote>
+
+        <h3>Phase 1 Teach-Back</h3>
+        <blockquote>
+          <p><strong>Tell someone (or write it out):</strong></p>
+          <p>"Imagine a student learning a new language. At first, they're terrible. But they practice, make mistakes, and gradually improve. A neural network works similarly: it starts with random 'intuition', sees examples, measures its mistakes, and adjusts. It doesn't understand language like a human does &mdash; it's learning statistical patterns."</p>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <section id="phase-2-why-things-break-week-1">
+      <h2>Phase 2: Why Things Break (Week 1)</h2>
+      <div class="section-content">
+        <p><strong>Time commitment:</strong> 3-4 hours total</p>
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 2, you should be able to:</p>
+        <ul>
+          <li>Explain overfitting in plain English</li>
+          <li>Understand why test data matters</li>
+          <li>Identify why a model can work great in-house and fail with customers</li>
+          <li>Ask intelligent questions about model reliability</li>
+        </ul>
+
+        <blockquote>
+          <p><strong>Mindset note:</strong> This phase is about healthy skepticism. You'll learn the main way ML systems fail in the real world.</p>
+        </blockquote>
+
+        <h3>Resource 3: How Learning Actually Works (Watch Only)</h3>
+        <p><strong>Title:</strong> Neural Networks: Zero to Hero &mdash; Lectures 1-2<br>
+        <strong>Link:</strong> <a href="https://karpathy.ai/zero-to-hero.html">https://karpathy.ai/zero-to-hero.html</a><br>
+        <strong>Time:</strong> 90 minutes (watch; don't code)</p>
+        <p><strong>How to watch:</strong></p>
+        <ol>
+          <li>You don't need to code. Just watch.</li>
+          <li>Pause to take notes; focus on the concepts, not the implementation</li>
+          <li>Loss curves are the key: watch how they change</li>
+          <li>Rewatch sections that confuse you</li>
+        </ol>
+        <p><strong>Key insights to extract:</strong></p>
+        <ul>
+          <li>What is "loss" and why does it matter?</li>
+          <li>Why does loss sometimes stop improving (plateau)?</li>
+          <li>What happens if you train too long on the same data?</li>
+        </ul>
+
+        <h3>Resource 4: The #1 Failure Mode</h3>
+        <p><strong>Title:</strong> What is Overfitting in Deep Learning (+ 10 Ways to Avoid It)<br>
+        <strong>Link:</strong> <a href="https://www.v7labs.com/blog/overfitting">https://www.v7labs.com/blog/overfitting</a><br>
+        <strong>Time:</strong> 25 minutes</p>
+        <p><strong>What overfitting means:</strong><br>
+        A network memorizes your training examples instead of learning the underlying pattern. Like a student who memorizes test questions but can't answer new ones.</p>
+        <p><strong>Why this matters:</strong><br>
+        This is the #1 reason ML projects fail in production. Your model works perfectly in-house, then bombs with real customers.</p>
+
+        <h3>Resource 5: The Nuance (OK to Skim)</h3>
+        <p><strong>Title:</strong> Are Deep Neural Networks Dramatically Overfitted? (Lil'Log)<br>
+        <strong>Link:</strong> <a href="https://lilianweng.github.io/posts/2019-03-14-overfit/">https://lilianweng.github.io/posts/2019-03-14-overfit/</a><br>
+        <strong>Time:</strong> 35 minutes (advanced; skim if overwhelmed)</p>
+        <p><strong>Why reading this:</strong> Modern big models break this pattern. They can be huge and still generalize. Understanding this nuance prevents bad decisions later.</p>
+
+        <h3>Phase 2 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Reality check</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Overfitting</strong></td><td>Network memorized training data; fails on new data (don't do this)</td></tr>
+            <tr><td><strong>Underfitting</strong></td><td>Network is too simple; can't learn the pattern even on training data</td></tr>
+            <tr><td><strong>Training Data</strong></td><td>Examples used to train the network</td></tr>
+            <tr><td><strong>Test Data</strong></td><td>Held-back examples to check if the network generalizes</td></tr>
+            <tr><td><strong>Validation</strong></td><td>Checking the network on data it didn't train on</td></tr>
+            <tr><td><strong>Generalization</strong></td><td>Working well on new, unseen data (the goal!)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phase 2 Try This</h3>
+        <blockquote>
+          <p><strong>Draw a Picture:</strong></p>
+          <p>Sketch two loss curves (training loss vs. validation loss over time):</p>
+          <ul>
+            <li>Good model: both curves drop, validation slightly higher, both plateau</li>
+            <li>Bad model (overfitting): training drops to near-zero, validation rises</li>
+          </ul>
+          <p>Label: "Good generalization" and "Overfitting &mdash; stop here!"</p>
+          <p>This diagram is what your team watches during training. If you can draw it, you understand overfitting.</p>
+        </blockquote>
+
+        <h3>Phase 2 Teach-Back</h3>
+        <blockquote>
+          <p><strong>Explain to a friend:</strong></p>
+          <p>"Why would a model work perfectly on the test data but fail with customers?"</p>
+          <p>Your answer should mention: the model memorized the test data instead of learning the pattern, or the test data doesn't represent customers. Write 2-3 sentences.</p>
+        </blockquote>
+
+        <h3>Phase 2 Production Example</h3>
+        <blockquote>
+          <p><strong>Real story:</strong> A startup trained a model on support tickets from 2023. It scored 97% accuracy on their test set. They shipped it confidently. Three months in production: accuracy dropped to 71%. Why? Customers in 2024 asked different questions than 2023. The model learned 2023 patterns, not "general support tickets." The team never tested on 2024-like data. Lesson: validation data must represent the real world you'll deploy to.</p>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <section id="phase-3-detecting-when-things-break-week-2">
+      <h2>Phase 3: Detecting When Things Break (Week 2)</h2>
+      <div class="section-content">
+        <p><strong>Time commitment:</strong> 3-4 hours total</p>
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 3, you should be able to:</p>
+        <ul>
+          <li>Understand why "monitoring is not optional"</li>
+          <li>Name three metrics that matter more than raw accuracy</li>
+          <li>Explain model drift in plain language</li>
+          <li>Feel empowered to ask your team: "What are we monitoring?"</li>
+        </ul>
+
+        <blockquote>
+          <p><strong>Career changer note:</strong> Phase 3 is where you become valuable to teams. You understand not just "how models learn" but "how to keep them working." This is the skill that makes you hireable.</p>
+        </blockquote>
+
+        <h3>Resource 6: Observability Fundamentals</h3>
+        <p><strong>Title:</strong> An Introduction to Observability for LLM-Based Applications<br>
+        <strong>Link:</strong> <a href="https://opentelemetry.io/blog/2024/llm-observability/">https://opentelemetry.io/blog/2024/llm-observability/</a><br>
+        <strong>Time:</strong> 30 minutes</p>
+        <p><strong>Key concept:</strong> Just like monitoring a website (is it up? how fast?), you monitor models (is it accurate? is it changing?).</p>
+        <p><strong>What to understand:</strong></p>
+        <ul>
+          <li>Metrics: numbers tracked over time (accuracy, latency, cost)</li>
+          <li>Alerts: automated notifications when something breaks</li>
+          <li>Dashboards: visualizations of metrics (what you'll be looking at daily)</li>
+        </ul>
+
+        <h3>Resource 7: The Standard (Skim If Technical)</h3>
+        <p><strong>Title:</strong> OpenTelemetry for Generative AI<br>
+        <strong>Link:</strong> <a href="https://opentelemetry.io/blog/2024/otel-generative-ai/">https://opentelemetry.io/blog/2024/otel-generative-ai/</a><br>
+        <strong>Time:</strong> 20 minutes</p>
+        <p><strong>Why this matters:</strong> The industry is standardizing how to measure LLMs. This is the language your team uses. You don't need to memorize it, but knowing it exists helps.</p>
+
+        <h3>Resource 8: Detecting Drift</h3>
+        <p><strong>Title:</strong> How to Detect Model Drift in MLOps Monitoring<br>
+        <strong>Link:</strong> <a href="https://towardsdatascience.com/how-to-detect-model-drift-in-mlops-monitoring-7a039c22eaf9/">https://towardsdatascience.com/how-to-detect-model-drift-in-mlops-monitoring-7a039c22eaf9/</a><br>
+        <strong>Time:</strong> 25 minutes</p>
+        <p><strong>Key insight:</strong> Models degrade over time. Your job: catch it before users notice.</p>
+
+        <h3>Phase 3 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Monitoring</strong></td><td>Continuously checking how your model performs in production</td></tr>
+            <tr><td><strong>Metric</strong></td><td>A measurement (accuracy, speed, cost) tracked over time</td></tr>
+            <tr><td><strong>Drift</strong></td><td>The model's behavior changes (or inputs change)</td></tr>
+            <tr><td><strong>Alert</strong></td><td>An automatic warning when something breaks</td></tr>
+            <tr><td><strong>SLO</strong></td><td>Service Level Objective; your promise to users</td></tr>
+            <tr><td><strong>Observability</strong></td><td>Ability to understand what's happening by looking at measurements</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phase 3 Try This</h3>
+        <blockquote>
+          <p><strong>Ask Your Team:</strong></p>
+          <p>"What metrics are we monitoring for our model? Show me the dashboard."</p>
+          <p>Listen. Ask follow-up questions: "What would each metric look like if we were failing? How do you respond to an alert?"</p>
+          <p>This is not a pop quiz &mdash; it's learning. Write down what you learn.</p>
+        </blockquote>
+
+        <h3>Phase 3 Teach-Back</h3>
+        <blockquote>
+          <p><strong>To your manager:</strong></p>
+          <p>"We need monitoring because models degrade silently. If we don't measure accuracy weekly, we won't know the model is failing until customers complain. Monitoring lets us catch problems early."</p>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <section id="phase-4-understanding-failures-week-3">
+      <h2>Phase 4: Understanding Failures (Week 3)</h2>
+      <div class="section-content">
+        <p><strong>Time commitment:</strong> 2-3 hours total</p>
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 4, you should be able to:</p>
+        <ul>
+          <li>Understand what "hallucination" means and why it's not a bug</li>
+          <li>Explain why you can't "make models fully explainable"</li>
+          <li>Translate technical AI concepts to non-technical colleagues</li>
+          <li>Feel confident in conversations about AI limitations</li>
+        </ul>
+
+        <blockquote>
+          <p><strong>This is the capstone phase.</strong> Everything comes together here. Your ability to communicate about AI limits is now your most valuable skill.</p>
+        </blockquote>
+
+        <h3>Resource 9: How Transformers Work (Visual)</h3>
+        <p><strong>Title:</strong> The Illustrated Transformer<br>
+        <strong>Link:</strong> <a href="https://jalammar.github.io/illustrated-transformer/">https://jalammar.github.io/illustrated-transformer/</a><br>
+        <strong>Time:</strong> 45-60 minutes</p>
+        <p><strong>Note:</strong> This gets abstract. OK to find a peer to discuss with. Visual understanding is enough; you don't need to internalize every detail.</p>
+
+        <h3>Resource 10: Why LLMs Hallucinate</h3>
+        <p><strong>Title:</strong> Extrinsic Hallucinations in LLMs<br>
+        <strong>Link:</strong> <a href="https://lilianweng.github.io/posts/2024-07-07-hallucination/">https://lilianweng.github.io/posts/2024-07-07-hallucination/</a><br>
+        <strong>Time:</strong> 40-50 minutes</p>
+        <p><strong>Core insight:</strong> Hallucinations are not bugs. They're the default. The model is trained to generate plausible text, not to fact-check.</p>
+        <p><strong>Career changer insight:</strong> This is where you become the adult in the room. When someone says "let's fix hallucinations with better training," you explain why that's not how it works.</p>
+
+        <h3>Resource 11: Interpretability Tools</h3>
+        <p><strong>Title:</strong> Explainability and Interpretability in Modern LLMs<br>
+        <strong>Link:</strong> <a href="https://www.rohan-paul.com/p/explainability-and-interpretability">https://www.rohan-paul.com/p/explainability-and-interpretability</a><br>
+        <strong>Time:</strong> 30 minutes</p>
+        <p><strong>Key concept:</strong> We can't fully explain AI decisions. But we have tools (attention visualization, saliency maps) that show us parts of the reasoning.</p>
+
+        <h3>Phase 4 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Hallucination</strong></td><td>Model confidently says false things</td></tr>
+            <tr><td><strong>Confidence</strong></td><td>Model's certainty about an answer (measured 0-1)</td></tr>
+            <tr><td><strong>Attention</strong></td><td>Which parts of the input the model focused on</td></tr>
+            <tr><td><strong>Interpretability</strong></td><td>Understanding how the model works (very hard)</td></tr>
+            <tr><td><strong>Explainability</strong></td><td>Tools to understand a specific decision (hard, but possible)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phase 4 Try This: The Most Important Exercise</h3>
+        <blockquote>
+          <p><strong>Communication Challenge:</strong></p>
+          <p>Your CEO reads in the news that an LLM hallucinated. Your CEO asks: "Are our models safe? Can we prevent this?"</p>
+          <p>Write a 2-minute response (3-4 paragraphs) that:</p>
+          <ol>
+            <li>Explains what hallucination is (without jargon)</li>
+            <li>Explains why it happens (without math)</li>
+            <li>Explains what you do about it (mitigation, monitoring, guardrails)</li>
+          </ol>
+          <p><strong>This is the skill that makes you valuable.</strong> If you can do this, you've internalized Phase 4.</p>
+        </blockquote>
+
+        <h3>Phase 4 Capstone: Explaining AI to Others</h3>
+        <p>You've learned how transformers work, why they fail, and how to detect failures. Now the most important skill: <strong>communicating this to people without technical backgrounds</strong>.</p>
+
+        <h4>How to Explain Hallucinations</h4>
+        <p><strong>Simple version:</strong> "LLMs make up facts sometimes. They predict what words come next; they don't verify facts. So they confidently generate false information."</p>
+        <p><strong>Why it happens:</strong> "The model was trained on internet text (which has false information). It learned patterns. It can't distinguish between patterns it learned from real facts vs. patterns from false claims."</p>
+        <p><strong>What we do about it:</strong> "We monitor for confidence mismatches. We use fact-checking tools. We tell customers: assume the model is wrong until verified."</p>
+
+        <h4>How to Explain "Black Box"</h4>
+        <p><strong>Simple version:</strong> "We don't fully understand why the model makes each decision. But we can observe what it paid attention to."</p>
+        <p><strong>Analogy:</strong> "Like asking someone why they like a painting. They can point to colors they enjoyed, but explaining aesthetic judgment completely is impossible. We can observe, but not fully explain."</p>
+
+      </div>
+    </section>
+
+    <section id="phase-5-going-deeper-month-2">
+      <h2>Phase 5: Going Deeper (Month 2+)</h2>
+      <div class="section-content">
+        <p><strong>Time commitment:</strong> 4-8 hours (optional, self-paced)</p>
+
+        <h3>Learning Objectives (Pick One)</h3>
+        <p>Career changers can choose to specialize based on their role:</p>
+        <p><strong>If you're moving into product/strategy:</strong></p>
+        <ul>
+          <li>How do you decide when to use LLMs vs. other approaches?</li>
+          <li>How do you communicate model limitations to customers?</li>
+        </ul>
+        <p><strong>If you're moving into operations/QA:</strong></p>
+        <ul>
+          <li>How do you test AI systems?</li>
+          <li>How do you design monitoring and alerts?</li>
+        </ul>
+        <p><strong>If you're moving into research/data:</strong></p>
+        <ul>
+          <li>How are modern models fine-tuned?</li>
+          <li>What does the full training-to-deployment lifecycle look like?</li>
+        </ul>
+
+        <h3>Resource 12: Practical Deployment (Self-Paced)</h3>
+        <p><strong>Title:</strong> Practical Deep Learning for Coders<br>
+        <strong>Link:</strong> <a href="https://course.fast.ai/">https://course.fast.ai/</a><br>
+        <strong>Time:</strong> Modular (pick lessons relevant to your role)</p>
+
+        <h3>Resource 13: Efficiency Tradeoffs</h3>
+        <p><strong>Title:</strong> Fine-Tuning LLMs: LoRA, Quantization, and Distillation Simplified<br>
+        <strong>Link:</strong> <a href="https://dev.to/iamfaham/fine-tuning-llms-lora-quantization-and-distillation-simplified-12nf">https://dev.to/iamfaham/fine-tuning-llms-lora-quantization-and-distillation-simplified-12nf</a><br>
+        <strong>Time:</strong> 20 minutes</p>
+        <p><strong>Career application:</strong> Understanding these tradeoffs (cost vs. quality, speed vs. accuracy) is how you evaluate decisions.</p>
+
+        <h3>Resource 14: Multi-Step Workflows</h3>
+        <p><strong>Title:</strong> AI Agent Observability - Evolving Standards and Best Practices<br>
+        <strong>Link:</strong> <a href="https://opentelemetry.io/blog/2025/ai-agent-observability/">https://opentelemetry.io/blog/2025/ai-agent-observability/</a><br>
+        <strong>Time:</strong> 20 minutes (forward-looking)</p>
+
+      </div>
+    </section>
+
+    <section id="common-mistakes-career-changers-make-and-how-to-avoid-them">
+      <h2>Common Mistakes Career Changers Make (And How to Avoid Them)</h2>
+      <div class="section-content">
+        <p><strong>Mistake 1: "I'm not good at math, so I can't understand this"</strong></p>
+        <ul>
+          <li>Reality: You don't need calculus or linear algebra for Phases 1-4. Math is optional for Phases 5+.</li>
+          <li>Fix: If a resource is too math-heavy, skip it and use another.</li>
+        </ul>
+        <p><strong>Mistake 2: "I should understand everything on the first read"</strong></p>
+        <ul>
+          <li>Reality: Career changers take 3-4 reads to internalize. This is normal.</li>
+          <li>Fix: Rewatch videos. Reread articles. Discuss with peers. Don't blame yourself.</li>
+        </ul>
+        <p><strong>Mistake 3: "I need to learn to code to understand ML"</strong></p>
+        <ul>
+          <li>Reality: You're learning the concepts. Coding is orthogonal.</li>
+          <li>Fix: This guide has zero coding exercises. If you later decide to code, do it separately.</li>
+        </ul>
+        <p><strong>Mistake 4: "This is too hard; I'm not cut out for tech"</strong></p>
+        <ul>
+          <li>Reality: Career changers often underestimate themselves. You're encountering new ideas; discomfort is progress.</li>
+          <li>Fix: Take breaks. Talk to other career changers. Normalize struggle.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="recommended-sequence">
+      <h2>Recommended Sequence</h2>
+      <div class="section-content">
+        <p><strong>Slow and steady (5-6 weeks, recommended):</strong></p>
+        <ul>
+          <li>Week 1: Phase 1 (1-2 hours)</li>
+          <li>Weeks 2-3: Phase 2 (3-4 hours)</li>
+          <li>Weeks 4-5: Phase 3 (3-4 hours)</li>
+          <li>Week 6: Phase 4 (2-3 hours), focus on communication exercise</li>
+          <li>Month 2+: Phase 5 (self-paced, pick your specialization)</li>
+        </ul>
+        <p><strong>Moderate pace (3-4 weeks):</strong></p>
+        <ul>
+          <li>Week 1: Phases 1-2</li>
+          <li>Week 2: Phase 3</li>
+          <li>Week 3: Phase 4 (focus on communication)</li>
+          <li>(Skip Phase 5 for now; return later)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="your-support-system">
+      <h2>Your Support System</h2>
+      <div class="section-content">
+        <p><strong>This path works best with others. Consider:</strong></p>
+        <ul>
+          <li>Finding a study buddy (another career changer in tech)</li>
+          <li>Joining a local AI/ML meetup</li>
+          <li>Starting conversations with your team: "I'm learning about this; can you explain how it applies here?"</li>
+          <li>Sharing your understanding with others (teaching is learning)</li>
+        </ul>
+        <p><strong>If you get stuck:</strong></p>
+        <ul>
+          <li>Rewatch videos (seriously, 3 watches is normal)</li>
+          <li>Google "[topic] explained simply" (others have struggled too)</li>
+          <li>Ask your team (they want you to learn)</li>
+          <li>Give yourself permission to move slowly</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="key-takeaways">
+      <h2>Key Takeaways</h2>
+      <div class="section-content">
+        <p>You now understand:</p>
+        <ol>
+          <li><strong>How networks learn</strong> &mdash; adjusting weights to minimize error through examples</li>
+          <li><strong>Why they fail</strong> &mdash; overfitting, data drift, distribution mismatch</li>
+          <li><strong>How to detect failures</strong> &mdash; monitoring, observability, alerts</li>
+          <li><strong>Why transparency matters</strong> &mdash; communicating limitations builds trust</li>
+          <li><strong>How to translate AI concepts</strong> &mdash; explaining to non-technical colleagues</li>
+        </ol>
+        <p>Most importantly: <strong>You're not behind. You're exactly where you should be.</strong></p>
+        <p>Career changers bring something others don't: the ability to ask "why?" without assuming you know the answer. That's your strength. Use it.</p>
+      </div>
+    </section>
+
+    <section id="next-steps">
+      <h2>Next Steps</h2>
+      <div class="section-content">
+        <ol>
+          <li><strong>Pick one resource per phase and start.</strong> Don't try to do everything at once.</li>
+          <li><strong>Join a community.</strong> Discord servers, subreddits, local meetups &mdash; you're not alone.</li>
+          <li><strong>Build a mental model, not mastery.</strong> After Phase 4, you know more than 95% of non-technical professionals.</li>
+          <li><strong>Apply it to your role.</strong> The learning accelerates when you connect concepts to real work.</li>
+        </ol>
+        <p><strong>You've got this.</strong> Welcome to the field.</p>
+      </div>
+    </section>
+
+  </main>
+  <footer>
+    <a href="index.html">&larr; All Learning Paths</a>
+  </footer>
+</body>
+</html>

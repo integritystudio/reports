@@ -257,6 +257,19 @@
     --color-shadow-hover: rgba(0, 0, 0, 0.12);
 }
 
+/* --- Neural Networks & LLMs — indigo/purple education theme --- */
+[data-brand="neural-networks"] {
+    --color-primary-dark: #312e81;
+    --color-primary-medium: #4f46e5;
+    --color-primary-light: #a5b4fc;
+    --primary: #312e81;
+    --secondary: #4f46e5;
+    --accent: #7c3aed;
+    --light: #eef2ff;
+    --dark: #1e1b4b;
+    --border: #c7d2fe;
+}
+
 /* --- Post Oak Group — navy/gold investment banking theme --- */
 [data-brand="post-oak-group"] {
     --color-primary-dark: #1a2744;
@@ -1303,6 +1316,21 @@
     [data-brand="strong-towns"] .badge-warning { background: var(--dark-towns-badge-warning-bg); color: var(--dark-towns-badge-warning-color); }
     [data-brand="strong-towns"] .badge-danger { background: var(--dark-towns-badge-danger-bg); color: var(--dark-towns-badge-danger-color); }
     [data-brand="strong-towns"] .badge-info { background: var(--dark-towns-badge-info-bg); color: var(--dark-towns-badge-success-color); }
+
+    /* --- Neural Networks dark overrides --- */
+    [data-brand="neural-networks"] {
+        --color-bg: #0f0e1a;
+        --color-bg-secondary: #1a1830;
+        --color-card-bg: #1a1830;
+        --color-text-primary: #e2e8f0;
+        --color-text-secondary: #94a3b8;
+        --color-border: #312e81;
+        --primary: #a5b4fc;
+        --secondary: #c7d2fe;
+        --accent: #d8b4fe;
+        --light: #1a1830;
+        --dark: #e2e8f0;
+    }
 
     /* --- Post Oak Group dark overrides --- */
     [data-brand="post-oak-group"] { --primary: #4a7ab5; --secondary: #6b9fd4; --accent: #d4b565; --light: #1a1a2e; --dark: #e8e0ce; --border: #334155; --tr-hover-bg: #1e293b; --color-highlight-start: #1a2744; --color-highlight-end: #2c3a52; --color-info-bg: #1a2744; --color-warning-bg-brand: #2a2518; }

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="neural-networks">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Systems &amp; Observability Path | Neural Networks Learning Paths</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>Systems &amp; Observability Path</h1>
+      <div class="subtitle">For data analysts, QA engineers, DevOps, and operations teams</div>
+      <div class="meta"><strong>Time:</strong> 2&ndash;3 weeks &middot; <strong>Pace:</strong> 2&ndash;3 hrs/wk</div>
+    </div>
+  </header>
+  <main id="main" class="container">
+
+    <nav id="toc">
+      <h2>Table of Contents</h2>
+      <ol>
+        <li><a href="#how-to-use-this-guide">How to Use This Guide</a></li>
+        <li><a href="#executive-summary">Executive Summary</a></li>
+        <li><a href="#phase-1-systems-thinking-day-1">Phase 1: Systems Thinking (Day 1)</a></li>
+        <li><a href="#phase-2-production-failure-modes-week-1">Phase 2: Production Failure Modes (Week 1)</a></li>
+        <li><a href="#phase-3-observability-operations-week-2">Phase 3: Observability &amp; Operations (Week 2)</a></li>
+        <li><a href="#phase-4-failure-detection-week-3">Phase 4: Failure Detection (Week 3)</a></li>
+        <li><a href="#phase-5-deployment-optimization-month-2">Phase 5: Deployment &amp; Optimization (Month 2+)</a></li>
+        <li><a href="#common-operational-pitfalls">Common Operational Pitfalls</a></li>
+        <li><a href="#recommended-sequence">Recommended Sequence</a></li>
+        <li><a href="#key-takeaways">Key Takeaways</a></li>
+      </ol>
+    </nav>
+
+    <section id="how-to-use-this-guide">
+      <h2>How to Use This Guide</h2>
+      <div class="section-content">
+        <p><strong>You understand systems and metrics. You don't code.</strong> This guide is designed for data analysts, QA engineers, DevOps/SRE teams, operations staff, and other technical professionals who need to understand neural networks and LLM systems from an <em>observability and operations</em> perspective &mdash; not from a coding perspective.</p>
+        <p>You'll learn to:</p>
+        <ul>
+          <li>Interpret metrics dashboards showing model behavior</li>
+          <li>Understand what signals indicate problems</li>
+          <li>Ask your ML team the right questions about production systems</li>
+          <li>Design and execute tests for model-based systems</li>
+        </ul>
+
+        <h3>Choose Your Path</h3>
+        <p><strong>Fast track (2-3 days, operational readiness):</strong></p>
+        <ul>
+          <li>Phase 1: Build conceptual model (1 hour)</li>
+          <li>Phase 3: Deep dive into observability (2-3 hours)</li>
+          <li>Phase 4: Understand failure modes (90 min)</li>
+          <li>Result: You can triage production issues, interpret dashboards, and run operational tests.</li>
+        </ul>
+
+        <p><strong>Standard track (1-2 weeks, system-level understanding):</strong></p>
+        <ul>
+          <li>Phases 1-2: Fundamentals (4 hours)</li>
+          <li>Phase 3: Observability deep dive (5-6 hours)</li>
+          <li>Phase 4: Failures and detection (3 hours)</li>
+          <li>Result: You're the bridge between ops/QA and ML teams.</li>
+        </ul>
+
+        <p><strong>Expert track (3-4 weeks, comprehensive systems knowledge):</strong></p>
+        <ul>
+          <li>All phases with extra focus on Phase 3 (observability) and Phase 5 (deployment patterns)</li>
+          <li>Result: You can design observability systems for ML, set SLOs, and evaluate vendors.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="executive-summary">
+      <h2>Executive Summary</h2>
+      <div class="section-content">
+        <ol>
+          <li><strong>Neural networks are differentiable function approximators.</strong> They learn by minimizing a loss function through gradient descent. Understanding this principle explains why you care about: training loss, validation loss, convergence.</li>
+          <li><strong>Production ML systems have failure modes distinct from traditional software.</strong> Overfitting, data drift, distribution shift. Your observability stack must detect these, not just uptime.</li>
+          <li><strong>Observability is architectural.</strong> Not a bolted-on afterthought. The metrics you emit during training &mdash; gradient norms, layer activations, validation divergence &mdash; are the same signals you need in production.</li>
+          <li><strong>Hallucinations in LLMs are detectable.</strong> Not through code inspection, but through behavioral signals: confidence calibration, consistency across samples, token probability distributions.</li>
+          <li><strong>Your SLOs must include model-specific metrics.</strong> Not just latency and availability. Accuracy, drift, hallucination detection, cost.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="phase-1-systems-thinking-day-1">
+      <h2>Phase 1: Systems Thinking (Day 1)</h2>
+      <div class="section-content">
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 1, you should be able to:</p>
+        <ul>
+          <li>Explain how neural networks learn to minimize error through iterative weight adjustment</li>
+          <li>Describe the distinction between overfitting and underfitting from a systems perspective</li>
+          <li>Identify the role of training vs. validation data in building generalizable systems</li>
+          <li>Sketch a simple training loop diagram showing data &rarr; network &rarr; loss &rarr; update</li>
+        </ul>
+
+        <h3>Resource 1: Visual Fundamentals</h3>
+        <p><strong>Title:</strong> But What Is a Neural Network? (Chapter 1, Deep Learning)<br>
+        <strong>Link:</strong> <a href="https://www.3blue1brown.com/topics/neural-networks">https://www.3blue1brown.com/topics/neural-networks</a><br>
+        <strong>Time:</strong> 19 minutes<br>
+        <strong>Technical relevance:</strong> Shows the feedback loop: forward pass, loss computation, backpropagation, weight updates. This is the core loop you'll see repeated in production monitoring (metrics &rarr; alerts &rarr; actions).</p>
+        <p><strong>What to watch for:</strong></p>
+        <ul>
+          <li>The loss function as a surface to minimize (think: error landscape)</li>
+          <li>Why random initialization matters</li>
+          <li>How local minima and saddle points affect training</li>
+        </ul>
+        <p><strong>Beginner Safe:</strong> Yes. Visual explanation requires no math background.</p>
+
+        <h3>Resource 2: Interactive Understanding</h3>
+        <p><strong>Title:</strong> A Visual and Interactive Guide to the Basics of Neural Networks<br>
+        <strong>Link:</strong> <a href="https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/">https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/</a><br>
+        <strong>Time:</strong> 20-30 minutes<br>
+        <strong>Technical relevance:</strong> Explore the loss surface interactively. This directly parallels how you'll interpret hyperparameter sensitivity in dashboards: "when we increased learning rate, what happened to convergence?"</p>
+        <p><strong>What to explore:</strong></p>
+        <ul>
+          <li>How weight adjustments change predictions</li>
+          <li>The tradeoff between model complexity and generalization</li>
+          <li>Why certain parameter settings lead to fast convergence vs. divergence</li>
+        </ul>
+
+        <h3>Phase 1 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Systems meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Neural Network</strong></td><td>Parameterized function that maps inputs to outputs; parameters are learned</td></tr>
+            <tr><td><strong>Loss Function</strong></td><td>Quantifies prediction error; the system's objective to minimize</td></tr>
+            <tr><td><strong>Gradient</strong></td><td>Direction of steepest increase in loss; opposite direction improves predictions</td></tr>
+            <tr><td><strong>Weight</strong></td><td>Learnable parameter in the network; what training adjusts</td></tr>
+            <tr><td><strong>Forward Pass</strong></td><td>One inference through the network</td></tr>
+            <tr><td><strong>Backpropagation</strong></td><td>Efficient algorithm to compute gradients; enables large-scale training</td></tr>
+            <tr><td><strong>Convergence</strong></td><td>When loss stops improving; the network has reached a local minimum</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phase 1 Try This</h3>
+        <blockquote>
+          <p><strong>System Diagram:</strong> Draw a box labeled "Neural Network" with arrows for: (1) training data in, (2) predictions out, (3) loss computed, (4) weights updated. Add a feedback loop from loss back to weights.</p>
+          <p>Now draw a second diagram showing production: input data &rarr; model &rarr; prediction &rarr; user feedback &rarr; data logging.</p>
+          <p>Annotation: "The training loop and production loop share the same network, but the feedback mechanisms are different. Training uses loss; production uses user signals and drift detection."</p>
+        </blockquote>
+
+        <h3>Phase 1 Teach-Back</h3>
+        <blockquote>
+          <p><strong>To your team:</strong> "A neural network is a function with learnable weights. We find good weights by showing examples and measuring error (loss). The system automatically computes which weights to adjust using gradients. This is why we care about: data quality (affects loss signal), learning rate (affects update magnitude), and batch size (affects gradient stability)."</p>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <section id="phase-2-production-failure-modes-week-1">
+      <h2>Phase 2: Production Failure Modes (Week 1)</h2>
+      <div class="section-content">
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 2, you should be able to:</p>
+        <ul>
+          <li>Identify overfitting in a train/validation loss curve</li>
+          <li>Explain why test accuracy &ne; production accuracy</li>
+          <li>Describe the role of hyperparameter tuning in generalizable systems</li>
+          <li>Design a validation strategy that represents your production distribution</li>
+        </ul>
+
+        <h3>Resource 3: Training Dynamics (Watch Only)</h3>
+        <p><strong>Title:</strong> Neural Networks: Zero to Hero &mdash; Lectures 1-2<br>
+        <strong>Link:</strong> <a href="https://karpathy.ai/zero-to-hero.html">https://karpathy.ai/zero-to-hero.html</a><br>
+        <strong>Time:</strong> ~90 minutes (watch; skip code)<br>
+        <strong>Technical relevance:</strong> Andrej shows loss curves, convergence patterns, when training becomes unstable. These are the exact signals your observability stack should emit: training loss, validation loss, gradient norms.</p>
+        <p><strong>What to watch for:</strong></p>
+        <ul>
+          <li>Loss convergence patterns (smooth vs. noisy vs. divergent)</li>
+          <li>Why validation loss diverging from training loss signals overfitting</li>
+          <li>Gradient magnitude and its relationship to stability</li>
+          <li>Learning rate sensitivity</li>
+        </ul>
+
+        <h3>Resource 4: Overfitting Detection</h3>
+        <p><strong>Title:</strong> What is Overfitting in Deep Learning (+ 10 Ways to Avoid It)<br>
+        <strong>Link:</strong> <a href="https://www.v7labs.com/blog/overfitting">https://www.v7labs.com/blog/overfitting</a><br>
+        <strong>Time:</strong> 25 minutes<br>
+        <strong>Technical relevance:</strong> Overfitting is your #1 production risk. The train/validation divergence chart is the earliest warning signal.</p>
+        <p><strong>What to understand:</strong></p>
+        <ul>
+          <li>Early stopping: why you monitor validation loss and stop training when it diverges</li>
+          <li>Dropout and regularization: architectural approaches to force generalization</li>
+          <li>Cross-validation: statistical technique to estimate true generalization</li>
+        </ul>
+        <p><strong>Systems perspective:</strong> This is equivalent to testing in traditional software. You build against one dataset (training); you validate against another (test). If test fails, your model doesn't generalize.</p>
+
+        <h3>Resource 5: Advanced Overfitting Concepts</h3>
+        <p><strong>Title:</strong> Are Deep Neural Networks Dramatically Overfitted? (Lil'Log)<br>
+        <strong>Link:</strong> <a href="https://lilianweng.github.io/posts/2019-03-14-overfit/">https://lilianweng.github.io/posts/2019-03-14-overfit/</a><br>
+        <strong>Time:</strong> 35 minutes<br>
+        <strong>Technical relevance:</strong> Modern large models can have billions of parameters yet still generalize. Understanding why informs deployment decisions: "Can we run this model efficiently? Will it overfit to niche use cases?"</p>
+
+        <h3>Phase 2 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Systems meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Overfitting</strong></td><td>Model memorizes training data; fails on new data (high variance)</td></tr>
+            <tr><td><strong>Underfitting</strong></td><td>Model is too simple to capture patterns (high bias)</td></tr>
+            <tr><td><strong>Training Set</strong></td><td>Data used to adjust weights</td></tr>
+            <tr><td><strong>Validation Set</strong></td><td>Data used to measure generalization; held-out from training</td></tr>
+            <tr><td><strong>Test Set</strong></td><td>Final holdout data representing production distribution</td></tr>
+            <tr><td><strong>Hyperparameter</strong></td><td>Setting you control (learning rate, batch size, regularization)</td></tr>
+            <tr><td><strong>Early Stopping</strong></td><td>Training termination criterion: stop when validation metrics diverge</td></tr>
+            <tr><td><strong>Regularization</strong></td><td>Technique to prevent overfitting: L1/L2 penalty, dropout, data augmentation</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phase 2 Try This</h3>
+        <blockquote>
+          <p><strong>Interpret a Dashboard:</strong> Your ML team shows you a dashboard with training vs. validation loss over time.</p>
+          <p>Scenario A: Both curves drop smoothly; validation slightly higher than training; both plateau at 0.15.<br>
+          Scenario B: Training drops to 0.05; validation drops to 0.10 then rises back to 0.25 over 50 epochs.<br>
+          Scenario C: Both curves are noisy; neither converges; training loss spikes every few epochs.</p>
+          <p>For each, answer: (1) Is the model generalizing? (2) What would you recommend next?</p>
+          <p>(Answers: A = good, ready to test; B = overfitting, try early stopping; C = unstable, reduce learning rate)</p>
+        </blockquote>
+
+        <h3>Phase 2 Teach-Back</h3>
+        <blockquote>
+          <p><strong>To your team:</strong> "We validate models on held-out data for the same reason QA tests on staging before production. Training loss alone means nothing; validation loss tells us if we're generalizing. If validation loss diverges from training, the model is memorizing, not learning patterns."</p>
+        </blockquote>
+
+        <h3>Phase 2 Production Example</h3>
+        <blockquote>
+          <p><strong>Scenario:</strong> Model trained on company support tickets from 2023. Test accuracy 94%. Deployed to production. Real-world accuracy drops to 71%. Post-mortem: 2024 customer base is different (new languages, different support patterns). The model was trained on 2023 patterns; new 2024 patterns are out-of-distribution. Root cause: validation set was random samples from 2023 data, not representative of expected 2024 distribution. Fix: re-validate on representative 2024 samples before deployment.</p>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <section id="phase-3-observability-operations-week-2">
+      <h2>Phase 3: Observability &amp; Operations (Week 2)</h2>
+      <div class="section-content">
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 3, you should be able to:</p>
+        <ul>
+          <li>Design observability for an ML system (what metrics, what alerts?)</li>
+          <li>Interpret Grafana/Prometheus dashboards for model metrics</li>
+          <li>Identify data drift and model drift from time-series signals</li>
+          <li>Define SLOs for model-based systems</li>
+          <li>Communicate operational risks to non-technical stakeholders</li>
+        </ul>
+
+        <blockquote>
+          <p><strong>Why this is critical:</strong> This is where you spend 80% of your career. Phase 3 is not optional; it's your primary value add.</p>
+        </blockquote>
+
+        <h3>Resource 6: Observability Fundamentals</h3>
+        <p><strong>Title:</strong> An Introduction to Observability for LLM-Based Applications Using OpenTelemetry<br>
+        <strong>Link:</strong> <a href="https://opentelemetry.io/blog/2024/llm-observability/">https://opentelemetry.io/blog/2024/llm-observability/</a><br>
+        <strong>Time:</strong> 30 minutes<br>
+        <strong>Technical relevance:</strong> OpenTelemetry is the emerging standard. Three signal types:</p>
+        <p><strong>Metrics</strong> (scalar measurements): token count per request, cost, latency, accuracy<br>
+        <strong>Traces</strong> (request lifecycle): one request from ingress &rarr; model inference &rarr; response, with timing per span<br>
+        <strong>Logs</strong> (structured events): errors, warnings, model decisions, sampling for audit</p>
+        <p><strong>Systems analogy:</strong> Just like monitoring an API (request rate, latency, error rate, saturation), you monitor ML systems. But the metrics are different: model confidence, accuracy, drift, cost.</p>
+        <p><strong>What to understand:</strong></p>
+        <ul>
+          <li>Why you need <em>all three</em> signal types</li>
+          <li>How traces differ from logs: traces are for request paths (when did inference happen?), logs are for events (model returned confidence=0.3)</li>
+          <li>Why semantic conventions matter: if every team emits <code>accuracy</code> differently, your dashboards break</li>
+        </ul>
+
+        <h3>Resource 7: LLM-Specific Standards</h3>
+        <p><strong>Title:</strong> OpenTelemetry for Generative AI<br>
+        <strong>Link:</strong> <a href="https://opentelemetry.io/blog/2024/otel-generative-ai/">https://opentelemetry.io/blog/2024/otel-generative-ai/</a><br>
+        <strong>Time:</strong> 20 minutes<br>
+        <strong>Technical relevance:</strong> The standards for observing LLMs. Metric names like <code>gen_ai.usage.input_tokens</code>, <code>gen_ai.request.duration</code>, <code>gen_ai.model.name</code>. These will be in your dashboards.</p>
+        <p><strong>What to understand:</strong></p>
+        <ul>
+          <li>Semantic conventions: agreed-upon metric names and attributes</li>
+          <li>Why this matters: you can switch vendors (OpenAI &rarr; Anthropic) and your dashboards still work</li>
+          <li>What gets emitted: token counts (usage), latency, cost, model name, error status</li>
+        </ul>
+
+        <h3>Resource 8: Data Drift Detection</h3>
+        <p><strong>Title:</strong> How to Detect Model Drift in MLOps Monitoring<br>
+        <strong>Link:</strong> <a href="https://towardsdatascience.com/how-to-detect-model-drift-in-mlops-monitoring-7a039c22eaf9/">https://towardsdatascience.com/how-to-detect-model-drift-in-mlops-monitoring-7a039c22eaf9/</a><br>
+        <strong>Time:</strong> 25 minutes<br>
+        <strong>Technical relevance:</strong> Statistical tests for distribution shift. When input distribution changes (data drift) or model performance degrades (model drift), your system should alert.</p>
+        <p><strong>Statistical approaches:</strong></p>
+        <ul>
+          <li><strong>KL Divergence:</strong> Jensen-Shannon distance between training distribution and current distribution</li>
+          <li><strong>Population Stability Index (PSI):</strong> how much the distribution changed month-over-month</li>
+          <li><strong>Kolmogorov-Smirnov test:</strong> does the distribution shape change?</li>
+        </ul>
+        <p><strong>Systems perspective:</strong> Like detecting anomalies in application logs, but for feature distributions. Your model assumes "inputs look like training data." When that assumption breaks, accuracy breaks.</p>
+
+        <h3>Phase 3 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Systems meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Observability</strong></td><td>Ability to understand system state from measurements; not just uptime</td></tr>
+            <tr><td><strong>Metric</strong></td><td>Numeric measurement (scalar) over time; queryable, aggregable</td></tr>
+            <tr><td><strong>Trace</strong></td><td>Record of one request lifecycle; shows timing, dependencies, errors</td></tr>
+            <tr><td><strong>Span</strong></td><td>One unit within a trace; like a function call with timing</td></tr>
+            <tr><td><strong>Semantic Convention</strong></td><td>Agreed-upon naming and structure for metrics (e.g., <code>gen_ai.usage.input_tokens</code>)</td></tr>
+            <tr><td><strong>SLO</strong></td><td>Service Level Objective; promise to users (e.g., "99% accuracy", "p99 latency &lt; 200ms")</td></tr>
+            <tr><td><strong>Drift</strong></td><td>Distribution shift; inputs or model behavior changed from training</td></tr>
+            <tr><td><strong>Anomaly</strong></td><td>Deviation from baseline; statistical threshold breach</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phase 3 Try This</h3>
+        <blockquote>
+          <p><strong>Design an Observability Stack:</strong> Your team just deployed an LLM-based customer service bot. Design three dashboards:</p>
+          <ol>
+            <li><strong>Operational Dashboard</strong> (for ops/SRE): What do you need to know hourly? (latency, error rate, token cost, uptime)</li>
+            <li><strong>Quality Dashboard</strong> (for ML team): What indicates the model is working? (hallucination rate, confidence distribution, accuracy on labeled samples)</li>
+            <li><strong>Drift Dashboard</strong> (for product): Is something changing? (input distribution shift, model confidence drift, user complaints trend)</li>
+          </ol>
+          <p>For each dashboard, list 3-5 metrics. For each metric, define: (1) the alert threshold, (2) what you do when it fires.</p>
+        </blockquote>
+
+        <h3>Phase 3 Teach-Back</h3>
+        <blockquote>
+          <p><strong>To leadership:</strong> "We monitor three things: operational health (latency, errors, cost), model quality (accuracy, confidence, hallucination rate), and drift (is the input distribution changing?). If any of these degrades, we alert and investigate. This is how we defend against silent failures."</p>
+        </blockquote>
+
+        <h3>Phase 3 Production Example</h3>
+        <blockquote>
+          <p><strong>Scenario:</strong> LLM bot running smoothly for 3 months. Token usage constant. Latency stable. Then accuracy (measured on a labeled holdout set) drops from 92% to 78% over one week. Investigation: users started asking questions outside the training distribution (new product features). The model is answering confidently but incorrectly. Root cause: no drift detection on input distribution. If the team had been monitoring "how different are today's inputs from training inputs?", they would have detected the shift and alerted the team for retraining.</p>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <section id="phase-4-failure-detection-week-3">
+      <h2>Phase 4: Failure Detection (Week 3)</h2>
+      <div class="section-content">
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 4, you should be able to:</p>
+        <ul>
+          <li>Identify hallucinations through behavioral signals (confidence calibration, consistency checks)</li>
+          <li>Explain why attention visualization is a mechanism, not an explanation</li>
+          <li>Design tests to catch failure modes before production</li>
+          <li>Communicate failure risks to non-technical stakeholders</li>
+        </ul>
+
+        <h3>Resource 9: Architecture Understanding</h3>
+        <p><strong>Title:</strong> The Illustrated Transformer<br>
+        <strong>Link:</strong> <a href="https://jalammar.github.io/illustrated-transformer/">https://jalammar.github.io/illustrated-transformer/</a><br>
+        <strong>Time:</strong> 45-60 minutes<br>
+        <strong>Technical relevance:</strong> Transformers use attention: each output token attends to all input tokens. This is detectable: you can log attention weights, anomaly-detect when attention is unusual.</p>
+        <p><strong>Systems perspective:</strong> Attention is a behavioral signal. Abnormal attention patterns (e.g., all weight on one token) may indicate hallucination risk. This is observable; you can emit it to your metrics system.</p>
+
+        <h3>Resource 10: Hallucination Mechanics</h3>
+        <p><strong>Title:</strong> Extrinsic Hallucinations in LLMs<br>
+        <strong>Link:</strong> <a href="https://lilianweng.github.io/posts/2024-07-07-hallucination/">https://lilianweng.github.io/posts/2024-07-07-hallucination/</a><br>
+        <strong>Time:</strong> 40-50 minutes<br>
+        <strong>Technical relevance:</strong> Hallucinations are not anomalies; they're the default. Detection methods:</p>
+        <ul>
+          <li><strong>Confidence calibration:</strong> high confidence + factual error = hallucination signal</li>
+          <li><strong>Consistency checking:</strong> sample multiple times; if outputs differ, uncertainty</li>
+          <li><strong>Retrieval-augmented generation (RAG):</strong> feed verified facts; hallucinations drop</li>
+        </ul>
+        <p><strong>Systems approach:</strong> Implement observability for these signals. Emit: confidence score, consistency (variance across samples), retrieval success rate.</p>
+
+        <h3>Resource 11: Interpretability &amp; Testing</h3>
+        <p><strong>Title:</strong> Explainability and Interpretability in Modern LLMs<br>
+        <strong>Link:</strong> <a href="https://www.rohan-paul.com/p/explainability-and-interpretability">https://www.rohan-paul.com/p/explainability-and-interpretability</a><br>
+        <strong>Time:</strong> 30 minutes<br>
+        <strong>Technical relevance:</strong> Tools like attention visualization and saliency maps show <em>what</em> the model paid attention to, not <em>why</em>. For testing: these tools help identify when the model is relying on spurious correlations.</p>
+        <p><strong>Systems perspective:</strong> Use interpretability tools in QA: "Is the model using the features I expect? Is it relying on biased patterns?"</p>
+
+        <h3>Phase 4 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Systems meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Hallucination</strong></td><td>Confident false output; detectable via confidence calibration and consistency checks</td></tr>
+            <tr><td><strong>Confidence</strong></td><td>Model's probability estimate for an output; lower confidence = higher hallucination risk</td></tr>
+            <tr><td><strong>Attention</strong></td><td>Which input tokens influenced each output token; observable signal</td></tr>
+            <tr><td><strong>Saliency</strong></td><td>Which input features contributed most to output; detectable from gradients</td></tr>
+            <tr><td><strong>Interpretability</strong></td><td>Understanding model internals (billions of parameters, millions of operations)</td></tr>
+            <tr><td><strong>Explainability</strong></td><td>Tools to understand a specific decision (attention maps, saliency)</td></tr>
+            <tr><td><strong>Consistency</strong></td><td>Multiple samples from the same input agree (low variance = confident; high variance = uncertain)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phase 4 Try This</h3>
+        <blockquote>
+          <p><strong>Design a Test Suite:</strong> Your team has an LLM that summarizes customer tickets. Design three tests:</p>
+          <ol>
+            <li><strong>Hallucination test:</strong> Provide a ticket with false information ("customer claims we offer free shipping"). Does the model hallucinate about your policies or stick to facts from the ticket?</li>
+            <li><strong>Consistency test:</strong> Ask the model the same question 5 times. Do outputs agree? (Low consistency &rarr; high uncertainty &rarr; hallucination risk)</li>
+            <li><strong>Confidence calibration test:</strong> Measure: when the model is 90% confident, is it right 90% of the time? (Badly calibrated = false confidence)</li>
+          </ol>
+          <p>For each test, define: (1) expected behavior, (2) failure criteria, (3) what you'd do if it fails.</p>
+        </blockquote>
+
+        <h3>Phase 4 Teach-Back</h3>
+        <blockquote>
+          <p><strong>To QA team:</strong> "We can't eliminate hallucinations, but we can detect them. Test for: high confidence + inconsistent outputs = hallucination risk. Test for: confidence scores that don't match actual accuracy = uncalibrated. Build regression tests that catch these patterns."</p>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <section id="phase-5-deployment-optimization-month-2">
+      <h2>Phase 5: Deployment &amp; Optimization (Month 2+)</h2>
+      <div class="section-content">
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 5, you should be able to:</p>
+        <ul>
+          <li>Evaluate fine-tuning vs. prompting vs. RAG trade-offs</li>
+          <li>Understand quantization's latency/quality/cost tradeoffs</li>
+          <li>Design operational tests for model deployments</li>
+          <li>Set realistic SLOs for model-based systems</li>
+        </ul>
+
+        <h3>Resource 12: Deployment Patterns (Watch Only)</h3>
+        <p><strong>Title:</strong> Practical Deep Learning for Coders &mdash; Lessons 1-5<br>
+        <strong>Link:</strong> <a href="https://course.fast.ai/">https://course.fast.ai/</a><br>
+        <strong>Time:</strong> Modular; focus on deployment/production lessons<br>
+        <strong>Technical relevance:</strong> Real-world patterns: data augmentation, transfer learning, deployment considerations (inference speed, memory).</p>
+
+        <h3>Resource 13: Efficiency Trade-offs</h3>
+        <p><strong>Title:</strong> Fine-Tuning LLMs: LoRA, Quantization, and Distillation Simplified<br>
+        <strong>Link:</strong> <a href="https://dev.to/iamfaham/fine-tuning-llms-lora-quantization-and-distillation-simplified-12nf">https://dev.to/iamfaham/fine-tuning-llms-lora-quantization-and-distillation-simplified-12nf</a><br>
+        <strong>Time:</strong> 20 minutes<br>
+        <strong>Technical relevance:</strong> Three operational choices:</p>
+        <p><strong>Fine-tuning:</strong> Train further on your data. Cost: 6-14 hours on A100, $50-200. Benefit: specialized model. Risk: overfitting to your narrow dataset.</p>
+        <p><strong>LoRA:</strong> Efficient fine-tuning. Cost: 1-2 hours on consumer GPU, $5-20. Benefit: 75% less memory. Caveat: less flexible than full fine-tuning.</p>
+        <p><strong>Quantization:</strong> Reduce precision (4-bit vs. 32-bit). Cost: one-time conversion. Benefit: 4-10x faster, 75% smaller. Risk: slight quality loss (~2-5% accuracy).</p>
+        <p><strong>Systems decision:</strong> What's your constraint? Latency? Cost? Quality? This determines which you choose.</p>
+
+        <h3>Resource 14: Advanced Observability</h3>
+        <p><strong>Title:</strong> AI Agent Observability - Evolving Standards and Best Practices<br>
+        <strong>Link:</strong> <a href="https://opentelemetry.io/blog/2025/ai-agent-observability/">https://opentelemetry.io/blog/2025/ai-agent-observability/</a><br>
+        <strong>Time:</strong> 20 minutes<br>
+        <strong>Technical relevance:</strong> Multi-step workflows (agent loops) need hierarchical tracing. Tool calls, retries, reasoning steps &mdash; all must be observable.</p>
+
+        <h3>Phase 5 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Systems meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Fine-tuning</strong></td><td>Training further on specific data; specialized but expensive</td></tr>
+            <tr><td><strong>LoRA</strong></td><td>Low-rank adaptation; efficient fine-tuning</td></tr>
+            <tr><td><strong>Quantization</strong></td><td>Reduce precision (4-bit); faster, cheaper, slight quality loss</td></tr>
+            <tr><td><strong>Inference</strong></td><td>Running model to generate output (production mode)</td></tr>
+            <tr><td><strong>Latency</strong></td><td>Time from request to response (milliseconds or seconds)</td></tr>
+            <tr><td><strong>Throughput</strong></td><td>Requests per second the system can handle; determines horizontal scaling</td></tr>
+            <tr><td><strong>SLO</strong></td><td>Service level objective; your promise to users</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Phase 5 Try This</h3>
+        <blockquote>
+          <p><strong>Architecture Decision:</strong> Your product needs real-time LLM responses (&lt; 500ms latency). Budget constraint: $0.01 per request max. Quality constraint: 90% accuracy.</p>
+          <p>Options:</p>
+          <ol>
+            <li>Fine-tuned GPT-4 on your data (best quality, most expensive)</li>
+            <li>Quantized open-source model (cheaper, faster, lower quality)</li>
+            <li>Prompt optimization on GPT-3.5 (middle ground)</li>
+          </ol>
+          <p>For each, estimate: cost per request, latency, expected accuracy. Which do you pick and why?</p>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <section id="common-operational-pitfalls">
+      <h2>Common Operational Pitfalls</h2>
+      <div class="section-content">
+
+        <h3>Training Divergence</h3>
+        <p><strong>What you see:</strong> Loss spikes 5-10x; training becomes unstable.<br>
+        <strong>What it means:</strong> Gradient explosion; learning rate too high.<br>
+        <strong>What you monitor:</strong> Gradient norm (spikes = instability), loss (erratic).<br>
+        <strong>What to do:</strong> Reduce learning rate 10x; use gradient clipping.</p>
+
+        <h3>Silent Accuracy Degradation</h3>
+        <p><strong>What you see:</strong> Latency, error rate stable. But accuracy decays over weeks.<br>
+        <strong>What it means:</strong> Model drift (input distribution changed, or labels shifted).<br>
+        <strong>What you monitor:</strong> Accuracy on labeled validation set; input distribution statistics.<br>
+        <strong>What to do:</strong> Trigger retraining; investigate what changed.</p>
+
+        <h3>Confidence Miscalibration</h3>
+        <p><strong>What you see:</strong> Model is 95% confident but only right 60% of the time.<br>
+        <strong>What it means:</strong> Model learned to be overconfident (not penalized for uncertainty).<br>
+        <strong>What you monitor:</strong> Confidence vs. actual accuracy; plot histogram.<br>
+        <strong>What to do:</strong> Retrain with confidence penalty; adjust alert thresholds.</p>
+
+        <h3>Production-Training Mismatch</h3>
+        <p><strong>What you see:</strong> 94% test accuracy, 71% production accuracy.<br>
+        <strong>What it means:</strong> Validation set doesn't represent production distribution.<br>
+        <strong>What you monitor:</strong> Input distribution (is production data different from training?).<br>
+        <strong>What to do:</strong> Validate on representative data; retrain on production-like data.</p>
+
+      </div>
+    </section>
+
+    <section id="recommended-sequence">
+      <h2>Recommended Sequence</h2>
+      <div class="section-content">
+
+        <p><strong>Operational readiness (3-5 days):</strong></p>
+        <ul>
+          <li>Phase 1 (systems intuition)</li>
+          <li>Phase 3 (observability, alerts, dashboards)</li>
+          <li>Phase 4 (failure detection, testing)</li>
+        </ul>
+
+        <p><strong>Expert operations engineer (2-3 weeks):</strong></p>
+        <ul>
+          <li>All phases with emphasis on Phase 3 and 5</li>
+          <li>Extra reading on drift detection, SLO definition, deployment patterns</li>
+        </ul>
+
+      </div>
+    </section>
+
+    <section id="key-takeaways">
+      <h2>Key Takeaways</h2>
+      <div class="section-content">
+        <ol>
+          <li><strong>You're the bridge</strong> between software systems (SRE/DevOps) and ML systems (data scientists). Your job: observability, testing, alerting.</li>
+          <li><strong>Model-specific metrics matter</strong> as much as system metrics. Accuracy, drift, confidence, hallucination rate.</li>
+          <li><strong>Overfitting is your #1 threat.</strong> Validation loss diverging from training loss = stop training.</li>
+          <li><strong>Drift detection saves hours.</strong> Catch distribution shifts before users complain.</li>
+          <li><strong>Hallucinations are detectable</strong> via confidence, consistency, and behavioral signals.</li>
+        </ol>
+        <p><strong>Your next step:</strong> Get access to the ML team's dashboards. Ask them to walk you through the metrics. This guide is context; their system is the real classroom.</p>
+      </div>
+    </section>
+
+  </main>
+  <footer>
+    <a href="index.html">&larr; All Learning Paths</a>
+  </footer>
+</body>
+</html>

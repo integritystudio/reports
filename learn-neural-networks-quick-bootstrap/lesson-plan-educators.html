@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="neural-networks">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educator&rsquo;s Curriculum Guide | Neural Networks Learning Paths</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>Educator&rsquo;s Curriculum Guide</h1>
+      <div class="subtitle">For teachers, trainers, and facilitators</div>
+      <div class="meta"><strong>Format:</strong> Reference document for instructors</div>
+    </div>
+  </header>
+  <main id="main" class="container">
+    <nav id="toc">
+      <h2>Table of Contents</h2>
+      <ol>
+        <li><a href="#how-to-use-this-guide">How to Use This Guide</a></li>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#phase-sequence-recommendation-reverse-for-educators">Phase Sequence Recommendation (Reverse for Educators)</a></li>
+        <li><a href="#executive-summary">Executive Summary</a></li>
+        <li><a href="#phase-1-building-intuition">Phase 1: Building Intuition</a></li>
+        <li><a href="#phase-2-why-systems-fail">Phase 2: Why Systems Fail</a></li>
+        <li><a href="#phase-3-detecting-failures-observability">Phase 3: Detecting Failures (Observability)</a></li>
+        <li><a href="#phase-4-capstone-teaching-others-to-explain">Phase 4 Capstone: Teaching Others to Explain</a></li>
+        <li><a href="#phase-5-depth-specialization">Phase 5: Depth &amp; Specialization</a></li>
+        <li><a href="#teaching-tips-across-all-phases">Teaching Tips Across All Phases</a></li>
+        <li><a href="#assessment-ideas-beyond-tests">Assessment Ideas (Beyond Tests)</a></li>
+        <li><a href="#resources-for-you-the-instructor">Resources for You (The Instructor)</a></li>
+        <li><a href="#final-notes-on-teaching-this-material">Final Notes on Teaching This Material</a></li>
+      </ol>
+    </nav>
+
+    <section id="how-to-use-this-guide">
+      <h2>How to Use This Guide</h2>
+      <div class="section-content">
+        <p><strong>You&rsquo;re teaching others about AI and LLMs.</strong> This guide provides:</p>
+        <ul>
+          <li>Pedagogically-structured curriculum (not just resources)</li>
+          <li>Discussion prompts and student misconceptions to address</li>
+          <li>Teaching strategies tested with non-technical audiences</li>
+          <li>Pacing guidance for different classroom settings</li>
+          <li>Assessment ideas and reflection exercises</li>
+        </ul>
+        <p>This curriculum centers on <strong>pedagogical principles, not content coverage</strong>. The goal is student understanding and ability to think critically about AI, not memorization.</p>
+      </div>
+    </section>
+
+    <section id="philosophy">
+      <h2>Philosophy</h2>
+      <div class="section-content">
+        <p><strong>Core principles:</strong></p>
+        <ol>
+          <li><strong>Intuition before abstraction.</strong> Build visual/conceptual understanding before formalism.</li>
+          <li><strong>Why before how.</strong> Students care about &ldquo;why do neural networks hallucinate?&rdquo; before &ldquo;how do transformers work?&rdquo;</li>
+          <li><strong>Misconceptions first.</strong> Address wrong mental models explicitly; don&rsquo;t let them fester.</li>
+          <li><strong>Talk-backs over quizzes.</strong> Student ability to explain is better metric than regurgitation.</li>
+          <li><strong>Connect to student experience.</strong> Every abstract concept gets one concrete analogy.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="phase-sequence-recommendation-reverse-for-educators">
+      <h2>Phase Sequence Recommendation (Reverse for Educators)</h2>
+      <div class="section-content">
+        <p><strong>Unlike other cohorts, educators benefit from teaching the capstone first.</strong> Why?</p>
+        <ul>
+          <li>Phase 4 Capstone (explaining to non-technical audiences) is the <strong>learnable skill</strong> you&rsquo;re teaching them</li>
+          <li>Phases 1&ndash;3 build the foundation that makes good explanations possible</li>
+          <li>Students understand &ldquo;where this lands&rdquo; before diving into details</li>
+        </ul>
+        <p><strong>Recommended class structure:</strong></p>
+        <ol>
+          <li><strong>Day 1:</strong> Phase 4 Capstone (orientation; &ldquo;this is where we&rsquo;re headed&rdquo;)</li>
+          <li><strong>Week 1:</strong> Phase 1 (building blocks)</li>
+          <li><strong>Week 2:</strong> Phase 2 (why systems fail)</li>
+          <li><strong>Week 3:</strong> Phase 3 (detecting failures)</li>
+          <li><strong>Week 4:</strong> Phase 4 (the full explanation skill)</li>
+          <li><strong>Ongoing:</strong> Phase 5 (depth, specialization)</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="executive-summary">
+      <h2>Executive Summary</h2>
+      <div class="section-content">
+        <p>Teaching students about neural networks and LLMs requires you to:</p>
+        <ul>
+          <li>Confront their misconceptions head-on (they&rsquo;ve heard LLMs can &ldquo;reason&rdquo;)</li>
+          <li>Build intuition through analogy and visualization (not formulas)</li>
+          <li>Emphasize the &ldquo;why&rdquo; before the &ldquo;how&rdquo;</li>
+          <li>Teach critical thinking about AI hype and limitations</li>
+          <li>Practice translating technical concepts to non-technical audiences</li>
+        </ul>
+        <p>This curriculum gives you the frameworks to do all of these well.</p>
+      </div>
+    </section>
+
+    <section id="phase-1-building-intuition">
+      <h2>Phase 1: Building Intuition</h2>
+      <div class="section-content">
+        <p><strong>Pedagogical goal:</strong> Students can explain how networks learn using analogies; no math required.</p>
+        <p><strong>Time:</strong> 1&ndash;2 hours per class session; 1&ndash;2 sessions total</p>
+        <p><strong>Student misconception to address upfront:</strong></p>
+        <ul>
+          <li>&ldquo;Neural networks are conscious / think like humans&rdquo;
+            <ul>
+              <li><strong>Reality:</strong> They&rsquo;re mathematical functions that adjust to minimize error</li>
+              <li><strong>Teaching approach:</strong> &ldquo;They learn patterns, not meaning. Like learning the rule &lsquo;if I see a, then b usually follows&rsquo; &mdash; that&rsquo;s pattern matching, not understanding.&rdquo;</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Resource 1 &mdash; Teaching Strategy</h3>
+        <p><strong>Resource:</strong> 3Blue1Brown Chapter 1<br>
+        <strong>Length:</strong> 19 minutes (good as homework or in-class)<br>
+        <strong>How to teach it:</strong></p>
+
+        <p><strong>Before watching:</strong></p>
+        <ul>
+          <li>Ask students: &ldquo;How do you think a computer learns to recognize handwritten digits?&rdquo;</li>
+          <li>Let them brainstorm (usually: &ldquo;memorize all of them&rdquo; or &ldquo;rules the programmer gives&rdquo;)</li>
+          <li>Frame: &ldquo;What if the computer learned the rules itself from examples?&rdquo;</li>
+        </ul>
+
+        <p><strong>While watching:</strong></p>
+        <ul>
+          <li>Pause at the visualization of the loss surface. Ask: &ldquo;What does this landscape represent?&rdquo;</li>
+          <li>Draw a simple neural network on the board; label the weights. Ask: &ldquo;What changes during training?&rdquo;</li>
+        </ul>
+
+        <p><strong>After watching:</strong></p>
+        <ul>
+          <li>Discussion prompt: &ldquo;Why can&rsquo;t the network just memorize all the training digits?&rdquo;</li>
+          <li>Have students draw their own network diagram and label: input, weights, output</li>
+        </ul>
+
+        <p><strong>Common student question:</strong></p>
+        <ul>
+          <li>&ldquo;Why random weights at the start?&rdquo;
+            <ul>
+              <li>Good answer: &ldquo;Random ensures the network doesn&rsquo;t learn the same pattern every time. And random + feedback = learning.&rdquo;</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Resource 2 &mdash; Teaching Strategy</h3>
+        <p><strong>Resource:</strong> Jay Alammar&rsquo;s Interactive Guide<br>
+        <strong>Length:</strong> 20&ndash;30 minutes<br>
+        <strong>How to teach it:</strong></p>
+
+        <p><strong>In class or as assignment:</strong></p>
+        <ul>
+          <li>Have students interact with the sliders themselves</li>
+          <li>Assign: &ldquo;Change each weight and predict what happens to the error bar&rdquo;</li>
+          <li>Then test your prediction (interactive verification)</li>
+        </ul>
+
+        <p><strong>Discussion after:</strong></p>
+        <ul>
+          <li>&ldquo;What did you notice when you increased one weight a lot?&rdquo;</li>
+          <li>&ldquo;Why would some configurations work better than others?&rdquo;</li>
+          <li>&ldquo;What&rsquo;s the tradeoff between having many weights vs. few weights?&rdquo;</li>
+        </ul>
+
+        <h3>Phase 1 Teaching Methods</h3>
+        <p><strong>Analogies students understand:</strong></p>
+        <ul>
+          <li><strong>Learning = adjusting dials on a machine.</strong> Each weight is a dial. The network finds the dial settings that minimize error.</li>
+          <li><strong>Gradient descent = finding downhill.</strong> Imagine you&rsquo;re in fog on a hill. You can&rsquo;t see where the bottom is. You feel the slope beneath your feet and step downhill. Repeat. That&rsquo;s gradient descent.</li>
+          <li><strong>Neural network = weather predictor learning patterns.</strong> &ldquo;If I see these atmospheric conditions, rain usually follows.&rdquo; The network learns hundreds of these correlations.</li>
+        </ul>
+
+        <p><strong>Activities:</strong></p>
+        <ul>
+          <li>Have students sketch a neural network without watching the video. Discuss the differences.</li>
+          <li>Bring in a simple physical example: a marble rolling down a surface (representing gradient descent)</li>
+          <li>Role-play: one student is the network, others are examples. The &ldquo;network&rdquo; adjusts (learning) based on feedback (loss)</li>
+        </ul>
+
+        <h3>Phase 1 Student Talk-Back (Assessment)</h3>
+        <p>Ask students: &ldquo;Explain to someone who&rsquo;s never heard of neural networks how they learn. No equations. One analogy.&rdquo;</p>
+        <p><strong>Grade on:</strong></p>
+        <ul>
+          <li>Clarity (no jargon)</li>
+          <li>Accuracy (captures the core loop: examples &rarr; error &rarr; adjustment)</li>
+          <li>Completeness (all three components present)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="phase-2-why-systems-fail">
+      <h2>Phase 2: Why Systems Fail</h2>
+      <div class="section-content">
+        <p><strong>Pedagogical goal:</strong> Students can identify overfitting; understand why models fail in production.</p>
+        <p><strong>Time:</strong> 3&ndash;4 hours (can span 2 sessions)</p>
+        <p><strong>Student misconception to address:</strong></p>
+        <ul>
+          <li>&ldquo;If a model works on our test set, it&rsquo;ll work in production&rdquo;
+            <ul>
+              <li><strong>Reality:</strong> Test set &ne; production distribution</li>
+              <li><strong>Teaching approach:</strong> &ldquo;It&rsquo;s like studying old exams and expecting every future exam to be identical. What if the teacher changes the focus?&rdquo;</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Resource 3 &mdash; Teaching Strategy</h3>
+        <p><strong>Resource:</strong> Karpathy Zero to Hero (Lectures 1&ndash;2)<br>
+        <strong>Note:</strong> Show, don&rsquo;t do. No coding assignments.</p>
+
+        <p><strong>How to teach it:</strong></p>
+        <ol>
+          <li>Show the video in class (90 min)</li>
+          <li>Pause at loss curve visualizations</li>
+          <li>Ask: &ldquo;What does a good loss curve look like? A bad one?&rdquo;</li>
+          <li>Ask: &ldquo;When would you stop training?&rdquo;</li>
+        </ol>
+
+        <p><strong>Key moments to highlight:</strong></p>
+        <ul>
+          <li>The moment loss stops improving (plateau)</li>
+          <li>The moment validation loss diverges from training loss (overfitting)</li>
+          <li>The moment gradient becomes zero (no more learning possible)</li>
+        </ul>
+
+        <h3>Resource 4 &mdash; Teaching Strategy</h3>
+        <p><strong>Resource:</strong> What is Overfitting?<br>
+        <strong>Length:</strong> 25 minutes</p>
+
+        <p><strong>In-class activity:</strong></p>
+        <ol>
+          <li>Show the train/val loss plots (2 minutes)</li>
+          <li>Ask students: &ldquo;What&rsquo;s happening in scenario A? Scenario B?&rdquo; (5 min)</li>
+          <li>Discuss: &ldquo;Why is scenario B bad? What would you do next?&rdquo; (5 min)</li>
+        </ol>
+
+        <p><strong>Common misconception:</strong></p>
+        <ul>
+          <li>&ldquo;Overfitting means the model isn&rsquo;t good&rdquo;
+            <ul>
+              <li><strong>Reality:</strong> Overfitting means the model learned the training set too well but can&rsquo;t generalize</li>
+              <li><strong>Teaching fix:</strong> &ldquo;It&rsquo;s not that the model is bad at the task; it&rsquo;s that the model is too specific to the training set.&rdquo;</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Phase 2 Teaching Methods</h3>
+        <p><strong>Real-world example:</strong></p>
+        <blockquote>
+          &ldquo;You study for a test using 10 practice exams. On those 10, you score 98%. But on the real exam (different questions), you score 70%. Why? You memorized answers, not understood concepts. That&rsquo;s overfitting.&rdquo;
+        </blockquote>
+
+        <p><strong>Classroom activity:</strong></p>
+        <ul>
+          <li>Bring two datasets: one for training, one for testing</li>
+          <li>Have students &ldquo;train&rdquo; (manually, no coding): memorize the training set perfectly</li>
+          <li>Then test on new data: fail spectacularly</li>
+          <li>Debrief: &ldquo;What just happened? Why did memorization not help?&rdquo;</li>
+        </ul>
+
+        <h3>Phase 2 Student Talk-Back (Assessment)</h3>
+        <p><strong>Scenario:</strong> &ldquo;Your team built a model that gets 94% accuracy on your test data. You deploy it. Real-world accuracy is 71%. Why? What would you have done differently?&rdquo;</p>
+        <p><strong>Grade on:</strong></p>
+        <ul>
+          <li>Identifies distribution mismatch or overfitting</li>
+          <li>Proposes validation strategy for the future</li>
+          <li>Reflects on test set representativeness</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="phase-3-detecting-failures-observability">
+      <h2>Phase 3: Detecting Failures (Observability)</h2>
+      <div class="section-content">
+        <p><strong>Pedagogical goal:</strong> Students understand monitoring as essential, not optional; can design observability systems.</p>
+        <p><strong>Time:</strong> 4&ndash;5 hours (span 2&ndash;3 sessions)</p>
+        <p><strong>Student misconception to address:</strong></p>
+        <ul>
+          <li>&ldquo;Monitoring is IT operations, not our problem&rdquo;
+            <ul>
+              <li><strong>Reality:</strong> Model-specific monitoring (accuracy drift, confidence calibration) is a science problem, not an ops problem</li>
+              <li><strong>Teaching approach:</strong> &ldquo;If you can&rsquo;t measure it, you can&rsquo;t know when it breaks.&rdquo;</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Resources 6&ndash;8 &mdash; Teaching Strategy</h3>
+        <p><strong>Session 1: Observability Concepts (30 min)</strong></p>
+        <ul>
+          <li>Read Resource 6 (LLM observability fundamentals)</li>
+          <li>Draw a dashboard on the board: what metrics would you want?</li>
+          <li>Brainstorm: &ldquo;If your model is failing silently, what measurements would catch it first?&rdquo;</li>
+        </ul>
+
+        <p><strong>Session 2: Standards &amp; Practices (25 min)</strong></p>
+        <ul>
+          <li>Skim Resource 7 (semantic conventions; this is reference material)</li>
+          <li>Focus: &ldquo;Why do standards matter? Why not just measure whatever?&rdquo;</li>
+        </ul>
+
+        <p><strong>Session 3: Drift Detection (35 min)</strong></p>
+        <ul>
+          <li>Read Resource 8 (drift detection)</li>
+          <li>Activity: &ldquo;Describe three ways a model could drift. What would you measure for each?&rdquo;</li>
+        </ul>
+
+        <h3>Phase 3 Teaching Methods</h3>
+        <p><strong>Dashboard design activity:</strong></p>
+        <ul>
+          <li>Break students into small groups</li>
+          <li>Assign each group a scenario (e.g., &ldquo;customer support chatbot&rdquo;)</li>
+          <li>Task: &ldquo;Design three dashboards: operational (for ops team), quality (for ML team), drift (for product). What metrics go on each?&rdquo;</li>
+          <li>Groups present; class discusses</li>
+        </ul>
+
+        <p><strong>Myth-busting:</strong></p>
+        <ul>
+          <li>&ldquo;Accuracy is the only metric that matters&rdquo;
+            <ul>
+              <li>Counter: &ldquo;Accuracy can stay the same while model drifts (more false positives, fewer false negatives balanced out). You need multiple signals.&rdquo;</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>Phase 3 Student Talk-Back (Assessment)</h3>
+        <p><strong>Task:</strong> &ldquo;Design monitoring for an LLM-based chatbot. What 5 metrics would you track? For each, describe: (1) what it measures, (2) what a healthy value looks like, (3) what you&rsquo;d do if it degrades.&rdquo;</p>
+        <p><strong>Grade on:</strong></p>
+        <ul>
+          <li>Metrics are specific (not vague)</li>
+          <li>Includes at least one model-specific metric (accuracy, drift, confidence)</li>
+          <li>Includes at least one operational metric (latency, cost)</li>
+          <li>Responses to degradation are realistic</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="phase-4-capstone-teaching-others-to-explain">
+      <h2>Phase 4 Capstone: Teaching Others to Explain</h2>
+      <div class="section-content">
+        <p><strong>Pedagogical goal:</strong> Students can translate technical AI concepts to non-technical audiences.</p>
+        <p><strong>This is the culmination.</strong> Everything prior was in service of this.</p>
+        <p><strong>Time:</strong> 4&ndash;5 hours (recommend full week to practice)</p>
+
+        <h3>Before Phase 4: Orientation Activity (1 hour)</h3>
+        <p><strong>Purpose:</strong> Show students why this matters.</p>
+        <p><strong>Activity:</strong></p>
+        <ol>
+          <li>Invite a non-technical colleague (or manager, or peer) to class</li>
+          <li>Have them ask a question: &ldquo;Why do LLMs hallucinate? Should we be worried?&rdquo;</li>
+          <li>Have a student attempt to answer (no prep)</li>
+          <li>Debrief: &ldquo;What was hard? What assumptions did we make?&rdquo;</li>
+          <li>Frame: &ldquo;Phase 4 teaches you to answer this well.&rdquo;</li>
+        </ol>
+
+        <h3>Resource 9&ndash;11 &mdash; Teaching Strategy</h3>
+        <p><strong>Session 1: Understand the Architecture (60 min)</strong></p>
+        <ul>
+          <li>Show Resource 9 (Illustrated Transformer)</li>
+          <li>Goal: students understand attention (not every detail, but the concept)</li>
+          <li>Activity: &ldquo;Annotate this attention visualization. Which words is the model paying attention to? Why?&rdquo;</li>
+        </ul>
+
+        <p><strong>Session 2: Understand Failures (45 min)</strong></p>
+        <ul>
+          <li>Read Resource 10 (hallucinations)</li>
+          <li>Discuss: &ldquo;Why can&rsquo;t we just train it better to not hallucinate?&rdquo;</li>
+          <li>Activity: &ldquo;Brainstorm three ways to detect hallucinations&rdquo;</li>
+        </ul>
+
+        <p><strong>Session 3: The Explanation Skill (60 min)</strong></p>
+        <ul>
+          <li>Read Resource 11 (interpretability tools)</li>
+          <li>Discuss: &ldquo;We have tools to explain decisions. Are they good enough?&rdquo;</li>
+          <li>Activity: &ldquo;Choose one misconception from Phase 4 Capstone (below). Write a 2-min explanation that addresses it.&rdquo;</li>
+        </ul>
+
+        <h3>Phase 4 Capstone Activities (In Depth)</h3>
+        <p><strong>Activity 1: Misconception Buster</strong></p>
+
+        <p><strong>Misconception 1:</strong> &ldquo;LLMs understand language&rdquo;</p>
+        <ul>
+          <li><strong>Your reframe:</strong> &ldquo;LLMs predict language. Understanding would mean grasping meaning; prediction means finding statistical patterns.&rdquo;</li>
+          <li><strong>Student task:</strong> Write a 1-min explanation of this distinction for a CEO.</li>
+        </ul>
+
+        <p><strong>Misconception 2:</strong> &ldquo;More training data = no hallucinations&rdquo;</p>
+        <ul>
+          <li><strong>Your reframe:</strong> &ldquo;Hallucinations aren&rsquo;t a data quality problem; they&rsquo;re architectural. Hallucination happens because the model is optimized to generate plausible text, not factual text.&rdquo;</li>
+          <li><strong>Student task:</strong> Explain to a customer why we can&rsquo;t promise &ldquo;no hallucinations.&rdquo;</li>
+        </ul>
+
+        <p><strong>Misconception 3:</strong> &ldquo;Attention visualization shows what the model thought&rdquo;</p>
+        <ul>
+          <li><strong>Your reframe:</strong> &ldquo;Attention shows what words mattered, not why they mattered or how they influenced the decision.&rdquo;</li>
+          <li><strong>Student task:</strong> Show an attention visualization and explain what it does and doesn&rsquo;t tell us.</li>
+        </ul>
+
+        <p><strong>Misconception 4:</strong> &ldquo;Explainability = safety&rdquo;</p>
+        <ul>
+          <li><strong>Your reframe:</strong> &ldquo;Explaining a bad decision doesn&rsquo;t make it good. Transparency and defense mechanisms (monitoring, guardrails) matter more than explanation.&rdquo;</li>
+          <li><strong>Student task:</strong> Propose a defense strategy for a company deploying LLMs, combining explanation + monitoring + guardrails.</li>
+        </ul>
+
+        <p><strong>Activity 2: Role-Play Scenarios</strong></p>
+
+        <p><strong>Scenario A: The Skeptical Executive</strong></p>
+        <ul>
+          <li>Student role-plays explaining hallucinations to a CEO who&rsquo;s read about ChatGPT errors</li>
+          <li>Class observes and gives feedback: &ldquo;What was clear? What was confusing?&rdquo;</li>
+        </ul>
+
+        <p><strong>Scenario B: The Non-Technical Customer</strong></p>
+        <ul>
+          <li>Student explains why the LLM gave a wrong answer, what we did about it, and what the customer should do</li>
+          <li>Class rates clarity and reassurance level</li>
+        </ul>
+
+        <p><strong>Scenario C: The Peer Who Disagrees</strong></p>
+        <ul>
+          <li>Student defends a position (e.g., &ldquo;we should use LLMs here despite hallucination risk&rdquo;)</li>
+          <li>Peer argues the opposite</li>
+          <li>Class evaluates quality of reasoning</li>
+        </ul>
+
+        <h3>Phase 4 Student Talk-Back (Assessment &mdash; The Capstone)</h3>
+        <p><strong>Final project:</strong> &ldquo;Choose a non-technical audience (CEO, customer, journalist, board member). Write or record a 3-minute explanation addressing this question: &lsquo;What&rsquo;s an LLM, where does it work, where does it fail, and how do you know?&rsquo;&rdquo;</p>
+        <p><strong>Grade on:</strong></p>
+        <ul>
+          <li>No jargon (or jargon explained)</li>
+          <li>Accurate (doesn&rsquo;t overstate capability)</li>
+          <li>Complete (answers all four parts)</li>
+          <li>Persuasive (audience feels informed, not scared)</li>
+        </ul>
+
+        <p><strong>Rubric:</strong></p>
+        <ul>
+          <li><strong>Excellent:</strong> Clear analogies, acknowledges limitations, proposes solutions (monitoring/guardrails)</li>
+          <li><strong>Good:</strong> Clear analogies, mentions limitations, but shallow on solutions</li>
+          <li><strong>Adequate:</strong> Some jargon leakage, mentions hallucinations but doesn&rsquo;t explain why</li>
+          <li><strong>Below target:</strong> Heavy jargon, overstates capability or dismisses risks</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="phase-5-depth-specialization">
+      <h2>Phase 5: Depth &amp; Specialization</h2>
+      <div class="section-content">
+        <p><strong>Pedagogical goal:</strong> Students choose a specialization and go deeper based on their interests.</p>
+        <p><strong>Time:</strong> 4&ndash;8 hours (self-paced, or structured as &ldquo;deep dives&rdquo; for advanced students)</p>
+        <p><strong>Specialization paths:</strong></p>
+
+        <p><strong>Path A: Model Builders (Technical)</strong></p>
+        <ul>
+          <li>Resource 12 + 13: deployment, fine-tuning, quantization</li>
+          <li>Project: &ldquo;Evaluate three deployment approaches for a use case. Which makes sense and why?&rdquo;</li>
+        </ul>
+
+        <p><strong>Path B: Monitors &amp; Operators</strong></p>
+        <ul>
+          <li>Deep dive into Resource 8 + 14: drift detection, observability at scale</li>
+          <li>Project: &ldquo;Design a monitoring system for multi-step AI workflows&rdquo;</li>
+        </ul>
+
+        <p><strong>Path C: Educators</strong></p>
+        <ul>
+          <li>Create a lesson for teaching Phase 1&ndash;2 to a different audience</li>
+          <li>Refine based on feedback</li>
+        </ul>
+
+        <p><strong>Path D: Researchers</strong></p>
+        <ul>
+          <li>Investigate recent papers on hallucination detection, interpretability</li>
+          <li>Synthesize findings into a &ldquo;state of the field&rdquo; presentation</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="teaching-tips-across-all-phases">
+      <h2>Teaching Tips Across All Phases</h2>
+      <div class="section-content">
+        <h3>Addressing Hype</h3>
+        <p>Students come in with inflated expectations (LLMs are going to code my app, etc.).</p>
+        <p><strong>Strategy:</strong></p>
+        <ul>
+          <li>Acknowledge: &ldquo;These are genuinely powerful tools&rdquo;</li>
+          <li>Contextualize: &ldquo;And they have specific, real failure modes&rdquo;</li>
+          <li>Inoculate: &ldquo;I&rsquo;ll teach you to think critically about when they&rsquo;re good, when they&rsquo;re not&rdquo;</li>
+        </ul>
+
+        <h3>Using Analogies Effectively</h3>
+        <ul>
+          <li>Give multiple analogies for one concept (students anchor to different ones)</li>
+          <li>Invite students to create their own analogies (co-create understanding)</li>
+          <li>Call out analogy limits: &ldquo;This is like X, but here&rsquo;s where the analogy breaks&rdquo;</li>
+        </ul>
+
+        <h3>Handling &ldquo;I Don&rsquo;t Know&rdquo;</h3>
+        <ul>
+          <li>Normalize: &ldquo;There&rsquo;s active research on these questions. Not knowing is honest.&rdquo;</li>
+          <li>Model: &ldquo;Here&rsquo;s how I&rsquo;d investigate this if I didn&rsquo;t know the answer&rdquo;</li>
+          <li>Empower: &ldquo;You could research this and find out&rdquo;</li>
+        </ul>
+
+        <h3>Pacing for Different Classroom Formats</h3>
+        <p><strong>Synchronous classroom (semester):</strong></p>
+        <ul>
+          <li>Phase 1: 1&ndash;2 weeks</li>
+          <li>Phase 2: 2 weeks</li>
+          <li>Phase 3: 2 weeks</li>
+          <li>Phase 4: 2&ndash;3 weeks (heavy project focus)</li>
+          <li>Phase 5: ongoing (student projects)</li>
+        </ul>
+
+        <p><strong>Bootcamp (2&ndash;3 weeks intensive):</strong></p>
+        <ul>
+          <li>Phase 1: 1 day</li>
+          <li>Phase 2: 2 days</li>
+          <li>Phase 3: 2 days</li>
+          <li>Phase 4: 3&ndash;4 days (majority of time; practice emphasis)</li>
+          <li>Phase 5: (post-bootcamp self-study)</li>
+        </ul>
+
+        <p><strong>Self-paced online:</strong></p>
+        <ul>
+          <li>Encourage 3&ndash;4 weeks minimum (slow &gt; fast for this material)</li>
+          <li>Provide peer discussion forums (essential)</li>
+          <li>Student peer-teaching (learners teach each other)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="assessment-ideas-beyond-tests">
+      <h2>Assessment Ideas (Beyond Tests)</h2>
+      <div class="section-content">
+        <ol>
+          <li><strong>Talk-back assignments:</strong> Can student explain to non-technical peer?</li>
+          <li><strong>Scenario analysis:</strong> Given a failure, what would you measure/do?</li>
+          <li><strong>Dashboard design:</strong> Students sketch and annotate monitoring strategy</li>
+          <li><strong>Peer review:</strong> Students critique each other&rsquo;s explanations</li>
+          <li><strong>Myth-busting:</strong> Students identify and correct AI hype claims</li>
+          <li><strong>Capstone project:</strong> Explain AI to a real non-technical audience</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="resources-for-you-the-instructor">
+      <h2>Resources for You (The Instructor)</h2>
+      <div class="section-content">
+        <p><strong>If you want to teach this and feel rusty:</strong></p>
+        <ul>
+          <li>Do Phases 1&ndash;4 yourself first</li>
+          <li>Engage with the discussion prompts as if you were a student</li>
+          <li>Create your own analogies (you&rsquo;ll teach better if you&rsquo;ve worked through the concepts)</li>
+        </ul>
+
+        <p><strong>If you want student groups to present:</strong></p>
+        <ul>
+          <li>Assign 1&ndash;2 resources per group + 10-min presentation</li>
+          <li>Require: (1) concept explained, (2) one analogy, (3) one misconception addressed</li>
+        </ul>
+
+        <p><strong>If you want office hours:</strong></p>
+        <ul>
+          <li>Expect questions on: &ldquo;Why can&rsquo;t we just fix hallucinations?&rdquo; (Revisit Phase 4)</li>
+          <li>Prepare: &ldquo;How do we know the model is biased?&rdquo; (Thread through Phase 3 monitoring)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="final-notes-on-teaching-this-material">
+      <h2>Final Notes on Teaching This Material</h2>
+      <div class="section-content">
+        <p><strong>You&rsquo;re not just teaching facts; you&rsquo;re teaching thinking.</strong></p>
+        <p>Students should leave this course able to:</p>
+        <ul>
+          <li>Recognize AI hype</li>
+          <li>Ask smart questions about capabilities vs. limitations</li>
+          <li>Design systems (monitoring, testing) that assume failure will happen</li>
+          <li>Explain technical concepts to anyone</li>
+        </ul>
+        <p>These are the skills that matter. Test for them.</p>
+        <p><strong>Good luck.</strong> You&rsquo;re preparing students to think critically in a world where AI is everywhere. That&rsquo;s important work.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <a href="index.html">&larr; All Learning Paths</a>
+  </footer>
+</body>
+</html>

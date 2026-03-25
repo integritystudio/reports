@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="neural-networks">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hands-On Learning Path | Neural Networks Learning Paths</title>
+  <link rel="stylesheet" href="../css/report-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <div class="container">
+      <h1>Hands-On Learning Path</h1>
+      <div class="subtitle">For mildly technical learners with Python experience</div>
+      <div class="meta"><strong>Time:</strong> 4 weeks &middot; <strong>Pace:</strong> 4&ndash;5 hrs/wk</div>
+    </div>
+  </header>
+  <main id="main" class="container">
+
+    <nav id="toc">
+      <h2>Table of Contents</h2>
+      <ol>
+        <li><a href="#how-to-use-this-guide">How to Use This Guide</a></li>
+        <li><a href="#executive-summary">Executive Summary</a></li>
+        <li><a href="#phase-1-quick-start-day-1-reading">Phase 1: Quick Start (Day 1 Reading)</a></li>
+        <li><a href="#phase-2-core-concepts-week-1">Phase 2: Core Concepts (Week 1)</a></li>
+        <li><a href="#bridge-from-training-concepts-to-otel-metrics-phase-2-3">Bridge: From Training Concepts to OTEL Metrics</a></li>
+        <li><a href="#phase-3-otel-and-observability-week-2">Phase 3: OTEL and Observability (Week 2)</a></li>
+        <li><a href="#phase-4-llm-and-explainability-week-3">Phase 4: LLM and Explainability (Week 3)</a></li>
+        <li><a href="#phase-4-capstone-explaining-llm-behavior-to-non-ml-colleagues">Phase 4 Capstone: Explaining LLM Behavior to Non-ML Colleagues</a></li>
+        <li><a href="#phase-5-advanced-context-month-2">Phase 5: Advanced Context (Month 2)</a></li>
+        <li><a href="#common-training-pitfalls">Common Training Pitfalls</a></li>
+        <li><a href="#cross-phase-resource-comparison-matrix">Cross-Phase Resource Comparison Matrix</a></li>
+        <li><a href="#identified-gaps-and-open-questions">Identified Gaps and Open Questions</a></li>
+        <li><a href="#recommended-reading-sequence-condensed">Recommended Reading Sequence (Condensed)</a></li>
+        <li><a href="#reference-section-key-terms-acronyms">Reference Section: Key Terms &amp; Acronyms</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ol>
+    </nav>
+
+    <section id="how-to-use-this-guide">
+      <h2>How to Use This Guide</h2>
+      <div class="section-content">
+        <p><strong>For new hires with a teaching background</strong>, this guide is organized into 5 phases spanning your first month + Month 2. Choose your path:</p>
+        <ul>
+          <li><strong>Fast track (strong Python):</strong> Start Phase 2 Week 1. Complete Phases 1&ndash;4 in 2 weeks. Phase 5 is ongoing depth.</li>
+          <li><strong>Standard track (some Python):</strong> Follow Day 1 &rarr; Week 1&ndash;3 sequence. Allow 3&ndash;4 weeks for solid fundamentals.</li>
+          <li><strong>Careful track (no recent coding):</strong> Spend 2&ndash;3 days on Python refresher before Week 1. Use Phase 2 resources in slower cadence.</li>
+        </ul>
+        <p><strong>For role-specific paths:</strong></p>
+        <ul>
+          <li><strong>Observability/Monitoring role:</strong> Prioritize Phase 3 (OTEL) after Phase 1&ndash;2 foundations.</li>
+          <li><strong>LLM Safety/Reliability role:</strong> Prioritize Phase 4 (Explainability &amp; Hallucinations) after Phase 1&ndash;2 foundations.</li>
+          <li><strong>General engineering onboarding:</strong> Follow the recommended sequence linearly.</li>
+        </ul>
+        <p><strong>Self-Assessment:</strong> Before starting Phase 2, check: Can you write a Python function that trains a simple model and prints its loss? If yes, proceed. If no, review <a href="https://docs.python.org/3/tutorial/index.html">Python basics</a> for 4&ndash;6 hours first.</p>
+      </div>
+    </section>
+
+    <section id="executive-summary">
+      <h2>Executive Summary</h2>
+      <div class="section-content">
+        <ol>
+          <li>The best entry point for a pedagogy-minded new hire is the combination of 3Blue1Brown&rsquo;s visual series (intuition-first) plus Jay Alammar&rsquo;s illustrated guides (architecture-specific) &mdash; together they cover fundamentals without requiring math prerequisites.</li>
+          <li>Karpathy&rsquo;s &ldquo;Zero to Hero&rdquo; is the single most recommended resource for building real depth, but requires coding commitment and is best treated as a Week 1&ndash;2 project, not a Day 1 skim.</li>
+          <li>The OTEL ecosystem has produced strong, practical LLM observability content in 2024 &mdash; the OpenTelemetry blog and Grafana&rsquo;s guide are directly aligned to this team&rsquo;s stack.</li>
+          <li>LLM explainability is a fast-moving area; Lilian Weng&rsquo;s blog (Lil&rsquo;Log) is the most reliable single source for research-grounded, readable deep dives on hallucination and interpretability.</li>
+          <li>Fast.ai is the strongest option for Month 2 depth &mdash; its &ldquo;top-down&rdquo; teaching philosophy maps well to someone with an educator background.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="phase-1-quick-start-day-1-reading">
+      <h2>Phase 1: Quick Start (Day 1 Reading)</h2>
+      <div class="section-content">
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 1, you should be able to:</p>
+        <ul>
+          <li>Explain what a neuron is and why networks of neurons can learn patterns</li>
+          <li>Describe what a forward pass does in plain language</li>
+          <li>Draw a simple neural network (input &rarr; hidden layer &rarr; output) on paper and label the weights</li>
+          <li>Explain gradient descent using a non-mathematical analogy</li>
+        </ul>
+        <blockquote>
+          <strong>As an educator, you know</strong> that building a mental model before encountering the math prevents the &ldquo;symbol shock&rdquo; that derails many self-taught ML beginners. Phase 1 is entirely about intuition first. The equations come later and will make more sense because of this foundation.
+        </blockquote>
+
+        <h3>Phase 1 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr><th>Term</th><th>Plain meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>AI</strong></td><td>Machines that perform tasks requiring human-like reasoning</td></tr>
+            <tr><td><strong>ML</strong></td><td>Systems that learn patterns from data, rather than following explicit rules</td></tr>
+            <tr><td><strong>DL</strong></td><td>Deep Learning &mdash; neural networks with many layers</td></tr>
+            <tr><td><strong>NN</strong></td><td>Neural Network &mdash; a graph of connected &ldquo;neurons&rdquo; that transform inputs into outputs</td></tr>
+            <tr><td><strong>Forward pass</strong></td><td>Running input data through the network to produce a prediction</td></tr>
+            <tr><td><strong>Activation</strong></td><td>The output value of a neuron after applying a non-linear function (e.g., ReLU)</td></tr>
+            <tr><td><strong>Weight</strong></td><td>A number that scales the signal between two neurons &mdash; what the network <em>learns</em></td></tr>
+          </tbody>
+        </table>
+
+        <h3>Resource 1</h3>
+        <p><strong>Title:</strong> But What Is a Neural Network? (Chapter 1, Deep Learning)<br>
+        <strong>Link:</strong> <a href="https://www.3blue1brown.com/topics/neural-networks">https://www.3blue1brown.com/topics/neural-networks</a><br>
+        <strong>Source:</strong> YouTube Video Series (3Blue1Brown)<br>
+        <strong>Time:</strong> 19 minutes (Chapter 1 only)<br>
+        <strong>Key Takeaway:</strong> Uses animated diagrams to show how a network learns to recognize handwritten digits &mdash; no equations required.<br>
+        <strong>Relevance to OTEL:</strong> Establishes the &ldquo;what is happening inside&rdquo; intuition that makes the black-box problem and observability need immediately concrete.<br>
+        <strong>Best For:</strong> New hires, Educators, non-technical stakeholders<br>
+        <strong>Difficulty:</strong> Beginner</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Grant Sanderson (3Blue1Brown) is exceptional at building visual intuition before introducing math</li>
+          <li>Animations make gradient descent and weight updates physically intuitive</li>
+          <li>Widely cited as the single best starting point across ML communities</li>
+          <li>Covers a complete use case (digit recognition) so it does not feel abstract</li>
+          <li>Free, no account required, captioned</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Video-only, no hands-on code at this stage</li>
+          <li>Chapter 1 alone leaves gaps on backpropagation specifics (later chapters fill this)</li>
+          <li>Does not address failure modes, deployment, or OTEL at all</li>
+          <li>2017 vintage &mdash; transformer-specific content is in a separate, newer series</li>
+        </ul>
+
+        <h3>Resource 2</h3>
+        <p><strong>Title:</strong> A Visual and Interactive Guide to the Basics of Neural Networks<br>
+        <strong>Link:</strong> <a href="https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/">https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/</a><br>
+        <strong>Source:</strong> Blog (Jay Alammar)<br>
+        <strong>Time:</strong> 20&ndash;30 minutes<br>
+        <strong>Key Takeaway:</strong> Walks from single-weight prediction to multi-variable classification using interactive sliders, making loss and gradient descent hands-on within a browser.<br>
+        <strong>Relevance to OTEL:</strong> The loss metric visualization directly parallels what gets tracked as a training metric in production observability dashboards.<br>
+        <strong>Best For:</strong> New hires, Educators<br>
+        <strong>Difficulty:</strong> Beginner</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Interactive sliders let readers adjust weights and see error change in real time &mdash; a uniquely pedagogical feature</li>
+          <li>House-pricing analogy is genuinely accessible</li>
+          <li>Progresses from regression to classification without a prerequisite jump</li>
+          <li>No code environment needed; runs in browser</li>
+          <li>Written explicitly for people without ML experience</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Does not cover hidden layers &mdash; the most important feature of deep networks</li>
+          <li>Gradient descent explanation is shallow; described but not mechanistically explained</li>
+          <li>No code examples, no PyTorch/TF context</li>
+          <li>Does not address overfitting, validation, or real-world caveats</li>
+        </ul>
+        <p><strong>Phase 1 Comparison Note:</strong> These two resources are highly complementary rather than competitive. 3Blue1Brown builds visual-spatial intuition; Alammar provides interactive experimentation. Together they provide a strong conceptual foundation in under an hour. Neither requires any coding. Neither covers failure modes or observability &mdash; those are Phase 2 concerns.</p>
+
+        <h3>Phase 1 Try This</h3>
+        <blockquote>
+          <strong>Try This:</strong> After watching 3Blue1Brown Chapter 1, close the video and sketch a neural network on paper. Draw at least 2 hidden layers. Label each connection as a &ldquo;weight&rdquo; and each node as a &ldquo;neuron.&rdquo; Show the direction of a forward pass with arrows. Then annotate: where does the network know it made a mistake? You don&rsquo;t need to know the math yet &mdash; just indicate <em>where</em> the error signal would come from.
+        </blockquote>
+
+        <h3>Phase 1 Teach-Back</h3>
+        <blockquote>
+          <strong>Teach-Back:</strong> Explain to a colleague (or write a paragraph as if explaining to one) why gradient descent is like walking downhill in the dark. The explanation should cover: what the &ldquo;hill&rdquo; represents, what &ldquo;downhill&rdquo; means for the model, and why you can only see the ground immediately beneath your feet. If you can do this without looking at the videos, you&rsquo;ve built the mental model Phase 2 requires.
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="phase-2-core-concepts-week-1">
+      <h2>Phase 2: Core Concepts (Week 1)</h2>
+      <div class="section-content">
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 2, you should be able to:</p>
+        <ul>
+          <li>Explain what backpropagation does (without needing to derive the chain rule)</li>
+          <li>Identify overfitting by looking at a train/validation loss plot</li>
+          <li>Describe what the learning rate controls and what happens when it&rsquo;s too high or too low</li>
+          <li>Write or follow a training loop in Python (even a simplified one)</li>
+        </ul>
+        <blockquote>
+          <strong>As an educator, you know</strong> that hands-on exercises create retention in a way that reading cannot. Karpathy&rsquo;s approach of building from first principles is the LPTHW methodology applied to ML &mdash; you don&rsquo;t understand gradient descent until you&rsquo;ve computed a gradient by hand.
+        </blockquote>
+
+        <h3>Phase 2 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr><th>Term</th><th>Plain meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Backpropagation</strong></td><td>Algorithm that propagates the error signal backwards through the network to update weights</td></tr>
+            <tr><td><strong>Gradient</strong></td><td>The direction and magnitude of the steepest increase in loss &mdash; you go the opposite direction</td></tr>
+            <tr><td><strong>Loss</strong></td><td>A number measuring how wrong the model&rsquo;s predictions are &mdash; lower is better</td></tr>
+            <tr><td><strong>Overfitting</strong></td><td>When a model memorizes training data instead of learning generalizable patterns</td></tr>
+            <tr><td><strong>Regularization</strong></td><td>Techniques (dropout, weight decay) that prevent overfitting by constraining the model</td></tr>
+            <tr><td><strong>Learning rate</strong></td><td>How big a step to take in the direction the gradient points &mdash; too large = overshoot, too small = slow</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Resource 3</h3>
+        <p><strong>Title:</strong> Neural Networks: Zero to Hero<br>
+        <strong>Link:</strong> <a href="https://karpathy.ai/zero-to-hero.html">https://karpathy.ai/zero-to-hero.html</a><br>
+        <strong>Source:</strong> Video Course + Code (Andrej Karpathy / YouTube)<br>
+        <strong>Time:</strong> 8&ndash;10 hours total; first two lectures are ~3 hours<br>
+        <strong>Key Takeaway:</strong> Builds backpropagation by hand in 100 lines of Python before introducing PyTorch &mdash; the clearest explanation of what training actually does, at the level of code.<br>
+        <strong>Relevance to OTEL:</strong> Building the engine manually makes it clear exactly what values (loss, gradient norms, activation distributions) are worth instrumenting during training.<br>
+        <strong>Best For:</strong> Engineers, Data Scientists, New hires with Python comfort<br>
+        <strong>Difficulty:</strong> Beginner-to-Intermediate</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Karpathy is a master explainer &mdash; the only resource that builds a full autograd engine from scratch in a way beginners can follow</li>
+          <li>Shows exactly why loss, gradient magnitude, and weight distributions matter &mdash; directly applicable to what OTEL metrics teams want to track</li>
+          <li>Leads to building a GPT from scratch, making transformers less mysterious</li>
+          <li>Active GitHub community with supplementary notes</li>
+          <li>Frequently updated; covers topics current through 2024</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Requires solid Python comfort and some calculus recall (even if rusty)</li>
+          <li>Time commitment is significant &mdash; not a skim resource</li>
+          <li>Does not cover deployment, monitoring, or observability tooling</li>
+          <li>No explicit OTEL connection; the learner must bridge that gap themselves</li>
+          <li>Can feel slow if the learner has prior ML exposure</li>
+        </ul>
+
+        <h3>Resource 4</h3>
+        <p><strong>Title:</strong> What is Overfitting in Deep Learning (+ 10 Ways to Avoid It)<br>
+        <strong>Link:</strong> <a href="https://www.v7labs.com/blog/overfitting">https://www.v7labs.com/blog/overfitting</a><br>
+        <strong>Source:</strong> Blog (V7 Labs)<br>
+        <strong>Time:</strong> 25 minutes<br>
+        <strong>Key Takeaway:</strong> Practical catalog of how neural networks fail to generalize, with clear diagrams comparing training vs. validation loss curves.<br>
+        <strong>Relevance to OTEL:</strong> The train/validation loss divergence chart is exactly the anomaly pattern that would trigger a monitoring alert in production &mdash; this resource builds the mental model for interpreting those signals.<br>
+        <strong>Best For:</strong> New hires, Data Scientists<br>
+        <strong>Difficulty:</strong> Beginner</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Directly addresses a gap left by introductory visual resources</li>
+          <li>Train vs. validation loss plots are the exact charts tracked in ML observability dashboards</li>
+          <li>Covers early stopping, dropout, regularization &mdash; practical tools, not just theory</li>
+          <li>Diagrams are clean and labeled</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>V7 Labs is a product company; some sections subtly promote their platform</li>
+          <li>Does not discuss when not to use neural networks at all</li>
+          <li>Overfitting framing is mostly about image/vision models; text/LLM context is less prominent</li>
+        </ul>
+
+        <h3>Resource 5</h3>
+        <p><strong>Title:</strong> Are Deep Neural Networks Dramatically Overfitted? (Lil&rsquo;Log)<br>
+        <strong>Link:</strong> <a href="https://lilianweng.github.io/posts/2019-03-14-overfit/">https://lilianweng.github.io/posts/2019-03-14-overfit/</a><br>
+        <strong>Source:</strong> Blog (Lilian Weng / OpenAI)<br>
+        <strong>Time:</strong> 35 minutes<br>
+        <strong>Key Takeaway:</strong> Explains the double descent phenomenon &mdash; why modern large models can be over-parameterized yet still generalize &mdash; with research-grounded nuance.<br>
+        <strong>Relevance to OTEL:</strong> Directly relevant to monitoring: the post explains why naive loss-curve interpretation can be misleading for large models, which matters when setting alerting thresholds.<br>
+        <strong>Best For:</strong> Engineers, Data Scientists<br>
+        <strong>Difficulty:</strong> Intermediate</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Adds important nuance that beginner resources omit (double descent, bias-variance)</li>
+          <li>Author is a senior OpenAI researcher; technically authoritative</li>
+          <li>Bridges from intuition to research-level understanding without becoming inaccessible</li>
+          <li>Helps calibrate when to worry about a rising training loss</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>2019 vintage &mdash; predates modern LLM-scale training behavior</li>
+          <li>More research-survey style than tutorial; no hands-on code</li>
+          <li>Requires comfort with basic statistical concepts</li>
+        </ul>
+        <p><strong>Phase 2 Comparison Note:</strong> Karpathy (Resource 3) is the most important single resource in this phase &mdash; nothing else builds the same depth of understanding of what is actually happening during training. Resources 4 and 5 are best read together: V7 Labs for the practical how-to, Lil&rsquo;Log for the conceptual nuance. Resource 5 is optional for Day 1 readers but becomes important once monitoring thresholds need to be discussed.</p>
+
+        <h3>Phase 2 Try This</h3>
+        <blockquote>
+          <strong>Try This:</strong> Write (or copy and annotate) a 50-line Python function that: (1) creates a small dataset with a known pattern, (2) initializes random weights, (3) computes a forward pass and a loss value, (4) prints the loss at each step as the weights improve. You don&rsquo;t need PyTorch. Pure Python + NumPy is the goal. If you run Karpathy&rsquo;s micrograd code, add a print statement that outputs the loss every 10 steps. Watch it go down.
+        </blockquote>
+
+        <h3>Phase 2 Teach-Back</h3>
+        <blockquote>
+          <strong>Teach-Back:</strong> Answer this without notes: &ldquo;What does it mean when training loss drops but validation loss rises?&rdquo; Your answer should include: what training loss vs. validation loss measure, what the divergence indicates about the model&rsquo;s behavior, and at least one concrete action you&rsquo;d take in response. If you can answer this clearly, you&rsquo;re ready for Phase 3&rsquo;s monitoring content.
+        </blockquote>
+
+        <h3>Phase 2 Production Example</h3>
+        <blockquote>
+          <strong>Real case:</strong> A startup&rsquo;s training loop ran for 12 hours and produced a model that scored 95% on training data &mdash; but only 61% on new user data. The team hadn&rsquo;t tracked validation loss at all; they only monitored training loss. By the time they noticed the quality gap, they&rsquo;d already shipped the model to 500 beta users. What monitoring would have caught this? (Answer: a validation loss metric emitted every N steps, with an alert when <code>validation_loss / training_loss</code> exceeds 1.3.)
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="bridge-from-training-concepts-to-otel-metrics-phase-2-3">
+      <h2>Bridge: From Training Concepts to OTEL Metrics (Phase 2 &rarr; 3)</h2>
+      <div class="section-content">
+        <p>After Phase 2, you understand <em>what is happening</em> during training. Phase 3 teaches you how to <em>measure it</em>. Here&rsquo;s the explicit mapping:</p>
+        <blockquote>
+          <strong>Deep Dive Available:</strong> See <a href="../docs/neural-networks-otel-bridge.md"><strong>Instrumenting Neural Network Training for OTEL Observability</strong></a> for a comprehensive guide with production alerting patterns, failure case studies, and concrete code examples. This bridge document is self-contained and highly recommended before starting Phase 3 resources.
+        </blockquote>
+
+        <h3>What You Learned in Phase 2 &rarr; What You Measure in Phase 3</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Phase 2 Concept</th>
+              <th>Phase 3 OTEL Signal</th>
+              <th>Why It Matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Loss function</strong> (how wrong predictions are)</td>
+              <td>Metrics: <code>training_loss</code>, <code>validation_loss</code></td>
+              <td>Primary signal of model health; divergence = overfitting alert</td>
+            </tr>
+            <tr>
+              <td><strong>Gradient magnitude</strong> (how much weights change)</td>
+              <td>Metrics: <code>gradient_norm</code>, <code>loss_spike_rate</code></td>
+              <td>Large gradients = instability; small = stalled learning</td>
+            </tr>
+            <tr>
+              <td><strong>Activation distributions</strong> (how neurons respond)</td>
+              <td>Metrics: <code>mean_activation_per_layer</code>, <code>dead_neuron_ratio</code></td>
+              <td>Dead neurons = wasted capacity; large variance = unstable</td>
+            </tr>
+            <tr>
+              <td><strong>Learning rate</strong> (controls training speed)</td>
+              <td>Metrics: <code>learning_rate_step</code>, <code>effective_lr</code></td>
+              <td>Too high = divergence; too low = slow convergence</td>
+            </tr>
+            <tr>
+              <td><strong>Overfitting signal</strong> (train/val divergence)</td>
+              <td>Trace + Metric: validation_loss exceeds training_loss + threshold</td>
+              <td>Triggers alert for regularization/early stopping</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Concrete Example: Instrumenting Training</h3>
+        <p>When you run Karpathy&rsquo;s code and see &ldquo;loss = 2.314&rdquo;, that number should be:</p>
+        <ol>
+          <li><strong>Logged</strong> as a scalar metric (Karpathy teaches you to print it; OTEL teaches you to emit it)</li>
+          <li><strong>Timestamped</strong> so you can plot it over training steps</li>
+          <li><strong>Aggregated</strong> to compute rolling averages</li>
+          <li><strong>Alerted on</strong> if it suddenly spikes or plateaus</li>
+        </ol>
+        <p>Phase 3 Resources 6&ndash;7 show you HOW (semantic conventions, export format). Resource 8 shows you WHEN to alert (drift thresholds).</p>
+
+        <h3>Before Moving to Phase 3, Ask Yourself:</h3>
+        <ul>
+          <li>Can you identify which of Karpathy&rsquo;s printed numbers would become OTEL metrics?</li>
+          <li>Could you explain to a colleague why loss divergence (validation &gt; training) is actionable information?</li>
+          <li>Do you know what &ldquo;early stopping&rdquo; means and why it requires monitoring?</li>
+        </ul>
+        <p>If yes, you&rsquo;re ready for Phase 3. If no, spend an extra 30 minutes re-reading Karpathy Resource 3&rsquo;s loss curve section.</p>
+      </div>
+    </section>
+
+    <section id="phase-3-otel-and-observability-week-2">
+      <h2>Phase 3: OTEL and Observability (Week 2)</h2>
+      <div class="section-content">
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 3, you should be able to:</p>
+        <ul>
+          <li>Set up basic OTEL instrumentation for a Python training script (3&ndash;5 lines)</li>
+          <li>Name the three OTEL signal types (metrics, traces, logs) and explain when you&rsquo;d use each</li>
+          <li>Identify at least 4 metric instruments worth emitting during model training</li>
+          <li>Explain what model drift is and describe one statistical approach for detecting it</li>
+        </ul>
+        <blockquote>
+          <strong>As an educator, you know</strong> that learners need to connect new abstractions to things they already understand. Phase 3&rsquo;s OTEL concepts are not new &mdash; they&rsquo;re the same observability patterns used for web services, applied to model training. If you&rsquo;ve ever seen an HTTP dashboard with p99 latency, you already understand the shape of what we&rsquo;re building here.
+        </blockquote>
+
+        <h3>Phase 3 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr><th>Term</th><th>Plain meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>OTEL</strong></td><td>OpenTelemetry &mdash; an open standard for collecting telemetry from software systems</td></tr>
+            <tr><td><strong>Metric</strong></td><td>A numeric measurement over time (e.g., <code>training_loss</code> at step 1000 = 0.23)</td></tr>
+            <tr><td><strong>Trace</strong></td><td>A record of a single operation (e.g., one forward pass) showing how long each part took</td></tr>
+            <tr><td><strong>Span</strong></td><td>One unit within a trace &mdash; like a function call with a start time, end time, and attributes</td></tr>
+            <tr><td><strong>Observability</strong></td><td>The ability to understand what&rsquo;s happening inside a system from its external outputs</td></tr>
+            <tr><td><strong>Drift</strong></td><td>When the model&rsquo;s behavior or input distribution changes from what it was trained on</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Resource 6</h3>
+        <p><strong>Title:</strong> An Introduction to Observability for LLM-Based Applications Using OpenTelemetry<br>
+        <strong>Link:</strong> <a href="https://opentelemetry.io/blog/2024/llm-observability/">https://opentelemetry.io/blog/2024/llm-observability/</a><br>
+        <strong>Source:</strong> Blog (OpenTelemetry.io / Grafana, June 2024)<br>
+        <strong>Time:</strong> 30 minutes<br>
+        <strong>Key Takeaway:</strong> Step-by-step setup of OTEL-based LLM monitoring covering token counts, latency, cost, and rate limits using OpenLIT, Prometheus, and Grafana.<br>
+        <strong>Relevance to OTEL:</strong> This is the canonical reference &mdash; written by the OpenTelemetry project itself, directly applicable to the team&rsquo;s stack.<br>
+        <strong>Best For:</strong> Engineers, New hires joining OTEL-focused teams<br>
+        <strong>Difficulty:</strong> Intermediate</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Written by the OTEL project &mdash; authoritative and vendor-neutral</li>
+          <li>Covers all three signal types: traces, metrics, events</li>
+          <li>Three-line Python integration example is immediately usable</li>
+          <li>Addresses cost monitoring and rate limits &mdash; startup-relevant concerns</li>
+          <li>2024 publication ensures it reflects current semantic conventions</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Assumes familiarity with Prometheus and Grafana concepts</li>
+          <li>Does not explain the neural network internals being observed &mdash; purely the instrumentation layer</li>
+          <li>No discussion of model drift or training-time monitoring; focused on inference</li>
+        </ul>
+
+        <h3>Resource 7</h3>
+        <p><strong>Title:</strong> OpenTelemetry for Generative AI<br>
+        <strong>Link:</strong> <a href="https://opentelemetry.io/blog/2024/otel-generative-ai/">https://opentelemetry.io/blog/2024/otel-generative-ai/</a><br>
+        <strong>Source:</strong> Blog (OpenTelemetry.io / Microsoft, December 2024)<br>
+        <strong>Time:</strong> 20 minutes<br>
+        <strong>Key Takeaway:</strong> Introduces the semantic conventions standard for GenAI observability in OTEL, with a working Python example for OpenAI API tracing.<br>
+        <strong>Relevance to OTEL:</strong> Directly defines the evolving standard the team would implement &mdash; semantic conventions for LLM traces, metrics, and events.<br>
+        <strong>Best For:</strong> Engineers, New hires on OTEL-native teams<br>
+        <strong>Difficulty:</strong> Beginner-to-Intermediate</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Defines the actual standard being adopted by the industry in 2024&ndash;2025</li>
+          <li>Working Docker + Python example lowers the barrier to trying it locally</li>
+          <li>Visual Jaeger trace screenshots make abstract tracing concrete</li>
+          <li>Covers multi-platform (OpenAI, Azure) vendor attribute conventions</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Very focused on instrumentation plumbing, not model behavior analysis</li>
+          <li>The standard is still evolving &mdash; some conventions are marked experimental</li>
+          <li>Does not address training monitoring, only inference observability</li>
+        </ul>
+
+        <h3>Resource 8</h3>
+        <p><strong>Title:</strong> How to Detect Model Drift in MLOps Monitoring<br>
+        <strong>Link:</strong> <a href="https://towardsdatascience.com/how-to-detect-model-drift-in-mlops-monitoring-7a039c22eaf9/">https://towardsdatascience.com/how-to-detect-model-drift-in-mlops-monitoring-7a039c22eaf9/</a><br>
+        <strong>Source:</strong> Blog (Towards Data Science)<br>
+        <strong>Time:</strong> 25 minutes<br>
+        <strong>Key Takeaway:</strong> Explains data drift, concept drift, and model performance drift with statistical tests (KL divergence, PSI) and practical detection strategies.<br>
+        <strong>Relevance to OTEL:</strong> Identifies the specific signals and statistical thresholds worth building OTEL alerts around in production deployments.<br>
+        <strong>Best For:</strong> Engineers, Data Scientists<br>
+        <strong>Difficulty:</strong> Intermediate</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Practical framing &mdash; covers both what to measure and what to do when drift is detected</li>
+          <li>Statistical tests are explained without requiring a statistics background</li>
+          <li>Addresses both data drift and concept drift as distinct problems</li>
+          <li>Relevant to LLM observability where input distribution shifts matter</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Written for traditional ML pipelines, not LLM-specific workflows</li>
+          <li>Does not integrate OTEL tooling &mdash; focuses on monitoring strategy, not implementation</li>
+          <li>Some statistical concepts (KL divergence) are introduced without sufficient intuition-building</li>
+        </ul>
+        <p><strong>Phase 3 Comparison Note:</strong> Resources 6 and 7 are both from opentelemetry.io and are complementary &mdash; Resource 6 is the practical walkthrough, Resource 7 is the standards reference. Read both. Resource 8 stands apart because it covers drift &mdash; which neither OTEL resource addresses. The gap in this phase is a single resource that bridges neural network behavior, drift detection, AND OTEL instrumentation together; that synthesis currently does not exist as a single beginner-friendly article and would be useful to write internally.</p>
+
+        <h3>Phase 3 Try This</h3>
+        <blockquote>
+          <strong>Try This:</strong> Open the training script from Phase 2&rsquo;s Try This exercise. Add OTEL instrumentation in 3 lines: (1) initialize an OTEL meter, (2) create a <code>training_loss</code> gauge instrument, (3) emit the loss value at each step. If you don&rsquo;t have a running environment, write the 3 lines as pseudocode and explain what each line does. Bonus: add a second instrument for <code>validation_loss</code> and describe what alert rule you&rsquo;d configure on it.
+        </blockquote>
+
+        <h3>Phase 3 Teach-Back</h3>
+        <blockquote>
+          <strong>Teach-Back:</strong> Answer this without notes: &ldquo;Why would you monitor <code>gradient_norm</code> in OTEL, and when would high values be bad?&rdquo; Your answer should cover: what gradient norm measures, what a high value indicates about training stability, and what you&rsquo;d do when the alert fires. (See <a href="../docs/neural-networks-otel-bridge.md">neural-networks-otel-bridge.md</a> for reference if needed.)
+        </blockquote>
+
+        <h3>Phase 3 Production Example</h3>
+        <blockquote>
+          <strong>Real case:</strong> A team monitored only final validation accuracy on their fine-tuning run. At step 8,000, accuracy looked fine &mdash; but <code>gradient_norm</code> had spiked to 47x its baseline at step 6,000 and then collapsed, indicating a training instability that the model partly recovered from. The final model underperformed in production edge cases. If they had been emitting <code>gradient_norm</code> as an OTEL metric with an alert at 10x baseline, they would have caught the instability mid-run and could have reduced the learning rate before the weights diverged.
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="phase-4-llm-and-explainability-week-3">
+      <h2>Phase 4: LLM and Explainability (Week 3)</h2>
+      <div class="section-content">
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 4, you should be able to:</p>
+        <ul>
+          <li>Describe the transformer architecture (encoder, decoder, attention mechanism) in plain language</li>
+          <li>Explain why LLMs hallucinate and name at least two detection approaches (e.g., SelfCheckGPT, consistency sampling)</li>
+          <li>Use BertViz or a similar tool to visualize attention weights on a short sentence</li>
+          <li>Explain the difference between interpretability (model mechanics) and explainability (external attribution tools)</li>
+          <li>Translate all of the above to a non-technical colleague without using math</li>
+        </ul>
+        <blockquote>
+          <strong>As an educator, you know</strong> the difference between knowing something and being able to teach it. Phase 4&rsquo;s capstone tests exactly this: can you explain hallucinations to a product manager in a way that changes how they think about risk? That&rsquo;s the most valuable skill in this phase.
+        </blockquote>
+
+        <h3>Phase 4 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr><th>Term</th><th>Plain meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Attention</strong></td><td>The mechanism that lets each token in a sequence &ldquo;look at&rdquo; and weight the relevance of all other tokens</td></tr>
+            <tr><td><strong>Hallucination</strong></td><td>When an LLM generates confident, plausible-sounding text that is factually false</td></tr>
+            <tr><td><strong>Interpretability</strong></td><td>Understanding the internal mechanics of a model (what the weights are doing)</td></tr>
+            <tr><td><strong>Explainability</strong></td><td>External tools and methods to attribute model outputs to input features (SHAP, saliency maps)</td></tr>
+            <tr><td><strong>Saliency</strong></td><td>Which input tokens contributed most to a specific output (a type of attribution score)</td></tr>
+            <tr><td><strong>Embedding</strong></td><td>A dense numeric vector representing a token, word, or sentence in a learned vector space</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Resource 9</h3>
+        <p><strong>Title:</strong> The Illustrated Transformer<br>
+        <strong>Link:</strong> <a href="https://jalammar.github.io/illustrated-transformer/">https://jalammar.github.io/illustrated-transformer/</a><br>
+        <strong>Source:</strong> Blog (Jay Alammar)<br>
+        <strong>Time:</strong> 45&ndash;60 minutes<br>
+        <strong>Key Takeaway:</strong> Walks through the full transformer architecture &mdash; encoder, decoder, multi-head attention, positional encoding &mdash; using diagrams for every step.<br>
+        <strong>Relevance to OTEL:</strong> Understanding what attention weights represent is a prerequisite for understanding attention-based explainability tools (BertViz, attention attribution), which are key to LLM interpretability observability.<br>
+        <strong>Best For:</strong> Engineers, New hires, Data Scientists<br>
+        <strong>Difficulty:</strong> Beginner-to-Intermediate</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Widely regarded as the definitive visual introduction to transformers</li>
+          <li>Progressive complexity: starts with black-box view, drills to matrix math only when ready</li>
+          <li>Used in university courses globally as assigned reading</li>
+          <li>Naturally transitions to explainability because it demystifies what attention &ldquo;sees&rdquo;</li>
+          <li>Directly applicable to understanding what LLM observability dashboards are measuring</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Does not cover why transformers hallucinate or fail</li>
+          <li>Q/K/V matrix math can still feel dense without linear algebra background</li>
+          <li>No code examples or runnable notebooks in the main article</li>
+          <li>Does not cover modern LLM-specific modifications (grouped query attention, RoPE, etc.)</li>
+        </ul>
+
+        <h3>Resource 10</h3>
+        <p><strong>Title:</strong> Extrinsic Hallucinations in LLMs<br>
+        <strong>Link:</strong> <a href="https://lilianweng.github.io/posts/2024-07-07-hallucination/">https://lilianweng.github.io/posts/2024-07-07-hallucination/</a><br>
+        <strong>Source:</strong> Blog (Lilian Weng / OpenAI, July 2024)<br>
+        <strong>Time:</strong> 40&ndash;50 minutes<br>
+        <strong>Key Takeaway:</strong> Research-grounded explanation of why LLMs hallucinate with specific focus on detection methods (FActScore, SelfCheckGPT, SAFE) and mitigation strategies (RAG, chain-of-verification).<br>
+        <strong>Relevance to OTEL:</strong> Hallucination detection frameworks described here (consistency checking across samples, uncertainty estimation) are precisely the kinds of signals worth building into LLM observability pipelines.<br>
+        <strong>Best For:</strong> Engineers, Data Scientists, Technical leads<br>
+        <strong>Difficulty:</strong> Intermediate</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Written by an OpenAI researcher in July 2024 &mdash; current and authoritative</li>
+          <li>Covers both root causes and practical detection/mitigation</li>
+          <li>Detection methods described (SelfCheckGPT, SAFE) are directly implementable</li>
+          <li>Calibration framing bridges from &ldquo;why it happens&rdquo; to &ldquo;how to measure it&rdquo;</li>
+          <li>More accessible than an arXiv paper while being more rigorous than a blog post</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Not a true beginner resource &mdash; benefits significantly from prior transformer knowledge</li>
+          <li>Dense citation structure; can feel like a literature survey at times</li>
+          <li>Does not provide code examples for the detection methods</li>
+          <li>Some detection methods (influence functions) are computationally impractical for small teams</li>
+        </ul>
+
+        <h3>Resource 11</h3>
+        <p><strong>Title:</strong> Explainability and Interpretability in Modern LLMs<br>
+        <strong>Link:</strong> <a href="https://www.rohan-paul.com/p/explainability-and-interpretability">https://www.rohan-paul.com/p/explainability-and-interpretability</a><br>
+        <strong>Source:</strong> Blog (Substack, 2024)<br>
+        <strong>Time:</strong> 30 minutes<br>
+        <strong>Key Takeaway:</strong> Catalog of LLM interpretability techniques &mdash; saliency maps, SHAP, LIME, attention visualization &mdash; with tool recommendations (Captum, BertViz) and Python code examples.<br>
+        <strong>Relevance to OTEL:</strong> Directly maps to the explainability layer of LLM observability; these tools generate the artifacts that make model behavior interpretable in dashboards.<br>
+        <strong>Best For:</strong> Engineers, Data Scientists<br>
+        <strong>Difficulty:</strong> Intermediate</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Covers both feature-attribution (SHAP, LIME) and attention-based (BertViz) approaches</li>
+          <li>Includes Python code snippets using Captum and HuggingFace</li>
+          <li>2024 content &mdash; reflects current tooling ecosystem</li>
+          <li>Practical tool recommendations rather than pure theory</li>
+          <li>Explicitly distinguishes interpretability (model mechanics) from explainability (external tools)</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Code examples are illustrative rather than runnable end-to-end</li>
+          <li>Does not connect these tools to OTEL instrumentation</li>
+          <li>SHAP/LIME introductions are brief; deeper understanding requires follow-up reading</li>
+          <li>Substack format can be inconsistent in depth</li>
+        </ul>
+        <p><strong>Phase 4 Comparison Note:</strong> Resources 9, 10, and 11 form a deliberate sequence: Illustrated Transformer (how it works) &rarr; Hallucinations (how it fails) &rarr; Explainability (how to see inside it). This sequence directly mirrors the startup&rsquo;s product concerns. Resource 10 is the highest-value single article in this phase because hallucination is both a common end-user concern and a measurement problem. Resource 11 is where the explainability-to-OTEL bridge becomes most concrete.</p>
+
+        <h3>Phase 4 Try This</h3>
+        <blockquote>
+          <strong>Try This:</strong> Install BertViz (<code>pip install bertviz</code>) and run the head view on the sentence &ldquo;The cat sat on the mat because it was tired.&rdquo; Observe which attention heads in layer 1 focus on &ldquo;it&rdquo; &mdash; where does &ldquo;it&rdquo; attend to most? What does this tell you about what the model &ldquo;knows&rdquo; about pronoun resolution? If you can&rsquo;t run it locally, read the BertViz paper&rsquo;s Figure 2 and describe what you see. This exercise makes the abstract concept of attention visually concrete in under 15 minutes.
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="phase-4-capstone-explaining-llm-behavior-to-non-ml-colleagues">
+      <h2>Phase 4 Capstone: Explaining LLM Behavior to Non-ML Colleagues</h2>
+      <div class="section-content">
+        <p>After studying transformers, hallucinations, and interpretability tools, you&rsquo;ll need to translate these concepts for product managers, customer success, sales, and other teammates. This section prepares you for that critical communication task.</p>
+
+        <h3>How to Explain Key Concepts Without the Math</h3>
+
+        <h4>Transformers (What They Actually Do)</h4>
+        <ul>
+          <li><strong>For non-technical people:</strong> &ldquo;A transformer is like a very sophisticated pattern-matching engine. It reads all the words in your input at once, figures out which words are most important to pay attention to, and uses that to predict the next word. It repeats this millions of times with billions of parameters.&rdquo;</li>
+          <li><strong>Common misconception to correct:</strong> &ldquo;It doesn&rsquo;t understand meaning the way humans do. It&rsquo;s pattern-matching so advanced it <em>seems</em> intelligent, but it&rsquo;s really just predicting the most likely next token based on statistical patterns from training data.&rdquo;</li>
+          <li><strong>The analogy that works:</strong> &ldquo;If you&rsquo;ve ever finished someone&rsquo;s sentence because you know them well, you&rsquo;re doing something similar &mdash; predicting what comes next based on patterns. Transformers do this with text at superhuman scale.&rdquo;</li>
+        </ul>
+
+        <h4>Hallucinations (Why They Happen)</h4>
+        <ul>
+          <li><strong>For non-technical people:</strong> &ldquo;An LLM hallucinates when it confidently generates false information. This happens because the model was trained on internet text (which contains falsehoods) and learned to predict plausible-sounding next words, not to fact-check itself. It doesn&rsquo;t know what it doesn&rsquo;t know.&rdquo;</li>
+          <li><strong>Common misconception to correct:</strong> &ldquo;Hallucinations aren&rsquo;t glitches or bugs. They&rsquo;re a fundamental property of how these models work. You can reduce them but never eliminate them. A model that never hallucinates would be a model that never generates creative or uncertain outputs.&rdquo;</li>
+          <li><strong>The analogy that works:</strong> &ldquo;Imagine someone who&rsquo;s read thousands of books but has never been fact-checked. When asked a question they&rsquo;ve never seen before, they&rsquo;ll confidently make up an answer that <em>sounds</em> like it could be from a book. That&rsquo;s an LLM hallucinating.&rdquo;</li>
+        </ul>
+
+        <h4>Explainability (Why It&rsquo;s Hard)</h4>
+        <ul>
+          <li><strong>For non-technical people:</strong> &ldquo;When we ask &lsquo;why did the model say that?&rsquo;, there&rsquo;s no simple answer. The decision emerges from billions of mathematical operations. We have tools (saliency maps, attention visualizations) that show <em>which words mattered</em>, but not <em>how the model reasoned</em>. It&rsquo;s like asking someone why they made a snap decision &mdash; they can tell you what they paid attention to, but not the exact thought process.&rdquo;</li>
+          <li><strong>Common misconception to correct:</strong> &ldquo;We can&rsquo;t fully explain LLM decisions, but that&rsquo;s not because we&rsquo;re not trying hard enough. It&rsquo;s because the model works fundamentally differently from human reasoning. We can get better at <em>observing</em> what it attends to, not at <em>decoding</em> how it thinks.&rdquo;</li>
+          <li><strong>The analogy that works:</strong> &ldquo;It&rsquo;s like explaining how a chess grandmaster decides to move a piece. They can tell you they &lsquo;felt&rsquo; it was the right move, they can point to board positions they considered, but they can&rsquo;t walk you through their exact thought process because it&rsquo;s intuitive, not explicit.&rdquo;</li>
+        </ul>
+
+        <h3>Common LLM Misconceptions Your Colleagues Will Have</h3>
+
+        <p><strong>Misconception 1: &ldquo;If the model was trained on good data, it won&rsquo;t hallucinate&rdquo;</strong></p>
+        <ul>
+          <li><strong>Reality:</strong> Even models trained on high-quality data hallucinate. The problem isn&rsquo;t training data quality; it&rsquo;s that prediction-based systems can&rsquo;t distinguish between patterns they&rsquo;ve learned and facts they&rsquo;ve verified.</li>
+          <li><strong>How to explain:</strong> &ldquo;The model learns patterns, not facts. If your training data has a pattern like &lsquo;scientists are called Dr. [NAME]&rsquo;, the model will confidently invent Dr. names it&rsquo;s never seen.&rdquo;</li>
+        </ul>
+
+        <p><strong>Misconception 2: &ldquo;We can make LLMs completely transparent by adding more explainability tools&rdquo;</strong></p>
+        <ul>
+          <li><strong>Reality:</strong> Explainability tools show correlation (which inputs mattered), not causation (how the model used them). A token can be high-attention but not directly causal to the output.</li>
+          <li><strong>How to explain:</strong> &ldquo;Attention visualization shows what the model looked at, not why it looked there or how that shaped the decision. It&rsquo;s like security camera footage &mdash; it tells you where someone was looking, not what they were thinking.&rdquo;</li>
+        </ul>
+
+        <p><strong>Misconception 3: &ldquo;LLMs will get better with scale and eventually be trustworthy&rdquo;</strong></p>
+        <ul>
+          <li><strong>Reality:</strong> Larger models hallucinate more confidently, not less frequently. Scale improves some capabilities but doesn&rsquo;t solve the hallucination problem.</li>
+          <li><strong>How to explain:</strong> &ldquo;Bigger models are better at writing convincing-sounding text. That can mean more fluent hallucinations, not fewer false statements.&rdquo;</li>
+        </ul>
+
+        <p><strong>Misconception 4: &ldquo;If we can explain a model&rsquo;s decision, it&rsquo;s safe to deploy&rdquo;</strong></p>
+        <ul>
+          <li><strong>Reality:</strong> Explainability &ne; safety. You can fully understand why a model made a decision and still have it be wrong or harmful.</li>
+          <li><strong>How to explain:</strong> &ldquo;Just because you can see what the model paid attention to doesn&rsquo;t mean its conclusion is correct. A doctor might look at the right medical charts and still misdiagnose. Transparency doesn&rsquo;t equal accuracy.&rdquo;</li>
+        </ul>
+
+        <p><strong>Misconception 5: &ldquo;Attention maps show you exactly what the model is thinking&rdquo;</strong></p>
+        <ul>
+          <li><strong>Reality:</strong> Attention is one mechanism; it&rsquo;s not the model&rsquo;s entire reasoning process. High attention to a token doesn&rsquo;t mean the model used that token to make the decision.</li>
+          <li><strong>How to explain:</strong> &ldquo;Attention visualization is like seeing which part of a picture a person looked at longest. But looking at something doesn&rsquo;t mean it&rsquo;s what made them decide.&rdquo;</li>
+        </ul>
+
+        <h3>Practical Guidance: Communicating With Different Roles</h3>
+
+        <p><strong>With Product/Business:</strong></p>
+        <ul>
+          <li>Lead with: &ldquo;What are users experiencing when the model hallucinates? That&rsquo;s the real problem we&rsquo;re solving, not &lsquo;making it more explainable.&rsquo;&rdquo;</li>
+          <li>Key phrase: &ldquo;Hallucination risk is unavoidable; our job is to detect and mitigate it through monitoring and guardrails.&rdquo;</li>
+          <li>Avoid: &ldquo;The model is a black box and we&rsquo;ll never understand it.&rdquo; (Wrong framing. Instead: &ldquo;We can observe what it attends to and measure when it&rsquo;s uncertain.&rdquo;)</li>
+        </ul>
+
+        <p><strong>With Customer Success:</strong></p>
+        <ul>
+          <li>Lead with: &ldquo;Here are the patterns in how/when the model fails. Teach customers to expect these failure modes.&rdquo;</li>
+          <li>Key phrase: &ldquo;Hallucination isn&rsquo;t a bug; it&rsquo;s a failure mode of the technology. We mitigate through [RAG/verification/guardrails].&rdquo;</li>
+          <li>Avoid: &ldquo;The model works perfectly when given good prompts.&rdquo; (It doesn&rsquo;t. Be honest about limitations.)</li>
+        </ul>
+
+        <p><strong>With Sales/Marketing:</strong></p>
+        <ul>
+          <li>Lead with: &ldquo;We&rsquo;re transparent about where LLMs work and where they fail. That&rsquo;s our competitive advantage.&rdquo;</li>
+          <li>Key phrase: &ldquo;We monitor model confidence, detect hallucinations in real-time, and have guardrails to prevent false outputs.&rdquo;</li>
+          <li>Avoid: &ldquo;Our model is explainable.&rdquo; (Instead: &ldquo;Our model is observable &mdash; we measure its behavior continuously.&rdquo;)</li>
+        </ul>
+
+        <p><strong>With Engineering (building on top of LLMs):</strong></p>
+        <ul>
+          <li>Lead with: &ldquo;Assume hallucination. Design for it. Use RAG, verification, and observability as your defense.&rdquo;</li>
+          <li>Key phrase: &ldquo;The model is a component with known failure modes. Treat it like any other system that can fail.&rdquo;</li>
+          <li>Avoid: &ldquo;The model will figure it out if you prompt it right.&rdquo; (Prompt engineering has limits.)</li>
+        </ul>
+
+        <h3>Testing Your Understanding: Teach-Back Questions</h3>
+        <p>After Phase 4, you should be able to answer these for a non-ML colleague without looking back:</p>
+        <ol>
+          <li><strong>&ldquo;Why does the model sometimes make up facts?&rdquo;</strong> (Distinguish between training data, pattern-matching, and hallucination.)</li>
+          <li><strong>&ldquo;Can we just make the model more transparent and call it solved?&rdquo;</strong> (No &mdash; explain why transparency &ne; accuracy.)</li>
+          <li><strong>&ldquo;If attention visualization shows which words mattered, doesn&rsquo;t that explain the decision?&rdquo;</strong> (No &mdash; explain the correlation vs. causation problem.)</li>
+          <li><strong>&ldquo;Will bigger models hallucinate less?&rdquo;</strong> (No &mdash; explain why scale makes confident hallucinations more common.)</li>
+          <li><strong>&ldquo;Should we stop using LLMs because we can&rsquo;t fully explain them?&rdquo;</strong> (No &mdash; explain risk mitigation vs. elimination.)</li>
+        </ol>
+        <p>If you can explain your answers clearly to someone without a math or ML background, you&rsquo;ve mastered Phase 4.</p>
+      </div>
+    </section>
+
+    <section id="phase-5-advanced-context-month-2">
+      <h2>Phase 5: Advanced Context (Month 2)</h2>
+      <div class="section-content">
+
+        <h3>Learning Objectives</h3>
+        <p>By end of Phase 5, you should be able to:</p>
+        <ul>
+          <li>Explain the difference between fine-tuning, LoRA, and quantization &mdash; and when you&rsquo;d choose each</li>
+          <li>Describe the latency/quality/cost trade-offs of deploying a quantized vs. full-precision model</li>
+          <li>Instrument a fine-tuning run with OTEL metrics (building on Phase 3)</li>
+          <li>Explain what an AI agent observability pipeline needs beyond single-model monitoring</li>
+        </ul>
+        <blockquote>
+          <strong>As an educator, you know</strong> that Month 2 learning happens best when integrated into real work rather than treated as a separate curriculum. Use the fast.ai course as the depth resource, but apply lessons from Resources 13&ndash;14 directly to any deployment or fine-tuning work you encounter in sprint.
+        </blockquote>
+
+        <h3>Phase 5 Glossary Callout</h3>
+        <table>
+          <thead>
+            <tr><th>Term</th><th>Plain meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Fine-tuning</strong></td><td>Further training a pre-trained model on a smaller, domain-specific dataset</td></tr>
+            <tr><td><strong>LoRA</strong></td><td>Low-Rank Adaptation &mdash; fine-tuning with far fewer parameters using matrix decomposition</td></tr>
+            <tr><td><strong>Quantization</strong></td><td>Reducing model weight precision (e.g., 32-bit &rarr; 4-bit) to shrink size and speed up inference</td></tr>
+            <tr><td><strong>Inference</strong></td><td>Running the model forward to generate a prediction (as opposed to training)</td></tr>
+            <tr><td><strong>Latency</strong></td><td>Time from input submission to response &mdash; a key SLO metric for deployed LLMs</td></tr>
+            <tr><td><strong>Throughput</strong></td><td>How many requests per second the model can handle &mdash; capacity planning metric</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Resource 12</h3>
+        <p><strong>Title:</strong> Practical Deep Learning for Coders<br>
+        <strong>Link:</strong> <a href="https://course.fast.ai/">https://course.fast.ai/</a><br>
+        <strong>Source:</strong> Course (fast.ai, Jeremy Howard)<br>
+        <strong>Time:</strong> 20&ndash;30 hours total; modular by lesson<br>
+        <strong>Key Takeaway:</strong> Top-down course that starts with working models before explaining the math &mdash; a rare pedagogical inversion that aligns with how experienced educators learn best.<br>
+        <strong>Relevance to OTEL:</strong> Production deployment chapters cover inference latency, model optimization, and serving considerations directly relevant to cost and reliability monitoring.<br>
+        <strong>Best For:</strong> Educators, Engineers, Data Scientists<br>
+        <strong>Difficulty:</strong> Beginner-to-Intermediate</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Top-down methodology is pedagogically well-matched to someone with a teaching background</li>
+          <li>Notebook-first approach on Kaggle/Colab; no local setup barrier</li>
+          <li>Covers production deployment, not just model training</li>
+          <li>Free, actively maintained, large community</li>
+          <li>Explicitly designed to require only basic Python, no deep math</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Course uses fastai library, not pure PyTorch &mdash; adds an abstraction layer that can obscure what is happening</li>
+          <li>OTEL/observability is not covered at all</li>
+          <li>LLM-specific content is in Part 2, which is significantly more advanced</li>
+          <li>Time commitment is large for a busy first-month hire</li>
+        </ul>
+
+        <h3>Resource 13</h3>
+        <p><strong>Title:</strong> Fine-Tuning LLMs: LoRA, Quantization, and Distillation Simplified<br>
+        <strong>Link:</strong> <a href="https://dev.to/iamfaham/fine-tuning-llms-lora-quantization-and-distillation-simplified-12nf">https://dev.to/iamfaham/fine-tuning-llms-lora-quantization-and-distillation-simplified-12nf</a><br>
+        <strong>Source:</strong> Blog (DEV Community, 2024)<br>
+        <strong>Time:</strong> 20 minutes<br>
+        <strong>Key Takeaway:</strong> Plain-language explanation of how LoRA reduces fine-tuning memory requirements by 75%, making it relevant for teams considering model customization on limited compute.<br>
+        <strong>Relevance to OTEL:</strong> Understanding quantization trade-offs (latency vs. quality vs. cost) is directly actionable when defining SLOs and alerting thresholds for LLM inference observability.<br>
+        <strong>Best For:</strong> Engineers, New hires<br>
+        <strong>Difficulty:</strong> Beginner-to-Intermediate</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>Explains the memory math concretely (7B parameters, ~14GB vs. ~3.5GB with 4-bit quantization)</li>
+          <li>Covers the three techniques most relevant to small startup teams</li>
+          <li>Free, accessible without advanced ML background</li>
+          <li>2024 content &mdash; tool recommendations are current</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Introductory only; skips implementation details</li>
+          <li>Does not cover failure modes of quantized models (quality degradation patterns)</li>
+          <li>No OTEL/monitoring connection made explicitly</li>
+        </ul>
+
+        <h3>Resource 14</h3>
+        <p><strong>Title:</strong> AI Agent Observability &mdash; Evolving Standards and Best Practices<br>
+        <strong>Link:</strong> <a href="https://opentelemetry.io/blog/2025/ai-agent-observability/">https://opentelemetry.io/blog/2025/ai-agent-observability/</a><br>
+        <strong>Source:</strong> Blog (OpenTelemetry.io, 2025)<br>
+        <strong>Time:</strong> 20 minutes<br>
+        <strong>Key Takeaway:</strong> Describes emerging OTEL standards for observing autonomous AI agent workflows &mdash; the next frontier beyond single-model LLM monitoring.<br>
+        <strong>Relevance to OTEL:</strong> Directly on-mission for a startup tracking OTEL-based measurement of LLM systems; represents where the ecosystem is heading.<br>
+        <strong>Best For:</strong> Engineers, Technical leads<br>
+        <strong>Difficulty:</strong> Intermediate-to-Advanced</p>
+        <p><strong>Pros:</strong></p>
+        <ul>
+          <li>2025 publication &mdash; most current resource in this list</li>
+          <li>Written by the OTEL project; will become the standard</li>
+          <li>Addresses the multi-step, multi-model observability problem that single-model guides miss</li>
+        </ul>
+        <p><strong>Cons:</strong></p>
+        <ul>
+          <li>Standards are still evolving; implementation details may change</li>
+          <li>Requires prior OTEL familiarity to get full value</li>
+          <li>No code examples or tutorials yet</li>
+        </ul>
+
+        <h3>Phase 5 Try This</h3>
+        <blockquote>
+          <strong>Try This:</strong> Deploy a quantized model and benchmark it against the full-precision version. Use <code>llama.cpp</code>, HuggingFace <code>bitsandbytes</code>, or any quantization-enabled runtime. Measure three things: (1) inference latency (ms per token), (2) memory usage (GB), (3) response quality on 5 test prompts you score yourself 1&ndash;5. Record your findings in a table. This gives you real numbers to cite when discussing latency/quality trade-offs with engineering or product colleagues.
+        </blockquote>
+
+        <h3>Phase 5 Teach-Back</h3>
+        <blockquote>
+          <strong>Teach-Back:</strong> Explain to a non-technical colleague what LoRA is and why it matters for a startup. Your explanation should cover: why full fine-tuning is expensive, what LoRA does differently (conceptually, not mathematically), and what the practical benefit is for a team without A100s. If your colleague leaves the conversation understanding why they should care about model adaptation costs, you&rsquo;ve done it right.
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="common-training-pitfalls">
+      <h2>Common Training Pitfalls</h2>
+      <div class="section-content">
+        <p>These are the patterns most likely to waste your time if you don&rsquo;t recognize them early. Each maps to a specific OTEL signal that would surface it.</p>
+
+        <h3>Training Instability: Loss Spikes</h3>
+        <p><strong>What you see:</strong> Loss drops steadily, then spikes by 5&ndash;10x at a random step, then may partially recover.</p>
+        <p><strong>Root cause:</strong> Learning rate is too high for the current phase of training. Gradient magnitude exceeds what the optimizer can handle cleanly.</p>
+        <p><strong>What OTEL would show:</strong> <code>gradient_norm</code> spiking 5&ndash;10x its rolling average. If you don&rsquo;t emit gradient_norm, you only see the loss spike after the fact.</p>
+        <p><strong>What to do:</strong> Reduce learning rate by 10x and restart from the last checkpoint. Use gradient clipping (<code>max_norm=1.0</code>) as a preventive measure.</p>
+
+        <h3>Dead Neurons: Activation Mean Collapse</h3>
+        <p><strong>What you see:</strong> Loss stops improving after a certain point. Validation accuracy plateaus even with more training.</p>
+        <p><strong>Root cause:</strong> A layer&rsquo;s neurons have entered the &ldquo;dead ReLU&rdquo; state &mdash; their gradient is always zero, so they never update. They&rsquo;ve been silenced.</p>
+        <p><strong>What OTEL would show:</strong> <code>activation_mean</code> for a specific layer approaching 0. <code>dead_neuron_ratio</code> above 20% for that layer.</p>
+        <p><strong>What to do:</strong> Switch to LeakyReLU or ELU activations. Reduce learning rate. Use batch normalization before activation layers.</p>
+
+        <h3>Observability Gap: Missing the Signal That Matters</h3>
+        <p><strong>What you see:</strong> Model ships with apparently good metrics, then underperforms in production. Post-mortem shows training looked fine.</p>
+        <p><strong>Root cause:</strong> You monitored the wrong thing. Training accuracy was high (overfit). Validation loss wasn&rsquo;t emitted. Or: validation set wasn&rsquo;t representative of production inputs.</p>
+        <p><strong>What OTEL would show (if properly instrumented):</strong> <code>validation_loss / training_loss</code> ratio &gt; 1.3 triggers overfitting alert. Input distribution comparison (KL divergence between val set and production inputs) reveals dataset mismatch.</p>
+        <p><strong>What to do:</strong> Always emit validation_loss, not just training_loss. Validate that your validation set reflects what users will actually send.</p>
+
+        <h3>OTEL Anti-patterns: Instrumenting Too Much</h3>
+        <p><strong>What you see:</strong> Your telemetry pipeline is overwhelmed. Storage costs spike. Dashboards are cluttered with 200 metrics. No one uses them.</p>
+        <p><strong>Root cause:</strong> Emitting every intermediate value &mdash; every weight, every neuron activation &mdash; instead of aggregated signals.</p>
+        <p><strong>Rule:</strong> Don&rsquo;t instrument per-weight or per-parameter. Instrument aggregates: <code>gradient_norm</code> (not per-layer gradients), <code>activation_mean</code> per layer (not per neuron), <code>loss</code> (not per-sample loss values). Focus on the core metrics in the <a href="../docs/neural-networks-otel-bridge.md#6-quick-reference-metric-checklist-for-training-observability">OTEL bridge guide</a>.</p>
+      </div>
+    </section>
+
+    <section id="cross-phase-resource-comparison-matrix">
+      <h2>Cross-Phase Resource Comparison Matrix</h2>
+      <div class="section-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Resource</th>
+              <th>Phase</th>
+              <th>Time</th>
+              <th>Difficulty</th>
+              <th>OTEL Relevance</th>
+              <th>Code Examples</th>
+              <th>Beginner Safe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>3Blue1Brown Neural Networks</td><td>1</td><td>19 min</td><td>Beginner</td><td>Low (indirect)</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Jay Alammar Visual NN Guide</td><td>1</td><td>25 min</td><td>Beginner</td><td>Low (indirect)</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Karpathy Zero to Hero</td><td>2</td><td>8&ndash;10 hrs</td><td>Beginner/Int</td><td>Medium</td><td>Yes (Python)</td><td>With Python skills</td></tr>
+            <tr><td>V7 Labs Overfitting Guide</td><td>2</td><td>25 min</td><td>Beginner</td><td>Medium</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Lil&rsquo;Log Overfitting Post</td><td>2</td><td>35 min</td><td>Intermediate</td><td>Medium</td><td>No</td><td>Partially</td></tr>
+            <tr><td>OTEL LLM Observability Intro</td><td>3</td><td>30 min</td><td>Intermediate</td><td>High (direct)</td><td>Yes (Python)</td><td>With OTEL basics</td></tr>
+            <tr><td>OTEL GenAI Semantic Conventions</td><td>3</td><td>20 min</td><td>Int</td><td>High (direct)</td><td>Yes (Python)</td><td>With OTEL basics</td></tr>
+            <tr><td>TDS Model Drift Detection</td><td>3</td><td>25 min</td><td>Intermediate</td><td>High</td><td>No</td><td>Partially</td></tr>
+            <tr><td>Illustrated Transformer</td><td>4</td><td>50 min</td><td>Beginner/Int</td><td>Medium</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Lil&rsquo;Log Hallucinations</td><td>4</td><td>45 min</td><td>Intermediate</td><td>High</td><td>No</td><td>With NN background</td></tr>
+            <tr><td>Rohan Paul Explainability</td><td>4</td><td>30 min</td><td>Intermediate</td><td>High</td><td>Yes (Python)</td><td>With NN background</td></tr>
+            <tr><td>fast.ai Practical DL</td><td>5</td><td>20&ndash;30 hrs</td><td>Beginner/Int</td><td>Low</td><td>Yes (fastai)</td><td>Yes</td></tr>
+            <tr><td>LoRA/Quantization Guide</td><td>5</td><td>20 min</td><td>Beginner/Int</td><td>Medium</td><td>No</td><td>Yes</td></tr>
+            <tr><td>OTEL AI Agent Observability</td><td>5</td><td>20 min</td><td>Int/Adv</td><td>High (direct)</td><td>No</td><td>No</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="identified-gaps-and-open-questions">
+      <h2>Identified Gaps and Open Questions</h2>
+      <div class="section-content">
+        <ul>
+          <li>No single resource bridges neural network training behavior directly to OTEL instrumentation in one article. This is a genuine content gap the team could fill with internal documentation.</li>
+          <li>LLM-specific training observability (monitoring fine-tuning runs, not just inference) is underrepresented in public content. The Neptune.ai guides (<a href="https://neptune.ai/blog/monitoring-machine-learning-experiments-guide">monitoring guide</a>, <a href="https://neptune.ai/blog/performance-metrics-in-machine-learning-complete-guide">performance metrics guide</a>) partially fill this but are not OTEL-native.</li>
+          <li>&ldquo;When not to use neural networks&rdquo; lacks a strong, accessible, free resource &mdash; the best candidate (Medium / Ygor Serpa) is paywalled. This decision-framework gap is worth noting in onboarding materials.</li>
+          <li>The OTEL semantic conventions for GenAI are still stabilizing in 2025 &mdash; resources in Phase 3&ndash;5 should be re-evaluated in 6 months.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="recommended-reading-sequence-condensed">
+      <h2>Recommended Reading Sequence (Condensed)</h2>
+      <div class="section-content">
+        <ul>
+          <li><strong>Day 1 (1 hour):</strong> 3Blue1Brown Chapter 1 + Jay Alammar Visual Guide</li>
+          <li><strong>Week 1 (5&ndash;8 hours):</strong> Karpathy Zero to Hero Lectures 1&ndash;2 + V7 Labs Overfitting</li>
+          <li><strong>Week 2 (2&ndash;3 hours):</strong> OTEL LLM Observability Intro + OTEL GenAI Conventions + TDS Drift Detection</li>
+          <li><strong>Week 3 (2&ndash;3 hours):</strong> Illustrated Transformer + Lil&rsquo;Log Hallucinations + Rohan Paul Explainability</li>
+          <li><strong>Month 2 (ongoing):</strong> fast.ai course (lessons 1&ndash;5) + LoRA/Quantization + OTEL AI Agents post</li>
+        </ul>
+
+        <h3>Time Commitment Summary</h3>
+        <ul>
+          <li><strong>First Week:</strong> ~14&ndash;17 hours of structured learning (Day 1 + Week 1&ndash;3)</li>
+          <li><strong>Month 2:</strong> ~5&ndash;8 hours/week for fast.ai (optional; can extend into Month 3)</li>
+          <li><strong>Total First Month:</strong> ~14&ndash;17 hours focused learning</li>
+          <li><strong>Ongoing:</strong> Phase 5 resources are asynchronous; integrate into normal work rhythm</li>
+        </ul>
+        <p><strong>Pacing Note:</strong> If your first month includes other onboarding (infrastructure setup, codebase tour, etc.), spread Weeks 1&ndash;3 learning across 4&ndash;5 calendar weeks rather than back-to-back.</p>
+      </div>
+    </section>
+
+    <section id="reference-section-key-terms-acronyms">
+      <h2>Reference Section: Key Terms &amp; Acronyms</h2>
+      <div class="section-content">
+
+        <h3>Core ML/AI</h3>
+        <ul>
+          <li><strong>AI</strong>: Artificial Intelligence &mdash; machines that perform tasks requiring human-like reasoning</li>
+          <li><strong>ML</strong>: Machine Learning &mdash; systems that learn patterns from data</li>
+          <li><strong>DL</strong>: Deep Learning &mdash; neural networks with multiple layers</li>
+          <li><strong>NN</strong>: Neural Network &mdash; computational system inspired by biological neurons</li>
+        </ul>
+
+        <h3>Neural Network Types</h3>
+        <ul>
+          <li><strong>CNN</strong>: Convolutional Neural Network &mdash; processes images and spatial data</li>
+          <li><strong>RNN</strong>: Recurrent Neural Network &mdash; processes sequences (text, time-series)</li>
+          <li><strong>LSTM</strong>: Long Short-Term Memory &mdash; advanced RNN that remembers long-term dependencies</li>
+          <li><strong>GRU</strong>: Gated Recurrent Unit &mdash; simplified LSTM variant</li>
+          <li><strong>Transformer</strong>: Attention-based architecture powering modern LLMs</li>
+          <li><strong>MLP</strong>: Multilayer Perceptron &mdash; basic fully-connected neural network</li>
+        </ul>
+
+        <h3>Language Models</h3>
+        <ul>
+          <li><strong>LLM</strong>: Large Language Model &mdash; transformer-based model with billions+ parameters</li>
+          <li><strong>GPT</strong>: Generative Pre-trained Transformer &mdash; OpenAI&rsquo;s model architecture</li>
+          <li><strong>BERT</strong>: Bidirectional Encoder Representations from Transformers &mdash; Google&rsquo;s encoder model</li>
+          <li><strong>NLP</strong>: Natural Language Processing &mdash; AI for understanding/generating text</li>
+          <li><strong>Embeddings</strong>: Numerical vector representations of words/concepts</li>
+        </ul>
+
+        <h3>Training &amp; Optimization</h3>
+        <ul>
+          <li><strong>Backpropagation</strong>: Algorithm for computing gradients (how networks learn)</li>
+          <li><strong>Gradient Descent</strong>: Optimization method for minimizing loss</li>
+          <li><strong>Loss Function</strong>: Measure of how wrong predictions are</li>
+          <li><strong>Accuracy</strong>: Percentage of correct predictions</li>
+          <li><strong>Overfitting</strong>: Model memorizes training data instead of learning general patterns</li>
+          <li><strong>Underfitting</strong>: Model too simple to capture patterns</li>
+          <li><strong>Regularization</strong>: Techniques to prevent overfitting</li>
+          <li><strong>Learning Rate</strong>: Controls how much weights change per update</li>
+        </ul>
+
+        <h3>Observability &amp; Monitoring</h3>
+        <ul>
+          <li><strong>OTEL</strong>: OpenTelemetry &mdash; open standard for collecting observability data</li>
+          <li><strong>Traces</strong>: Detailed records of how a request flows through systems</li>
+          <li><strong>Metrics</strong>: Quantitative measurements (latency, error rate, accuracy)</li>
+          <li><strong>Logs</strong>: Detailed records of system events</li>
+          <li><strong>Model Drift</strong>: When model performance degrades over time</li>
+          <li><strong>Inference</strong>: Running a trained model on new data</li>
+          <li><strong>Latency</strong>: How long predictions take</li>
+          <li><strong>Throughput</strong>: How many predictions per unit time</li>
+        </ul>
+
+        <h3>Explainability &amp; Safety</h3>
+        <ul>
+          <li><strong>Hallucination</strong>: When LLMs generate false or nonsensical information</li>
+          <li><strong>Attention Mechanism</strong>: How transformers focus on relevant parts of input</li>
+          <li><strong>Saliency Maps</strong>: Visual explanation of which inputs matter most</li>
+          <li><strong>Feature Attribution</strong>: Measuring importance of each input feature</li>
+          <li><strong>Interpretability</strong>: How well humans can understand model decisions</li>
+          <li><strong>Black Box</strong>: Model whose inner workings are hard to interpret</li>
+          <li><strong>Uncertainty</strong>: Confidence level of a prediction</li>
+          <li><strong>Fairness</strong>: Whether model treats different groups equally</li>
+        </ul>
+
+        <h3>Production &amp; Deployment</h3>
+        <ul>
+          <li><strong>Quantization</strong>: Reducing model size/precision for faster inference</li>
+          <li><strong>Fine-tuning</strong>: Adapting pre-trained model to specific task</li>
+          <li><strong>Prompt Engineering</strong>: Designing input text to get desired outputs</li>
+          <li><strong>Temperature</strong>: Randomness parameter in generation (higher = more creative)</li>
+          <li><strong>Top-k/Top-p</strong>: Sampling methods for text generation</li>
+          <li><strong>Token</strong>: Individual unit of text (roughly word-sized)</li>
+          <li><strong>Context Window</strong>: How much previous text the model can &ldquo;see&rdquo;</li>
+          <li><strong>Inference Cost</strong>: Computational cost to run predictions</li>
+        </ul>
+
+        <h3>Startup Context</h3>
+        <ul>
+          <li><strong>Observability</strong>: Ability to measure and understand system behavior in production</li>
+          <li><strong>Explainability</strong>: Making model decisions understandable to humans</li>
+          <li><strong>Measurement</strong>: Collecting metrics to track performance and reliability</li>
+          <li><strong>Production Readiness</strong>: All the steps needed before deploying models</li>
+          <li><strong>Alignment</strong>: Ensuring AI behavior matches human intentions</li>
+          <li><strong>Safety</strong>: Preventing harmful outputs and behaviors</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sources">
+      <h2>Sources</h2>
+      <div class="section-content">
+        <ul>
+          <li><a href="https://www.3blue1brown.com/topics/neural-networks">3Blue1Brown Neural Networks</a></li>
+          <li><a href="https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/">Jay Alammar Visual Guide to Neural Networks</a></li>
+          <li><a href="https://jalammar.github.io/illustrated-transformer/">Jay Alammar The Illustrated Transformer</a></li>
+          <li><a href="https://karpathy.ai/zero-to-hero.html">Karpathy Neural Networks: Zero to Hero</a></li>
+          <li><a href="https://www.v7labs.com/blog/overfitting">V7 Labs: What is Overfitting in Deep Learning</a></li>
+          <li><a href="https://lilianweng.github.io/posts/2019-03-14-overfit/">Lil&rsquo;Log: Are Deep Neural Networks Dramatically Overfitted?</a></li>
+          <li><a href="https://lilianweng.github.io/posts/2024-07-07-hallucination/">Lil&rsquo;Log: Extrinsic Hallucinations in LLMs</a></li>
+          <li><a href="https://opentelemetry.io/blog/2024/llm-observability/">OpenTelemetry: Introduction to LLM Observability</a></li>
+          <li><a href="https://opentelemetry.io/blog/2024/otel-generative-ai/">OpenTelemetry: OpenTelemetry for Generative AI</a></li>
+          <li><a href="https://opentelemetry.io/blog/2025/ai-agent-observability/">OpenTelemetry: AI Agent Observability</a></li>
+          <li><a href="https://towardsdatascience.com/how-to-detect-model-drift-in-mlops-monitoring-7a039c22eaf9/">Towards Data Science: How to Detect Model Drift in MLOps Monitoring</a></li>
+          <li><a href="https://www.rohan-paul.com/p/explainability-and-interpretability">Rohan Paul: Explainability and Interpretability in Modern LLMs</a></li>
+          <li><a href="https://dev.to/iamfaham/fine-tuning-llms-lora-quantization-and-distillation-simplified-12nf">DEV Community: Fine-Tuning LLMs</a></li>
+          <li><a href="https://course.fast.ai/">fast.ai: Practical Deep Learning for Coders</a></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+  <footer>
+    <a href="index.html">&larr; All Learning Paths</a>
+  </footer>
+</body>
+</html>
