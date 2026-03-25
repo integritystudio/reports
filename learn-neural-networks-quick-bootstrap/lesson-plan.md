@@ -164,6 +164,8 @@
 
 After Phase 2, you understand *what is happening* during training. Phase 3 teaches you how to *measure it*. Here's the explicit mapping:
 
+> **Deep Dive Available:** See [**Instrumenting Neural Network Training for OTEL Observability**](../docs/neural-networks-otel-bridge.md) for a comprehensive guide with production alerting patterns, failure case studies, and concrete code examples. This bridge document is self-contained and highly recommended before starting Phase 3 resources.
+
 ### What You Learned in Phase 2 → What You Measure in Phase 3
 
 | Phase 2 Concept | Phase 3 OTEL Signal | Why It Matters |
