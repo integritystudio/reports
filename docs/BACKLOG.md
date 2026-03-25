@@ -42,6 +42,25 @@ This fills a genuine gap: no public resource currently bridges these two essenti
 
 ---
 
+### NN3. URL verification for lesson-plan.md — Done
+**Priority:** Critical (pre-distribution)
+**Source:** Quality audit (Mar 25) — hallucination flag on unverified URLs/dates
+
+All 14 resource URLs verified via WebFetch (Mar 25, 2026):
+- ✅ All URLs active and accessible
+- ✅ All author attributions correct (3Blue1Brown, Karpathy, Lil'Log, OTEL, fast.ai, etc.)
+- ✅ Resource descriptions match actual content
+- ✅ Time estimates reasonable based on content scope
+- ✅ Future-dated resources (2025) confirmed authentic — we're now in March 2026, so these are contemporary
+
+**Hallucination risk resolved:** The three "future-dated" resources (Rohan Paul explainability, LoRA/Quantization DEV article, OTEL AI Agent Observability post) that triggered warnings are legitimate 2025 publications. No fabrication; judge's caution was appropriate at evaluation time.
+
+**Lesson plan is CLEARED for distribution to new hire.**
+
+**[DONE]**
+
+---
+
 ### H11. Extract inline styles from 50 report files — Done (Phase 4)
 **Priority:** Medium (code quality, maintainability)
 **Source:** CSS architecture audit (Mar 9)
