@@ -8,6 +8,40 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+### NN1. Enhance lesson plan with LPTHW pedagogy elements
+**Priority:** Medium (learning experience, completeness)
+**Source:** Content review (Mar 25, neural-networks learning roadmap)
+**Items:**
+- Add role-based customization guidance (which resources to prioritize based on team role: observability, safety, general engineering)
+- Expand Phase 3 (OTEL) with hands-on implementation tutorial or checklist for first dashboard
+- Create "Common Pitfalls" section for LLM observability mistakes
+- Add "Teach-Back" reflection prompts after each phase
+- Include 1-2 production examples showing how concepts matter in real systems
+- Weave teaching-background perspective throughout (not just in fast.ai section)
+- Add simple glossary callout per phase (distinct from comprehensive reference)
+
+**Related:** Session-start hook configured to audit lesson-plan.md against LPTHW structure and suggest additional pedagogical enhancements on next session start.
+
+**Effort:** Medium (5-8 hours to implement all items)
+
+---
+
+### NN2. Bridge neural network training to OTEL instrumentation
+**Priority:** Medium (core competency gap)
+**Source:** Content review (Mar 25) — identified as critical missing bridge
+
+A new internal resource (blog post or guide) that explicitly maps:
+- Phase 2 concepts (loss, gradient norms, activation distributions) → Phase 3 OTEL metrics
+- Shows concrete example: instrumenting Karpathy's training loop with OTEL
+- Explains why each metric matters (not just what to measure, but why)
+- Teaches alerting thresholds for LLM observability (when to panic vs. when to wait)
+
+This fills a genuine gap: no public resource currently bridges these two essential phases for OTEL-focused startups.
+
+**Effort:** Medium (3-4 hours to research and write)
+
+---
+
 ### H11. Extract inline styles from 50 report files — Done (Phase 4)
 **Priority:** Medium (code quality, maintainability)
 **Source:** CSS architecture audit (Mar 9)
