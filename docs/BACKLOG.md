@@ -10,19 +10,77 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ### NN1. Enhance lesson plan with LPTHW pedagogy elements
 **Priority:** Medium (learning experience, completeness)
-**Source:** Content review (Mar 25, neural-networks learning roadmap)
-**Items:**
-- Add role-based customization guidance (which resources to prioritize based on team role: observability, safety, general engineering)
-- Expand Phase 3 (OTEL) with hands-on implementation tutorial or checklist for first dashboard
-- Create "Common Pitfalls" section for LLM observability mistakes
-- Add "Teach-Back" reflection prompts after each phase
-- Include 1-2 production examples showing how concepts matter in real systems
-- Weave teaching-background perspective throughout (not just in fast.ai section)
-- Add simple glossary callout per phase (distinct from comprehensive reference)
+**Source:** Content review (Mar 25, neural-networks learning roadmap) + LPTHW audit hook
+**Status:** Backlog, waiting for hook feedback before implementation
 
-**Related:** Session-start hook configured to audit lesson-plan.md against LPTHW structure and suggest additional pedagogical enhancements on next session start.
+**Related:** Session-start hook configured to audit lesson-plan.md against LPTHW methodology on next session start.
 
-**Effort:** Medium (5-8 hours to implement all items)
+**LPTHW Pedagogical Elements to Add:**
+
+1. **Exercise-Driven Learning**
+   - Add 1-2 "Try This" exercises per phase (hands-on tasks)
+   - Phase 1: Watch 3Blue1Brown Ch1, then sketch a neural network on paper showing how neurons connect
+   - Phase 2: After Karpathy Lec 1, write a 50-line Python function that computes loss manually
+   - Phase 3: After OTEL intro, instrument a simple training script with 3 lines of OTEL code
+   - Phase 4: After Illustrated Transformer, visualize attention weights using BertViz on a real model
+   - Phase 5: Deploy a quantized model and measure inference latency vs. full-precision
+
+2. **Learning Objectives Per Phase**
+   - "By end of Phase 1, you should be able to: explain what a neuron is, describe forward pass, draw a simple network"
+   - "By end of Phase 2, you should be able to: code backpropagation from scratch, identify overfitting, tune learning rate"
+   - "By end of Phase 3, you should be able to: set up OTEL traces for model training, interpret training metrics"
+   - etc.
+
+3. **Teach-Back Reflection Prompts** (after each phase)
+   - Phase 1: "Explain to a colleague why gradient descent is like walking downhill in the dark"
+   - Phase 2: "What does it mean when training loss drops but validation loss rises?"
+   - Phase 3: "Why would you monitor gradient_norm in OTEL, and when would high values be bad?"
+   - Phase 4: "What's the difference between why a model hallucinates (Phase 4) and how to detect it (OTEL)?"
+
+4. **Common Pitfalls & Error Patterns**
+   - "Training Instability: If loss spikes every few steps, you likely have..."
+   - "Dead Neurons: When activation_mean → 0 for a layer, check..."
+   - "Observability Gap: If you can't explain why accuracy dropped, you're missing..."
+   - "OTEL Anti-patterns: Don't instrument every weight; instead focus on..."
+
+5. **Production Examples** (1-2 per phase)
+   - Phase 2: Real case: "How a startup's training loop failed silently (and what metrics would have caught it)"
+   - Phase 3: "Monitoring a fine-tuning run in production: what alerts matter and why"
+   - Phase 4: "Detecting hallucination drift: a metric-based approach with real examples"
+
+6. **Role-Based Customization Guidance**
+   - If you're on Observability team: prioritize Phase 3 → Phase 2 → Phase 4
+   - If you're on Safety/Reliability team: prioritize Phase 4 → Phase 3 → Phase 2
+   - If you're a General Engineer: follow the standard sequence linearly
+
+7. **Per-Phase Glossary Callouts**
+   - Phase 1 glossary: AI, ML, DL, NN, forward pass, activation
+   - Phase 2 glossary: backprop, gradient, loss, overfitting, regularization, learning rate
+   - Phase 3 glossary: OTEL, metric, trace, span, observability, drift
+   - Phase 4 glossary: attention, hallucination, interpretability, saliency, embedding
+   - Phase 5 glossary: quantization, fine-tuning, inference, latency, throughput
+
+8. **Teaching-Background Perspective Throughout**
+   - Add callouts: "As an educator, you know that..."
+   - Highlight pedagogical gaps in resources: "Resource X skips the 'why', Resource Y fixes it by..."
+   - Connect to learning theory: "This is like the zone of proximal development in teaching..."
+
+**Implementation approach:**
+- Edit `learn-neural-networks-quick-bootstrap/lesson-plan.md` in place
+- Add exercises as indented callout blocks (e.g., `> **Try This:** ...`)
+- Add learning objectives as section headers per phase
+- Add teach-back prompts at phase conclusions
+- Create a new "Common Pitfalls" section in the glossary area
+- Weave teaching perspective into phase comparison notes
+
+**Effort estimate:**
+- Lightweight: 3-4 hours (add objectives, teach-back prompts, one exercise per phase)
+- Comprehensive: 6-8 hours (full exercises, production examples, pitfalls catalog, role-based guidance)
+- Recommended: Comprehensive (transforms it from reference list → interactive learning journey)
+
+**Timeline:** Implement after LPTHW audit hook provides specific feedback (expected next session start)
+- Hook will surface pedagogical gaps the agent identifies
+- Use hook output + this checklist to prioritize which elements to add first
 
 ---
 
