@@ -26,19 +26,52 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-### NN2. Bridge neural network training to OTEL instrumentation
-**Priority:** Medium (core competency gap)
+### NN2. Bridge neural network training to OTEL instrumentation (Highest-Leverage)
+**Priority:** HIGH (core competency gap, competitive advantage)
 **Source:** Content review (Mar 25) — identified as critical missing bridge
+**Status:** Ready for implementation
 
-A new internal resource (blog post or guide) that explicitly maps:
-- Phase 2 concepts (loss, gradient norms, activation distributions) → Phase 3 OTEL metrics
-- Shows concrete example: instrumenting Karpathy's training loop with OTEL
-- Explains why each metric matters (not just what to measure, but why)
-- Teaches alerting thresholds for LLM observability (when to panic vs. when to wait)
+**Deliverable:** Internal guide "Instrumenting Neural Network Training for OTEL Observability"
+**Save location:** `docs/neural-networks-otel-bridge.md`
 
-This fills a genuine gap: no public resource currently bridges these two essential phases for OTEL-focused startups.
+**Content outline:**
+1. **Mapping table:** Phase 2 training concepts → OTEL signals
+   - Loss function → metrics (training_loss, validation_loss, loss_spike_rate)
+   - Gradient magnitude → metrics (gradient_norm, dead_neuron_ratio, activation_mean)
+   - Learning rate → observable parameters
+   - Overfitting signal → metric thresholds for alerts
 
-**Effort:** Medium (3-4 hours to research and write)
+2. **Concrete walkthrough:** Instrumenting Karpathy's Zero to Hero code
+   - Before/after code snippets (Python + OpenTelemetry)
+   - Three lines of OTEL setup to capture training metrics
+   - Example: how to emit loss as a scalar metric at each step
+
+3. **Production patterns & alerting:**
+   - When to alert (gradient explosion, loss plateau, dead neurons)
+   - Thresholds for warning vs. critical (based on model size/architecture)
+   - Dashboard queries for monitoring training health in real-time
+
+4. **Failure case studies:**
+   - Training instability patterns and their OTEL signatures
+   - Overfitting detection via metric divergence
+   - How to distinguish learning rate issues from architecture problems
+
+5. **Why this matters for new hires:**
+   - Makes the abstract (Phase 2 backprop) concrete (Phase 3 dashboards)
+   - Bridges the gap between "understanding how networks learn" and "measuring if they're learning"
+
+**Why this is highest-leverage:**
+- No public article currently covers this specific bridge (verified via research)
+- Essential for OTEL-focused startup: ties training science to observability practice
+- Directly applicable to new hire's onboarding (can reference this after Karpathy/Phase 3)
+- Reusable for internal training, documentation, and knowledge transfer
+
+**Effort estimate:**
+- Quick version: 2-3 hours (~2000 words, essentials only)
+- Comprehensive: 4-5 hours (~4000 words, production patterns + case studies)
+- Recommended: Comprehensive (this is a differentiator)
+
+**Ready to start on:** Next available session after lesson-plan distribution
 
 ---
 
