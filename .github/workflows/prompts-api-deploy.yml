@@ -1,0 +1,46 @@
+name: Deploy prompts-api Worker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "workers/prompts-api/**"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Cloudflare Workers
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: workers/prompts-api
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install pywrangler
+        run: uv sync
+
+      - name: Deploy worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: b3868dd0fd5c0faa7d98aa325a9c2377
+        run: uv run pywrangler deploy
+
+  seed-catalog:
+    name: Seed KV catalog
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Python deps
+        run: pip install httpx
+
+      - name: Seed catalog.json to KV
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          KV_NAMESPACE_ID: ea9267c947334bf89917e218f3cd6ce7
+        run: python3 workers/prompts-api/scripts/seed_kv.py --catalog-only

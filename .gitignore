@@ -2,3 +2,7 @@ repomix-output.xml
 .DS_Store
 
 node_modules/
+
+# Cloudflare Worker local secrets and build cache
+.dev.vars
+workers/prompts-api/.wrangler/
