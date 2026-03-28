@@ -1,0 +1,12 @@
+{
+  "name": "reports",
+  "version": "1.0.0",
+  "description": "Static reports site at integritystudio.io",
+  "private": true,
+  "scripts": {
+    "serve": "http-server . --ssl --cert localhost.pem --key localhost-key.pem -p 8443 --cors"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

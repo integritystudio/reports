@@ -187,6 +187,26 @@
     --accent: #60a5fa;
 }
 
+/* --- Hines (Global Real Estate) --- */
+[data-brand="hines"] {
+    --color-primary-dark: #1c2b4a;
+    --color-primary-medium: #2a4070;
+    --color-primary-light: #c9a227;
+    --primary: #1c2b4a;
+    --secondary: #2a4070;
+    --accent: #c9a227;
+    --light: #f8f6f0;
+    --dark: #111827;
+    --border: #d6cdb8;
+    --tr-hover-bg: #f8f6f0;
+    --color-highlight-start: #fdf8ee;
+    --color-highlight-end: #faefd0;
+    --color-info-bg: #f0f4ff;
+    --badge-info-bg: #e8edf8;
+    --badge-info-text: #1c2b4a;
+    --details-hover-bg: #f0ecdf;
+}
+
 /* --- Capital City Village --- */
 [data-brand="capital-city"] {
     --color-primary-dark: #1a365d;
