@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="hub">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt — AI Prompt Library</title>
+  <link rel="stylesheet" href="../css/portal-base.css">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="prompt-view.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="pv-header">
+    <a href="index.html" class="pv-back" id="back-link">← Prompt Library</a>
+    <span class="pv-breadcrumb" id="pv-title"></span>
+    <button class="pv-copy-btn" id="copy-btn" aria-label="Copy prompt text" hidden>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+      </svg>
+      Copy Prompt
+    </button>
+  </header>
+
+  <main class="pv-main" id="main">
+    <article class="pv-content" id="pv-content">
+      <p class="pv-loading">Loading…</p>
+    </article>
+  </main>
+
+  <script>
+    // ── Minimal markdown → HTML renderer ─────────────────────────────────────
+    function renderMd(md) {
+      const lines = md.split('\n');
+      let html = '';
+      let i = 0;
+
+      while (i < lines.length) {
+        const line = lines[i];
+
+        // Fenced code block
+        if (line.startsWith('```')) {
+          const lang = line.slice(3).trim();
+          let code = '';
+          i++;
+          while (i < lines.length && !lines[i].startsWith('```')) {
+            code += escHtml(lines[i]) + '\n';
+            i++;
+          }
+          html += `<pre><code${lang ? ` class="language-${escHtml(lang)}"` : ''}>${code}</code></pre>`;
+          i++;
+          continue;
+        }
+
+        // Headings
+        const hm = line.match(/^(#{1,6})\s+(.+)/);
+        if (hm) {
+          const lvl = hm[1].length;
+          html += `<h${lvl}>${inline(hm[2])}</h${lvl}>`;
+          i++;
+          continue;
+        }
+
+        // Horizontal rule
+        if (/^---+$/.test(line.trim())) {
+          html += '<hr>';
+          i++;
+          continue;
+        }
+
+        // Unordered list — collect contiguous list items
+        if (/^[\*\-]\s/.test(line)) {
+          html += '<ul>';
+          while (i < lines.length && /^[\*\-]\s/.test(lines[i])) {
+            html += `<li>${inline(lines[i].replace(/^[\*\-]\s/, ''))}</li>`;
+            i++;
+          }
+          html += '</ul>';
+          continue;
+        }
+
+        // Ordered list
+        if (/^\d+\.\s/.test(line)) {
+          html += '<ol>';
+          while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
+            html += `<li>${inline(lines[i].replace(/^\d+\.\s/, ''))}</li>`;
+            i++;
+          }
+          html += '</ol>';
+          continue;
+        }
+
+        // Blank line → paragraph break (skip)
+        if (line.trim() === '') {
+          i++;
+          continue;
+        }
+
+        // Paragraph — collect contiguous non-blank lines
+        let para = '';
+        while (i < lines.length && lines[i].trim() !== '' &&
+               !lines[i].startsWith('#') && !lines[i].startsWith('```') &&
+               !/^[\*\-]\s/.test(lines[i]) && !/^\d+\.\s/.test(lines[i]) &&
+               !/^---+$/.test(lines[i].trim())) {
+          para += (para ? ' ' : '') + lines[i].trim();
+          i++;
+        }
+        if (para) html += `<p>${inline(para)}</p>`;
+      }
+
+      return html;
+    }
+
+    function inline(text) {
+      return escHtml(text)
+        // Bold + italic
+        .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+        // Bold
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        // Italic
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        // Inline code
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        // Links
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    }
+
+    function escHtml(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // ── Extract raw prompt text (content under "## Prompt" heading) ──────────
+    function extractPromptText(md) {
+      const match = md.match(/^##\s+Prompt\s*\n+([\s\S]+?)(?:\n---|\n##\s|$)/im);
+      return match ? match[1].trim() : md.trim();
+    }
+
+    // ── Main ─────────────────────────────────────────────────────────────────
+    const params   = new URLSearchParams(location.search);
+    const filePath = params.get('file');
+    const content  = document.getElementById('pv-content');
+    const pvTitle  = document.getElementById('pv-title');
+    const copyBtn  = document.getElementById('copy-btn');
+    const backLink = document.getElementById('back-link');
+
+    // Preserve category filter in back link if present
+    const cat = params.get('cat');
+    if (cat) backLink.href = `index.html?cat=${encodeURIComponent(cat)}`;
+
+    if (!filePath) {
+      content.innerHTML = '<p class="pv-error">No prompt file specified. <a href="index.html">Browse the library.</a></p>';
+    } else {
+      fetch(filePath)
+        .then(r => {
+          if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+          return r.text();
+        })
+        .then(md => {
+          // Set page title from first H1
+          const titleMatch = md.match(/^#\s+(.+)/m);
+          const title = titleMatch ? titleMatch[1].trim() : filePath.split('/').pop().replace('.md', '');
+          document.title = `${title} — AI Prompt Library`;
+          pvTitle.textContent = title;
+
+          content.innerHTML = renderMd(md);
+
+          // Copy button — copies just the prompt body
+          const promptText = extractPromptText(md);
+          copyBtn.hidden = false;
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(promptText).then(() => {
+              const orig = copyBtn.innerHTML;
+              copyBtn.textContent = 'Copied!';
+              setTimeout(() => { copyBtn.innerHTML = orig; }, 1800);
+            });
+          });
+        })
+        .catch(err => {
+          content.innerHTML = `<p class="pv-error">Failed to load prompt: ${escHtml(String(err))}</p>`;
+        });
+    }
+  </script>
+</body>
+</html>

@@ -108,7 +108,7 @@
         <span class="prompt-cat-badge">${esc(label)}</span>
         <p class="prompt-title">${esc(prompt.title || '')}</p>
         ${contributor ? `<p class="prompt-meta">${contributor}</p>` : ''}
-        ${filePath ? `<a class="prompt-link" href="${esc(filePath)}" target="_blank" rel="noopener">
+        ${filePath ? `<a class="prompt-link" href="prompt.html?file=${encodeURIComponent(filePath)}">
           View prompt
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
