@@ -1,0 +1,287 @@
+/**
+ * External Link Checker
+ * Scans HTML files for external links and verifies they are accessible
+ *
+ * Academic Link Handling:
+ * - HTTP 403 (Forbidden) for academic DOIs is EXPECTED and ACCEPTABLE
+ *   Indicates paywall/institutional access required, not a broken link
+ * - HTTP 418 (I'm a teapot) for academic resources = server quirk, investigate
+ *   Example: McCabe 1976 IEEE TSE paper returns 418 but is valid via Academia.edu
+ * - HTTP 404 requires investigation: verify publication exists via CrossRef/Google Scholar
+ * - Skipped domains require manual verification in browser
+ *
+ * Alternative Discovery Strategies:
+ * - Use official package manager APIs (npm, PyPI) instead of package web pages
+ * - Replace broken direct PDFs with official agency publication pages
+ * - For academic papers:
+ *   • arXiv preprints: https://arxiv.org/pdf/[paper-id]
+ *   • Microsoft Research: https://www.microsoft.com/en-us/research/ (hosted PDFs for MSR-authored papers)
+ *   • Author/institution repositories: literateprogramming.com, personal author pages
+ *   • Academia.edu/ResearchGate: Use SPECIFIC paper links, NOT generic homepage (https://www.researchgate.net/ returns 403)
+ *   • Wayback Machine: For archived articles and old web pages
+ */
+
+import fs from 'fs';
+import path from 'path';
+
+// Client subdirectories to scan for HTML files
+const CONTENT_DIRS = [
+  '.',
+  'balloon-collective',
+  'capital_city',
+  'edgar_nadyne',
+  'holliday_lighting',
+  'integrity-studio-ai',
+  'leora_research',
+  'micah_lindsey',
+  'ngo-market',
+  'skelton-woody',
+  'sound-sight-tarot',
+  'trp-austin',
+  'zoukmx',
+  'ai-observability',
+  'playground-tools',
+  'hines',
+];
+
+// Link extraction regex - matches href="https://..." and src="https://..." in HTML
+const LINK_REGEX = /(?:href|src)=["'](https?:\/\/[^"'>\s]+)["']/g;
+
+// Skip certain domains that block automated requests
+// These require manual verification in a browser or API calls
+const SKIP_DOMAINS = [
+  'medium.com',
+  'linkedin.com',
+  'dl.acm.org',              // ACM Digital Library (valid alternative for academic papers)
+  'onlinelibrary.wiley.com', // Wiley (journal publisher, HTTP 403 is expected)
+  'papers.ssrn.com',         // SSRN (research papers, rate limited)
+  'crunchbase.com',
+  'neptune.ai',
+  'openai.com',
+  'link.springer.com',       // Springer (journal publisher, HTTP 403 is expected)
+  'ieeexplore.ieee.org',     // IEEE (journal publisher, HTTP 403 is expected)
+  'scholar.google.com',      // Google Scholar (blocks automated requests)
+];
+
+// Request configuration
+const REQUEST_CONFIG = {
+  timeout: 10000,
+  userAgent: 'Mozilla/5.0 (compatible; LinkChecker/1.0)',
+  concurrency: 5,
+  retryCount: 2,
+  retryDelay: 1000
+};
+
+class LinkChecker {
+  constructor(rootDir = process.cwd(), dirs = null) {
+    this.rootDir = rootDir;
+    this.dirs = dirs ?? CONTENT_DIRS;
+    this.links = new Map(); // url -> { files: [], status: null }
+    this.results = { passed: 0, failed: 0, skipped: 0 };
+  }
+
+  async scanFiles() {
+    console.log('Scanning HTML files for external links...\n');
+
+    for (const dir of this.dirs) {
+      const dirPath = path.join(this.rootDir, dir);
+      if (!fs.existsSync(dirPath)) continue;
+
+      const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.html'));
+      for (const file of files) {
+        const filePath = path.join(dirPath, file);
+        const content = fs.readFileSync(filePath, 'utf-8');
+        const relPath = dir === '.' ? file : `${dir}/${file}`;
+        this.extractLinks(content, relPath);
+      }
+    }
+
+    console.log(`Found ${this.links.size} unique external links\n`);
+  }
+
+  extractLinks(content, sourceFile) {
+    let match;
+    while ((match = LINK_REGEX.exec(content)) !== null) {
+      const url = match[1];
+      if (!this.links.has(url)) {
+        this.links.set(url, { files: [], status: null, error: null });
+      }
+      this.links.get(url).files.push(sourceFile);
+    }
+  }
+
+  shouldSkip(url) {
+    try {
+      const hostname = new URL(url).hostname;
+      return SKIP_DOMAINS.some(domain => hostname.includes(domain));
+    } catch {
+      return true;
+    }
+  }
+
+  async checkLink(url) {
+    if (this.shouldSkip(url)) {
+      return { status: 'skipped', code: null, error: 'Domain in skip list' };
+    }
+
+    for (let attempt = 0; attempt <= REQUEST_CONFIG.retryCount; attempt++) {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), REQUEST_CONFIG.timeout);
+
+        // Try HEAD first (faster), fall back to GET if blocked
+        let response = await fetch(url, {
+          method: 'HEAD',
+          signal: controller.signal,
+          headers: { 'User-Agent': REQUEST_CONFIG.userAgent },
+          redirect: 'follow'
+        });
+
+        clearTimeout(timeout);
+
+        // Some servers block HEAD, retry with GET
+        if (response.status === 405 || response.status === 403) {
+          const getController = new AbortController();
+          const getTimeout = setTimeout(() => getController.abort(), REQUEST_CONFIG.timeout);
+
+          response = await fetch(url, {
+            method: 'GET',
+            signal: getController.signal,
+            headers: { 'User-Agent': REQUEST_CONFIG.userAgent },
+            redirect: 'follow'
+          });
+
+          clearTimeout(getTimeout);
+        }
+
+        if (response.ok || response.status === 301 || response.status === 302) {
+          return { status: 'ok', code: response.status, error: null };
+        }
+
+        return { status: 'failed', code: response.status, error: `HTTP ${response.status}` };
+      } catch (error) {
+        if (attempt < REQUEST_CONFIG.retryCount) {
+          await new Promise(r => setTimeout(r, REQUEST_CONFIG.retryDelay));
+          continue;
+        }
+        return { status: 'failed', code: null, error: error.message };
+      }
+    }
+  }
+
+  async checkAllLinks() {
+    const urls = Array.from(this.links.keys());
+    const total = urls.length;
+    let checked = 0;
+
+    // Process in batches for concurrency control
+    for (let i = 0; i < urls.length; i += REQUEST_CONFIG.concurrency) {
+      const batch = urls.slice(i, i + REQUEST_CONFIG.concurrency);
+      await Promise.all(
+        batch.map(async url => {
+          const result = await this.checkLink(url);
+          this.links.get(url).status = result.status;
+          this.links.get(url).error = result.error;
+          this.links.get(url).code = result.code;
+
+          checked++;
+          const status = result.status === 'ok' ? '✓' :
+                        result.status === 'skipped' ? '○' : '✗';
+          console.log(`[${checked}/${total}] ${status} ${url}`);
+
+          if (result.status === 'ok') this.results.passed++;
+          else if (result.status === 'skipped') this.results.skipped++;
+          else this.results.failed++;
+        })
+      );
+    }
+  }
+
+  generateReport() {
+    console.log('\n' + '='.repeat(60));
+    console.log('LINK CHECK SUMMARY');
+    console.log('='.repeat(60));
+    console.log(`Total links: ${this.links.size}`);
+    console.log(`Passed: ${this.results.passed}`);
+    console.log(`Failed: ${this.results.failed}`);
+    console.log(`Skipped: ${this.results.skipped}`);
+
+    const failedLinks = Array.from(this.links.entries())
+      .filter(([_, data]) => data.status === 'failed');
+
+    if (failedLinks.length > 0) {
+      console.log('\nFAILED LINKS:');
+      console.log('-'.repeat(60));
+
+      const paywalledLinks = [];
+      const brokenLinks = [];
+
+      for (const [url, data] of failedLinks) {
+        const isAcademicDOI = url.includes('doi.org/') || url.includes('handle.net/');
+        const isPublisherDomain = url.includes('springer.com') || url.includes('wiley.com') ||
+                                  url.includes('ieee.org') || url.includes('acm.org');
+        const isPaywallStatus = data.error && (data.error.includes('403') || data.error.includes('418'));
+
+        if (isPaywallStatus && (isAcademicDOI || isPublisherDomain)) {
+          paywalledLinks.push([url, data]);
+        } else {
+          brokenLinks.push([url, data]);
+        }
+      }
+
+      if (paywalledLinks.length > 0) {
+        console.log('\nPaywall/Forbidden (HTTP 403/418) - ACCEPTABLE for academic papers:');
+        for (const [url, data] of paywalledLinks) {
+          console.log(`\n${url}`);
+          console.log(`  Note: This is a legitimate paywalled academic resource`);
+          console.log(`  Found in: ${data.files.join(', ')}`);
+        }
+      }
+
+      if (brokenLinks.length > 0) {
+        console.log('\n\nActual Broken Links (requires remediation):');
+        for (const [url, data] of brokenLinks) {
+          console.log(`\n${url}`);
+          console.log(`  Error: ${data.error}`);
+          console.log(`  Found in: ${data.files.join(', ')}`);
+        }
+      }
+    }
+
+    console.log('\n' + '='.repeat(60));
+    return this.results.failed === 0;
+  }
+
+  async run() {
+    await this.scanFiles();
+
+    if (this.links.size === 0) {
+      console.log('No external links found.');
+      return true;
+    }
+
+    await this.checkAllLinks();
+    return this.generateReport();
+  }
+}
+
+async function main() {
+  console.log('External Link Checker');
+  console.log('='.repeat(60) + '\n');
+
+  // Optional: pass a subdirectory as CLI arg (e.g. node check-links.mjs hines)
+  const targetDir = process.argv[2];
+  const checker = new LinkChecker(process.cwd(), targetDir ? [targetDir] : null);
+  const success = await checker.run();
+
+  process.exit(success ? 0 : 1);
+}
+
+export { LinkChecker };
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch(error => {
+    console.error('Link check failed:', error);
+    process.exit(1);
+  });
+}

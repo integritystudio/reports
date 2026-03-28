@@ -4,6 +4,8 @@
   "description": "Static reports site at integritystudio.io",
   "private": true,
   "scripts": {
+    "check:links": "node scripts/check-links.mjs",
+    "check:links:dir": "node scripts/check-links.mjs",
     "serve": "http-server . --ssl --cert localhost.pem --key localhost-key.pem -p 8443 --cors",
     "prompts:setup": "pip install datasets pyarrow",
     "prompts:import": "python scripts/import_prompts.py",

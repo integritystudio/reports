@@ -1,0 +1,320 @@
+/* prompts-layout.css — Layout for prompts/index.html browsing page
+ * Paired with: portal-base.css + theme.css (data-brand="hub")
+ * Page-specific styles only — no color values, uses CSS custom properties
+ */
+
+/* ── Page shell ─────────────────────────────────────────────────────────── */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+
+.page-header {
+    background: var(--color-primary-dark);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.page-header h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #fff;
+}
+
+.page-header h1 span {
+    font-weight: 400;
+    opacity: 0.75;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+.search-wrap {
+    flex: 1;
+    min-width: 200px;
+    max-width: 480px;
+    position: relative;
+}
+
+.search-wrap input {
+    width: 100%;
+    padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+    border-radius: 6px;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+    transition: background 0.2s;
+}
+
+.search-wrap input::placeholder { color: rgba(255,255,255,0.6); }
+.search-wrap input:focus { background: rgba(255,255,255,0.25); }
+
+.search-wrap svg {
+    position: absolute;
+    left: 0.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+.result-count {
+    font-size: 0.82rem;
+    opacity: 0.8;
+    white-space: nowrap;
+}
+
+.back-link {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    white-space: nowrap;
+}
+.back-link:hover { color: #fff; }
+
+/* ── Body layout ─────────────────────────────────────────────────────────── */
+
+.page-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    height: calc(100vh - 60px);
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+
+.sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: var(--color-bg-secondary);
+    border-right: 1px solid var(--color-border);
+    overflow-y: auto;
+    padding: 0.75rem 0;
+}
+
+.sidebar-section {
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    padding: 0.5rem 1rem 0.25rem;
+    opacity: 0.6;
+}
+
+.cat-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.45rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    text-align: left;
+    transition: background 0.15s;
+    border-left: 3px solid transparent;
+}
+
+.cat-btn:hover {
+    background: var(--color-border);
+}
+
+.cat-btn.active {
+    background: color-mix(in srgb, var(--color-primary-dark) 12%, transparent);
+    border-left-color: var(--color-primary-dark);
+    color: var(--color-primary-dark);
+    font-weight: 600;
+}
+
+.cat-count {
+    font-size: 0.75rem;
+    background: var(--color-border);
+    color: var(--color-text-secondary);
+    padding: 0.1rem 0.4rem;
+    border-radius: 10px;
+    min-width: 1.5rem;
+    text-align: center;
+}
+
+.cat-btn.active .cat-count {
+    background: var(--color-primary-dark);
+    color: #fff;
+}
+
+/* ── Main content ────────────────────────────────────────────────────────── */
+
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem 1.5rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.875rem;
+}
+
+/* ── Prompt cards ────────────────────────────────────────────────────────── */
+
+.prompt-card {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: box-shadow 0.15s, transform 0.15s;
+    position: relative;
+}
+
+.prompt-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.prompt-card[hidden] { display: none; }
+
+.prompt-cat-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    max-width: fit-content;
+}
+
+.prompt-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.35;
+    /* clamp to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.prompt-meta {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    opacity: 0.7;
+    margin-top: auto;
+}
+
+.prompt-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-primary-medium);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.prompt-link:hover { text-decoration: underline; }
+
+/* ── Category badge colors ───────────────────────────────────────────────── */
+
+[data-cat="image-visual"]          .prompt-cat-badge { background: #fff3e0; color: #bf6900; }
+[data-cat="technology-ai"]         .prompt-cat-badge { background: #e3f2fd; color: #1565c0; }
+[data-cat="business-professional"] .prompt-cat-badge { background: #e8eaf6; color: #283593; }
+[data-cat="multilingual"]          .prompt-cat-badge { background: #e0f7fa; color: #006064; }
+[data-cat="education-teaching"]    .prompt-cat-badge { background: #e8f5e9; color: #2e7d32; }
+[data-cat="research-analysis"]     .prompt-cat-badge { background: #fce4ec; color: #880e4f; }
+[data-cat="writing-creative"]      .prompt-cat-badge { background: #f3e5f5; color: #6a1b9a; }
+[data-cat="games-entertainment"]   .prompt-cat-badge { background: #fbe9e7; color: #bf360c; }
+[data-cat="social-media-marketing"] .prompt-cat-badge { background: #e3f2fd; color: #0277bd; }
+[data-cat="legal-finance"]         .prompt-cat-badge { background: #f1f8e9; color: #33691e; }
+[data-cat="personal-development"]  .prompt-cat-badge { background: #fff8e1; color: #f57f17; }
+[data-cat="lifestyle-home"]        .prompt-cat-badge { background: #fce4ec; color: #ad1457; }
+[data-cat="health-wellness"]       .prompt-cat-badge { background: #e8f5e9; color: #1b5e20; }
+[data-cat="role-play-character"],
+[data-cat="roleplay-character"]    .prompt-cat-badge { background: #ede7f6; color: #4527a0; }
+[data-cat="travel-culture"]        .prompt-cat-badge { background: #e0f2f1; color: #004d40; }
+[data-cat="language-translation"]  .prompt-cat-badge { background: #e1f5fe; color: #01579b; }
+[data-cat="developer"]             .prompt-cat-badge { background: #1a1a2e; color: #e94560; }
+[data-cat="other"]                 .prompt-cat-badge { background: #eceff1; color: #455a64; }
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+    font-size: 0.95rem;
+}
+
+/* ── Dark mode adjustments ───────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+    .page-header { background: #1e293b; }
+    .search-wrap input { background: rgba(255,255,255,0.1); }
+    .prompt-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+
+    [data-cat="image-visual"]          .prompt-cat-badge { background: #3d2800; color: #ffb74d; }
+    [data-cat="technology-ai"]         .prompt-cat-badge { background: #0d2137; color: #90caf9; }
+    [data-cat="business-professional"] .prompt-cat-badge { background: #1a1f3d; color: #9fa8da; }
+    [data-cat="multilingual"]          .prompt-cat-badge { background: #002b2e; color: #80deea; }
+    [data-cat="education-teaching"]    .prompt-cat-badge { background: #1b3a1f; color: #a5d6a7; }
+    [data-cat="research-analysis"]     .prompt-cat-badge { background: #3b0019; color: #f48fb1; }
+    [data-cat="writing-creative"]      .prompt-cat-badge { background: #2a0845; color: #ce93d8; }
+    [data-cat="games-entertainment"]   .prompt-cat-badge { background: #3e0d00; color: #ffab91; }
+    [data-cat="social-media-marketing"] .prompt-cat-badge { background: #0a1929; color: #81d4fa; }
+    [data-cat="legal-finance"]         .prompt-cat-badge { background: #1a2a00; color: #c5e1a5; }
+    [data-cat="personal-development"]  .prompt-cat-badge { background: #3d2900; color: #ffe082; }
+    [data-cat="lifestyle-home"]        .prompt-cat-badge { background: #3b0022; color: #f48fb1; }
+    [data-cat="health-wellness"]       .prompt-cat-badge { background: #0d2612; color: #a5d6a7; }
+    [data-cat="roleplay-character"]    .prompt-cat-badge { background: #1a0e3d; color: #b39ddb; }
+    [data-cat="travel-culture"]        .prompt-cat-badge { background: #00201d; color: #80cbc4; }
+    [data-cat="language-translation"]  .prompt-cat-badge { background: #001929; color: #81d4fa; }
+    [data-cat="developer"]             .prompt-cat-badge { background: #0f0f1a; color: #e94560; }
+    [data-cat="other"]                 .prompt-cat-badge { background: #1c2530; color: #90a4ae; }
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 700px) {
+    .page-body { flex-direction: column; height: auto; overflow: visible; }
+    .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--color-border); display: flex; flex-wrap: wrap; gap: 0.25rem; padding: 0.5rem; }
+    .sidebar-label { display: none; }
+    .cat-btn { width: auto; border-left: none; border-radius: 20px; padding: 0.3rem 0.75rem; font-size: 0.8rem; }
+    .cat-btn.active { border-left: none; outline: 2px solid var(--color-primary-dark); }
+    .main-content { overflow: visible; }
+    .cards-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+    .cards-grid { grid-template-columns: 1fr; }
+}

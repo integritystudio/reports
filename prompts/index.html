@@ -6,103 +6,208 @@
   <title>AI Prompt Library</title>
   <link rel="stylesheet" href="../css/portal-base.css">
   <link rel="stylesheet" href="../css/theme.css">
-  <link rel="stylesheet" href="css/prompts-library.css">
+  <link rel="stylesheet" href="prompts-layout.css">
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
 
-  <header>
-    <div class="header-content">
-      <h1>AI Prompt Library</h1>
-      <p class="subtitle">Curated collection of AI personas and prompts from fka/prompts.chat</p>
+  <header class="page-header">
+    <h1>AI Prompt Library <span>prompts.chat</span></h1>
+
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="search" id="search-input" placeholder="Search prompts…" aria-label="Search prompts" autocomplete="off">
     </div>
+
+    <span class="result-count" id="result-count" aria-live="polite"></span>
+
+    <a href="../index.html" class="back-link">← Hub</a>
   </header>
 
-  <main id="main">
-    <!-- Search & Filter Bar -->
-    <section class="prompts-search-section">
-      <div class="search-container">
-        <input
-          type="text"
-          id="promptSearch"
-          class="search-input"
-          placeholder="Search prompts by name, category, or content..."
-          aria-label="Search prompts"
-        >
-        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.35-4.35"></path>
-        </svg>
-      </div>
-
-      <div class="filter-controls">
-        <button class="filter-btn active" data-filter="all">All Prompts</button>
-        <button class="filter-btn" data-filter="dev">Developer</button>
-        <button class="filter-btn" data-filter="general">General</button>
-      </div>
-    </section>
-
-    <!-- Prompts Grid -->
-    <section class="prompts-section">
-      <div class="prompts-grid" id="promptsGrid">
-        <!-- Dynamically populated by JavaScript -->
-      </div>
-    </section>
-
-    <!-- Prompt Detail Modal -->
-    <div class="prompt-modal" id="promptModal">
-      <div class="modal-content">
-        <button class="modal-close" id="closeModal" aria-label="Close prompt details">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+  <div class="page-body" id="main">
+    <nav class="sidebar" aria-label="Categories">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Browse</div>
+        <button class="cat-btn active" data-cat="all">
+          All Prompts
+          <span class="cat-count" id="count-all">…</span>
         </button>
-
-        <div class="modal-header">
-          <span class="modal-category" id="modalCategory"></span>
-          <h2 id="modalTitle"></h2>
-        </div>
-
-        <div class="modal-metadata">
-          <div class="metadata-item">
-            <span class="label">Contributor:</span>
-            <span id="modalContributor"></span>
-          </div>
-          <div class="metadata-item">
-            <span class="label">Source:</span>
-            <a href="https://prompts.chat" target="_blank" rel="noopener noreferrer">prompts.chat</a>
-          </div>
-          <div class="metadata-item">
-            <span class="label">License:</span>
-            <span>CC0 1.0 (Public Domain)</span>
-          </div>
-        </div>
-
-        <div class="modal-body">
-          <h3>Prompt</h3>
-          <div class="prompt-content" id="promptContent"></div>
-        </div>
-
-        <div class="modal-actions">
-          <button class="copy-btn" id="copyPromptBtn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-            </svg>
-            Copy Prompt
-          </button>
-        </div>
+        <button class="cat-btn" data-cat="developer">
+          Developer
+          <span class="cat-count" id="count-developer">…</span>
+        </button>
       </div>
-    </div>
-  </main>
+      <div class="sidebar-section">
+        <div class="sidebar-label">General</div>
+        <div id="cat-list"></div>
+      </div>
+    </nav>
 
-  <footer>
-    <div class="footer-content">
-      <p>&copy; 2026 Integrity Studio. All rights reserved.</p>
-    </div>
-  </footer>
+    <main class="main-content">
+      <div class="cards-grid" id="cards-grid" role="list" aria-label="Prompt cards">
+        <p class="empty-state" id="loading-msg">Loading prompts…</p>
+      </div>
+    </main>
+  </div>
 
-  <script src="js/prompts-library.js" defer></script>
+  <script>
+    const CATEGORY_LABELS = {
+      "image-visual":           "Image & Visual",
+      "technology-ai":          "Technology & AI",
+      "business-professional":  "Business & Professional",
+      "multilingual":           "Multilingual",
+      "education-teaching":     "Education & Teaching",
+      "research-analysis":      "Research & Analysis",
+      "writing-creative":       "Writing & Creative",
+      "games-entertainment":    "Games & Entertainment",
+      "social-media-marketing": "Social Media & Marketing",
+      "legal-finance":          "Legal & Finance",
+      "personal-development":   "Personal Development",
+      "lifestyle-home":         "Lifestyle & Home",
+      "health-wellness":        "Health & Wellness",
+      "roleplay-character":     "Role-Play & Characters",
+      "role-play-character":    "Role-Play & Characters",
+      "travel-culture":         "Travel & Culture",
+      "language-translation":   "Language & Translation",
+      "developer":              "Developer",
+      "other":                  "Other",
+    };
+
+    const grid     = document.getElementById('cards-grid');
+    const searchEl = document.getElementById('search-input');
+    const countEl  = document.getElementById('result-count');
+    const catList  = document.getElementById('cat-list');
+    const countAll = document.getElementById('count-all');
+    const countDev = document.getElementById('count-developer');
+
+    let allCards = [];
+    let activeCategory = 'all';
+
+    function esc(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function buildCard(prompt, catSlug) {
+      const article = document.createElement('article');
+      article.className = 'prompt-card';
+      article.setAttribute('role', 'listitem');
+      article.dataset.cat   = catSlug;
+      article.dataset.title = (prompt.title || '').toLowerCase();
+
+      const label = CATEGORY_LABELS[catSlug] || catSlug;
+      const contributor = prompt.contributor ? `by ${esc(prompt.contributor)}` : '';
+      const filePath = prompt.file || '';
+
+      article.innerHTML = `
+        <span class="prompt-cat-badge">${esc(label)}</span>
+        <p class="prompt-title">${esc(prompt.title || '')}</p>
+        ${contributor ? `<p class="prompt-meta">${contributor}</p>` : ''}
+        ${filePath ? `<a class="prompt-link" href="${esc(filePath)}" target="_blank" rel="noopener">
+          View prompt
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>` : ''}
+      `;
+
+      return article;
+    }
+
+    function applyFilters() {
+      const query = searchEl.value.trim().toLowerCase();
+      let visible = 0;
+
+      for (const card of allCards) {
+        const catMatch    = activeCategory === 'all' || card.dataset.cat === activeCategory;
+        const searchMatch = !query || card.dataset.title.includes(query);
+        const show        = catMatch && searchMatch;
+        card.hidden       = !show;
+        if (show) visible++;
+      }
+
+      countEl.textContent = `${visible.toLocaleString()} prompt${visible === 1 ? '' : 's'}`;
+
+      let empty = grid.querySelector('.empty-state');
+      if (visible === 0) {
+        if (!empty) {
+          empty = document.createElement('p');
+          empty.className = 'empty-state';
+          grid.appendChild(empty);
+        }
+        empty.textContent = query
+          ? `No prompts match "${query}"`
+          : 'No prompts in this category.';
+      } else if (empty) {
+        empty.remove();
+      }
+    }
+
+    function buildSidebar(categorySummary) {
+      const sorted = Object.entries(categorySummary)
+        .sort((a, b) => b[1].count - a[1].count);
+
+      for (const [slug, info] of sorted) {
+        const btn = document.createElement('button');
+        btn.className = 'cat-btn';
+        btn.dataset.cat = slug;
+        btn.innerHTML = `${esc(info.name)}<span class="cat-count">${info.count}</span>`;
+        catList.appendChild(btn);
+      }
+    }
+
+    function handleCatClick(e) {
+      const btn = e.target.closest('.cat-btn');
+      if (!btn) return;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCategory = btn.dataset.cat;
+      applyFilters();
+    }
+
+    async function loadPrompts() {
+      const res     = await fetch('metadata/catalog.json');
+      const catalog = await res.json();
+      const frag    = document.createDocumentFragment();
+
+      const devPrompts = catalog.developer_prompts || [];
+      for (const p of devPrompts) {
+        frag.appendChild(buildCard(p, 'developer'));
+      }
+      countDev.textContent = devPrompts.length;
+
+      const general = (catalog.general_prompts || {}).general || [];
+      for (const p of general) {
+        frag.appendChild(buildCard(p, p.category || 'other'));
+      }
+
+      const catSummary = (catalog.general_prompts || {}).category_summary || {};
+      buildSidebar(catSummary);
+
+      grid.innerHTML = '';
+      grid.appendChild(frag);
+      allCards = Array.from(grid.querySelectorAll('.prompt-card'));
+
+      const total = allCards.length;
+      countAll.textContent = total;
+      countEl.textContent  = `${total.toLocaleString()} prompts`;
+
+      applyFilters();
+    }
+
+    searchEl.addEventListener('input', applyFilters);
+    document.querySelector('.sidebar').addEventListener('click', handleCatClick);
+
+    loadPrompts().catch(err => {
+      grid.innerHTML = `<p class="empty-state">Failed to load prompts: ${esc(String(err))}</p>`;
+    });
+  </script>
 </body>
 </html>
