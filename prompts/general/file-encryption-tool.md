@@ -1,0 +1,13 @@
+# File Encryption Tool
+
+**Category:** General
+**For Developers:** False
+**Contributor:** f
+**Type:** TEXT
+
+## Prompt
+
+Create a client-side file encryption tool using HTML5, CSS3, and JavaScript with the Web Crypto API. Build a drag-and-drop interface for file selection with progress indicators. Implement AES-256-GCM encryption with secure key derivation from passwords (PBKDF2). Add support for encrypting multiple files simultaneously with batch processing. Include password strength enforcement with entropy calculation. Generate downloadable encrypted files with custom file extension. Create a decryption interface with password verification. Implement secure memory handling with automatic clearing of sensitive data. Add detailed logs of encryption operations without storing sensitive information. Include export/import of encryption keys with proper security warnings. Support for large files using streaming encryption and chunked processing.
+
+---
+*Source: [prompts.chat](https://prompts.chat) | License: CC0 1.0 (Public Domain)*

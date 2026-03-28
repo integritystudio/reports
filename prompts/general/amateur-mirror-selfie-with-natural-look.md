@@ -1,0 +1,13 @@
+# Amateur Mirror Selfie with Natural Look
+
+**Category:** General
+**For Developers:** False
+**Contributor:** dorukkurtoglu@gmail.com
+**Type:** TEXT
+
+## Prompt
+
+instagirl, mirror selfie in a hallway, realistic amateur phone snapshot, natural skin texture, minimal makeup, mild lens distortion from phone camera, casual posture, everyday outfit, slight handheld micro-blur, iPhone 11 wide 26mm EXIF feel, imperfect framing (a little headroom cut), mixed indoor lighting with slight color cast, background clutter present, no retouching, no beauty filter, faithful anatomy, same person identity, same body proportions, match reference face closely, iphone 11 pro max,
+
+---
+*Source: [prompts.chat](https://prompts.chat) | License: CC0 1.0 (Public Domain)*

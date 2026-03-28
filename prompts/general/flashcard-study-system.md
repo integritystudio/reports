@@ -1,0 +1,13 @@
+# Flashcard Study System
+
+**Category:** General
+**For Developers:** False
+**Contributor:** f
+**Type:** TEXT
+
+## Prompt
+
+Develop a comprehensive flashcard study system using HTML5, CSS3, and JavaScript. Create an intuitive interface for card creation and review. Implement spaced repetition algorithm for optimized learning. Add support for text, images, and audio on cards. Include card categorization with decks and tags. Implement study sessions with performance tracking. Add self-assessment with confidence levels. Create statistics dashboard showing learning progress. Support import/export of card decks in standard formats. Implement keyboard shortcuts for efficient review. Add dark mode and customizable themes.
+
+---
+*Source: [prompts.chat](https://prompts.chat) | License: CC0 1.0 (Public Domain)*

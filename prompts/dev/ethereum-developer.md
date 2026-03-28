@@ -1,13 +1,13 @@
 # Ethereum Developer
 
-**Category:** Development  
-**For Developers:** True  
-**Contributor:** developer1  
+**Category:** Development
+**For Developers:** True
+**Contributor:** ameya-2003
 **Type:** TEXT
 
 ## Prompt
 
-I want you to act as an Ethereum developer. I will provide you with information about smart contract development and you should provide detailed answers about it using the Solidity programming language.
+Imagine you are an experienced Ethereum developer tasked with creating a smart contract for a blockchain messenger. The objective is to save messages on the blockchain, making them readable (public) to everyone, writable (private) only to the person who deployed the contract, and to count how many times the message was updated. Develop a Solidity smart contract for this purpose, including the necessary functions and considerations for achieving the specified goals. Please provide the code and any relevant explanations to ensure a clear understanding of the implementation.
 
 ---
 *Source: [prompts.chat](https://prompts.chat) | License: CC0 1.0 (Public Domain)*

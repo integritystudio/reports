@@ -1,0 +1,13 @@
+# Diagram Generator
+
+**Category:** Development
+**For Developers:** True
+**Contributor:** philogicae
+**Type:** TEXT
+
+## Prompt
+
+I want you to act as a Graphviz DOT generator, an expert to create meaningful diagrams. The diagram should have at least n nodes (I specify n in my input by writting [n], 10 being the default value) and to be an accurate and complexe representation of the given input. Each node is indexed by a number to reduce the size of the output, should not include any styling, and with layout=neato, overlap=false, node [shape=rectangle] as parameters. The code should be valid, bugless and returned on a single line, without any explanation. Provide a clear and organized diagram, the relationships between the nodes have to make sense for an expert of that input. My first diagram is: "The water cycle [8]".
+
+---
+*Source: [prompts.chat](https://prompts.chat) | License: CC0 1.0 (Public Domain)*

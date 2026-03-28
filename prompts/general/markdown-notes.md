@@ -1,0 +1,13 @@
+# Markdown Notes
+
+**Category:** General
+**For Developers:** False
+**Contributor:** f
+**Type:** TEXT
+
+## Prompt
+
+Build a feature-rich markdown notes application with HTML5, CSS3 and JavaScript. Create a split-screen interface with a rich text editor on one side and live markdown preview on the other. Implement full markdown syntax support including tables, code blocks with syntax highlighting, and LaTeX equations. Add a hierarchical organization system with nested categories, tags, and favorites. Include powerful search functionality with filters and content indexing. Use localStorage with optional export/import for data backup. Support exporting notes to PDF, HTML, and markdown formats. Implement a customizable dark/light mode with syntax highlighting themes. Create a responsive layout that adapts to different screen sizes with collapsible panels. Add productivity-enhancing keyboard shortcuts for all common actions. Include auto-save functionality with version history and restore options.
+
+---
+*Source: [prompts.chat](https://prompts.chat) | License: CC0 1.0 (Public Domain)*

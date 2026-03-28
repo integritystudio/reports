@@ -4,7 +4,11 @@
   "description": "Static reports site at integritystudio.io",
   "private": true,
   "scripts": {
-    "serve": "http-server . --ssl --cert localhost.pem --key localhost-key.pem -p 8443 --cors"
+    "serve": "http-server . --ssl --cert localhost.pem --key localhost-key.pem -p 8443 --cors",
+    "prompts:setup": "pip install datasets pyarrow",
+    "prompts:import": "python scripts/import_prompts.py",
+    "prompts:serve": "python3 -m http.server 8000",
+    "prompts:catalog": "cat prompts/metadata/catalog.json"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

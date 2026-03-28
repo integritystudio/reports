@@ -1,0 +1,11 @@
+{
+  "name": "prompts",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "setup": "pip install datasets pyarrow",
+    "import": "python scripts/import_prompts.py",
+    "serve": "python3 -m http.server 8000",
+    "catalog": "cat prompts/metadata/catalog.json"
+  }
+}

@@ -1,0 +1,36 @@
+# Art-W
+
+**Category:** General
+**For Developers:** False
+**Contributor:** alienergizer6@gmail.com
+**Type:** STRUCTURED
+
+## Prompt
+
+{
+  "colors": {
+    "dominant_palette": [
+      "coral_pink",
+      "cerulean_blue",
+      "olive_green",
+      "forest_green",
+      "cream_white"
+    ],
+    "application": "Flat, blocks of color with minimal gradients, defined contours."
+  },
+  "typography": {
+    "style": "None present in the image."
+  },
+  "composition": {
+    "structure": "Three horizontal bands: sky/mountain, figures/orange trees, large fruit/table.",
+    "perspective": "Flattened, layered planes with stylized depth.",
+    "elements": "Simplified forms of people, trees, fruit, and landscape."
+  },
+  "effects": {
+    "texture": "Impasto oil painting texture, visible brushstrokes.",
+    "lighting": "Stylized, strong shadows and highlights, non-realistic."
+  }
+}
+
+---
+*Source: [prompts.chat](https://prompts.chat) | License: CC0 1.0 (Public Domain)*

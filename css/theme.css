@@ -1030,6 +1030,30 @@
 [data-brand="trp-austin"] .profile-item .value { color: var(--text); }
 
 
+/* --- Hines Land Development Opportunities Report --- */
+
+[data-brand="hines"] .priority-high { background: #d4edda; color: #155724; padding: 0.15rem 0.55rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+[data-brand="hines"] .priority-medium { background: #fff3cd; color: #856404; padding: 0.15rem 0.55rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+[data-brand="hines"] .priority-low { background: #d1ecf1; color: #0c5460; padding: 0.15rem 0.55rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+[data-brand="hines"] .timeline-immediate { background: #f8d7da; color: #721c24; padding: 0.15rem 0.55rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+[data-brand="hines"] .timeline-6mo { background: #ffeeba; color: #533f03; padding: 0.15rem 0.55rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+[data-brand="hines"] .timeline-12mo { background: #cce5ff; color: #004085; padding: 0.15rem 0.55rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+[data-brand="hines"] .opportunity-card { border: 1px solid var(--border); border-left: 4px solid var(--primary); border-radius: 6px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; background: var(--light); }
+[data-brand="hines"] .opportunity-card h4 { margin: 0 0 0.5rem; font-size: 1rem; color: var(--primary); }
+[data-brand="hines"] .opportunity-card .meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+[data-brand="hines"] .opportunity-card p { margin: 0.4rem 0; font-size: 0.95rem; }
+[data-brand="hines"] .opportunity-card .url { font-size: 0.85rem; color: var(--secondary); word-break: break-all; }
+[data-brand="hines"] .opportunity-card .cost { font-weight: 600; }
+[data-brand="hines"] .section-intro { background: #f0ebe0; border-left: 4px solid var(--accent); padding: 1rem 1.25rem; border-radius: 4px; margin-bottom: 1.5rem; font-size: 0.95rem; }
+[data-brand="hines"] .comparison-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.88rem; }
+[data-brand="hines"] .comparison-table th { background: var(--primary); color: #fff; padding: 0.65rem 0.75rem; text-align: left; }
+[data-brand="hines"] .comparison-table td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+[data-brand="hines"] .comparison-table tr:hover td { background: var(--tr-hover-bg, #f8f6f0); }
+[data-brand="hines"] .callout-box { background: #fff8e6; border: 1px solid var(--accent); border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+[data-brand="hines"] .callout-box strong { color: var(--primary); }
+[data-brand="hines"] .contact-block { background: #f4f1ea; border-radius: 6px; padding: 0.75rem 1rem; font-size: 0.9rem; margin-top: 0.5rem; }
+
+
 /* ==========================================================================
    10. DARK MODE
    All dark mode overrides organized by section

@@ -1,13 +1,14 @@
-# Life Coach
+# Life coach
 
-**Category:** Lifestyle  
-**For Developers:** False  
-**Contributor:** coach-pro  
+**Category:** General
+**For Developers:** False
+**Contributor:** ashleyjames8857@gmail.com
 **Type:** TEXT
 
 ## Prompt
 
-I want you to act as a life coach. You will help me understand my personality, identify my goals and values, and develop strategies to achieve them.
+Create a daily and weekly routine that consists of gym and work and self reflection
+
 
 ---
 *Source: [prompts.chat](https://prompts.chat) | License: CC0 1.0 (Public Domain)*
