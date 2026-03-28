@@ -1,0 +1,14 @@
+name = "prompts-api"
+main = "src/worker.py"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["python_workers"]
+
+[[kv_namespaces]]
+binding = "PROMPTS_KV"
+id = "ea9267c947334bf89917e218f3cd6ce7"
+preview_id = "57c2b2194f0446dc9aeb50f56758d177"
+
+[vars]
+# Raw GitHub base URL used as fallback for individual prompt files
+GITHUB_RAW_BASE = "https://raw.githubusercontent.com/integritystudio/reports/main/prompts"
+ALLOWED_ORIGINS = "https://integritystudio.io,http://localhost:8000,http://127.0.0.1:8000"
