@@ -12,7 +12,7 @@ Usage:
 
 Environment variables (or .dev.vars):
   CF_ACCOUNT_ID   — Cloudflare account ID
-  CF_API_TOKEN    — API token with KV:Edit permission
+  CLOUDFLARE_API_TOKEN    — API token with KV:Edit permission
   KV_NAMESPACE_ID — Target KV namespace ID
 
 The KV_NAMESPACE_ID defaults to the production namespace. Pass
@@ -37,7 +37,7 @@ PROMPTS_DIR = REPO_ROOT / "prompts"
 CATALOG_PATH = PROMPTS_DIR / "metadata" / "catalog.json"
 
 CF_ACCOUNT_ID = os.environ.get("CF_ACCOUNT_ID", "b3868dd0fd5c0faa7d98aa325a9c2377")
-CF_API_TOKEN = os.environ.get("CF_API_TOKEN", "")
+CLOUDFLARE_API_TOKEN = os.environ.get("CLOUDFLARE_API_TOKEN", "")
 KV_NAMESPACE_ID = os.environ.get("KV_NAMESPACE_ID", "ea9267c947334bf89917e218f3cd6ce7")
 
 KV_BASE = f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT_ID}/storage/kv/namespaces/{KV_NAMESPACE_ID}"
@@ -47,11 +47,11 @@ BULK_SIZE = 100
 
 
 def headers() -> dict:
-    if not CF_API_TOKEN:
-        print("ERROR: CF_API_TOKEN env var not set.")
+    if not CLOUDFLARE_API_TOKEN:
+        print("ERROR: CLOUDFLARE_API_TOKEN env var not set.")
         sys.exit(1)
     return {
-        "Authorization": f"Bearer {CF_API_TOKEN}",
+        "Authorization": f"Bearer {CLOUDFLARE_API_TOKEN}",
         "Content-Type": "application/json",
     }
 

@@ -17,6 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v3
+
       - name: Install uv
         uses: astral-sh/setup-uv@v5
 
@@ -25,9 +28,8 @@ jobs:
 
       - name: Deploy worker
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: b3868dd0fd5c0faa7d98aa325a9c2377
-        run: uv run pywrangler deploy
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+        run: doppler run --config prd -- uv run pywrangler deploy
 
   seed-catalog:
     name: Seed KV catalog
@@ -36,11 +38,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v3
+
       - name: Install Python deps
         run: pip install httpx
 
       - name: Seed catalog.json to KV
         env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
           KV_NAMESPACE_ID: ea9267c947334bf89917e218f3cd6ce7
-        run: python3 workers/prompts-api/scripts/seed_kv.py --catalog-only
+        run: doppler run --config prd -- python3 workers/prompts-api/scripts/seed_kv.py --catalog-only

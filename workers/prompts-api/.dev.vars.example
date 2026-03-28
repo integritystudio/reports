@@ -1,4 +1,4 @@
 # Copy to .dev.vars (git-ignored) for local pywrangler dev
 CF_ACCOUNT_ID=b3868dd0fd5c0faa7d98aa325a9c2377
-CF_API_TOKEN=your_token_here
+CLOUDFLARE_API_TOKEN=your_token_here
 KV_NAMESPACE_ID=57c2b2194f0446dc9aeb50f56758d177
