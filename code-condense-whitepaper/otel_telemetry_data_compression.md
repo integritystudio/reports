@@ -109,10 +109,10 @@ zstd wins on the **ratio-per-CPU-cycle** metric that matters most in telemetry p
 
 ### 3a. Specification Requirements
 
-Per the [OTLP Specification 1.9.0](https://opentelemetry.io/docs/specs/otlp/):
+Per the [OTLP Specification](https://opentelemetry.io/docs/specs/otlp/):
 
 - All OTLP servers **must** support `none` (no compression) and `gzip`
-- Additional algorithms (`zstd`, `snappy`) are **optional** -- negotiated via headers or gRPC encoding
+- Additional algorithms (`zstd`) are **optional** -- negotiated via headers or gRPC encoding (`snappy` applies to Prometheus Remote Write v1, not standard gRPC compression)
 - The [OpenTelemetry Protocol Exporter spec](https://opentelemetry.io/docs/specs/otel/protocol/exporter/) defines `OTEL_EXPORTER_OTLP_COMPRESSION` with values `gzip` or `none`
 
 ### 3b. Collector Configuration
@@ -123,7 +123,7 @@ Per the [OTLP Specification 1.9.0](https://opentelemetry.io/docs/specs/otlp/):
 exporters:
   otlp:
     endpoint: backend.example.com:4317
-    compression: zstd        # gzip | zstd | snappy | none
+    compression: zstd        # gzip | zstd | none
     tls:
       insecure: false
 ```
@@ -134,7 +134,7 @@ exporters:
 exporters:
   otlphttp:
     endpoint: https://ingest.example.com:4318
-    compression: gzip        # gzip | zstd | snappy | none
+    compression: gzip        # gzip | zstd | none
     headers:
       authorization: "Bearer ${OTEL_TOKEN}"
 ```
@@ -554,12 +554,10 @@ service:
 
 ### Deduplication & Attribute Optimization
 - [Universal Attribute Deduplication (Issue #13785)](https://github.com/open-telemetry/opentelemetry-collector/issues/13785)
-- [Reducing Log Volume with the OTel Log Deduplication Processor](https://opentelemetry.io/blog/2026/log-deduplication-processor/)
 - [OTel Collector Configuration](https://opentelemetry.io/docs/collector/configuration/) -- Processor chain ordering
 
 ### Cost & Scale
 - [Strategies for Reducing Observability Costs with OpenTelemetry (Bindplane)](https://bindplane.com/blog/strategies-for-reducing-observability-costs-with-opentelemetry)
-- [How to Build a Cost-Effective Observability Platform with OpenTelemetry (OneUptime)](https://oneuptime.com/blog/post/2026-02-06-cost-effective-observability-platform-opentelemetry/view)
 - [Best Practices for Storing OTel Collector Data (ClickHouse)](https://clickhouse.com/resources/engineering/best-resources-storing-opentelemetry-collector-data)
 
 ---

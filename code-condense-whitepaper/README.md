@@ -24,7 +24,7 @@ Compression best practices for relational databases and key-value stores. Covers
 | [Prediction by Partial Matching](prediction-by-partial-matching.md) | PPM algorithm — context modeling, escape symbols, arithmetic coding; variants PPMC, PPMd, PPM*, PPM-Decay; open-source libraries across C, Python, Java, R |
 | [Repomix CLI Cheat Sheet](repomix-command-line-cheat-sheet.md) | Full CLI reference — output formats, file filtering, `--compress` lossy behavior, compression modes (Interface/Signature/Minimal), full `repomix.config.json` template |
 | [Zstandard Condense Report](zstd-condense-report.md) | zstd overview — benchmark tables vs brotli/zlib/lz4/snappy, dictionary training how-to, build systems (make/cmake/vcpkg/conan), language bindings across 30+ languages |
-| [HTTP Content Compression (RFC 8478)](http-content-compression.md) | Full text of RFC 8478 — Zstandard compression format specification, frame format, FSE and Huffman entropy encoding, IANA media type registration |
+| [HTTP Content Compression (RFC 8478 / RFC 8878)](http-content-compression.md) | RFC 8478 — IANA media type registration for `application/zstd`; RFC 8878 — Zstandard compression format specification, frame format, FSE and Huffman entropy encoding |
 
 ---
 

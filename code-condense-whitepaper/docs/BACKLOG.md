@@ -6,29 +6,39 @@ GenAI quality review identified factual errors and hallucinations across 8 markd
 
 ## P1 — Critical Errors (Publish Blockers)
 
-#### M1: Fix RFC 8478/8878 mismatch in README.md
+#### M1: Fix RFC 8478/8878 mismatch in README.md — Done
 **Priority**: P1 | **Source**: genai-quality-monitor review — otel_telemetry_data_compression.md
 The README describes `http-content-compression.md` as "RFC 8478 — Zstandard compression format specification, frame format, FSE and Huffman entropy encoding." However, RFC 8478 covers IANA media type registration for `application/zstd` (October 2018), not the binary format spec. The frame format/FSE/Huffman content belongs to RFC 8878 (the actual Zstandard format spec). Fix the file description or clarify the RFC numbering. -- `README.md:27`
 
-#### M2: Remove fabricated OTLP Specification 1.9.0
+**[DONE]** Updated README.md table entry to reference both RFC 8478 (media type registration) and RFC 8878 (format spec) with accurate descriptions.
+
+#### M2: Remove fabricated OTLP Specification 1.9.0 — Done
 **Priority**: P1 | **Source**: genai-quality-monitor review — otel_telemetry_data_compression.md
 Line 112 claims "OTLP Specification 1.9.0" but OTLP spec does not use this version format. Replace with a direct URL to the current spec without a fabricated version number. -- `otel_telemetry_data_compression.md:112`
 
-#### M3: Correct snappy-as-gRPC codec claim
+**[DONE]** Removed "1.9.0" version number; link now reads "OTLP Specification" pointing to current spec URL.
+
+#### M3: Correct snappy-as-gRPC codec claim — Done
 **Priority**: P1 | **Source**: genai-quality-monitor review — otel_telemetry_data_compression.md
 Lines 115 and 126 list `snappy` as a gRPC exporter compression option. Snappy is not a standard gRPC compression codec. Remove snappy from gRPC config examples; it applies only to Prometheus Remote Write v1. -- `otel_telemetry_data_compression.md:115,126`
 
-#### M4: Audit and remove 2026-dated blog citations
+**[DONE]** Removed `snappy` from all three compression option comments (spec note, gRPC exporter, HTTP exporter); added clarifying note that snappy applies to Prometheus Remote Write v1 only.
+
+#### M4: Audit and remove 2026-dated blog citations — Done
 **Priority**: P1 | **Source**: genai-quality-monitor review — otel_telemetry_data_compression.md
 Lines 557 and 562 cite blog posts from 2026 ("Reducing Log Volume with the OTel Log Deduplication Processor" and "OneUptime blog post 2026-02-06") that may be fabricated. Remove or replace with verifiable sources before publishing. -- `otel_telemetry_data_compression.md:557,562`
+
+**[DONE]** Removed both unverifiable 2026-dated citations from the references section.
 
 #### M5: Verify repomix CLI flag argument syntax
 **Priority**: P3 | **Source**: genai-quality-monitor review — repomix-command-line-cheat-sheet.md
 All three flags (`--no-files`, `--token-count-tree [threshold]`, `--split-output <size>`) confirmed real via `npx repomix --help`. Verify cheat sheet descriptions match actual help text — e.g., `--token-count-tree` accepts an optional threshold (not `[N]`), `--split-output` accepts sizes like `500kb`, `2mb`, `2.5mb`. Update cheat sheet wording to match CLI help exactly. -- `repomix-command-line-cheat-sheet.md:17,24,31`
 
-#### M6: Verify or remove ZIP method 98 PPM claim
+#### M6: Verify or remove ZIP method 98 PPM claim — Done
 **Priority**: P1 | **Source**: genai-quality-monitor review — prediction-by-partial-matching.md
 Line 20 claims "method 98 in the ZIP file format specification" for PPM compression. ZIP method 98 is not in the PKZIP Application Note or IANA ZIP registry. Verify against official sources (Info-ZIP, 7-Zip docs) and remove if unverifiable. -- `prediction-by-partial-matching.md:20`
+
+**[DONE]** Removed the unverifiable "method 98" claim; replaced with accurate statement that PPM is not a registered ZIP compression method.
 
 ---
 
@@ -115,6 +125,6 @@ Line 63 mentions `pass` placeholder as if universal. Qualify as Python-specific 
 
 ---
 
-**Summary**: 23 backlog items across quality tiers. P1 (6 items) blocks publication; fix before external sharing. P2 (5 items) high hallucination risk; verify before publishing. P3 (11 items) polish for professional appearance. P4 (1 item) nice-to-have.
+**Summary**: 23 backlog items across quality tiers. P1 (6 items, 5 done) blocks publication; fix before external sharing. P2 (5 items) high hallucination risk; verify before publishing. P3 (11 items) polish for professional appearance. P4 (1 item) nice-to-have.
 
 Total files affected: 8 markdown documents. Most critical: `otel_telemetry_data_compression.md` (4 P1 issues), `sql_kv_data_compression.md` (2 P1 + 3 P2 issues).

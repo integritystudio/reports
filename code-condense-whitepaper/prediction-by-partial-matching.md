@@ -17,7 +17,7 @@ Prediction by Partial Matching (PPM) is an adaptive statistical data compression
 
 ## Applications
 
-- **File Compression:** Used by default in RAR and available in 7z. Also defined as method 98 in the ZIP file format specification, though most ZIP archivers (WinZip, Info-ZIP) default to Deflate.
+- **File Compression:** Used by default in RAR and available in 7z. Most ZIP archivers (WinZip, Info-ZIP) default to Deflate; PPM is not a registered ZIP compression method in the PKZIP Application Note or IANA ZIP registry.
 - **Assistive Technology:** Powers Dasher, a gesture-based text-entry system for users with motor impairments.
 - **Web Prefetching:** Used to predict the next webpage a user might visit to reduce loading times.
 
