@@ -1106,7 +1106,7 @@ This approach is practical, deployable within existing LLM ecosystems, and groun
 
 [2] Schulman, J., Wolski, F., Dhariwal, P., Radford, A., & Klimov, O. (2017). "Proximal Policy Optimization Algorithms." arXiv:1707.06347. https://arxiv.org/abs/1707.06347
 
-[3] Gymnasium (Farama Foundation). "Gymnasium: A Maintained Fork of OpenAI Gym." https://gymnasium.farama.org/
+[3] Brockman, G., et al. (2016). "OpenAI Gym." — Historical reference; current implementation maintained by Farama Foundation at https://gymnasium.farama.org/
 
 [4] Stable Baselines3 Documentation. (2021). https://stable-baselines3.readthedocs.io/en/master/
 
