@@ -733,13 +733,13 @@ These targets are projections based on reward structure design. Validation requi
 
 2. **Schulman et al. (2017)**: "Proximal Policy Optimization Algorithms". arXiv:1707.06347
 
-3. **Stable Baselines3 (2021)**: https://stable-baselines3.readthedocs.io/
+3. **Stable Baselines3 (2021)**: https://stable-baselines3.readthedocs.io/en/master/
 
 4. **Gymnasium (Farama Foundation)**: Fork of OpenAI Gym, maintained by Farama Foundation. https://gymnasium.farama.org/
 
 5. **OpenTelemetry (CNCF)**: https://opentelemetry.io/docs/
 
-6. **Pufferlib (Suarez, J., et al., 2024)**: Vectorized multi-agent reinforcement learning library. https://github.com/jsuarez5341/pufferlib
+6. **Pufferlib (Suarez, J., et al., 2024)**: Vectorized multi-agent reinforcement learning library. https://pypi.org/project/pufferlib/
 
 ---
 

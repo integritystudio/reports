@@ -1020,13 +1020,13 @@ This approach is practical, deployable within existing LLM ecosystems, and groun
 
 [3] Brockman, G., Cheung, V., Petersen, L., Schneider, J., Schulman, J., Tang, J., & Zaremba, W. (2016). "OpenAI Gym." arXiv:1606.01540.
 
-[4] Stable Baselines3 Documentation. (2021). https://stable-baselines3.readthedocs.io/
+[4] Stable Baselines3 Documentation. (2021). https://stable-baselines3.readthedocs.io/en/master/
 
 [5] OpenTelemetry Specification. (2023). https://opentelemetry.io/docs/reference/specification/
 
 [6] Amodei, D., Olah, C., Steinhardt, J., Christiano, P., Schulman, J., & Mané, D. (2016). "Concrete Problems in AI Safety." arXiv:1606.06565.
 
-[7] Suarez, J., et al. (2024). "Pufferlib: Vectorized Multi-Agent Reinforcement Learning." GitHub: https://github.com/jsuarez5341/pufferlib
+[7] Suarez, J., et al. (2024). "Pufferlib: Vectorized Multi-Agent Reinforcement Learning." PyPI: https://pypi.org/project/pufferlib/
 
 ---
 
