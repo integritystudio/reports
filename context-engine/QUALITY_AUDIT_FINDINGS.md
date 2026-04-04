@@ -6,12 +6,13 @@
 1. `AGENTIC_SELF_OPTIMIZATION_ARCHITECTURE.md` (26 KB)
 2. `SELF_OPTIMIZING_AGENTS_WHITEPAPER.md` (37 KB)
 
-**Overall Status**: **V1.1 - Publication-Grade** (P1, P2, P3 complete; all 14 findings + 2 hallucination-checker corrections resolved with external source verification)
+**Overall Status**: **V1.1 - REQUIRES RE-VERIFICATION** (P1, P2 complete; P3 has 3 complete + 1 fabrication discovered and fixed; 14 original findings + 3 post-audit fabrications identified and corrected)
 
-⚠️ **Critical Post-Audit Corrections** (hallucination-checker 2026-04-03):
-- **Fabricated Ratio 1**: "2-3× higher churn rates" — NOT in Popescu et al. (2026) — Replaced with verified Figure 9, §4.2 data: Claude Code median 0.8–1.0 vs. human 0–0.4
-- **Fabricated Ratio 2**: "40-60% lower survival rates" — NOT in Popescu et al. (2026) — Replaced with verified Figure 8, §4.2 effect sizes: Cliff's δ = −0.05 to −0.14
-- **Status**: Both false claims removed from all 4 document copies (source + Jekyll) (commit 843b793 + 82b6a414)
+⚠️ **Critical Post-Audit Corrections** (hallucination-checker 2026-04-03 + V-03 verification 2026-04-03):
+- **Fabricated Ratio 1**: "2-3× higher churn rates" — NOT in Popescu et al. (2026) — Replaced with verified Figure 9, §4.2 data: Claude Code median 0.8–1.0 vs. human 0–0.4 (commit 843b793)
+- **Fabricated Ratio 2**: "40-60% lower survival rates" — NOT in Popescu et al. (2026) — Replaced with verified Figure 8, §4.2 effect sizes: Cliff's δ = −0.05 to −0.14 (commit 843b793)
+- **Fabricated Data 3 (V-03)**: "~960× spread; Devin median 8 hours" — NOT in Popescu et al. (2026); Devin not mentioned for merge times, ratio not cited — Replaced with verified Figure 6, §4.1.3 data: Codex 0.5 min vs. human 0.4 hours (low-star) or ~10 hours (high-star) (commit 006c7ce)
+- **Status**: All 3 fabrications removed from all 4 document copies (source + Jekyll)
 
 ---
 
@@ -42,8 +43,8 @@ Two independent audits identified **14 distinct vulnerabilities** across the fra
 - ✅ **V-08 (Git blame multiset)**: FIXED — Already uses Counter() instead of set() in whitepaper
 - ✅ **V-12 (OTEL span model)**: FIXED — Already uses linked spans instead of parent-child in both documents
 
-**🎯 Priority 3 Complete** (4/4 items fixed):
-- ✅ **V-03 (Merge time variance)**: FIXED — Confirmed "spread" terminology with proper "median" statistical qualifiers (Codex median 0.5 min vs. Devin median 8 hours; Architecture line 31, Whitepaper line 31)
+**🎯 Priority 3 Status** (3/4 complete; 1 fabrication discovered):
+- ⚠️ **V-03 (Merge time variance)**: FABRICATION DISCOVERED — Claim "~960× spread (Codex 0.5 min vs. Devin 8 hours)" is NOT in Popescu et al. (2026); Devin's merge time not mentioned in paper, 960× ratio not cited anywhere. FIXED: Replaced with verified claim "Codex median 0.5 min vs. human 0.4 hours (low-star) or ~10 hours (high-star); Figure 6, §4.1.3" (commit 006c7ce)
 - ✅ **V-11 (Gymnasium citation)**: FIXED — Both Architecture (line 752) and Whitepaper (line 1109) cite Gymnasium/Farama Foundation consistently
 - ✅ **V-13 (Repository concentration)**: FIXED — Verified against Popescu et al. Table 4 (§4.1.1 Pull Request and Repositories Characteristics): Codex 75.3%, Claude Code 51.7%, Copilot 59.6%, Devin 64.1%; human PRs 40.5% in 0-star repos.
 - ✅ **V-14 (Dataset size anchor)**: FIXED — Verified against published Popescu et al. (2026) §3.2: "The resulting dataset includes 111,969 PRs contributed by both agents and humans." Anchor added to all document instances.
@@ -61,11 +62,14 @@ Two independent audits identified **14 distinct vulnerabilities** across the fra
   - Source anchor "N=111,969 per §3.2 Methodology" added to Whitepaper lines 99, 126
 - **Audit findings status**:
   - ✅ P1 (5 items) and P2 (5 items): Complete (10/10) → v1.0 (implementation-ready)
-  - ✅ P3 (4 items): Complete (4/4) → V-03, V-11, V-13, V-14 all FIXED
+  - ⚠️ P3 (4 items): 3 complete (V-11, V-13, V-14); 1 fabrication discovered in V-03 but corrected
 
 **Recommendation**: 
-- ✅ **All 14 findings resolved** (P1, P2, P3 complete + 2 hallucination-checker corrections)
-- ✅ Framework **ready for publication** (**v1.1 Publication-Grade**)
+- ⚠️ **14 original findings resolved; 3 post-audit fabrications discovered and corrected**
+- 🔄 **Framework status downgraded to V1.1-VERIFICATION-REQUIRED**
+  - All claims now verified against Popescu et al. (2026) source material
+  - Recommend: Full hallucination audit pass on corrected documents before publication
+  - Recommend: Run hallucination-checker on complete final version
 - ✅ All empirical claims verified and anchored to Popescu et al. (2026) figures, tables, and sections
 
 ---
@@ -194,12 +198,15 @@ via independent replication."
 **Location**: Architecture §1.2, Whitepaper §1.3
 
 **Finding**:
-Both documents cite: "1000x spread (Codex 0.5min vs. Devin 8+ hours)"
+Original documents cited: "1000x spread (Codex 0.5min vs. Devin 8+ hours)"
 
-**Problems**:
-1. **Precision Rounding**: 0.5 minutes to 8 hours = (8×60)/0.5 = 960×, rounded to 1000×. The rounding to a round number is a common rhetorical move that introduces imprecision.
-2. **Terminology Misuse**: "Variance" is a specific statistical term (σ²). The documents use it colloquially to mean "spread" or "range." A 960× range is not the same as "1000× variance."
-3. **Missing Qualifiers**: Are 0.5 minutes and 8 hours the median, mean, min, or max values? The documents do not specify.
+**Problems** (UPDATED 2026-04-03 — Source Verification):
+1. **FABRICATION DISCOVERED**: "Devin 8+ hours" — Devin's merge time is NOT mentioned in Popescu et al. (2026). Only Codex (0.5 min) vs. human (0.4 hours in low-star, ~10 hours in high-star) are discussed.
+2. **FABRICATION DISCOVERED**: "~960×" or "1000×" ratio — This specific ratio is NOT in the source paper. Devin is not discussed in the merge time section at all.
+3. **ORIGINAL ISSUES** (if claim were valid):
+   - Precision Rounding: 0.5 min to 8 hours = 960×, rounded to 1000×
+   - Terminology Misuse: "Variance" (statistical σ²) vs. "spread" (correct term)
+   - Missing Qualifiers: Median/mean/min/max not specified
 
 **Risk**:
 - Readers may cite "1000x" as a precise finding; when challenged, the imprecision undermines credibility
@@ -211,24 +218,24 @@ Both documents cite: "1000x spread (Codex 0.5min vs. Devin 8+ hours)"
 - Affects the introduction's narrative impact (impressive statistic)
 - Low technical impact (the exact ratio is not used in calculations)
 
-**Remediation**:
+**Remediation** (COMPLETED 2026-04-03 — Commit 006c7ce):
 
-**Option A** (Specify):
+**Action Taken**: Removed fabricated claim and replaced with verified data from Popescu et al. (2026) Figure 6, §4.1.3:
+
+**Old (Fabricated)**:
 ```
-"Merge times vary dramatically across agent platforms. Codex median 
-merge time is reported as 0.5 minutes; Devin's median is 8+ hours 
-(approximately 960× difference, or ~1000:1 ratio). This variance 
-reflects differences in code clarity, review friction, and repository 
-characteristics (Popescu et al., 2026, §Results)."
+"~960× spread in merge times across agent platforms (Codex median 0.5 min vs. Devin median 8 hours)"
 ```
 
-**Option B** (Verify and Correct):
-1. Find the exact merge time statistics in the paper
-2. Confirm they are medians (not extremes)
-3. If available, include confidence intervals: "Codex median merge time: 0.5 min [95% CI: 0.3–0.8]"
-4. Replace "variance" with "spread" or "range"
+**New (Verified)**:
+```
+"Faster merge velocity: Codex median 0.5 min vs. human median 0.4 hours in low-star repos; 
+human PRs ~10 hours in high-star repos (Figure 6, §4.1.3 Pull Request Merges)"
+```
 
-**Priority**: P2 (narrative clarity; not blocking implementation)
+**Status**: ✅ FIXED — Fabricated Devin claim removed; replaced with paper's actual human merge time data stratified by repository popularity.
+
+**Priority**: P3 (publication accuracy; fabrication risk)
 
 ---
 
