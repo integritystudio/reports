@@ -40,7 +40,7 @@ Two independent audits identified **14 distinct vulnerabilities** across the fra
 **🎯 Priority 3 Status** (4 items addressed; 2 complete, 2 partially complete):
 - ✅ **V-03 (Merge time variance)**: PARTIALLY FIXED — Confirmed "spread" terminology; missing statistical qualifiers (median vs. mean vs. min/max) not added
 - ✅ **V-11 (Gymnasium citation)**: FIXED — Both Architecture (line 752) and Whitepaper (line 1109) cite Gymnasium/Farama Foundation consistently
-- ⚠️ **V-13 (Repository concentration)**: PARTIALLY FIXED — Documents contain per-platform breakdown (Claude Code ~55%, Devin ~72%, Codex ~51%); however, these numbers contradict the remediation template (Codex ~60%, Claude Code ~68%, Devin ~76%) and neither set is sourced to Popescu et al. Requires verification against source paper.
+- ⚠️ **V-13 (Repository concentration)**: PARTIALLY FIXED — Updated documents with per-platform breakdown from remediation template (Codex ~60%, Claude Code ~68%, Devin ~76%, Copilot ~51%). **NOTE**: These numbers originate from the audit remediation template, not directly quoted from Popescu et al. Requires verification against published source paper (§2.1 Study Design) before final publication.
 - ⚠️ **V-14 (Dataset size anchor)**: PARTIALLY FIXED — Added self-referential anchor (N=111,969 per §3.2); does not constitute external verification as noted in original finding. Requires confirmation against published Popescu et al. paper.
 
 **Verification Results**:
