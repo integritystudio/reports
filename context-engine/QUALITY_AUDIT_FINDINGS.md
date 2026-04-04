@@ -6,7 +6,12 @@
 1. `AGENTIC_SELF_OPTIMIZATION_ARCHITECTURE.md` (26 KB)
 2. `SELF_OPTIMIZING_AGENTS_WHITEPAPER.md` (37 KB)
 
-**Overall Status**: **V1.1 - Publication-Grade** (P1, P2, P3 complete; all 14 findings resolved with external source verification)
+**Overall Status**: **V1.1 - Publication-Grade** (P1, P2, P3 complete; all 14 findings + 2 hallucination-checker corrections resolved with external source verification)
+
+⚠️ **Critical Post-Audit Corrections** (hallucination-checker 2026-04-03):
+- **Fabricated Ratio 1**: "2-3× higher churn rates" — NOT in Popescu et al. (2026) — Replaced with verified Figure 9, §4.2 data: Claude Code median 0.8–1.0 vs. human 0–0.4
+- **Fabricated Ratio 2**: "40-60% lower survival rates" — NOT in Popescu et al. (2026) — Replaced with verified Figure 8, §4.2 effect sizes: Cliff's δ = −0.05 to −0.14
+- **Status**: Both false claims removed from all 4 document copies (source + Jekyll) (commit 843b793 + 82b6a414)
 
 ---
 
