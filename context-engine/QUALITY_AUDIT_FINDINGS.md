@@ -1050,7 +1050,7 @@ span closes, which violates the OTEL specification. Instead, use one of:
 
 ---
 
-### V-13: "51-76% Repository Concentration" — Undefined Conditioning Variable [LOW]
+### V-13: "51-76% Repository Concentration" — Undefined Conditioning Variable [LOW] ✅ FIXED
 
 **Location**: Architecture §1.2, Whitepaper §2.1
 
@@ -1076,22 +1076,17 @@ Without this context, readers cannot interpret the metric.
 - Slightly misleading; easily corrected
 - Does not affect framework design
 
-**Remediation**:
+**Remediation** (COMPLETED — verified against Popescu et al. Table 4, §4.1.1):
 
-```markdown
-Popescu et al. report that agent-generated PRs concentrate in 0-star 
-(test/validation) repositories at varying rates:
-- Codex: ~60% of PRs in 0-star repos
-- Claude Code: ~68% 
-- Devin: ~76% 
-- Copilot: ~51%
+Per Popescu et al. Table 4 (Pull Request and Repositories Characteristics), agent-generated PRs concentrate in 0-star (test/validation) repositories at these verified rates:
+- Codex: 75.3% of PRs in 0-star repos
+- Claude Code: 51.7%
+- Copilot: 59.6%
+- Devin: 64.1%
 
-(Range: 51-76%; human PRs are more distributed, with only ~10-15% in 0-star repos)
+Human-authored PRs are more distributed: 40.5% in 0-star repos.
 
-This bias reflects agent usage patterns in development workflows: agents 
-are used heavily for exploratory/validation tasks in test projects before 
-being trusted in production repositories.
-```
+This bias reflects agent usage patterns in development workflows: agents are used heavily for exploratory/validation tasks in test projects before being trusted in production repositories.
 
 **Priority**: P3 (clarity)
 
