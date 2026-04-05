@@ -52,7 +52,7 @@ Agent-generated code exhibits distinct failure modes:
 | **Deletion Rate** | % lines deleted | Same windows | Code rejection signal |
 | **Merge Rate** | % PRs merged | Immediate | Code review quality |
 | **Merge Time** | Hours to merge | Immediate | Review friction / urgency |
-| **Change Size** | Median lines added | Per PR | Scope complexity |
+| **Change Size** | Lines added + lines removed (per Popescu et al. §3.2) | Per PR | Scope complexity |
 | **Review Comments** | Count per PR | Pre-merge | Code clarity issues |
 | **Review Count** | Number of reviewers | Pre-merge | Review thoroughness |
 
@@ -132,7 +132,7 @@ code.quality.churn_21d
 code.quality.deletion_21d
 code.quality.merge_rate       # Float [0.0, 1.0]
 code.quality.merge_time_hours # Float >= 0
-code.quality.change_size_lines # Int >= 0
+code.quality.change_size_lines # Int >= 0; lines_added + lines_removed (Popescu et al. §3.2)
 code.quality.review_comments   # Int >= 0
 code.quality.review_count      # Int >= 0
 ```
@@ -174,32 +174,36 @@ repository.name     # GitHub repo name
 
 **State** (observation):
 ```python
-observation = {
-    "task_description": str,           # Task prompt
-    "context_files": List[str],        # Code to refactor/modify
-    "recent_agent_history": List[{     # Past agent actions in this repo
-        "survival_21d": float,
-        "churn_7d": float,
-        "merge_time": float,
-        "change_size": int,
-    }],
-    "repository_profile": {            # Repo characteristics
-        "star_count": int,
-        "team_size": int,
-        "language": str,
-        "avg_pr_size": int,
-    },
-}
+# Gymnasium-compatible observation space using spaces.Box encoding.
+# Text inputs (task_description, context_files) are pre-tokenized to integer arrays
+# for SB3 MlpPolicy compatibility. See Whitepaper §4.1 for full CodeQualityEnv implementation.
+observation_space = spaces.Dict({
+    "task_description": spaces.Box(
+        low=0, high=50257, shape=(128,), dtype=np.int32
+    ),  # Tokenized task prompt (GPT-2 vocab, truncated to 128 tokens)
+    "context_files": spaces.Box(
+        low=0, high=50257, shape=(8, 256), dtype=np.int32
+    ),  # 8 context snippets, 256 tokens each
+    "recent_survival_21d": spaces.Box(
+        low=0.0, high=1.0, shape=(10,), dtype=np.float32
+    ),  # Last 10 survival outcomes for this skill
+    "repo_star_count": spaces.Box(low=0, high=1_000_000, shape=(1,), dtype=np.int32),
+    "repo_team_size": spaces.Box(low=1, high=1000, shape=(1,), dtype=np.int32),
+    "dominant_language": spaces.Discrete(20),  # Python, JS, Go, Rust, etc.
+})
 ```
 
 **Action**:
 ```python
-action = {
-    "code": str,                       # Generated code
-    "scope_confidence": float,         # Agent's confidence in change scope
-    "test_coverage": float,            # % new code with tests
-    "refactor_depth": int,             # 1=minimal, 5=comprehensive
-}
+# Action space: tokenized code output + quality parameters
+action_space = spaces.Dict({
+    "code": spaces.Box(
+        low=0, high=50257, shape=(512,), dtype=np.int32
+    ),  # Generated code tokens (GPT-2 vocab, max 512 tokens)
+    "scope_confidence": spaces.Box(low=0.0, high=1.0, shape=(1,), dtype=np.float32),
+    "test_coverage": spaces.Box(low=0.0, high=1.0, shape=(1,), dtype=np.float32),
+    "refactor_depth": spaces.Discrete(5),  # 1=minimal, 5=comprehensive
+})
 ```
 
 **Reward Function** (multi-objective):
@@ -719,25 +723,60 @@ increase(rl_policy_training_total[1w])
 
 ## 11. Success Metrics
 
-### Primary (21-day outcomes) — Hypothesis-Level Projections
+### Core Assumption: Code Quality is RL-Trainable
 
-These targets are projections based on reward structure design. Validation requires Phase 1 pilot implementation with controlled rollout and empirical measurement. See Whitepaper §9 for full qualification.
+**Statement**: Agents can learn to generate higher-quality code through RL feedback signals based on 21-day post-merge survival metrics.
 
-- **Survival Rate @ 21d**: Hypothesis Target ≥ 85% (baseline: agent 75-78%, human ~90%)
-- **Churn Rate @ 21d**: Hypothesis Target ≤ 10% (baseline: agent 15-18%, human ~5%)
-- **Agent-to-Human Code Quality Ratio**: Hypothesis Target ≥ 0.90
-  - Computed as: `min(survival_agent / survival_human, (1 - churn_agent) / (1 - churn_human))`
-  - Current baseline ratio: ~0.83-0.87 (agent 75-81% survival vs. human 90%)
+**Evidence Level**: None. This is the core innovation being tested. All targets below are contingent on this assumption holding. See Whitepaper §9 for full qualification.
+
+---
+
+### Conditional Targets (if training succeeds)
+
+#### Conservative Target (7-month horizon)
+
+| Metric | Baseline | Target | Improvement |
+|--------|----------|--------|-------------|
+| Survival Rate @ 21d | 75-78% | 80-82% | +2-4pp |
+| Churn Rate @ 21d | 15-18% | 13-15% | -2-3pp |
+| Agent:Human Ratio | 0.84-0.87 | 0.90 | +6pp |
+
+#### Optimistic Target (8-month horizon)
+
+| Metric | Baseline | Target | Improvement |
+|--------|----------|--------|-------------|
+| Survival Rate @ 21d | 75-78% | 83-85% | +5-7pp |
+| Churn Rate @ 21d | 15-18% | 11-13% | -4-6pp |
+| Agent:Human Ratio | 0.84-0.87 | 0.92 | +8pp |
+
+#### Stretch Target (12-month horizon)
+
+| Metric | Baseline | Target | Improvement |
+|--------|----------|--------|-------------|
+| Survival Rate @ 21d | 75-78% | 87-90% | +10-12pp |
+| Churn Rate @ 21d | 15-18% | 8-10% | -7-9pp |
+| Agent:Human Ratio | 0.84-0.87 | 0.95 | +11pp |
+
+**Recommended Initial Target**: 80% survival at Month 6 (conservative scenario). See Whitepaper §9 for contingency plan.
+
+**Critical Note**: No projections beyond Month 8 without additional validation data. All targets contingent on Phase 1-3 milestones.
 
 ### Secondary (user experience)
-- **Merge Rate**: Target ≥ 90% (code passes review)
-- **Merge Time**: Target ≤ 4 hours median
-- **Review Comments**: Target ≤ 2 per PR (clarity proxy)
+
+| Metric | Baseline | Target | Rationale |
+|--------|----------|--------|-----------|
+| Merge Rate (% merged) | 72-87% | ≥90% | Adoption friction; stabilizes if quality improves |
+| Merge Time (hours) | 2-8 | ≤5 (median) | Proxy for review confidence |
+| Review Comments/PR | 3-4 | ≤2.5 | Reduced rework cycles |
 
 ### Tertiary (system health)
-- **Policy Update Frequency**: ≥ 1 per week
-- **Canary Rollback Rate**: ≤ 5% (stability)
-- **Value Function Calibration Error**: ≤ 10%
+
+| Metric | Target | Purpose |
+|--------|--------|---------|
+| Training Success Rate | ≥95% (weekly) | Reward loop stability |
+| Policy Update Frequency | ≥1 per week | Iterative improvement |
+| Canary Rollback Rate | ≤5% | Safety gate: revert if >3pp drop |
+| Value Function Calibration Error | ≤10% | Reward signal quality |
 
 ---
 

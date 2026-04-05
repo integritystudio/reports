@@ -105,7 +105,7 @@ Popescu et al. (2026) analyzed 110,000+ pull requests (N=111,969 per §3.2 Metho
 - Deletion rate: % of lines deleted
 - Merge rate: % of PRs successfully merged
 - Merge time: Hours to merge
-- Change size: Median lines added per PR
+- Change size: Lines added + lines removed per PR (per Popescu et al. §3.2)
 
 **Cohort Characteristics**:
 - **Agent-heavy repos**: Agent PRs concentrate in 0-star/test repos (Codex 75.3%, Claude Code 51.7%, Copilot 59.6%, Devin 64.1%; Popescu et al. Table 4, §4.1.1). Human PRs more distributed (40.5% in 0-star repos).
@@ -189,7 +189,7 @@ Span: code-generation
   ├─ Event: code-submitted
   │   timestamp: 2026-04-03T10:15:45Z
   │   attributes:
-  │     code_lines: 127
+  │     change_size_lines: 127
   │
   ├─ Child Span: code-review (async)
   │   start: 2026-04-03T10:16:00Z
@@ -571,7 +571,7 @@ def compute_reward_at_21d(
     
     # Shape reward: penalize oversized changes
     # (Popescu et al.: larger changes don't improve survival)
-    change_size = action["code_lines"]
+    change_size = action["change_size_lines"]
     scope_penalty = min(change_size / 1000, 1.0) * -20  # [0, -20]
     
     # Intrinsic bonus for completing the task
@@ -828,7 +828,7 @@ def detect_reward_hacking():
             trigger_code_review(batch)
     
     # Red flag 2: Policy selecting extreme actions
-    if policy.select_action(obs)["code_lines"] > 2 * baseline_change_size:
+    if policy.select_action(obs)["change_size_lines"] > 2 * baseline_change_size:
         log_alert("large-change-anomaly")
         trigger_code_inspection()
     
