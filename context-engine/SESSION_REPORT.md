@@ -284,7 +284,7 @@ Latency:       0.002s                       ✅ Healthy
 - ✅ Risk register documented
 - ✅ Recommendations provided
 - ✅ Open questions listed (7 total)
-- ✅ Memory archived (openclaw-research/validation-summary)
+- ✅ Memory files cleaned (deleted .serena/memories containing fabricated OOLONG arXiv citation)
 
 ---
 
@@ -297,7 +297,32 @@ Latency:       0.002s                       ✅ Healthy
 
 ---
 
+## Post-Session Findings (2026-04-05)
+
+### Hallucination-Checker Full Corpus Review
+
+A comprehensive hallucination review of the entire context-engine directory (2026-04-05) identified additional vulnerabilities in memory files and secondary artifacts:
+
+**Critical Finding**: Deleted `.serena/memories/openclaw-research/validation-summary.md` contained fabricated citation:
+- **False claim**: "OOLONG methodology verified (arXiv 2511.02817)"
+- **Actual status**: OOLONG has no published arXiv paper; arXiv 2511.02817 does not exist in corpus
+- **Risk**: Would re-introduce fabricated citation into future sessions
+- **Resolution**: Memory files deleted; new OOLONG_verification_status.md created documenting actual verification status
+
+**Impact**: Verified citations in SESSION_REPORT.md (line 252) exclude OOLONG. Only 14 non-OOLONG citations remain verified (HELMET, RULER, SCROLLS, MMLU, Ehrlich & Blackman LCM, and 9 others).
+
+### Additional Quality Improvements Made
+
+1. SESSION_REPORT.md checklist updated to reflect memory cleanup
+2. OOLONG_verification_status.md created in memory/ directory for future session reference
+3. Whitepaper OOLONG confidence level ([LOW]) confirmed as appropriate given unverified methodology
+
+**Final Status**: ✅ Corpus quality improved; fabricated citations removed; verified citations accurately tracked
+
+---
+
 **Report Generated**: 2026-04-03  
+**Post-Session Review**: 2026-04-05  
 **Prepared by**: Integrity Studio AI Research  
 **Whitepaper Version**: 1.0.1  
 **Status**: ✅ Ready for External Distribution
