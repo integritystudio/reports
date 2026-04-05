@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .bg { fill: #121826; }
+      .w1 { fill: #6366F1; }
+      .w2 { fill: #38BDF8; }
+      .w3 { fill: #22C55E; }
+      .w4 { fill: #FB923C; }
+      .edge { stroke: rgba(255,255,255,0.8); stroke-width: 2; fill: none; }
+      .node { fill: #ffffff; }
+    </style>
+  </defs>
+
+  <!-- background -->
+  <circle cx="32" cy="32" r="30" class="bg"/>
+
+  <!-- wedges -->
+  <path d="M32 32 L32 4 A28 28 0 0 1 60 32 Z" class="w1"/>
+  <path d="M32 32 L60 32 A28 28 0 0 1 32 60 Z" class="w2"/>
+  <path d="M32 32 L32 60 A28 28 0 0 1 4 32 Z" class="w3"/>
+  <path d="M32 32 L4 32 A28 28 0 0 1 32 4 Z" class="w4"/>
+
+  <!-- inner circle -->
+  <circle cx="32" cy="32" r="10" class="bg"/>
+
+  <!-- graph edges -->
+  <path d="M32 12 L52 32 L32 52 L12 32 Z" class="edge"/>
+
+  <!-- nodes -->
+  <circle cx="32" cy="12" r="2.5" class="node"/>
+  <circle cx="52" cy="32" r="2.5" class="node"/>
+  <circle cx="32" cy="52" r="2.5" class="node"/>
+  <circle cx="12" cy="32" r="2.5" class="node"/>
+  <circle cx="32" cy="32" r="3" class="node"/>
+</svg>
