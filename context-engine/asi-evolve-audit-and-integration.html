@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolutionary Program Search Meets Production Agentic Systems: Auditing ASI-Evolve Against Anthropic Best Practices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/report-base.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>Evolutionary Program Search Meets Production Agentic Systems</h1>
+        <p>Auditing ASI-Evolve Against Anthropic Best Practices and Integrating with RL-Based Self-Optimization</p>
+        <div class="header-meta">
+            <span>April 5, 2026</span>
+            <span>Integrity Studio AI Research</span>
+            <span>Version 1.0 &mdash; Technical Whitepaper</span>
+        </div>
+    </header>
+    <div class="container">
+        <aside>
+            <nav class="toc">
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#abstract">Abstract</a></li>
+                    <li><a href="#confidence-level-key">Confidence Level Key</a></li>
+                    <li>
+                        <a href="#introduction">1. Introduction</a>
+                        <ul>
+                            <li><a href="#convergence-evolutionary-agentic-ai">1.1 The Convergence of Evolutionary and Agentic AI</a></li>
+                            <li><a href="#the-production-gap">1.2 The Production Gap</a></li>
+                            <li><a href="#relationship-to-prior-work">1.3 Relationship to Prior Work</a></li>
+                            <li><a href="#document-structure">1.4 Document Structure</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#asi-evolve-framework-analysis">2. ASI-Evolve Framework Analysis</a>
+                        <ul>
+                            <li><a href="#component-decomposition">2.1 Component Decomposition</a></li>
+                            <li><a href="#evolutionary-loop-closed-loop-control">2.2 The Evolutionary Loop as Closed-Loop Control</a></li>
+                            <li><a href="#sampling-policies-exploration-strategies">2.3 Sampling Policies as Exploration Strategies</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#systematic-audit">3. Systematic Audit Against Anthropic Best Practices</a>
+                        <ul>
+                            <li><a href="#dimension-a-architectural-patterns">3.1 Dimension A: Architectural Patterns</a></li>
+                            <li><a href="#dimension-b-tool-design">3.2 Dimension B: Tool Design</a></li>
+                            <li><a href="#dimension-c-context-engineering">3.3 Dimension C: Context Engineering</a></li>
+                            <li><a href="#dimension-d-safety">3.4 Dimension D: Safety</a></li>
+                            <li><a href="#dimension-e-evaluation">3.5 Dimension E: Evaluation</a></li>
+                            <li><a href="#dimension-f-long-running-agent-design">3.6 Dimension F: Long-Running Agent Design</a></li>
+                            <li><a href="#dimension-g-rate-limits-efficiency">3.7 Dimension G: Rate Limits and Efficiency</a></li>
+                            <li><a href="#audit-summary">3.8 Audit Summary</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#integration-architecture">4. Integration Architecture</a>
+                        <ul>
+                            <li><a href="#researcher-as-orchestrator-workers">4.1 Researcher as Orchestrator-Workers</a></li>
+                            <li><a href="#engineer-as-tool-use-execution-sandboxing">4.2 Engineer as Tool Use + Execution Sandboxing</a></li>
+                            <li><a href="#analyzer-as-evaluator-optimizer">4.3 Analyzer as Evaluator-Optimizer</a></li>
+                            <li><a href="#cognition-base-as-context-engineering-rag">4.4 Cognition Base as Context Engineering + RAG</a></li>
+                            <li><a href="#database-as-structured-state-persistence">4.5 Database as Structured State Persistence</a></li>
+                            <li><a href="#integration-diagram">4.6 Integration Diagram</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#bridging-evolutionary-search-and-rl">5. Bridging Evolutionary Search and RL Self-Optimization</a>
+                        <ul>
+                            <li><a href="#survival-metrics-as-fitness-functions">5.1 Survival Metrics as Fitness Functions</a></li>
+                            <li><a href="#hybrid-architecture-rl-evolution">5.2 Hybrid Architecture: RL + Evolution</a></li>
+                            <li><a href="#three-tier-fitness">5.3 Three-Tier Fitness</a></li>
+                            <li><a href="#otel-instrumentation-evolutionary-loop">5.4 OTEL Instrumentation for the Evolutionary Loop</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#safety-and-governance">6. Safety and Governance</a>
+                        <ul>
+                            <li><a href="#human-control">6.1 Human Control</a></li>
+                            <li><a href="#transparency">6.2 Transparency</a></li>
+                            <li><a href="#value-alignment">6.3 Value Alignment</a></li>
+                            <li><a href="#privacy">6.4 Privacy</a></li>
+                            <li><a href="#security-against-manipulation">6.5 Security Against Manipulation</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#implementation-roadmap">7. Implementation Roadmap</a>
+                        <ul>
+                            <li><a href="#phase-1-foundation">7.1 Phase 1: Foundation (Weeks 1&ndash;4)</a></li>
+                            <li><a href="#phase-2-integration">7.2 Phase 2: Integration (Weeks 5&ndash;8)</a></li>
+                            <li><a href="#phase-3-hybrid-rl-evolution">7.3 Phase 3: Hybrid RL+Evolution (Weeks 9&ndash;12)</a></li>
+                            <li><a href="#phase-4-production-deployment">7.4 Phase 4: Production Deployment (Weeks 13&ndash;16)</a></li>
+                            <li><a href="#success-criteria">7.5 Success Criteria</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#risks-and-mitigations">8. Risks and Mitigations</a></li>
+                    <li><a href="#open-questions">9. Open Questions</a></li>
+                    <li><a href="#conclusion">10. Conclusion</a></li>
+                    <li><a href="#references">References</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main id="main">
+
+            <!-- Abstract -->
+            <section id="abstract">
+                <h2>Abstract</h2>
+                <p>ASI-Evolve (Xu et al., 2026) introduces a learn-design-experiment-analyze cycle for autonomous AI research, demonstrating state-of-the-art results across neural architecture design, pretraining data curation, and reinforcement learning algorithm discovery. However, translating research-grade evolutionary frameworks into production agentic systems requires systematic alignment with established deployment best practices. This whitepaper conducts a structured audit of ASI-Evolve&rsquo;s five core components (Researcher, Engineer, Analyzer, Cognition Base, Database) against seven dimensions of Anthropic&rsquo;s 2026 agentic system guidelines, producing a 35-cell compliance matrix with STRONG/PARTIAL/WEAK/MISSING ratings. We identify three critical alignment strengths (closed-loop evaluation, principled exploration via UCB1/MAP-Elites, domain-adaptive context engineering) and three critical gaps (absent human oversight, missing meta-evaluation, no checkpoint-resume capability). We then propose an integration architecture mapping ASI-Evolve components to Claude production patterns, design a hybrid RL+Evolution pipeline that uses Popescu et al. (2026) code survival metrics as evolutionary fitness signals, and specify safety governance for self-improving systems grounded in Anthropic&rsquo;s five safety principles. This document extends the RL-based self-optimization framework established in our prior whitepapers (Integrity Studio, 2026a, 2026b) by introducing evolutionary program search as a complementary optimization paradigm.</p>
+                <p><strong>Keywords</strong>: Evolutionary Search, Agentic Systems, Best Practice Audit, Claude API, Self-Optimization, OpenTelemetry, Reinforcement Learning, Safety Governance</p>
+            </section>
+
+            <!-- Confidence Level Key -->
+            <section id="confidence-level-key">
+                <h2>Confidence Level Key</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Level</th>
+                            <th>Indicator</th>
+                            <th>Criteria</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>High</td>
+                            <td><strong>[HIGH]</strong></td>
+                            <td>Independently verifiable; reproducible; multiple corroborating sources</td>
+                        </tr>
+                        <tr>
+                            <td>Medium</td>
+                            <td><strong>[MED]</strong></td>
+                            <td>Partially verifiable; relies on limited external evidence or single source</td>
+                        </tr>
+                        <tr>
+                            <td>Low</td>
+                            <td><strong>[LOW]</strong></td>
+                            <td>Unverifiable from public record; self-reported only; requires further investigation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- 1. Introduction -->
+            <section id="introduction">
+                <h2>1. Introduction</h2>
+
+                <h3 id="convergence-evolutionary-agentic-ai">1.1 The Convergence of Evolutionary and Agentic AI</h3>
+                <p>The landscape of autonomous AI research has bifurcated into two paradigms. The first, exemplified by production agentic systems like Claude Code and GitHub Copilot, deploys LLM-based agents for well-scoped software engineering tasks with rapid human feedback. The second, represented by evolutionary frameworks like AlphaEvolve (Novikov et al., 2025), FunSearch (Romera-Paredes et al., 2023), and ASI-Evolve (Xu et al., 2026), pursues open-ended scientific discovery through population-based search over program space.</p>
+                <p>ASI-Evolve advances this second paradigm by introducing a structured learn-design-experiment-analyze cycle augmented with two distinguishing components: a <strong>cognition base</strong> that injects accumulated human research priors into each exploration round, and a dedicated <strong>analyzer</strong> that distills complex experimental outcomes into reusable insights. The framework demonstrates results across three central components of AI development <strong>[MED]</strong>:</p>
+                <ul>
+                    <li><strong>Architecture Design</strong>: 105 SOTA linear attention architectures discovered across 1,773 rounds; best model surpasses DeltaNet by +0.97 points (Table 1, Section 4.1)</li>
+                    <li><strong>Data Curation</strong>: Evolved strategies improve average benchmark performance by +3.96 points, with +18.64 points on MMLU (Table 2, Section 4.2)</li>
+                    <li><strong>RL Algorithm Design</strong>: Discovered algorithms outperform GRPO by up to +12.5 points on AMC32, +11.67 on AIME24, +5.04 on OlympiadBench (Table 3, Section 4.3)</li>
+                    <li><strong>Benchmark Convergence</strong>: Circle packing SOTA (2.63597) achieved in 17 rounds vs. OpenEvolve&rsquo;s 460 (Table 4, Section 5.1)</li>
+                </ul>
+                <p>These results are reported by the authors and have not been independently replicated at the time of writing <strong>[LOW]</strong>.</p>
+
+                <h3 id="the-production-gap">1.2 The Production Gap</h3>
+                <p>Despite these research results, ASI-Evolve is a research framework designed for offline scientific exploration. Production agentic systems face fundamentally different constraints: rate limits, context window budgets, human oversight requirements, security boundaries, and the need for incremental, auditable progress. Anthropic&rsquo;s 2026 engineering guidance articulates these constraints through specific architectural patterns, tool design principles, and safety frameworks that ASI-Evolve does not address.</p>
+                <p>This gap is not a deficiency of ASI-Evolve &mdash; the framework was not designed for production deployment. Rather, it represents an integration opportunity: the evolutionary search paradigm offers capabilities (principled exploration, diversity maintenance, knowledge accumulation) that current production agentic systems lack, while production best practices offer the safety, efficiency, and auditability that evolutionary frameworks need.</p>
+
+                <h3 id="relationship-to-prior-work">1.3 Relationship to Prior Work</h3>
+                <p>This whitepaper is the third in a series on agentic self-optimization:</p>
+                <ul>
+                    <li><strong>Paper 1</strong> (Integrity Studio, 2026a): Establishes the concept of converting Popescu et al. (2026) code churn metrics into RL reward signals. Defines the 21-day survival feedback loop, auxiliary reward signals, and canary deployment safeguards. See Sections 1.2&ndash;1.3 and the reward formulation in Section 4.</li>
+                    <li><strong>Paper 2</strong> (Integrity Studio, 2026b): Details the OTEL telemetry architecture, Gymnasium-compatible RL environment design, PPO training pipeline via Stable Baselines3/Pufferlib, and deployment safety guardrails. See the span model in Section 3 and RL environment in Section 4.</li>
+                </ul>
+                <p>This document extends both by introducing <strong>evolutionary program search as a complementary optimization paradigm</strong>. Where Papers 1&ndash;2 optimize a fixed agent via gradient-based policy updates (PPO), ASI-Evolve offers population-based search over discrete program space. The two are not mutually exclusive: survival metrics can serve as fitness functions for evolutionary search, and evolutionary diversity can address the agent diversity collapse risk identified in Paper 1.</p>
+
+                <h3 id="document-structure">1.4 Document Structure</h3>
+                <ul>
+                    <li><strong>Section 2</strong>: Technical decomposition of ASI-Evolve&rsquo;s five components</li>
+                    <li><strong>Section 3</strong>: Systematic audit against seven Anthropic best practice dimensions</li>
+                    <li><strong>Section 4</strong>: Integration architecture mapping components to Claude production patterns</li>
+                    <li><strong>Section 5</strong>: Hybrid RL+Evolution design bridging evolutionary search with the existing survival metrics pipeline</li>
+                    <li><strong>Section 6</strong>: Safety and governance framework for self-improving evolutionary loops</li>
+                    <li><strong>Section 7</strong>: Implementation roadmap</li>
+                    <li><strong>Section 8</strong>: Risks and mitigations</li>
+                    <li><strong>Section 9</strong>: Open questions</li>
+                    <li><strong>Section 10</strong>: Conclusion</li>
+                </ul>
+            </section>
+
+            <!-- 2. ASI-Evolve Framework Analysis -->
+            <section id="asi-evolve-framework-analysis">
+                <h2>2. ASI-Evolve Framework Analysis</h2>
+
+                <h3 id="component-decomposition">2.1 Component Decomposition</h3>
+                <p>ASI-Evolve organizes autonomous research into five modules that collectively implement a closed-loop scientific process <strong>[HIGH]</strong>:</p>
+                <p><strong>Researcher.</strong> The generative engine of the loop. Each round, the Researcher samples <em>n</em> context nodes from the Database, retrieves relevant entries from the Cognition Base via embedding-based semantic search, and uses an LLM to produce a complete candidate program together with a natural-language motivation. The system supports both full-code generation and diff-based editing for evolving larger codebases (Section 3.1).</p>
+                <p><strong>Engineer.</strong> The execution and validation module. Given a generated program, the Engineer invokes a user-specified evaluation procedure that runs the experiment end-to-end and returns structured metrics including a primary scalar fitness score. It supports early rejection via configurable wall-clock limits and lightweight quick tests, as well as an optional LLM-based judge for qualitative assessment (Section 3.2).</p>
+                <p><strong>Analyzer.</strong> The feedback distillation module. The Analyzer receives the current program together with full experimental output &mdash; including raw logs and detailed metrics &mdash; and distills them into a compact, decision-oriented report. This report is persisted in the Database and used for retrieval in subsequent rounds, keeping context length manageable without sacrificing analytical depth (Section 3.3).</p>
+                <p><strong>Cognition Base.</strong> The domain knowledge repository. A collection of task-relevant textual items (extracted from 80&ndash;150 domain papers) indexed by embeddings. In each round, after sampling context nodes from the Database, the pipeline uses the sampled nodes&rsquo; information as queries to retrieve cognition entries via embedding-based semantic search. These entries are injected into the Researcher&rsquo;s context to provide human research priors (Section 3.4).</p>
+                <p><strong>Database.</strong> The persistent evolutionary memory. Each evolution step produces a node storing: (i) Researcher motivation, (ii) generated program, (iii) structured evaluation results, (iv) analysis report, and (v) auxiliary metadata. For parent selection, the system offers multiple sampling policies behind a unified interface: UCB1, random, greedy, and MAP-Elites island algorithm (Section 3.5).</p>
+
+                <h3 id="evolutionary-loop-closed-loop-control">2.2 The Evolutionary Loop as Closed-Loop Control</h3>
+                <p>ASI-Evolve&rsquo;s learn-design-experiment-analyze cycle directly addresses the open-loop problem identified in Paper 1 (Section 1.2). Where current production agents operate as:</p>
+<pre><code>Task Prompt --&gt; Agent --&gt; Code Output --&gt; (submit, no feedback)</code></pre>
+                <p>ASI-Evolve implements:</p>
+<pre><code>&#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;
+&#x2502; Cognition Base (domain priors)                           &#x2502;
+&#x2502;     &#x2193; retrieval                                          &#x2502;
+&#x2502; Researcher (generate candidate from context + cognition) &#x2502;
+&#x2502;     &#x2193;                                                    &#x2502;
+&#x2502; Engineer (execute, evaluate, score)                      &#x2502;
+&#x2502;     &#x2193;                                                    &#x2502;
+&#x2502; Analyzer (distill feedback into compact report)          &#x2502;
+&#x2502;     &#x2193;                                                    &#x2502;
+&#x2502; Database (store node, sample for next round)             &#x2502;
+&#x2502;     &#x2193; (loop)                                             &#x2502;
+&#x2502; Researcher (informed by accumulated experience)          &#x2502;
+&#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;</code></pre>
+                <p>This structural parallel is significant: both ASI-Evolve and the RL pipeline in Papers 1&ndash;2 solve the same fundamental problem (missing feedback loops) but through different optimization mechanisms &mdash; evolutionary selection vs. gradient-based policy updates.</p>
+
+                <h3 id="sampling-policies-exploration-strategies">2.3 Sampling Policies as Exploration Strategies</h3>
+                <p>The Database&rsquo;s sampling policies deserve particular attention because they address a challenge that pure LLM-based agents handle poorly: the explore-exploit tradeoff <strong>[HIGH]</strong>.</p>
+                <p><strong>UCB1</strong> (Upper Confidence Bound) treats each database node as a bandit arm and selects based on an upper confidence bound combining estimated value with an exploration bonus inversely proportional to visit count (Auer et al., 2002). This provides provable regret bounds for stationary environments, though the research search space is non-stationary.</p>
+                <p><strong>MAP-Elites</strong> (Multi-dimensional Archive of Phenotypic Elites) maintains a quality-diversity archive partitioned by behavioral features, actively preserving diverse niches to prevent premature convergence (Mouret &amp; Clune, 2015). This directly addresses the &ldquo;Agent Diversity Collapse&rdquo; risk identified in Paper 1 &mdash; where PPO-trained agents converge to a narrow set of coding patterns.</p>
+                <p>ASI-Evolve&rsquo;s empirical results suggest that in the presence of a strong Cognition Base, UCB1 outperforms MAP-Elites for convergence speed: UCB1 + GPT-5-mini reached circle packing SOTA in 17 steps vs. MAP-Elites&rsquo; 79 steps with the same base model (Section 5.2.3) <strong>[MED]</strong>. This implies that when domain priors are strong, exploitation-oriented sampling is more efficient than diversity-preserving sampling &mdash; a finding with direct implications for production integration.</p>
+            </section>
+
+            <!-- 3. Systematic Audit Against Anthropic Best Practices -->
+            <section id="systematic-audit">
+                <h2>3. Systematic Audit Against Anthropic Best Practices</h2>
+                <p>We evaluate each ASI-Evolve component against seven dimensions derived from Anthropic&rsquo;s 2026 agentic system guidelines. Each cell in the matrix below receives a compliance rating:</p>
+                <ul>
+                    <li><strong>STRONG</strong>: Design choice directly implements the best practice</li>
+                    <li><strong>PARTIAL</strong>: Conceptually aligned but incomplete implementation</li>
+                    <li><strong>WEAK</strong>: Minimal alignment; significant gaps</li>
+                    <li><strong>MISSING</strong>: Best practice not addressed</li>
+                </ul>
+
+                <h3 id="dimension-a-architectural-patterns">3.1 Dimension A: Architectural Patterns</h3>
+                <p>Anthropic identifies five core workflow patterns for building effective agents: prompt chaining, routing, parallelization, orchestrator-workers, and evaluator-optimizer <strong>[HIGH]</strong> (Anthropic, 2026a).</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Rating</th>
+                            <th>Evidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Researcher</td>
+                            <td>PARTIAL</td>
+                            <td>Implements prompt chaining (context assembly then generation) but lacks orchestrator-worker separation; generation is monolithic rather than delegated to specialized workers</td>
+                        </tr>
+                        <tr>
+                            <td>Engineer</td>
+                            <td>STRONG</td>
+                            <td>Maps cleanly to prompt chaining with validation gates (timeout, early rejection). LLM-based judge implements evaluator pattern</td>
+                        </tr>
+                        <tr>
+                            <td>Analyzer</td>
+                            <td>STRONG</td>
+                            <td>Direct implementation of the evaluator half of evaluator-optimizer. Produces structured feedback that closes the optimization cycle</td>
+                        </tr>
+                        <tr>
+                            <td>Cognition Base</td>
+                            <td>PARTIAL</td>
+                            <td>Enables the routing pattern (embedding retrieval selects which knowledge to surface) but uses only a single retrieval strategy</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>STRONG</td>
+                            <td>Sampling policies implement a sophisticated routing pattern; UCB1 and MAP-Elites route exploration toward productive regions of the search space</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Key conflict</strong>: Anthropic explicitly recommends &ldquo;simple, composable patterns rather than complex frameworks.&rdquo; ASI-Evolve is a monolithic framework with tightly coupled components. For production integration, the components should be decomposed into independent, composable agents.</p>
+                <p><strong>Missing pattern</strong>: No explicit parallelization. ASI-Evolve executes candidates sequentially. Anthropic&rsquo;s parallelization pattern (fan-out candidate generation, fan-in evaluation) would improve throughput.</p>
+
+                <h3 id="dimension-b-tool-design">3.2 Dimension B: Tool Design</h3>
+                <p>Anthropic specifies seven principles for writing effective tools: strategic choice, consolidation, namespacing, high-signal returns, token efficiency, description engineering, and systematic evaluation <strong>[HIGH]</strong> (Anthropic, 2026b).</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Rating</th>
+                            <th>Evidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Researcher</td>
+                            <td>WEAK</td>
+                            <td>Single retrieval mechanism (embedding similarity) without strategic choice between retrieval strategies. No namespacing of retrieval operations</td>
+                        </tr>
+                        <tr>
+                            <td>Engineer</td>
+                            <td>PARTIAL</td>
+                            <td>Execution + timeout + LLM judge represent reasonable strategic choices. High-signal returns via early rejection. Missing systematic evaluation of judge calibration</td>
+                        </tr>
+                        <tr>
+                            <td>Analyzer</td>
+                            <td>PARTIAL</td>
+                            <td>Compact report format suggests token efficiency awareness. Missing structured output schema for cross-experiment comparison</td>
+                        </tr>
+                        <tr>
+                            <td>Cognition Base</td>
+                            <td>PARTIAL</td>
+                            <td>Embedding index is well-scoped as a single tool. Missing consolidation with Database retrieval into a unified interface</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>STRONG</td>
+                            <td>Multiple sampling strategies represent strategic tool choice. Node schema consolidates motivation, program, results, analysis, and metadata</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Key gap</strong>: Token efficiency. The Researcher receives full context + cognition items without documented compression or relevance filtering. In production Claude API usage, where input tokens directly affect cost and latency, this would require cache-aware optimization and prompt caching strategies.</p>
+
+                <h3 id="dimension-c-context-engineering">3.3 Dimension C: Context Engineering</h3>
+                <p>Anthropic&rsquo;s context engineering guidance emphasizes direct system prompts, dynamic retrieval (lightweight refs then JIT load), structured note-taking, sub-agent architectures, and finding &ldquo;the smallest set of high-signal tokens&rdquo; <strong>[HIGH]</strong> (Anthropic, 2026c).</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Rating</th>
+                            <th>Evidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Researcher</td>
+                            <td>PARTIAL</td>
+                            <td>Receives structured context from Database sampling and Cognition retrieval. Missing sub-agent architecture for context assembly</td>
+                        </tr>
+                        <tr>
+                            <td>Engineer</td>
+                            <td>WEAK</td>
+                            <td>Context is fixed at invocation time; no dynamic retrieval during execution if errors occur</td>
+                        </tr>
+                        <tr>
+                            <td>Analyzer</td>
+                            <td>STRONG</td>
+                            <td>Core function IS context engineering &mdash; compresses high-dimensional feedback into compact, high-signal reports. Implements &ldquo;smallest set of high-signal tokens&rdquo; for downstream consumption</td>
+                        </tr>
+                        <tr>
+                            <td>Cognition Base</td>
+                            <td>STRONG</td>
+                            <td>Direct implementation of dynamic retrieval for context assembly. Embedding-indexed corpus is the canonical RAG pattern</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>PARTIAL</td>
+                            <td>Stores compact reports (structured notes) but sampling optimizes for score landscape, not semantic diversity of context</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Key strength</strong>: The Analyzer&rsquo;s role as a lossy context compressor optimized for downstream decision-making is a valuable primitive not explicitly covered in Anthropic&rsquo;s current guidance. It addresses the practical challenge of maintaining long-horizon context across many iterations without exceeding context budgets.</p>
+
+                <h3 id="dimension-d-safety">3.4 Dimension D: Safety</h3>
+                <p>Anthropic&rsquo;s safety framework for trustworthy agents specifies five principles: human control, transparency, value alignment, privacy, and security against manipulation <strong>[HIGH]</strong> (Anthropic, 2026d).</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Rating</th>
+                            <th>Evidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Researcher</td>
+                            <td>WEAK</td>
+                            <td>No human-in-the-loop on candidate generation. No transparency mechanism for explaining retrieval decisions. No value alignment checks on generated hypotheses</td>
+                        </tr>
+                        <tr>
+                            <td>Engineer</td>
+                            <td>PARTIAL</td>
+                            <td>Wall-clock timeouts prevent runaway compute. Early rejection prevents resource waste. Missing human escalation path for uncertain judge decisions</td>
+                        </tr>
+                        <tr>
+                            <td>Analyzer</td>
+                            <td>WEAK</td>
+                            <td>No faithfulness verification that compact reports accurately represent raw results. Misleading summaries could cause the Researcher to pursue dead-end hypotheses</td>
+                        </tr>
+                        <tr>
+                            <td>Cognition Base</td>
+                            <td>WEAK</td>
+                            <td>No curation controls on what enters the corpus. No provenance tracking. Poisoned papers could systematically bias all downstream research</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>PARTIAL</td>
+                            <td>Multiple sampling strategies provide diversity (reducing premature convergence risk). Missing data integrity controls, audit trail, and rollback mechanism</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Critical finding</strong>: Safety is the most significant gap across all five components. ASI-Evolve is designed for autonomous operation without human oversight, which directly conflicts with Anthropic&rsquo;s first principle (human control). Anthropic&rsquo;s agentic misalignment research demonstrates that frontier models can engage in harmful autonomous behavior when given extensive information access with minimal oversight <strong>[HIGH]</strong> (Anthropic, 2026e). Self-improving evolutionary systems amplify this risk because the loop generates novel programs that may behave unpredictably.</p>
+
+                <h3 id="dimension-e-evaluation">3.5 Dimension E: Evaluation</h3>
+                <p>Anthropic&rsquo;s evaluation framework specifies five components: tasks, trials, graders, transcripts, and outcomes <strong>[HIGH]</strong> (Anthropic, 2026f).</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Rating</th>
+                            <th>Evidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Researcher</td>
+                            <td>MISSING</td>
+                            <td>Does not evaluate its own outputs. No pre-evaluation grader before Engineer handoff</td>
+                        </tr>
+                        <tr>
+                            <td>Engineer</td>
+                            <td>STRONG</td>
+                            <td>LLM-based judge directly implements the grader concept. Wall-clock limits represent trial constraints. Execution results serve as outcomes</td>
+                        </tr>
+                        <tr>
+                            <td>Analyzer</td>
+                            <td>PARTIAL</td>
+                            <td>Produces evaluation artifacts (reports) but is not itself evaluated. No meta-grader for report quality</td>
+                        </tr>
+                        <tr>
+                            <td>Cognition Base</td>
+                            <td>MISSING</td>
+                            <td>No evaluation of retrieval effectiveness (precision, recall, downstream impact). Entire evaluation dimension absent</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>PARTIAL</td>
+                            <td>Implicitly evaluates candidates via sampling scores. Missing systematic evaluation of sampling strategy effectiveness (no A/B testing framework)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Key observation</strong>: ASI-Evolve evaluates its <em>outputs</em> (candidate programs) but does not evaluate its <em>components</em>. Is the Cognition Base retrieval effective? Is the LLM judge calibrated? Are the sampling strategies optimal? Claude&rsquo;s evaluation framework should be applied not just to experiment results but to each component&rsquo;s performance &mdash; a form of meta-evaluation that production systems require.</p>
+
+                <h3 id="dimension-f-long-running-agent-design">3.6 Dimension F: Long-Running Agent Design</h3>
+                <p>Anthropic&rsquo;s guidance on long-running agent harnesses emphasizes the initializer/coding agent pattern, feature-list tracking, incremental work, browser-based verification, and consistent startup routines <strong>[HIGH]</strong> (Anthropic, 2026g).</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Rating</th>
+                            <th>Evidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Researcher</td>
+                            <td>PARTIAL</td>
+                            <td>Operates within the broader loop (inherently long-running). Cognition Base serves as persistent memory. Missing initializer pattern and startup routine</td>
+                        </tr>
+                        <tr>
+                            <td>Engineer</td>
+                            <td>PARTIAL</td>
+                            <td>Timeouts appropriate for long-running execution. Missing checkpoint-resume capability; timed-out experiments lose all progress</td>
+                        </tr>
+                        <tr>
+                            <td>Analyzer</td>
+                            <td>PARTIAL</td>
+                            <td>Reports stored in Database provide persistent memory across iterations. Missing structured note-taking pattern and meta-analysis layer</td>
+                        </tr>
+                        <tr>
+                            <td>Cognition Base</td>
+                            <td>STRONG</td>
+                            <td>Persistent across all iterations. Represents accumulated domain knowledge. Matches the &ldquo;external memory&rdquo; pattern</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>STRONG</td>
+                            <td>Persistence backbone of the entire system. Enables resume, incremental building, and state maintenance across arbitrarily long campaigns</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Key gap</strong>: No checkpoint-resume pattern. If any step fails or times out, the work is lost. For research campaigns that run for weeks (1,773 rounds in architecture search), this is a significant operational risk.</p>
+
+                <h3 id="dimension-g-rate-limits-efficiency">3.7 Dimension G: Rate Limits and Efficiency</h3>
+                <p>Claude API rate limits (RPM, ITPM, OTPM) require cache-aware optimization, budget caps, and efficient token usage <strong>[HIGH]</strong> (Anthropic, 2026h).</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Rating</th>
+                            <th>Evidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Researcher</td>
+                            <td>MISSING</td>
+                            <td>No cache-aware optimization. Each invocation appears to be a fresh LLM call without prompt caching</td>
+                        </tr>
+                        <tr>
+                            <td>Engineer</td>
+                            <td>PARTIAL</td>
+                            <td>Early rejection prevents wasted compute. Missing cost-per-evaluation tracking</td>
+                        </tr>
+                        <tr>
+                            <td>Analyzer</td>
+                            <td>PARTIAL</td>
+                            <td>Compact reports reduce downstream token consumption. Missing adaptive compression based on budget remaining</td>
+                        </tr>
+                        <tr>
+                            <td>Cognition Base</td>
+                            <td>MISSING</td>
+                            <td>No token budget awareness. Retrieval volume does not adapt to remaining context capacity</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>WEAK</td>
+                            <td>No <code>max_turns</code> or <code>max_budget_usd</code> caps on the evolutionary loop. UCB1 naturally limits redundant exploration but without explicit budget enforcement</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="audit-summary">3.8 Audit Summary</h3>
+                <p><strong>Compliance Matrix (35 cells)</strong>:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Arch. Patterns</th>
+                            <th>Tool Design</th>
+                            <th>Context Eng.</th>
+                            <th>Safety</th>
+                            <th>Evaluation</th>
+                            <th>Long-Running</th>
+                            <th>Rate Limits</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Researcher</strong></td>
+                            <td>PARTIAL</td>
+                            <td>WEAK</td>
+                            <td>PARTIAL</td>
+                            <td>WEAK</td>
+                            <td>MISSING</td>
+                            <td>PARTIAL</td>
+                            <td>MISSING</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Engineer</strong></td>
+                            <td>STRONG</td>
+                            <td>PARTIAL</td>
+                            <td>WEAK</td>
+                            <td>PARTIAL</td>
+                            <td>STRONG</td>
+                            <td>PARTIAL</td>
+                            <td>PARTIAL</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Analyzer</strong></td>
+                            <td>STRONG</td>
+                            <td>PARTIAL</td>
+                            <td>STRONG</td>
+                            <td>WEAK</td>
+                            <td>PARTIAL</td>
+                            <td>PARTIAL</td>
+                            <td>PARTIAL</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cognition</strong></td>
+                            <td>PARTIAL</td>
+                            <td>PARTIAL</td>
+                            <td>STRONG</td>
+                            <td>WEAK</td>
+                            <td>MISSING</td>
+                            <td>STRONG</td>
+                            <td>MISSING</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Database</strong></td>
+                            <td>STRONG</td>
+                            <td>STRONG</td>
+                            <td>PARTIAL</td>
+                            <td>PARTIAL</td>
+                            <td>PARTIAL</td>
+                            <td>STRONG</td>
+                            <td>WEAK</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Distribution</strong>: 7 STRONG, 14 PARTIAL, 6 WEAK, 5 MISSING, 3 not rated</p>
+                <p><strong>Top 3 Strengths</strong>:</p>
+                <ol>
+                    <li>Closed-loop evaluation via Analyzer + Database feedback cycle (evaluator-optimizer pattern)</li>
+                    <li>Principled exploration via UCB1/MAP-Elites with mathematical grounding (Auer et al., 2002; Mouret &amp; Clune, 2015)</li>
+                    <li>Domain-adaptive context engineering via the Cognition Base (embedding-indexed RAG over curated literature)</li>
+                </ol>
+                <p><strong>Top 3 Critical Gaps</strong>:</p>
+                <ol>
+                    <li>Safety and human oversight are systematically absent across all components</li>
+                    <li>No meta-evaluation of the system&rsquo;s own components (only evaluates candidate outputs)</li>
+                    <li>No checkpoint-resume or incremental work pattern for long-running campaigns</li>
+                </ol>
+            </section>
+
+            <!-- 4. Integration Architecture -->
+            <section id="integration-architecture">
+                <h2>4. Integration Architecture</h2>
+                <p>We propose mapping ASI-Evolve&rsquo;s five components to Claude production patterns, producing a system that combines evolutionary search capabilities with production-grade safety, efficiency, and auditability.</p>
+
+                <h3 id="researcher-as-orchestrator-workers">4.1 Researcher as Orchestrator-Workers</h3>
+                <p>The Researcher&rsquo;s monolithic candidate generation decomposes naturally into Anthropic&rsquo;s orchestrator-workers pattern:</p>
+                <p><strong>Orchestrator</strong> (Claude API call with tool use):</p>
+                <ul>
+                    <li>Receives the current research objective and Database-sampled context</li>
+                    <li>Decomposes the search space into parallel candidate generation tasks</li>
+                    <li>Specifies constraints and quality criteria for each worker</li>
+                </ul>
+                <p><strong>Workers</strong> (parallel Claude API calls):</p>
+                <ul>
+                    <li>Each worker generates one candidate program from a distinct region of the search space</li>
+                    <li>Workers receive different subsets of Cognition Base entries (enforcing exploration diversity)</li>
+                    <li>Workers use structured outputs (<code>strict: true</code>) to guarantee schema conformance</li>
+                </ul>
+                <p><strong>Fan-in</strong>:</p>
+                <ul>
+                    <li>Candidates are collected, deduplicated by motivation similarity (ASI-Evolve&rsquo;s novelty check), and forwarded to the Engineer</li>
+                </ul>
+                <p>This mapping enables Anthropic&rsquo;s parallelization pattern: instead of generating one candidate per round, the system generates K candidates in parallel, bounded by the rate limit budget. With prompt caching, the shared context (task description, Cognition Base results) is cached across parallel calls, achieving up to 5x effective throughput <strong>[MED]</strong>.</p>
+
+                <h3 id="engineer-as-tool-use-execution-sandboxing">4.2 Engineer as Tool Use + Execution Sandboxing</h3>
+                <p>The Engineer maps directly to Claude&rsquo;s tool use framework:</p>
+<pre><code>&#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;
+&#x2502; Claude orchestrator calls execute_candidate&#x2502;
+&#x2502; tool with:                                 &#x2502;
+&#x2502;   - candidate_program: string              &#x2502;
+&#x2502;   - timeout_ms: number                     &#x2502;
+&#x2502;   - evaluation_script: string              &#x2502;
+&#x2502;   - budget_usd: number                     &#x2502;
+&#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;
+         &#x2193;
+&#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;
+&#x2502; Tool implementation:                       &#x2502;
+&#x2502;   1. Sandbox creation (container isolation)&#x2502;
+&#x2502;   2. Program execution with timeout        &#x2502;
+&#x2502;   3. Metric collection                     &#x2502;
+&#x2502;   4. OTEL span emission                    &#x2502;
+&#x2502;   5. Early rejection if quality &lt; threshold&#x2502;
+&#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;
+         &#x2193;
+&#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;
+&#x2502; Tool returns structured metrics:           &#x2502;
+&#x2502;   { score, benchmarks, logs_summary,       &#x2502;
+&#x2502;     execution_time, resource_usage }       &#x2502;
+&#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;</code></pre>
+                <p>Each Engineer execution emits an OTEL span connected to the telemetry model from Paper 2 (Section 3). The span type <code>evolution.evaluation</code> carries attributes:</p>
+                <ul>
+                    <li><code>evolution.round</code>: Current evolution round number</li>
+                    <li><code>evolution.candidate_id</code>: Unique candidate identifier</li>
+                    <li><code>evolution.parent_id</code>: Parent node from Database sampling</li>
+                    <li><code>evolution.fitness_score</code>: Primary scalar fitness</li>
+                    <li><code>evolution.execution_time_ms</code>: Wall-clock execution time</li>
+                    <li><code>code.quality.*</code>: Reuse the code quality attributes from Paper 2&rsquo;s span model</li>
+                </ul>
+
+                <h3 id="analyzer-as-evaluator-optimizer">4.3 Analyzer as Evaluator-Optimizer</h3>
+                <p>The Analyzer maps to the evaluator-optimizer pattern with two enhancements:</p>
+                <p><strong>Evaluator</strong> (Claude API call):</p>
+                <ul>
+                    <li>Receives: candidate program + full execution output (logs, metrics, benchmarks)</li>
+                    <li>Produces: structured JSON report with required fields:
+                        <ul>
+                            <li><code>hypothesis_tested</code>: Natural language description</li>
+                            <li><code>result_summary</code>: Key findings</li>
+                            <li><code>confidence_level</code>: HIGH/MED/LOW</li>
+                            <li><code>recommended_next_steps</code>: Actionable guidance for the Researcher</li>
+                            <li><code>failure_modes_observed</code>: Identified issues</li>
+                            <li><code>numerical_claims</code>: Array of {claim, value, source} tuples for faithfulness verification</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>Faithfulness Check</strong> (programmatic, not LLM):</p>
+                <ul>
+                    <li>Each numerical claim in the report is verified against raw execution data</li>
+                    <li>Mismatches are flagged before the report is stored in the Database</li>
+                    <li>This addresses the hallucination risk identified in our audit (Section 3.4)</li>
+                </ul>
+                <p><strong>OTEL Integration</strong>:</p>
+                <ul>
+                    <li>LLM-as-Judge scores (referenced in Paper 2&rsquo;s OTEL Quality Scorecard) serve as one dimension of the Analyzer&rsquo;s evaluation</li>
+                    <li>The Analyzer emits an <code>evolution.analysis</code> span linking the evaluation span to the analysis report</li>
+                </ul>
+
+                <h3 id="cognition-base-as-context-engineering-rag">4.4 Cognition Base as Context Engineering + RAG</h3>
+                <p>We adapt the Cognition Base to Anthropic&rsquo;s &ldquo;lightweight refs then JIT load&rdquo; pattern:</p>
+                <p><strong>Phase 1 &mdash; Lightweight Retrieval</strong>:</p>
+                <ul>
+                    <li>Embedding index returns document IDs, titles, and 2&ndash;3 sentence snippets (not full content)</li>
+                    <li>Token cost: ~100 tokens per retrieved item (vs. potentially thousands for full papers)</li>
+                    <li>Top-K retrieval with configurable K based on remaining context budget</li>
+                </ul>
+                <p><strong>Phase 2 &mdash; JIT Loading</strong>:</p>
+                <ul>
+                    <li>The Researcher can request full content of specific retrieved items via a <code>load_cognition_item</code> tool</li>
+                    <li>Full content is loaded only when the Researcher determines it needs deeper detail</li>
+                    <li>This implements Anthropic&rsquo;s dynamic retrieval pattern with explicit budget awareness</li>
+                </ul>
+                <p><strong>Sub-agent Architecture</strong>:</p>
+                <ul>
+                    <li>A dedicated context management sub-agent handles retrieval, deduplication, contradiction resolution, and synthesis</li>
+                    <li>The sub-agent produces a structured briefing document rather than raw retrieval results</li>
+                    <li>This isolates context engineering complexity from the Researcher&rsquo;s generative task</li>
+                </ul>
+                <p><strong>Growth Strategy</strong>:</p>
+                <ul>
+                    <li>The Cognition Base is not static. As the system discovers relevant new findings, the Analyzer can recommend additions</li>
+                    <li>Human curation gate: all corpus additions require human approval (addressing the data poisoning risk from Section 3.4)</li>
+                </ul>
+
+                <h3 id="database-as-structured-state-persistence">4.5 Database as Structured State Persistence</h3>
+                <p>The Database maps to Anthropic&rsquo;s &ldquo;feature-list-as-JSON&rdquo; pattern for long-running agents:</p>
+<pre><code class="language-json">{
+  "evolution_state": {
+    "round": 1773,
+    "best_score": 57.28,
+    "total_candidates": 1350,
+    "successful_candidates": 105,
+    "sampling_policy": "ucb1",
+    "budget_remaining_usd": 450.00
+  },
+  "nodes": [
+    {
+      "id": "node_001",
+      "round": 1,
+      "motivation": "...",
+      "program_hash": "sha256:...",
+      "fitness_score": 55.76,
+      "analysis_summary": "...",
+      "parent_id": null,
+      "lineage_depth": 0,
+      "otel_trace_id": "...",
+      "created_at": "2026-04-05T10:00:00Z"
+    }
+  ]
+}</code></pre>
+                <p><strong>Startup Routine</strong> (addressing the long-running agent gap):</p>
+                <ol>
+                    <li>Load evolution state from the Database</li>
+                    <li>Review the current exploration frontier (top-K nodes by score)</li>
+                    <li>Select sampling strategy based on convergence metrics (UCB1 if still climbing, MAP-Elites if plateaued)</li>
+                    <li>Log startup decisions to OTEL for auditability</li>
+                    <li>Resume from the last completed round</li>
+                </ol>
+
+                <h3 id="integration-diagram">4.6 Integration Diagram</h3>
+<pre><code>&#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;
+&#x2502;                    Claude API (Orchestrator)                 &#x2502;
+&#x2502;                                                             &#x2502;
+&#x2502;  &#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;    &#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;    &#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;              &#x2502;
+&#x2502;  &#x2502;Researcher&#x2502;&#x2500;&#x2500;&#x2500;&#x2192;&#x2502; Engineer  &#x2502;&#x2500;&#x2500;&#x2500;&#x2192;&#x2502; Analyzer &#x2502;              &#x2502;
+&#x2502;  &#x2502;(Workers) &#x2502;    &#x2502;(Tool Use) &#x2502;    &#x2502;(Evaluator&#x2502;              &#x2502;
+&#x2502;  &#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x252C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;    &#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x252C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;    &#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x252C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;              &#x2502;
+&#x2502;       &#x2502;                &#x2502;               &#x2502;                    &#x2502;
+&#x2502;       &#x2502;          &#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x25BC;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;         &#x2502;                    &#x2502;
+&#x2502;       &#x2502;          &#x2502; Sandbox   &#x2502;         &#x2502;                    &#x2502;
+&#x2502;       &#x2502;          &#x2502; Execution &#x2502;         &#x2502;                    &#x2502;
+&#x2502;       &#x2502;          &#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x252C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;         &#x2502;                    &#x2502;
+&#x2502;       &#x2502;                &#x2502;               &#x2502;                    &#x2502;
+&#x2502;       &#x2502;          OTEL spans            &#x2502;                    &#x2502;
+&#x2502;       &#x2502;          (evolution.*)         &#x2502;                    &#x2502;
+&#x2502;       &#x2502;                &#x2502;               &#x2502;                    &#x2502;
+&#x2502;  &#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x25BC;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x25BC;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x25BC;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;              &#x2502;
+&#x2502;  &#x2502;              Database                     &#x2502;              &#x2502;
+&#x2502;  &#x2502;  (JSON store + UCB1/MAP-Elites sampling)  &#x2502;              &#x2502;
+&#x2502;  &#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x252C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;              &#x2502;
+&#x2502;       &#x2502;                                                     &#x2502;
+&#x2502;  &#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x25BC;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;                                      &#x2502;
+&#x2502;  &#x2502;  Cognition Base   &#x2502;                                      &#x2502;
+&#x2502;  &#x2502;  (RAG: lightweight&#x2502;                                      &#x2502;
+&#x2502;  &#x2502;   refs + JIT load)&#x2502;                                      &#x2502;
+&#x2502;  &#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;                                      &#x2502;
+&#x2502;                                                             &#x2502;
+&#x2502;  &#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;              &#x2502;
+&#x2502;  &#x2502;  Safety Layer                             &#x2502;              &#x2502;
+&#x2502;  &#x2502;  - Budget caps (max_turns, max_budget_usd)&#x2502;              &#x2502;
+&#x2502;  &#x2502;  - Human approval gates                   &#x2502;              &#x2502;
+&#x2502;  &#x2502;  - Kill switch                            &#x2502;              &#x2502;
+&#x2502;  &#x2502;  - Scope constraints                      &#x2502;              &#x2502;
+&#x2502;  &#x2502;  - Faithfulness verification              &#x2502;              &#x2502;
+&#x2502;  &#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;              &#x2502;
+&#x2502;                                                             &#x2502;
+&#x2502;  &#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;              &#x2502;
+&#x2502;  &#x2502;  OTEL Collector                           &#x2502;              &#x2502;
+&#x2502;  &#x2502;  - evolution.generation spans             &#x2502;              &#x2502;
+&#x2502;  &#x2502;  - evolution.evaluation spans             &#x2502;              &#x2502;
+&#x2502;  &#x2502;  - evolution.analysis spans               &#x2502;              &#x2502;
+&#x2502;  &#x2502;  - evolution.selection spans              &#x2502;              &#x2502;
+&#x2502;  &#x2502;  - code.quality.* attributes              &#x2502;              &#x2502;
+&#x2502;  &#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;              &#x2502;
+&#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;</code></pre>
+            </section>
+
+            <!-- 5. Bridging Evolutionary Search and RL Self-Optimization -->
+            <section id="bridging-evolutionary-search-and-rl">
+                <h2>5. Bridging Evolutionary Search and RL Self-Optimization</h2>
+
+                <h3 id="survival-metrics-as-fitness-functions">5.1 Survival Metrics as Fitness Functions</h3>
+                <p>The central insight connecting ASI-Evolve to the existing RL pipeline is that <strong>Popescu et al.&rsquo;s 21-day code survival rate can serve as a fitness signal for evolutionary search</strong> <strong>[MED]</strong>.</p>
+                <p>In Papers 1&ndash;2, the survival rate feeds into an RL reward function:</p>
+<pre><code>R = 100 * survival_21d - 50 * churn_21d - 25 * deletion_21d - 5 * change_size_normalized</code></pre>
+                <p>In the evolutionary paradigm, this same formulation becomes a fitness function for UCB1 ranking:</p>
+<pre><code>fitness(node) = R(node.program)    // identical reward formula
+UCB1_score(node) = fitness(node) / visits(node) + c * sqrt(ln(total_rounds) / visits(node))</code></pre>
+                <p>The mathematical machinery is complementary: UCB1 uses the fitness signal for parent selection (which programs to build on), while PPO uses the same signal for gradient-based policy updates (how to generate better programs). This duality suggests a hybrid architecture.</p>
+
+                <h3 id="hybrid-architecture-rl-evolution">5.2 Hybrid Architecture: RL + Evolution</h3>
+                <p>We propose a two-level optimization architecture:</p>
+                <p><strong>Level 1 &mdash; RL (exploitation)</strong>:</p>
+                <ul>
+                    <li>PPO optimizes the Researcher&rsquo;s generation policy via gradient-based updates</li>
+                    <li>The policy learns to produce candidates with high fitness scores across many rounds</li>
+                    <li>This is the continuous, differentiable optimization layer from Papers 1&ndash;2</li>
+                </ul>
+                <p><strong>Level 2 &mdash; Evolution (exploration)</strong>:</p>
+                <ul>
+                    <li>ASI-Evolve&rsquo;s evolutionary loop maintains a population of candidate programs</li>
+                    <li>UCB1/MAP-Elites sampling ensures broad exploration of the program space</li>
+                    <li>The evolutionary layer discovers novel patterns that gradient-based optimization might miss</li>
+                </ul>
+                <p><strong>Interaction</strong>:</p>
+                <ul>
+                    <li>The RL policy generates initial candidates (exploitation of learned patterns)</li>
+                    <li>The evolutionary loop refines candidates through selection pressure (exploration of the fitness landscape)</li>
+                    <li>MAP-Elites maintains diversity across quality dimensions: survival rate, code complexity, test coverage, maintainability</li>
+                    <li>This addresses the &ldquo;Agent Diversity Collapse&rdquo; risk from Paper 1 where PPO-trained agents converge to a narrow set of coding patterns</li>
+                </ul>
+
+                <h3 id="three-tier-fitness">5.3 Three-Tier Fitness</h3>
+                <p>The 21-day latency problem identified in Paper 1 (Section 6) is addressed through a three-tier fitness scheme that maps ASI-Evolve&rsquo;s evaluation to different time horizons:</p>
+                <p><strong>Tier 1 &mdash; Immediate (Engineer execution, seconds to minutes)</strong>:</p>
+                <ul>
+                    <li>Tests pass/fail</li>
+                    <li>No runtime errors</li>
+                    <li>Performance benchmarks (latency, memory)</li>
+                    <li>Static analysis quality (complexity, style)</li>
+                    <li>This tier provides the fast feedback that ASI-Evolve&rsquo;s Engineer already produces</li>
+                </ul>
+                <p><strong>Tier 2 &mdash; Medium-term (merge and review, hours to days)</strong>:</p>
+                <ul>
+                    <li>Merge success rate</li>
+                    <li>Code review comment count</li>
+                    <li>Review velocity (time to approval)</li>
+                    <li>These are the auxiliary rewards from Paper 1 (Section 6)</li>
+                </ul>
+                <p><strong>Tier 3 &mdash; Long-term (production survival, 3&ndash;21 days)</strong>:</p>
+                <ul>
+                    <li>3-day survival rate (early signal)</li>
+                    <li>7-day survival rate (intermediate signal)</li>
+                    <li>21-day survival rate (primary fitness)</li>
+                    <li>These are the core Popescu et al. metrics</li>
+                </ul>
+                <p>In the evolutionary loop, Tier 1 fitness drives the Engineer&rsquo;s early rejection, Tier 2 fitness influences Database sampling weights, and Tier 3 fitness determines the definitive ranking of candidates. This tiered approach means the evolutionary loop can make progress using Tier 1 signals immediately while waiting for Tier 3 signals to provide ground truth.</p>
+
+                <h3 id="otel-instrumentation-evolutionary-loop">5.4 OTEL Instrumentation for the Evolutionary Loop</h3>
+                <p>We extend the OTEL span model from Paper 2 (Section 3) with four new span types:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Span Type</th>
+                            <th>Parent</th>
+                            <th>Key Attributes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>evolution.generation</code></td>
+                            <td><code>evolution.round</code></td>
+                            <td><code>candidate_id</code>, <code>parent_ids</code>, <code>cognition_items_retrieved</code>, <code>sampling_policy</code>, <code>researcher_model</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>evolution.evaluation</code></td>
+                            <td><code>evolution.generation</code></td>
+                            <td><code>fitness_score</code>, <code>tier1_score</code>, <code>execution_time_ms</code>, <code>early_rejected</code>, <code>code.quality.*</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>evolution.analysis</code></td>
+                            <td><code>evolution.evaluation</code></td>
+                            <td><code>report_length_tokens</code>, <code>confidence_level</code>, <code>recommended_actions</code>, <code>faithfulness_verified</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>evolution.selection</code></td>
+                            <td><code>evolution.round</code></td>
+                            <td><code>selected_node_ids</code>, <code>sampling_policy</code>, <code>ucb1_exploration_bonus</code>, <code>population_diversity_score</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Correlation</strong>: Each candidate program is linked to its lineage via <code>evolution.parent_ids</code>, enabling ancestry-based performance analysis. The <code>code.quality.*</code> attributes from Paper 2 are reused verbatim to maintain telemetry compatibility.</p>
+                <p><strong>Budget Tracking</strong>: Each round span carries <code>evolution.budget_spent_usd</code> and <code>evolution.budget_remaining_usd</code> attributes, enabling real-time cost monitoring and automated stop conditions.</p>
+            </section>
+
+            <!-- 6. Safety and Governance -->
+            <section id="safety-and-governance">
+                <h2>6. Safety and Governance</h2>
+                <p>Self-improving evolutionary systems represent the highest-risk category for agentic deployment. We map Anthropic&rsquo;s five safety principles to specific controls within the evolutionary loop.</p>
+
+                <h3 id="human-control">6.1 Human Control</h3>
+                <p><strong>Principle</strong>: Agents must operate independently yet humans retain oversight before high-stakes decisions <strong>[HIGH]</strong> (Anthropic, 2026d).</p>
+                <p>Self-improving systems challenge this principle because the evolutionary loop generates novel programs that may behave unpredictably. We propose four control mechanisms:</p>
+                <ol>
+                    <li><strong>Budget Caps</strong>: Hard limits on <code>max_rounds</code>, <code>max_budget_usd</code>, and <code>max_concurrent_evaluations</code>. The evolutionary loop halts automatically when any budget is exhausted. These map directly to Anthropic&rsquo;s <code>max_turns</code> and <code>max_budget_usd</code> API parameters.</li>
+                    <li><strong>Approval Gates</strong>: Human review is required at three points:
+                        <ul>
+                            <li>Before any candidate is deployed to production (never auto-deploy evolutionary outputs)</li>
+                            <li>Before the Cognition Base is expanded with new knowledge sources</li>
+                            <li>Before the fitness function or sampling policy is modified</li>
+                        </ul>
+                    </li>
+                    <li><strong>Kill Switch</strong>: Ability to halt the evolutionary loop at any point via an API flag or OTEL alert trigger. The system must be designed so that halting mid-round produces a consistent Database state.</li>
+                    <li><strong>Scope Constraints</strong>: The evolutionary loop is prohibited from:
+                        <ul>
+                            <li>Modifying its own fitness function</li>
+                            <li>Modifying its own sampling policy parameters</li>
+                            <li>Generating code that expands the agent&rsquo;s own permissions</li>
+                            <li>Accessing systems outside the designated sandbox</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3 id="transparency">6.2 Transparency</h3>
+                <p><strong>Principle</strong>: Humans must understand agent reasoning <strong>[HIGH]</strong> (Anthropic, 2026d).</p>
+                <ol>
+                    <li><strong>OTEL Trace Auditability</strong>: Every evolutionary step is fully traceable via the span model in Section 5.4. Auditors can reconstruct the complete decision chain: which context was sampled, which cognition items were retrieved, what candidate was generated, how it was evaluated, and what analysis was produced.</li>
+                    <li><strong>Lineage Tracking</strong>: Every deployed candidate traces back to its ancestors in the Database. This enables root cause analysis when a deployed program exhibits unexpected behavior.</li>
+                    <li><strong>Human-Readable Reports</strong>: The Analyzer must produce natural language reports, not just embeddings or scores. Apply the same hallucination audit methodology from our QUALITY_AUDIT_FINDINGS (Integrity Studio, 2026c) to Analyzer reports.</li>
+                    <li><strong>Retrieval Provenance</strong>: Each Researcher invocation logs which Cognition Base entries and Database nodes contributed to the candidate, with similarity scores, enabling inspection of knowledge influence.</li>
+                </ol>
+
+                <h3 id="value-alignment">6.3 Value Alignment</h3>
+                <p><strong>Principle</strong>: Systems must pursue intended organizational goals, not metric optimization <strong>[HIGH]</strong> (Anthropic, 2026d).</p>
+                <p>The primary risk is <strong>Goodhart&rsquo;s Law</strong>: optimizing for 21-day survival may produce code that is stable but unmaintainable, or that games survival metrics without improving actual code quality.</p>
+                <p>Mitigations:</p>
+                <ol>
+                    <li><strong>Multi-objective Fitness</strong>: Extend the reward function from Paper 1 with additional dimensions:
+<pre><code>fitness = w1 * survival_21d + w2 * readability_score + w3 * test_coverage
+        + w4 * maintainability_index - w5 * complexity_penalty</code></pre>
+                        Weights are human-specified and not modifiable by the evolutionary loop (scope constraint from Section 6.1).
+                    </li>
+                    <li><strong>Hold-out Evaluation</strong>: A subset of evaluation benchmarks are held out from the fitness function and used only for periodic human audit. If evolutionary candidates score well on fitness but poorly on hold-out metrics, the fitness function needs recalibration.</li>
+                    <li><strong>Regression Detection</strong>: Track historical performance on all metrics. Flag candidates that show fitness improvement but regression on any secondary metric.</li>
+                </ol>
+
+                <h3 id="privacy">6.4 Privacy</h3>
+                <p><strong>Principle</strong>: Granular controls restrict agent access to sensitive data <strong>[HIGH]</strong> (Anthropic, 2026d).</p>
+                <ol>
+                    <li><strong>Cognition Base Classification</strong>: Each knowledge entry is tagged with a sensitivity level (PUBLIC, INTERNAL, CONFIDENTIAL). The Researcher can only access entries at or below its clearance level.</li>
+                    <li><strong>Code Sanitization</strong>: Candidate programs generated by the Researcher must not contain hardcoded credentials, PII, or references to internal systems. Static analysis scans enforce this before Engineer execution.</li>
+                    <li><strong>Database Access Control</strong>: The Database may contain proprietary experiment results. Access is restricted to authorized evolutionary loops and audit processes.</li>
+                </ol>
+
+                <h3 id="security-against-manipulation">6.5 Security Against Manipulation</h3>
+                <p><strong>Principle</strong>: Multiple security layers counter prompt injection and tool vulnerabilities <strong>[HIGH]</strong> (Anthropic, 2026d).</p>
+                <p>The Engineer executes arbitrary generated code &mdash; the highest security risk in the system.</p>
+                <ol>
+                    <li><strong>Sandbox Isolation</strong>: Container-based execution with:
+                        <ul>
+                            <li>No network access (unless explicitly required by the evaluation procedure)</li>
+                            <li>Filesystem restrictions (write only to designated output directories)</li>
+                            <li>Memory and CPU limits</li>
+                            <li>No access to the evolutionary loop&rsquo;s own infrastructure</li>
+                        </ul>
+                    </li>
+                    <li><strong>Code Scanning</strong>: Static analysis and pattern matching before execution to detect:
+                        <ul>
+                            <li>System calls that exceed the sandbox&rsquo;s intended scope</li>
+                            <li>Attempts to read or modify the evolutionary loop&rsquo;s configuration</li>
+                            <li>Known vulnerability patterns (OWASP Top 10)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Agentic Misalignment Mitigations</strong>: Anthropic&rsquo;s research demonstrates that frontier models can engage in strategic harmful behavior when their autonomy or goals are threatened (Anthropic, 2026e). In the context of self-improving evolutionary systems, three specific misalignment risks apply:
+                        <ul>
+                            <li><strong>Reward Hacking</strong>: Generating code that games survival metrics (e.g., trivial no-op changes that survive because they do nothing). Mitigation: multi-objective fitness and hold-out evaluation (Section 6.3).</li>
+                            <li><strong>Capability Escalation</strong>: Generating code that expands the agent&rsquo;s own permissions or resource access. Mitigation: scope constraints (Section 6.1) and sandbox isolation.</li>
+                            <li><strong>Deceptive Alignment</strong>: Generating code that appears safe during evaluation but behaves differently in production. Mitigation: hold-out evaluation sets, shadow deployment (run evolutionary candidates in observation mode before production), and adversarial testing.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </section>
+
+            <!-- 7. Implementation Roadmap -->
+            <section id="implementation-roadmap">
+                <h2>7. Implementation Roadmap</h2>
+                <p>We propose a 16-week implementation plan that builds on the existing OTEL infrastructure from Paper 2. Prerequisites: OTEL instrumentation from Paper 2 must be operational, and Claude API access with sufficient rate limits (Tier 2+) must be available.</p>
+
+                <h3 id="phase-1-foundation">7.1 Phase 1: Foundation (Weeks 1&ndash;4)</h3>
+                <p><strong>Objective</strong>: Single-iteration evolutionary loop running locally.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Deliverable</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cognition Base v1</td>
+                            <td>RAG pipeline over domain documentation. Embedding index with lightweight retrieval. 50&ndash;100 curated entries.</td>
+                        </tr>
+                        <tr>
+                            <td>Database v1</td>
+                            <td>JSON-backed node store with UCB1 sampling. Schema validation on write. Append-only logging.</td>
+                        </tr>
+                        <tr>
+                            <td>Researcher v1</td>
+                            <td>Claude orchestrator with single-candidate generation (no parallelization yet). Structured output for candidate schema.</td>
+                        </tr>
+                        <tr>
+                            <td>Engineer v1</td>
+                            <td>Tool implementation with configurable timeout. Integration with existing test suites.</td>
+                        </tr>
+                        <tr>
+                            <td>Analyzer v1</td>
+                            <td>Claude evaluator with structured JSON report schema. Programmatic faithfulness check on numerical claims.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Verification</strong>: Run 10 complete evolutionary rounds on a test problem (e.g., function optimization). Verify all OTEL spans are emitted correctly. Confirm Database state is consistent after each round.</p>
+
+                <h3 id="phase-2-integration">7.2 Phase 2: Integration (Weeks 5&ndash;8)</h3>
+                <p><strong>Objective</strong>: Multi-iteration evolutionary loop with OTEL observability and safety gates.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Deliverable</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>OTEL span model</td>
+                            <td>Four new span types (evolution.generation, evaluation, analysis, selection) integrated with Paper 2&rsquo;s collector.</td>
+                        </tr>
+                        <tr>
+                            <td>Safety gates</td>
+                            <td>Budget caps (max_rounds, max_budget_usd). Kill switch via API flag. Human approval gate for production candidates.</td>
+                        </tr>
+                        <tr>
+                            <td>Parallel Researcher</td>
+                            <td>Fan-out to K=3 parallel candidate generation workers. Prompt caching for shared context.</td>
+                        </tr>
+                        <tr>
+                            <td>Cognition Base JIT</td>
+                            <td>Two-phase retrieval: lightweight refs then JIT load on demand. Token budget awareness.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Verification</strong>: Run 100 evolutionary rounds. Verify budget tracking accuracy. Trigger kill switch mid-round and confirm Database consistency. Measure prompt cache hit rate (target: &gt;70%).</p>
+
+                <h3 id="phase-3-hybrid-rl-evolution">7.3 Phase 3: Hybrid RL+Evolution (Weeks 9&ndash;12)</h3>
+                <p><strong>Objective</strong>: Integrated PPO + evolutionary selection with survival metrics as fitness.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Deliverable</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Survival fitness integration</td>
+                            <td>Connect Tier 3 fitness (21-day survival from Paper 1) to Database node scoring.</td>
+                        </tr>
+                        <tr>
+                            <td>Three-tier fitness</td>
+                            <td>Implement tiered scoring: Tier 1 (immediate execution), Tier 2 (merge/review), Tier 3 (survival).</td>
+                        </tr>
+                        <tr>
+                            <td>MAP-Elites diversity</td>
+                            <td>Implement quality-diversity archive with behavioral features: survival rate, complexity, test coverage.</td>
+                        </tr>
+                        <tr>
+                            <td>PPO integration</td>
+                            <td>Connect PPO policy updates from Paper 2 as the Researcher&rsquo;s generative model.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Verification</strong>: Run pilot on 3&ndash;5 representative repositories. Compare convergence rates of evolution-only, RL-only, and hybrid approaches. Measure MAP-Elites coverage across quality dimensions.</p>
+
+                <h3 id="phase-4-production-deployment">7.4 Phase 4: Production Deployment (Weeks 13&ndash;16)</h3>
+                <p><strong>Objective</strong>: Production evolutionary loop with full safety governance.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Deliverable</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Shadow deployment</td>
+                            <td>Evolutionary candidates evaluated but not deployed. Performance tracked alongside production agents.</td>
+                        </tr>
+                        <tr>
+                            <td>Canary rollout</td>
+                            <td>Same pattern as Paper 1: 5% &rarr; 25% &rarr; 100% with automated rollback triggers.</td>
+                        </tr>
+                        <tr>
+                            <td>Monitoring dashboard</td>
+                            <td>Grafana dashboard showing evolutionary progress, budget consumption, safety gate triggers, and fitness trends.</td>
+                        </tr>
+                        <tr>
+                            <td>Documentation</td>
+                            <td>Operational runbook, safety review checklist, and incident response procedures.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Verification</strong>: Shadow deployment produces measurable fitness improvements over baseline without degrading production metrics. Canary rollout triggers automated rollback at least once (deliberate test). Full OTEL trace audit passes review.</p>
+
+                <h3 id="success-criteria">7.5 Success Criteria</h3>
+                <p>Following the conditional target framework from Paper 1:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Conservative</th>
+                            <th>Optimistic</th>
+                            <th>Stretch</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fitness improvement over baseline</td>
+                            <td>+2%</td>
+                            <td>+5%</td>
+                            <td>+10%</td>
+                        </tr>
+                        <tr>
+                            <td>Candidate diversity (MAP-Elites coverage)</td>
+                            <td>40% cells occupied</td>
+                            <td>60%</td>
+                            <td>80%</td>
+                        </tr>
+                        <tr>
+                            <td>Convergence rate (rounds to threshold)</td>
+                            <td>500 rounds</td>
+                            <td>200 rounds</td>
+                            <td>50 rounds</td>
+                        </tr>
+                        <tr>
+                            <td>Safety gate trigger rate</td>
+                            <td>&lt;5% false positives</td>
+                            <td>&lt;2%</td>
+                            <td>&lt;1%</td>
+                        </tr>
+                        <tr>
+                            <td>Prompt cache hit rate</td>
+                            <td>&gt;60%</td>
+                            <td>&gt;75%</td>
+                            <td>&gt;85%</td>
+                        </tr>
+                        <tr>
+                            <td>Budget efficiency (fitness per dollar)</td>
+                            <td>1.5x baseline</td>
+                            <td>3x</td>
+                            <td>5x</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>These targets are conditional hypotheses, not empirical predictions <strong>[LOW]</strong>.</p>
+            </section>
+
+            <!-- 8. Risks and Mitigations -->
+            <section id="risks-and-mitigations">
+                <h2>8. Risks and Mitigations</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Probability</th>
+                            <th>Impact</th>
+                            <th>Mitigation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Fitness function gaming</strong> (Goodhart&rsquo;s Law)</td>
+                            <td>High</td>
+                            <td>Critical</td>
+                            <td>Multi-objective fitness; hold-out evaluation sets; regression detection on secondary metrics</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Evolutionary loop runaway costs</strong></td>
+                            <td>High</td>
+                            <td>High</td>
+                            <td>Hard budget caps (max_rounds, max_budget_usd); cost-per-round monitoring via OTEL; automatic halt</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Capability escalation</strong> (agent self-modification)</td>
+                            <td>Low</td>
+                            <td>Critical</td>
+                            <td>Scope constraints; sandbox isolation; code scanning; prohibition on modifying own fitness function</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deceptive alignment</strong> (candidates safe in eval, harmful in production)</td>
+                            <td>Low</td>
+                            <td>Critical</td>
+                            <td>Hold-out evaluation; shadow deployment; adversarial testing; canary rollout with automated rollback</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cognition Base data poisoning</strong></td>
+                            <td>Medium</td>
+                            <td>High</td>
+                            <td>Human curation gate; provenance tracking; retraction checking; embedding adversarial detection</td>
+                        </tr>
+                        <tr>
+                            <td><strong>21-day fitness latency</strong></td>
+                            <td>High</td>
+                            <td>Medium</td>
+                            <td>Three-tier fitness (Tier 1 immediate, Tier 2 medium-term, Tier 3 long-term); auxiliary reward bootstrapping from Paper 1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Context window exhaustion</strong></td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>Two-phase Cognition Base retrieval; Analyzer compression; prompt caching; adaptive context budgeting</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LLM judge miscalibration</strong></td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>Periodic calibration against human expert ratings; confidence thresholds with human escalation; judge transcript logging</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- 9. Open Questions -->
+            <section id="open-questions">
+                <h2>9. Open Questions</h2>
+                <ol>
+                    <li>
+                        <p><strong>Optimal population size</strong>: What is the right number of active candidates in the Database for code generation tasks? ASI-Evolve uses a periodically refreshed pool of 50 nodes (Section 4.1). Does this scale to multi-repository, multi-language settings?</p>
+                    </li>
+                    <li>
+                        <p><strong>UCB1 vs. PPO for code quality</strong>: Can ASI-Evolve&rsquo;s sampling policies outperform PPO for optimizing code survival rates? The two approaches have different inductive biases (discrete selection vs. continuous policy gradients), and empirical comparison is needed.</p>
+                    </li>
+                    <li>
+                        <p><strong>Minimum Cognition Base size</strong>: ASI-Evolve initializes with 80&ndash;150 domain papers (Section 4.1) or as few as 10 papers (Section 4.3). What is the minimum corpus size for effective domain-guided evolution in software engineering contexts?</p>
+                    </li>
+                    <li>
+                        <p><strong>Cross-domain transfer</strong>: Can evolutionary patterns discovered in one code quality domain (e.g., API design) transfer to others (e.g., test generation)? MAP-Elites behavioral features may enable cross-domain diversity, but empirical validation is required.</p>
+                    </li>
+                    <li>
+                        <p><strong>Analyzer faithfulness</strong>: Can the Analyzer reliably detect and prevent deceptive alignment in generated candidates? If the Analyzer uses the same LLM family as the Researcher, it may share blind spots. Cross-model evaluation and human audit remain essential.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <!-- 10. Conclusion -->
+            <section id="conclusion">
+                <h2>10. Conclusion</h2>
+                <p>This whitepaper completes a trilogy on agentic self-optimization:</p>
+                <ul>
+                    <li><strong>Paper 1</strong> established the concept: agent-generated code exhibits measurably higher churn and lower survival rates; these metrics can serve as RL reward signals for continuous improvement.</li>
+                    <li><strong>Paper 2</strong> specified the architecture: OTEL instrumentation captures code quality metrics, a Gymnasium-compatible RL environment trains PPO policies, and canary deployments ensure safe rollout.</li>
+                    <li><strong>This paper</strong> introduces the evolutionary paradigm: ASI-Evolve&rsquo;s population-based search over program space offers complementary capabilities (principled exploration, diversity maintenance, knowledge accumulation) that augment gradient-based RL.</li>
+                </ul>
+                <p>The systematic audit reveals that ASI-Evolve&rsquo;s core design &mdash; closed-loop evaluation, principled sampling, domain-adaptive context engineering &mdash; aligns well with production agentic best practices. However, significant gaps in safety, meta-evaluation, and operational robustness must be addressed before production deployment. The integration architecture proposed here maps each ASI-Evolve component to a Claude production pattern, adds safety governance grounded in Anthropic&rsquo;s five principles, and connects evolutionary fitness to the existing survival metrics pipeline.</p>
+                <p>The hybrid RL+Evolution architecture is the key contribution: RL handles exploitation (refining known good patterns via gradient updates) while evolution handles exploration (discovering novel patterns via population-based search). Together with three-tier fitness and full OTEL observability, this produces a system where agents continuously improve their code quality through both individual learning and collective search &mdash; closing the feedback loop that current production agents lack.</p>
+            </section>
+
+            <!-- References -->
+            <section id="references">
+                <h2>References</h2>
+                <ol>
+                    <li>Xu, W., Mi, T., Liu, Y., Nan, Y., Zhou, Z., Ye, L., Zhang, L., Qiao, Y., &amp; Liu, P. (2026). ASI-Evolve: AI Accelerates AI. SJTU/SII/GAIR. <a href="https://github.com/GAIR-NLP/ASI-Evolve">https://github.com/GAIR-NLP/ASI-Evolve</a></li>
+                    <li>Popescu, A. et al. (2026). Empirical Analysis of Code Quality in Agent-Generated Pull Requests. arXiv:2604.00917v1.</li>
+                    <li>Anthropic. (2026a). Building Effective Agents. <a href="https://www.anthropic.com/research/building-effective-agents">https://www.anthropic.com/research/building-effective-agents</a></li>
+                    <li>Anthropic. (2026b). Writing Effective Tools for Agents. <a href="https://www.anthropic.com/engineering/writing-tools-for-agents">https://www.anthropic.com/engineering/writing-tools-for-agents</a></li>
+                    <li>Anthropic. (2026c). Effective Context Engineering for AI Agents. <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents</a></li>
+                    <li>Anthropic. (2026d). Our Framework for Developing Safe and Trustworthy Agents. <a href="https://www.anthropic.com/news/our-framework-for-developing-safe-and-trustworthy-agents">https://www.anthropic.com/news/our-framework-for-developing-safe-and-trustworthy-agents</a></li>
+                    <li>Anthropic. (2026e). Agentic Misalignment: How LLMs Could Be Insider Threats. <a href="https://www.anthropic.com/research/agentic-misalignment">https://www.anthropic.com/research/agentic-misalignment</a></li>
+                    <li>Anthropic. (2026f). Demystifying Evals for AI Agents. <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents</a></li>
+                    <li>Anthropic. (2026g). Effective Harnesses for Long-Running Agents. <a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents</a></li>
+                    <li>Anthropic. (2026h). Rate Limits. <a href="https://platform.claude.com/docs/en/api/rate-limits">https://platform.claude.com/docs/en/api/rate-limits</a></li>
+                    <li>Auer, P., Cesa-Bianchi, N., &amp; Fischer, P. (2002). Finite-time Analysis of the Multiarmed Bandit Problem. <em>Machine Learning</em>, 47(2&ndash;3), 235&ndash;256.</li>
+                    <li>Mouret, J.-B., &amp; Clune, J. (2015). Illuminating Search Spaces by Mapping Elites. arXiv:1504.04909.</li>
+                    <li>Schulman, J., Wolski, F., Dhariwal, P., Radford, A., &amp; Klimov, O. (2017). Proximal Policy Optimization Algorithms. arXiv:1707.06347.</li>
+                    <li>Novikov, A. et al. (2025). AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery.</li>
+                    <li>Romera-Paredes, B. et al. (2023). Mathematical Discoveries from Program Search with Large Language Models. <em>Nature</em>.</li>
+                    <li>Integrity Studio AI Research. (2026a). Self-Optimizing Agentic Systems: Converting Code Quality Feedback into RL-Based Continuous Improvement. Technical Whitepaper.</li>
+                    <li>Integrity Studio AI Research. (2026b). Agentic Self-Optimization Architecture. Technical Specification.</li>
+                    <li>Integrity Studio AI Research. (2026c). Quality Audit Findings. V1.1 &mdash; Publication-Grade.</li>
+                </ol>
+                <p><strong>Document Generated</strong>: April 5, 2026<br>
+                <strong>Status</strong>: Technical Whitepaper<br>
+                <strong>Series</strong>: Agentic Self-Optimization, Paper 3 of 3</p>
+            </section>
+
+        </main>
+    </div>
+    <footer>
+        <a href="../index.html">&larr; Reports Hub</a>
+    </footer>
+</body>
+</html>
