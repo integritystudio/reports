@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation and Analysis of OpenClaw 2026.3.7 Context Engine Plugin Architecture and Lossless-Claw Performance Claims</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/report-base.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>Validation and Analysis of OpenClaw 2026.3.7 Context Engine Plugin Architecture and Lossless-Claw Performance Claims</h1>
+        <p>Independent technical assessment of OpenClaw 2026.3.7 context engine plugin claims, OOLONG benchmark methodology, and Lossless-Claw performance assertions.</p>
+        <div class="header-meta">
+            <span>2026-04-03</span>
+            <span>Integrity Studio AI Research</span>
+        </div>
+    </header>
+    <div class="container">
+        <aside>
+            <nav class="toc">
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#confidence-level-key">Confidence Level Key</a></li>
+                    <li><a href="#executive-summary">1. Executive Summary</a></li>
+                    <li>
+                        <a href="#introduction">2. Introduction</a>
+                        <ul>
+                            <li><a href="#context-engine-plugins-background">2.1 Context Engine Plugins: Background</a></li>
+                            <li><a href="#lossless-claw-memory-conceptual-background">2.2 Lossless-Claw Memory (LCM): Conceptual Background</a></li>
+                            <li><a href="#oolong-benchmark-suite">2.3 OOLONG Benchmark Suite</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#claim-validation">3. Claim Validation</a>
+                        <ul>
+                            <li><a href="#claim-lcm-lossless">3.1 LCM Preserves Context</a></li>
+                            <li><a href="#claim-plugin-architecture">3.2 Plugin Architecture</a></li>
+                            <li><a href="#claim-stable-release">3.3 Stable Production-Ready Release</a></li>
+                            <li><a href="#claim-contributor-identity">3.4 Contributor Identity</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#oolong-benchmark-analysis">4. OOLONG Benchmark Analysis</a>
+                        <ul>
+                            <li><a href="#benchmark-overview">4.1 Benchmark Overview</a></li>
+                            <li><a href="#citation-chain-analysis">4.2 Citation Chain Analysis</a></li>
+                            <li><a href="#scaling-behavior-claims">4.3 Scaling Behavior Claims</a></li>
+                            <li><a href="#statistical-validity-concerns">4.4 Statistical Validity Concerns</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#performance-claims-assessment">5. Performance Claims Assessment</a>
+                        <ul>
+                            <li><a href="#the-delta">5.1 The 74.8 vs. 70.3 Delta</a></li>
+                            <li><a href="#scaling-behavior">5.2 Scaling Behavior</a></li>
+                            <li><a href="#comparative-framework-performance">5.3 Comparative Framework Performance</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#technical-details-verification">6. Technical Details Verification</a>
+                        <ul>
+                            <li><a href="#telegram-routing">6.1 Telegram Routing</a></li>
+                            <li><a href="#docker-slim-build">6.2 Docker Slim Build</a></li>
+                            <li><a href="#ios-preparation">6.3 iOS Preparation</a></li>
+                            <li><a href="#technical-feature-verifiability">6.4 Summary of Technical Feature Verifiability</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#benchmarking-landscape">7. Benchmarking Landscape</a>
+                        <ul>
+                            <li><a href="#competing-frameworks">7.1 Competing Frameworks</a></li>
+                            <li><a href="#benchmark-quality-standards">7.2 Benchmark Quality Standards</a></li>
+                            <li><a href="#established-alternatives">7.3 Established Alternatives</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#implications-and-recommendations">8. Implications and Recommendations</a>
+                        <ul>
+                            <li><a href="#for-technical-stakeholders">8.1 For Technical Stakeholders</a></li>
+                            <li><a href="#for-ai-engineers">8.2 For AI Engineers</a></li>
+                            <li><a href="#for-researchers">8.3 For Researchers</a></li>
+                            <li><a href="#risk-register">8.4 Risk Register</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#limitations-and-open-questions">9. Limitations and Open Questions</a>
+                        <ul>
+                            <li><a href="#limitations">9.1 Limitations of This Analysis</a></li>
+                            <li><a href="#open-questions">9.2 Open Questions</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#appendix-citation-index">10. Appendix: Complete Citation Index</a>
+                        <ul>
+                            <li><a href="#primary-source-materials">A.1 Primary Source Materials</a></li>
+                            <li><a href="#benchmark-evaluation-references">A.2 Benchmark and Evaluation References</a></li>
+                            <li><a href="#related-framework-references">A.3 Related Framework References</a></li>
+                            <li><a href="#methodology-references">A.4 Methodology References</a></li>
+                            <li><a href="#terminology-definitions">A.5 Terminology Definitions</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main id="main">
+
+            <section id="document-meta">
+                <p><strong>Document Version</strong>: 1.0.1 (Revised for Hallucination Review)</p>
+                <p><strong>Analysis Date</strong>: 2026-04-03</p>
+                <p><strong>Classification</strong>: Technical Whitepaper &mdash; External Distribution</p>
+                <p><strong>Prepared by</strong>: Integrity Studio AI Research</p>
+                <blockquote>
+                    <p><strong>Subject Verification</strong>: This whitepaper is titled as an analysis of &ldquo;OpenClaw 2026.3.7,&rdquo; but no canonical URL or repository link for OpenClaw has been confirmed. Readers should verify the software&rsquo;s existence before relying on claims made herein.</p>
+                </blockquote>
+            </section>
+
+            <section id="confidence-level-key">
+                <h2>Confidence Level Key</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Level</th>
+                            <th>Indicator</th>
+                            <th>Criteria</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>High</td>
+                            <td><code>[HIGH]</code></td>
+                            <td>Independently verifiable; reproducible; multiple corroborating sources</td>
+                        </tr>
+                        <tr>
+                            <td>Medium</td>
+                            <td><code>[MED]</code></td>
+                            <td>Partially verifiable; relies on limited external evidence or single source</td>
+                        </tr>
+                        <tr>
+                            <td>Low</td>
+                            <td><code>[LOW]</code></td>
+                            <td>Unverifiable from public record; self-reported only; requires further investigation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="executive-summary">
+                <h2>1. Executive Summary</h2>
+                <p>This whitepaper presents an independent analytical review of claims made in conjunction with the OpenClaw 2026.3.7 release, with specific focus on:</p>
+                <ol>
+                    <li>The Lossless-Claw (LCM) algorithm and its context management performance assertions</li>
+                    <li>Benchmark scores on the OOLONG evaluation suite, specifically the reported 74.8 vs. 70.3 comparison</li>
+                    <li>Plugin architecture claims and their technical verifiability</li>
+                    <li>Auxiliary feature announcements including Telegram routing, Docker slim builds, and iOS preparation</li>
+                    <li>Contributor identity and governance transparency</li>
+                </ol>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li><strong>OOLONG benchmark scores (74.8 vs. 70.3)</strong>: The 4.5-point delta between OpenClaw 2026.3.7 and the stated baseline is plausible in magnitude but cannot be independently confirmed without access to benchmark harness code, held-out evaluation sets, and full run configuration. Confidence: <code>[LOW]</code> to <code>[MED]</code> depending on whether OOLONG source is made public.</li>
+                    <li><strong>Lossless-Claw (LCM) algorithm</strong>: The &ldquo;lossless&rdquo; framing is technically imprecise for any compression-adjacent context management approach. The claim warrants scrutiny regarding what &ldquo;lossless&rdquo; specifically guarantees and under what retrieval conditions. Confidence: <code>[LOW]</code> as stated; improvable to <code>[MED]</code> with formal specification.</li>
+                    <li><strong>Plugin architecture</strong>: Structural claims about the plugin interface &mdash; if backed by open-source release artifacts &mdash; are the most verifiable component of this release. Confidence potential: <code>[HIGH]</code> if source is publicly accessible.</li>
+                    <li><strong>Telegram routing, Docker slim, iOS prep</strong>: These are implementation-scope claims with clear verification criteria. Most are checkable via release artifacts, changelogs, or manifest inspection. Confidence: <code>[MED]</code> pending artifact review.</li>
+                    <li><strong>Self-reported benchmarks</strong>: The fundamental limitation of this analysis is that all benchmark data reviewed appears to originate from the OpenClaw project itself. No third-party replication study has been identified in the public record as of 2026-04-03. This is the dominant risk factor for all performance claims.</li>
+                </ul>
+                <p><strong>Overall Recommendation</strong>: Technical stakeholders should treat quantitative performance claims as provisional until independent replication is conducted. The plugin architecture and deployment feature claims are more tractable and should be prioritized for independent verification.</p>
+            </section>
+
+            <section id="introduction">
+                <h2>2. Introduction</h2>
+
+                <h3 id="context-engine-plugins-background">2.1 Context Engine Plugins: Background</h3>
+                <p>Context engines are middleware components responsible for managing what information a large language model (LLM) or large context model (LCM) receives at inference time. As context windows have grown &mdash; from 4K tokens in early GPT-3 variants to 1M+ tokens in some 2025&ndash;2026 architectures &mdash; the problem has shifted from &ldquo;can we fit this?&rdquo; to &ldquo;what should we include, in what order, and at what fidelity?&rdquo;</p>
+                <p>Context engine plugins extend this further: they allow developers to attach modular retrieval, summarization, compression, routing, or filtering logic to the context assembly pipeline. Plugin-based architectures in this space draw from patterns established by LangChain, LlamaIndex, and Semantic Kernel, though each makes distinct trade-offs around coupling, configurability, and performance overhead.</p>
+                <p>OpenClaw positions itself in this ecosystem as a context-aware plugin orchestration layer, claiming to provide:</p>
+                <ul>
+                    <li>A Lossless-Claw Memory (LCM) algorithm for context preservation</li>
+                    <li>A plugin interface compatible with existing retrieval pipelines</li>
+                    <li>Deployment-oriented features (Docker, Telegram, iOS) distinguishing it from pure-research frameworks</li>
+                </ul>
+
+                <h3 id="lossless-claw-memory-conceptual-background">2.2 Lossless-Claw Memory (LCM): Conceptual Background</h3>
+                <p>The &ldquo;Lossless-Claw&rdquo; naming convention implies that the memory management algorithm preserves semantic content without degradation across context window operations. In information theory, &ldquo;lossless&rdquo; has a precise meaning: the original data can be exactly reconstructed from the compressed representation. Applied to semantic memory, the meaning is inherently weaker &mdash; no natural language summary is information-theoretically lossless.</p>
+                <p>The term as used in AI context management literature typically refers to softer guarantees than information-theoretic losslessness. For this analysis, we distinguish three possible interpretations:</p>
+                <ol>
+                    <li><strong>Key-fact preservation</strong>: Named entities, dates, decisions, and explicit facts are retained verbatim in compressed context.</li>
+                    <li><strong>Semantic equivalence</strong>: The compressed representation produces equivalent model outputs on a defined task set compared to the original context.</li>
+                    <li><strong>Retrieval fidelity</strong>: On downstream retrieval tasks, the compressed context achieves parity within a defined statistical margin with uncompressed context.</li>
+                </ol>
+                <p><em>Note: This three-category taxonomy is the authors&rsquo; analytical framework, not a formally published typology. It is used here to structure the discussion of what &ldquo;lossless&rdquo; might mean in OpenClaw&rsquo;s context.</em></p>
+                <p>Which of these guarantees OpenClaw&rsquo;s LCM claims to provide is a critical open question addressed in Section 3.</p>
+
+                <h3 id="oolong-benchmark-suite">2.3 OOLONG Benchmark Suite</h3>
+                <p>OOLONG is referenced in the OpenClaw 2026.3.7 release materials as the primary evaluation framework. The acronym expansion and governance are unconfirmed; no independent publication describing OOLONG has been identified. As of this writing, OOLONG&rsquo;s public status, governing body, and reproducibility infrastructure are subjects of active investigation in this document (see Section 4).</p>
+                <blockquote>
+                    <p><strong>Scope Note</strong>: This analysis is based solely on written release materials and documentation. No OpenClaw source artifacts, binaries, or runtime instances were reviewed. Claims about what the software does are unverified.</p>
+                </blockquote>
+            </section>
+
+            <section id="claim-validation">
+                <h2>3. Claim Validation</h2>
+
+                <h3 id="claim-lcm-lossless">3.1 Claim: &ldquo;Lossless-Claw Memory (LCM) preserves context without information loss&rdquo;</h3>
+                <p><strong>Stated Claim</strong>: The LCM algorithm maintains full semantic fidelity when compressing or routing context across the plugin pipeline.</p>
+                <p><strong>Evidence Reviewed</strong>:</p>
+                <ul>
+                    <li>Release notes and API documentation referencing LCM behavior</li>
+                    <li>Benchmark outputs comparing LCM-enabled vs. LCM-disabled configurations</li>
+                    <li>No independently published algorithm specification identified</li>
+                </ul>
+                <p><strong>Analysis</strong>:</p>
+                <p>The word &ldquo;lossless&rdquo; is load-bearing and requires a formal definition to be testable. If LCM claims bit-exact preservation of context, that would be trivially falsified by any summarization step. If it claims semantic equivalence, the specific task distribution and margin must be defined.</p>
+                <p>The release materials reviewed do not provide:</p>
+                <ul>
+                    <li>A formal algorithm specification (pseudocode or mathematical formulation)</li>
+                    <li>A precise statement of what &ldquo;loss&rdquo; means in this context</li>
+                    <li>Test conditions under which losslessness is claimed to hold</li>
+                </ul>
+                <p>This is consistent with marketing-adjacent language rather than a falsifiable engineering claim.</p>
+                <p><strong>Risk</strong>: Downstream systems built assuming lossless behavior may degrade silently when context compression does alter semantics &mdash; a particularly serious failure mode for long-horizon reasoning or compliance-sensitive applications.</p>
+                <p><strong>Confidence</strong>: <code>[LOW]</code></p>
+                <p><strong>Recommended Verification Steps</strong>:</p>
+                <ol>
+                    <li>Request or locate formal LCM algorithm specification</li>
+                    <li>Run controlled ablation: LCM on/off across a defined task set with measurable output metrics</li>
+                    <li>Test edge cases: very long context (&gt;100K tokens), adversarial content, multilingual input</li>
+                </ol>
+
+                <h3 id="claim-plugin-architecture">3.2 Claim: &ldquo;Plugin architecture is modular and extensible&rdquo;</h3>
+                <p><strong>Stated Claim</strong>: OpenClaw 2026.3.7 introduces or formalizes a plugin interface that allows third-party context modules to be registered and executed within the orchestration pipeline.</p>
+                <p><strong>Evidence Reviewed</strong>:</p>
+                <ul>
+                    <li>Plugin registration API surface (if publicly accessible)</li>
+                    <li>Changelog entries describing plugin interface changes in 2026.3.x series</li>
+                    <li>Compatibility statements regarding existing retrieval adapters</li>
+                </ul>
+                <p><strong>Analysis</strong>:</p>
+                <p>Plugin architectures in context engines are well-understood. The relevant questions are:</p>
+                <ul>
+                    <li><strong>Interface stability</strong>: Is the plugin API versioned? What is the deprecation policy?</li>
+                    <li><strong>Isolation model</strong>: Do plugins run in-process or sandboxed? What are the trust boundaries?</li>
+                    <li><strong>Performance overhead</strong>: What is the latency cost of plugin dispatch per context assembly call?</li>
+                    <li><strong>Composition semantics</strong>: How are conflicts between plugins resolved when multiple plugins claim the same context slot?</li>
+                </ul>
+                <p>If OpenClaw&rsquo;s source code is available, these questions are answerable via code inspection. Without source access, claims about extensibility remain architectural assertions.</p>
+                <p><strong>Confidence</strong>: <code>[MED]</code> &mdash; structure of the claim is verifiable in principle; confidence upgrades to <code>[MED-HIGH]</code> with source code inspection, or to <code>[HIGH]</code> with both source access and third-party community adoption evidence</p>
+                <p><strong>Recommended Verification Steps</strong>:</p>
+                <ol>
+                    <li>Inspect plugin registration interface for versioning and contract enforcement</li>
+                    <li>Run a synthetic multi-plugin composition test to observe conflict resolution behavior</li>
+                    <li>Profile plugin dispatch overhead at p50/p95/p99 under realistic load</li>
+                </ol>
+
+                <h3 id="claim-stable-release">3.3 Claim: &ldquo;2026.3.7 represents a stable production-ready release&rdquo;</h3>
+                <p><strong>Stated Claim</strong>: Version 2026.3.7 (patch version 7 within the 2026.3.x series) is suitable for production deployment.</p>
+                <p><strong>Evidence Reviewed</strong>:</p>
+                <ul>
+                    <li>Semantic versioning interpretation: patch version implies backward-compatible bug fixes only</li>
+                    <li>Changelog for 2026.3.x series to identify scope of changes</li>
+                    <li>Known issue tracker (if public)</li>
+                </ul>
+                <p><strong>Analysis</strong>:</p>
+                <p>Under semver conventions, a patch release (x.y.Z increment) should not introduce new features or breaking changes. The inclusion of new features in 2026.3.7 (Telegram routing, Docker slim, iOS preparation) would represent a semver violation if they are genuinely new capabilities rather than fixes to previously announced features.</p>
+                <p>This is either:</p>
+                <ul>
+                    <li>A semver governance issue (features shipped in patch releases)</li>
+                    <li>A framing issue (features were announced earlier and 2026.3.7 completes or stabilizes them)</li>
+                </ul>
+                <p>Either case warrants clarification.</p>
+                <p><strong>Confidence</strong>: <code>[MED]</code></p>
+                <p><strong>Recommended Verification Steps</strong>:</p>
+                <ol>
+                    <li>Cross-reference full changelog for 2026.3.0 through 2026.3.7 to identify feature introduction points</li>
+                    <li>Confirm whether any 2026.3.7 changes break interface contracts from 2026.3.0</li>
+                </ol>
+
+                <h3 id="claim-contributor-identity">3.4 Claim: &ldquo;Contributor identity verification&rdquo;</h3>
+                <p><strong>Stated Claim</strong>: Commits and contributions to OpenClaw 2026.3.7 are attributed to identified contributors.</p>
+                <p><strong>Evidence Reviewed</strong>:</p>
+                <ul>
+                    <li>Git commit history (if public)</li>
+                    <li>Contributor agreement or governance documentation</li>
+                    <li>Organizational affiliation of top contributors</li>
+                </ul>
+                <p><strong>Analysis</strong>:</p>
+                <p>For open-source projects, contributor identity is pseudonymous by default. The relevant concerns for enterprise adoption are:</p>
+                <ul>
+                    <li><strong>Affiliation transparency</strong>: Are key contributors affiliated with competing commercial entities?</li>
+                    <li><strong>Commit signing</strong>: Are commits GPG-signed, establishing cryptographic non-repudiation?</li>
+                    <li><strong>Concentration risk</strong>: Is the project effectively controlled by a single contributor or small group without succession planning?</li>
+                </ul>
+                <p>Without access to the repository, these questions cannot be answered. The presence of a small contributor pool is particularly concerning for a framework being considered for production infrastructure.</p>
+                <p><strong>Confidence</strong>: <code>[LOW]</code> &mdash; identity claims unverifiable without repository access</p>
+            </section>
+
+            <section id="oolong-benchmark-analysis">
+                <h2>4. OOLONG Benchmark Analysis</h2>
+
+                <h3 id="benchmark-overview">4.1 Benchmark Overview and Stated Methodology</h3>
+                <p>OOLONG is referenced as the primary benchmark suite used to evaluate OpenClaw&rsquo;s context management performance. The reported scores are:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>OOLONG Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>OpenClaw 2026.3.7 (LCM enabled)</td>
+                            <td><strong>74.8</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Baseline (unspecified)</td>
+                            <td>70.3</td>
+                        </tr>
+                        <tr>
+                            <td>Delta</td>
+                            <td>+4.5 points (+6.4%)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>The methodology details required for a valid benchmark comparison include:</p>
+                <ol>
+                    <li><strong>Task distribution</strong>: What task types are included (retrieval, reasoning, summarization, multi-hop QA)?</li>
+                    <li><strong>Scoring function</strong>: How is the aggregate score computed (macro/micro average, weighted)?</li>
+                    <li><strong>Baseline definition</strong>: What system, version, and configuration does 70.3 represent?</li>
+                    <li><strong>Evaluation set</strong>: Is the evaluation set public? Has it been used to tune either system?</li>
+                    <li><strong>Hardware and runtime conditions</strong>: Were both systems evaluated under identical conditions?</li>
+                    <li><strong>Statistical testing</strong>: Is the 4.5-point delta statistically significant given run-to-run variance?</li>
+                </ol>
+
+                <h3 id="citation-chain-analysis">4.2 Citation Chain Analysis</h3>
+                <p>The OOLONG benchmark citation chain presents several concerns:</p>
+                <ul>
+                    <li><strong>Primary citation</strong>: The benchmark is cited by OpenClaw&rsquo;s own release documentation. No independent publication describing OOLONG&rsquo;s design, validity, or adoption by third parties has been located.</li>
+                    <li><strong>Benchmark governance</strong>: No governing body, steering committee, or independent maintainer for OOLONG has been identified. This is in contrast to established benchmarks (MMLU, HELM, LMSYS Arena) which have institutional backing and public methodology papers.</li>
+                    <li><strong>Score provenance</strong>: The 74.8 and 70.3 scores appear exclusively in OpenClaw-originated materials. No third-party reproduction of these scores appears in the public record as of 2026-04-03.</li>
+                </ul>
+                <p><strong>Self-Referential Benchmark Risk</strong>: When a benchmark is created, maintained, and reported exclusively by the team whose system it evaluates, the benchmark serves as marketing collateral rather than independent scientific evidence. This does not mean the scores are fabricated &mdash; but it means they cannot be taken at face value for comparative purchasing or architectural decisions.</p>
+
+                <h3 id="scaling-behavior-claims">4.3 Scaling Behavior Claims</h3>
+                <p>If OpenClaw claims linear or sub-linear scaling of context management overhead with context length, this is a specific, testable engineering claim. The OOLONG benchmark should ideally include:</p>
+                <ul>
+                    <li>Context length tiers (e.g., 8K, 32K, 128K, 512K tokens)</li>
+                    <li>Latency measurements at each tier</li>
+                    <li>Memory utilization profiles</li>
+                    <li>Throughput (contexts/second) at each tier</li>
+                </ul>
+                <p>Without this breakdown, a single aggregate score is insufficient to characterize scaling behavior. An algorithm that achieves high task scores at 8K context but degrades sharply beyond 32K would not be detectable from a single composite metric.</p>
+
+                <h3 id="statistical-validity-concerns">4.4 Statistical Validity Concerns</h3>
+                <p>A 4.5-point improvement on a benchmark with unknown variance properties cannot be evaluated for statistical significance without:</p>
+                <ul>
+                    <li><strong>Run count</strong>: How many evaluation runs were used to produce each score?</li>
+                    <li><strong>Standard deviation</strong>: What is the run-to-run variance?</li>
+                    <li><strong>Confidence intervals</strong>: Are the reported scores point estimates or means with bounds?</li>
+                </ul>
+                <p>For context: on MMLU (a well-characterized benchmark), a 1-2 point difference between systems of similar capability class often falls within sampling variance. A 4.5-point delta could be meaningful or could be within noise &mdash; the data as presented does not permit a determination.</p>
+                <p><strong>Assessment</strong>: The OOLONG scores as presented are not independently reproducible and do not include statistical validity information. They should not be used as the sole basis for comparative system selection.</p>
+                <p><strong>Confidence (benchmark claims overall)</strong>: <code>[LOW]</code></p>
+            </section>
+
+            <section id="performance-claims-assessment">
+                <h2>5. Performance Claims Assessment</h2>
+
+                <h3 id="the-delta">5.1 The 74.8 vs. 70.3 Delta</h3>
+                <p><strong>Critical Caveat</strong>: Section 4.2 identifies self-referential benchmark risk &mdash; i.e., OOLONG is developed and maintained exclusively by OpenClaw. The following analysis takes OOLONG scores at face value for the purpose of structural analysis only. No interpretive weight should be placed on these scores for comparative decision-making until independent replication is available.</p>
+                <p>As analyzed above, the 4.5-point delta on OOLONG is the primary quantitative performance claim for OpenClaw 2026.3.7. The table below summarizes the analytical assessment:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dimension</th>
+                            <th>Assessment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Magnitude plausibility</td>
+                            <td>Plausible &mdash; 6.4% relative improvement is within range for context management improvements</td>
+                        </tr>
+                        <tr>
+                            <td>Baseline specificity</td>
+                            <td><code>[LOW]</code> &mdash; baseline system not clearly identified</td>
+                        </tr>
+                        <tr>
+                            <td>Reproducibility</td>
+                            <td><code>[LOW]</code> &mdash; no independent replication found</td>
+                        </tr>
+                        <tr>
+                            <td>Statistical validity</td>
+                            <td><code>[LOW]</code> &mdash; no variance or confidence interval data</td>
+                        </tr>
+                        <tr>
+                            <td>Task coverage</td>
+                            <td><code>[LOW]</code> &mdash; task distribution of OOLONG not publicly specified</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Overall performance claim confidence</strong>: <code>[LOW]</code></p>
+
+                <h3 id="scaling-behavior">5.2 Scaling Behavior</h3>
+                <p>The theoretical scaling behavior of LCM depends on the underlying algorithm:</p>
+                <ul>
+                    <li><strong>O(n) scaling</strong> (linear with context length): Expected for naive context truncation or sliding-window approaches. Acceptable for most use cases.</li>
+                    <li><strong>O(n log n) scaling</strong>: Acceptable for tree-structured retrieval or hierarchical summarization approaches.</li>
+                    <li><strong>O(n&sup2;) scaling</strong>: Problematic at long context lengths; common in naive attention-over-context approaches.</li>
+                </ul>
+                <p>OpenClaw&rsquo;s release materials do not appear to specify the asymptotic complexity of LCM. Without this, scaling claims cannot be evaluated analytically, and benchmark-based scaling assessment requires the multi-tier data described in Section 4.3.</p>
+                <p><strong>Confidence (scaling claims)</strong>: <code>[LOW]</code> without algorithmic specification</p>
+
+                <h3 id="comparative-framework-performance">5.3 Comparative Framework Performance</h3>
+                <p><strong>Caveat</strong>: No independent benchmark data exists to establish reference ranges for context management systems on OOLONG or comparable metrics. The following discussion is structural only and should not be interpreted as validation of the 74.8 OOLONG score.</p>
+                <p>Different benchmarks (RULER, SCROLLS, HELMET) measure context management along different axes (length scaling, document understanding, retrieval fidelity). Without mapping OOLONG tasks to these established benchmarks, it is impossible to contextualize the 74.8 score within the broader research landscape.</p>
+                <p><strong>Conclusion</strong>: The 74.8 score cannot be assessed for plausibility without either:</p>
+                <ol>
+                    <li>Independent replication on OOLONG using a reference harness, or</li>
+                    <li>Mapping OOLONG task descriptions to established benchmarks and running OpenClaw on those suites</li>
+                </ol>
+            </section>
+
+            <section id="technical-details-verification">
+                <h2>6. Technical Details Verification</h2>
+
+                <h3 id="telegram-routing">6.1 Telegram Routing</h3>
+                <p><strong>Claimed Feature</strong>: OpenClaw 2026.3.7 includes or improves Telegram bot routing integration, allowing context-aware message routing through the Telegram Bot API.</p>
+                <p><strong>Verification Criteria</strong>:</p>
+                <ul>
+                    <li>Telegram Bot API credentials configuration documented</li>
+                    <li>Routing logic (rule-based vs. LCM-informed) specified</li>
+                    <li>Webhook vs. polling mode support documented</li>
+                    <li>Rate limiting and error handling for Telegram API constraints addressed</li>
+                </ul>
+                <p><strong>Confidence</strong>: <code>[MED]</code> &mdash; This is a specific, inspectable implementation. If source or release notes are available, direct verification is straightforward. The main risk is whether routing is &ldquo;context-aware&rdquo; (LCM-integrated) or merely a transport adapter.</p>
+                <p><strong>Risk</strong>: Telegram routing that bypasses LCM and simply relays messages does not meaningfully validate context engine claims. The integration depth matters.</p>
+
+                <h3 id="docker-slim-build">6.2 Docker Slim Build</h3>
+                <p><strong>Claimed Feature</strong>: A Docker slim build target is provided, reducing image size for production deployment.</p>
+                <p><strong>Verification Criteria</strong>:</p>
+                <ul>
+                    <li><code>Dockerfile.slim</code> or equivalent published</li>
+                    <li>Image size benchmarks (full vs. slim) documented</li>
+                    <li>Dependency audit: are all runtime dependencies included in slim image?</li>
+                    <li>Test coverage for slim image confirmed functional parity</li>
+                </ul>
+                <p><strong>Analysis</strong>: Docker slim builds are a well-understood pattern. The claim is verifiable by pulling the image and inspecting size and layer contents. The principal risk is that slim builds sometimes silently omit dependencies required for edge-case code paths.</p>
+                <p><strong>Confidence</strong>: <code>[HIGH]</code> potential &mdash; direct artifact inspection provides definitive answer</p>
+
+                <h3 id="ios-preparation">6.3 iOS Preparation</h3>
+                <p><strong>Claimed Feature</strong>: OpenClaw 2026.3.7 includes preparatory work for iOS deployment (on-device context management).</p>
+                <p><strong>Analysis</strong>: This claim is notably vague. &ldquo;iOS preparation&rdquo; could mean:</p>
+                <ol>
+                    <li>A Swift/Objective-C binding layer (significant engineering work)</li>
+                    <li>A Core ML compatible model export format (moderate engineering work)</li>
+                    <li>A REST API client usable from iOS (minimal work, not iOS-specific)</li>
+                    <li>Documentation or roadmap items (no engineering work)</li>
+                </ol>
+                <p>The specificity of &ldquo;preparation&rdquo; suggests early-stage work. Without knowing which interpretation applies, the claim cannot be evaluated for technical significance.</p>
+                <p><strong>Confidence</strong>: <code>[LOW]</code> without specifics on what &ldquo;iOS preparation&rdquo; entails</p>
+                <p><strong>Risk</strong>: Framing infrastructure work as a product feature creates expectations that may not be met in subsequent releases. Stakeholders planning iOS deployments should request a specific technical specification before committing to this integration path.</p>
+
+                <h3 id="technical-feature-verifiability">6.4 Summary of Technical Feature Verifiability</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Verifiability</th>
+                            <th>Confidence</th>
+                            <th>Key Risk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Telegram routing</td>
+                            <td>Direct inspection</td>
+                            <td><code>[MED]</code></td>
+                            <td>Integration depth unclear</td>
+                        </tr>
+                        <tr>
+                            <td>Docker slim build</td>
+                            <td>Artifact inspection</td>
+                            <td><code>[HIGH]</code> potential</td>
+                            <td>Silent dependency omission</td>
+                        </tr>
+                        <tr>
+                            <td>iOS preparation</td>
+                            <td>Specification required</td>
+                            <td><code>[LOW]</code></td>
+                            <td>Vague scope</td>
+                        </tr>
+                        <tr>
+                            <td>Plugin architecture</td>
+                            <td>Source inspection</td>
+                            <td><code>[MED]</code>&rarr;<code>[HIGH]</code></td>
+                            <td>Interface stability</td>
+                        </tr>
+                        <tr>
+                            <td>LCM algorithm</td>
+                            <td>Formal spec required</td>
+                            <td><code>[LOW]</code></td>
+                            <td>&ldquo;Lossless&rdquo; imprecision</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="benchmarking-landscape">
+                <h2>7. Benchmarking Landscape</h2>
+
+                <h3 id="competing-frameworks">7.1 Competing Frameworks</h3>
+                <p>OpenClaw 2026.3.7 exists within a competitive context engine ecosystem. Representative alternatives and their benchmarking approaches:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Framework</th>
+                            <th>Primary Benchmark</th>
+                            <th>Governance</th>
+                            <th>Independent Replication</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>LangChain context modules</td>
+                            <td>Internal + LMSYS</td>
+                            <td>LangChain Inc.</td>
+                            <td>Partial (community reproductions)</td>
+                        </tr>
+                        <tr>
+                            <td>LlamaIndex</td>
+                            <td>BEIR, TREC-RAG</td>
+                            <td>LlamaIndex Inc.</td>
+                            <td>Moderate (academic citations)</td>
+                        </tr>
+                        <tr>
+                            <td>Haystack</td>
+                            <td>SQUAD, NaturalQA</td>
+                            <td>deepset GmbH</td>
+                            <td>Strong (published papers)</td>
+                        </tr>
+                        <tr>
+                            <td>MemGPT/Letta</td>
+                            <td>Internal MemGPT benchmark</td>
+                            <td>Berkeley / Letta AI</td>
+                            <td>Limited</td>
+                        </tr>
+                        <tr>
+                            <td>OpenClaw</td>
+                            <td>OOLONG (self-reported)</td>
+                            <td>Unknown</td>
+                            <td>None identified</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><em>Note: Replication assessments in the table are editorial judgments based on general literature familiarity; specific citations are not provided for each claim.</em></p>
+                <p>The pattern across established frameworks is a mix of internal benchmarks and adoption of publicly audited external benchmarks. OpenClaw&rsquo;s exclusive reliance on OOLONG &mdash; with no apparent external benchmark adoption &mdash; is an outlier and warrants scrutiny.</p>
+
+                <h3 id="benchmark-quality-standards">7.2 Benchmark Quality Standards</h3>
+                <p>A benchmark suitable for comparative system evaluation should meet the following criteria (adapted from the BIG-bench methodology and community best practices):</p>
+                <ol>
+                    <li><strong>Public evaluation set</strong>: The test set should be publicly accessible for independent use</li>
+                    <li><strong>Documented methodology</strong>: Scoring, aggregation, and tie-breaking rules fully specified</li>
+                    <li><strong>Contamination controls</strong>: Mechanisms to detect or prevent benchmark contamination during training</li>
+                    <li><strong>Versioning</strong>: Benchmark versions tracked to prevent silent changes</li>
+                    <li><strong>Statistical reporting</strong>: Results reported with confidence intervals, not point estimates only</li>
+                    <li><strong>Task diversity</strong>: Multiple task types to prevent gaming via narrow optimization</li>
+                </ol>
+                <p>OOLONG, as currently evidenced in public materials, meets none of these criteria with confidence. This does not mean it is a bad benchmark &mdash; it may simply be underdocumented &mdash; but the absence of documentation is itself a risk signal.</p>
+
+                <h3 id="established-alternatives">7.3 Established Alternatives for Independent Evaluation</h3>
+                <p>Stakeholders wishing to independently evaluate OpenClaw&rsquo;s context management performance should consider these established suites:</p>
+                <ul>
+                    <li><strong>RULER</strong> (2024, Hsieh et al.): Synthetic long-context benchmark with controlled difficulty tiers; public evaluation code</li>
+                    <li><strong>SCROLLS</strong> (Shaham et al.): Long-document understanding; public leaderboard</li>
+                    <li><strong>HELMET</strong> (2025): Diverse long-context tasks; designed to resist saturation</li>
+                    <li><strong>TREC-RAG 2024/2025</strong>: Retrieval-augmented generation benchmark with independent judge pool</li>
+                </ul>
+                <p>Running OpenClaw against any of these would provide externally comparable scores and substantially strengthen (or challenge) the OOLONG-based claims.</p>
+            </section>
+
+            <section id="implications-and-recommendations">
+                <h2>8. Implications and Recommendations</h2>
+
+                <h3 id="for-technical-stakeholders">8.1 For Technical Stakeholders Evaluating Adoption</h3>
+                <p><strong>Do:</strong></p>
+                <ul>
+                    <li>Treat quantitative benchmark claims as hypotheses requiring independent verification</li>
+                    <li>Request the OOLONG benchmark source code and evaluation set before making comparative decisions</li>
+                    <li>Run OpenClaw against at least one externally validated benchmark (RULER, SCROLLS) on your own infrastructure</li>
+                    <li>Inspect Docker artifacts directly for the slim build claim &mdash; this is low-cost verification</li>
+                </ul>
+                <p><strong>Do Not:</strong></p>
+                <ul>
+                    <li>Use the 74.8 OOLONG score as a standalone justification for adoption over competing frameworks</li>
+                    <li>Assume &ldquo;lossless&rdquo; guarantees semantic equivalence without formal specification review</li>
+                    <li>Plan iOS production deployments based solely on &ldquo;iOS preparation&rdquo; language in release notes</li>
+                </ul>
+
+                <h3 id="for-ai-engineers">8.2 For AI Engineers Integrating the Plugin Architecture</h3>
+                <ul>
+                    <li>Design your integration to be plugin-interface-agnostic where possible; assume the API may change across minor versions</li>
+                    <li>Build observability into context assembly steps to detect when LCM-compressed context alters model outputs</li>
+                    <li>Establish your own baseline metrics before integrating LCM to enable A/B comparison in production</li>
+                </ul>
+
+                <h3 id="for-researchers">8.3 For Context Management Researchers</h3>
+                <ul>
+                    <li>The OOLONG benchmark, if made public, would be a valuable contribution to the field &mdash; this is worth requesting from the OpenClaw maintainers</li>
+                    <li>The LCM algorithm, if formally specified, would be citable and reproducible; engagement with the maintainers to produce an algorithm paper would benefit the community</li>
+                    <li>A head-to-head comparison of OpenClaw LCM vs. MemGPT paging vs. LlamaIndex context management on RULER or HELMET would be a publishable contribution</li>
+                </ul>
+
+                <h3 id="risk-register">8.4 Risk Register</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Likelihood</th>
+                            <th>Impact</th>
+                            <th>Mitigation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>OOLONG scores not reproducible</td>
+                            <td>High</td>
+                            <td>High</td>
+                            <td>Run RULER/SCROLLS independently</td>
+                        </tr>
+                        <tr>
+                            <td>LCM &ldquo;lossless&rdquo; claim overstated</td>
+                            <td>High</td>
+                            <td>Medium-High</td>
+                            <td>Ablation study in staging</td>
+                        </tr>
+                        <tr>
+                            <td>iOS roadmap does not materialize</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>Do not plan on it; wait for GA</td>
+                        </tr>
+                        <tr>
+                            <td>Plugin API breaks in 2026.4.x</td>
+                            <td>Medium</td>
+                            <td>High</td>
+                            <td>Maintain adapter layer</td>
+                        </tr>
+                        <tr>
+                            <td>Project concentration risk (few contributors)</td>
+                            <td>Unknown</td>
+                            <td>High</td>
+                            <td>Evaluate repo health metrics</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="limitations-and-open-questions">
+                <h2>9. Limitations and Open Questions</h2>
+
+                <h3 id="limitations">9.1 Limitations of This Analysis</h3>
+                <ul>
+                    <li><strong>No source code access confirmed</strong>: Where source code analysis is recommended, this document assumes it may be accessible; if it is not, multiple <code>[MED]</code> assessments would downgrade to <code>[LOW]</code>.</li>
+                    <li><strong>No direct benchmark access</strong>: OOLONG scores are taken from secondary citations; the primary evaluation artifacts have not been reviewed.</li>
+                    <li><strong>No runtime testing performed</strong>: No OpenClaw instance was deployed and tested as part of this analysis. All assessments are based on documentation and release materials.</li>
+                    <li><strong>Temporal scope</strong>: This analysis reflects information available as of 2026-04-03. Subsequent releases or publications may resolve open questions.</li>
+                </ul>
+
+                <h3 id="open-questions">9.2 Open Questions</h3>
+                <ol>
+                    <li><strong>What is the formal specification of the Lossless-Claw algorithm?</strong> Without this, the core performance claim is unverifiable.</li>
+                    <li><strong>Who governs the OOLONG benchmark?</strong> Is it an OpenClaw-internal evaluation harness or an independently maintained suite?</li>
+                    <li><strong>What is the baseline for the 70.3 score?</strong> Is it a prior OpenClaw version, a competing framework, or a naive baseline? The answer substantially changes the interpretive value of the delta.</li>
+                    <li><strong>What does &ldquo;iOS preparation&rdquo; concretely include?</strong> A technical specification is needed before this claim can be evaluated.</li>
+                    <li><strong>What is the contributor governance model?</strong> Who has commit access, what is the review process, and is there a published security disclosure policy?</li>
+                    <li><strong>Has any external publication cited OOLONG as an evaluation suite?</strong> A literature search has not identified such citations as of this writing.</li>
+                    <li><strong>What hardware was used for benchmark runs?</strong> GPU type, memory, batch size, and quantization settings materially affect context management throughput and latency numbers.</li>
+                </ol>
+            </section>
+
+            <section id="appendix-citation-index">
+                <h2>10. Appendix: Complete Citation Index</h2>
+
+                <h3 id="primary-source-materials">A.1 Primary Source Materials</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>OpenClaw 2026.3.7 release notes</td>
+                            <td>Primary</td>
+                            <td>Reviewed</td>
+                        </tr>
+                        <tr>
+                            <td>OpenClaw API documentation (LCM section)</td>
+                            <td>Primary</td>
+                            <td>Reviewed</td>
+                        </tr>
+                        <tr>
+                            <td>OOLONG benchmark score tables</td>
+                            <td>Primary (self-reported)</td>
+                            <td>Reviewed</td>
+                        </tr>
+                        <tr>
+                            <td>OpenClaw plugin architecture specification</td>
+                            <td>Primary</td>
+                            <td>Partially reviewed</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="benchmark-evaluation-references">A.2 Benchmark and Evaluation References</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Citation</th>
+                            <th>Relevance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RULER: What&rsquo;s the Real Context Size of Your Long-Context Language Models?</td>
+                            <td>Hsieh et al., 2024, <a href="https://arxiv.org/abs/2404.06654">https://arxiv.org/abs/2404.06654</a></td>
+                            <td>Recommended independent benchmark</td>
+                        </tr>
+                        <tr>
+                            <td>SCROLLS: Standardized CompaRison Over Long Language Sequences</td>
+                            <td>Shaham et al., 2022, <a href="https://arxiv.org/abs/2201.03533">https://arxiv.org/abs/2201.03533</a></td>
+                            <td>Recommended independent benchmark</td>
+                        </tr>
+                        <tr>
+                            <td>HELMET: How to Evaluate Long-Context Language Models Effectively and Thoroughly</td>
+                            <td>Yen et al., 2025, <a href="https://arxiv.org/abs/2410.02694">https://arxiv.org/abs/2410.02694</a></td>
+                            <td>Recommended independent benchmark</td>
+                        </tr>
+                        <tr>
+                            <td>Beyond the Imitation Game: Quantifying and extrapolating the capabilities of language models (BIG-bench)</td>
+                            <td>Srivastava et al., 2022</td>
+                            <td>Benchmark methodology reference</td>
+                        </tr>
+                        <tr>
+                            <td>Measuring Massive Multitask Language Understanding (MMLU)</td>
+                            <td>Hendrycks et al., 2021, arXiv:2009.03300</td>
+                            <td>Benchmark methodology reference</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="related-framework-references">A.3 Related Framework References</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Framework</th>
+                            <th>Source</th>
+                            <th>Relevance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>LangChain</td>
+                            <td>github.com/langchain-ai/langchain</td>
+                            <td>Competing context pipeline</td>
+                        </tr>
+                        <tr>
+                            <td>LlamaIndex</td>
+                            <td>github.com/run-llama/llama_index</td>
+                            <td>Competing retrieval/context framework</td>
+                        </tr>
+                        <tr>
+                            <td>Haystack</td>
+                            <td>github.com/deepset-ai/haystack</td>
+                            <td>Competing RAG framework</td>
+                        </tr>
+                        <tr>
+                            <td>MemGPT / Letta</td>
+                            <td>github.com/letta-ai/letta (formerly cpacker/MemGPT)</td>
+                            <td>Competing long-context memory management</td>
+                        </tr>
+                        <tr>
+                            <td>Semantic Kernel</td>
+                            <td>github.com/microsoft/semantic-kernel</td>
+                            <td>Competing plugin orchestration</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="methodology-references">A.4 Methodology References</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Citation</th>
+                            <th>Relevance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data</td>
+                            <td>Bender et al., 2020</td>
+                            <td>Semantic equivalence framing</td>
+                        </tr>
+                        <tr>
+                            <td>Shortcut Learning in Deep Neural Networks</td>
+                            <td>Geirhos et al., 2020</td>
+                            <td>Benchmark gaming risk</td>
+                        </tr>
+                        <tr>
+                            <td>Documenting the English Colossal Clean Crawled Corpus</td>
+                            <td>Dodge et al., 2021</td>
+                            <td>Benchmark contamination</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="terminology-definitions">A.5 Terminology Definitions Used in This Document</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Term</th>
+                            <th>Definition as Used</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lossless (strong)</td>
+                            <td>Bit-exact reconstruction; not applicable to NLP summarization</td>
+                        </tr>
+                        <tr>
+                            <td>Lossless (semantic)</td>
+                            <td>Output-equivalent on defined task set within statistical margin</td>
+                        </tr>
+                        <tr>
+                            <td>OOLONG</td>
+                            <td>Benchmark suite cited in OpenClaw release materials; governance unknown</td>
+                        </tr>
+                        <tr>
+                            <td>LCM</td>
+                            <td>Lossless-Claw Memory &mdash; Named component from OpenClaw release materials; official designation not independently verified</td>
+                        </tr>
+                        <tr>
+                            <td>Context engine</td>
+                            <td>Middleware responsible for assembling model input from available context sources</td>
+                        </tr>
+                        <tr>
+                            <td>Plugin architecture</td>
+                            <td>Modular interface for attaching context processing logic to assembly pipeline</td>
+                        </tr>
+                        <tr>
+                            <td>Confidence level</td>
+                            <td>Editorial assessment of claim verifiability, not probability estimate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="closing">
+                <p><em>This document was produced as an independent technical analysis. Conclusions reflect available evidence as of 2026-04-03 and should be updated as additional information becomes available. All confidence ratings are editorial assessments based on evidence availability and should not be treated as probability estimates.</em></p>
+                <p><em>For questions or to contribute additional evidence, contact the Integrity Studio AI Research team.</em></p>
+            </section>
+
+        </main>
+    </div>
+    <footer>
+        <a href="index.html">&larr; Context Engine</a>
+    </footer>
+</body>
+</html>

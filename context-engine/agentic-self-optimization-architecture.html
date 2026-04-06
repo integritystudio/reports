@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="integrity-studio">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Self-Optimization Framework: Architecture &amp; Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/report-base.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <header>
+        <h1>Agentic Self-Optimization Framework: Architecture &amp; Design</h1>
+        <p>OpenTelemetry-based observability framework for RL-driven agent code quality improvement</p>
+        <div class="header-meta">
+            <span>April 3, 2026</span>
+            <span>Integrity Studio AI Research</span>
+            <span>Version 1.0</span>
+        </div>
+    </header>
+    <div class="container">
+        <aside>
+            <nav class="toc">
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#executive-summary">Executive Summary</a></li>
+                    <li><a href="#problem-statement">1. Problem Statement</a></li>
+                    <li><a href="#churn-data-model">2. Churn Data Model</a></li>
+                    <li><a href="#otel-telemetry-architecture">3. OTEL Telemetry Architecture</a></li>
+                    <li><a href="#rl-environment-design">4. RL Environment Design</a></li>
+                    <li><a href="#multi-agent-rl-training-architecture">5. Multi-Agent RL Training Architecture</a></li>
+                    <li><a href="#feedback-integration-pipeline">6. Feedback Integration Pipeline</a></li>
+                    <li><a href="#deployment-safety-and-guardrails">7. Deployment Safety &amp; Guardrails</a></li>
+                    <li><a href="#monitoring-and-observability">8. Monitoring &amp; Observability</a></li>
+                    <li><a href="#implementation-roadmap">9. Implementation Roadmap</a></li>
+                    <li><a href="#risks-and-mitigation">10. Risks &amp; Mitigation</a></li>
+                    <li><a href="#success-metrics">11. Success Metrics</a></li>
+                    <li><a href="#references">References</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main id="main">
+
+            <section id="executive-summary">
+                <h2>Executive Summary</h2>
+                <p>This document defines an OpenTelemetry (OTEL)-based observability framework that measures agent/skill/plugin code quality using the churn data model from Popescu et al. (2026), translating code stability metrics into reinforcement learning (RL) reward signals. The framework enables self-optimizing agentic systems that learn to produce higher-quality, longer-lived code by observing post-deployment code survival, merge velocity, and downstream stability patterns.</p>
+                <p><strong>Core Innovation</strong>: Treating agent outputs as continuous experiments with measurable feedback loops, enabling RL agents to optimize for production-grade code stability&mdash;not just task completion.</p>
+                <p><strong>Key Components</strong>:</p>
+                <ol>
+                    <li>Code Churn Telemetry Model (OTEL spans + attributes)</li>
+                    <li>RL Environment abstraction (Gymnasium-compatible)</li>
+                    <li>Multi-agent policy learning (Stable Baselines3 + Pufferlib)</li>
+                    <li>Feedback integration pipeline (Git analysis &rarr; OTEL &rarr; RL reward)</li>
+                    <li>Deployment safety guardrails (gradual rollout, rollback triggers)</li>
+                </ol>
+            </section>
+
+            <section id="problem-statement">
+                <h2>1. Problem Statement</h2>
+
+                <h3>Current State (2026)</h3>
+                <p>Agent-generated code exhibits distinct failure modes:</p>
+                <ul>
+                    <li><strong>Higher churn rates</strong>: Claude Code median 0.8&ndash;1.0 vs. human median 0&ndash;0.4 (Popescu et al., Figure 9, &sect;4.2)</li>
+                    <li><strong>Lower survival rates</strong>: Effect sizes modest but consistently negative (Cliff&rsquo;s &delta; = &minus;0.05 to &minus;0.14; Figure 8, &sect;4.2)</li>
+                    <li><strong>Repository concentration bias</strong>: Agent PRs concentrate in 0-star/test repos at varying rates (Codex 75.3%, Claude Code 51.7%, Copilot 59.6%, Devin 64.1%; Popescu et al. Table 4, &sect;4.1.1). Human PRs more distributed (40.5% in 0-star repos).</li>
+                    <li><strong>Faster merge velocity</strong>: Codex median 0.5 min vs. human median 0.4 hours in low-star repos; human PRs ~10 hours in high-star repos (Figure 6, &sect;4.1.3 Pull Request Merges)</li>
+                </ul>
+                <p><strong>Root cause</strong>: Agents optimize for immediate task completion; lack feedback on production-grade code quality.</p>
+
+                <h3>Desired Future State</h3>
+                <ul>
+                    <li><strong>Agents learn from code survival signals</strong>: Each line&rsquo;s post-deployment lifetime becomes a training signal</li>
+                    <li><strong>Continuous improvement loop</strong>: Agent policies updated as new code stability data arrives</li>
+                    <li><strong>Production-grade outputs</strong>: Agents internalize patterns that correlate with high-survival code</li>
+                    <li><strong>Measurable framework quality</strong>: Operators track agent skill improvement via OTEL dashboards</li>
+                </ul>
+            </section>
+
+            <section id="churn-data-model">
+                <h2>2. Churn Data Model (From Popescu et al. 2026)</h2>
+
+                <h3>Metrics Collected Per PR/Commit</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Type</th>
+                            <th>Collection Window</th>
+                            <th>Production Signal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Survival Rate</strong></td>
+                            <td>% lines unmodified</td>
+                            <td>3d, 7d, 21d post-merge</td>
+                            <td>Long-term code viability</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Churn Rate</strong></td>
+                            <td>% lines modified</td>
+                            <td>Same windows</td>
+                            <td>Instability indicator</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deletion Rate</strong></td>
+                            <td>% lines deleted</td>
+                            <td>Same windows</td>
+                            <td>Code rejection signal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Merge Rate</strong></td>
+                            <td>% PRs merged</td>
+                            <td>Immediate</td>
+                            <td>Code review quality</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Merge Time</strong></td>
+                            <td>Hours to merge</td>
+                            <td>Immediate</td>
+                            <td>Review friction / urgency</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Change Size</strong></td>
+                            <td>Lines added + lines removed (per Popescu et al. &sect;3.2)</td>
+                            <td>Per PR</td>
+                            <td>Scope complexity</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Review Comments</strong></td>
+                            <td>Count per PR</td>
+                            <td>Pre-merge</td>
+                            <td>Code clarity issues</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Review Count</strong></td>
+                            <td>Number of reviewers</td>
+                            <td>Pre-merge</td>
+                            <td>Review thoroughness</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Why These Metrics?</h3>
+                <ol>
+                    <li><strong>Survival metrics</strong> = Ground truth of code quality in production context</li>
+                    <li><strong>Merge signals</strong> = Immediate feedback (faster &rarr; less controversial)</li>
+                    <li><strong>Change size</strong> = Proxy for defect density (larger changes &rarr; more bugs)</li>
+                    <li><strong>Review signals</strong> = Proxy for code clarity (fewer comments &rarr; clearer code)</li>
+                </ol>
+            </section>
+
+            <section id="otel-telemetry-architecture">
+                <h2>3. OTEL Telemetry Architecture</h2>
+
+                <h3>Span Structure: Code Quality Pipeline</h3>
+<pre><code># Parent span: Code generation (day 0)
+Span: "code-generation"
+  start: 2026-04-03T10:15:00Z
+  end: 2026-04-03T10:15:45Z
+  attributes:
+    agent.name: "claude-code-v4.5"
+    agent.skill: "api-endpoint-refactor"
+    agent.model: "sonnet-4.6"
+    tool.type: "plugin|skill|agent"
+    correlation.trace_id: "abc-123-def"  # Used to link delayed spans
+    code.event: "generated"
+
+  # Immediate child: Code review/merge event (same day or +1-7 days)
+  Child Span: "code-merge-event"
+    start: 2026-04-04T08:00:00Z  # Sometime after generation
+    end: 2026-04-04T08:05:00Z
+    attributes:
+      code.quality.merged: true
+      code.quality.merge_time_hours: 22.25
+      code.quality.review_comments: 4
+      code.quality.review_count: 2
+      git.commit_hash: "abc123..."
+
+# Delayed spans: Code survival checkpoints (created on days 3, 7, 21)
+# These are NOT children (violates OTEL spec). Instead, link them to parent via trace/correlation.
+Span: "code-survival-3d" (created on 2026-04-06T10:15:00Z)
+  links:
+    - parent_span_context: (from code-generation trace)
+  attributes:
+    code.quality.survival_3d: 0.92
+    code.quality.churn_3d: 0.05
+    code.quality.deletion_3d: 0.03
+    correlation.trace_id: "abc-123-def"  # Matches parent
+    code.event: "survival_checkpoint"
+    code.checkpoint_window: "3d"
+
+Span: "code-survival-21d" (created on 2026-04-24T10:15:00Z)
+  links:
+    - parent_span_context: (from code-generation trace)
+  attributes:
+    code.quality.survival_21d: 0.78
+    code.quality.churn_21d: 0.15
+    code.quality.deletion_21d: 0.07
+    correlation.trace_id: "abc-123-def"  # Matches parent
+    code.event: "survival_checkpoint"
+    code.checkpoint_window: "21d"
+    code.rl_reward_trigger: true  # This span triggers RL training</code></pre>
+
+                <h3>OTEL Attribute Naming Convention</h3>
+                <p><strong>Pattern</strong>: <code>code.quality.{metric_name}</code> for all Popescu et al. metrics</p>
+<pre><code>code.quality.survival_3d      # Float [0.0, 1.0]
+code.quality.survival_7d
+code.quality.survival_21d
+code.quality.churn_7d
+code.quality.churn_21d
+code.quality.deletion_21d
+code.quality.merge_rate       # Float [0.0, 1.0]
+code.quality.merge_time_hours # Float &gt;= 0
+code.quality.change_size_lines # Int &gt;= 0; lines_added + lines_removed (Popescu et al. &sect;3.2)
+code.quality.review_comments   # Int &gt;= 0
+code.quality.review_count      # Int &gt;= 0</code></pre>
+
+                <p><strong>Resource Attributes</strong> (agent/skill identity):</p>
+<pre><code>agent.name          # "claude-code", "github-copilot"
+agent.skill         # "refactor-api", "write-tests"
+agent.model         # "sonnet-4.6", "gpt-4-turbo"
+agent.version       # "1.2.3"
+tool.type           # "plugin" | "skill" | "agent"
+repository.name     # GitHub repo name</code></pre>
+
+                <h3>Data Ingestion Pipeline</h3>
+<pre><code>[Git Webhook: New PR merged]
+    &darr;
+[Async job: Track commit hash + agent metadata]
+    &darr;
+[Cron: Measure survival @ 3d, 7d, 21d]
+    &darr;
+[Emit OTEL span with code.quality.survival_* attributes]
+    &darr;
+[OTEL collector: Route to feature store + RL feedback buffer]</code></pre>
+
+                <p><strong>Implementation</strong>:</p>
+                <ul>
+                    <li>Git hook (post-merge): Capture PR metadata + agent identity</li>
+                    <li>Scheduled cron (3d/7d/21d): Git blame analysis &rarr; survival metrics</li>
+                    <li>OTEL exporter: Batch emit spans with aggregated metrics</li>
+                </ul>
+            </section>
+
+            <section id="rl-environment-design">
+                <h2>4. RL Environment Design (Gymnasium Compatible)</h2>
+
+                <h3>Agent&rsquo;s Decision Space</h3>
+                <p><strong>State</strong> (observation):</p>
+<pre><code class="language-python"># Gymnasium-compatible observation space using spaces.Box encoding.
+# Text inputs (task_description, context_files) are pre-tokenized to integer arrays
+# for SB3 MlpPolicy compatibility. See Whitepaper &sect;4.1 for full CodeQualityEnv implementation.
+observation_space = spaces.Dict({
+    "task_description": spaces.Box(
+        low=0, high=50257, shape=(128,), dtype=np.int32
+    ),  # Tokenized task prompt (GPT-2 vocab, truncated to 128 tokens)
+    "context_files": spaces.Box(
+        low=0, high=50257, shape=(8, 256), dtype=np.int32
+    ),  # 8 context snippets, 256 tokens each
+    "recent_survival_21d": spaces.Box(
+        low=0.0, high=1.0, shape=(10,), dtype=np.float32
+    ),  # Last 10 survival outcomes for this skill
+    "repo_star_count": spaces.Box(low=0, high=1_000_000, shape=(1,), dtype=np.int32),
+    "repo_team_size": spaces.Box(low=1, high=1000, shape=(1,), dtype=np.int32),
+    "dominant_language": spaces.Discrete(20),  # Python, JS, Go, Rust, etc.
+})</code></pre>
+
+                <p><strong>Action</strong>:</p>
+<pre><code class="language-python"># Action space: tokenized code output + quality parameters
+action_space = spaces.Dict({
+    "code": spaces.Box(
+        low=0, high=50257, shape=(512,), dtype=np.int32
+    ),  # Generated code tokens (GPT-2 vocab, max 512 tokens)
+    "scope_confidence": spaces.Box(low=0.0, high=1.0, shape=(1,), dtype=np.float32),
+    "test_coverage": spaces.Box(low=0.0, high=1.0, shape=(1,), dtype=np.float32),
+    "refactor_depth": spaces.Discrete(5),  # 1=minimal, 5=comprehensive
+})</code></pre>
+
+                <p><strong>Reward Function</strong> (multi-objective):</p>
+<pre><code class="language-python">def compute_reward(action, outcomes_at_21d):
+    """
+    Outcomes = code metrics observed 21 days post-merge
+    """
+
+    # Weighted sum of quality signals
+    survival_reward = outcomes_at_21d["survival_21d"] * 100  # [0, 100]
+
+    # Penalize large, high-churn code
+    churn_penalty = outcomes_at_21d["churn_21d"] * -50      # [0, -50]
+
+    # Reward fast merges (proxy for code clarity)
+    merge_speed = 1.0 / (1.0 + outcomes_at_21d["merge_time_hours"] / 24)
+    merge_reward = merge_speed * 30                          # [0, 30]
+
+    # Intrinsic reward for reaching the task goal
+    task_completion_reward = 50 if task_success else 0
+
+    # Shape reward: penalize oversized changes
+    scope_penalty = min(outcomes_at_21d["change_size_lines"] / 1000, 1.0) * -20
+
+    total = (survival_reward + churn_penalty + merge_reward +
+             task_completion_reward + scope_penalty)
+
+    return total</code></pre>
+
+                <h3>Why 21 Days?</h3>
+                <p>This framework adopts the 21-day window as the primary feedback signal based on the assumption that this timeframe captures meaningful code stability patterns observed in the Popescu et al. study. Using 21d as the reward window:</p>
+                <ul>
+                    <li>Captures long-term stability patterns (aligns with Popescu et al.&rsquo;s measurement window)</li>
+                    <li>Provides enough data for statistical significance</li>
+                    <li>Balances feedback latency with learning speed</li>
+                    <li><strong>Trade-off</strong>: RL agents see rewards with 21-day delay; mitigate with auxiliary intermediate rewards (merge time, review count)</li>
+                </ul>
+                <blockquote>
+                    <p><em>Note: Empirical validation of 21 days as a stability threshold is not provided in the Popescu et al. paper and should be verified via independent replication before deploying this framework to production systems.</em></p>
+                </blockquote>
+
+                <h3>Auxiliary Rewards (Immediate Feedback)</h3>
+                <p>To reduce 21-day training latency, include immediate proxy rewards:</p>
+<pre><code class="language-python">immediate_reward = {
+    "merge_success": +10 if merged else -5,
+    "review_velocity": 5 / (1 + merge_time_hours),  # Fast = good signal
+    "comment_ratio": -num_review_comments / 10,     # More comments = clarity issues
+}</code></pre>
+                <p>These <strong>don&rsquo;t</strong> replace the 21d reward; they&rsquo;re added as auxiliary signals for policy gradient updates.</p>
+            </section>
+
+            <section id="multi-agent-rl-training-architecture">
+                <h2>5. Multi-Agent RL Training Architecture</h2>
+
+                <h3>Approach: Multi-Skill Policy Learning</h3>
+                <p><strong>Goal</strong>: Train separate policies for each skill/agent type; share learned patterns via a central value function.</p>
+<pre><code>+---------------------------------------------------------+
+| Central Agent Repository (GitHub)                       |
+|  - claude-code/refactor-api/v1.2                        |
+|  - github-copilot/write-tests/v3.1                      |
+|  - devin/debug-integration-tests/v0.9                   |
++---------------------------------------------------------+
+         | (generates code + emits OTEL)
++---------------------------------------------------------+
+| OTEL Observation Buffer (Git-based Feature Store)        |
+|  - Collects 21-day survival outcomes                    |
+|  - Batch exports for training (weekly)                  |
++---------------------------------------------------------+
+         | (feeds into training loop)
++---------------------------------------------------------+
+| RL Training Environment (Gymnasium-compatible)           |
+|  - Vectorized environments (parallel training)          |
+|  - PPO with vectorized scaling (Pufferlib)              |
+|  - Shared value function (transfer learning)            |
++---------------------------------------------------------+
+         | (produces improved policies)
++---------------------------------------------------------+
+| Policy Deployment                                        |
+|  - Canary: 10% of requests -&gt; new policy                |
+|  - Monitor: Survival rate @ 7d vs. baseline             |
+|  - Rollback: If survival drops &gt; 2%                     |
++---------------------------------------------------------+</code></pre>
+
+                <h3>Training Algorithm: PPO + Advantage Aggregation</h3>
+                <p><strong>Why PPO (Proximal Policy Optimization)</strong>:</p>
+                <ul>
+                    <li>Sample-efficient (reuse 4-5 epochs per trajectory)</li>
+                    <li>Handles high-variance delayed rewards (21d window)</li>
+                    <li>Proven stable for continuous actions (scope_confidence, test_coverage)</li>
+                    <li><strong>Limitation</strong>: Doesn&rsquo;t natively handle 21-day reward delays</li>
+                </ul>
+
+                <p><strong>Mitigation: Advantage Estimation with Bootstrapping</strong></p>
+<pre><code class="language-python"># Pseudocode (Stable Baselines3 + custom callback)
+
+def compute_gae_with_delayed_rewards(
+    trajectories: List[Trajectory],
+    delayed_rewards_at_21d: Dict[str, float],
+    lambda_gae: float = 0.95,
+):
+    """
+    Use immediate proxy rewards for on-policy updates;
+    retroactively adjust value estimates when 21d outcomes arrive.
+    """
+
+    # Phase 1: Initial training (on immediate rewards)
+    for traj in trajectories:
+        advantage = compute_gae(
+            rewards=traj.immediate_rewards,  # merge time, review signals
+            value_estimates=model.value_function(traj.observations),
+            lambda=lambda_gae,
+        )
+        update_policy(advantage)
+
+    # Phase 2: Delayed reward correction (async)
+    for traj_id, delayed_outcomes in delayed_rewards_at_21d.items():
+        actual_reward = compute_reward(delayed_outcomes)
+        prior_estimate = value_function_cache[traj_id]
+
+        # Adjust advantage retroactively
+        advantage_correction = actual_reward - prior_estimate
+
+        # Apply importance sampling correction (off-policy safety)
+        # PPO-style symmetric clipping: constrain ratio to [1-clip_range, 1+clip_range]
+        clip_range = 0.2  # Standard PPO value
+        importance_weight = torch.clamp(
+            action_prob_current / action_prob_old,
+            1 - clip_range,
+            1 + clip_range
+        )
+
+        # Compute clipped advantage correction loss
+        advantage_correction = actual_reward - prior_estimate
+        policy_loss = -(torch.minimum(
+            importance_weight * advantage_correction,
+            torch.clamp(importance_weight, 1 - clip_range, 1 + clip_range) * advantage_correction
+        ))
+        loss += policy_loss.mean()
+
+    return loss</code></pre>
+
+                <h3>Stable Baselines3 Configuration</h3>
+<pre><code class="language-python">from stable_baselines3 import PPO
+from stable_baselines3.common.env_util import make_vec_env
+
+# 1. Vectorized environments for parallel rollouts
+env = make_vec_env(
+    CodeQualityEnv,
+    n_envs=8,  # 8 parallel agents (skills)
+    vec_env_cls=SubprocVecEnv,
+)
+
+# 2. PPO with tuned hyperparameters for code generation
+model = PPO(
+    policy="MlpPolicy",
+    env=env,
+    learning_rate=3e-4,
+    n_steps=2048,              # Rollout buffer size
+    batch_size=64,             # Mini-batch for updates
+    n_epochs=10,               # Epochs per rollout
+    gamma=0.99,                # Discount factor (accounts for 21d delay)
+    gae_lambda=0.95,
+    clip_range=0.2,
+    clip_range_vf=0.2,
+    ent_coef=0.01,             # Entropy for exploration
+    verbose=1,
+)
+
+# 3. Callbacks for intermediate rewards + delayed reward correction
+model.learn(
+    total_timesteps=1_000_000,
+    callback=[
+        DelayedRewardCallback(),    # Apply 21d outcomes retroactively
+        SurvivalMetricCallback(),   # Log survival_21d to OTEL
+        RollbackTriggerCallback(),  # Halt training if survival drops
+    ],
+)</code></pre>
+
+                <h3>Multi-Agent Coordination: Skill-Level Policies (Manual Weight Transfer)</h3>
+                <p><strong>Architecture</strong>: One policy per (agent, skill) pair; shared value function for transfer learning.</p>
+                <blockquote>
+                    <p><strong>Important</strong>: Stable Baselines3 does not natively support cross-policy weight sharing. This architecture achieves transfer learning through <strong>manual weight transfer</strong> &mdash; loading the value network from one trained skill as initialization for the next. This is a workaround, not a built-in SB3 feature.</p>
+                </blockquote>
+<pre><code class="language-python">skills = [
+    "refactor-api-endpoint",
+    "write-integration-tests",
+    "debug-failing-tests",
+    "add-observability",
+]
+
+base_policy_kwargs = dict(
+    net_arch=dict(pi=[64, 64], vf=[64, 64]),  # Separate networks per policy
+    activation_fn=th.nn.ReLU,
+)
+
+policies = {}
+shared_vf_weights = None  # Will hold value network weights from first policy
+
+for i, skill in enumerate(skills):
+    env = CodeQualityEnv(skill)
+    policies[skill] = PPO(
+        policy="MlpPolicy",
+        env=env,
+        policy_kwargs=base_policy_kwargs,
+        learning_rate=3e-4,
+    )
+
+    # Transfer learning: Use first policy's value network as warm-start for subsequent policies
+    if i == 0:
+        # Train first policy to convergence
+        policies[skill].learn(total_timesteps=100000)
+        shared_vf_weights = policies[skill].policy.value_net.state_dict()
+    else:
+        # Load value network weights from prior skill as initialization
+        if shared_vf_weights:
+            policies[skill].policy.value_net.load_state_dict(shared_vf_weights)
+
+# Alternative: Use SurveyL2-based reward function to enforce consistency across skills</code></pre>
+            </section>
+
+            <section id="feedback-integration-pipeline">
+                <h2>6. Feedback Integration Pipeline</h2>
+
+                <h3>Data Flow: Git &rarr; OTEL &rarr; RL Reward Buffer</h3>
+<pre><code>+----------------------------------------------+
+| 1. GitHub Webhook (Post-Merge Event)         |
+|    - PR metadata + agent identity             |
+|    - Commit hash + timestamp                  |
++----------------------------------------------+
+              |
++----------------------------------------------+
+| 2. Async Indexer (Real-time)                 |
+|    - Store metadata in feature store          |
+|    - Emit OTEL span "code-generation"        |
+|    - Tag with agent.name, tool.type          |
++----------------------------------------------+
+              |
++----------------------------------------------+
+| 3. Survival Measurement Cron (Scheduled)     |
+|    - At +3d, +7d, +21d:                      |
+|      * Run `git blame` on changed files      |
+|      * Count lines still in HEAD              |
+|      * Compute survival_rate                  |
+|    - Emit OTEL checkpoint span with metrics   |
++----------------------------------------------+
+              |
++----------------------------------------------+
+| 4. OTEL Collector &amp; Export                   |
+|    - Route spans to feature store (Parquet)   |
+|    - Buffer outcomes for weekly training      |
+|    - Dashboard: Survival by agent/skill       |
++----------------------------------------------+
+              |
++----------------------------------------------+
+| 5. RL Training Loop (Weekly)                 |
+|    - Load feature store -&gt; trajectories       |
+|    - Compute 21d rewards                      |
+|    - Apply PPO updates                        |
+|    - Save policy checkpoints                  |
++----------------------------------------------+
+              |
++----------------------------------------------+
+| 6. Deployment &amp; Canary Testing               |
+|    - Version new policies                     |
+|    - Route 10% of requests to new agents     |
+|    - Monitor survival_7d vs. baseline         |
+|    - Auto-rollback on degradation             |
++----------------------------------------------+</code></pre>
+
+                <h3>Implementation: Python-Based Feedback Collector</h3>
+<pre><code class="language-python"># feedback_collector.py
+
+import json
+import subprocess
+from dataclasses import dataclass
+from datetime import datetime, timedelta
+from typing import Dict, List
+
+@dataclass
+class CodeMetrics:
+    commit_hash: str
+    agent_name: str
+    skill: str
+    merge_time_hours: float
+    survival_3d: float
+    survival_7d: float
+    survival_21d: float
+    churn_7d: float
+    deletion_21d: float
+
+class SurvivalMeasurer:
+    def __init__(self, repo_path: str):
+        self.repo_path = repo_path
+
+    def measure_survival_at_timestamp(
+        self,
+        commit_hash: str,
+        target_timestamp: datetime,
+    ) -&gt; Dict[str, float]:
+        """
+        Measure survival at target_timestamp by:
+        1. Checkout HEAD (current state)
+        2. For each line in commit_hash, check if it still exists
+        3. Compute survival_rate = (lines_still_present / original_lines)
+        """
+
+        # Get original lines from target commit
+        original_lines = self._get_lines_from_commit(commit_hash)
+
+        # Get current lines from HEAD
+        current_lines = self._get_lines_from_head()
+
+        # Compute metrics
+        survival_rate = self._compute_survival(original_lines, current_lines)
+        churn_rate = self._compute_churn(original_lines, current_lines)
+        deletion_rate = self._compute_deletion(original_lines, current_lines)
+
+        return {
+            "survival_rate": survival_rate,
+            "churn_rate": churn_rate,
+            "deletion_rate": deletion_rate,
+        }
+
+    def _get_lines_from_commit(self, commit_hash: str) -&gt; Set[str]:
+        """Get hash of each line in commit_hash"""
+        # Use git show + content hashing
+        pass
+
+    def _compute_survival(
+        self,
+        original_lines: Set[str],
+        current_lines: Set[str],
+    ) -&gt; float:
+        return len(original_lines &amp; current_lines) / len(original_lines)
+
+# Cron job: Measure at 3d, 7d, 21d
+scheduler = APScheduler()
+
+@scheduler.scheduled_job('cron', day_of_week=3)  # Every 3 days
+def measure_survival_3d():
+    for commit in pending_measurements_at_3d():
+        measurer = SurvivalMeasurer(commit.repo_path)
+        metrics = measurer.measure_survival_at_timestamp(
+            commit.hash,
+            datetime.now() - timedelta(days=3),
+        )
+        emit_otel_span("code-survival-checkpoint", attributes={
+            "code.quality.survival_3d": metrics["survival_rate"],
+            "agent.name": commit.agent_name,
+            "git.commit_hash": commit.hash,
+        })</code></pre>
+            </section>
+
+            <section id="deployment-safety-and-guardrails">
+                <h2>7. Deployment Safety &amp; Guardrails</h2>
+
+                <h3>Canary Rollout Strategy</h3>
+                <p><strong>Phase 1: Shadow Deployment</strong> (1 week)</p>
+                <ul>
+                    <li>New policy runs in parallel; results NOT used</li>
+                    <li>Monitor 7-day survival rate vs. baseline</li>
+                    <li>No user impact</li>
+                </ul>
+                <p><strong>Phase 2: Canary</strong> (2 weeks)</p>
+                <ul>
+                    <li>Route 10% of requests to new policy</li>
+                    <li>Compare survival_7d, merge_rate to baseline</li>
+                    <li>If divergence &gt; 2%, revert immediately</li>
+                </ul>
+                <p><strong>Phase 3: Gradual Rollout</strong> (2-4 weeks)</p>
+                <ul>
+                    <li>10% &rarr; 25% &rarr; 50% &rarr; 100%</li>
+                    <li>Monitor at each step</li>
+                    <li>Roll back if survival_21d drops</li>
+                </ul>
+
+                <h3>Rollback Triggers</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Threshold</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>survival_21d</code></td>
+                            <td>&lt; baseline - 2%</td>
+                            <td>Immediate rollback</td>
+                        </tr>
+                        <tr>
+                            <td><code>churn_21d</code></td>
+                            <td>&gt; baseline + 3%</td>
+                            <td>Rollback after 24h</td>
+                        </tr>
+                        <tr>
+                            <td><code>merge_rate</code></td>
+                            <td>&lt; baseline - 5%</td>
+                            <td>Halt rollout (investigate)</td>
+                        </tr>
+                        <tr>
+                            <td><code>merge_time_hours</code></td>
+                            <td>&gt; baseline * 2</td>
+                            <td>Pause (review friction)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Value Function Monitoring</h3>
+                <p>Track the trained value function to detect <strong>reward hacking</strong> (e.g., agent finds spurious correlation):</p>
+<pre><code class="language-python"># Red flags for reward hacking
+if value_function(observation) &gt;&gt; expected_value:
+    # Policy may have exploited an artifact
+    # Trigger manual code review of recent agent outputs
+    log_alert("value-function-anomaly", severity="high")
+
+if survival_21d_actual &lt; predicted_value * 0.8:
+    # Value function consistently overestimates
+    # Retrain with calibration adjustment
+    log_alert("value-prediction-miscalibration")</code></pre>
+            </section>
+
+            <section id="monitoring-and-observability">
+                <h2>8. Monitoring &amp; Observability</h2>
+
+                <h3>OTEL Dashboard Schema</h3>
+<pre><code class="language-yaml"># Grafana dashboard: Agent Code Quality
+
+Panels:
+  - Agent Comparison (Heatmap)
+    Series: agent.name (rows) x survival_21d (color)
+    Metric: code.quality.survival_21d
+
+  - Skill Improvement Over Time (Time Series)
+    Series: Per-skill survival_21d
+    Aggregation: 7d rolling average
+
+  - Churn Rate by Agent (Bar Chart)
+    Metric: code.quality.churn_21d
+    Comparison: Agent vs. human baseline
+
+  - Merge Velocity (Box Plot)
+    Metric: code.quality.merge_time_hours
+    Grouping: agent.name
+
+  - Policy Version Deployment (Stacked Area)
+    Metric: % requests -&gt; policy_v1, policy_v2, etc.
+    Trigger: Rollback on survival drop</code></pre>
+
+                <h3>Key Queries (Prometheus-compatible)</h3>
+<pre><code class="language-promql"># Average survival rate by agent (21 days)
+avg(code_quality_survival_21d) by (agent_name)
+
+# Survival degradation detection
+code_quality_survival_21d &lt; 0.75
+
+# RL training frequency
+increase(rl_policy_training_total[1w])
+
+# Canary success (new policy maintains baseline)
+(code_quality_survival_21d{policy_version="v2"}
+ /
+ code_quality_survival_21d{policy_version="v1"}) &gt; 0.98</code></pre>
+            </section>
+
+            <section id="implementation-roadmap">
+                <h2>9. Implementation Roadmap</h2>
+
+                <h3>Phase 1: Instrumentation (Weeks 1-2)</h3>
+                <ul>
+                    <li>Git webhook &rarr; OTEL span emitter</li>
+                    <li><code>SurvivalMeasurer</code> cron job (3d checkpoint)</li>
+                    <li>OTEL collector export to Parquet feature store</li>
+                    <li>Dashboard: Survival by agent</li>
+                </ul>
+
+                <h3>Phase 2: RL Environment (Weeks 3-4)</h3>
+                <ul>
+                    <li>Gymnasium-compatible <code>CodeQualityEnv</code></li>
+                    <li>Reward function (21d outcomes + immediate proxies)</li>
+                    <li>Stable Baselines3 PPO setup</li>
+                    <li>Delayed reward correction callback</li>
+                </ul>
+
+                <h3>Phase 3: Training Loop (Weeks 5-6)</h3>
+                <ul>
+                    <li>Weekly training cron</li>
+                    <li>Policy versioning + checkpointing</li>
+                    <li>Canary deployment infrastructure</li>
+                    <li>Rollback triggers</li>
+                </ul>
+
+                <h3>Phase 4: Production Deployment (Weeks 7-8)</h3>
+                <ul>
+                    <li>Shadow testing (1 week, phase 1)</li>
+                    <li>Canary rollout (phase 2)</li>
+                    <li>Gradual rollout (phase 3)</li>
+                    <li>Monitoring + alerting</li>
+                </ul>
+            </section>
+
+            <section id="risks-and-mitigation">
+                <h2>10. Risks &amp; Mitigation</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Probability</th>
+                            <th>Impact</th>
+                            <th>Mitigation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Reward hacking</strong></td>
+                            <td>High</td>
+                            <td>Critical</td>
+                            <td>Value function anomaly detection; manual code review; hold-out test set</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Distribution shift</strong> (new codebase)</td>
+                            <td>Medium</td>
+                            <td>High</td>
+                            <td>Transfer learning via shared value function; domain adaptation layer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>21d training latency</strong></td>
+                            <td>High</td>
+                            <td>Medium</td>
+                            <td>Auxiliary immediate rewards (merge time, reviews); policy distillation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data quality (Git blame failures)</strong></td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>Validation checks; fallback to PR size + review count</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Agent diversity (models diverge)</strong></td>
+                            <td>Medium</td>
+                            <td>High</td>
+                            <td>Centralized policy hub; skill-specific fine-tuning only</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="success-metrics">
+                <h2>11. Success Metrics</h2>
+
+                <h3>Core Assumption: Code Quality is RL-Trainable</h3>
+                <p><strong>Statement</strong>: Agents can learn to generate higher-quality code through RL feedback signals based on 21-day post-merge survival metrics.</p>
+                <p><strong>Evidence Level</strong>: None. This is the core innovation being tested. All targets below are contingent on this assumption holding. See Whitepaper &sect;9 for full qualification.</p>
+
+                <h3>Conditional Targets (if training succeeds)</h3>
+
+                <h4>Conservative Target (7-month horizon)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Baseline</th>
+                            <th>Target</th>
+                            <th>Improvement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Survival Rate @ 21d</td>
+                            <td>75-78%</td>
+                            <td>80-82%</td>
+                            <td>+2-4pp</td>
+                        </tr>
+                        <tr>
+                            <td>Churn Rate @ 21d</td>
+                            <td>15-18%</td>
+                            <td>13-15%</td>
+                            <td>-2-3pp</td>
+                        </tr>
+                        <tr>
+                            <td>Agent:Human Ratio</td>
+                            <td>0.84-0.87</td>
+                            <td>0.90</td>
+                            <td>+6pp</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Optimistic Target (8-month horizon)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Baseline</th>
+                            <th>Target</th>
+                            <th>Improvement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Survival Rate @ 21d</td>
+                            <td>75-78%</td>
+                            <td>83-85%</td>
+                            <td>+5-7pp</td>
+                        </tr>
+                        <tr>
+                            <td>Churn Rate @ 21d</td>
+                            <td>15-18%</td>
+                            <td>11-13%</td>
+                            <td>-4-6pp</td>
+                        </tr>
+                        <tr>
+                            <td>Agent:Human Ratio</td>
+                            <td>0.84-0.87</td>
+                            <td>0.92</td>
+                            <td>+8pp</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Stretch Target (12-month horizon)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Baseline</th>
+                            <th>Target</th>
+                            <th>Improvement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Survival Rate @ 21d</td>
+                            <td>75-78%</td>
+                            <td>87-90%</td>
+                            <td>+10-12pp</td>
+                        </tr>
+                        <tr>
+                            <td>Churn Rate @ 21d</td>
+                            <td>15-18%</td>
+                            <td>8-10%</td>
+                            <td>-7-9pp</td>
+                        </tr>
+                        <tr>
+                            <td>Agent:Human Ratio</td>
+                            <td>0.84-0.87</td>
+                            <td>0.95</td>
+                            <td>+11pp</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Recommended Initial Target</strong>: 80% survival at Month 6 (conservative scenario). See Whitepaper &sect;9 for contingency plan.</p>
+                <p><strong>Critical Note</strong>: No projections beyond Month 8 without additional validation data. All targets contingent on Phase 1-3 milestones.</p>
+
+                <h3>Secondary (user experience)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Baseline</th>
+                            <th>Target</th>
+                            <th>Rationale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Merge Rate (% merged)</td>
+                            <td>72-87%</td>
+                            <td>&ge;90%</td>
+                            <td>Adoption friction; stabilizes if quality improves</td>
+                        </tr>
+                        <tr>
+                            <td>Merge Time (hours)</td>
+                            <td>2-8</td>
+                            <td>&le;5 (median)</td>
+                            <td>Proxy for review confidence</td>
+                        </tr>
+                        <tr>
+                            <td>Review Comments/PR</td>
+                            <td>3-4</td>
+                            <td>&le;2.5</td>
+                            <td>Reduced rework cycles</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Tertiary (system health)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Target</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Training Success Rate</td>
+                            <td>&ge;95% (weekly)</td>
+                            <td>Reward loop stability</td>
+                        </tr>
+                        <tr>
+                            <td>Policy Update Frequency</td>
+                            <td>&ge;1 per week</td>
+                            <td>Iterative improvement</td>
+                        </tr>
+                        <tr>
+                            <td>Canary Rollback Rate</td>
+                            <td>&le;5%</td>
+                            <td>Safety gate: revert if &gt;3pp drop</td>
+                        </tr>
+                        <tr>
+                            <td>Value Function Calibration Error</td>
+                            <td>&le;10%</td>
+                            <td>Reward signal quality</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="references">
+                <h2>References</h2>
+                <ol>
+                    <li><strong>Popescu et al. (2026)</strong>: &ldquo;Investigating Autonomous Agent Contributions in the Wild: Activity Patterns and Code Change over Time&rdquo;. arXiv:2604.00917v1. <a href="https://arxiv.org/html/2604.00917v1">https://arxiv.org/html/2604.00917v1</a></li>
+                    <li><strong>Schulman et al. (2017)</strong>: &ldquo;Proximal Policy Optimization Algorithms&rdquo;. arXiv:1707.06347</li>
+                    <li><strong>Stable Baselines3 (2021)</strong>: <a href="https://stable-baselines3.readthedocs.io/en/master/">https://stable-baselines3.readthedocs.io/en/master/</a></li>
+                    <li><strong>Gymnasium (Farama Foundation)</strong>: Fork of OpenAI Gym, maintained by Farama Foundation. <a href="https://gymnasium.farama.org/">https://gymnasium.farama.org/</a></li>
+                    <li><strong>OpenTelemetry (CNCF)</strong>: <a href="https://opentelemetry.io/docs/">https://opentelemetry.io/docs/</a></li>
+                    <li><strong>Pufferlib (Suarez, J., et al., 2024)</strong>: Vectorized reinforcement learning library with parallel environment support and 1M+ steps/second performance. <a href="https://pypi.org/project/pufferlib/">https://pypi.org/project/pufferlib/</a></li>
+                </ol>
+                <p><strong>Document Generated</strong>: April 3, 2026</p>
+                <p><strong>Next Steps</strong>: Implement Phase 1 (Git webhook + OTEL instrumentation)</p>
+            </section>
+
+        </main>
+    </div>
+    <footer>
+        <a href="index.html">&larr; Context Engine</a>
+    </footer>
+</body>
+</html>
