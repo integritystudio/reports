@@ -35,10 +35,10 @@
           All Prompts
           <span class="cat-count" id="count-all">…</span>
         </button>
-        <button class="cat-btn" data-cat="developer">
+        <a class="cat-btn" href="category/developer.html">
           Developer
           <span class="cat-count" id="count-developer">…</span>
-        </button>
+        </a>
       </div>
       <div class="sidebar-section">
         <div class="sidebar-label">General</div>
@@ -156,11 +156,11 @@
         .sort((a, b) => b[1].count - a[1].count);
 
       for (const [slug, info] of sorted) {
-        const btn = document.createElement('button');
-        btn.className = 'cat-btn';
-        btn.dataset.cat = slug;
-        btn.innerHTML = `${esc(info.name)}<span class="cat-count">${info.count}</span>`;
-        catList.appendChild(btn);
+        const link = document.createElement('a');
+        link.className = 'cat-btn';
+        link.href = `category/${slug}.html`;
+        link.innerHTML = `${esc(info.name)}<span class="cat-count">${info.count}</span>`;
+        catList.appendChild(link);
       }
     }
 
