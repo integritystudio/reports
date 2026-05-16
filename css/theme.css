@@ -1494,3 +1494,20 @@
 /* Integrity Studio opportunities print → css/opportunity-components.css */
 
 /* Leora dashboard & form print → css/leora-referral.css */
+
+/* --- Back Alley Tea — warm jade/clay artisan tea theme --- */
+[data-brand="back-alley-tea"] {
+    --color-primary-dark: #2f4a3d;
+    --color-primary-medium: #4a6b54;
+    --color-primary-light: #87a878;
+    --primary: #2f4a3d;
+    --secondary: #4a6b54;
+    --accent: #b8693d;
+    --light: #f5efe6;
+    --dark: #1f2e26;
+    --border: #d9cdb8;
+    --color-accent: #b8693d;
+    --color-accent-light: #faf3e8;
+    --color-shadow: rgba(31, 46, 38, 0.08);
+    --color-shadow-hover: rgba(31, 46, 38, 0.14);
+}
