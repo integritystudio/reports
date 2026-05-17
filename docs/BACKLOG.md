@@ -8,64 +8,7 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-### GA1. Add GA4 tracking to back-alley-tea pages — Done
-**Priority:** High (analytics coverage gap)
-**Source:** GA tracking health audit (May 16)
-
-4 HTML files missing `<script src="../js/gtag.js"></script>`:
-- `back-alley-tea/index.html`
-- `back-alley-tea/back_alley_tea_research.html`
-- `back-alley-tea/back_alley_tea_opportunities_report.html`
-- `back-alley-tea/back_alley_tea_austin_resources.html`
-
-Coverage currently 111/115 (96.5%). Fix brings hub to 100%.
-
-**Effort:** Trivial (4 single-line inserts)
-
-**[DONE]** commit 0cdcfbc
-
----
-
-### GA2. Fix `detectContentType()` segment-vs-path bug — Done
-**Priority:** Medium (mis-categorized events)
-**Source:** GA tracking health audit (May 16)
-**File:** `js/gtag.js:155-167`
-
-Function matches regexes against `segment` (last path part, e.g. `/http-content-compression.html`), so directory-based categories like `whitepaper` and `architecture` never fire — pages under `/code-condense-whitepaper/` are tagged `report` instead of `whitepaper`. Switch directory-based checks to match against `path`, keep filename-based checks against `segment`.
-
-**Effort:** Low
-
-**[DONE]** commit 2ee1648
-
----
-
-### GA3. Defer `js/gtag.js` loader script — Done
-**Priority:** Low (performance)
-**Source:** GA tracking health audit (May 16)
-**File:** `index.html:4` (and every other page including the loader)
-
-`<script src="js/gtag.js"></script>` is parser-blocking. Inner GTM injection is already async, so the wrapper can safely take `defer`.
-
-**Effort:** Trivial (project-wide find/replace)
-
-**[DONE]** commit a4c2a06 — 97 files updated
-
----
-
-### GA4. Remove deprecated `custom_map` block from gtag config — Done
-**Priority:** Low (cleanup, no functional impact)
-**Source:** GA tracking health audit (May 16)
-**File:** `js/gtag.js:25-29`
-
-`custom_map: { dimension1: 'brand', … }` is a UA-era pattern; GA4 ignores it. Custom dimensions must be registered in GA4 Admin → Custom Definitions against the event params (`brand`, `section`, `content_type`) already being sent. Verify Admin registration, then delete the block.
-
-**Effort:** Low
-
-**[DONE]** commit e9b9412
-
----
-
-### GA5. Add Consent Mode v2 defaults
+### GA5. Add Consent Mode v2 defaults — Done
 **Priority:** Medium (GDPR/LGPD compliance)
 **Source:** GA tracking health audit (May 16)
 **File:** `js/gtag.js`
@@ -74,18 +17,7 @@ No `gtag('consent', 'default', …)` call before `config`. Relevant given Portug
 
 **Effort:** Medium (defaults trivial; banner UI is the work)
 
----
-
-### GA6. De-duplicate card-click vs. GA4 Enhanced Measurement outbound clicks — Done
-**Priority:** Low (reporting hygiene)
-**Source:** GA tracking health audit (May 16)
-**File:** `js/gtag.js:79-96`
-
-Custom `card_click` event overlaps with GA4 Enhanced Measurement's `click` (outbound) event when EM is enabled in Admin. Decide which is canonical and either disable EM outbound clicks or stop firing `card_click` for outbound destinations.
-
-**Effort:** Low
-
-**[DONE]** commit 2224410 — added hostname guard; card_click skips external URLs, EM handles outbound
+**[DONE]** — added `gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500})` before config call in `js/gtag.js`
 
 ---
 
@@ -100,112 +32,8 @@ Submodules ship their own GTM partials and analytics tests, outside the hub's `G
 
 ---
 
-### NN1. Enhance lesson plan with LPTHW pedagogy elements — Done
-**Priority:** Medium (learning experience, completeness)
-**Source:** Content review (Mar 25, neural-networks learning roadmap) + LPTHW audit hook
-**Status:** ✅ COMPLETED (Mar 25)
 
-**Delivered (205 lines, 2 commits: 0cef0ca, 10b75df):**
-1. ✅ Learning objectives per phase (Phases 1-5)
-2. ✅ Per-phase glossary callout tables (plain-language definitions)
-3. ✅ "Try This" hands-on exercises per phase (paper sketch, NumPy loop, OTEL instrumentation, BertViz, quantization benchmark)
-4. ✅ Teach-Back prompts per phase (Phases 1, 2, 3, 5; Phase 4 capstone already had this)
-5. ✅ Production failure examples for Phases 2 and 3
-6. ✅ New "Common Training Pitfalls" section (loss spikes, dead neurons, observability gaps, OTEL anti-patterns)
-7. ✅ Teaching-background callouts ("As an educator, you know…") in each phase
-8. ✅ Role-based guidance was already present; left intact
 
-**[DONE]**
-
----
-
-### NN2. Bridge neural network training to OTEL instrumentation (Highest-Leverage) — Done
-**Priority:** HIGH (core competency gap, competitive advantage)
-**Source:** Content review (Mar 25) — identified as critical missing bridge
-**Status:** ✅ COMPLETED (Mar 25)
-
-**Deliverable:** Internal guide "Instrumenting Neural Network Training for OTEL Observability"
-**Save location:** `docs/neural-networks-otel-bridge.md`
-
-**Delivered:**
-1. ✅ **Mapping table:** Phase 2 training concepts → OTEL signals (8 rows: loss, gradients, backprop, neuron activation, learning rate, overfitting, timing, gradient flow)
-2. ✅ **Concrete walkthrough:** Instrumenting Karpathy's training loop
-   - Before/after code snippets (Python + OpenTelemetry)
-   - 3-line OTEL setup + 4 metric instruments
-   - Instrumentation overhead noted as low (microseconds)
-3. ✅ **Production patterns & alerting:**
-   - Alert thresholds table (warning/critical levels)
-   - 2 example alert rules: overfitting detection, gradient explosion
-4. ✅ **Failure case studies with instrumentation fixes:**
-   - Case 1: Silent NaN divergence (caught by `gradient_nan_count` + `gradient_norm`)
-   - Case 2: Dead ReLU syndrome (caught by `dead_neuron_ratio` and layer-wise `activation_mean`)
-   - Case 3: Overfitting creep (caught by `loss_divergence` ratio monitoring)
-5. ✅ **Why this matters for new hires:** Bridges theory → practice, competitive advantage, onboarding path
-6. ✅ **Quick reference checklist:** 8-point metric checklist for training scripts
-7. ✅ **Extension to Phase 5:** Fine-tuning, inference, quantization scenarios
-
-**Why this is highest-leverage:**
-- ✓ No public article currently covers this specific bridge (verified via research)
-- ✓ Essential for OTEL-focused startup: ties training science to observability practice
-- ✓ Directly applicable to new hire's onboarding (cross-reference from lesson-plan Phase 2→3 bridge)
-- ✓ Reusable for internal training, documentation, and knowledge transfer
-
-**Effort:** 4-5 hours (~3500 words, comprehensive with production patterns + 3 case studies)
-
-**[DONE]**
-
----
-
-### NN3. URL verification for lesson-plan.md — Done
-**Priority:** Critical (pre-distribution)
-**Source:** Quality audit (Mar 25) — hallucination flag on unverified URLs/dates
-
-All 14 resource URLs verified via WebFetch (Mar 25, 2026):
-- ✅ All URLs active and accessible
-- ✅ All author attributions correct (3Blue1Brown, Karpathy, Lil'Log, OTEL, fast.ai, etc.)
-- ✅ Resource descriptions match actual content
-- ✅ Time estimates reasonable based on content scope
-- ✅ Future-dated resources (2025) confirmed authentic — we're now in March 2026, so these are contemporary
-
-**Hallucination risk resolved:** The three "future-dated" resources (Rohan Paul explainability, LoRA/Quantization DEV article, OTEL AI Agent Observability post) that triggered warnings are legitimate 2025 publications. No fabrication; judge's caution was appropriate at evaluation time.
-
-**Lesson plan is CLEARED for distribution to new hire.**
-
-**[DONE]**
-
----
-
-### H11. Extract inline styles from 50 report files — Done (Phase 4)
-**Priority:** Medium (code quality, maintainability)
-**Source:** CSS architecture audit (Mar 9)
-**Phase 1 (Mar 9):** Extended `section h2, #toc h2` CSS selector; removed nav#toc and h2 redundant inline styles (29 instances); replaced `color: white` with `color: var(--color-white)` (11 files). ~290 inline styles remain (was ~367, excluding overflow-x:auto).
-**Phase 2 (Mar 9):** Added 24 utility classes to `report-base.css`. Replaced 150+ inline styles across 37 files. Extracted hardcoded SWOT hex colors to semantic CSS classes in edgar_nadyne files.
-**Phase 3 (Mar 9):** Added spacing tokens and SWOT utilities. Extracted 30 more inline styles from 6 edgar_nadyne files.
-**Phase 4 (Mar 9):** Added `--color-swot-opportunity` token to edgar-nadyne brand and `.color-swot-opportunity` utility (with dark mode override). Replaced `#4a1a6b`/`#6B2D5B` heading colors in artist profile files with `.color-swot-opportunity`/`.text-primary`. Replaced `margin-top: 5px` with `.mt-xs` in leora dashboards. Remaining: table column widths and `overflow-x:auto` wrappers intentionally left as-is (layout-critical, not extractable to shared utilities).
-
-**[DONE]**
-
----
-
-### T1. Create `content-translator` skill — Done
-**Priority:** Medium
-**Source:** Readability audit (Feb 13)
-
-Built `~/.claude/skills/content-translator/SKILL.md` — 5-phase workflow: source extraction, translation, localization, assembly, QA validation. Handles BCP-47 lang tags, source-tracking comments, skip-link translation, hub card and TRANSLATION_STATUS.md updates. Invoke via `/content-translator <file.html> --lang <BCP-47>`.
-
-**[DONE]**
-
----
-
-### T5. Multi-language support beyond PT-BR — Done
-**Priority:** Medium
-**Source:** Readability audit (Feb 13)
-
-Added locale conventions table (19 BCP-47 tags: pt-BR, pt-PT, es, es-MX, es-ES, fr, fr-CA, de, he, it, ja, zh-CN, zh-TW, ko, ar, nl, pl, sv, tr) to `content-translator` SKILL.md. Covers date formats, decimal separators, currency symbols, quote marks, and RTL handling (ar, he). Replaces two ad-hoc inline bullet points with a structured, extensible reference table. Phase 3 localization table also updated with per-locale examples.
-
-**[DONE]**
-
----
 
 ### W1. Repomix granular compression config — track upstream
 **Priority:** Medium
@@ -215,6 +43,46 @@ Added locale conventions table (19 BCP-47 tags: pt-BR, pt-PT, es, es-MX, es-ES, 
 Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). Granular controls (e.g., `keep_signatures`, `keep_interfaces`, `keep_docstrings`, per-directory compress patterns) are discussed upstream but not yet implemented. When upstream support lands, update `code-condense-whitepaper/repomix-command-line-cheat-sheet.md` with the actual config schema and remove the "Future Granularity" placeholder section.
 
 **Effort:** Low (documentation update when upstream ships)
+
+---
+
+### A14. `.badge-direct` text contrast — Done
+**Priority:** Medium (accessibility)
+**Source:** UI/UX audit (May 16) — important #3
+
+**[DONE]** commit b87c412 — raised `.badge-direct` text to `#1d4ed8` for WCAG AA contrast
+
+---
+
+### A15. Leora form inputs: invisible focus ring — Done
+**Priority:** Medium (accessibility — WCAG 2.4.7 / 1.4.11)
+**Source:** UI/UX audit (May 16) — important #4
+
+**[DONE]** commit 36cb209 — added `outline: 2px solid var(--leora-primary); outline-offset: 1px` to focus state
+
+---
+
+### A16. Leora dark mode: missing `:root` variable overrides — Done
+**Priority:** Medium (dark mode coverage)
+**Source:** UI/UX audit (May 16) — important #5
+
+**[DONE]** commit 94d0bc9 — added `:root` dark mode override block to `leora-referral.css`
+
+---
+
+### A17. Tables inside `<section>` lack mobile padding — Done
+**Priority:** Medium (responsive layout)
+**Source:** UI/UX audit (May 16) — important #6
+
+**[DONE]** commit 7e300bf — added `padding: var(--spacing-sm) var(--spacing-md)` to `.table-wrapper` in `report-base.css`
+
+---
+
+### A18. Small font sizes at 480px breakpoint — Done
+**Priority:** Low (readability)
+**Source:** UI/UX audit (May 16) — nice-to-have #7-8
+
+**[DONE]** commit 0894cda — raised `--font-size-table-sm` to `0.85rem`, `--font-size-toggle` to `0.75rem`, `--font-size-milestone-label` to `0.75rem`
 
 ---
 
@@ -232,15 +100,6 @@ Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). G
 
 ---
 
-### F7. CSS variable namespace consolidation — Done
-**Priority:** P4
-**Source:** Bugfix plan item #13 (Feb 15)
-
-Added ASCII namespace reference table to `theme.css` documenting all four parallel namespaces (portal-base, report-base, competitor-base, holliday portal-layout). Added `--color-*` bridge aliases to `report-base.css` and `competitor-base.css` so cross-namespace utilities can reference a consistent `--color-*` convention without renaming any existing variables. Portal-base needs no bridge (already uses `--color-*` natively). `--color-surface` intentionally scoped to competitor-base only (card surface concept vs. page background in report-base). Zero regression risk — purely additive.
-
-**[DONE]**
-
----
 
 ## Reference
 
@@ -263,7 +122,10 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | Mar 9 — Backlog Implementer (3) | H11-P4, T1 (2 items) |
 | Mar 9 — Backlog Implementer (4) | T5 (1 item) |
 | Mar 9 — Backlog Implementer (5) | F7 (1 item) |
-| **Total** | **80 completed, 0 open** |
+| May 16 — GA4 Tracking Audit | GA1, GA2, GA3, GA4, GA6 (5 items) |
+| May 16 — Neural Networks & OTEL | NN1, NN2, NN3 (3 items) |
+| May 16 — UI/UX Audit | GA5, A14, A15, A16, A17, A18 (6 items) |
+| **Total** | **98 completed, 2 open** |
 
 ### Scorecard (Phase 2 — Feb 16)
 

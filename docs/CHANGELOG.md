@@ -4,6 +4,69 @@ All completed backlog items, organized by session.
 
 ---
 
+## May 16, 2026 — UI/UX Audit Implementation
+
+Source: `docs/BACKLOG.md` items GA5, A14-A18
+
+| Item | Description | Commit |
+|------|-------------|--------|
+| GA5 | Add Consent Mode v2 defaults — added `gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500})` before config call in `js/gtag.js`; covers GDPR (EU) and LGPD (Brazil) compliance | in-session |
+| A14 | `.badge-direct` text contrast — raised color from `#2563eb` to `#1d4ed8` in `css/competitor-base.css`; effective contrast now passes WCAG AA (4.5:1) for 12px badge text | `b87c412` |
+| A15 | Leora form inputs: visible focus ring — replaced `outline: none` with `outline: 2px solid var(--leora-primary); outline-offset: 1px` on focus state in `css/leora-referral.css`; satisfies WCAG 2.4.7 / 1.4.11 | `36cb209` |
+| A16 | Leora dark mode `:root` overrides — added `:root` variable override block inside `@media (prefers-color-scheme: dark)` to `css/leora-referral.css`; fixes generic containers staying white in dark mode | `94d0bc9` |
+| A17 | Mobile padding for `.table-wrapper` — added `padding: var(--spacing-sm) var(--spacing-md)` to `.table-wrapper` in `css/report-base.css`; prevents tables from touching rounded section corners on mobile | `7e300bf` |
+| A18 | Minimum font-size tokens at 480px — raised `--font-size-table-sm` (0.8→0.85rem), `--font-size-toggle` (0.7→0.75rem) in `report-base.css`; raised `--font-size-milestone-label` (0.6875→0.75rem) in `leora-referral.css` | `0894cda` |
+
+---
+
+## May 16, 2026 — GA4 Tracking & Analytics Health Audit
+
+Source: `docs/BACKLOG.md` items GA1-GA4, GA6
+
+| Item | Description | Commit |
+|------|-------------|--------|
+| GA1 | Add GA4 tracking to back-alley-tea pages — added `<script src="../js/gtag.js"></script>` to 4 HTML files (index.html, back_alley_tea_research.html, back_alley_tea_opportunities_report.html, back_alley_tea_austin_resources.html); hub coverage 111/115 → 115/115 (100%) | `0cdcfbc` |
+| GA2 | Fix `detectContentType()` segment-vs-path bug — switched directory-based category checks (whitepaper, architecture) to match against full `path` instead of `segment` so pages under `/code-condense-whitepaper/` are correctly tagged as `whitepaper` not `report` | `2ee1648` |
+| GA3 | Defer `js/gtag.js` loader script — added `defer` attribute to `<script src="js/gtag.js"></script>` across 97 files; GTM injection already async so wrapper safely defers; improves parser blocking | `a4c2a06` |
+| GA4 | Remove deprecated `custom_map` block from gtag config — deleted `custom_map: { dimension1: 'brand', … }` UA-era pattern from `js/gtag.js`; GA4 ignores it; custom dimensions now registered in GA4 Admin | `e9b9412` |
+| GA6 | De-duplicate card-click vs. GA4 Enhanced Measurement outbound clicks — added hostname guard to `card_click` event so card_click skips external URLs; GA4 Enhanced Measurement handles outbound click deduplication | `2224410` |
+
+---
+
+## May 16, 2026 — Neural Networks Learning & OTEL Integration
+
+Source: `docs/BACKLOG.md` items NN1-NN3
+
+| Item | Description | Commit/Status |
+|------|-------------|--------|
+| NN1 | Enhance lesson plan with LPTHW pedagogy elements — added learning objectives per phase (Phases 1-5), per-phase glossary callout tables, 5 "Try This" hands-on exercises, teach-back prompts per phase, production failure examples, common training pitfalls section, teaching-background callouts; 205 lines delivered | `0cef0ca`, `10b75df` |
+| NN2 | Bridge neural network training to OTEL instrumentation — created `docs/neural-networks-otel-bridge.md` with mapping table (8 rows: loss, gradients, backprop, etc.), concrete walkthrough of Karpathy's training loop, production patterns & alerting, 3 failure case studies, checklist for training scripts; ~3500 words | session |
+| NN3 | URL verification for lesson-plan.md — verified all 14 resource URLs via WebFetch; all URLs active, author attributions correct, descriptions match content, time estimates reasonable; future-dated resources (2025) confirmed authentic | session |
+
+---
+
+## March 9, 2026 — Backlog Implementer Session 5
+
+Source: `docs/BACKLOG.md` items T1, T5, F7
+
+| Item | Description | Commit/Status |
+|------|-------------|--------|
+| T1 | Create `content-translator` skill — built `~/.claude/skills/content-translator/SKILL.md` with 5-phase workflow (source extraction, translation, localization, assembly, QA); handles BCP-47 lang tags, source-tracking comments, skip-link translation, hub card and TRANSLATION_STATUS.md updates | session |
+| T5 | Multi-language support beyond PT-BR — added locale conventions table (19 BCP-47 tags) to content-translator SKILL.md covering date formats, decimal separators, currency symbols, quote marks, RTL handling (ar, he); replaces ad-hoc inline bullets with structured reference table | session |
+| F7 | CSS variable namespace consolidation — added ASCII namespace reference table documenting 4 parallel namespaces (portal-base, report-base, competitor-base, holliday) to theme.css; added `--color-*` bridge aliases to report-base.css and competitor-base.css for cross-namespace utility consistency | session |
+
+---
+
+## March 9, 2026 — Backlog Implementer Session 4
+
+Source: `docs/BACKLOG.md` item H11 (Phase 4)
+
+| Item | Description | Commit |
+|------|-------------|--------|
+| H11 Phase 4 | Extract inline styles — Phase 4 completion: added `--color-swot-opportunity` token to edgar-nadyne brand; added `.color-swot-opportunity` utility (with dark mode override); replaced `#4a1a6b`/`#6B2D5B` heading colors in artist profile files with `.color-swot-opportunity`/`.text-primary`; replaced `margin-top: 5px` with `.mt-xs` in leora dashboards. Remaining: table column widths and `overflow-x:auto` wrappers intentionally left as-is (layout-critical) | session |
+
+---
+
 ## March 9, 2026 — Backlog Implementer Session 3
 
 Source: `docs/BACKLOG.md` items H11-P3-A, H11-P3-B
