@@ -156,12 +156,12 @@
     var path = window.location.pathname.toLowerCase();
     var segment = '/' + (pathSegments[pathSegments.length - 1] || '');
 
-    if (/whitepaper/.test(segment)) return 'whitepaper';
+    if (/whitepaper/.test(path)) return 'whitepaper';
+    if (/architecture/.test(path)) return 'architecture';
     if (/audit/.test(segment)) return 'audit';
     if (/competitor/.test(segment)) return 'competitor-analysis';
     if (/research/.test(segment)) return 'research';
     if (/prompt/.test(segment)) return 'prompts';
-    if (/architecture/.test(segment)) return 'architecture';
     if (/index\.html$/.test(path) || path === '/' || /\/$/.test(path)) return 'index';
     return 'report';
   }
