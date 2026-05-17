@@ -72,9 +72,17 @@
   var scrollObserver = initScrollTracking();
 
   // --- Card click tracking ---
+  // card_click fires only for internal hub cards (same-origin links).
+  // GA4 Enhanced Measurement outbound-click events fire on external URLs only,
+  // so there is no duplication. If an external card is ever added, the hostname
+  // guard below prevents double-counting with EM outbound tracking.
   function onCardClick(e) {
     var link = e.target.closest('a.card');
     if (!link) return;
+
+    var href = link.getAttribute('href') || '';
+    var isExternal = /^https?:\/\//.test(href) && link.hostname !== window.location.hostname;
+    if (isExternal) return; // let GA4 Enhanced Measurement handle outbound clicks
 
     var titleEl = link.querySelector('.card-title');
     var categoryEl = link.querySelector('.card-category');
@@ -82,7 +90,7 @@
     gtag('event', 'card_click', {
       card_title: titleEl ? titleEl.textContent : '',
       card_category: categoryEl ? categoryEl.textContent : '',
-      destination_url: link.getAttribute('href') || '',
+      destination_url: href,
       brand: brand,
       section: section
     });
