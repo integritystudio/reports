@@ -180,7 +180,7 @@ section h3 {
     font-size: var(--font-size-h3);
 }
 .section-content { padding: var(--spacing-md); overflow-x: auto; }
-.table-wrapper { overflow-x: auto; }
+.table-wrapper { overflow-x: auto; padding: var(--spacing-sm) var(--spacing-md); }
 
 table { width: 100%; border-collapse: collapse; margin: var(--spacing-sm) 0; }
 th, td { padding: var(--spacing-table-cell); text-align: left; border-bottom: var(--border-width-1) solid var(--border); }
