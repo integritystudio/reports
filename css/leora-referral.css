@@ -365,7 +365,8 @@ body.form-page .container {
 .form-page input[type="tel"]:focus,
 .form-page select:focus,
 .form-page textarea:focus {
-    outline: none;
+    outline: 2px solid var(--leora-primary);
+    outline-offset: 1px;
     border-color: var(--leora-primary);
 }
 
