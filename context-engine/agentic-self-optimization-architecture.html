@@ -85,6 +85,7 @@
                 <h2>2. Churn Data Model (From Popescu et al. 2026)</h2>
 
                 <h3>Metrics Collected Per PR/Commit</h3>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -145,6 +146,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <h3>Why These Metrics?</h3>
                 <ol>
@@ -657,6 +659,7 @@ def measure_survival_3d():
                 </ul>
 
                 <h3>Rollback Triggers</h3>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -688,6 +691,7 @@ def measure_survival_3d():
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <h3>Value Function Monitoring</h3>
                 <p>Track the trained value function to detect <strong>reward hacking</strong> (e.g., agent finds spurious correlation):</p>
@@ -784,6 +788,7 @@ increase(rl_policy_training_total[1w])
 
             <section id="risks-and-mitigation">
                 <h2>10. Risks &amp; Mitigation</h2>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -826,6 +831,7 @@ increase(rl_policy_training_total[1w])
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </section>
 
             <section id="success-metrics">
@@ -838,6 +844,7 @@ increase(rl_policy_training_total[1w])
                 <h3>Conditional Targets (if training succeeds)</h3>
 
                 <h4>Conservative Target (7-month horizon)</h4>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -868,8 +875,10 @@ increase(rl_policy_training_total[1w])
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <h4>Optimistic Target (8-month horizon)</h4>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -900,8 +909,10 @@ increase(rl_policy_training_total[1w])
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <h4>Stretch Target (12-month horizon)</h4>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -932,11 +943,13 @@ increase(rl_policy_training_total[1w])
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <p><strong>Recommended Initial Target</strong>: 80% survival at Month 6 (conservative scenario). See Whitepaper &sect;9 for contingency plan.</p>
                 <p><strong>Critical Note</strong>: No projections beyond Month 8 without additional validation data. All targets contingent on Phase 1-3 milestones.</p>
 
                 <h3>Secondary (user experience)</h3>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -967,8 +980,10 @@ increase(rl_policy_training_total[1w])
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <h3>Tertiary (system health)</h3>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1000,6 +1015,7 @@ increase(rl_policy_training_total[1w])
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </section>
 
             <section id="references">

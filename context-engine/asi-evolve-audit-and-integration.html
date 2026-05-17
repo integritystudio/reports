@@ -118,6 +118,7 @@
             <!-- Confidence Level Key -->
             <section id="confidence-level-key">
                 <h2>Confidence Level Key</h2>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -144,6 +145,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </section>
 
             <!-- 1. Introduction -->
@@ -238,6 +240,7 @@
 
                 <h3 id="dimension-a-architectural-patterns">3.1 Dimension A: Architectural Patterns</h3>
                 <p>Anthropic identifies five core workflow patterns for building effective agents: prompt chaining, routing, parallelization, orchestrator-workers, and evaluator-optimizer <strong>[HIGH]</strong> (Anthropic, 2026a).</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -274,11 +277,13 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Key conflict</strong>: Anthropic explicitly recommends &ldquo;simple, composable patterns rather than complex frameworks.&rdquo; ASI-Evolve is a monolithic framework with tightly coupled components. For production integration, the components should be decomposed into independent, composable agents.</p>
                 <p><strong>Missing pattern</strong>: No explicit parallelization. ASI-Evolve executes candidates sequentially. Anthropic&rsquo;s parallelization pattern (fan-out candidate generation, fan-in evaluation) would improve throughput.</p>
 
                 <h3 id="dimension-b-tool-design">3.2 Dimension B: Tool Design</h3>
                 <p>Anthropic specifies seven principles for writing effective tools: strategic choice, consolidation, namespacing, high-signal returns, token efficiency, description engineering, and systematic evaluation <strong>[HIGH]</strong> (Anthropic, 2026b).</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -315,10 +320,12 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Key gap</strong>: Token efficiency. The Researcher receives full context + cognition items without documented compression or relevance filtering. In production Claude API usage, where input tokens directly affect cost and latency, this would require cache-aware optimization and prompt caching strategies.</p>
 
                 <h3 id="dimension-c-context-engineering">3.3 Dimension C: Context Engineering</h3>
                 <p>Anthropic&rsquo;s context engineering guidance emphasizes direct system prompts, dynamic retrieval (lightweight refs then JIT load), structured note-taking, sub-agent architectures, and finding &ldquo;the smallest set of high-signal tokens&rdquo; <strong>[HIGH]</strong> (Anthropic, 2026c).</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -355,10 +362,12 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Key strength</strong>: The Analyzer&rsquo;s role as a lossy context compressor optimized for downstream decision-making is a valuable primitive not explicitly covered in Anthropic&rsquo;s current guidance. It addresses the practical challenge of maintaining long-horizon context across many iterations without exceeding context budgets.</p>
 
                 <h3 id="dimension-d-safety">3.4 Dimension D: Safety</h3>
                 <p>Anthropic&rsquo;s safety framework for trustworthy agents specifies five principles: human control, transparency, value alignment, privacy, and security against manipulation <strong>[HIGH]</strong> (Anthropic, 2026d).</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -395,10 +404,12 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Critical finding</strong>: Safety is the most significant gap across all five components. ASI-Evolve is designed for autonomous operation without human oversight, which directly conflicts with Anthropic&rsquo;s first principle (human control). Anthropic&rsquo;s agentic misalignment research demonstrates that frontier models can engage in harmful autonomous behavior when given extensive information access with minimal oversight <strong>[HIGH]</strong> (Anthropic, 2026e). Self-improving evolutionary systems amplify this risk because the loop generates novel programs that may behave unpredictably.</p>
 
                 <h3 id="dimension-e-evaluation">3.5 Dimension E: Evaluation</h3>
                 <p>Anthropic&rsquo;s evaluation framework specifies five components: tasks, trials, graders, transcripts, and outcomes <strong>[HIGH]</strong> (Anthropic, 2026f).</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -435,10 +446,12 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Key observation</strong>: ASI-Evolve evaluates its <em>outputs</em> (candidate programs) but does not evaluate its <em>components</em>. Is the Cognition Base retrieval effective? Is the LLM judge calibrated? Are the sampling strategies optimal? Claude&rsquo;s evaluation framework should be applied not just to experiment results but to each component&rsquo;s performance &mdash; a form of meta-evaluation that production systems require.</p>
 
                 <h3 id="dimension-f-long-running-agent-design">3.6 Dimension F: Long-Running Agent Design</h3>
                 <p>Anthropic&rsquo;s guidance on long-running agent harnesses emphasizes the initializer/coding agent pattern, feature-list tracking, incremental work, browser-based verification, and consistent startup routines <strong>[HIGH]</strong> (Anthropic, 2026g).</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -475,10 +488,12 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Key gap</strong>: No checkpoint-resume pattern. If any step fails or times out, the work is lost. For research campaigns that run for weeks (1,773 rounds in architecture search), this is a significant operational risk.</p>
 
                 <h3 id="dimension-g-rate-limits-efficiency">3.7 Dimension G: Rate Limits and Efficiency</h3>
                 <p>Claude API rate limits (RPM, ITPM, OTPM) require cache-aware optimization, budget caps, and efficient token usage <strong>[HIGH]</strong> (Anthropic, 2026h).</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -515,9 +530,11 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <h3 id="audit-summary">3.8 Audit Summary</h3>
                 <p><strong>Compliance Matrix (35 cells)</strong>:</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -584,6 +601,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Distribution</strong>: 7 STRONG, 14 PARTIAL, 6 WEAK, 5 MISSING, 3 not rated</p>
                 <p><strong>Top 3 Strengths</strong>:</p>
                 <ol>
@@ -859,6 +877,7 @@ UCB1_score(node) = fitness(node) / visits(node) + c * sqrt(ln(total_rounds) / vi
 
                 <h3 id="otel-instrumentation-evolutionary-loop">5.4 OTEL Instrumentation for the Evolutionary Loop</h3>
                 <p>We extend the OTEL span model from Paper 2 (Section 3) with four new span types:</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -890,6 +909,7 @@ UCB1_score(node) = fitness(node) / visits(node) + c * sqrt(ln(total_rounds) / vi
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Correlation</strong>: Each candidate program is linked to its lineage via <code>evolution.parent_ids</code>, enabling ancestry-based performance analysis. The <code>code.quality.*</code> attributes from Paper 2 are reused verbatim to maintain telemetry compatibility.</p>
                 <p><strong>Budget Tracking</strong>: Each round span carries <code>evolution.budget_spent_usd</code> and <code>evolution.budget_remaining_usd</code> attributes, enabling real-time cost monitoring and automated stop conditions.</p>
             </section>
@@ -989,6 +1009,7 @@ UCB1_score(node) = fitness(node) / visits(node) + c * sqrt(ln(total_rounds) / vi
 
                 <h3 id="phase-1-foundation">7.1 Phase 1: Foundation (Weeks 1&ndash;4)</h3>
                 <p><strong>Objective</strong>: Single-iteration evolutionary loop running locally.</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1019,10 +1040,12 @@ UCB1_score(node) = fitness(node) / visits(node) + c * sqrt(ln(total_rounds) / vi
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Verification</strong>: Run 10 complete evolutionary rounds on a test problem (e.g., function optimization). Verify all OTEL spans are emitted correctly. Confirm Database state is consistent after each round.</p>
 
                 <h3 id="phase-2-integration">7.2 Phase 2: Integration (Weeks 5&ndash;8)</h3>
                 <p><strong>Objective</strong>: Multi-iteration evolutionary loop with OTEL observability and safety gates.</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1049,10 +1072,12 @@ UCB1_score(node) = fitness(node) / visits(node) + c * sqrt(ln(total_rounds) / vi
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Verification</strong>: Run 100 evolutionary rounds. Verify budget tracking accuracy. Trigger kill switch mid-round and confirm Database consistency. Measure prompt cache hit rate (target: &gt;70%).</p>
 
                 <h3 id="phase-3-hybrid-rl-evolution">7.3 Phase 3: Hybrid RL+Evolution (Weeks 9&ndash;12)</h3>
                 <p><strong>Objective</strong>: Integrated PPO + evolutionary selection with survival metrics as fitness.</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1079,10 +1104,12 @@ UCB1_score(node) = fitness(node) / visits(node) + c * sqrt(ln(total_rounds) / vi
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Verification</strong>: Run pilot on 3&ndash;5 representative repositories. Compare convergence rates of evolution-only, RL-only, and hybrid approaches. Measure MAP-Elites coverage across quality dimensions.</p>
 
                 <h3 id="phase-4-production-deployment">7.4 Phase 4: Production Deployment (Weeks 13&ndash;16)</h3>
                 <p><strong>Objective</strong>: Production evolutionary loop with full safety governance.</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1109,10 +1136,12 @@ UCB1_score(node) = fitness(node) / visits(node) + c * sqrt(ln(total_rounds) / vi
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Verification</strong>: Shadow deployment produces measurable fitness improvements over baseline without degrading production metrics. Canary rollout triggers automated rollback at least once (deliberate test). Full OTEL trace audit passes review.</p>
 
                 <h3 id="success-criteria">7.5 Success Criteria</h3>
                 <p>Following the conditional target framework from Paper 1:</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1161,12 +1190,14 @@ UCB1_score(node) = fitness(node) / visits(node) + c * sqrt(ln(total_rounds) / vi
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p>These targets are conditional hypotheses, not empirical predictions <strong>[LOW]</strong>.</p>
             </section>
 
             <!-- 8. Risks and Mitigations -->
             <section id="risks-and-mitigations">
                 <h2>8. Risks and Mitigations</h2>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1227,6 +1258,7 @@ UCB1_score(node) = fitness(node) / visits(node) + c * sqrt(ln(total_rounds) / vi
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </section>
 
             <!-- 9. Open Questions -->

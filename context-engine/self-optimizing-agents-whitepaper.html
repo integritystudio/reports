@@ -199,6 +199,7 @@
 
                 <h3 id="key-findings-relevant-to-rl">2.2 Key Findings Relevant to RL</h3>
                 <p><em>Note: The table below presents illustrative ranges based on trends reported in Popescu et al. (2026). These are not exact per-agent metrics extracted from the paper but rather representative estimates to illustrate code quality patterns. Consult the original published paper for precise empirical values.</em></p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -253,6 +254,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Source</strong>: Popescu et al. (2026), empirical trends from analysis of 110,000+ PRs (N=111,969 per &sect;3.2 Methodology) in open-source repositories. Values represent estimated ranges reflecting reported patterns; exact per-agent metrics should be consulted from the published paper.</p>
                 <p><strong>Interpretation</strong>:</p>
                 <ul>
@@ -898,6 +900,7 @@ for skill in skills:
                 </ul>
 
                 <h3 id="rollback-triggers">6.2 Rollback Triggers</h3>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -934,6 +937,7 @@ for skill in skills:
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <h3 id="reward-hacking-detection">6.3 Reward Hacking Detection</h3>
                 <p>Monitor value function to catch agents exploiting artifacts:</p>
@@ -1090,6 +1094,7 @@ for skill in skills:
 
                 <h4>Scenario 1: Conservative Target (7-month horizon)</h4>
                 <p><strong>Assumption</strong>: Modest reward engineering; auxiliary signals prove sufficient for convergence.</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1120,10 +1125,12 @@ for skill in skills:
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Rationale</strong>: Reflects modest but achievable improvements without breakthrough in reward design.</p>
 
                 <h4>Scenario 2: Optimistic Target (8-month horizon)</h4>
                 <p><strong>Assumption</strong>: Auxiliary + delayed rewards combine effectively; policy convergence achieved on pilot repositories.</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1154,10 +1161,12 @@ for skill in skills:
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Rationale</strong>: Represents alignment with historical RL gains in similar domains (6-8pp typical for well-tuned policies).</p>
 
                 <h4>Scenario 3: Stretch Target (12-month horizon)</h4>
                 <p><strong>Assumption</strong>: Population-based training with domain adaptation; transfer to diverse codebases succeeds.</p>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1188,6 +1197,7 @@ for skill in skills:
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Rationale</strong>: Achievable only if transfer learning and diversity mechanisms work as designed; requires successful deployment beyond pilot.</p>
 
                 <h3 id="recommended-initial-target">Recommended Initial Target: Month 6 Checkpoint</h3>
@@ -1206,6 +1216,7 @@ for skill in skills:
                 </ul>
 
                 <h3>Success Criteria &amp; Timeline</h3>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1247,9 +1258,11 @@ for skill in skills:
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p><strong>Critical Note</strong>: No projections beyond Month 8 are made without additional validation data. All targets in Scenarios 1&ndash;3 are contingent on successful completion of Phase 1&ndash;3 milestones.</p>
 
                 <h3 id="secondary-metrics">Secondary Metrics (user experience)</h3>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1280,8 +1293,10 @@ for skill in skills:
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <h3 id="tertiary-metrics">Tertiary Metrics (system health)</h3>
+                <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
@@ -1313,6 +1328,7 @@ for skill in skills:
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </section>
 
             <!-- 10. Open Questions -->
