@@ -218,7 +218,7 @@ tr:hover td { background: var(--surface2); }
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-badge);
 }
-.badge-direct  { background: var(--color-badge-direct-bg); color: var(--accent); }
+.badge-direct  { background: var(--color-badge-direct-bg); color: #1d4ed8; }
 .badge-volume  { background: var(--color-badge-volume-bg); color: var(--accent2); }
 .badge-luxury  { background: var(--color-badge-luxury-bg); color: var(--amber); }
 .badge-legacy  { background: var(--color-badge-legacy-bg); color: var(--green); }
