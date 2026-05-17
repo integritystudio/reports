@@ -22,12 +22,7 @@
 
   gtag('config', GA_ID, {
     content_group: brand,
-    page_title: document.title,
-    custom_map: {
-      dimension1: 'brand',
-      dimension2: 'section',
-      dimension3: 'content_type'
-    }
+    page_title: document.title
   });
 
   gtag('event', 'page_metadata', {
