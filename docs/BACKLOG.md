@@ -21,14 +21,20 @@ No `gtag('consent', 'default', …)` call before `config`. Relevant given Portug
 
 ---
 
-### GA7. Audit submodule GA setups vs. hub property
+### GA7. Audit submodule GA setups vs. hub property — Done
 **Priority:** Low (data consolidation)
 **Source:** GA tracking health audit (May 16)
 **Files:** `john_skelton/_includes/_google_tag_manager.html`, `micah_lindsey/_includes/_google_tag_manager.html`
 
 Submodules ship their own GTM partials and analytics tests, outside the hub's `G-YXLT76BTM4` property. Confirm whether separate properties are intentional (per-client reporting) or whether they should be merged into the hub property for unified dashboards.
 
-**Effort:** Low (audit) / Medium (if consolidating)
+**Audit findings (May 16):**
+- `john_skelton`: GA4 property `G-J7TL7PQH7S` + GTM container `GTM-NR4GGH5K` configured in `_config.yml`. Separate per-client property — intentional. No consolidation needed.
+- `micah_lindsey`: Has `_includes/_google_tag_manager.html` partial but no `container_id` set in `_config.yml`. GTM tag renders empty/disabled — no tracking currently active from this submodule.
+
+**Decision:** Separate properties are the correct approach for per-client reporting. `micah_lindsey` has no active GA setup; if tracking is desired for that site, a container_id should be added to its `_config.yml` (out of scope for hub work).
+
+**[DONE]** — audit complete, no hub-side changes required.
 
 ---
 
@@ -125,7 +131,8 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | May 16 — GA4 Tracking Audit | GA1, GA2, GA3, GA4, GA6 (5 items) |
 | May 16 — Neural Networks & OTEL | NN1, NN2, NN3 (3 items) |
 | May 16 — UI/UX Audit | GA5, A14, A15, A16, A17, A18 (6 items) |
-| **Total** | **98 completed, 2 open** |
+| May 16 — Backlog Implementer | GA7 (1 item) |
+| **Total** | **99 completed, 1 open (W1 upstream-blocked)** |
 
 ### Scorecard (Phase 2 — Feb 16)
 
