@@ -8,7 +8,7 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-### GA1. Add GA4 tracking to back-alley-tea pages
+### GA1. Add GA4 tracking to back-alley-tea pages — Done
 **Priority:** High (analytics coverage gap)
 **Source:** GA tracking health audit (May 16)
 
@@ -22,9 +22,11 @@ Coverage currently 111/115 (96.5%). Fix brings hub to 100%.
 
 **Effort:** Trivial (4 single-line inserts)
 
+**[DONE]** commit 0cdcfbc
+
 ---
 
-### GA2. Fix `detectContentType()` segment-vs-path bug
+### GA2. Fix `detectContentType()` segment-vs-path bug — Done
 **Priority:** Medium (mis-categorized events)
 **Source:** GA tracking health audit (May 16)
 **File:** `js/gtag.js:155-167`
@@ -33,9 +35,11 @@ Function matches regexes against `segment` (last path part, e.g. `/http-content-
 
 **Effort:** Low
 
+**[DONE]** commit 2ee1648
+
 ---
 
-### GA3. Defer `js/gtag.js` loader script
+### GA3. Defer `js/gtag.js` loader script — Done
 **Priority:** Low (performance)
 **Source:** GA tracking health audit (May 16)
 **File:** `index.html:4` (and every other page including the loader)
@@ -44,9 +48,11 @@ Function matches regexes against `segment` (last path part, e.g. `/http-content-
 
 **Effort:** Trivial (project-wide find/replace)
 
+**[DONE]** commit a4c2a06 — 97 files updated
+
 ---
 
-### GA4. Remove deprecated `custom_map` block from gtag config
+### GA4. Remove deprecated `custom_map` block from gtag config — Done
 **Priority:** Low (cleanup, no functional impact)
 **Source:** GA tracking health audit (May 16)
 **File:** `js/gtag.js:25-29`
@@ -54,6 +60,8 @@ Function matches regexes against `segment` (last path part, e.g. `/http-content-
 `custom_map: { dimension1: 'brand', … }` is a UA-era pattern; GA4 ignores it. Custom dimensions must be registered in GA4 Admin → Custom Definitions against the event params (`brand`, `section`, `content_type`) already being sent. Verify Admin registration, then delete the block.
 
 **Effort:** Low
+
+**[DONE]** commit e9b9412
 
 ---
 
@@ -68,7 +76,7 @@ No `gtag('consent', 'default', …)` call before `config`. Relevant given Portug
 
 ---
 
-### GA6. De-duplicate card-click vs. GA4 Enhanced Measurement outbound clicks
+### GA6. De-duplicate card-click vs. GA4 Enhanced Measurement outbound clicks — Done
 **Priority:** Low (reporting hygiene)
 **Source:** GA tracking health audit (May 16)
 **File:** `js/gtag.js:79-96`
@@ -76,6 +84,8 @@ No `gtag('consent', 'default', …)` call before `config`. Relevant given Portug
 Custom `card_click` event overlaps with GA4 Enhanced Measurement's `click` (outbound) event when EM is enabled in Admin. Decide which is canonical and either disable EM outbound clicks or stop firing `card_click` for outbound destinations.
 
 **Effort:** Low
+
+**[DONE]** commit 2224410 — added hostname guard; card_click skips external URLs, EM handles outbound
 
 ---
 
