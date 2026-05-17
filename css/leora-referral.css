@@ -435,6 +435,12 @@ body.form-page .container {
 
 @media (prefers-color-scheme: dark) {
     :root {
+        /* Base token overrides — ensures generic containers using these tokens go dark */
+        --color-bg: #0f0f1a;
+        --color-text-primary: #e8e8e8;
+        --color-text-muted: #b0b0b0;
+        --color-text-faint: #909090;
+        --color-border: #2a2a3a;
         --color-dark-text: #f0f0f0;
         --color-dark-text-muted: #c0c0c0;
         --color-dark-text-faint: #b0b0b0;
