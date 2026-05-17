@@ -1,0 +1,89 @@
+/* consent-banner.css — Cookie consent / Consent Mode v2 banner
+ * Used by pages that include js/consent.js
+ * Respects prefers-color-scheme and is keyboard-navigable.
+ */
+
+.consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #1a1a2e;
+    color: #e8e8e8;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.consent-banner[hidden] { display: none; }
+
+.consent-banner__text { flex: 1 1 280px; }
+
+.consent-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.consent-banner__btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.consent-banner__btn--accept {
+    background: #2563eb;
+    color: #fff;
+    border-color: #2563eb;
+}
+
+.consent-banner__btn--accept:hover,
+.consent-banner__btn--accept:focus-visible {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
+}
+
+.consent-banner__btn--decline {
+    background: transparent;
+    color: #e8e8e8;
+    border-color: #4b5563;
+}
+
+.consent-banner__btn--decline:hover,
+.consent-banner__btn--decline:focus-visible {
+    border-color: #9ca3af;
+    outline: 2px solid #9ca3af;
+    outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: light) {
+    .consent-banner {
+        background: #1e293b;
+        color: #f1f5f9;
+    }
+}
+
+@media (max-width: 480px) {
+    .consent-banner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+    }
+
+    .consent-banner__actions { flex-direction: column; }
+
+    .consent-banner__btn { width: 100%; text-align: center; }
+}

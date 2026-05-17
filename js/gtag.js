@@ -13,6 +13,18 @@
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
   window.gtag = gtag;
+
+  // --- Consent Mode v2 defaults (denied until user accepts) ---
+  // Covers GDPR (EU) and LGPD (Brazil / edgar_nadyne PT-BR translations).
+  // Update to 'granted' via gtag('consent','update',{...}) after user accepts.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+
   gtag('js', new Date());
 
   // --- Content grouping from data-brand and path ---
