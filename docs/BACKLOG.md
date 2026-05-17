@@ -8,6 +8,88 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+### GA1. Add GA4 tracking to back-alley-tea pages
+**Priority:** High (analytics coverage gap)
+**Source:** GA tracking health audit (May 16)
+
+4 HTML files missing `<script src="../js/gtag.js"></script>`:
+- `back-alley-tea/index.html`
+- `back-alley-tea/back_alley_tea_research.html`
+- `back-alley-tea/back_alley_tea_opportunities_report.html`
+- `back-alley-tea/back_alley_tea_austin_resources.html`
+
+Coverage currently 111/115 (96.5%). Fix brings hub to 100%.
+
+**Effort:** Trivial (4 single-line inserts)
+
+---
+
+### GA2. Fix `detectContentType()` segment-vs-path bug
+**Priority:** Medium (mis-categorized events)
+**Source:** GA tracking health audit (May 16)
+**File:** `js/gtag.js:155-167`
+
+Function matches regexes against `segment` (last path part, e.g. `/http-content-compression.html`), so directory-based categories like `whitepaper` and `architecture` never fire — pages under `/code-condense-whitepaper/` are tagged `report` instead of `whitepaper`. Switch directory-based checks to match against `path`, keep filename-based checks against `segment`.
+
+**Effort:** Low
+
+---
+
+### GA3. Defer `js/gtag.js` loader script
+**Priority:** Low (performance)
+**Source:** GA tracking health audit (May 16)
+**File:** `index.html:4` (and every other page including the loader)
+
+`<script src="js/gtag.js"></script>` is parser-blocking. Inner GTM injection is already async, so the wrapper can safely take `defer`.
+
+**Effort:** Trivial (project-wide find/replace)
+
+---
+
+### GA4. Remove deprecated `custom_map` block from gtag config
+**Priority:** Low (cleanup, no functional impact)
+**Source:** GA tracking health audit (May 16)
+**File:** `js/gtag.js:25-29`
+
+`custom_map: { dimension1: 'brand', … }` is a UA-era pattern; GA4 ignores it. Custom dimensions must be registered in GA4 Admin → Custom Definitions against the event params (`brand`, `section`, `content_type`) already being sent. Verify Admin registration, then delete the block.
+
+**Effort:** Low
+
+---
+
+### GA5. Add Consent Mode v2 defaults
+**Priority:** Medium (GDPR/LGPD compliance)
+**Source:** GA tracking health audit (May 16)
+**File:** `js/gtag.js`
+
+No `gtag('consent', 'default', …)` call before `config`. Relevant given Portuguese/Brazilian (LGPD) and broader EU traffic on `edgar_nadyne` translations and other reports. Add denied-by-default consent state with banner-driven update.
+
+**Effort:** Medium (defaults trivial; banner UI is the work)
+
+---
+
+### GA6. De-duplicate card-click vs. GA4 Enhanced Measurement outbound clicks
+**Priority:** Low (reporting hygiene)
+**Source:** GA tracking health audit (May 16)
+**File:** `js/gtag.js:79-96`
+
+Custom `card_click` event overlaps with GA4 Enhanced Measurement's `click` (outbound) event when EM is enabled in Admin. Decide which is canonical and either disable EM outbound clicks or stop firing `card_click` for outbound destinations.
+
+**Effort:** Low
+
+---
+
+### GA7. Audit submodule GA setups vs. hub property
+**Priority:** Low (data consolidation)
+**Source:** GA tracking health audit (May 16)
+**Files:** `john_skelton/_includes/_google_tag_manager.html`, `micah_lindsey/_includes/_google_tag_manager.html`
+
+Submodules ship their own GTM partials and analytics tests, outside the hub's `G-YXLT76BTM4` property. Confirm whether separate properties are intentional (per-client reporting) or whether they should be merged into the hub property for unified dashboards.
+
+**Effort:** Low (audit) / Medium (if consolidating)
+
+---
+
 ### NN1. Enhance lesson plan with LPTHW pedagogy elements — Done
 **Priority:** Medium (learning experience, completeness)
 **Source:** Content review (Mar 25, neural-networks learning roadmap) + LPTHW audit hook
