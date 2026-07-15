@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="hub">
+<head>
+  <script src="js/gtag.js" defer></script>
+  <link rel="stylesheet" href="css/consent-banner.css">
+  <script src="js/consent.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founding a 501(c)(3) Movement Arts Nonprofit in Austin</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/report-base.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <style>
+    /* Page-scoped brand retint — vibrant, inclusive movement-arts palette.
+       Overrides report-base :root tokens; dark-mode variant keeps links/subheads legible. */
+    :root {
+      --primary: #7b2d8e;   /* deep magenta-purple — headers */
+      --secondary: #0e7c86; /* teal — links, subheadings */
+      --accent: #f2a341;    /* warm amber — accents, borders */
+      --color-highlight-start: #f6ecfa;
+      --color-highlight-end: #e6f5f3;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --secondary: #3fd0d8; /* lighter teal for legible links/subheads on dark */
+        --color-highlight-start: #2a1a33;
+        --color-highlight-end: #12302f;
+      }
+    }
+    /* Report-specific components (classes only — no inline styles) */
+    .report-meta { margin-top: var(--spacing-sm); font-size: var(--font-size-sm); color: var(--color-header-meta); }
+    .lead { font-size: 1.05rem; }
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist li { padding: 0.35rem 0 0.35rem 1.9rem; position: relative; border-bottom: 1px solid var(--border-light); }
+    .checklist li::before {
+      content: '\2610';
+      position: absolute; left: 0; top: 0.3rem;
+      color: var(--secondary); font-size: 1.15rem; font-weight: 700;
+    }
+    .source-group { margin-bottom: var(--spacing-md); }
+    .source-group h3 { margin-bottom: 0.3rem; }
+    .source-group ul { font-size: var(--font-size-sm); word-break: break-word; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.6rem 0; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div class="container">
+    <header>
+      <h1>Founding a 501(c)(3) Movement Arts Nonprofit in Austin</h1>
+      <p class="subtitle">Legal formation, funding, safety &amp; the evidence base for a community movement-arts organization</p>
+      <p class="report-meta">Research &amp; implementation guide &middot; Austin, Texas &middot; Prepared July 2026</p>
+    </header>
+
+    <main id="main">
+      <!-- Scope -->
+      <div class="executive-summary">
+        <h2>Recommended path</h2>
+        <p class="lead">A movement-arts nonprofit supporting existing Austin artists, events, and venues &mdash; flow arts, firespinning, acroyoga, contact improv, ecstatic dance, partner dance, aerial acrobatics, performance choreography, and weight-lifting &mdash; with an explicit commitment to safety and empowerment for LGBTQ+ individuals, grounded in research on the mental-health benefits of dance and community. Named community partners: <strong>Flowstorm</strong>, <strong>Swolemates</strong>, and <strong>Ekstasis at Brodie Homestead</strong>.</p>
+        <ol>
+          <li><strong>Launch under a fiscal sponsor first, incorporate later.</strong> Operate immediately under an Austin fiscal sponsor (Austin Creative Alliance or Museum of Human Achievement) to accept tax-deductible donations and apply for grants now &mdash; no waiting on the IRS.</li>
+          <li><strong>Incorporate as a Texas nonprofit corporation</strong> (Certificate of Formation, Form 202, $25) with a purpose clause and asset-dedication language drafted to satisfy the IRS &mdash; <em>not</em> the bare state template.</li>
+          <li><strong>Get an EIN, adopt IRS-compliant bylaws + conflict-of-interest policy, seat a board of &ge;3 directors,</strong> then file federal exemption on <strong>Form 1023-EZ</strong> ($275) if eligible, or <strong>Form 1023</strong> ($600).</li>
+          <li><strong>After the IRS determination letter,</strong> file Texas franchise &amp; sales-tax exemption, then register with the Texas Commission on the Arts and City of Austin cultural-arts programs.</li>
+          <li><strong>Stand up a real safety &amp; insurance program</strong> for fire/flow/aerial before the first event (NAFAA standards + specialty coverage).</li>
+          <li><strong>Anchor your charitable-purpose narrative</strong> in peer-reviewed evidence that social dance and community belonging improve mental health, with LGBTQ+-specific literature backing your safety commitment.</li>
+        </ol>
+      </div>
+
+      <!-- Methodology / confidence -->
+      <div class="info-box">
+        <h2 class="text-primary">Methodology &amp; confidence</h2>
+        <p><span class="badge badge-verified">Verified</span> Produced by an automated deep-research pass: 6 search angles &rarr; 30 sources fetched &rarr; 140 claims extracted &rarr; adversarial 3-vote fact-verification. <strong>25 core claims were verified and all 25 confirmed (0 refuted, 0 killed)</strong>, synthesizing into 7 high-confidence findings from <strong>authoritative primary sources</strong> (IRS.gov, austintexas.gov, arts.texas.gov, Public Counsel) plus reputable guides. Sections 1&ndash;3 and 5 carry the <span class="badge badge-verified">Verified</span> badge.</p>
+        <p class="mt-sm"><strong>Open gap &mdash; insurance &amp; safety:</strong> the verification pass surfaced <strong>no confirmed findings on insurance/liability for fire, flow, or aerial arts</strong>. Section 4 is therefore marked <span class="badge badge-unverified">directional</span>: sourced from industry search results but not independently verified. Treat it as a starting point and confirm with a licensed broker and the Austin Fire Department.</p>
+        <p class="mt-sm"><strong>Still verify before relying:</strong> specific dollar figures, deadlines, and eligibility thresholds change annually &mdash; items marked <span class="badge badge-warning">time-sensitive</span> especially. Items marked <span class="badge badge-info">confirm</span> are standard Texas steps added for completeness that fell outside the verified set.</p>
+      </div>
+
+      <!-- TOC -->
+      <nav id="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+        <div class="section-content">
+          <ol>
+            <li><a href="#s1">Legal &amp; procedural formation</a></li>
+            <li><a href="#s2">Governance &amp; fiscal sponsorship</a></li>
+            <li><a href="#s3">Austin &amp; Texas arts funding</a></li>
+            <li><a href="#s4">Insurance, liability &amp; safety</a></li>
+            <li><a href="#s5">Evidence: dance, community &amp; mental health</a></li>
+            <li><a href="#s6">Comparable &amp; model organizations</a></li>
+            <li><a href="#action">Action checklist</a></li>
+            <li><a href="#sources">Sources</a></li>
+          </ol>
+        </div>
+      </nav>
+
+      <!-- 1. Legal -->
+      <section id="s1">
+        <h2>1. Legal &amp; procedural formation</h2>
+        <div class="section-content">
+          <p><span class="badge badge-verified">Verified &middot; high confidence</span> <span class="source">IRS primary sources, 3-vote unanimous.</span></p>
+          <h3>1a. Form the Texas nonprofit corporation</h3>
+          <ul>
+            <li>File a <strong>Certificate of Formation &ndash; Nonprofit Corporation (Form 202)</strong> with the <strong>Texas Secretary of State</strong>; filing fee <strong>$25</strong>. <span class="source">[nonprofitquest.com; 501c3.org]</span></li>
+            <li>Form 202 requires: name, registered agent, initial board, <strong>purpose clause</strong>, member structure, and organizer info. <span class="source">[nonprofitquest.com]</span></li>
+            <li>A Texas nonprofit must have <strong>at least three directors</strong>. <span class="source">[nonprofitquest.com]</span></li>
+            <li>Your purpose must include a recognized <strong>exempt characteristic</strong> &mdash; <strong>charitable and educational</strong> fit best here (arts education, community health, public performance). <span class="source">[nonprofitquest.com]</span></li>
+          </ul>
+          <div class="warning-box">
+            <strong>Critical gotcha:</strong> The state's Form 202 template <strong>does not by itself meet IRS requirements</strong> for 501(c)(3) status. Your Certificate of Formation must add an IRS-compliant purpose clause (limiting activities to exempt purposes) and a <strong>dissolution / asset-dedication clause</strong> permanently dedicating assets to a 501(c)(3) purpose. <span class="source">[501c3.org &ndash; TX guide; IRS i1023ez]</span>
+          </div>
+          <p class="mt-sm"><span class="badge badge-info">confirm</span> Standard companion steps: appoint a <strong>registered agent</strong> with a Texas street address; adopt <strong>bylaws</strong> and a <strong>conflict-of-interest policy</strong>; hold an <strong>organizational board meeting</strong>; obtain a free <strong>EIN</strong>.</p>
+
+          <h3>1b. Obtain an EIN</h3>
+          <p>An organization <strong>must obtain an EIN before applying</strong> for 501(c)(3) status (free, via IRS). <span class="source">[donorbox.org]</span></p>
+
+          <h3>1c. Apply for federal 501(c)(3) recognition</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr><th>&nbsp;</th><th>Form 1023-EZ (streamlined)</th><th>Form 1023 (standard)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>User fee</strong></td><td>$275</td><td>$600</td></tr>
+                <tr><td><strong>Filing</strong></td><td>Electronic only, via Pay.gov (no paper)</td><td>Electronic, via Pay.gov</td></tr>
+                <tr><td><strong>Eligibility</strong></td><td>Total assets &lt; $250,000 <em>and</em> gross revenue &lt; $50,000; must pass Eligibility Worksheet</td><td>No size cap; required if you fail the EZ worksheet</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source">Sources: donorbox.org; IRS &ndash; About Form 1023; IRS &ndash; Instructions for Form 1023-EZ</p>
+          <ul>
+            <li><strong>Form 1023-EZ requires the mandatory Eligibility Worksheet first.</strong> Answering <strong>"Yes" to <em>any</em> question disqualifies you</strong> and forces the full Form 1023. <span class="source">[IRS i1023ez]</span></li>
+            <li>EZ eligibility is gated by the gross-receipts and total-asset limits you attest to on the worksheet. <span class="source">[IRS i1023ez]</span></li>
+            <li>Your organizing document must <strong>permanently dedicate assets</strong> to a section 501(c)(3) purpose. <span class="source">[IRS i1023ez]</span></li>
+            <li>Both forms are filed <strong>electronically through Pay.gov</strong>. <span class="source">[IRS &ndash; About Form 1023]</span></li>
+          </ul>
+          <blockquote><strong>Planning note:</strong> The activities (dance, fitness, performance, arts education) are ordinary exempt purposes. The IRS will focus on your purpose clause, public-benefit orientation, and financials. Because you intend to <em>support existing groups</em> (Flowstorm, Swolemates, Ekstasis), draft the purpose around <strong>public arts education, community wellness, and charitable support of the local movement-arts field</strong> &mdash; not around any single private business.</blockquote>
+
+          <h3>1d. Texas state tax exemptions <span class="badge badge-info">confirm</span></h3>
+          <p>After the IRS determination letter, apply to the <strong>Texas Comptroller</strong> (typically <strong>Form AP-204</strong>) for exemption from Texas <strong>franchise and sales/use tax</strong> &mdash; a separate step from federal recognition. <em>Not surfaced in fetched sources; verify current process at comptroller.texas.gov.</em></p>
+        </div>
+      </section>
+
+      <!-- 2. Governance -->
+      <section id="s2">
+        <h2>2. Governance &amp; fiscal sponsorship</h2>
+        <div class="section-content">
+          <p><span class="badge badge-verified">Verified &middot; high confidence</span> <span class="source">Public Counsel + CreateAustin + sponsor primary pages, 3-vote unanimous.</span></p>
+          <p><strong>Recommendation: begin under a fiscal sponsor.</strong> Fiscal sponsorship lets an unincorporated individual or group carry out charitable programs and accept tax-deductible donations and grants through an existing 501(c)(3) public charity (the "Sponsor") &mdash; <strong>without</strong> incorporating, applying for exemption, or maintaining nonprofit status yourself. Sponsors typically charge an administrative fee of <strong>5&ndash;15% of funds collected</strong>, scaled to services provided. Austin has unusually strong options:</p>
+          <div class="highlight-box">
+            <ul>
+              <li><strong>Austin Creative Alliance (ACA)</strong> &mdash; the single most actionable launch resource. ACA extends its 501(c)(3) over community-based Austin arts projects, so you can receive tax-deductible donations and grants immediately without incorporating first. Cost: <strong>$180 annual membership + 10% revenue share on donations/grants.</strong> ACA prioritizes projects contributing to Austin's cultural vibrancy &mdash; a direct fit for supporting Flowstorm, Swolemates, and Ekstasis. <span class="source">[austincreativealliance.org]</span></li>
+              <li><strong>Museum of Human Achievement (MoHA)</strong> &mdash; sponsors individual artists and informal/LLC organizations, prioritizes Central Texas projects, and charges <strong>no fiscal-sponsorship fee</strong>. Strong mission alignment: its grantee portfolio is <strong>~61% LGBTQIA+</strong> (it distributed ~$425K to 140 first-time grantees). Unusually favorable for a grassroots, LGBTQ+-affirming startup. <span class="source">[moha.wiki]</span></li>
+              <li><strong>Create Austin &mdash; "A Guide to Using Fiscal Sponsors"</strong> &mdash; an Austin-specific guide for comparing sponsor terms (fee vs. no-fee, control, services). <span class="source">[createaustin.org]</span></li>
+            </ul>
+          </div>
+          <div class="info-box"><strong>City-grant tip:</strong> for City of Austin HOT-funded grants, the City <strong>caps the fiscal-sponsor service fee at 10% of the total grant award</strong> &mdash; so a sponsored project keeps at least 90% of any City grant. <span class="source">[createaustin.org]</span></div>
+          <p><strong>How to choose:</strong> compare fee structure (ACA's $180 + 10% vs. MoHA's no-fee), back-office services (bookkeeping, insurance, grant admin), how much control the sponsor retains, and whether they'll cover the liability profile of fire/aerial events. Many groups run 1&ndash;2 years under sponsorship, build a track record and donor base, then graduate to independent 501(c)(3) status.</p>
+          <p><strong>Governance foundations regardless of path:</strong> a board of &ge;3 unrelated directors, bylaws, a conflict-of-interest policy, and clear financial controls &mdash; all expected by the IRS and grantmakers.</p>
+        </div>
+      </section>
+
+      <!-- 3. Funding -->
+      <section id="s3">
+        <h2>3. Austin &amp; Texas arts funding</h2>
+        <div class="section-content">
+          <p><span class="badge badge-verified">Verified &middot; high confidence</span> <span class="source">City of Austin &amp; TCA state-agency primary sources, 3-vote unanimous. Dollar amounts <span class="badge badge-warning">time-sensitive</span> &mdash; confirm current cycle.</span></p>
+          <h3>3a. City of Austin &mdash; cultural arts grants (ACME)</h3>
+          <p>The <strong>Austin Arts, Culture, Music and Entertainment (ACME)</strong> office administers the main local cultural-arts grants, funded by Hotel Occupancy Tax (HOT). <span class="source">[austintexas.gov]</span></p>
+          <div class="highlight-box">
+            <p><strong>Program tiers &mdash; where a new org fits:</strong></p>
+            <ul>
+              <li><strong>Nexus (entry tier)</strong> &mdash; <strong>$5,000 and $10,000</strong> awards over 12-month periods for emerging/established artists and arts groups. Requires <strong>&ge;1 year Austin-MSA history</strong> and <strong>budget &le;$150K</strong>. <strong>The realistic entry point.</strong> <span class="source">[austintexas.gov]</span></li>
+              <li><strong>Elevate (mid tier)</strong> &mdash; accepts <strong>501(c)(3) nonprofits, arts groups with an EIN, or individual artists</strong> &mdash; the most flexible eligibility, workable via a fiscal sponsor. <span class="source">[austintexas.gov]</span></li>
+              <li><strong>Thrive (top tier)</strong> &mdash; multi-year operational funding (<strong>~$85K&ndash;$150K/yr</strong>) restricted to <strong>501(c)(3) arts nonprofits</strong> with <strong>&ge;5 years Austin/MSA history</strong>, over half of production in Austin/ETJ, and <strong>annual expenses &ge;$60,000</strong> per Form 990. A brand-new org <strong>will not yet qualify</strong> &mdash; build toward it. <span class="source">[austintexas.gov/thrive]</span></li>
+            </ul>
+            <p>Apply / ask: City portal + <strong>culturalarts@austintexas.gov</strong>.</p>
+          </div>
+          <p><span class="badge badge-warning">time-sensitive</span> Context: in <strong>FY26</strong> the City awarded <strong>731 grants ($24M+)</strong>; <strong>3.3%</strong> of awardees were in <strong>Dance</strong> and <strong>26.6%</strong> identified as <strong>LGBTQ</strong> &mdash; funding demonstrably reaches dance and LGBTQ+ arts communities. <span class="source">[austintexas.gov]</span></p>
+
+          <h3>3b. Texas Commission on the Arts (TCA)</h3>
+          <ul>
+            <li>TCA grants are restricted to <strong>Texas-based 501(c)(3) nonprofits and governmental entities</strong> &mdash; <strong>individuals and fiscally sponsored/umbrella proposals are ineligible.</strong> <span class="source">[arts.texas.gov]</span></li>
+            <li>Organizations with an arts mission and a <strong>verified budget of $4,000+</strong> can apply for <strong>Arts Respond Project grants</strong> (<strong>avg $5,000</strong>; deadlines <strong>July 15 and January 15</strong>). <span class="source">[arts.texas.gov]</span></li>
+            <li>First-time nonprofit applicants must email their <strong>IRS letter of determination to accounts@arts.texas.gov</strong> to set up a grant-portal account (up to <strong>5 business days</strong>); competitive grants require a <strong>SAM-UEI number</strong>. <span class="source">[arts.texas.gov]</span></li>
+          </ul>
+          <div class="info-box"><strong>Implication:</strong> To access TCA money you generally need your <strong>own</strong> 501(c)(3); a fiscal sponsor does <strong>not</strong> make you TCA-eligible (unlike City of Austin programs). A key reason to pursue independent incorporation once established.</div>
+
+          <h3>3c. Funding roadmap</h3>
+          <ol>
+            <li><strong>Now (fiscal-sponsored):</strong> City of Austin <strong>Nexus</strong> (via sponsor), private/community foundation grants, crowdfunding.</li>
+            <li><strong>After own 501(c)(3):</strong> register with <strong>TCA</strong>; obtain <strong>SAM-UEI</strong>; pursue TCA grants.</li>
+            <li><strong>After 5 yrs + $60k budget:</strong> City of Austin <strong>Thrive</strong> multi-year funding.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 4. Insurance -->
+      <section id="s4">
+        <h2>4. Insurance, liability &amp; safety</h2>
+        <div class="section-content">
+          <div class="warning-box"><span class="badge badge-unverified">Directional &mdash; not independently verified</span> This section draws on industry search results (NAFAA, specialty insurers, Flow Arts Institute) that fell outside the verified claim set &mdash; the verification pass confirmed <strong>no</strong> insurance/liability findings. Treat as a starting checklist and confirm specifics with a <strong>licensed insurance broker</strong> and the <strong>Austin Fire Department</strong>.</div>
+          <p>Fire, flow, and aerial arts carry real physical risk; insurers and the Austin Fire Department (AFD) will require documented safety practices. Build this <strong>before</strong> your first event.</p>
+          <h3>Adopt recognized fire-arts safety standards</h3>
+          <ul>
+            <li><strong>NAFAA (North American Fire Arts Association) Performer Safety Guidelines</strong> &mdash; the recognized industry-standard body. Covers tool maintenance, wick attachment, spotters/safeties, extinguisher ratings, and audience control &mdash; the reference venues and fire marshals expect in a fire-arts org's SOPs. <span class="source">[NAFAA / avon.org]</span></li>
+            <li><strong>Specialty Insurance Agency &mdash; Safety Requirements for Fire Performers</strong> &mdash; an insurer's own conditions of coverage (dedicated fire safety/spotter, ABC-rated extinguishers, controlled wick/fuel handling, crash-zone clearances). Usable directly as an event checklist. <span class="source">[specialtyinsuranceagency.com]</span></li>
+          </ul>
+          <h3>Fire-marshal / open-flame permits</h3>
+          <p><strong>Flow Arts Institute &mdash; "How to Approach Your Local Fire Marshal to Legally Spin Fire"</strong> &mdash; practical guide to open-flame performance permission; <strong>AFD requires open-flame performance permits</strong> for public fire events. <span class="source">[flowartsinstitute.com]</span></p>
+          <h3>Insurance to secure</h3>
+          <p>General liability + <strong>event/special-event liability</strong>, participant accident coverage, and <strong>directors &amp; officers (D&amp;O)</strong> coverage for the board. Aerial and fire acts typically require a <strong>specialty/excess carrier</strong>; standard nonprofit GL often excludes them &mdash; get written confirmation that fire and aerial are <em>covered, not excluded</em>. <span class="source">[specialty carriers: XInsurance, Insureon, Specialty Insurance Agency]</span></p>
+          <h3>Operational safety program</h3>
+          <p>Written SOPs per discipline (fire safety officer &amp; extinguishers; rigging inspection, qualified riggers, crash mats, load ratings for aerial; spotting protocols for acro), waivers/assumption-of-risk forms, incident reporting, and instructor qualification standards.</p>
+        </div>
+      </section>
+
+      <!-- 5. Evidence -->
+      <section id="s5">
+        <h2>5. Evidence: dance, community &amp; mental health</h2>
+        <div class="section-content">
+          <p><span class="badge badge-verified">Verified &middot; high confidence</span> <span class="source">Peer-reviewed 2024 primary sources, 3-vote confirmed. (One meta-analysis's RCT label and small sample warrant modest caution.)</span></p>
+          <p>This literature is the backbone of your <strong>charitable-purpose narrative</strong> and grant "case for support." Two findings were independently confirmed: <strong>social/community dance is a documented accessible, low-cost approach to preventing and treating mood disorders</strong>, and <strong>LGBTQ+ community events measurably promote acceptance, belonging, empowerment, and mental-health resilience.</strong></p>
+          <ul>
+            <li><strong>Social dance and movement for mental health: A narrative review</strong> (Delattre et al., 2024, <em>Mental Health Science</em>) &mdash; peer-reviewed synthesis of psychology, neuroscience, and psychiatry evidence that <strong>social forms of dance</strong> (not just clinical dance/movement therapy) benefit mental health and wellbeing. Maps directly to partner dance, contact improv, ecstatic dance, and community events. <span class="source">[Wiley, doi 10.1002/mhs2.62]</span></li>
+            <li><strong>Effects of Dance Movement Therapy and Dance on Health-Related Psychological Outcomes</strong> &mdash; systematic review/meta-analysis quantifying dance's psychological benefits. <span class="source">[NCBI PMC6710484]</span></li>
+            <li><strong>LGBTQ+ community, belonging &amp; mental health</strong> &mdash; "Community, belonging and acceptance; is this the antidote to shame and societal discrimination?" (<em>Psychology &amp; Sexuality</em>, 2024). Empirically links <strong>being in a safe space with others</strong> to reduced sexuality-related shame, framing community/belonging/acceptance as protective against discrimination-driven distress. Directly supports the org's LGBTQ+ safety commitment. <span class="source">[Taylor &amp; Francis, doi 10.1080/19419899.2024.2372047]</span></li>
+          </ul>
+          <blockquote><strong>How to use this:</strong> In your purpose clause and grant narratives, position the charitable purpose as <em>advancing community mental health and social connection through movement arts</em>, with <strong>safe, affirming spaces for LGBTQ+ participants</strong> as a core public-benefit outcome &mdash; each claim anchored to the citations above. This strengthens both IRS "charitable/educational purpose" framing and competitive grant scoring.</blockquote>
+        </div>
+      </section>
+
+      <!-- 6. Comparable models -->
+      <section id="s6">
+        <h2>6. Comparable &amp; model organizations</h2>
+        <div class="section-content">
+          <p>Proven templates for mission language, governance, and the "support existing events" model:</p>
+          <ul>
+            <li><strong>Full Moon Jam Foundation</strong> (Austin) &mdash; a local fire/flow arts nonprofit; the closest hometown model for community fire-arts events and their permitting/safety posture. <span class="source">[fullmoonjam.org]</span></li>
+            <li><strong>Seattle Flow Arts Collective (SFAC)</strong> &mdash; a <strong>501(c)(3)</strong> founded to expand programming and policy advocacy for flow arts and fire spinning regionally. Mission ("promote well-being and inspire play by sharing and advancing the flow arts") is a proven template for a <strong>regional collective supporting local artists</strong> rather than running one venue. <span class="source">[mightycause.com/seattleflowarts]</span></li>
+            <li><strong>Spinning Arts Foundation / WildFire Retreat</strong> &mdash; a <strong>501(c)(3)</strong> (est. 2013) that "functions as a resource for those wishing to start their own events, programs, or organizations." A direct governance model for an umbrella foundation backing multiple community-run fire/flow events and handling event insurance and safety &mdash; mirroring your intent to support Flowstorm, Ekstasis, etc. <span class="source">[wildfireretreat.org]</span></li>
+            <li><strong>Circus / aerial-arts nonprofits (e.g. CSAW)</strong> &mdash; model for aerial rigging, instruction, and safety governance. <span class="source">[csawcircus.org &mdash; review directly]</span></li>
+          </ul>
+          <div class="info-box"><strong>Pattern to emulate:</strong> a <strong>foundation/umbrella</strong> that supports the existing ecosystem (events, artists, venues) rather than competing with it &mdash; pooling insurance, safety standards, fiscal infrastructure, and grant access on behalf of partners like Flowstorm, Swolemates, and Ekstasis.</div>
+        </div>
+      </section>
+
+      <!-- Action checklist -->
+      <section id="action">
+        <h2>Action checklist</h2>
+        <div class="section-content">
+          <ul class="checklist">
+            <li>Choose a fiscal sponsor (compare <strong>ACA</strong> $150 + 10% vs. <strong>MoHA</strong> no-fee) and launch under it</li>
+            <li>Reserve/confirm name; recruit <strong>&ge;3 board directors</strong>; appoint a registered agent</li>
+            <li>Draft <strong>bylaws</strong> + <strong>conflict-of-interest policy</strong></li>
+            <li>File <strong>Certificate of Formation (Form 202, $25)</strong> with IRS-compliant purpose + asset-dedication clauses</li>
+            <li>Obtain <strong>EIN</strong> (free)</li>
+            <li>Run the <strong>Form 1023-EZ Eligibility Worksheet</strong>; file <strong>1023-EZ ($275)</strong> or <strong>1023 ($600)</strong> via Pay.gov</li>
+            <li>After determination letter: file <strong>Texas Comptroller AP-204</strong> (franchise + sales tax exemption)</li>
+            <li>Register with <strong>TCA</strong> (email determination letter to accounts@arts.texas.gov); obtain <strong>SAM-UEI</strong></li>
+            <li>Apply for City of Austin <strong>Nexus</strong> (via sponsor now; independently later) &mdash; check FY27 cycle dates</li>
+            <li>Stand up <strong>safety SOPs</strong> (NAFAA fire standards, aerial rigging, acro spotting) + <strong>waivers</strong></li>
+            <li>Secure <strong>specialty event/GL + D&amp;O insurance</strong> confirming fire &amp; aerial are covered</li>
+            <li>Confirm <strong>AFD open-flame permit</strong> requirements for each fire event</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Sources -->
+      <section id="sources">
+        <h2>Sources</h2>
+        <div class="section-content">
+          <div class="source-group">
+            <h3>Primary (government/official)</h3>
+            <ul>
+              <li>IRS &mdash; About Form 1023: <a href="https://www.irs.gov/forms-pubs/about-form-1023">irs.gov/forms-pubs/about-form-1023</a></li>
+              <li>IRS &mdash; Instructions for Form 1023-EZ: <a href="https://www.irs.gov/instructions/i1023ez">irs.gov/instructions/i1023ez</a></li>
+              <li>City of Austin &mdash; Cultural Arts Funding Programs: <a href="https://www.austintexas.gov/arts-culture/funding-programs">austintexas.gov/arts-culture/funding-programs</a></li>
+              <li>City of Austin &mdash; Apply for Cultural Arts Funding: <a href="https://www.austintexas.gov/services/apply-cultural-arts-funding">austintexas.gov/services/apply-cultural-arts-funding</a></li>
+              <li>City of Austin &mdash; Thrive Program: <a href="https://www.austintexas.gov/thrive">austintexas.gov/thrive</a></li>
+              <li>Texas Commission on the Arts &mdash; Getting Started: <a href="https://www.arts.texas.gov/getting-started-with-tca-grants/">arts.texas.gov/getting-started-with-tca-grants</a></li>
+              <li>Texas Commission on the Arts &mdash; Program Overview: <a href="https://www.arts.texas.gov/progoverview/">arts.texas.gov/progoverview</a></li>
+            </ul>
+          </div>
+          <div class="source-group">
+            <h3>Secondary (guides)</h3>
+            <ul>
+              <li>Foundation Group &mdash; How to Start a Nonprofit in Texas: <a href="https://www.501c3.org/state-nonprofit-guide/how-to-start-a-nonprofit-in-texas/">501c3.org</a></li>
+              <li>NonprofitQuest &mdash; Texas Certificate of Formation: <a href="https://nonprofitquest.com/texas-nonprofit-certificate-of-formation">nonprofitquest.com</a></li>
+              <li>Donorbox &mdash; Form 1023-EZ for Nonprofits: <a href="https://donorbox.org/nonprofit-blog/form-1023-ez-for-nonprofits">donorbox.org</a></li>
+            </ul>
+          </div>
+          <div class="source-group">
+            <h3>Fiscal sponsorship (Austin)</h3>
+            <ul>
+              <li>Austin Creative Alliance &mdash; Fiscal Sponsorship: <a href="https://www.austincreativealliance.org/fiscalsponsorship">austincreativealliance.org/fiscalsponsorship</a></li>
+              <li>Museum of Human Achievement &mdash; Fiscal Sponsorship: <a href="https://moha.wiki/Fiscal_Sponsorship">moha.wiki/Fiscal_Sponsorship</a></li>
+              <li>Create Austin &mdash; A Guide to Using Fiscal Sponsors: <a href="https://createaustin.org/wp-content/uploads/2024/03/A-Guide-to-Using-Fiscal-Sponsors.pdf">createaustin.org (PDF)</a></li>
+            </ul>
+          </div>
+          <div class="source-group">
+            <h3>Safety &amp; insurance</h3>
+            <ul>
+              <li>NAFAA Performer Safety Guidelines: <a href="https://www.avon.org/DocumentCenter/View/19606/Fire-Performer-Safety-Guidelines">avon.org (PDF)</a></li>
+              <li>Specialty Insurance Agency &mdash; Fire Performer Safety Requirements: <a href="https://www.specialtyinsuranceagency.com/sites/default/files/2021-01/safety-requirements-for-fire-performers.pdf">specialtyinsuranceagency.com (PDF)</a></li>
+              <li>Flow Arts Institute &mdash; How to Approach Your Fire Marshal: <a href="https://flowartsinstitute.com/how-to-fire-marshall/">flowartsinstitute.com</a></li>
+            </ul>
+          </div>
+          <div class="source-group">
+            <h3>Evidence (mental health)</h3>
+            <ul>
+              <li>Delattre et al. (2024), Social dance and movement for mental health (<em>Mental Health Science</em>): <a href="https://onlinelibrary.wiley.com/doi/10.1002/mhs2.62">doi 10.1002/mhs2.62</a></li>
+              <li>Dance Movement Therapy &amp; Dance &mdash; psychological outcomes (NCBI): <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6710484/">PMC6710484</a></li>
+              <li>LGBTQ+ Pride, belonging &amp; mental health (<em>Psychology &amp; Sexuality</em>, 2024): <a href="https://www.tandfonline.com/doi/full/10.1080/19419899.2024.2372047">doi 10.1080/19419899.2024.2372047</a></li>
+            </ul>
+          </div>
+          <div class="source-group">
+            <h3>Comparable models</h3>
+            <ul>
+              <li>Full Moon Jam Foundation (Austin): <a href="https://www.fullmoonjam.org/about">fullmoonjam.org/about</a></li>
+              <li>Seattle Flow Arts Collective: <a href="https://www.mightycause.com/organization/seattleflowarts">mightycause.com/seattleflowarts</a></li>
+              <li>Spinning Arts Foundation / WildFire Retreat: <a href="https://www.wildfireretreat.org/">wildfireretreat.org</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Integrity Studio. Research &amp; implementation guide &mdash; verify time-sensitive figures against cited sources before relying on them. Not legal or tax advice.</p>
+    </footer>
+  </div>
+</body>
+</html>
