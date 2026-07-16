@@ -23,8 +23,8 @@ What this means for you:
 ## Executive summary — recommended path
 
 1. **Launch under a fiscal sponsor first, incorporate later.** Rather than waiting months for IRS recognition, operate immediately under an Austin fiscal sponsor (Austin Creative Alliance or the Museum of Human Achievement) so you can accept tax-deductible donations and apply for grants right away. ([§2](#2-governance--fiscal-sponsorship))
-2. **Incorporate as a Texas nonprofit corporation** (Certificate of Formation, Form 202, $25) with a purpose clause and asset-dedication language drafted to satisfy the IRS — *not* the bare state template. ([§1](#1-legal--procedural-formation))
-3. **Get an EIN, adopt IRS-compliant bylaws and conflict-of-interest policy, seat a board of ≥3 directors,** then file for federal exemption on **Form 1023-EZ** ($275) if you qualify, or **Form 1023** ($600) if not. ([§1](#1-legal--procedural-formation))
+2. **Incorporate as a Texas nonprofit corporation** (Certificate of Formation, Form 202, [$25](https://nonprofitquest.com/texas-nonprofit-certificate-of-formation)) with a purpose clause and asset-dedication language drafted to satisfy the IRS — *not* the bare state template. ([§1](#1-legal--procedural-formation))
+3. **Get an EIN, adopt IRS-compliant bylaws and conflict-of-interest policy, seat a board of ≥3 directors,** then file for federal exemption on **Form 1023-EZ** ([$275](https://donorbox.org/nonprofit-blog/form-1023-ez-for-nonprofits)) if you qualify, or **Form 1023** ([$600](https://donorbox.org/nonprofit-blog/form-1023-ez-for-nonprofits)) if not. ([§1](#1-legal--procedural-formation))
 4. **After the IRS determination letter,** file for Texas franchise & sales tax exemption, then register with the Texas Commission on the Arts and the City of Austin cultural-arts programs. ([§1](#1-legal--procedural-formation), [§3](#3-austin--texas-arts-funding))
 5. **Stand up a real safety & insurance program** for fire/flow/aerial before your first event, adopting NAFAA fire-arts standards and securing specialty event/liability coverage. ([§4](#4-insurance-liability--safety))
 6. **Anchor your charitable-purpose narrative** (grant applications, case for support) in the peer-reviewed evidence that social dance and community belonging improve mental health — with LGBTQ+-specific literature backing your safety commitment. ([§5](#5-evidence-dance-community--mental-health))
@@ -35,7 +35,7 @@ What this means for you:
 
 ### 1a. Form the Texas nonprofit corporation
 
-- To start a domestic nonprofit corporation in Texas, file a **Certificate of Formation – Nonprofit Corporation (Form 202)** with the **Texas Secretary of State**. The filing fee is **$25**. [Source: nonprofitquest.com](https://nonprofitquest.com/texas-nonprofit-certificate-of-formation) · [Source: 501c3.org – TX guide](https://www.501c3.org/state-nonprofit-guide/how-to-start-a-nonprofit-in-texas/)
+- To start a domestic nonprofit corporation in Texas, file a **Certificate of Formation – Nonprofit Corporation (Form 202)** with the **Texas Secretary of State**. The filing fee is **[$25](https://nonprofitquest.com/texas-nonprofit-certificate-of-formation)**. [Source: nonprofitquest.com](https://nonprofitquest.com/texas-nonprofit-certificate-of-formation) · [Source: 501c3.org – TX guide](https://www.501c3.org/state-nonprofit-guide/how-to-start-a-nonprofit-in-texas/)
 - Form 202 requires: nonprofit name, registered agent, initial board of directors, a **purpose clause**, member structure, and organizer information. [Source: nonprofitquest.com](https://nonprofitquest.com/texas-nonprofit-certificate-of-formation)
 - A Texas nonprofit corporation must have **at least three directors** on its board. [Source: nonprofitquest.com](https://nonprofitquest.com/texas-nonprofit-certificate-of-formation)
 - **Critical gotcha:** The state's Form 202 template **does not, by itself, meet IRS requirements for 501(c)(3) status.** Your Certificate of Formation must add an IRS-compliant purpose clause (limiting activities to exempt purposes) and a **dissolution/asset-dedication clause** permanently dedicating assets to a 501(c)(3) purpose. [Source: 501c3.org – TX guide](https://www.501c3.org/state-nonprofit-guide/how-to-start-a-nonprofit-in-texas/)
@@ -53,9 +53,9 @@ Two paths — choose based on size:
 
 | | **Form 1023-EZ** (streamlined) | **Form 1023** (standard) |
 |---|---|---|
-| User fee | **$275** | **$600** |
+| User fee | **[$275](https://donorbox.org/nonprofit-blog/form-1023-ez-for-nonprofits)** | **[$600](https://donorbox.org/nonprofit-blog/form-1023-ez-for-nonprofits)** |
 | Filing | Electronic only, via **Pay.gov** — paper not accepted | Electronic, via **Pay.gov** |
-| Eligibility | Total assets **< $250,000** AND gross revenue **< $50,000**; must pass the Eligibility Worksheet | No size cap; required if you fail the EZ worksheet |
+| Eligibility | Total assets **< [$250,000](https://donorbox.org/nonprofit-blog/form-1023-ez-for-nonprofits)** AND gross revenue **< [$50,000](https://donorbox.org/nonprofit-blog/form-1023-ez-for-nonprofits)**; must pass the Eligibility Worksheet | No size cap; required if you fail the EZ worksheet |
 
 Sources: [donorbox.org](https://donorbox.org/nonprofit-blog/form-1023-ez-for-nonprofits) · [IRS – About Form 1023](https://www.irs.gov/forms-pubs/about-form-1023) · [IRS – Instructions for Form 1023-EZ](https://www.irs.gov/instructions/i1023ez)
 
@@ -77,11 +77,25 @@ After receiving the IRS determination letter, apply to the **Texas Comptroller**
 
 **Recommendation: begin under a fiscal sponsor.** Fiscal sponsorship lets a new project accept tax-deductible donations and apply for grants under an existing 501(c)(3)'s status — **before** you incorporate or receive your own IRS determination. Austin has unusually strong options:
 
-- **Austin Creative Alliance (ACA)** — the single most actionable launch resource. ACA extends its 501(c)(3) over community-based Austin arts projects, so a new movement-arts group can receive tax-deductible donations and grants immediately without incorporating first. Cost: **$180 annual membership + 10% revenue share on donations/grants.** ACA specifically prioritizes projects contributing to Austin's cultural vibrancy — a direct fit for supporting Flowstorm, Swolemates, and Ekstasis. [Source: austincreativealliance.org/fiscalsponsorship](https://www.austincreativealliance.org/fiscalsponsorship)
-- **Museum of Human Achievement (MoHA)** — offers **no-fee** fiscal sponsorship for Central Texas artists and organizations with operating budgets **under $500k/year** — unusually favorable for a grassroots startup. [Source: moha.wiki/Fiscal_Sponsorship](https://moha.wiki/Fiscal_Sponsorship)
+- **Austin Creative Alliance (ACA)** — the single most actionable launch resource. ACA extends its 501(c)(3) over community-based Austin arts projects, so a new movement-arts group can receive tax-deductible donations and grants immediately without incorporating first. Cost: **[$180](https://www.austincreativealliance.org/fiscalsponsorship) annual membership + 10% revenue share on donations/grants.** ACA specifically prioritizes projects contributing to Austin's cultural vibrancy — a direct fit for supporting Flowstorm, Swolemates, and Ekstasis. [Source: austincreativealliance.org/fiscalsponsorship](https://www.austincreativealliance.org/fiscalsponsorship)
+- **Museum of Human Achievement (MoHA)** — offers **no-fee** fiscal sponsorship for Central Texas artists and organizations with operating budgets **under [$500k](https://moha.wiki/Fiscal_Sponsorship)/year** — unusually favorable for a grassroots startup. [Source: moha.wiki/Fiscal_Sponsorship](https://moha.wiki/Fiscal_Sponsorship)
 - **Create Austin — "A Guide to Using Fiscal Sponsors"** — an Austin-specific practical guide for comparing sponsor terms (fee vs. no-fee, control, services). [Source: createaustin.org (PDF)](https://createaustin.org/wp-content/uploads/2024/03/A-Guide-to-Using-Fiscal-Sponsors.pdf)
 
-**How to choose:** Compare fee structure (ACA's 10% vs. MoHA's no-fee), what back-office services each provides (bookkeeping, insurance, grant administration), how much control the sponsor retains, and whether they'll cover the liability profile of fire/aerial events. Many organizations run 1–2 years under sponsorship, build a track record and donor base, then graduate to independent 501(c)(3) status.
+**Austin & Texas arts fiscal sponsors — at a glance** (fees current as of July 2026; confirm on each sponsor's page):
+
+| Sponsor | Scope | Fee | Fit for movement arts |
+|---|---|---|---|
+| **Austin Creative Alliance (ACA)** | Austin arts (broad) | [$180](https://www.austincreativealliance.org/fiscalsponsorship)/yr + 10% of donations/grants | **Strong** — community arts focus; adds affordable liability insurance + sales-tax exemption (valuable for fire/aerial). |
+| **Museum of Human Achievement (MoHA)** | Central TX arts (budgets <[$500K](https://moha.wiki/Fiscal_Sponsorship)) | **No fee** | **Strong** — grassroots & LGBTQ+-affirming (~61% LGBTQIA+ portfolio). |
+| **Fractured Atlas** | National arts (US-wide) | 8% of donations + [$10](https://www.fracturedatlas.org/fiscal-sponsorship)/mo (individual) or [$20](https://www.fracturedatlas.org/fiscal-sponsorship)/mo (org) | **Good for individuals** — non-curatorial, broad, ~1–2 wk approval; best for an individual dance/movement artist before there's an org. |
+| Fresh Arts | Greater Houston arts | 8% + [$25](https://fresharts.org/become-sponsored/) app + [$150](https://fresharts.org/become-sponsored/) setup + [$120](https://fresharts.org/become-sponsored/)/yr + [$100](https://fresharts.org/become-sponsored/)/yr renewal | **Not Austin-eligible** — requires a Greater Houston base; listed for comparison. |
+| Austin Film Society | Film/media only | 7.5% | **Closing** — film-only; program ends August 2026. |
+
+Sources: [austincreativealliance.org](https://www.austincreativealliance.org/fiscalsponsorship), [moha.wiki](https://moha.wiki/Fiscal_Sponsorship), [fracturedatlas.org](https://www.fracturedatlas.org/fiscal-sponsorship), [fresharts.org](https://fresharts.org/become-sponsored/), [austinfilm.org](https://www.austinfilm.org/sponsored-films/).
+
+**How to find every sponsor (not just these):** no government master list exists, but two national directories filter by state and by "arts" service category — the [Fiscal Sponsor Directory](https://fiscalsponsordirectory.org/directory-listings-by-state-alpha-ordered/) (~300+ sponsors) and the [National Network of Fiscal Sponsors](https://www.fiscalsponsors.org/member-directory) member directory. These are self-listed and incomplete (MoHA isn't in every directory), so cross-check against local knowledge.
+
+**How to choose:** Compare fee structure (ACA's [$180](https://www.austincreativealliance.org/fiscalsponsorship) + 10% vs. MoHA's no-fee vs. Fractured Atlas's 8% + dues), back-office services (bookkeeping, insurance, grant administration), how much control the sponsor retains, and whether they'll cover the liability profile of fire/aerial events. Many organizations run 1–2 years under sponsorship, build a track record and donor base, then graduate to independent 501(c)(3) status.
 
 **Governance foundations to put in place regardless of path:** a board of ≥3 unrelated directors, bylaws, a conflict-of-interest policy, and clear financial controls — all of which the IRS and grantmakers expect.
 
@@ -93,13 +107,13 @@ After receiving the IRS determination letter, apply to the **Texas Comptroller**
 
 The **City of Austin Arts, Culture, Music and Entertainment (AACME)** department is the central hub for cultural-arts grants, funded largely through Hotel Occupancy Tax (HOT). [Source: austintexas.gov/arts-culture/funding-programs](https://www.austintexas.gov/arts-culture/funding-programs)
 
-- **[time-sensitive]** The City offers multiple programs — **Elevate, Thrive, Nexus,** plus **Austin Live Music Fund** and **Heritage Preservation** — reported at **over $23M for FY27**, with **Thrive** providing sustained investment to local arts nonprofits rooted in Austin's cultures. [Source: austintexas.gov/arts-culture/funding-programs](https://www.austintexas.gov/arts-culture/funding-programs)
-- **[time-sensitive]** In **FY26**, the program awarded **731 grants totaling $24M+**; **3.3%** of awardees were in the **Dance** discipline and **26.6%** identified as **LGBTQ** — evidence the funding reaches dance and LGBTQ+ arts communities. [Source: austintexas.gov/arts-culture/funding-programs](https://www.austintexas.gov/arts-culture/funding-programs)
+- **[time-sensitive]** The City offers multiple programs — **Elevate, Thrive, Nexus,** plus **Austin Live Music Fund** and **Heritage Preservation** — reported at **over [$23M](https://www.austintexas.gov/arts-culture/funding-programs) for FY27**, with **Thrive** providing sustained investment to local arts nonprofits rooted in Austin's cultures. [Source: austintexas.gov/arts-culture/funding-programs](https://www.austintexas.gov/arts-culture/funding-programs)
+- **[time-sensitive]** In **FY26**, the program awarded **731 grants totaling [$24M+](https://www.austintexas.gov/arts-culture/funding-programs)**; **3.3%** of awardees were in the **Dance** discipline and **26.6%** identified as **LGBTQ** — evidence the funding reaches dance and LGBTQ+ arts communities. [Source: austintexas.gov/arts-culture/funding-programs](https://www.austintexas.gov/arts-culture/funding-programs)
 - **Eligibility:** nonprofit applicants must have **501(c)(3) status, a registered business formation, and an EIN**; **individual artists may apply through fiscal sponsors.** [Source: austintexas.gov/arts-culture/funding-programs](https://www.austintexas.gov/arts-culture/funding-programs)
 
 **Program tiers — where a new org fits:**
-- **Nexus** (entry tier) — awards of **$5,000 and $10,000** for 12-month grant periods, targeting **emerging and established artists and arts groups**. Administered by AACME. **This is the realistic entry point for a young org.** [Source: austintexas.gov/services/apply-cultural-arts-funding](https://www.austintexas.gov/services/apply-cultural-arts-funding)
-- **Thrive** (top tier) — multi-year funding to sustain and grow local **501(c)(3) arts nonprofits**. Strictest bar: a 501(c)(3) arts nonprofit, **5+ years operating in Austin**, **$60,000+ annual expenses**, and **majority of creative production within Austin city limits/districts**. A brand-new org **will not yet qualify** — target entry programs first and build toward Thrive. [Source: austintexas.gov/thrive](https://www.austintexas.gov/thrive)
+- **Nexus** (entry tier) — awards of **[$5,000](https://www.austintexas.gov/services/apply-cultural-arts-funding) and [$10,000](https://www.austintexas.gov/services/apply-cultural-arts-funding)** for 12-month grant periods, targeting **emerging and established artists and arts groups**. Administered by AACME. **This is the realistic entry point for a young org.** [Source: austintexas.gov/services/apply-cultural-arts-funding](https://www.austintexas.gov/services/apply-cultural-arts-funding)
+- **Thrive** (top tier) — multi-year funding to sustain and grow local **501(c)(3) arts nonprofits**. Strictest bar: a 501(c)(3) arts nonprofit, **5+ years operating in Austin**, **[$60,000+](https://www.austintexas.gov/thrive) annual expenses**, and **majority of creative production within Austin city limits/districts**. A brand-new org **will not yet qualify** — target entry programs first and build toward Thrive. [Source: austintexas.gov/thrive](https://www.austintexas.gov/thrive)
 - **Apply / ask questions:** City application portal and guidelines; contact **culturalarts@austintexas.gov**. [Source: austintexas.gov/services/apply-cultural-arts-funding](https://www.austintexas.gov/services/apply-cultural-arts-funding)
 
 ### 3b. Texas Commission on the Arts (TCA)
@@ -114,7 +128,7 @@ The **City of Austin Arts, Culture, Music and Entertainment (AACME)** department
 
 1. **Now (fiscal-sponsored):** City of Austin **Nexus** (via fiscal sponsor), private foundation and community grants, individual/crowdfunding.
 2. **After own 501(c)(3):** Register with **TCA**; obtain **SAM-UEI**; pursue TCA project/organizational grants.
-3. **After 5 yrs + $60k budget:** City of Austin **Thrive** multi-year funding.
+3. **After 5 yrs + [$60k](https://www.austintexas.gov/thrive) budget:** City of Austin **Thrive** multi-year funding.
 
 ---
 
@@ -163,12 +177,12 @@ Proven templates for mission language, governance, and the "support existing eve
 
 ## Action checklist
 
-- [ ] Choose a fiscal sponsor (compare **ACA** $150 + 10% vs. **MoHA** no-fee) and launch under it
+- [ ] Choose a fiscal sponsor (compare **ACA** [$180](https://www.austincreativealliance.org/fiscalsponsorship)/yr + 10% vs. **MoHA** no-fee) and launch under it
 - [ ] Reserve/confirm name; recruit **≥3 board directors**; appoint a registered agent
 - [ ] Draft **bylaws** + **conflict-of-interest policy**
-- [ ] File **Certificate of Formation (Form 202, $25)** with IRS-compliant purpose + asset-dedication clauses
+- [ ] File **Certificate of Formation (Form 202, [$25](https://nonprofitquest.com/texas-nonprofit-certificate-of-formation))** with IRS-compliant purpose + asset-dedication clauses
 - [ ] Obtain **EIN** (free)
-- [ ] Run the **Form 1023-EZ Eligibility Worksheet**; file **1023-EZ ($275)** or **1023 ($600)** via Pay.gov
+- [ ] Run the **Form 1023-EZ Eligibility Worksheet**; file **1023-EZ ([$275](https://donorbox.org/nonprofit-blog/form-1023-ez-for-nonprofits))** or **1023 ([$600](https://donorbox.org/nonprofit-blog/form-1023-ez-for-nonprofits))** via Pay.gov
 - [ ] After determination letter: file **Texas Comptroller AP-204** (franchise + sales tax exemption)
 - [ ] Register with **TCA** (email determination letter to accounts@arts.texas.gov); obtain **SAM-UEI**
 - [ ] Apply for City of Austin **Nexus** (via sponsor now; independently later); contact culturalarts@austintexas.gov **[time-sensitive: check FY27 cycle dates]**
