@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="hub">
+<head>
+  <script src="js/gtag.js" defer></script>
+  <link rel="stylesheet" href="css/consent-banner.css">
+  <script src="js/consent.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>meltopus — Nexus Grant Application Strategy</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/report-base.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <style>
+    /* Page-scoped brand retint — fire/ember palette. Overrides report-base :root tokens;
+       dark-mode variant keeps links/subheads legible. */
+    :root {
+      --primary: #a5261a;   /* ember red — headers */
+      --secondary: #c2410c; /* burnt orange — links, subheadings */
+      --accent: #e0a82e;    /* gold — accents, borders */
+      --color-highlight-start: #fbeadb;
+      --color-highlight-end: #fdf2d8;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --secondary: #fb923c;
+        --color-highlight-start: #35180f;
+        --color-highlight-end: #2f2410;
+      }
+    }
+    .report-meta { margin-top: var(--spacing-sm); font-size: var(--font-size-sm); color: var(--color-header-meta); }
+    .lead { font-size: 1.05rem; }
+    .abbr-list { line-height: 1.9; }
+    .source-group ul { font-size: var(--font-size-sm); word-break: break-word; }
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist li { padding: 0.35rem 0 0.35rem 1.9rem; position: relative; border-bottom: 1px solid var(--border-light); }
+    .checklist li::before { content: '\2610'; position: absolute; left: 0; top: 0.3rem; color: var(--secondary); font-size: 1.15rem; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div class="container">
+    <header>
+      <h1>meltopus — Nexus Grant Application Strategy</h1>
+      <p class="subtitle">Comprehensive Research Report — an Austin fire-performance artist &amp; choreographer applying for a City of Austin Nexus grant via Museum of Human Achievement fiscal sponsorship</p>
+      <p class="report-meta">Subject: Chris Tong (<a href="https://www.instagram.com/meltopus/?hl=en">@meltopus</a>) &middot; Prepared July 2026 &middot; Primary source: <a href="https://www.austintexas.gov/nexus">austintexas.gov/nexus</a></p>
+    </header>
+
+    <main id="main">
+      <!-- Executive summary -->
+      <div class="executive-summary">
+        <h2>Executive summary</h2>
+        <p class="lead">Chris Tong (<strong>@meltopus</strong>) is an Austin fire-performance artist and choreographer positioning to apply for a <strong>City of Austin Nexus grant</strong> — a <strong>$5,000 or $10,000</strong> award for emerging/established individual artists — using the <strong>Museum of Human Achievement (MoHA)</strong> as fiscal sponsor. The pairing is strong: Nexus is purpose-built for individual artists producing public, Austin-rooted cultural work (fiscal sponsorship is explicitly allowed), and MoHA sponsors individual artists at <strong>no fee</strong>, so 100% of any award flows to the project. The application is scored out of <strong>100 points across three equal-weight-ish categories — Creative Work (35), Capacity (35), Public Connection (30)</strong> — and panels reward work that "reflects the people, places, histories and cultures of Austin." The two decisive levers for a fire artist are (1) framing the project as <strong>public community art, not commercial entertainment</strong>, and (2) documenting a <strong>1+ year Austin production history</strong> (currently <strong>undocumented</strong> — the record lives in a private/gated Instagram; see &sect;9) — both underpinned by Chris's community leadership: he is <strong>Camp Lead of "Swolemates Safe Space,"</strong> a queer-friendly strength-training camp at the regional Burning Man event <strong>Burning Flipside</strong> (organized by the 501(c)(3) Catalyst Collective), and hosts a <strong>free, donation-only</strong> strength event at his home <strong>three times a week</strong> year-round. Fire also raises a real operational bar: venue permits and liability insurance must be budgeted and named. Next Nexus window: <strong>Round 2 opens September 2026</strong>.</p>
+      </div>
+
+      <!-- Research limitation -->
+      <div class="warning-box">
+        <p><strong>Sourcing note — artist profile:</strong> The subject's public web footprint is limited to an Instagram profile (<a href="https://www.instagram.com/meltopus/?hl=en">@meltopus</a>, confirmed as <strong>Chris Tong</strong>), which is login-gated and could not be scraped for bio, follower count, or performance credits. The community-leadership details in §1 (Swolemates Safe Space, the home strength event) are <strong>founder-provided</strong> <span class="badge badge-info">provided</span>; the affiliated organizations (Burning Flipside, the 501(c)(3) Catalyst Collective) are <strong>independently verified</strong> <span class="badge badge-verified">verified</span>. Remaining gaps — fire-performance credits and work samples — should still be supplied by the artist. This report does not invent credentials; all Nexus/MoHA/peer data is independently sourced and cited.</p>
+      </div>
+
+      <!-- TOC -->
+      <nav id="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+        <div class="section-content">
+          <ol>
+            <li><a href="#artist">Artist profile (founder-completable)</a></li>
+            <li><a href="#presence">Online presence</a></li>
+            <li><a href="#nexus">The Nexus grant — program mechanics</a></li>
+            <li><a href="#moha">Fiscal sponsorship via MoHA</a></li>
+            <li><a href="#strategy">Application strategy — scoring the 100-point rubric</a></li>
+            <li><a href="#budget">Sample budget &amp; eligible expenses</a></li>
+            <li><a href="#landscape">Austin fire/flow peer landscape</a></li>
+            <li><a href="#timeline">Timeline &amp; action plan</a></li>
+            <li><a href="#risks">Risks &amp; eligibility gaps</a></li>
+            <li><a href="#verification">Data verification summary</a></li>
+            <li><a href="#conclusions">Conclusions &amp; recommendations</a></li>
+            <li><a href="#sources">Sources &amp; citations</a></li>
+          </ol>
+        </div>
+      </nav>
+
+      <!-- 1. Artist profile -->
+      <section id="artist">
+        <h2>1. Artist profile (founder-completable)</h2>
+        <div class="section-content">
+          <p>Confirmed: <strong>Chris Tong</strong>, performing as <strong>meltopus</strong> — a fire-performance artist and choreographer based in Austin. Beyond performance, Chris is an active leader in Austin's queer movement/strength community:</p>
+          <div class="highlight-box">
+            <ul>
+              <li><strong>Camp Lead — "Swolemates Safe Space"</strong> <span class="badge badge-info">founder-provided</span>: a queer-friendly gym and strength-training camp/service at <strong>Burning Flipside</strong>, the annual Central-Texas regional Burning Man event (five days over Memorial Day weekend; participant-created art, no spectators), organized by the <strong>501(c)(3) Catalyst Collective</strong>. <span class="source">[founder; Burning Flipside / Catalyst Collective verified — burningflipside.com, Wikipedia]</span></li>
+              <li><strong>Year-round free strength event</strong> <span class="badge badge-info">founder-provided</span>: a <strong>donation-only</strong>, free event Chris hosts at his home <strong>three times per week</strong> throughout the year. <span class="source">[founder-provided]</span></li>
+            </ul>
+            <p>Together these establish a <strong>documented, recurring Austin-area track record</strong> and <strong>community leadership</strong> in a <strong>queer, non-commercial</strong> context — strengthening <strong>Capacity (35)</strong> and <strong>Public Connection (30)</strong> and aligning with MoHA's LGBTQIA+ mission. (Note: <strong>Swolemates</strong> is one of the community partners named in the companion <a href="movement-arts-nonprofit-austin.html">movement-arts report</a>.)</p>
+          </div>
+          <div class="info-box"><strong>Eligibility nuance:</strong> the strength/gym activities are strong evidence of <em>capacity, community connection, and Austin history</em>, but Nexus's <em>Creative Work</em> score and the "arts &amp; culture production" eligibility rest on the <strong>fire choreography</strong> — keep that the artistic core of the proposal. Also confirm the funded public activity occurs <strong>within Austin Council Districts/ETJ</strong> and is <strong>openly advertised</strong> (Burning Flipside's site is near Bastrop and is a private participant event, so it supports leadership/history but is not itself the qualifying Austin-district public activity).</div>
+          <p>Remaining items for the artist to supply and document:</p>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Profile element</th><th>Why it matters for Nexus</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>Disciplines (fire poi/staff/fans, fire eating, choreography, partner/aerial work)</td><td>Defines the "Creative Work" narrative &amp; work samples</td><td><span class="badge badge-warning">Supply</span></td></tr>
+                <tr><td>Years producing/performing <em>in Austin</em></td><td>Eligibility gate: 1+ year Austin production history</td><td><span class="badge badge-warning">Undocumented</span> track record exists (home event/Flipside) but must be documented from the gated <a href="https://www.instagram.com/meltopus/?hl=en">@meltopus</a> account</td></tr>
+                <tr><td>Notable public performances, festivals, venues (e.g., Flowstorm, Full Moon Jam)</td><td>Capacity + Public Connection scoring</td><td><span class="badge badge-warning">Supply</span></td></tr>
+                <tr><td>Choreography credits / ensembles directed</td><td>Distinguishes artistic practice from gig performance</td><td><span class="badge badge-warning">Supply</span></td></tr>
+                <tr><td>Work samples (video of fire choreography)</td><td>Required application material; heavily weighted</td><td><span class="badge badge-warning">Prepare</span></td></tr>
+                <tr><td>Community ties (troupes, teaching, collaborators, LGBTQ+ community)</td><td>Public Connection + MoHA mission fit</td><td><span class="badge badge-verified">Provided</span> Swolemates / Flipside leadership</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-box"><strong>Positioning note:</strong> Nexus funds <em>artists and cultural producers</em>, not entertainers-for-hire. Frame meltopus as a <strong>choreographer creating public fire-arts work rooted in Austin's flow-arts community</strong> — the choreography/direction angle is a genuine differentiator from the many commercial fire performers listed on gig platforms (see <a href="#landscape">&sect;7</a>).</p></div>
+        </div>
+      </section>
+
+      <!-- 2. Online presence -->
+      <section id="presence">
+        <h2>2. Online presence</h2>
+        <div class="section-content">
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Channel</th><th>Status</th><th>Note</th></tr></thead>
+              <tbody>
+                <tr><td>Instagram <a href="https://www.instagram.com/meltopus/?hl=en">@meltopus</a></td><td>Active (primary)</td><td>Login-gated; details not publicly scrapeable</td></tr>
+                <tr><td>Website / portfolio</td><td><span class="badge badge-danger">None found</span></td><td>A simple portfolio site strengthens Capacity scoring &amp; work-sample hosting</td></tr>
+                <tr><td>Press / event listings / directories</td><td><span class="badge badge-danger">None found</span></td><td>No third-party coverage surfaced for the stage name</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="highlight-box"><strong>Recommendation:</strong> before applying, stand up (1) a one-page portfolio site or link-in-bio with 2&ndash;3 polished fire-choreography videos, a short artist statement, and an Austin performance list; and (2) a public-facing record of past Austin activity (event photos, flyers, collaborator tags). Reviewers assess "relevant experience, relationships, or cultural knowledge" — a visible track record directly raises the Capacity and Public Connection scores.</div>
+        </div>
+      </section>
+
+      <!-- 3. Nexus mechanics -->
+      <section id="nexus">
+        <h2>3. The Nexus grant — program mechanics</h2>
+        <div class="section-content">
+          <p>Nexus is the City of Austin ACME entry-tier cultural grant, funded by Hotel Occupancy Tax (HOT), targeting "new and emerging local small organizations, individual artists, and small arts businesses." <span class="source">[austintexas.gov/nexus; createaustin.org/nexus]</span></p>
+          <div class="stat-grid">
+            <div class="contact-item"><div class="label">Award</div><div class="value">$5,000 or $10,000</div></div>
+            <div class="contact-item"><div class="label">Term</div><div class="value">12 months</div></div>
+            <div class="contact-item"><div class="label">Cycles / year</div><div class="value">2 (Spring &amp; Fall)</div></div>
+            <div class="contact-item"><div class="label">Fiscal sponsor</div><div class="value">Allowed</div></div>
+          </div>
+
+          <div class="info-box">
+            <strong>Abbreviations</strong>
+            <div class="abbr-list">
+              <strong>ACME</strong> — Austin Arts, Culture, Music &amp; Entertainment (city office)<br>
+              <strong>HOT</strong> — Hotel Occupancy Tax (funding source)<br>
+              <strong>MSA</strong> — Metropolitan Statistical Area (Austin-Round Rock-Georgetown)<br>
+              <strong>ETJ</strong> — Extraterritorial Jurisdiction (just outside city limits)<br>
+              <strong>MoHA</strong> — Museum of Human Achievement (the fiscal sponsor)
+            </div>
+          </div>
+
+          <details open>
+            <summary>Eligibility requirements <span class="detail-count">5 gates</span></summary>
+            <div class="details-content">
+              <ul>
+                <li><strong>1+ year creative-production history in Austin</strong> before the deadline. <span class="source">[austintexas.gov/nexus]</span></li>
+                <li>Annual operating budget <strong>&le; $150,000</strong>. <span class="source">[austintexas.gov/nexus]</span></li>
+                <li>Produce events/activities <strong>open and advertised to Austin residents, visitors, and tourists</strong>. <span class="source">[austintexas.gov/nexus]</span></li>
+                <li>Headquartered in the <strong>Austin MSA</strong>, with production inside the <strong>Austin Council Districts or ETJ</strong>. <span class="source">[austintexas.gov/nexus]</span></li>
+                <li><strong>501(c) nonprofits are ineligible</strong> for Nexus — individuals apply directly or via a fiscal sponsor. <span class="source">[austintexas.gov/nexus]</span></li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>Scoring rubric — 100 points <span class="detail-count">3 categories</span></summary>
+            <div class="details-content table-wrapper">
+              <table>
+                <thead><tr><th>Category</th><th>Points</th><th>What the panel assesses</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Creative Work</strong></td><td>35</td><td>Artistic merit, vision, and the strength of work samples</td></tr>
+                  <tr><td><strong>Capacity</strong></td><td>35</td><td>Ability to deliver — relevant experience, relationships, cultural knowledge, feasibility</td></tr>
+                  <tr><td><strong>Public Connection</strong></td><td>30</td><td>Public benefit and how work "reflects the people, places, histories and cultures of Austin"</td></tr>
+                </tbody>
+              </table>
+              <p class="source">Source: austintexas.gov/nexus.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Application steps &amp; required deliverables <span class="detail-count">5 steps + 3 deliverables</span></summary>
+            <div class="details-content">
+              <p><strong>Steps (via Submittable):</strong> (1) register account → (2) Intake Form → (3) Eligibility Form → (4) full Application → (5) work samples. One complete application per applicant per round. <span class="source">[createaustin.org/nexus]</span></p>
+              <p><strong>If awarded, you must:</strong> complete a public activity; post the activity to Visit Austin; submit a final report with <strong>proof of funds spent</strong> and <strong>audience/participant data</strong>. <span class="source">[austintexas.gov/nexus]</span></p>
+              <p><strong>Help:</strong> applicationhelp@thelongcenter.org; ACME workshops, office hours, and a grant-writing workshop; open office hours on deadline day. <span class="source">[createaustin.org/nexus]</span></p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 4. MoHA -->
+      <section id="moha">
+        <h2>4. Fiscal sponsorship via MoHA</h2>
+        <div class="section-content">
+          <p>The <strong>Museum of Human Achievement (MoHA)</strong> is a strong sponsor choice for this project:</p>
+          <ul>
+            <li><strong>No fiscal-sponsorship fee</strong> — unusual; the artist keeps 100% of a Nexus award (Nexus otherwise permits a sponsor fee up to 10%). <span class="source">[moha.wiki]</span></li>
+            <li>Sponsors <strong>individual artists</strong> and informal/LLC organizations; <strong>prioritizes Central Texas</strong> projects. <span class="source">[moha.wiki]</span></li>
+            <li><strong>Mission fit:</strong> MoHA's grantee portfolio is <strong>~61% LGBTQIA+</strong>; it has distributed ~$425K to 140 first-time grantees — aligned with an Austin flow-arts community that skews queer and grassroots. <span class="source">[moha.wiki]</span></li>
+            <li>Provides the 501(c)(3) umbrella so the project can receive <strong>tax-deductible donations and grants</strong> without the artist incorporating. <span class="source">[moha.wiki]</span></li>
+          </ul>
+          <div class="warning-box"><strong>Critical Nexus + fiscal-sponsor mechanics:</strong> The fiscal sponsor <strong>may not</strong> complete the Intake Form, Eligibility Form, or Application on the artist's behalf — <strong>Chris must initiate and submit the application personally</strong>; MoHA is added only as a <strong>collaborator</strong>. If awarded, the application/contract is <strong>transferred to MoHA at the time of contracting</strong>, and MoHA receives and disburses the funds. Line up the <strong>MoHA Fiscal Sponsorship Agreement</strong> before the deadline. <span class="source">[austintexas.gov/nexus; createaustin.org/nexus]</span></div>
+        </div>
+      </section>
+
+      <!-- 5. Strategy -->
+      <section id="strategy">
+        <h2>5. Application strategy — scoring the 100-point rubric</h2>
+        <div class="section-content">
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Category (pts)</th><th>How a fire choreographer wins the points</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>Creative Work (35)</strong></td>
+                  <td>Lead with <strong>choreography and artistic vision</strong>, not stunts. Submit tightly edited work samples of <em>composed</em> fire pieces (ensemble or solo with clear intent). Articulate a specific new public work the grant funds — e.g., a site-specific fire-dance piece premiered at an Austin community event.</td>
+                </tr>
+                <tr>
+                  <td><strong>Capacity (35)</strong></td>
+                  <td>Show you can deliver: <strong>1+ year Austin track record</strong>, named collaborators, a realistic budget, and a plan for the hard parts of fire (safety crew, permits, insurance). MoHA sponsorship itself signals administrative capacity. A portfolio site helps here.</td>
+                </tr>
+                <tr>
+                  <td><strong>Public Connection (30)</strong></td>
+                  <td>Tie the work to <strong>Austin's people, places, histories, and cultures</strong>: a free/low-barrier public performance, collaboration with local flow-arts community (Full Moon Jam, Flowstorm, Austin Flow Jam), and an accessible venue in an Austin council district. <strong>Lead with the queer-community track record</strong> — Swolemates Safe Space and the free donation-only home strength event show a lived commitment to accessible, non-commercial community space. Specify how audiences engage.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="highlight-box"><strong>Highest-leverage moves:</strong> (1) propose a <strong>free, public, Austin-rooted premiere</strong> (directly serves Public Connection and the required "public activity" deliverable); (2) name a real <strong>fire-safety + insurance plan</strong> in the budget (de-risks Capacity scoring); (3) submit <strong>choreographed</strong> work samples per the "Selecting Your Work Samples" guide, not gig-reel clips.</div>
+        </div>
+      </section>
+
+      <!-- 6. Budget -->
+      <section id="budget">
+        <h2>6. Sample budget &amp; eligible expenses</h2>
+        <div class="section-content">
+          <p><strong>Eligible expenses</strong> (Nexus): artist &amp; administrator compensation; venue/equipment rentals; production, performance, and service fees; fiscal-sponsor fee if applicable (<strong>&le;10% of award</strong> — <strong>$0 with MoHA</strong>). <span class="source">[austintexas.gov/acme; austintexas.gov/nexus]</span></p>
+          <p>Illustrative allocation of a <strong>$10,000</strong> award for a public fire-choreography premiere (adjust to the actual project):</p>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Line item</th><th>Est.</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr><td>Artist / choreographer compensation</td><td>$3,500</td><td>Creation + direction time</td></tr>
+                <tr><td>Performer/collaborator stipends</td><td>$2,000</td><td>Ensemble dancers/spinners</td></tr>
+                <tr><td>Fire safety crew + liability insurance + permits</td><td>$1,800</td><td>Safety officer, event/GL coverage, AFD open-flame permit</td></tr>
+                <tr><td>Venue rental</td><td>$1,200</td><td>Austin council-district site with fire clearance</td></tr>
+                <tr><td>Equipment, props, fuel, wicks</td><td>$700</td><td>Production materials</td></tr>
+                <tr><td>Documentation (photo/video)</td><td>$500</td><td>Required audience data + future work samples</td></tr>
+                <tr><td>Marketing / accessibility</td><td>$300</td><td>Public advertising to Austin audiences</td></tr>
+                <tr><td>Fiscal-sponsor fee (MoHA)</td><td>$0</td><td>No fee</td></tr>
+                <tr><td><strong>Total</strong></td><td><strong>$10,000</strong></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source">Illustrative only — build the real budget from actual quotes. Insurance and permits are non-negotiable for public fire performance (see <a href="#risks">&sect;9</a>).</p>
+        </div>
+      </section>
+
+      <!-- 7. Landscape -->
+      <section id="landscape">
+        <h2>7. Austin fire/flow peer landscape</h2>
+        <div class="section-content">
+          <p>Austin has a dense fire/flow ecosystem — useful both for collaborators/references (Capacity, Public Connection) and to sharpen positioning. Most listed players are <strong>commercial performers-for-hire</strong>; a <strong>choreographer producing public artistic work</strong> is a distinct, grant-appropriate niche.</p>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Peer / entity</th><th>Type</th><th>Relevance</th></tr></thead>
+              <tbody>
+                <tr><td><a href="https://www.flowstormtx.com/">Flowstorm</a></td><td>Flow-arts festival (Austin)</td><td>Premiere/collab platform; community connection</td></tr>
+                <tr><td><a href="https://www.fullmoonjam.org/about">Full Moon Jam Foundation</a></td><td>Fire/flow nonprofit (Austin)</td><td>Public-event partner; potential collaborator/reference</td></tr>
+                <tr><td><a href="https://www.facebook.com/groups/austinflowjam/">Austin Flow Jam</a></td><td>Community meetup</td><td>Grassroots audience &amp; Austin production history</td></tr>
+                <tr><td><a href="https://www.synergyflowarts.com/pages/artists">Synergy FlowArts</a></td><td>Artists collective</td><td>Peer artists; collaboration</td></tr>
+                <tr><td><a href="https://flowmayhem.com/">Flow Mayhem</a>, <a href="https://epicentertainment.com/fire-dancers-austin/">Epic</a>, <a href="https://elevatefireentertainment.com/locations/austin/">Elevate Fire</a></td><td>Commercial fire acts</td><td>Contrast: entertainment-for-hire vs. grant-funded public art</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source">Note: <a href="https://www.gigsalad.com/Variety/Fire-Performer/TX/Austin">GigSalad lists ~33 fire performers for hire in Austin</a> — the commercial field is crowded, underscoring the value of the artistic/choreographic positioning for a cultural grant.</p>
+        </div>
+      </section>
+
+      <!-- 8. Timeline -->
+      <section id="timeline">
+        <h2>8. Timeline &amp; action plan</h2>
+        <div class="section-content">
+          <div class="table-wrapper">
+            <table>
+              <thead><tr><th>Nexus 2026 cycle</th><th>Applications</th><th>Activity period</th></tr></thead>
+              <tbody>
+                <tr><td>Round 1 (Spring)</td><td>Mar 10 &ndash; Apr 16, 2026 <span class="badge badge-danger">closed</span></td><td>Jul 1, 2026 &ndash; Jun 2027</td></tr>
+                <tr><td><strong>Round 2 (Fall)</strong></td><td><strong>Opens Sep 2026</strong> <span class="badge badge-success">next window</span></td><td>Jan 1 &ndash; Dec 31, 2027</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source">Source: createaustin.org/nexus; austintexas.gov/nexus. <span class="badge badge-warning">time-sensitive</span> — confirm exact Round 2 open/close dates.</p>
+          <ul class="checklist">
+            <li>Confirm/document <strong>1+ year Austin production history</strong> (photos, flyers, event tags)</li>
+            <li>Execute a <strong>MoHA Fiscal Sponsorship Agreement</strong> (allow lead time)</li>
+            <li>Build a <strong>one-page portfolio</strong> + 2&ndash;3 choreographed fire work samples</li>
+            <li>Register a <strong>Submittable</strong> account; complete Intake + Eligibility forms <em>as the artist</em> (not MoHA)</li>
+            <li>Define a <strong>free public Austin premiere</strong> as the funded project</li>
+            <li>Get <strong>insurance + AFD open-flame permit</strong> quotes for the budget</li>
+            <li>Attend an <strong>ACME grant-writing workshop / office hours</strong></li>
+            <li>Add MoHA as a <strong>collaborator</strong>; submit before the Round 2 deadline</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 9. Risks -->
+      <section id="risks">
+        <h2>9. Risks &amp; eligibility gaps</h2>
+        <div class="section-content">
+          <ul>
+            <li><strong>Austin production history — undocumented:</strong> a track record exists (year-round home event, Swolemates/Flipside leadership), but it is <strong>not yet documented</strong> for grant purposes and the primary record lives on a <strong>private/gated Instagram</strong> (<a href="https://www.instagram.com/meltopus/?hl=en">@meltopus</a>). You'll need to <strong>access and export that account</strong> to compile dated evidence (photos, flyers, attendance) and confirm the qualifying arts activity is fire choreography — until documented, this remains an eligibility gate. <span class="badge badge-warning">gate</span></li>
+            <li><strong>Fire = insurance &amp; permits:</strong> public fire performance requires liability coverage and an <strong>AFD open-flame permit</strong>; a credible safety plan is essential to Capacity scoring and to actually staging the work. See the movement-arts insurance/safety guidance. <span class="badge badge-warning">operational</span></li>
+            <li><strong>Production location:</strong> the funded activity must occur within Austin Council Districts or ETJ, and be publicly advertised. <span class="badge badge-warning">gate</span></li>
+            <li><strong>Artist-initiated application:</strong> MoHA cannot fill out the forms — build in the artist's own time to complete Submittable. <span class="badge badge-info">process</span></li>
+            <li><strong>Positioning risk:</strong> a "fire entertainer" framing scores worse than a "public cultural artist/choreographer" framing. <span class="badge badge-info">framing</span></li>
+          </ul>
+          <div class="info-box">Companion reference for the fire/aerial insurance, safety standards (NAFAA), and AFD open-flame permitting: <a href="movement-arts-nonprofit-austin.html#s4">Founding a 501(c)(3) Movement Arts Nonprofit in Austin — &sect;4 Insurance &amp; safety</a>.</div>
+        </div>
+      </section>
+
+      <!-- 10. Verification -->
+      <section id="verification">
+        <h2>10. Data verification summary</h2>
+        <div class="section-content">
+          <details>
+            <summary>Verification matrix <span class="detail-count">10 data points</span></summary>
+            <div class="details-content table-wrapper">
+              <table class="verification-table">
+                <thead><tr><th>Data point</th><th>Value</th><th>Source</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Nexus award</td><td>$5,000 or $10,000</td><td>Primary (City)</td><td><span class="badge badge-verified">Verified</span></td></tr>
+                  <tr><td>Scoring rubric</td><td>35 / 35 / 30</td><td>Primary (City)</td><td><span class="badge badge-verified">Verified</span></td></tr>
+                  <tr><td>Eligibility (1 yr, $150K, Austin)</td><td>see §3</td><td>Primary (City)</td><td><span class="badge badge-verified">Verified</span></td></tr>
+                  <tr><td>Fiscal sponsor allowed; fee &le;10%</td><td>Yes</td><td>Primary (City)</td><td><span class="badge badge-verified">Verified</span></td></tr>
+                  <tr><td>Sponsor can't submit; artist initiates</td><td>Yes</td><td>Primary + CreateAustin</td><td><span class="badge badge-verified">Verified</span></td></tr>
+                  <tr><td>2026 Round 1 / Round 2 dates</td><td>Mar 10&ndash;Apr 16 / Sep</td><td>CreateAustin + City</td><td><span class="badge badge-verified">Verified</span> <span class="badge badge-warning">confirm R2</span></td></tr>
+                  <tr><td>MoHA no fee; ~61% LGBTQIA+</td><td>Yes</td><td>moha.wiki</td><td><span class="badge badge-verified">Verified</span></td></tr>
+                  <tr><td>Artist = Chris Tong (@meltopus)</td><td>Confirmed name</td><td>Instagram</td><td><span class="badge badge-info">Name only</span></td></tr>
+                  <tr><td>Camp Lead, Swolemates Safe Space</td><td>Queer strength camp @ Flipside</td><td>Founder</td><td><span class="badge badge-info">Founder-provided</span></td></tr>
+                  <tr><td>Free donation-only home event, 3&times;/week</td><td>Year-round</td><td>Founder</td><td><span class="badge badge-info">Founder-provided</span></td></tr>
+                  <tr><td>Catalyst Collective = 501(c)(3); runs Flipside</td><td>Since 2023, Texas</td><td>burningflipside.com; Wikipedia</td><td><span class="badge badge-verified">Verified</span></td></tr>
+                  <tr><td>Fire-performance credits / work samples</td><td>&mdash;</td><td>Login-gated</td><td><span class="badge badge-unverified">To supply</span></td></tr>
+                  <tr><td>Sample budget</td><td>illustrative</td><td>Author estimate</td><td><span class="badge badge-info">Illustrative</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 11. Conclusions -->
+      <section id="conclusions">
+        <h2>11. Conclusions &amp; recommendations</h2>
+        <div class="section-content">
+          <ul>
+            <li><strong>The fit is strong.</strong> Nexus is built for individual artists doing public Austin-rooted work; MoHA sponsors individuals at no fee, so the artist keeps the full award.</li>
+            <li><strong>Win on Public Connection (30) and Capacity (35)</strong> by proposing a free public Austin premiere and proving a documented local track record — these are where a fire artist most often gains or loses points.</li>
+            <li><strong>Frame as a choreographer/cultural artist,</strong> not an entertainer-for-hire — the crowded commercial field makes the artistic angle both true and strategic.</li>
+            <li><strong>Handle fire logistics up front:</strong> insurance, AFD open-flame permit, and a safety crew belong in the budget and the Capacity narrative.</li>
+            <li><strong>Act on the calendar:</strong> Round 1 has closed; target <strong>Round 2 (opens September 2026)</strong> and execute the MoHA agreement + portfolio before then.</li>
+          </ul>
+          <div class="info-box"><strong>Next steps for the artist:</strong> complete the §1 profile, publish a portfolio, document Austin history, and book an ACME grant-writing office-hours slot. Then this report's strategy maps directly onto the Submittable application.</div>
+        </div>
+      </section>
+
+      <!-- 12. Sources -->
+      <section id="sources">
+        <h2>12. Sources &amp; citations</h2>
+        <div class="section-content">
+          <details>
+            <summary>City of Austin / ACME &amp; grant guidance <span class="detail-count">5 sources</span></summary>
+            <div class="details-content source-group">
+              <ul>
+                <li>Nexus program: <a href="https://www.austintexas.gov/nexus">austintexas.gov/nexus</a></li>
+                <li>ACME grants &amp; funding: <a href="https://www.austintexas.gov/acme/grants-funding">austintexas.gov/acme/grants-funding</a></li>
+                <li>Apply for cultural arts funding: <a href="https://www.austintexas.gov/services/apply-cultural-arts-funding">austintexas.gov/services/apply-cultural-arts-funding</a></li>
+                <li>Create Austin — Nexus (application guidance &amp; dates): <a href="https://createaustin.org/nexus/">createaustin.org/nexus</a></li>
+                <li>Granted AI — Nexus Program ($10K individuals): <a href="https://grantedai.com/grants/nexus-program-austin-austin-arts-culture-music-and-entertainm-5c17c30e">grantedai.com</a></li>
+              </ul>
+            </div>
+          </details>
+          <details>
+            <summary>Fiscal sponsor, artist &amp; affiliations <span class="detail-count">5 sources</span></summary>
+            <div class="details-content source-group">
+              <ul>
+                <li>Museum of Human Achievement — Fiscal Sponsorship: <a href="https://moha.wiki/Fiscal_Sponsorship">moha.wiki/Fiscal_Sponsorship</a></li>
+                <li>Artist Instagram: <a href="https://www.instagram.com/meltopus/?hl=en">instagram.com/meltopus</a></li>
+                <li>Burning Flipside: <a href="https://www.burningflipside.com/">burningflipside.com</a></li>
+                <li>Catalyst Collective (501(c)(3), organizer) — financial: <a href="https://www.burningflipside.com/about/financial">burningflipside.com/about/financial</a></li>
+                <li>Burning Flipside — Wikipedia: <a href="https://en.wikipedia.org/wiki/Burning_Flipside">en.wikipedia.org/wiki/Burning_Flipside</a></li>
+              </ul>
+            </div>
+          </details>
+          <details>
+            <summary>Austin fire/flow peer landscape <span class="detail-count">6 sources</span></summary>
+            <div class="details-content source-group">
+              <ul>
+                <li>Flowstorm: <a href="https://www.flowstormtx.com/">flowstormtx.com</a></li>
+                <li>Full Moon Jam Foundation: <a href="https://www.fullmoonjam.org/about">fullmoonjam.org</a></li>
+                <li>Austin Flow Jam: <a href="https://www.facebook.com/groups/austinflowjam/">facebook.com/groups/austinflowjam</a></li>
+                <li>Synergy FlowArts: <a href="https://www.synergyflowarts.com/pages/artists">synergyflowarts.com</a></li>
+                <li>Flow Mayhem: <a href="https://flowmayhem.com/">flowmayhem.com</a></li>
+                <li>GigSalad — Austin fire performers: <a href="https://www.gigsalad.com/Variety/Fire-Performer/TX/Austin">gigsalad.com</a></li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Integrity Studio. Grant-application strategy report. Artist profile (§1) is a founder-completable framework — this report does not invent the artist's credentials. Grant figures/dates are time-sensitive; confirm the current Nexus cycle at austintexas.gov/nexus. Not affiliated with the City of Austin or MoHA.</p>
+    </footer>
+  </div>
+</body>
+</html>
