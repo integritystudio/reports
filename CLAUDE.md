@@ -4,9 +4,9 @@ Static reports site at [integritystudio.io](https://integritystudio.io) via GitH
 
 ## Structure
 
-`index.html` (hub landing) + client subdirectories (`balloon-collective/`, `capital_city/`, `edgar_nadyne/`, `holliday_lighting/`, `integrity-studio-ai/`, `leora_research/`, `micah_lindsey/`, `ngo-market/`, `PerformanceTest/`, `performance_testing/`, `skelton-woody/`, `sound-sight-tarot/`, `trp-austin/`, `zoukmx/`) + `ai-observability/`, `playground-tools/`, shared `css/` and `docs/`.
+`index.html` (hub landing) + client subdirectories (`balloon-collective/`, `capital_city/`, `edgar_nadyne/`, `holliday_lighting/`, `integrity-studio-ai/`, `leora_research/`, `ngo-market/`, `PerformanceTest/`, `performance_testing/`, `skelton-woody/`, `sound-sight-tarot/`, `trp-austin/`, `zoukmx/`) + `ai-observability/`, `playground-tools/`, shared `css/` and `docs/`.
 
-**Submodules (do not edit in-place)**: `ai-news`, `calender-updates`, `isabel_budenz/PersonalSite`, `john_skelton`, `micah_lindsey`
+**Submodules (do not edit in-place)**: `ai-news`, `calender-updates`, `isabel_budenz/PersonalSite`, `john_skelton`
 
 ## CSS Architecture
 
