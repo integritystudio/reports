@@ -1,20 +1,20 @@
 # meltopus — Nexus Grant Application Strategy
 
-**Comprehensive Research Report** · Subject: Chris Tong ([@meltopus](https://www.instagram.com/meltopus/?hl=en)), Austin fire-performance artist & choreographer · Prepared July 2026
+**Comprehensive Research Report** · Subject: [@meltopus](https://www.instagram.com/meltopus/?hl=en), Austin fire-performance artist & choreographer · Prepared July 2026
 Primary source: [austintexas.gov/nexus](https://www.austintexas.gov/nexus)
 
 ## Executive summary
 
-Chris Tong (**@meltopus**) is an Austin fire-performance artist and choreographer positioning to apply for a **City of Austin Nexus grant** — a **[$5,000 or $10,000](https://www.austintexas.gov/nexus)** award for emerging/established individual artists — using the **Museum of Human Achievement (MoHA)** as fiscal sponsor. The pairing is strong: Nexus is purpose-built for individual artists producing public, Austin-rooted cultural work (fiscal sponsorship is explicitly allowed), and MoHA sponsors individual artists at **no fee**, so 100% of any award flows to the project. The application is scored out of **100 points — Creative Work (35), Capacity (35), Public Connection (30)** — and panels reward work that "reflects the people, places, histories and cultures of Austin." The two decisive levers for a fire artist: (1) frame the project as **public community art, not commercial entertainment**, and (2) document a **1+ year Austin production history** (currently **undocumented** — the record lives in a private/gated Instagram; see §9) — both underpinned by Chris's community leadership: he is **Camp Lead of "Swolemates Safe Space,"** a queer-friendly strength-training camp at the regional Burning Man event **Burning Flipside** (organized by the 501(c)(3) Catalyst Collective), and hosts a **free, donation-only** strength event at his home **three times a week** year-round. Fire also raises a real operational bar: venue permits and liability insurance must be budgeted. Next window: **Round 2 opens September 2026**.
+**@meltopus** is an Austin fire-performance artist and choreographer positioning to apply for a **City of Austin Nexus grant** — a **[$5,000 or $10,000](https://www.austintexas.gov/nexus)** award for emerging/established individual artists — using the **Museum of Human Achievement (MoHA)** as fiscal sponsor. The pairing is strong: Nexus is purpose-built for individual artists producing public, Austin-rooted cultural work (fiscal sponsorship is explicitly allowed), and MoHA sponsors individual artists at **no fee**, so 100% of any award flows to the project. The application is scored out of **100 points — Creative Work (35), Capacity (35), Public Connection (30)** — and panels reward work that "reflects the people, places, histories and cultures of Austin." The two decisive levers for a fire artist: (1) frame the project as **public community art, not commercial entertainment**, and (2) document a **1+ year Austin production history** (currently **undocumented** — the record lives in a private/gated Instagram; see §9) — both underpinned by @meltopus's community leadership: he is **Camp Lead of "Swolemates Safe Space,"** a queer-friendly strength-training camp at the regional Burning Man event **Burning Flipside** (organized by the 501(c)(3) Catalyst Collective), and hosts a **free, donation-only** strength event at his home **three times a week** year-round. Fire also raises a real operational bar: venue permits and liability insurance must be budgeted. Next window: **Round 2 opens September 2026**.
 
-> **Sourcing note — artist profile:** The subject's public web footprint is limited to an Instagram profile ([@meltopus](https://www.instagram.com/meltopus/?hl=en), confirmed as **Chris Tong**), login-gated and not scrapeable for bio/credits. The §1 community-leadership details (Swolemates Safe Space, the home strength event) are **founder-provided**; the affiliated organizations (Burning Flipside, the 501(c)(3) Catalyst Collective) are **independently verified**. Remaining gaps — fire-performance credits and work samples — should still be supplied. This report does not invent credentials; all Nexus/MoHA/peer data is independently sourced.
+> **Sourcing note — artist profile:** The subject's public web footprint is limited to an Instagram profile ([@meltopus](https://www.instagram.com/meltopus/?hl=en)), login-gated and not scrapeable for bio/credits. The §1 community-leadership details (Swolemates Safe Space, the home strength event) are **founder-provided**; the affiliated organizations (Burning Flipside, the 501(c)(3) Catalyst Collective) are **independently verified**. Remaining gaps — fire-performance credits and work samples — should still be supplied. This report does not invent credentials; all Nexus/MoHA/peer data is independently sourced.
 
 ## 1. Artist profile (founder-completable)
 
-Confirmed: **Chris Tong**, performing as **meltopus** — a fire-performance artist and choreographer in Austin. Beyond performance, Chris is an active leader in Austin's queer movement/strength community:
+**@meltopus** is a fire-performance artist and choreographer in Austin. Beyond performance, @meltopus is an active leader in Austin's queer movement/strength community:
 
 - **Camp Lead — "Swolemates Safe Space"** *(founder-provided)*: a queer-friendly gym and strength-training camp/service at **Burning Flipside**, the annual Central-Texas regional Burning Man event (five days over Memorial Day weekend; participant-created art, no spectators), organized by the **501(c)(3) [Catalyst Collective](https://www.burningflipside.com/about/financial)**. ([Burning Flipside](https://www.burningflipside.com/); [Wikipedia](https://en.wikipedia.org/wiki/Burning_Flipside) — org verified)
-- **Year-round free strength event** *(founder-provided)*: a **donation-only**, free event Chris hosts at his home **three times per week** all year.
+- **Year-round free strength event** *(founder-provided)*: a **donation-only**, free event @meltopus hosts at his home **three times per week** all year.
 
 Together these establish a **documented, recurring Austin-area track record** and **community leadership** in a **queer, non-commercial** context — strengthening **Capacity (35)** and **Public Connection (30)** and aligning with MoHA's LGBTQIA+ mission. (Note: **Swolemates** is one of the community partners named in the companion [movement-arts report](movement-arts-nonprofit-austin.html).)
 
@@ -77,7 +77,7 @@ Source: [austintexas.gov/nexus](https://www.austintexas.gov/nexus).
 - **Mission fit:** MoHA's grantee portfolio is **~61% LGBTQIA+** ([~$425K](https://moha.wiki/Fiscal_Sponsorship) to 140 first-time grantees) — aligned with Austin's queer, grassroots flow-arts community.
 - Provides the 501(c)(3) umbrella for tax-deductible donations and grants without incorporating.
 
-> **Critical Nexus + fiscal-sponsor mechanics:** the sponsor **may not** complete the Intake/Eligibility/Application — **Chris must initiate and submit personally**; MoHA is added as a **collaborator**. If awarded, the application/contract **transfers to MoHA at contracting**, and MoHA receives/disburses funds. Execute the MoHA Fiscal Sponsorship Agreement before the deadline. ([austintexas.gov/nexus](https://www.austintexas.gov/nexus); [createaustin.org/nexus](https://createaustin.org/nexus/))
+> **Critical Nexus + fiscal-sponsor mechanics:** the sponsor **may not** complete the Intake/Eligibility/Application — **@meltopus must initiate and submit personally**; MoHA is added as a **collaborator**. If awarded, the application/contract **transfers to MoHA at contracting**, and MoHA receives/disburses funds. Execute the MoHA Fiscal Sponsorship Agreement before the deadline. ([austintexas.gov/nexus](https://www.austintexas.gov/nexus); [createaustin.org/nexus](https://createaustin.org/nexus/))
 
 ## 5. Application strategy — scoring the 100-point rubric
 
@@ -162,7 +162,7 @@ Companion reference for fire/aerial insurance, NAFAA safety standards, and AFD o
 | Sponsor can't submit; artist initiates | Yes | Verified (City + CreateAustin) |
 | 2026 Round 1 / Round 2 dates | Mar 10–Apr 16 / Sep | Verified; confirm R2 |
 | MoHA no fee; ~61% LGBTQIA+ | Yes | Verified (moha.wiki) |
-| Artist = Chris Tong (@meltopus) | Name confirmed | Instagram (name only) |
+| Artist = @meltopus | Handle confirmed | Instagram (handle only) |
 | Camp Lead, Swolemates Safe Space (queer strength camp @ Flipside) | Yes | Founder-provided |
 | Free donation-only home event, 3×/week year-round | Yes | Founder-provided |
 | Catalyst Collective = 501(c)(3), runs Flipside (since 2023, TX) | Yes | Verified (burningflipside.com; Wikipedia) |
