@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Wrapper: makes the global playwright-core resolvable and runs browser-collect.
-# Usage: ./run-browser-collect.sh --source carmax|carvana|cars --min 10000 --max 20000 [--zip 78701] [--pretty] [--headful]
+# Usage: ./run-browser-collect.sh --source carmax|carvana|cars --min 10000 --max 20000 [--zip 78701] [--radius 75] [--pretty] [--headful]
+# --zip + --radius geo-restrict CarMax/Cars.com to the metro; Carvana is national (tagged geoScope:national).
+# Carvana defaults to free-shipping-only; --include-paid-shipping disables it, --free-shipping-only forces it for any source.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 PW_DIR="/opt/homebrew/lib/node_modules/openclaw/node_modules"

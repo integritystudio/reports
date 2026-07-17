@@ -3,9 +3,19 @@
 // the only path that can reach CarMax, Carvana, Cars.com, CarGurus, and KBB
 // listing pages deterministically (zero LLM tokens).
 //
+// Metro restriction: --zip + --radius geo-restrict CarMax and Cars.com to
+// physical inventory within RADIUS miles of ZIP (their real distance filters).
+// Carvana has no location filter (national inventory) and is tagged
+// geoScope:'national' instead — its listings deliver to the metro, not local.
+// Carvana's one availability signal is per-car shipping cost, so it defaults to
+// free-shipping-only (--include-paid-shipping opts out; --free-shipping-only
+// forces the gate on for any source). The browser also pins navigator.geolocation
+// to --zip's coordinates (default 78702), though Carvana's grid does not localize
+// its free-shipping labels to it.
+//
 // playwright-core isn't a repo dependency; it resolves from a global install.
 // Run via the wrapper so NODE_PATH is set:
-//   scripts/car-market-research/run-browser-collect.sh --source carmax --min 10000 --max 20000 --zip 78701
+//   scripts/car-market-research/run-browser-collect.sh --source carmax --min 10000 --max 20000 --zip 78701 --radius 75
 // or directly:
 //   NODE_PATH="$(node -e "process.stdout.write(require('path').dirname(require.resolve('playwright-core/package.json')+'/..'))" 2>/dev/null || echo /opt/homebrew/lib/node_modules/openclaw/node_modules)" \
 //     node src/browser-collect.mjs --source carmax ...
@@ -51,28 +61,71 @@ const CARD_TEXT_CAP = 400        // innerText longer than this spans >1 card
 const SOURCE = (arg('--source', 'carmax')).toLowerCase()
 const MIN = numArg('--min', '10000')
 const MAX = numArg('--max', '20000')
-const ZIP = arg('--zip', '78701')
+const ZIP = arg('--zip', '78702')
+// Metro radius in miles around ZIP. CarMax accepts 10–500; used by the sources
+// that expose a real distance filter (CarMax, Cars.com) to restrict to local
+// inventory. Carvana has no such filter (national inventory) and ignores it.
+const RADIUS = numArg('--radius', '75')
+// Geolocation pin: browser-level coordinates for ZIP so the page reports the
+// delivery location as ZIP if it reads navigator.geolocation (permission is
+// granted on the context). Known Austin-metro ZIPs are mapped exactly; any
+// other ZIP falls back to the Austin metro centroid. NOTE: probing (2026-07)
+// found Carvana's results grid does not localize its "Free shipping" labels to
+// this pin — actual delivery fees are finalized per-vehicle at checkout — so the
+// pin is set correctly but mainly matters for sites that read geolocation.
+const ZIP_COORDS = {
+  '78701': { latitude: 30.2711, longitude: -97.7437 },
+  '78702': { latitude: 30.2635, longitude: -97.7141 },
+  '78745': { latitude: 30.2079, longitude: -97.8009 },
+}
+const AUSTIN_CENTROID = { latitude: 30.2672, longitude: -97.7431 }
+const GEO = ZIP_COORDS[ZIP] || AUSTIN_CENTROID
+if (!ZIP_COORDS[ZIP]) process.stderr.write(`No exact coords for ZIP ${ZIP}; pinning geolocation to the Austin metro centroid.\n`)
 const MAXITEMS = numArg('--max-items', '25')
 const HEADFUL = process.argv.includes('--headful')
 const PRICE_FLOOR = Math.min(PRICE_TOKEN_FLOOR, MIN)
+// Carvana is national inventory with per-car delivery, so "free shipping" is its
+// only availability signal (there is no distance filter). Default Carvana to
+// free-shipping-only — the card must say "Free shipping" — so paid-delivery cars
+// are excluded. --include-paid-shipping opts out; --free-shipping-only forces it
+// for any source. Cards without a detectable shipping status are excluded when
+// the filter is on (can't confirm free → don't include).
+const FREE_SHIP_ONLY = process.argv.includes('--free-shipping-only') ||
+  (SOURCE === 'carvana' && !process.argv.includes('--include-paid-shipping'))
 
 // Per-source search URL + a DOM extractor evaluated in the page. Each extractor
 // returns raw {year,make,model,price,miles,url,...} objects; price parsing and
 // band filtering happen back in Node.
+//
+// geoScope: 'metro' = the URL geo-restricts to within RADIUS miles of ZIP (real
+// local inventory). 'national' = centralized nationwide inventory that merely
+// delivers to the metro; the source exposes no physical-location filter, so its
+// listings are tagged national rather than presented as local. (Confirmed 2026-07
+// via the stealth browser: CarMax `zip`+`distance` genuinely restricts; Cars.com
+// `maximum_distance`+`zip` restricts; Carvana's /cars/<city> path 302-redirects
+// to the national /cars grid, so Carvana cannot be metro-restricted.)
 const SOURCES = {
   carmax: {
-    url: `https://www.carmax.com/cars/all/price-under-${MAX}?location=austin+tx`,
+    // zip + distance is CarMax's real radius filter; the price band goes in-URL
+    // too (price=min-max) so the server pre-filters to the band and the metro.
+    url: `https://www.carmax.com/cars?zip=${ZIP}&distance=${RADIUS}&price=${MIN}-${MAX}`,
     waitFor: 'article, [data-test="car-tile"], a[href*="/car/"]',
+    geoScope: 'metro',
   },
   carvana: {
-    // Category path pre-filters to ~under-$20k (national delivery; Node still
-    // band-filters). The ?price[max] query param does not stick on redirect.
+    // National inventory. The category path pre-filters to ~under-$20k (Node
+    // still band-filters); ?price[max] does not stick on redirect. Carvana has
+    // no consumer-facing location filter — /cars/<city> redirects to /cars — so
+    // these listings are national (delivered to the metro), not local.
     url: `https://www.carvana.com/cars/cars-under-${MAX}`,
     waitFor: 'a[href*="/vehicle/"], [data-qa="result-tile"]',
+    geoScope: 'national',
   },
   cars: {
-    url: `https://www.cars.com/shopping/results/?stock_type=used&maximum_price=${MAX}&zip=${ZIP}`,
+    // maximum_distance + zip restricts Cars.com to the metro radius.
+    url: `https://www.cars.com/shopping/results/?stock_type=used&maximum_price=${MAX}&maximum_distance=${RADIUS}&zip=${ZIP}`,
     waitFor: '.vehicle-card, a[href*="/vehicledetail/"]',
+    geoScope: 'metro',
   },
 }
 
@@ -138,10 +191,16 @@ function extractInPage({ hint, priceFloor, cardTextCap }) {
     }
 
     const miles = best.match(milesRe)
+    // Delivery/shipping status from the card text: 'free' (card says "Free
+    // shipping/delivery"), 'fee' (a "$… shipping" / "shipping fee"), or null.
+    const shipFree = /free\s+(?:shipping|delivery)/i.test(best)
+    const shipFee = /\$[\d,]+\s+(?:shipping|delivery)\b|(?:shipping|delivery)\s+fee/i.test(best)
+    const shipping = shipFree ? 'free' : (shipFee ? 'fee' : null)
     out.push({
       year, make, model, trim,
       priceRaw,
       milesRaw: miles ? (miles[2] ? String(Number(miles[1].replace(/,/g, '')) * 1000) : miles[1]) : null,
+      shipping,
       url: id,
       text: best.slice(0, 140),
     })
@@ -170,6 +229,7 @@ async function main() {
   let browser = null
   let blocked = false
   let listings = []
+  let droppedForShipping = 0
   try {
     try { browser = await chromium.launch({ ...launchOpts, channel: 'chrome' }) }
     catch { browser = await chromium.launch(launchOpts) }
@@ -178,6 +238,9 @@ async function main() {
       viewport: { width: 1440, height: 2200 },
       locale: 'en-US',
       timezoneId: 'America/Chicago',
+      // Pin the reported location to ZIP's coordinates (see GEO above).
+      geolocation: GEO,
+      permissions: ['geolocation'],
     })
     // Hide the headless/automation tells before any page script runs.
     await ctx.addInitScript(() => {
@@ -202,16 +265,30 @@ async function main() {
       const raw = await page.evaluate(extractInPage, { hint: HINTS[SOURCE], priceFloor: PRICE_FLOOR, cardTextCap: CARD_TEXT_CAP })
       // Normalize + band-filter in Node.
       const toInt = s => s == null ? null : Number(String(s).replace(/[^\d]/g, '')) || null
-      listings = raw.map(r => ({
+      const bandFiltered = raw.map(r => ({
         year: r.year, make: r.make, model: r.model, trim: r.trim,
         price: toInt(r.priceRaw),
         miles: toInt(r.milesRaw),
         sellerType: 'dealer',
         sellerName: SRC_LABEL,
         bodyStyle: null,
+        // 'free' = card says free shipping/delivery; 'fee' = a paid-delivery
+        // card; null = undetectable. Used by the free-shipping gate below.
+        shipping: r.shipping,
         url: r.url,
         src: SRC_LABEL,
-      })).filter(v => v.price && v.price >= MIN && v.price <= MAX && v.url).slice(0, MAXITEMS)
+        // 'metro' listings are physically within RADIUS mi of ZIP; 'national'
+        // ones (Carvana) merely deliver there. Carried through so the ranker /
+        // report can label or drop non-local inventory per the metro-only rule.
+        geoScope: cfg.geoScope,
+      })).filter(v => v.price && v.price >= MIN && v.price <= MAX && v.url)
+      // Free-shipping gate (default on for Carvana): keep only cards confirmed
+      // "Free shipping"; drop paid-delivery and undetectable-shipping cards.
+      const shipFiltered = FREE_SHIP_ONLY
+        ? bandFiltered.filter(v => v.shipping === 'free')
+        : bandFiltered
+      droppedForShipping = bandFiltered.length - shipFiltered.length
+      listings = shipFiltered.slice(0, MAXITEMS)
     }
   } catch (e) {
     process.stderr.write(`nav error: ${e.message || e}\n`)
@@ -219,9 +296,18 @@ async function main() {
     if (browser) await browser.close()
   }
 
+  if (FREE_SHIP_ONLY && droppedForShipping > 0) {
+    process.stderr.write(`${SRC_LABEL}: dropped ${droppedForShipping} listing(s) without confirmed free shipping.\n`)
+  }
+
   process.stdout.write(JSON.stringify({
     source: SRC_LABEL,
     url: cfg.url,
+    geoScope: cfg.geoScope,
+    zip: ZIP,
+    pinnedGeo: GEO,
+    radiusMi: cfg.geoScope === 'metro' ? RADIUS : null,
+    freeShippingOnly: FREE_SHIP_ONLY,
     blocked,
     count: listings.length,
     listings,
