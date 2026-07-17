@@ -107,14 +107,18 @@ The collector now pins `navigator.geolocation` to `--zip` coords (default 78702)
 
 ---
 
-### CM5. Populate dealership rankings in `src/dealers.json`
+### CM5. Populate dealership rankings in `dealers.json`
 **Priority:** Low
 **Source:** local-dealer seed list follow-up (Jul 17)
-**File:** `car-market/scripts/src/dealers.json`
+**File:** `car-market/dealers.json` (moved from `scripts/src/dealers.json` in commit 28af015)
 
-Run a single WebSearch for Austin-metro used-car dealership rankings/reputation, then add a `rank` (or `ranking`) field and a `category`/quality value to each entry in `src/dealers.json` from the result, so the collector can prioritize higher-ranked dealers. One search only — synthesize the ordering from that single result set rather than fanning out per dealer. Keep it deterministic and cited (note the source in the file's `note`/a `rankingSource` field).
+Run a single WebSearch for Austin-metro used-car dealership rankings/reputation, then add a `rank` (or `ranking`) field and a `category`/quality value to each entry in `dealers.json` from the result, so the collector can prioritize higher-ranked dealers. One search only — synthesize the ordering from that single result set rather than fanning out per dealer. Keep it deterministic and cited (note the source in the file's `note`/a `rankingSource` field).
+
+**Progress:** commit ca13e38 resolved and verified each dealer's used-inventory URL (27 verified, 4 nav-resolved but bot-blocked, 3 left null) and added `usedNote` context — but no `rank`/`ranking` field yet, so this item remains open.
 
 **Effort:** Low
+
+**[DONE]** — added `rank` (1–7, lower = higher priority) and `category` (`top-rated`/`franchise-group`/`franchise`) to all 31 dealers plus a `rankingSource` field citing threebestrated.com, copilotsearch.com, and cardealersup.com (single search, 2026-07-17). Texas Auto Center rank 1 (BBB A+, 4.9/5, #1 on two lists); major verified groups rank 2–3; verified high-reliability franchise dealers rank 4; remaining verified rank 5; bot-blocked rank 6; dead/unresolvable rank 7.
 
 ---
 
@@ -198,7 +202,9 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | May 16 — Neural Networks & OTEL | NN1, NN2, NN3 (3 items) |
 | May 16 — UI/UX Audit | GA5, A14, A15, A16, A17, A18 (6 items) |
 | May 16 — Backlog Implementer | GA7 (1 item) |
-| **Total** | **99 completed, 1 open (W1 upstream-blocked)** |
+| Jul 17 — Car-Market Pipeline | CM1, CM2, CM3 (3 items) |
+| Jul 17 — Backlog Implementer | CM5 (1 item) |
+| **Total** | **103 completed, 2 open (W1 upstream-blocked; CM4 bot-wall-blocked)** |
 
 ### Scorecard (Phase 2 — Feb 16)
 
