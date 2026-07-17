@@ -27,8 +27,18 @@ const A = (typeof args === 'object' && args) ? args : {}
 const METRO = A.metro || 'Austin, TX'
 const PRICE_MIN = Number.isFinite(A.priceMin) ? A.priceMin : 10000
 const PRICE_MAX = Number.isFinite(A.priceMax) ? A.priceMax : 20000
-const SOURCES = Array.isArray(A.sources) && A.sources.length ? A.sources : ['CarGurus', 'Cars.com', 'Craigslist', 'KBB']
+const SOURCES = Array.isArray(A.sources) && A.sources.length ? A.sources : ['CarGurus', 'Cars.com', 'Craigslist', 'KBB', 'CarMax', 'Carvana']
 const BODY_STYLES = Array.isArray(A.bodyStyles) && A.bodyStyles.length ? A.bodyStyles : ['all', 'suv', 'truck']
+
+// Per-source access reality (probed 2026-07). CarMax and Carvana are national
+// online retailers (inventory ships/delivers to Austin, not local dealers) and
+// hard-403 to BOTH plain fetch and WebFetch, so a collector agent typically
+// returns sourceQuality:'blocked' with no listings until a headless-browser or
+// official-feed collector exists. They are listed as sources so the pipeline
+// attempts them, but per the "verified as valid" rule any listing from them
+// that lacks a resolvable detail URL MUST be dropped downstream (stage 3
+// verification). Never include an unverifiable CarMax/Carvana listing.
+const VERIFY_REQUIRED_SOURCES = new Set(['CarMax', 'Carvana'])
 
 const LISTING_SCHEMA = {
   type: 'object', required: ['listings', 'sourceQuality'],
@@ -91,9 +101,16 @@ const FETCH_PROMPT = (t, i) => {
   const target = t.url
     ? `**Listings URL:** ${t.url}\nUse WebFetch on this URL first.`
     : `**Search query:** \`${t.query}\`\nUse WebSearch, then WebFetch the most relevant ${t.src} listings page for ${METRO}.`
+  const nationalNote = VERIFY_REQUIRED_SOURCES.has(t.src)
+    ? `\n**NOTE — ${t.src} is a national online retailer** (inventory delivers to ${METRO}, not a local dealer) and is often bot-blocked (HTTP 403). ` +
+      `If you cannot retrieve real listings, set sourceQuality:"blocked" and return listings: []. ` +
+      `Include a listing ONLY if you captured its exact detail URL verbatim (${t.src === 'CarMax' ? '/car/<stocknumber>' : '/vehicle/<id>'}) — ` +
+      `these listings will be link-verified downstream and dropped if the URL does not resolve to the stated vehicle. Never guess a URL.\n`
+    : ''
   return `## Used-Car Listing Extractor (task ${i + 1})\n\n` +
     `Goal: pull as MANY current used-car listings as you can from **${t.src}** in the **${METRO}** metro, priced ` +
-    `**$${PRICE_MIN.toLocaleString()}–$${PRICE_MAX.toLocaleString()}**. Body-style focus: **${t.body}**${BODY_HINT[t.body] || ''}.\n\n` +
+    `**$${PRICE_MIN.toLocaleString()}–$${PRICE_MAX.toLocaleString()}**. Body-style focus: **${t.body}**${BODY_HINT[t.body] || ''}.\n` +
+    `${nationalNote}\n` +
     `${target}\n\n` +
     `## Extract, per vehicle\n` +
     `year, make, model, trim, price (int USD), miles (int), sellerType (dealer|private), sellerName/dealer or location, ` +
@@ -135,14 +152,57 @@ const agentListings = sources.flatMap(s =>
     .map(v => ({ ...v, src: s.src }))
 )
 // Merge code-collected (preCollected) + agent-collected listings.
-const listings = [...PRE, ...agentListings]
-log(`Collected ${listings.length} in-band listings (${PRE.length} code + ${agentListings.length} agent) across ${sources.length} agent task(s)`)
+const merged = [...PRE, ...agentListings]
+
+// ─── Deterministic pre-filter (token-saving) ───
+// The sandbox can't import modules, so this mirrors src/classify.mjs — keep the
+// two in sync. Body-class exclusion (mid/full-size trucks, vans) and the
+// VIN-required-for-private rule run HERE in code, so the downstream LLM ranker
+// receives a pre-screened pool and spends no tokens rejecting these.
+// Disable by passing args.preFilter === false.
+const EXCLUDE_CLASSES = new Set(Array.isArray(A.excludeClasses) ? A.excludeClasses : ['fullsize-truck', 'midsize-truck', 'van'])
+const REQUIRE_VIN_PRIVATE = A.requireVinForPrivate !== false
+const clsNorm = s => String(s == null ? '' : s).trim().toLowerCase()
+const FULLSIZE = ['f-150', 'f150', 'f-250', 'f250', 'f-350', 'f350', 'super duty', 'silverado', 'sierra', 'ram 1500', 'ram 2500', 'ram 3500', '1500', '2500', '3500', 'tundra', 'titan', 'avalanche']
+const MIDSIZE = ['colorado', 'canyon', 'ranger', 'tacoma', 'frontier', 'ridgeline', 'dakota', 'gladiator']
+const COMPACT = ['maverick', 'santa cruz', 'santa-cruz']
+const VANLIST = ['transit', 'express', 'promaster', 'sprinter', 'nv200', 'nv1500', 'nv2500', 'nv3500', 'savana', 'metris', 'sienna', 'odyssey', 'pacifica', 'carnival', 'sedona', 'quest', 'caravan', 'town & country', 'town and country']
+const anyIn = (hay, arr) => arr.some(k => hay.includes(k))
+const excludeClassOf = (make, model, hint) => {
+  const m = clsNorm(model)
+  if (anyIn(m, COMPACT)) return null                    // compact trucks kept
+  if (anyIn(m, VANLIST)) return 'van'
+  if (anyIn(m, MIDSIZE)) return 'midsize-truck'
+  if (anyIn(m, FULLSIZE)) return 'fullsize-truck'
+  if (clsNorm(hint) === 'van') return 'van'
+  return null
+}
+const preRejected = []
+const listings = A.preFilter === false ? merged : merged.filter(v => {
+  const label = `${v.year || '?'} ${v.make || ''} ${v.model || ''} $${v.price}`.trim()
+  const ec = excludeClassOf(v.make, v.model, v.bodyStyle)
+  if (ec && EXCLUDE_CLASSES.has(ec)) { preRejected.push({ label, reason: `Excluded body class: ${ec}.` }); return false }
+  if (REQUIRE_VIN_PRIVATE && clsNorm(v.sellerType) === 'private' && !v.vin) {
+    preRejected.push({ label, reason: 'Private listing with no VIN — excluded by VIN requirement.' }); return false
+  }
+  // "Verified as valid" gate for CarMax/Carvana: without a resolvable detail URL
+  // the listing can never pass stage-3 verification, so drop it now and tag the
+  // rest so downstream knows verification is mandatory before inclusion.
+  if (VERIFY_REQUIRED_SOURCES.has(v.src)) {
+    if (!v.url) { preRejected.push({ label, reason: `${v.src} listing without a detail URL — cannot be verified, excluded.` }); return false }
+    v.mustVerify = true
+  }
+  return true
+})
+log(`Collected ${merged.length} in-band (${PRE.length} code + ${agentListings.length} agent); pre-filtered to ${listings.length} (${preRejected.length} rejected in code)`)
 
 return {
   metro: METRO,
   priceMin: PRICE_MIN,
   priceMax: PRICE_MAX,
   listings,
+  preRejected,
+  excludeClasses: [...EXCLUDE_CLASSES],
   sources: [
     ...(PRE.length ? [{ src: [...coveredSources].join('+') || 'code', body: 'all', quality: 'code-collected', count: PRE.length }] : []),
     ...sources.map(s => ({ src: s.src, body: s.body, quality: s.sourceQuality, count: (s.listings || []).length, note: s.note })),
@@ -152,6 +212,8 @@ return {
     skippedTasks: ALL_TASKS.length - TASKS.length,
     codeListings: PRE.length,
     agentListings: agentListings.length,
-    inBandListings: listings.length,
+    mergedInBand: merged.length,
+    preRejected: preRejected.length,
+    listingsToRank: listings.length,
   },
 }

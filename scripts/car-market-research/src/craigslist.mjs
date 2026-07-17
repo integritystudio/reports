@@ -17,9 +17,37 @@
 // Feed listings into the ranking workflow via args.preCollected.
 
 import { parseTitle, MAKES } from './collect-lib.mjs'
+import { filterListings } from './classify.mjs'
 
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
   '(KHTML, like Gecko) Chrome/126.0 Safari/537.36'
+
+// Craigslist posting detail pages embed the VIN as `"vin":"<17>"` when the
+// seller entered one. Fetch a posting and extract it deterministically.
+async function fetchVin(url) {
+  try {
+    const res = await fetch(url, { headers: { 'User-Agent': UA } })
+    if (!res.ok) return null
+    const html = await res.text()
+    const m = html.match(/"vin":"([A-HJ-NPR-Z0-9]{17})"/i)
+    return m ? m[1].toUpperCase() : null
+  } catch { return null }
+}
+
+// Enrich private listings with VINs by fetching detail pages, bounded
+// concurrency so we don't hammer Craigslist. Only listings with a URL.
+async function enrichVins(listings, concurrency = 5) {
+  const queue = listings.filter(v => v.url && !v.vin)
+  let i = 0
+  async function worker() {
+    while (i < queue.length) {
+      const v = queue[i++]
+      v.vin = await fetchVin(v.url)
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, queue.length) }, worker))
+  return listings
+}
 
 function argVal(flag, def) {
   const i = process.argv.indexOf(flag)
@@ -81,19 +109,40 @@ async function main() {
   }
   const json = await res.json()
   const rawItems = json?.data?.items ?? []
-  const listings = rawItems
+  let listings = rawItems
     .map(parseItem)
     .filter(Boolean)
     .filter(v => v.price >= MIN && v.price <= MAX)
 
+  // --enrich-vin: fetch each posting's detail page and extract the VIN in code,
+  // so the VIN-required-for-private rule can be enforced without an LLM.
+  if (hasFlag('--enrich-vin')) {
+    await enrichVins(listings)
+  }
+
+  // --filter: apply deterministic body-class exclusion (mid/full-size trucks,
+  // vans) and (with --enrich-vin) the VIN-required-for-private rule, so the
+  // downstream LLM ranker receives a pre-screened pool and spends no tokens
+  // rejecting them. All listings here are private (purveyor=owner).
+  let rejected = []
+  if (hasFlag('--filter')) {
+    const r = filterListings(listings, { requireVinForPrivate: hasFlag('--enrich-vin') })
+    listings = r.kept
+    rejected = r.rejected
+  }
+
+  const withVin = listings.filter(v => v.vin).length
   const out = {
     source: 'Craigslist',
     searchPath: SEARCH_PATH,
     area: Number(AREA),
     total: json?.data?.totalResultCount ?? rawItems.length,
     count: listings.length,
+    withVin,
+    rejectedCount: rejected.length,
     knownMakes: MAKES.length,
     listings,
+    rejected,
   }
   process.stdout.write(JSON.stringify(out, null, hasFlag('--pretty') ? 1 : 0))
   process.stdout.write('\n')
