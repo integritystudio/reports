@@ -35,6 +35,34 @@ carried `metro` / `priceMin` / `priceMax` / `listings` / `topBargains` fields ar
 picked up automatically. Stages 2 and 3 also accept a bare `{ listings: [...] }`
 or `{ items: [...] }` if you want to run them standalone.
 
+## Reducing tokens: code-collect what you can, agent-collect the rest
+
+The Workflow sandbox has no network, so real scraping lives in Node code under
+`src/`. Craigslist exposes a JSON API (`sapi`), so its listings are collected by
+**free deterministic code** instead of 3 LLM agents. CarGurus / Cars.com / KBB
+bot-wall plain HTTP, so those still need agents.
+
+```
+# 1. Code-collect Craigslist (0 tokens). Austin area id = 15.
+node scripts/car-market-research/src/craigslist.mjs \
+  --area 15 --min 10000 --max 20000 --purveyor owner > cl.json
+
+# 2. Stage 1 with preCollected → skips Craigslist agents, keeps the rest.
+Workflow({ scriptPath: ".../01-search-listings.js", args: {
+  metro: "Austin, TX", priceMin: 10000, priceMax: 20000,
+  sources: ["CarGurus","Cars.com","KBB"],      // Craigslist handled by code
+  bodyStyles: ["all","suv","truck"],
+  preCollected: <listings array from cl.json>   // merged in; its sources are skipped
+}})
+```
+
+`preCollected` listings are merged into the output and their source is dropped
+from the agent task matrix (stage 1 logs how many tasks it skipped). Any metro:
+open `https://<metro>.craigslist.org/search/cta` and grep `"areaId":N` for `--area`.
+
+`src/collect-lib.mjs` holds the shared pure helpers (title→year/make/model
+parser with model→make inference, in-band filter, task matrix, dedupe key).
+
 ## Notes / lessons baked in
 
 - **Stage 1 never guesses URLs.** The original run reconstructed CarGurus detail

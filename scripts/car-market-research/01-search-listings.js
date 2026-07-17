@@ -66,13 +66,26 @@ const BODY_HINT = {
   all: '',
 }
 
+// Token-saving: listings already gathered by deterministic Node collectors
+// (e.g. src/craigslist.mjs, run via Bash) are passed in as preCollected. Their
+// sources are dropped from the agent task matrix so we don't pay LLM tokens to
+// re-collect what code already fetched for free.
+const PRE = (Array.isArray(A.preCollected) ? A.preCollected : [])
+  .filter(v => v && typeof v.price === 'number' && v.price >= PRICE_MIN && v.price <= PRICE_MAX)
+const coveredSources = new Set(PRE.map(v => String(v.src || v.source || '').toLowerCase()).filter(Boolean))
+
 // Build the task matrix. Explicit `tasks` override the default source×body grid.
-const TASKS = Array.isArray(A.tasks) && A.tasks.length
+const ALL_TASKS = Array.isArray(A.tasks) && A.tasks.length
   ? A.tasks
   : SOURCES.flatMap(src => BODY_STYLES.map(body => ({
       src, body,
       query: `${src} used ${body === 'all' ? 'cars' : body} for sale ${METRO} $${PRICE_MIN.toLocaleString()} to $${PRICE_MAX.toLocaleString()} best deal clean title`,
     })))
+// Skip agent tasks for any source already supplied via preCollected.
+const TASKS = ALL_TASKS.filter(t => !coveredSources.has(String(t.src).toLowerCase()))
+if (PRE.length) {
+  log(`preCollected: ${PRE.length} listings from [${[...coveredSources].join(', ')}] — skipping ${ALL_TASKS.length - TASKS.length} agent task(s)`)
+}
 
 const FETCH_PROMPT = (t, i) => {
   const target = t.url
@@ -116,18 +129,29 @@ const collected = await parallel(
 )
 
 const sources = collected.filter(Boolean)
-const listings = sources.flatMap(s =>
+const agentListings = sources.flatMap(s =>
   (s.listings || [])
     .filter(v => typeof v.price === 'number' && v.price >= PRICE_MIN && v.price <= PRICE_MAX)
     .map(v => ({ ...v, src: s.src }))
 )
-log(`Collected ${listings.length} in-band listings across ${sources.length} source tasks`)
+// Merge code-collected (preCollected) + agent-collected listings.
+const listings = [...PRE, ...agentListings]
+log(`Collected ${listings.length} in-band listings (${PRE.length} code + ${agentListings.length} agent) across ${sources.length} agent task(s)`)
 
 return {
   metro: METRO,
   priceMin: PRICE_MIN,
   priceMax: PRICE_MAX,
   listings,
-  sources: sources.map(s => ({ src: s.src, body: s.body, quality: s.sourceQuality, count: (s.listings || []).length, note: s.note })),
-  stats: { collectTasks: TASKS.length, sourcesReturned: sources.length, inBandListings: listings.length },
+  sources: [
+    ...(PRE.length ? [{ src: [...coveredSources].join('+') || 'code', body: 'all', quality: 'code-collected', count: PRE.length }] : []),
+    ...sources.map(s => ({ src: s.src, body: s.body, quality: s.sourceQuality, count: (s.listings || []).length, note: s.note })),
+  ],
+  stats: {
+    agentTasks: TASKS.length,
+    skippedTasks: ALL_TASKS.length - TASKS.length,
+    codeListings: PRE.length,
+    agentListings: agentListings.length,
+    inBandListings: listings.length,
+  },
 }
