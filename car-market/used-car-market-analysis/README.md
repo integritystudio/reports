@@ -5,11 +5,15 @@ bargain research run, generalized to any metro / price band / source set. Each
 runs via the Claude Code **Workflow** tool (they use the `agent()` / `parallel()`
 harness — they are not plain Node scripts and won't run under `node`).
 
-| Stage | Script | Does |
+| Order | Script | Does |
 |-------|--------|------|
 | 1 | `01-search-listings.js` | Fan-out collection: one agent per source × body-style, extracts every in-band live listing |
-| 2 | `02-rank-listings.js` | Screens salvage/scam/out-of-scope, estimates discount-to-market, ranks top-N |
-| 3 | `03-verify-dedupe.js` | Semantic-dedupes, then WebFetch-verifies each URL resolves to the stated vehicle |
+| 2 | `03-verify-dedupe.js` | **Validation:** semantic-dedupes, then WebFetch-verifies each URL resolves to the stated vehicle |
+| 3 | `02-rank-listings.js` | **Valuation & rank:** per-vehicle LLM market-value call on the validated survivors, then discount + rank top-N |
+
+> Ordering note: valuation runs **after** validation, so the LLM only prices
+> real (live-match, de-duplicated) survivors — not dead/mismatched/duplicate
+> rows. `02-rank-listings.js` keeps its filename but is the last stage.
 
 ## Chaining
 
@@ -23,24 +27,27 @@ Workflow({ scriptPath: "car-market/scripts/01-search-listings.js", args: {
 }})
 // → { listings, sources, metro, priceMin, priceMax, stats }
 
-Workflow({ scriptPath: "car-market/scripts/02-rank-listings.js", args: <stage-1 output> })
+Workflow({ scriptPath: "car-market/scripts/03-verify-dedupe.js", args: <stage-1 output> })
+// → { verified, buckets, stalePriced, dedupe, stats }
+
+Workflow({ scriptPath: "car-market/scripts/02-rank-listings.js", args: <verify output> })
 // → { topBargains, rejected, summary, caveats, stats }
 //
-// Body-class exclusion (stage 2): args.excludeClasses controls which body
-// classes are rejected in the screen. Default is
-//   ["fullsize-truck","midsize-truck","van"]
-// (keeps compact unibody trucks like the Ford Maverick / Hyundai Santa Cruz).
-// Pass [] to rank all body styles, or a subset to relax the rule, e.g.
-//   args: { ...stage1, excludeClasses: ["fullsize-truck"] }   // keep mid-size + vans
-
-Workflow({ scriptPath: "car-market/scripts/03-verify-dedupe.js", args: <stage-2 output> })
-// → { verified, buckets, stalePriced, dedupe, stats }
+// Valuation is one LLM call PER vehicle (parallelized), returning only
+// estMarketValue (+ scam flag); discount %, demotion, sorting, confidence, and
+// rationales are computed deterministically. It values args.verified filtered to
+// args.acceptStatuses (default ["live-match"]).
+//
+// Body-class exclusion: args.excludeClasses controls which body classes are
+// rejected. Default ["fullsize-truck","midsize-truck","van"] (keeps compact
+// unibody trucks like the Ford Maverick / Hyundai Santa Cruz). Pass [] to rank
+// all body styles, or a subset to relax the rule.
 ```
 
 Pass the previous stage's JSON result object straight through as `args`; the
-carried `metro` / `priceMin` / `priceMax` / `listings` / `topBargains` fields are
-picked up automatically. Stages 2 and 3 also accept a bare `{ listings: [...] }`
-or `{ items: [...] }` if you want to run them standalone.
+carried `metro` / `priceMin` / `priceMax` / `listings` / `verified` fields are
+picked up automatically. Both later stages also accept a bare `{ listings: [...] }`
+or `{ items: [...] }` if you want to run them standalone (skipping validation).
 
 ## Reducing tokens: code-collect what you can, agent-collect the rest
 
@@ -175,15 +182,16 @@ pagePrice, priceMatches, evidence }` where `status` is:
 Verification is **sequential** (one tab at a time) — parallel tabs on the same
 domain trip the rate-limiter that produces the 403 in the first place.
 
-Feed `verdicts.json` into stage 3 as **`args.preVerified`**: any listing whose
-URL has a pre-verdict uses it verbatim and **skips the WebFetch agent**, so
-CarMax/Carvana can finally clear the "verified as valid" gate (and it saves the
-agent call for every pre-verified URL). Run the browser verifier outside the
-Workflow sandbox (the sandbox has no network), then pass its output through:
+Feed `verdicts.json` into `03-verify-dedupe.js` as **`args.preVerified`**: any
+listing whose URL has a pre-verdict uses it verbatim and **skips the WebFetch
+agent**, so CarMax/Carvana can finally clear the "verified as valid" gate (and it
+saves the agent call for every pre-verified URL). Run the browser verifier
+outside the Workflow sandbox (the sandbox has no network), then pass its output
+through:
 
 ```
 Workflow({ scriptPath: ".../03-verify-dedupe.js", args: {
-  ...stage2Output,                         // topBargains, metro, price band …
+  ...stage1Output,                         // listings, metro, price band …
   preVerified: <verdicts array from verdicts.json>
 }})
 ```
@@ -266,13 +274,14 @@ resolution, launch, anti-bot context) used by both the collector and verifier.
 
 ## Notes / lessons baked in
 
-- **Stage 1 never guesses URLs.** The original run reconstructed CarGurus detail
-  URLs from listing IDs with the wrong path format (`/Cars/detail/<id>` → 404;
-  only `/details/<id>` resolves). Stage 1's prompt requires verbatim on-page URLs
-  and prefers *no* URL over a constructed one.
-- **Stage 2 demotes implausible discounts.** A price far below comparables is a
-  primary fraud signal, so the biggest raw discounts are demoted, not ranked top.
-- **Stage 3 distinguishes `blocked` from `dead`.** Anti-bot 403/406 (KBB, and via
+- **`01-search-listings.js` never guesses URLs.** The original run reconstructed
+  CarGurus detail URLs from listing IDs with the wrong path format
+  (`/Cars/detail/<id>` → 404; only `/details/<id>` resolves). Its prompt requires
+  verbatim on-page URLs and prefers *no* URL over a constructed one.
+- **`02-rank-listings.js` demotes implausible discounts.** A price far below
+  comparables is a primary fraud signal, so the biggest raw discounts are
+  demoted, not ranked top.
+- **`03-verify-dedupe.js` distinguishes `blocked` from `dead`.** Anti-bot 403/406 (KBB, and via
   `curl` also CarGurus/Cars.com) means *unverifiable*, not gone. It also flags
   `live-mismatch` (an ID that now resolves to a different vehicle) and stale prices.
 - Sandbox limits: no `Date.now()` / `Math.random()` / `new Date()`.
