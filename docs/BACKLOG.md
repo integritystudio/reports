@@ -61,6 +61,8 @@ The headless collector's extractor captures the first two tokens after the make 
 
 **Effort:** Low–Medium
 
+**[DONE]** commit d8218e3 — `sameVehicle` now does VIN-first match then prefix-based model comparison (`ma.startsWith(mb + ' ')`) so "Sentra SR" deduplicates against "Sentra". Price/miles tolerances guard against false positives. Inline copy in `02-rank-listings.js` kept in sync.
+
 ---
 
 ### CM2. Stage-3 verification cannot reach CarMax/Carvana (WebFetch 403s)
@@ -80,6 +82,19 @@ CarMax/Carvana listings are tagged `mustVerify` in stage 1, but stage 3 verifies
 **File:** `scripts/car-market-research/src/browser-collect.mjs`
 
 Per-run counts are modest (CarMax 6, Carvana 3, Cars.com 1) because the collector does a fixed 6-round scroll on page 1 only. For fuller coverage, add pagination (follow "next"/load-more) and/or price-ascending sort so in-band inventory front-loads, and make scroll depth scale with `--max-items`. Not a correctness bug — a coverage/tuning limitation.
+
+**Effort:** Low–Medium
+
+**[DONE]** commit d2a6bfe — `SCROLL_ROUNDS` now scales with `--max-items` (`max(6, ceil(items/4))`); `--pages 1–3` adds URL-based multi-page collection for CarMax and Cars.com (`&page=N`); Carvana (infinite-scroll) multiplies scroll rounds by PAGES on page 1 instead; Cars.com URL adds `&sort=list_price`; `scrollAndExtract` helper extracted; cross-page URL dedup added.
+
+---
+
+### CM4. Carvana geolocation-pin effect on grid unconfirmed (A/B blocked)
+**Priority:** Low
+**Source:** browser-collect geo/free-shipping/pin session (Jul 17)
+**File:** `scripts/car-market-research/src/browser-collect.mjs`
+
+The collector now pins `navigator.geolocation` to `--zip` coords (default 78702) and grants the geolocation permission — verified reading back exactly on a secure origin. But whether Carvana's *results grid* recomputes its "Free shipping" labels from that pin could not be confirmed: the Austin-vs-rural-Montana A/B probe tripped Carvana's Cloudflare bot-wall (403) after repeated loads before a clean comparison landed. Current behavior is documented honestly (README caveat: the pin is set correctly and matters for geolocation-reading sites, but on Carvana the free-shipping gate operates on whatever labels the grid renders, which is not proof of Austin-specific free delivery). To resolve: re-run the A/B with rotating IPs / longer backoff, or find a Carvana location cookie/param that localizes the grid. Related: CM2's browser-verify path could share the same stealth session.
 
 **Effort:** Low–Medium
 
