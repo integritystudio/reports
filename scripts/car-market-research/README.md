@@ -102,14 +102,51 @@ Carvana, and Cars.com listing pages — deterministically, zero LLM tokens.
 
 ```
 # via the wrapper (sets PW_DIR so global playwright-core resolves)
-./run-browser-collect.sh --source carmax  --min 10000 --max 20000   # /car/<stock>
-./run-browser-collect.sh --source carvana --min 10000 --max 20000   # /vehicle/<id>
-./run-browser-collect.sh --source cars    --min 10000 --max 20000 --zip 78701
+./run-browser-collect.sh --source carmax  --min 10000 --max 20000 --zip 78745 --radius 75   # /car/<stock>
+./run-browser-collect.sh --source carvana --min 10000 --max 20000                           # /vehicle/<id>
+./run-browser-collect.sh --source cars    --min 10000 --max 20000 --zip 78745 --radius 75
 ```
 
-Emits `{ source, url, blocked, count, listings:[...] }`; each listing carries a
-verbatim detail URL. Feed `listings` into stage 1 as `preCollected` (its source
-is then skipped in the agent matrix — more token savings on top of Craigslist).
+Emits `{ source, url, geoScope, zip, radiusMi, blocked, count, listings:[...] }`;
+each listing carries a verbatim detail URL and a `geoScope` tag. Feed `listings`
+into stage 1 as `preCollected` (its source is then skipped in the agent matrix —
+more token savings on top of Craigslist).
+
+**Metro restriction (`--zip` + `--radius`).** The two sources with a real
+distance filter are geo-restricted to physical inventory within `--radius` miles
+(default 75) of `--zip`, and tagged `geoScope:"metro"`:
+- **CarMax** — `?zip=<zip>&distance=<radius>` is CarMax's own radius filter
+  (accepts 10–500 mi); the price band goes in the same URL (`price=min-max`).
+- **Cars.com** — `maximum_distance=<radius>&zip=<zip>`.
+
+**Carvana is national and cannot be metro-restricted.** Its inventory is
+centralized nationwide delivery; the `/cars/<city>` path 302-redirects to the
+national `/cars` grid and no consumer location filter exists (confirmed 2026-07
+via the browser). Carvana listings are therefore tagged `geoScope:"national"`
+(they deliver to the metro, they are not local) — never presented as local
+inventory. The ranker/report can label or drop them per a metro-only rule.
+
+**Free-shipping filter (Carvana's availability signal).** Because Carvana has no
+distance filter, its one delivery signal is per-car shipping cost. Carvana runs
+default to **free-shipping-only**: each card is read for "Free shipping" and only
+confirmed-free cars are kept (`shipping:"free"` per listing; `freeShippingOnly`
+in the output; dropped counts logged to stderr). Paid-delivery and
+undetectable-shipping cards are excluded — if free can't be confirmed, the car is
+not included. Flags: `--include-paid-shipping` disables it for Carvana;
+`--free-shipping-only` forces it for any source.
+
+**Location pin (`--zip`, default 78702).** The browser context pins
+`navigator.geolocation` to the coordinates of `--zip` (known Austin-metro zips
+are mapped exactly; others fall back to the metro centroid) and grants the
+geolocation permission, so a site that reads geolocation sees the Austin
+location. Verified 2026-07: on a secure origin the page reads back exactly the
+78702 coordinates; the pin also flows into the CarMax/Cars.com `zip=` URLs.
+Output carries `pinnedGeo`. **Caveat:** probing found Carvana's *results grid*
+does not recompute its "Free shipping" labels from this pin (no zip control on
+the grid; delivery fees are finalized per-vehicle at checkout from a saved
+address). So the pin is set correctly and matters for geolocation-reading sites,
+but on Carvana the free-shipping gate still operates on whatever labels the grid
+renders — it is not proof of Austin-specific free delivery.
 
 Verified working (2026-07): stealth (real-Chrome channel, `navigator.webdriver`
 spoof, `--disable-blink-features=AutomationControlled`) turns the 403 into a
@@ -125,10 +162,12 @@ loaded page; a lazy-load scroll then reveals inventory. Notes:
 
 ### CarMax & Carvana (national retailers, verification-gated)
 
-`CarMax` and `Carvana` are in the default source list, but they are **national
-online retailers** (inventory delivers to the metro; not local dealers) and
-hard-**403 to every fetch path tested — plain `fetch` AND WebFetch** (probed
-2026-07). A collector agent therefore usually returns `sourceQuality:"blocked"`
+`CarMax` and `Carvana` are in the default source list. **CarMax has physical
+stores, so `--zip`+`--radius` restrict it to real Austin-metro inventory**
+(`geoScope:"metro"`). **Carvana is national-only** — no location filter exists,
+so it stays `geoScope:"national"` (delivers to the metro, not local). Both
+hard-**403 to every plain fetch path — `fetch` AND WebFetch** (probed 2026-07),
+which is why they need the headless browser. A collector agent therefore usually returns `sourceQuality:"blocked"`
 with no listings until a headless-browser or official-feed collector is added.
 
 Because of that, they are wired **verification-gated**: any CarMax/Carvana
