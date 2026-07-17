@@ -12,7 +12,16 @@ const norm = s => String(s == null ? '' : s).trim().toLowerCase()
 // ─── Dedup ───
 const priceTol = p => Math.max(500, Math.round((p || 0) * 0.04))
 export function sameVehicle(a, b) {
-  if (a.year !== b.year || norm(a.make) !== norm(b.make) || norm(a.model) !== norm(b.model)) return false
+  // VIN match is definitive regardless of parsed fields.
+  if (a.vin && b.vin && norm(a.vin) === norm(b.vin)) return true
+  if (a.year !== b.year || norm(a.make) !== norm(b.make)) return false
+  // Model: exact match OR one string is a prefix of the other (e.g. "Sentra" vs
+  // "Sentra SR"). browser-collect captures up to 2 tokens after the make, so a
+  // single-word nameplate absorbs the trim level; cross-source pairs that differ
+  // only in trim would fail a strict equality check. Price/miles tolerances below
+  // guard against false-positive prefix matches (e.g. "Civic Si" vs "Civic Sport").
+  const ma = norm(a.model), mb = norm(b.model)
+  if (ma !== mb && !ma.startsWith(mb + ' ') && !mb.startsWith(ma + ' ')) return false
   if (Math.abs((a.price || 0) - (b.price || 0)) > priceTol(a.price || b.price || 0)) return false
   if (a.miles && b.miles && Math.abs(a.miles - b.miles) > 2500) return false
   return true

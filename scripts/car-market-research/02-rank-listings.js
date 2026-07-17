@@ -46,10 +46,18 @@ if (LISTINGS.length === 0) {
 // Collapsing cross-source repeats in code shrinks the LLM's input and output.
 const _norm = s => String(s == null ? '' : s).trim().toLowerCase()
 const _tol = p => Math.max(500, Math.round((p || 0) * 0.04))
-const _same = (a, b) =>
-  a.year === b.year && _norm(a.make) === _norm(b.make) && _norm(a.model) === _norm(b.model) &&
-  Math.abs((a.price || 0) - (b.price || 0)) <= _tol(a.price || b.price || 0) &&
-  !(a.miles && b.miles && Math.abs(a.miles - b.miles) > 2500)
+// VIN match is definitive. Model uses prefix comparison so "Sentra" and "Sentra SR"
+// (2-token capture from browser-collect) are caught as duplicates; price/miles
+// tolerances guard against false-positive prefix matches across different nameplates.
+const _same = (a, b) => {
+  if (a.vin && b.vin && _norm(a.vin) === _norm(b.vin)) return true
+  if (a.year !== b.year || _norm(a.make) !== _norm(b.make)) return false
+  const ma = _norm(a.model), mb = _norm(b.model)
+  if (ma !== mb && !ma.startsWith(mb + ' ') && !mb.startsWith(ma + ' ')) return false
+  if (Math.abs((a.price || 0) - (b.price || 0)) > _tol(a.price || b.price || 0)) return false
+  if (a.miles && b.miles && Math.abs(a.miles - b.miles) > 2500) return false
+  return true
+}
 const UNIQUE = []
 const MERGED = []
 for (const v of LISTINGS) {
