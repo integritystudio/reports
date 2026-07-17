@@ -118,7 +118,7 @@ Run a single WebSearch for Austin-metro used-car dealership rankings/reputation,
 
 **Effort:** Low
 
-**[DONE]** — added `rank` (1–7, lower = higher priority) and `category` (`top-rated`/`franchise-group`/`franchise`) to all 31 dealers plus a `rankingSource` field citing threebestrated.com, copilotsearch.com, and cardealersup.com (single search, 2026-07-17). Texas Auto Center rank 1 (BBB A+, 4.9/5, #1 on two lists); major verified groups rank 2–3; verified high-reliability franchise dealers rank 4; remaining verified rank 5; bot-blocked rank 6; dead/unresolvable rank 7.
+**[DONE]** — added `rank` (1–7, lower = higher priority) and `category` (`top-rated`/`franchise-group`/`franchise`) to all 34 dealers plus a `rankingSource` field citing threebestrated.com, copilotsearch.com, and cardealersup.com (single search, 2026-07-17). Texas Auto Center rank 1 (BBB A+, 4.9/5, #1 on two lists); major verified groups rank 2–3; verified high-reliability franchise dealers rank 4; remaining verified rank 5; bot-blocked rank 6; dead/unresolvable rank 7.
 
 ---
 
