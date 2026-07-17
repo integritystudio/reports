@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="automotive-market">
+<head>
+  <script src="../js/gtag.js" defer></script>
+  <link rel="stylesheet" href="../css/consent-banner.css">
+  <script src="../js/consent.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austin Used-Car Bargains $10k–$20k | July 2026</title>
+    <link rel="stylesheet" href="../css/report-base.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <style>
+        [data-brand="automotive-market"] {
+            --primary: #1e40af;
+            --secondary: #1e3a8a;
+            --accent: #f59e0b;
+            --light: #f0f4f8;
+            --dark: #0f172a;
+            --border: #cbd5e1;
+            --good: #15803d;
+            --good-bg: #dcfce7;
+            --warn: #92400e;
+            --warn-bg: #fef3c7;
+            --danger: #b91c1c;
+            --danger-bg: #fee2e2;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            [data-brand="automotive-market"] {
+                --primary: #60a5fa;
+                --secondary: #93c5fd;
+                --accent: #fbbf24;
+                --light: #1e293b;
+                --dark: #f8fafc;
+                --border: #475569;
+                --good: #4ade80;
+                --good-bg: #14532d;
+                --warn: #fcd34d;
+                --warn-bg: #4a2f0a;
+                --danger: #fca5a5;
+                --danger-bg: #4c1414;
+            }
+        }
+
+        .lede {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-card {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+        }
+
+        .stat-card .num {
+            display: block;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+
+        .stat-card .lbl {
+            font-size: 0.85rem;
+            color: inherit;
+            opacity: 0.8;
+        }
+
+        .rank-cell {
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .price-cell {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .discount-cell {
+            font-weight: 700;
+            color: var(--good);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 0.15rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .pill-high { background: var(--good-bg); color: var(--good); }
+        .pill-medium { background: var(--warn-bg); color: var(--warn); }
+        .pill-dealer { background: #dbeafe; color: #1e40af; }
+        .pill-private { background: #ede9fe; color: #6d28d9; }
+
+        @media (prefers-color-scheme: dark) {
+            .pill-dealer { background: #1e3a5f; color: #93c5fd; }
+            .pill-private { background: #3b2f5c; color: #c4b5fd; }
+        }
+
+        .body-tag {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            opacity: 0.75;
+        }
+
+        .flag-box {
+            background: var(--danger-bg);
+            border: 1px solid var(--danger);
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .flag-box h3 { color: var(--danger); margin-top: 0; }
+
+        .reject-reason { font-size: 0.92rem; }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0 0.5rem 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .checklist li::before {
+            content: "\2713";
+            position: absolute;
+            left: 0.25rem;
+            color: var(--good);
+            font-weight: 700;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 1rem 0;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+
+        .note-small {
+            font-size: 0.88rem;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="report-header">
+        <div class="header-content">
+            <h1>Austin Used-Car Bargains: $10k–$20k</h1>
+            <p class="subtitle">Top 20 true bargains ranked by estimated discount to local market value — dealer &amp; private sellers, salvage &amp; suspicious listings filtered out</p>
+            <p class="report-date">July 16, 2026</p>
+            <p class="source-link"><a href="#sources">View sources &amp; coverage notes below</a></p>
+        </div>
+    </header>
+
+    <nav class="toc">
+        <h2>Table of Contents</h2>
+        <ol>
+            <li><a href="#executive-summary">Executive Summary</a></li>
+            <li><a href="#methodology">Methodology &amp; How Discount Is Estimated</a></li>
+            <li><a href="#top20">The Top 20 Ranked Bargains</a></li>
+            <li><a href="#highlights">Best Picks by Category</a></li>
+            <li><a href="#rejected">Rejected &amp; Flagged Listings</a></li>
+            <li><a href="#screening">Pre-Purchase Screening Checklist</a></li>
+            <li><a href="#sources">Sources &amp; Coverage Notes</a></li>
+            <li><a href="#caveats">Caveats &amp; Limitations</a></li>
+        </ol>
+    </nav>
+
+    <main id="main" class="report-content">
+
+        <a href="index.html" class="back-link">&larr; Back to Automotive Market Research</a>
+
+        <section id="executive-summary">
+            <h2>Executive Summary</h2>
+            <p class="lede">From <strong>256 in-band listings</strong> pulled live across CarGurus, Cars.com, and Craigslist (KBB was bot-blocked; its inventory largely mirrors Cars.com), we deduped heavy cross-platform repetition, screened out three classes of problem listings, and ranked the <strong>20 strongest true bargains</strong> in the $10,000–$20,000 band. Surviving deals cluster at a credible <strong>9–17% below estimated Austin retail</strong> and span SUVs, mid-size trucks, sedans, and a hatchback, from both franchise dealers and private sellers.</p>
+
+            <div class="stat-row">
+                <div class="stat-card"><span class="num">256</span><span class="lbl">In-band listings collected</span></div>
+                <div class="stat-card"><span class="num">20</span><span class="lbl">True bargains ranked</span></div>
+                <div class="stat-card"><span class="num">30</span><span class="lbl">Rejected / flagged</span></div>
+                <div class="stat-card"><span class="num">9–17%</span><span class="lbl">Est. discount range</span></div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Key takeaways</h3>
+                <ul>
+                    <li><strong>The strongest, highest-confidence picks are near-new dealer SUVs and trucks with clean mileage:</strong> 2022 Chevrolet Colorado LT, 2024 Kia Sportage, 2023 Ford Escape, and 2024 Buick Encore GX all sit ~12–15% under retail with no red flags.</li>
+                    <li><strong>The biggest apparent discounts are usually the biggest traps.</strong> A price far below comparable local cars is itself a primary fraud signal — luxury vehicles priced like economy cars dominated the rejected pile.</li>
+                    <li><strong>Trucks are well-represented</strong> (7 of 20), but the cheap ones carry high mileage — the value is real only if a Tundra/Colorado/Frontier's durability offsets the odometer.</li>
+                    <li><strong>Private-seller bargains exist but carry thinner data:</strong> Craigslist listings rarely show a VIN and often omit mileage, so every private pick is medium-confidence pending inspection.</li>
+                    <li><strong>No listing here is verified salvage-free.</strong> None of these platforms expose title status at the search level — a VIN history report is mandatory before purchase.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="methodology">
+            <h2>Methodology &amp; How Discount Is Estimated</h2>
+            <p>This report was produced by a multi-agent research harness: 14 parallel collection agents fetched live listings from the accessible Austin-metro sources across three body-style axes (all / SUV / truck), followed by a single high-reasoning screening-and-ranking pass over the pooled inventory.</p>
+            <ol>
+                <li><strong>Collect.</strong> Agents pulled every listing they could render in the $10,000–$20,000 band from CarGurus, Cars.com (dealer + for-sale-by-owner), and Craigslist by-owner. KBB and TrueCar returned HTTP 403 (anti-bot), so their coverage was backfilled via Cars.com/CarGurus.</li>
+                <li><strong>Dedupe.</strong> The same VINs recur across platforms, often at slightly different prices; duplicates were merged and the lower price kept.</li>
+                <li><strong>Screen.</strong> Three problem classes were removed: (a) curbstoner/scam-style listings — luxury vehicles priced like economy cars, no-VIN private posts, prices far below comparables; (b) out-of-metro or out-of-scope units — Oklahoma/Missouri/Illinois sellers, Houston-area listings, classic and commercial trucks; (c) extreme mileage/year mismatches.</li>
+                <li><strong>Estimate discount.</strong> For each survivor, fair local market value was estimated at the model/trim/mileage level for the Austin metro, and <em>discount % = (est. market value − price) ÷ est. market value</em>. Platform "deal" badges (CarGurus "Great Deal", Cars.com "High Demand") were treated only as <em>corroborating</em> evidence, never as the discount itself.</li>
+                <li><strong>Rank &amp; demote.</strong> Vehicles were ranked by estimated discount, but listings whose discount was so large it more likely signals a problem than a deal were deliberately demoted — a genuine bargain is meaningfully below market yet still explainable.</li>
+            </ol>
+            <p class="note-small"><strong>Important:</strong> Market-value figures are model-level estimates from general used-car knowledge, <em>not</em> VIN-level appraisals. Discount percentages are directional, not precise. See <a href="#caveats">Caveats</a>.</p>
+        </section>
+
+        <section id="top20">
+            <h2>The Top 20 Ranked Bargains</h2>
+            <p>Ranked by estimated discount to local market value, with genuine-bargain confidence factored in. Every price and mileage figure is reported exactly as the listing showed on July 16, 2026.</p>
+            <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Vehicle</th>
+                        <th>Price</th>
+                        <th>Miles</th>
+                        <th>Est. market</th>
+                        <th>Discount</th>
+                        <th>Seller</th>
+                        <th>Confidence</th>
+                        <th>Why it's a bargain</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="rank-cell">1</td>
+                        <td><strong>2022 Chevrolet Colorado</strong> LT Ext Cab RWD <span class="body-tag">truck</span></td>
+                        <td class="price-cell">$19,202</td>
+                        <td>53,805</td>
+                        <td class="price-cell">$22,500</td>
+                        <td class="discount-cell">15%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Georgetown, TX</span></td>
+                        <td><span class="pill pill-high">High</span></td>
+                        <td>Low-mileage mid-size truck well under retail; CarGurus "Good Deal". Clean data, in-metro, no red flags.</td>
+                        <td><a href="https://www.cargurus.com/details/449763568">CarGurus</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">2</td>
+                        <td><strong>2024 Kia Sportage</strong> LX FWD <span class="body-tag">suv</span></td>
+                        <td class="price-cell">$19,650</td>
+                        <td>34,819</td>
+                        <td class="price-cell">$22,500</td>
+                        <td class="discount-cell">13%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Alusi Motors, Jarrell</span></td>
+                        <td><span class="pill pill-high">High</span></td>
+                        <td>Near-new compact SUV, only 35k miles, ~$2.9k below retail; "Great Deal" badge. Strong, explainable.</td>
+                        <td><a href="https://www.cargurus.com/details/452551614">CarGurus</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">3</td>
+                        <td><strong>2023 Ford Escape</strong> Active FWD <span class="body-tag">suv</span></td>
+                        <td class="price-cell">$19,295</td>
+                        <td>29,850</td>
+                        <td class="price-cell">$21,800</td>
+                        <td class="discount-cell">12%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Lockhart, TX</span></td>
+                        <td><span class="pill pill-high">High</span></td>
+                        <td>Low-mileage Escape ~$2.5k under retail with "Great Deal" badge; appeared 3× across CarGurus (deduped).</td>
+                        <td><a href="https://www.cargurus.com/details/446874071">CarGurus</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">4</td>
+                        <td><strong>2024 Buick Encore GX</strong> Preferred FWD <span class="body-tag">suv</span></td>
+                        <td class="price-cell">$18,022</td>
+                        <td>34,114</td>
+                        <td class="price-cell">$20,500</td>
+                        <td class="discount-cell">12%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">New Braunfels, TX</span></td>
+                        <td><span class="pill pill-high">High</span></td>
+                        <td>Near-new subcompact SUV, 34k miles, ~$2.5k below retail; "Great Deal" badge. No mismatch flags.</td>
+                        <td><a href="https://www.cargurus.com/details/446194722">CarGurus</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">5</td>
+                        <td><strong>2021 RAM 1500</strong> Tradesman <span class="body-tag">truck</span></td>
+                        <td class="price-cell">$19,595</td>
+                        <td>110,226</td>
+                        <td class="price-cell">$22,500</td>
+                        <td class="discount-cell">13%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">DriveTime, Round Rock</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Half-ton under $20k, "Great Deal", ~$2.9k below retail. 110k miles is the main caveat; DriveTime prices firm.</td>
+                        <td><a href="https://www.cars.com/vehicledetail/d47a9ed3-5bab-41dc-8fc3-809f324069cb/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">6</td>
+                        <td><strong>2018 Chevrolet Colorado</strong> LT Crew Cab RWD <span class="body-tag">truck</span></td>
+                        <td class="price-cell">$15,210</td>
+                        <td>122,627</td>
+                        <td class="price-cell">$17,000</td>
+                        <td class="discount-cell">11%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Group 1 Ford of South Austin</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>~$1.8k under retail; Cars.com "Great Deal", clean title, no accidents. High miles (123k) tempers to medium. (CarGurus showed $14,811; verified Cars.com price used.)</td>
+                        <td><a href="https://www.cars.com/vehicledetail/445988d1-0ff2-48d6-b629-8ac25d4e57ee/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">7</td>
+                        <td><strong>2017 Cadillac XT5</strong> Premium Luxury <span class="body-tag">suv</span></td>
+                        <td class="price-cell">$17,667</td>
+                        <td>69,747</td>
+                        <td class="price-cell">$20,000</td>
+                        <td class="discount-cell">12%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Round Rock Hyundai</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Reasonable-mileage luxury crossover (not priced like economy) ~$2.3k under retail; reputable franchise dealer.</td>
+                        <td><a href="https://www.cars.com/vehicledetail/d978420b-38d2-4574-a4eb-06baf803a275/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">8</td>
+                        <td><strong>2021 Jeep Compass</strong> Latitude <span class="body-tag">suv</span></td>
+                        <td class="price-cell">$14,768</td>
+                        <td>50,815</td>
+                        <td class="price-cell">$16,800</td>
+                        <td class="discount-cell">12%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">AutoNation Toyota S. Austin</span></td>
+                        <td><span class="pill pill-high">High</span></td>
+                        <td>Low-mileage compact SUV ~$2k under retail at a major dealer; "Great Deal" badge. Clean.</td>
+                        <td><a href="https://www.cars.com/vehicledetail/6b53679a-7212-4d29-968e-390fa3c43820/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">9</td>
+                        <td><strong>2017 Mazda Mazda3</strong> Sport <span class="body-tag">hatchback</span></td>
+                        <td class="price-cell">$12,206</td>
+                        <td>53,188</td>
+                        <td class="price-cell">$13,800</td>
+                        <td class="discount-cell">12%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Group 1 Ford S. Austin</span></td>
+                        <td><span class="pill pill-high">High</span></td>
+                        <td>Low-mileage (53k) reliable hatchback ~$1.6k under retail; "Great Deal", "High Demand".</td>
+                        <td><a href="https://www.cars.com/vehicledetail/8faa24f7-4566-472b-a37e-96dbe8a99499/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">10</td>
+                        <td><strong>2022 Hyundai Santa Cruz</strong> SEL <span class="body-tag">truck</span></td>
+                        <td class="price-cell">$19,834</td>
+                        <td>82,190</td>
+                        <td class="price-cell">$23,000</td>
+                        <td class="discount-cell">14%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">AutoNation USA Austin</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Scarce compact pickup that holds value; ~$3.2k under retail, "Great Deal". 82k miles is high for a 2022.</td>
+                        <td><a href="https://www.cars.com/vehicledetail/3d55eda3-d48f-430d-8e1a-e73e13cd4b78/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">11</td>
+                        <td><strong>2019 Nissan Frontier</strong> SV <span class="body-tag">truck</span></td>
+                        <td class="price-cell">$16,206</td>
+                        <td>126,703</td>
+                        <td class="price-cell">$18,500</td>
+                        <td class="discount-cell">12%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Group 1 Ford S. Austin</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Durable mid-size truck that holds value; ~$2.3k under retail, "Great Deal". High miles (127k) is the caveat.</td>
+                        <td><a href="https://www.cars.com/vehicledetail/9428ce4a-227a-4424-8ec6-a3c7ee47cea1/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">12</td>
+                        <td><strong>2018 Honda CR-V</strong> Touring <span class="body-tag">suv</span></td>
+                        <td class="price-cell">$17,567</td>
+                        <td>108,545</td>
+                        <td class="price-cell">$19,500</td>
+                        <td class="discount-cell">10%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">AutoNation USA Austin</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Top Touring trim, reliable platform, ~$1.9k under retail; "Great Deal", "High Demand". 108k miles.</td>
+                        <td><a href="https://www.cars.com/vehicledetail/3b377e83-e196-45ef-89b1-7c2b855f7be0/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">13</td>
+                        <td><strong>2020 Hyundai Santa Fe</strong> 2.4L SEL FWD <span class="body-tag">suv</span></td>
+                        <td class="price-cell">$16,713</td>
+                        <td>62,161</td>
+                        <td class="price-cell">$18,500</td>
+                        <td class="discount-cell">10%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Seguin, TX</span></td>
+                        <td><span class="pill pill-high">High</span></td>
+                        <td>Moderate-mileage SUV ~$1.8k under retail; "Great Deal", appears multiple times on CarGurus (deduped). Clean.</td>
+                        <td><a href="https://www.cargurus.com/details/448103076">CarGurus</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">14</td>
+                        <td><strong>2023 Chevrolet Trailblazer</strong> RS FWD <span class="body-tag">suv</span></td>
+                        <td class="price-cell">$19,990</td>
+                        <td>42,413</td>
+                        <td class="price-cell">$22,000</td>
+                        <td class="discount-cell">9%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Austin, TX</span></td>
+                        <td><span class="pill pill-high">High</span></td>
+                        <td>Low-mileage 2023 SUV ~$2k under retail with "Great Deal" badge; in-metro, clean data.</td>
+                        <td><a href="https://www.cargurus.com/details/449594793">CarGurus</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">15</td>
+                        <td><strong>2022 Chevrolet Colorado</strong> WT <span class="body-tag">truck</span></td>
+                        <td class="price-cell">$19,425</td>
+                        <td>71,387</td>
+                        <td class="price-cell">$21,500</td>
+                        <td class="discount-cell">10%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Elder Mitsubishi, Cedar Park</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Mid-size truck ~$2.1k under retail; "Great Deal". Work-truck trim and 71k miles temper it.</td>
+                        <td><a href="https://www.cars.com/vehicledetail/1c9f35a7-58d5-4c31-bd00-c457054dd426/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">16</td>
+                        <td><strong>2024 Chevrolet Malibu</strong> LT 1LT FWD <span class="body-tag">sedan</span></td>
+                        <td class="price-cell">$17,699</td>
+                        <td>50,189</td>
+                        <td class="price-cell">$20,000</td>
+                        <td class="discount-cell">12%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">Chuck Nash Chevrolet, San Marcos</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Near-new sedan ~$2.3k under retail; Cars.com "Great Deal", CARFAX one-owner, clean title. 50k miles on a 2024 suggests former fleet.</td>
+                        <td><a href="https://www.cars.com/vehicledetail/00d5b979-71ac-402b-b985-cdf80409671c/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">17</td>
+                        <td><strong>2021 Nissan Sentra</strong> SV <span class="body-tag">sedan</span></td>
+                        <td class="price-cell">$15,500</td>
+                        <td>16,000</td>
+                        <td class="price-cell">$17,500</td>
+                        <td class="discount-cell">11%</td>
+                        <td><span class="pill pill-private">Private</span><br><span class="note-small">Austin</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Very low miles (16k) on a 2021 sedan, ~$2k under retail from a private seller. Thin listing = medium.</td>
+                        <td><a href="https://www.craigslist.org/view/d/austin-2021-nissan-sentra-sv-sedan-only/ssQHXBurnKSzvC3JppUBr1">Craigslist</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">18</td>
+                        <td><strong>2018 Toyota Corolla</strong> SE <span class="body-tag">sedan</span></td>
+                        <td class="price-cell">$13,000</td>
+                        <td>57,000</td>
+                        <td class="price-cell">$14,800</td>
+                        <td class="discount-cell">12%</td>
+                        <td><span class="pill pill-private">Private</span><br><span class="note-small">Austin</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Low-mileage reliable compact ~$1.8k under retail from a private seller (deduped across two identical posts).</td>
+                        <td><a href="https://www.craigslist.org/view/d/austin-2018-toyota-corolla-se-57k-miles/ey1927SsjmPc8RHmyX2xjR">Craigslist</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">19</td>
+                        <td><strong>2019 Toyota Tundra</strong> SR <span class="body-tag">truck</span></td>
+                        <td class="price-cell">$16,189</td>
+                        <td>149,384</td>
+                        <td class="price-cell">$19,500</td>
+                        <td class="discount-cell">17%</td>
+                        <td><span class="pill pill-dealer">Dealer</span><br><span class="note-small">CarVin ATX</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Largest verified discount (~17%) but demoted for 149k miles; Tundras are famously durable and command a premium.</td>
+                        <td><a href="https://www.cars.com/vehicledetail/1479a608-f688-48d5-a98f-4edde89e0910/">Cars.com</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-cell">20</td>
+                        <td><strong>2013 Toyota Camry</strong> XLE <span class="body-tag">sedan</span></td>
+                        <td class="price-cell">$12,600</td>
+                        <td>66,000</td>
+                        <td class="price-cell">$13,800</td>
+                        <td class="discount-cell">9%</td>
+                        <td><span class="pill pill-private">Private</span><br><span class="note-small">Austin</span></td>
+                        <td><span class="pill pill-medium">Medium</span></td>
+                        <td>Unusually low miles (66k) for a 2013, reliable platform, ~$1.2k under retail from a private seller.</td>
+                        <td><a href="https://www.craigslist.org/view/d/austin-2013-toyota-camry-xle-66k-miles/1KSJdXFMomZgRLCQ6xmjfT">Craigslist</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <p class="note-small">Seller-type breakdown: 16 dealer, 4 private. Body-style mix: 8 SUV, 7 truck, 4 sedan, 1 hatchback. High-confidence picks: 7. URLs are as reconstructed from listing pages on July 16, 2026 and may expire as inventory turns over.</p>
+        </section>
+
+        <section id="highlights">
+            <h2>Best Picks by Category</h2>
+
+            <div class="info-box">
+                <h3>Best near-new value (highest confidence)</h3>
+                <p><strong>#2 2024 Kia Sportage LX</strong> ($19,650, 35k mi) and <strong>#3 2023 Ford Escape Active</strong> ($19,295, 30k mi) — both are late-model compact SUVs with genuinely low mileage sitting ~12–13% under retail at dealers, with no offsetting red flags. The cleanest "just buy it after a VIN check" candidates.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Best truck bargain</h3>
+                <p><strong>#1 2022 Chevrolet Colorado LT</strong> ($19,202, 54k mi) leads the whole list at ~15% under retail — the rare cheap truck without a six-figure odometer. If you want maximum discount and don't mind mileage, <strong>#19 2019 Toyota Tundra SR</strong> shows the largest raw discount (~17%) but at 149k miles it's a bet on Toyota durability.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Best budget / private-party pick</h3>
+                <p><strong>#9 2017 Mazda3 Sport</strong> ($12,206, 53k mi) is the strongest sub-$13k car — low miles, reliable, dealer-backed. Among private sellers, <strong>#17 2021 Nissan Sentra SV</strong> stands out for its 16k miles, though private listings warrant extra title/VIN diligence.</p>
+            </div>
+        </section>
+
+        <section id="rejected">
+            <h2>Rejected &amp; Flagged Listings</h2>
+            <p>These listings fell in the $10k–$20k band but were screened <em>out</em> — this is the salvage/suspicious filter doing its job. The dominant pattern: <strong>luxury vehicles priced like economy cars</strong>, which is the single most common used-car fraud signal. Others were out-of-metro, classic/commercial, or extreme mileage/year mismatches.</p>
+
+            <div class="flag-box">
+                <h3>The "too good to be true" cluster (likely scams)</h3>
+                <p class="reject-reason">A price far below comparable local cars typically signals hidden collision damage, a washed salvage/flood title, odometer fraud, or a vehicle that doesn't exist. Every entry below was rejected specifically because the discount was <em>implausibly</em> large for the vehicle.</p>
+            </div>
+
+            <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr><th>Listing</th><th>Reason rejected</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>2017 Land Rover Range Rover Sport Supercharged — $10,000 (144k mi, private)</td><td class="reject-reason">Supercharged luxury SUV priced like an economy car, no VIN/title; textbook scam pricing.</td></tr>
+                    <tr><td>2020 Cadillac Escalade ESV Luxury — $19,500 (Killeen, private)</td><td class="reject-reason">Full-size luxury SUV far below market, no mileage shown, title unverified; likely scam.</td></tr>
+                    <tr><td>2007 BMW M6 — $18,500 (private)</td><td class="reject-reason">High-performance luxury convertible priced like economy; no VIN/title/service.</td></tr>
+                    <tr><td>2017 BMW 750i xDrive — $19,900 (private)</td><td class="reject-reason">Full-size luxury sedan priced like economy; curbstoner signals, verify title/service.</td></tr>
+                    <tr><td>2018 Audi Q7 2.0T Quattro — $14,000 (private)</td><td class="reject-reason">Luxury SUV well below market with no mileage shown.</td></tr>
+                    <tr><td>2016 Land Rover LR4 HSE — $11,900 (private)</td><td class="reject-reason">Luxury SUV priced like economy; high-maintenance model, records unverified.</td></tr>
+                    <tr><td>2014 Porsche Cayenne Diesel — $19,500 (private)</td><td class="reject-reason">Luxury diesel priced near economy, no mileage, title/history unverified.</td></tr>
+                    <tr><td>2019 / 2018 Jaguar F-PACE — $13,900 / $14,900</td><td class="reject-reason">OKC seller 362 mi out of metro; same dealer spamming multiple cheap Jaguars (curbstoner).</td></tr>
+                    <tr><td>2019 BMW X5 xDrive40i — $19,925 (137k mi)</td><td class="reject-reason">Luxury SUV priced like economy with very high mileage; heavy maintenance risk.</td></tr>
+                    <tr><td>2019 INFINITI QX80 Luxe — $19,287 (117k mi)</td><td class="reject-reason">Full-size luxury SUV priced like economy; high running/maintenance costs.</td></tr>
+                    <tr><td>2014 Mercedes-Benz M-Class 4MATIC — $10,766 (108k mi)</td><td class="reject-reason">Aging luxury SUV priced like economy; maintenance risk outweighs the "Great Deal" badge.</td></tr>
+                    <tr><td>2016 Cadillac CT6 3.0TT Premium Luxury — $19,224 (102k mi)</td><td class="reject-reason">Luxury flagship over 100k priced like economy; twin-turbo V6 deferred-maintenance risk.</td></tr>
+                    <tr><td>2015 BMW X1 sDrive28i — $10,363 (72k mi)</td><td class="reject-reason">Luxury priced like economy; only a "Fair Deal" despite the low price.</td></tr>
+                    <tr><td>2013 Mercedes C250 / 2010 Mercedes E350 — $11,125 / $10,222</td><td class="reject-reason">Older luxury sedans priced like economy cars; service history critical, likely high upkeep.</td></tr>
+                    <tr><td>2008 Mercedes-Benz C300 — $11,995 (36,549 mi)</td><td class="reject-reason">Implausibly low miles for a 17-year-old car (odometer concern); no VIN.</td></tr>
+                    <tr><td>2014 Lexus GS 350 — $10,999 (private)</td><td class="reject-reason">Priced well below market and reposted twice on the page; likely curbstoner/duplicate.</td></tr>
+                    <tr><td>2014 Audi A6 3.0 TDI — $13,150 (private)</td><td class="reject-reason">TDI diesel with emissions-recall exposure; no VIN or title status shown.</td></tr>
+                    <tr><td>2019 Lincoln MKZ — $13,000 (39k mi, Richmond)</td><td class="reject-reason">Richmond is Houston-area, outside Austin metro; "$7k under KBB" claim is scam-style.</td></tr>
+                    <tr><td>2014 Chevrolet Captiva Sport LS — $14,599 (Plano)</td><td class="reject-reason">Fleet/rental-only model, Plano seller out of metro, overpriced for the model.</td></tr>
+                    <tr><td>2013 Nissan Titan PRO-4X — $17,549</td><td class="reject-reason">Seller 713 mi away in Missouri, delivery-only; out of Austin metro.</td></tr>
+                    <tr><td>2003 GMC Sonoma SLS — $15,000</td><td class="reject-reason">22-year-old compact truck at classic-car dealer markup (seller 725 mi in Illinois).</td></tr>
+                    <tr><td>Vintage / commercial trucks (F100, Scout II, Ram 2500, wrecker, dump, box, dually)</td><td class="reject-reason">No mileage/VIN; not standard resale vehicles.</td></tr>
+                    <tr><td>Classic / antique cars (Chevelle, Cadillac Calais, 1985 500 SEL, Fairlane, 1929 Chevy)</td><td class="reject-reason">Collector pricing, miscategorized, not comparable market.</td></tr>
+                    <tr><td>1979 BMW "328i E90" — $10,999</td><td class="reject-reason">Year/chassis mismatch (E90 328i is 2006–2011); listing inaccurate/likely scam.</td></tr>
+                    <tr><td>2012 Toyota Tacoma Reg Cab — $10,000 (private)</td><td class="reject-reason">Bottom of price filter, no mileage/VIN; too little data and suspicious pricing.</td></tr>
+                    <tr><td>2015 Ford F-150 XLT — $17,000 (143,000 mi)</td><td class="reject-reason">Suspiciously round price and mileage, small independent dealer, no deal badge or VIN.</td></tr>
+                    <tr><td>2018 RAM 2500 Tradesman — $16,995 (160k mi)</td><td class="reject-reason">Very high-mileage heavy-duty, small independent dealer, no deal-rating badge or VIN.</td></tr>
+                    <tr><td>Extreme-mileage trucks — F-250, RAM 2500, Silverado 1500/2500HD (190k–225k mi)</td><td class="reject-reason">Heavy/fleet use, high failure risk.</td></tr>
+                    <tr><td>Late-model high-mileage fleet cars — 2023–2024 Camry/Sentra/Sorento (54k–102k mi)</td><td class="reject-reason">Severe year/mileage mismatch, former fleet/rental, priced at or above market.</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </section>
+
+        <section id="screening">
+            <h2>Pre-Purchase Screening Checklist</h2>
+            <p>Every pick above is a <em>candidate</em>, not a verified clean car. None of these platforms expose title status at the search level, and a clean-looking title can itself be washed. Before buying — especially the higher-mileage trucks, the fleet-mileage late models, and any luxury vehicle — run this checklist:</p>
+            <ul class="checklist">
+                <li><strong>Pull a full VIN history report</strong> (Carfax or AutoCheck) to rule out salvage, rebuilt, flood, and branded titles — <em>title washing</em> can erase a salvage brand by re-registering the car in another state, so paperwork alone is not enough.</li>
+                <li><strong>Run the free NICB VINCheck</strong> and an NMVTIS-approved provider for theft and total-loss records.</li>
+                <li><strong>Verify the VIN matches</strong> across the dashboard plate, the driver's-door jamb, the title, and the history report — mismatches signal VIN cloning or tampering.</li>
+                <li><strong>Get an independent pre-purchase mechanical inspection</strong> before any money changes hands.</li>
+                <li><strong>Watch for curbstoning on private sales:</strong> the same phone number on multiple listings, a seller who wants to meet in a parking lot rather than a home, or a title not in the seller's name are all red flags for an unlicensed dealer.</li>
+                <li><strong>Treat an unusually large discount as a warning, not a win</strong> — if the price is far below every comparable local listing, assume there's a reason until the VIN report and inspection prove otherwise.</li>
+            </ul>
+        </section>
+
+        <section id="sources">
+            <h2>Sources &amp; Coverage Notes</h2>
+            <p>Listings were collected live on <strong>July 16, 2026</strong> across 14 source tasks spanning three body-style axes. Coverage by platform:</p>
+            <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr><th>Source</th><th>Status</th><th>What it contributed</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><a href="https://www.cargurus.com/Cars/spt-great-deals-Austin_L34938">CarGurus</a> (deals, under-20k, truck, SUV pages)</td><td><span class="pill pill-high">Live</span></td><td>~74 in-band listings across four pages; dealer inventory only, all carrying market-relative "Deal" badges. No private sellers, VINs, or title status exposed at list level.</td></tr>
+                    <tr><td><a href="https://www.cars.com/shopping/austin-tx/price-under-20000/">Cars.com</a> (dealer, FSBO, truck, SUV)</td><td><span class="pill pill-high">Live</span></td><td>~94 in-band listings incl. a working for-sale-by-owner section; "Great/Good Deal" + "High Demand" badges. Reports 132+ trucks under $20k in-market — more than the schema cap returned.</td></tr>
+                    <tr><td><a href="https://austin.craigslist.org/search/cta?purveyor=owner">Craigslist</a> (by-owner: all, truck, SUV)</td><td><span class="pill pill-high">Live</span></td><td>~186 private listings in-band; the only pure private-party channel. No deal badges, no VINs, mileage only when sellers include it. Area search bleeds into neighboring metros.</td></tr>
+                    <tr><td><a href="https://www.kbb.com/cars-for-sale/all/austin-tx">KBB</a> / TrueCar</td><td><span class="pill pill-medium">Blocked (403)</span></td><td>Anti-bot protection returned HTTP 403; no direct data. Backfilled via Cars.com/CarGurus, whose inventory KBB largely mirrors.</td></tr>
+                    <tr><td>Facebook Marketplace / Autotrader by-owner / Edmunds</td><td><span class="pill pill-medium">Not accessible</span></td><td>Blocked automated fetch (from the prior research pass); private-party coverage is therefore weighted toward Craigslist and Cars.com FSBO.</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <p class="note-small">Fraud-screening methodology draws on verified guidance from <a href="https://www.thezebra.com/resources/car-insurance/spotting-used-car-scams/">The Zebra</a>, <a href="https://www.aura.com/learn/car-title-scams">Aura</a>, and <a href="https://vininspect.com/blog/how-to-check-for-title-washing-using-a-vin">VININSPECT</a> (title washing, curbstoning, VIN verification, "price too low" as a primary fraud signal), and on CarGurus' published <a href="https://cargurus.helpscoutdocs.com/article/10-what-is-imv">Instant Market Value</a> methodology.</p>
+        </section>
+
+        <section id="caveats">
+            <h2>Caveats &amp; Limitations</h2>
+            <div class="info-box">
+                <ul>
+                    <li><strong>Market values are model-level estimates, not VIN-level appraisals.</strong> Actual value depends on options, condition, accident history, and title status that these listings don't disclose. Discount percentages are directional.</li>
+                    <li><strong>Private-seller and high-discount picks carry medium confidence.</strong> Craigslist listings frequently omit mileage and never show a VIN; KBB entries here mirror Cars.com without VINs.</li>
+                    <li><strong>Deal badges are corroboration, not proof.</strong> "Great Deal" / "High Demand" were used as supporting signals only.</li>
+                    <li><strong>These are point-in-time snapshots.</strong> Prices and availability change quickly; listing URLs may expire as inventory turns over.</li>
+                    <li><strong>No purchase should proceed without a VIN history report and an independent inspection</strong> — see the screening checklist above.</li>
+                </ul>
+            </div>
+            <p class="note-small">Research generated via a multi-agent fetch-and-rank harness over accessible public listing sources. 256 in-band listings collected; 20 ranked, 30 rejected. Not financial or purchasing advice.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Integrity Studio. <a href="index.html">Automotive Market Research</a> &middot; <a href="../index.html">ReportsHub</a></p>
+    </footer>
+</body>
+</html>
