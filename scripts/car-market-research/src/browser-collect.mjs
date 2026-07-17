@@ -82,6 +82,12 @@ const AUSTIN_CENTROID = { latitude: 30.2672, longitude: -97.7431 }
 const GEO = ZIP_COORDS[ZIP] || AUSTIN_CENTROID
 if (!ZIP_COORDS[ZIP]) process.stderr.write(`No exact coords for ZIP ${ZIP}; pinning geolocation to the Austin metro centroid.\n`)
 const MAXITEMS = numArg('--max-items', '25')
+// Number of pages to collect (1–3). URL-paginated sources (CarMax, Cars.com) load
+// each page separately; scroll-only sources (Carvana) multiply scroll rounds instead.
+const PAGES = Math.max(1, Math.min(numArg('--pages', '1'), 3))
+// Scroll rounds scale with --max-items so deeper inventories load more cards.
+// Minimum of 6 preserves prior behaviour at the default of 25 items.
+const SCROLL_ROUNDS = Math.max(6, Math.ceil(MAXITEMS / 4))
 const HEADFUL = process.argv.includes('--headful')
 const PRICE_FLOOR = Math.min(PRICE_TOKEN_FLOOR, MIN)
 // Carvana is national inventory with per-car delivery, so "free shipping" is its
@@ -108,24 +114,31 @@ const SOURCES = {
   carmax: {
     // zip + distance is CarMax's real radius filter; the price band goes in-URL
     // too (price=min-max) so the server pre-filters to the band and the metro.
+    // pageParam: CarMax supports &page=N for URL-based pagination.
     url: `https://www.carmax.com/cars?zip=${ZIP}&distance=${RADIUS}&price=${MIN}-${MAX}`,
     waitFor: 'article, [data-test="car-tile"], a[href*="/car/"]',
     geoScope: 'metro',
+    pageParam: 'page',
   },
   carvana: {
     // National inventory. The category path pre-filters to ~under-$20k (Node
     // still band-filters); ?price[max] does not stick on redirect. Carvana has
     // no consumer-facing location filter — /cars/<city> redirects to /cars — so
     // these listings are national (delivered to the metro), not local.
+    // pageParam: null — Carvana uses infinite scroll; --pages multiplies scroll rounds.
     url: `https://www.carvana.com/cars/cars-under-${MAX}`,
     waitFor: 'a[href*="/vehicle/"], [data-qa="result-tile"]',
     geoScope: 'national',
+    pageParam: null,
   },
   cars: {
     // maximum_distance + zip restricts Cars.com to the metro radius.
-    url: `https://www.cars.com/shopping/results/?stock_type=used&maximum_price=${MAX}&maximum_distance=${RADIUS}&zip=${ZIP}`,
+    // sort=list_price pre-sorts price ascending so in-band inventory front-loads.
+    // pageParam: Cars.com supports &page=N for URL-based pagination.
+    url: `https://www.cars.com/shopping/results/?stock_type=used&maximum_price=${MAX}&maximum_distance=${RADIUS}&zip=${ZIP}&sort=list_price`,
     waitFor: '.vehicle-card, a[href*="/vehicledetail/"]',
     geoScope: 'metro',
+    pageParam: 'page',
   },
 }
 
@@ -208,6 +221,16 @@ function extractInPage({ hint, priceFloor, cardTextCap }) {
   return out
 }
 
+// Wait for the page to settle, scroll `rounds` times to trigger lazy-loaded
+// inventory, then extract raw listings via the in-page function.
+async function scrollAndExtract(page, cfg, rounds) {
+  await page.waitForSelector(cfg.waitFor, { timeout: 20000 }).catch(() => {})
+  await page.waitForTimeout(3500)
+  for (let s = 0; s < rounds; s++) { await page.mouse.wheel(0, 3200); await page.waitForTimeout(1100) }
+  await page.waitForTimeout(500)
+  return page.evaluate(extractInPage, { hint: HINTS[SOURCE], priceFloor: PRICE_FLOOR, cardTextCap: CARD_TEXT_CAP })
+}
+
 const HINTS = { carmax: '/car/', carvana: '/vehicle/', cars: '/vehicledetail/' }
 // Canonical source label — used for both `src` and `sellerName`, so casing is
 // identical whether or not any listing was found. (CarMax/Carvana ARE the
@@ -250,22 +273,37 @@ async function main() {
       window.chrome = window.chrome || { runtime: {} }
     })
     const page = await ctx.newPage()
-    const resp = await page.goto(cfg.url, { waitUntil: 'domcontentloaded', timeout: 45000 })
-    const status = resp ? resp.status() : 0
-    if (status === 403 || status === 406 || status === 429) blocked = true
-    if (blocked) {
-      // Bot-blocked: the page has no inventory, so skip the ~27s wait/scroll.
-      process.stderr.write(`${SRC_LABEL} returned HTTP ${status} — blocked, skipping extraction.\n`)
-    } else {
+
+    // Collect raw listings across pages. URL-paginated sources (CarMax, Cars.com)
+    // load each page at a separate URL; scroll-only sources (Carvana) accumulate
+    // everything from page 1 by multiplying the scroll rounds instead.
+    const allRaw = []
+    const totalPages = cfg.pageParam ? PAGES : 1
+    for (let pg = 1; pg <= totalPages && allRaw.length < MAXITEMS * 2; pg++) {
+      const pgUrl = pg === 1 ? cfg.url : `${cfg.url}&${cfg.pageParam}=${pg}`
+      // Carvana: no URL pagination — do all scrolls on page 1.
+      const rounds = (pg === 1 && !cfg.pageParam) ? SCROLL_ROUNDS * PAGES : SCROLL_ROUNDS
+      const resp = await page.goto(pgUrl, { waitUntil: 'domcontentloaded', timeout: 45000 })
+      const status = resp ? resp.status() : 0
+      if (status === 403 || status === 406 || status === 429) {
+        // Bot-blocked: the page has no inventory, so skip the wait/scroll.
+        blocked = true
+        process.stderr.write(`${SRC_LABEL} returned HTTP ${status} — blocked, skipping extraction.\n`)
+        break
+      }
       // Client-rendered SPA: wait, then scroll to trigger lazy-loaded inventory.
-      await page.waitForSelector(cfg.waitFor, { timeout: 20000 }).catch(() => {})
-      await page.waitForTimeout(3500)
-      for (let s = 0; s < 6; s++) { await page.mouse.wheel(0, 3200); await page.waitForTimeout(1100) }
-      await page.waitForTimeout(500)
-      const raw = await page.evaluate(extractInPage, { hint: HINTS[SOURCE], priceFloor: PRICE_FLOOR, cardTextCap: CARD_TEXT_CAP })
+      const pgRaw = await scrollAndExtract(page, cfg, rounds)
+      if (pgRaw.length === 0) break  // no more pages
+      allRaw.push(...pgRaw)
+    }
+
+    if (!blocked) {
+      // Cross-page URL dedup: the same vehicle card can appear on page 1 and 2.
+      const seenUrls = new Set()
+      const deduped = allRaw.filter(r => { if (seenUrls.has(r.url)) return false; seenUrls.add(r.url); return true })
       // Normalize + band-filter in Node.
       const toInt = s => s == null ? null : Number(String(s).replace(/[^\d]/g, '')) || null
-      const bandFiltered = raw.map(r => ({
+      const bandFiltered = deduped.map(r => ({
         year: r.year, make: r.make, model: r.model, trim: r.trim,
         price: toInt(r.priceRaw),
         miles: toInt(r.milesRaw),
