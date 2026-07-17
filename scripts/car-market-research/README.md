@@ -205,6 +205,39 @@ loaded page; a lazy-load scroll then reveals inventory. Notes:
   `preVerified` verdicts; a detail page returning 200 with a matching title
   satisfies the "verified as valid" gate.
 
+### Local dealership sites (`--source dealer`)
+
+`src/dealers.json` is an Austin-metro seed list (~34 franchise/independent
+dealers from the Austin Auto Dealers Association directory) for collecting local
+dealer inventory. Most run on JS platforms (Dealer.com / DealerOn /
+DealerInspire) that hide inventory behind JS, so they need the headless browser,
+not plain `fetch`. They are physical metro dealers → `geoScope:"metro"`.
+
+```
+./run-browser-collect.sh --source dealer \
+  --site https://www.rogerbeasleyused.com/inventory/used \
+  --name "Roger Beasley Used" --min 10000 --max 20000
+```
+
+The generic extractor uses a multi-marker VDP link hint (`/inventory/used`,
+`/vehicledetail`, `-vin-`, etc.) and a broad card selector, then band-filters in
+Node. Verified working (2026-07) on Roger Beasley Used (12 in-band listings) and
+Covert (extraction confirmed). Caveats, per the "never guess URLs" rule:
+- **`used` URL is null for most seed dealers** — only the explicitly confirmed
+  groups (Covert, Roger Beasley, Leif Johnson) carry a verified path. Resolve the
+  live used-inventory URL before collecting rather than guessing; `commonUsedPaths`
+  in the seed lists the usual shapes to check.
+- **No universal price param.** `--site` can carry a platform-specific price
+  facet if you know it; otherwise Node band-filters whatever loads. Dealers that
+  default-sort cheapest-first (e.g. Covert) may need a sort/price facet or deeper
+  paging before in-band cars appear on page 1.
+- **No generic pagination.** Dealer.com-style grids are server-paginated (not
+  infinite scroll), so only page 1 is collected unless `--site` targets a
+  filtered/sorted view. Tune per site.
+
+Feed the `listings` into stage 1 as `preCollected` like any other code-collected
+source.
+
 ### CarMax & Carvana (national retailers, verification-gated)
 
 `CarMax` and `Carvana` are in the default source list. **CarMax has physical

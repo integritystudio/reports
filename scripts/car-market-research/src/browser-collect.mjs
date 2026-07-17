@@ -167,8 +167,10 @@ function extractInPage({ hints, priceFloor, cardTextCap }) {
   const out = []
   const seen = new Set()
   const priceRe = /\$\s?([1-9]\d{1,2}(?:,\d{3})+|\d{4,6})\b/g
-  // A price marker that ends the model/trim span (miles, price, or payment).
-  const stopRe = /\$|\b[\d,]+\s*k?\s*(?:mi|miles)\b|current price|original price/i
+  // A price marker that ends the model/trim span (miles, price, payment, or a
+  // dealer price-label that precedes the number — "Doc Fee", "MSRP", "Retail
+  // Price" — so trim doesn't absorb those tokens on dealer-platform cards).
+  const stopRe = /\$|\b[\d,]+\s*k?\s*(?:mi|miles)\b|current price|original price|retail price|doc(?:umentation)? fee|msrp/i
   const milesRe = /([\d,]+)\s*(k)?\s*(?:mi|miles)\b/i
   // hints is an array of href substrings that mark a vehicle-detail link; a card
   // matches if its anchor href contains ANY of them (generic dealer sites expose
