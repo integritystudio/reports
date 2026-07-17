@@ -41,10 +41,10 @@ for s in $SOURCES; do
   # Carvana has no location filter; --zip/--radius are skipped for it.
   if [ "$s" = "carvana" ]; then
     "$HERE/run-browser-collect.sh" --source "$s" --min "$MIN" --max "$MAX" \
-      --max-items "$MAX_ITEMS" "${EXTRA[@]}" > "$out"
+      --max-items "$MAX_ITEMS" ${EXTRA[@]+"${EXTRA[@]}"} > "$out"
   else
     "$HERE/run-browser-collect.sh" --source "$s" --min "$MIN" --max "$MAX" \
-      --zip "$ZIP" --radius "$RADIUS" --max-items "$MAX_ITEMS" "${EXTRA[@]}" > "$out"
+      --zip "$ZIP" --radius "$RADIUS" --max-items "$MAX_ITEMS" ${EXTRA[@]+"${EXTRA[@]}"} > "$out"
   fi
   count="$(node -e "process.stdout.write(String((require('$OUT_DIR/$s.json').count) ?? 0))" 2>/dev/null || echo '?')"
   echo "  $s: $count listings" >&2

@@ -1,6 +1,8 @@
-// Stage 3 of 3 — VERIFYING & DEDUPING RESULTS
+// VALIDATION — VERIFYING & DEDUPING (runs BEFORE valuation/ranking)
 //
-// Two passes over stage-2 output:
+// Recommended chain: 01-search → 03-verify-dedupe → 02-rank. This stage
+// validates the raw collected listings so 02-rank values only real survivors.
+// Two passes over the input listings:
 //   (A) Semantic dedupe (code) — collapse the same vehicle appearing across
 //       sources at near-identical price/mileage, keeping one canonical row.
 //   (B) Link verification (agents) — WebFetch each listing URL and check it
@@ -10,8 +12,9 @@
 //       and bot-walled pages (blocked → unverifiable, not dead).
 //
 // Invoke (Workflow tool):
-//   Workflow({ scriptPath: ".../03-verify-dedupe.js", args: <stage-2 output> })
-// It reads args.topBargains (falls back to args.items / args.listings).
+//   Workflow({ scriptPath: ".../03-verify-dedupe.js", args: <stage-1 output> })
+// It reads args.listings (also accepts args.items / args.topBargains). Feed the
+// returned `verified` array into 02-rank, which values the survivors.
 //
 // args.preVerified (optional): an array of browser-produced verdicts
 // { url, status, evidence, pageYear, pageMake, pageModel, pagePrice, priceMatches }
@@ -149,6 +152,9 @@ log(`Verify done: ${buckets.liveMatch.length} live-match, ${buckets.liveMismatch
 
 const label = x => `${x.year} ${x.make} ${x.model} $${x.price}${x.url ? ' — ' + x.url : ''}`
 return {
+  // Pass scope forward so the downstream valuation/rank stage keeps metro + band.
+  metro: A.metro, priceMin: A.priceMin, priceMax: A.priceMax,
+  excludeClasses: A.excludeClasses,
   verified,
   buckets: {
     liveMatch: buckets.liveMatch.map(label),

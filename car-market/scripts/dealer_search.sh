@@ -57,7 +57,7 @@ while IFS=$'\t' read -r slug name url; do
   out="$OUT_DIR/$slug.json"
   echo "collecting $name -> $out" >&2
   "$HERE/run-browser-collect.sh" --source dealer --site "$url" --name "$name" \
-    --min "$MIN" --max "$MAX" --max-items "$MAX_ITEMS" "${EXTRA[@]}" > "$out" \
+    --min "$MIN" --max "$MAX" --max-items "$MAX_ITEMS" ${EXTRA[@]+"${EXTRA[@]}"} > "$out" \
     || echo "  ! $name failed (see above); leaving $out" >&2
   count="$(node -e "process.stdout.write(String((require(require('path').resolve('$out')).count) ?? 0))" 2>/dev/null || echo '?')"
   echo "  $name: $count listings" >&2

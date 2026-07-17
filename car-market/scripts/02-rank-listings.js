@@ -1,17 +1,19 @@
-// Stage 2 of 3 — RANKING RESULTS
+// VALUATION & RANKING — runs AFTER validation
 //
-// Takes the listings produced by stage 1, screens out salvage/rebuilt titles,
-// scam/curbstoner patterns, out-of-metro units and mileage/year mismatches,
-// estimates each survivor's discount to local market value, and ranks the
-// top-N true bargains. One high-reasoning pass over the pooled inventory.
+// Recommended chain: 01-search → 03-verify-dedupe (validation) → 02-rank.
+// Takes the VALIDATED survivors, estimates each one's market value with a
+// per-vehicle LLM call (one focused call per listing, parallelized), screens out
+// scam/curbstoner patterns, then computes discount, confidence, and ranks the
+// top-N true bargains. Valuing only post-validation survivors keeps the LLM off
+// dead/mismatched/duplicate listings.
 //
 // Invoke (Workflow tool):
-//   Workflow({ scriptPath: ".../02-rank-listings.js", args: <stage-1 output> })
-// i.e. pass the object stage 1 returned (it carries listings/metro/priceMin/
-// priceMax). You may also pass { listings, metro, priceMin, priceMax, topN }.
+//   Workflow({ scriptPath: ".../02-rank-listings.js", args: <stage-3 output> })
+// Reads args.verified (stage-3 survivors, filtered to args.acceptStatuses —
+// default ['live-match']). Also accepts a bare { listings } / { topBargains }
+// (+ metro/priceMin/priceMax/topN) to run standalone without validation.
 //
 // Returns { topBargains:[...], rejected:[...], summary, caveats, stats }.
-// Feed `topBargains` into stage 3 (03-verify-dedupe.js) to check the links.
 
 export const meta = {
   name: 'car-rank-listings',
@@ -24,19 +26,26 @@ const METRO = A.metro || 'Austin, TX'
 const PRICE_MIN = Number.isFinite(A.priceMin) ? A.priceMin : 10000
 const PRICE_MAX = Number.isFinite(A.priceMax) ? A.priceMax : 20000
 const TOP_N = Number.isFinite(A.topN) ? A.topN : 20
-const LISTINGS = Array.isArray(A.listings) ? A.listings : []
+
+// Input priority: stage-3 verified survivors → topBargains → raw listings.
+// This stage now runs AFTER validation (03-verify-dedupe.js), so when handed
+// that stage's `verified` array it values only listings that passed validation.
+// acceptStatuses controls which verify statuses are kept (default: live-match only).
+const ACCEPT_STATUSES = Array.isArray(A.acceptStatuses) ? A.acceptStatuses : ['live-match']
+const LISTINGS = Array.isArray(A.verified)
+  ? A.verified
+      .filter(v => v && v.verify && ACCEPT_STATUSES.includes(v.verify.status))
+      .map(({ verify, rank, rationale, estMarketValue, estDiscountPct, confidence, ...rest }) => rest)
+  : Array.isArray(A.topBargains) ? A.topBargains
+  : Array.isArray(A.listings) ? A.listings
+  : []
 
 // Body-class exclusions (default: mid-size + full-size pickups and all vans;
 // compact unibody trucks like the Ford Maverick / Hyundai Santa Cruz are kept).
-// Override with args.excludeClasses (any of: 'fullsize-truck','midsize-truck','van').
+// The exclusion is applied upstream (stage-1 pre-filter + collectors); this stage
+// only carries the list forward for reporting. Override with args.excludeClasses.
 const DEFAULT_EXCLUDE = ['fullsize-truck', 'midsize-truck', 'van']
 const EXCLUDE = Array.isArray(A.excludeClasses) ? A.excludeClasses : DEFAULT_EXCLUDE
-const EXCLUDE_RULES = {
-  'fullsize-truck': 'full-size / heavy-duty pickups (Ford F-150 and F-250/F-350+, Chevrolet Silverado 1500 and 2500/3500+, GMC Sierra 1500+, RAM 1500 and 2500/3500+, Toyota Tundra, Nissan Titan)',
-  'midsize-truck': 'mid-size pickups (Chevrolet Colorado, GMC Canyon, Ford Ranger, Toyota Tacoma, Nissan Frontier, Honda Ridgeline)',
-  'van': 'cargo and passenger vans (Ford Transit, Chevrolet Express, RAM ProMaster, Mercedes Sprinter, minivans, etc.)',
-}
-const excludeText = EXCLUDE.filter(k => EXCLUDE_RULES[k]).map(k => '- ' + EXCLUDE_RULES[k]).join('\n')
 
 if (LISTINGS.length === 0) {
   return { error: 'No listings provided. Pass stage-1 output (or { listings: [...] }) as args.', topBargains: [], rejected: [] }
@@ -66,60 +75,52 @@ for (const v of LISTINGS) {
   UNIQUE.push({ ...v })
 }
 
-// The LLM now returns ONLY judgment fields (market value + scam flag) per unique
-// listing — a compact output. Discount math, demotion, sorting, confidence, and
-// rationales are all computed deterministically below.
+// Per-vehicle valuation: one LLM call per unique listing (parallelized), each
+// returning ONLY judgment fields (market value + scam flag) for that single
+// vehicle. Discount math, demotion, sorting, confidence, and rationales are all
+// computed deterministically below.
 const VALUE_SCHEMA = {
-  type: 'object', required: ['valuations'],
+  type: 'object', required: ['estMarketValue'],
   properties: {
-    valuations: {
-      type: 'array', items: {
-        type: 'object', required: ['idx', 'estMarketValue'],
-        properties: {
-          idx: { type: 'integer' },
-          estMarketValue: { type: 'integer' },
-          isScam: { type: 'boolean' },
-          scamReason: { type: 'string' },
-        },
-      },
-    },
+    estMarketValue: { type: 'integer' },
+    isScam: { type: 'boolean' },
+    scamReason: { type: 'string' },
   },
 }
 
-const listBlock = UNIQUE.map((v, i) =>
-  `[${i}] ${v.year} ${v.make} ${v.model}${v.trim ? ' ' + v.trim : ''}` +
-  ` | $${v.price}${v.miles ? ' | ' + v.miles + ' mi' : ''}` +
-  ` | ${v.sellerType}${v.sellerName ? ' (' + v.sellerName + ')' : ''}` +
+const valuePrompt = (v) =>
+  `## Used-Car Valuation & Scam Screen (${METRO})\n\n` +
+  `One used-car listing from the ${METRO} metro. Body-class exclusions and VIN screening have ALREADY been applied upstream.\n\n` +
+  `**Vehicle:** ${v.year} ${v.make} ${v.model}${v.trim ? ' ' + v.trim : ''}` +
+  ` | $${v.price}${v.miles ? ` | ${v.miles} mi` : ''}` +
+  ` | ${v.sellerType || '?'}${v.sellerName ? ` (${v.sellerName})` : ''}` +
   ` | body:${v.bodyStyle || '?'} | src:${v.src || v.source || '?'}` +
-  (v.dealRating ? ' | rating:' + v.dealRating : '') +
-  (v.titleStatus ? ' | title:' + v.titleStatus : '') +
-  (v.redFlags ? ' | flags:' + v.redFlags : '') +
-  (v.url ? ' | ' + v.url : '')
-).join('\n')
+  (v.dealRating ? ` | badge:${v.dealRating}` : '') +
+  (v.titleStatus ? ` | title:${v.titleStatus}` : '') +
+  (v.vin ? ` | VIN:${v.vin}` : '') + `\n\n` +
+  `## Return only:\n` +
+  `- **estMarketValue**: the fair local ${METRO} retail price for this year/make/model/trim/mileage, from your used-car knowledge (integer USD). Treat any platform deal badge as corroborating only.\n` +
+  `- **isScam** (+ **scamReason**): true if this is a likely scam/curbstoner or branded-title risk — luxury vehicle priced like an economy car, price far below comparable cars with no explanation, mileage/price mismatch, or an out-of-metro seller. Otherwise false.\n\n` +
+  `Do NOT rank, compute discounts, or write prose — that is done downstream in code. Structured output only.`
 
 phase('Screen & Rank')
 // LLM does only what needs world knowledge: estimate market value + flag scams.
-const valued = await agent(
-  `## Used-Car Valuation & Scam Screen (${METRO})\n\n` +
-  `You are given ${UNIQUE.length} de-duplicated used-car listings from the ${METRO} metro, each priced ` +
-  `$${PRICE_MIN.toLocaleString()}–$${PRICE_MAX.toLocaleString()}. Body-class exclusions and VIN screening have ALREADY been applied upstream.\n\n` +
-  `## Listings\n${listBlock}\n\n` +
-  `## Your job — for EACH listing, return only:\n` +
-  `- **idx**: the listing's [index].\n` +
-  `- **estMarketValue**: the fair local ${METRO} retail price for that year/make/model/trim/mileage, from your used-car knowledge (integer USD). Treat any platform deal badge as corroborating only.\n` +
-  `- **isScam** (+ **scamReason**): true if the listing is a likely scam/curbstoner or branded-title risk — luxury vehicle priced like an economy car, price far below comparable cars with no explanation, mileage/price mismatch, or an out-of-metro seller. Otherwise false.\n\n` +
-  `Do NOT rank, sort, compute discounts, or write prose — that is done downstream in code. Value every listing (omit an idx only if it is a genuine scam you already marked isScam). Structured output only.`,
-  { label: 'valuate-screen', phase: 'Screen & Rank', schema: VALUE_SCHEMA, effort: 'high' }
+// One focused call per vehicle, run in parallel.
+const valuations = await parallel(
+  UNIQUE.map((v, i) => () =>
+    agent(valuePrompt(v), {
+      label: `value:${_norm(v.make)}-${_norm(v.model)}`.slice(0, 40),
+      phase: 'Screen & Rank', schema: VALUE_SCHEMA, effort: 'high',
+    })
+      .then(res => ({ idx: i, ...(res || {}) }))
+      .catch(() => ({ idx: i }))
+  )
 )
-
-if (!valued) {
-  return { error: 'Valuation agent failed.', topBargains: [], rejected: [], rawListings: LISTINGS }
-}
 
 // ─── Deterministic ranking (mirrors src/rank-lib.mjs) ───
 const NOW_YEAR = A.nowYear || 2026
 const DEMOTE = A.demoteThreshold || 20
-const byIdx = new Map(valued.valuations.map(x => [x.idx, x]))
+const byIdx = new Map(valuations.filter(Boolean).map(x => [x.idx, x]))
 const rejected = []
 const scored = []
 UNIQUE.forEach((v, i) => {
