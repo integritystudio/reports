@@ -22,7 +22,11 @@ export const meta = {
   phases: [{ title: 'Screen & Rank', detail: 'Dedupe, reject bad listings, estimate discount, rank top-N' }],
 }
 
-const A = (typeof args === 'object' && args) ? args : {}
+// args may arrive as an object or as a JSON string, depending on how the
+// Workflow is invoked — tolerate both.
+const A = typeof args === 'string'
+  ? (() => { try { return JSON.parse(args) } catch { return {} } })()
+  : (args && typeof args === 'object') ? args : {}
 const METRO = A.metro || 'Austin, TX'
 const PRICE_MIN = Number.isFinite(A.priceMin) ? A.priceMin : 10000
 const PRICE_MAX = Number.isFinite(A.priceMax) ? A.priceMax : 20000
