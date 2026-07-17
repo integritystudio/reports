@@ -3,7 +3,7 @@
 # Usage: ./run-browser-collect.sh --source carmax|carvana|cars --min 10000 --max 20000 [--zip 78701] [--radius 75] [--pretty] [--headful]
 #        ./run-browser-collect.sh --source dealer --site <used-inventory URL> [--name Label] --min 10000 --max 20000
 # --zip + --radius geo-restrict CarMax/Cars.com to the metro; Carvana is national (tagged geoScope:national).
-# --source dealer collects any local dealer site (see src/dealers.json for the Austin-metro seed list).
+# --source dealer collects any local dealer site (see ../dealers.json for the Austin-metro seed list).
 # Carvana defaults to free-shipping-only; --include-paid-shipping disables it, --free-shipping-only forces it for any source.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"

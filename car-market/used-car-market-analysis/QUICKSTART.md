@@ -33,7 +33,7 @@ redirect to a file.
 # Carvana — national inventory, defaults to free-shipping-only
 ./run-browser-collect.sh --source carvana --min 10000 --max 20000 --max-items 25 > carvana.json
 
-# A specific local dealer (see src/dealers.json for the Austin seed list)
+# A specific local dealer (see ../dealers.json for the Austin seed list)
 ./run-browser-collect.sh --source dealer --site https://www.covertauto.com/used-vehicles/ --name "Covert Auto" --min 10000 --max 20000 > covert.json
 ```
 

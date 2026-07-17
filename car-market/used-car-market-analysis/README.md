@@ -207,7 +207,8 @@ loaded page; a lazy-load scroll then reveals inventory. Notes:
 
 ### Local dealership sites (`--source dealer`)
 
-`src/dealers.json` is an Austin-metro seed list (~34 franchise/independent
+`../dealers.json` (at the `car-market/` root, shared across the root reports,
+`scripts/`, and `src/`) is an Austin-metro seed list (~34 franchise/independent
 dealers from the Austin Auto Dealers Association directory) for collecting local
 dealer inventory. Most run on JS platforms (Dealer.com / DealerOn /
 DealerInspire) that hide inventory behind JS, so they need the headless browser,
