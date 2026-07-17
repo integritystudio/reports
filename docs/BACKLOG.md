@@ -52,6 +52,39 @@ Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). G
 
 ---
 
+### CM1. Cross-source dedup weakness from 2-token model capture
+**Priority:** Low
+**Source:** `/code-review src/browser-collect.mjs` (this session) — residual of finding #2 fix
+**File:** `scripts/car-market-research/src/browser-collect.mjs`, `src/rank-lib.mjs`
+
+The headless collector's extractor captures the first two tokens after the make as `model`, so single-word nameplates absorb the trim (e.g. `Sentra SR`, `Sorento LX`). Multi-word nameplates ("Santa Cruz") are captured correctly, which was the point of the fix — but the tradeoff is that `rank-lib.mjs` `dedupeListings`/`sameVehicle`, which compare on normalized `model`, can miss a cross-source duplicate when one source emits `Sentra SR` and another emits `Sentra`. Kept consistent with `collect-lib.mjs parseTitle` (same 2-token behavior) rather than diverging. Consider a make+model normalization pass (strip trailing trim tokens against a known-trim list, or dedup on VIN when present) before ranking.
+
+**Effort:** Low–Medium
+
+---
+
+### CM2. Stage-3 verification cannot reach CarMax/Carvana (WebFetch 403s)
+**Priority:** Medium (blocks the "verified as valid" gate for these sources)
+**Source:** `/code-review src/browser-collect.mjs` session — surfaced during CarMax/Carvana integration
+**Files:** `scripts/car-market-research/03-verify-dedupe.js`, `src/browser-collect.mjs`
+
+CarMax/Carvana listings are tagged `mustVerify` in stage 1, but stage 3 verifies URLs via WebFetch, which returns 403 on both domains — so their detail URLs currently bucket as `blocked` (unverifiable), not `live-match`. Per the "only include what can be verified as valid" rule they would be dropped. A browser-based verification path (reuse `browser-collect.mjs`'s stealth Chromium to open the detail URL and confirm a 200 + matching year/make/model in the title) is needed so these sources can actually contribute verified listings.
+
+**Effort:** Medium
+
+---
+
+### CM3. Headless collector low yield (shallow scroll / no pagination)
+**Priority:** Low
+**Source:** `/code-review src/browser-collect.mjs` session
+**File:** `scripts/car-market-research/src/browser-collect.mjs`
+
+Per-run counts are modest (CarMax 6, Carvana 3, Cars.com 1) because the collector does a fixed 6-round scroll on page 1 only. For fuller coverage, add pagination (follow "next"/load-more) and/or price-ascending sort so in-band inventory front-loads, and make scroll depth scale with `--max-items`. Not a correctness bug — a coverage/tuning limitation.
+
+**Effort:** Low–Medium
+
+---
+
 ### A14. `.badge-direct` text contrast — Done
 **Priority:** Medium (accessibility)
 **Source:** UI/UX audit (May 16) — important #3
