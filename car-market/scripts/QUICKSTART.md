@@ -7,7 +7,7 @@ headless browser drives a real Chrome so it reaches CarMax / Carvana / Cars.com
 All commands run from this directory:
 
 ```
-cd scripts/car-market-research
+cd car-market/scripts
 ```
 
 ## Prerequisites

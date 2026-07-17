@@ -16,14 +16,14 @@ harness — they are not plain Node scripts and won't run under `node`).
 Each stage's return value is the next stage's `args`:
 
 ```
-Workflow({ scriptPath: "scripts/car-market-research/01-search-listings.js", args: {
+Workflow({ scriptPath: "car-market/scripts/01-search-listings.js", args: {
   metro: "Austin, TX", priceMin: 10000, priceMax: 20000,
   sources: ["CarGurus","Cars.com","Craigslist","KBB"],
   bodyStyles: ["all","suv","truck"]
 }})
 // → { listings, sources, metro, priceMin, priceMax, stats }
 
-Workflow({ scriptPath: "scripts/car-market-research/02-rank-listings.js", args: <stage-1 output> })
+Workflow({ scriptPath: "car-market/scripts/02-rank-listings.js", args: <stage-1 output> })
 // → { topBargains, rejected, summary, caveats, stats }
 //
 // Body-class exclusion (stage 2): args.excludeClasses controls which body
@@ -33,7 +33,7 @@ Workflow({ scriptPath: "scripts/car-market-research/02-rank-listings.js", args: 
 // Pass [] to rank all body styles, or a subset to relax the rule, e.g.
 //   args: { ...stage1, excludeClasses: ["fullsize-truck"] }   // keep mid-size + vans
 
-Workflow({ scriptPath: "scripts/car-market-research/03-verify-dedupe.js", args: <stage-2 output> })
+Workflow({ scriptPath: "car-market/scripts/03-verify-dedupe.js", args: <stage-2 output> })
 // → { verified, buckets, stalePriced, dedupe, stats }
 ```
 
@@ -51,7 +51,7 @@ bot-wall plain HTTP, so those still need agents.
 
 ```
 # 1. Code-collect Craigslist (0 tokens). Austin area id = 15.
-node scripts/car-market-research/src/craigslist.mjs \
+node car-market/scripts/src/craigslist.mjs \
   --area 15 --min 10000 --max 20000 --purveyor owner > cl.json
 
 # 2. Stage 1 with preCollected → skips Craigslist agents, keeps the rest.

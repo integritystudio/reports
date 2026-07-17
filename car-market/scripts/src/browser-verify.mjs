@@ -19,8 +19,8 @@
 //           priceMatches, evidence } — feed it to stage 3 as args.preVerified.
 //
 // Run via the wrapper (sets PW_DIR):
-//   scripts/car-market-research/run-browser-verify.sh --file listings.json > verdicts.json
-//   cat listings.json | scripts/car-market-research/run-browser-verify.sh
+//   car-market/scripts/run-browser-verify.sh --file listings.json > verdicts.json
+//   cat listings.json | car-market/scripts/run-browser-verify.sh
 
 import { readFileSync } from 'node:fs'
 import { resolveChromium, launchStealth, newStealthContext } from './browser-lib.mjs'

@@ -7,7 +7,7 @@
 // Cars.com and KBB bot-wall plain HTTP, so those still need agents.
 //
 // Usage:
-//   node scripts/car-market-research/src/craigslist.mjs \
+//   node car-market/scripts/src/craigslist.mjs \
 //     --area 15 --min 10000 --max 20000 --purveyor owner [--searchPath cta] [--pretty]
 //
 //   # Austin area id is 15. To find another metro's id, load its search page

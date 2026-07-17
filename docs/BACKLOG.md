@@ -55,7 +55,7 @@ Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). G
 ### CM1. Cross-source dedup weakness from 2-token model capture
 **Priority:** Low
 **Source:** `/code-review src/browser-collect.mjs` (this session) — residual of finding #2 fix
-**File:** `scripts/car-market-research/src/browser-collect.mjs`, `src/rank-lib.mjs`
+**File:** `car-market/scripts/src/browser-collect.mjs`, `src/rank-lib.mjs`
 
 The headless collector's extractor captures the first two tokens after the make as `model`, so single-word nameplates absorb the trim (e.g. `Sentra SR`, `Sorento LX`). Multi-word nameplates ("Santa Cruz") are captured correctly, which was the point of the fix — but the tradeoff is that `rank-lib.mjs` `dedupeListings`/`sameVehicle`, which compare on normalized `model`, can miss a cross-source duplicate when one source emits `Sentra SR` and another emits `Sentra`. Kept consistent with `collect-lib.mjs parseTitle` (same 2-token behavior) rather than diverging. Consider a make+model normalization pass (strip trailing trim tokens against a known-trim list, or dedup on VIN when present) before ranking.
 
@@ -68,7 +68,7 @@ The headless collector's extractor captures the first two tokens after the make 
 ### CM2. Stage-3 verification cannot reach CarMax/Carvana (WebFetch 403s)
 **Priority:** Medium (blocks the "verified as valid" gate for these sources)
 **Source:** `/code-review src/browser-collect.mjs` session — surfaced during CarMax/Carvana integration
-**Files:** `scripts/car-market-research/03-verify-dedupe.js`, `src/browser-collect.mjs`
+**Files:** `car-market/scripts/03-verify-dedupe.js`, `src/browser-collect.mjs`
 
 CarMax/Carvana listings are tagged `mustVerify` in stage 1, but stage 3 verifies URLs via WebFetch, which returns 403 on both domains — so their detail URLs currently bucket as `blocked` (unverifiable), not `live-match`. Per the "only include what can be verified as valid" rule they would be dropped. A browser-based verification path (reuse `browser-collect.mjs`'s stealth Chromium to open the detail URL and confirm a 200 + matching year/make/model in the title) is needed so these sources can actually contribute verified listings.
 
@@ -81,7 +81,7 @@ CarMax/Carvana listings are tagged `mustVerify` in stage 1, but stage 3 verifies
 ### CM3. Headless collector low yield (shallow scroll / no pagination)
 **Priority:** Low
 **Source:** `/code-review src/browser-collect.mjs` session
-**File:** `scripts/car-market-research/src/browser-collect.mjs`
+**File:** `car-market/scripts/src/browser-collect.mjs`
 
 Per-run counts are modest (CarMax 6, Carvana 3, Cars.com 1) because the collector does a fixed 6-round scroll on page 1 only. For fuller coverage, add pagination (follow "next"/load-more) and/or price-ascending sort so in-band inventory front-loads, and make scroll depth scale with `--max-items`. Not a correctness bug — a coverage/tuning limitation.
 
@@ -94,16 +94,27 @@ Per-run counts are modest (CarMax 6, Carvana 3, Cars.com 1) because the collecto
 ### CM4. Carvana geolocation-pin effect on grid unconfirmed (A/B blocked)
 **Priority:** Low
 **Source:** browser-collect geo/free-shipping/pin session (Jul 17)
-**File:** `scripts/car-market-research/src/browser-collect.mjs`
+**File:** `car-market/scripts/src/browser-collect.mjs`
 
 The collector now pins `navigator.geolocation` to `--zip` coords (default 78702) and grants the geolocation permission — verified reading back exactly on a secure origin. But whether Carvana's *results grid* recomputes its "Free shipping" labels from that pin could not be confirmed: the Austin-vs-rural-Montana A/B probe tripped Carvana's Cloudflare bot-wall (403) after repeated loads before a clean comparison landed. Current behavior is documented honestly (README caveat: the pin is set correctly and matters for geolocation-reading sites, but on Carvana the free-shipping gate operates on whatever labels the grid renders, which is not proof of Austin-specific free delivery). To resolve: re-run the A/B with rotating IPs / longer backoff, or find a Carvana location cookie/param that localizes the grid. Related: CM2's browser-verify path could share the same stealth session.
 
 **Effort:** Low–Medium
 
 **Resources** (repro probes for re-running the investigation):
-- `scripts/car-market-research/probes/probe-carvana-ab.mjs` — Austin-vs-Montana A/B of the free/fee shipping distribution on the grid under a geolocation override
-- `scripts/car-market-research/probes/probe-carvana-ab2.mjs` — same A/B with HTTP-status + bot-wall capture (the run that hit the 403)
-- `scripts/car-market-research/probes/probe-carvana-pin.mjs` — discovery probe: dumps Carvana location controls, cookies, and localStorage to find a persisted zip/location key
+- `car-market/scripts/probes/probe-carvana-ab.mjs` — Austin-vs-Montana A/B of the free/fee shipping distribution on the grid under a geolocation override
+- `car-market/scripts/probes/probe-carvana-ab2.mjs` — same A/B with HTTP-status + bot-wall capture (the run that hit the 403)
+- `car-market/scripts/probes/probe-carvana-pin.mjs` — discovery probe: dumps Carvana location controls, cookies, and localStorage to find a persisted zip/location key
+
+---
+
+### CM5. Populate dealership rankings in `src/dealers.json`
+**Priority:** Low
+**Source:** local-dealer seed list follow-up (Jul 17)
+**File:** `car-market/scripts/src/dealers.json`
+
+Run a single WebSearch for Austin-metro used-car dealership rankings/reputation, then add a `rank` (or `ranking`) field and a `category`/quality value to each entry in `src/dealers.json` from the result, so the collector can prioritize higher-ranked dealers. One search only — synthesize the ordering from that single result set rather than fanning out per dealer. Keep it deterministic and cited (note the source in the file's `note`/a `rankingSource` field).
+
+**Effort:** Low
 
 ---
 

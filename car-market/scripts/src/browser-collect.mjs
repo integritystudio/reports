@@ -23,7 +23,7 @@
 //
 // playwright-core isn't a repo dependency; it resolves from a global install.
 // Run via the wrapper so NODE_PATH is set:
-//   scripts/car-market-research/run-browser-collect.sh --source carmax --min 10000 --max 20000 --zip 78701 --radius 75
+//   car-market/scripts/run-browser-collect.sh --source carmax --min 10000 --max 20000 --zip 78701 --radius 75
 // or directly:
 //   NODE_PATH="$(node -e "process.stdout.write(require('path').dirname(require.resolve('playwright-core/package.json')+'/..'))" 2>/dev/null || echo /opt/homebrew/lib/node_modules/openclaw/node_modules)" \
 //     node src/browser-collect.mjs --source carmax ...
