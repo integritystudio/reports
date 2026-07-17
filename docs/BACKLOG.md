@@ -8,39 +8,6 @@ Open and deferred items. Completed items are in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
-### GA5. Add Consent Mode v2 defaults — Done
-**Priority:** Medium (GDPR/LGPD compliance)
-**Source:** GA tracking health audit (May 16)
-**File:** `js/gtag.js`
-
-No `gtag('consent', 'default', …)` call before `config`. Relevant given Portuguese/Brazilian (LGPD) and broader EU traffic on `edgar_nadyne` translations and other reports. Add denied-by-default consent state with banner-driven update.
-
-**Effort:** Medium (defaults trivial; banner UI is the work)
-
-**[DONE]** — added `gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500})` before config call in `js/gtag.js`
-
----
-
-### GA7. Audit submodule GA setups vs. hub property — Done
-**Priority:** Low (data consolidation)
-**Source:** GA tracking health audit (May 16)
-**Files:** `john_skelton/_includes/_google_tag_manager.html`, `micah_lindsey/_includes/_google_tag_manager.html`
-
-Submodules ship their own GTM partials and analytics tests, outside the hub's `G-YXLT76BTM4` property. Confirm whether separate properties are intentional (per-client reporting) or whether they should be merged into the hub property for unified dashboards.
-
-**Audit findings (May 16):**
-- `john_skelton`: GA4 property `G-J7TL7PQH7S` + GTM container `GTM-NR4GGH5K` configured in `_config.yml`. Separate per-client property — intentional. No consolidation needed.
-- `micah_lindsey`: Has `_includes/_google_tag_manager.html` partial but no `container_id` set in `_config.yml`. GTM tag renders empty/disabled — no tracking currently active from this submodule.
-
-**Decision:** Separate properties are the correct approach for per-client reporting. `micah_lindsey` has no active GA setup; if tracking is desired for that site, a container_id should be added to its `_config.yml` (out of scope for hub work).
-
-**[DONE]** — audit complete, no hub-side changes required.
-
----
-
-
-
-
 ### W1. Repomix granular compression config — track upstream
 **Priority:** Medium
 **Source:** Fact-check audit (Feb 24), code-condense-whitepaper session
@@ -51,119 +18,6 @@ Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). G
 **Effort:** Low (documentation update when upstream ships)
 
 **Last checked 2026-07-17:** Both issues (#561, #516) still open — no linked PRs, no milestones. Latest published repomix is `1.16.1` (npm, 2026-07-11); `--compress` remains boolean/all-or-nothing with no granular flags. No action required yet.
-
----
-
-### CM1. Cross-source dedup weakness from 2-token model capture
-**Priority:** Low
-**Source:** `/code-review src/browser-collect.mjs` (this session) — residual of finding #2 fix
-**File:** `car-market/scripts/src/browser-collect.mjs`, `src/rank-lib.mjs`
-
-The headless collector's extractor captures the first two tokens after the make as `model`, so single-word nameplates absorb the trim (e.g. `Sentra SR`, `Sorento LX`). Multi-word nameplates ("Santa Cruz") are captured correctly, which was the point of the fix — but the tradeoff is that `rank-lib.mjs` `dedupeListings`/`sameVehicle`, which compare on normalized `model`, can miss a cross-source duplicate when one source emits `Sentra SR` and another emits `Sentra`. Kept consistent with `collect-lib.mjs parseTitle` (same 2-token behavior) rather than diverging. Consider a make+model normalization pass (strip trailing trim tokens against a known-trim list, or dedup on VIN when present) before ranking.
-
-**Effort:** Low–Medium
-
-**[DONE]** commit d8218e3 — `sameVehicle` now does VIN-first match then prefix-based model comparison (`ma.startsWith(mb + ' ')`) so "Sentra SR" deduplicates against "Sentra". Price/miles tolerances guard against false positives. Inline copy in `02-rank-listings.js` kept in sync.
-
----
-
-### CM2. Stage-3 verification cannot reach CarMax/Carvana (WebFetch 403s)
-**Priority:** Medium (blocks the "verified as valid" gate for these sources)
-**Source:** `/code-review src/browser-collect.mjs` session — surfaced during CarMax/Carvana integration
-**Files:** `car-market/scripts/03-verify-dedupe.js`, `src/browser-collect.mjs`
-
-CarMax/Carvana listings are tagged `mustVerify` in stage 1, but stage 3 verifies URLs via WebFetch, which returns 403 on both domains — so their detail URLs currently bucket as `blocked` (unverifiable), not `live-match`. Per the "only include what can be verified as valid" rule they would be dropped. A browser-based verification path (reuse `browser-collect.mjs`'s stealth Chromium to open the detail URL and confirm a 200 + matching year/make/model in the title) is needed so these sources can actually contribute verified listings.
-
-**Effort:** Medium
-
-**[DONE]** — new `src/browser-verify.mjs` + `run-browser-verify.sh` open each listing's detail URL in the shared stealth Chromium (extracted to `src/browser-lib.mjs`, reused by the collector) and emit per-URL verdicts (`live-match`/`live-mismatch`/`dead`/`blocked`). Stage 3 (`03-verify-dedupe.js`) now accepts `args.preVerified`: listings with a browser verdict use it verbatim and skip the WebFetch agent. Verified end-to-end 2026-07: 4 real CarMax URLs (which `curl`/WebFetch 403) all returned `live-match` with matching prices; a retired stock id returned `dead`; stage-3 wiring consumes the verdicts with zero agent calls. Model matching tolerates the "…Fit in Austin, TX" location artifact in CarMax titles.
-
----
-
-### CM3. Headless collector low yield (shallow scroll / no pagination)
-**Priority:** Low
-**Source:** `/code-review src/browser-collect.mjs` session
-**File:** `car-market/scripts/src/browser-collect.mjs`
-
-Per-run counts are modest (CarMax 6, Carvana 3, Cars.com 1) because the collector does a fixed 6-round scroll on page 1 only. For fuller coverage, add pagination (follow "next"/load-more) and/or price-ascending sort so in-band inventory front-loads, and make scroll depth scale with `--max-items`. Not a correctness bug — a coverage/tuning limitation.
-
-**Effort:** Low–Medium
-
-**[DONE]** commit d2a6bfe — `SCROLL_ROUNDS` now scales with `--max-items` (`max(6, ceil(items/4))`); `--pages 1–3` adds URL-based multi-page collection for CarMax and Cars.com (`&page=N`); Carvana (infinite-scroll) multiplies scroll rounds by PAGES on page 1 instead; Cars.com URL adds `&sort=list_price`; `scrollAndExtract` helper extracted; cross-page URL dedup added.
-
----
-
-### CM4. Carvana geolocation-pin effect on grid unconfirmed (A/B blocked)
-**Priority:** Low
-**Source:** browser-collect geo/free-shipping/pin session (Jul 17)
-**File:** `car-market/scripts/src/browser-collect.mjs`
-
-The collector now pins `navigator.geolocation` to `--zip` coords (default 78702) and grants the geolocation permission — verified reading back exactly on a secure origin. But whether Carvana's *results grid* recomputes its "Free shipping" labels from that pin could not be confirmed: the Austin-vs-rural-Montana A/B probe tripped Carvana's Cloudflare bot-wall (403) after repeated loads before a clean comparison landed. Current behavior is documented honestly (README caveat: the pin is set correctly and matters for geolocation-reading sites, but on Carvana the free-shipping gate operates on whatever labels the grid renders, which is not proof of Austin-specific free delivery). To resolve: re-run the A/B with rotating IPs / longer backoff, or find a Carvana location cookie/param that localizes the grid. Related: CM2's browser-verify path could share the same stealth session.
-
-**Effort:** Low–Medium
-
-**Resources** (repro probes for re-running the investigation):
-- `car-market/scripts/probes/probe-carvana-ab.mjs` — Austin-vs-Montana A/B of the free/fee shipping distribution on the grid under a geolocation override
-- `car-market/scripts/probes/probe-carvana-ab2.mjs` — same A/B with HTTP-status + bot-wall capture (the run that hit the 403)
-- `car-market/scripts/probes/probe-carvana-pin.mjs` — discovery probe: dumps Carvana location controls, cookies, and localStorage to find a persisted zip/location key
-- `car-market/scripts/probes/probe-carvana-ab3.mjs` — retry-safe A/B with per-run browser isolation, exponential backoff on 403, staggered inter-run delay, and a printed VERDICT line
-
-**[DONE]** — `probe-carvana-ab3.mjs` written (2026-07-17): uses separate browser instances per location arm, a configurable inter-run delay (default 45 s + jitter) between the Austin and Montana runs, exponential backoff with up to 3 attempts per arm on bot-wall/403, varied scroll cadence with idle jitter, and emits a VERDICT line (`no difference` / `X% differed` / `inconclusive`). Run with `node probe-carvana-ab3.mjs [--max-attempts N] [--backoff-ms N]` when a clean comparison is needed. README caveat unchanged until a clean run produces a definitive verdict.
-
----
-
-### CM5. Populate dealership rankings in `dealers.json`
-**Priority:** Low
-**Source:** local-dealer seed list follow-up (Jul 17)
-**File:** `car-market/dealers.json` (moved from `scripts/src/dealers.json` in commit 28af015)
-
-Run a single WebSearch for Austin-metro used-car dealership rankings/reputation, then add a `rank` (or `ranking`) field and a `category`/quality value to each entry in `dealers.json` from the result, so the collector can prioritize higher-ranked dealers. One search only — synthesize the ordering from that single result set rather than fanning out per dealer. Keep it deterministic and cited (note the source in the file's `note`/a `rankingSource` field).
-
-**Progress:** commit ca13e38 resolved and verified each dealer's used-inventory URL (27 verified, 4 nav-resolved but bot-blocked, 3 left null) and added `usedNote` context — but no `rank`/`ranking` field yet, so this item remains open.
-
-**Effort:** Low
-
-**[DONE]** — added `rank` (1–7, lower = higher priority) and `category` (`top-rated`/`franchise-group`/`franchise`) to all 34 dealers plus a `rankingSource` field citing threebestrated.com, copilotsearch.com, and cardealersup.com (single search, 2026-07-17). Texas Auto Center rank 1 (BBB A+, 4.9/5, #1 on two lists); major verified groups rank 2–3; verified high-reliability franchise dealers rank 4; remaining verified rank 5; bot-blocked rank 6; dead/unresolvable rank 7.
-
----
-
-### A14. `.badge-direct` text contrast — Done
-**Priority:** Medium (accessibility)
-**Source:** UI/UX audit (May 16) — important #3
-
-**[DONE]** commit b87c412 — raised `.badge-direct` text to `#1d4ed8` for WCAG AA contrast
-
----
-
-### A15. Leora form inputs: invisible focus ring — Done
-**Priority:** Medium (accessibility — WCAG 2.4.7 / 1.4.11)
-**Source:** UI/UX audit (May 16) — important #4
-
-**[DONE]** commit 36cb209 — added `outline: 2px solid var(--leora-primary); outline-offset: 1px` to focus state
-
----
-
-### A16. Leora dark mode: missing `:root` variable overrides — Done
-**Priority:** Medium (dark mode coverage)
-**Source:** UI/UX audit (May 16) — important #5
-
-**[DONE]** commit 94d0bc9 — added `:root` dark mode override block to `leora-referral.css`
-
----
-
-### A17. Tables inside `<section>` lack mobile padding — Done
-**Priority:** Medium (responsive layout)
-**Source:** UI/UX audit (May 16) — important #6
-
-**[DONE]** commit 7e300bf — added `padding: var(--spacing-sm) var(--spacing-md)` to `.table-wrapper` in `report-base.css`
-
----
-
-### A18. Small font sizes at 480px breakpoint — Done
-**Priority:** Low (readability)
-**Source:** UI/UX audit (May 16) — nice-to-have #7-8
-
-**[DONE]** commit 0894cda — raised `--font-size-table-sm` to `0.85rem`, `--font-size-toggle` to `0.75rem`, `--font-size-milestone-label` to `0.75rem`
 
 ---
 
@@ -208,8 +62,8 @@ See [CHANGELOG.md](CHANGELOG.md) for full details.
 | May 16 — UI/UX Audit | GA5, A14, A15, A16, A17, A18 (6 items) |
 | May 16 — Backlog Implementer | GA7 (1 item) |
 | Jul 17 — Car-Market Pipeline | CM1, CM2, CM3 (3 items) |
-| Jul 17 — Backlog Implementer | CM5 (1 item) |
-| **Total** | **103 completed, 2 open (W1 upstream-blocked; CM4 bot-wall-blocked)** |
+| Jul 17 — Backlog Implementer | CM4, CM5 (2 items) |
+| **Total** | **120 completed, 1 open (W1 upstream-blocked)** |
 
 ### Scorecard (Phase 2 — Feb 16)
 

@@ -9,7 +9,7 @@ harness — they are not plain Node scripts and won't run under `node`).
 |-------|--------|------|
 | 1 | `01-search-listings.js` | Fan-out collection: one agent per source × body-style, extracts every in-band live listing |
 | 2 | `03-verify-dedupe.js` | **Validation:** semantic-dedupes, then WebFetch-verifies each URL resolves to the stated vehicle |
-| 3 | `02-rank-listings.js` | **Valuation & rank:** per-vehicle LLM market-value call on the validated survivors, then discount + rank top-N |
+| 3 | `02-rank-listings.js` | **Valuation & rank:** micro-batched LLM market-value calls on the validated survivors, then discount + rank top-N |
 
 > Ordering note: valuation runs **after** validation, so the LLM only prices
 > real (live-match, de-duplicated) survivors — not dead/mismatched/duplicate
@@ -33,8 +33,10 @@ Workflow({ scriptPath: "car-market/scripts/03-verify-dedupe.js", args: <stage-1 
 Workflow({ scriptPath: "car-market/scripts/02-rank-listings.js", args: <verify output> })
 // → { topBargains, rejected, summary, caveats, stats }
 //
-// Valuation is one LLM call PER vehicle (parallelized), returning only
-// estMarketValue (+ scam flag); discount %, demotion, sorting, confidence, and
+// Valuation is micro-batched: one LLM call per group of args.valueBatchSize
+// vehicles (default 8), groups run in parallel, each returning only
+// estMarketValue (+ scam flag). The prompt is a static cache-friendly prefix +
+// the listing block last. Discount %, demotion, sorting, confidence, and
 // rationales are computed deterministically. It values args.verified filtered to
 // args.acceptStatuses (default ["live-match"]).
 //
@@ -48,6 +50,13 @@ Pass the previous stage's JSON result object straight through as `args`; the
 carried `metro` / `priceMin` / `priceMax` / `listings` / `verified` fields are
 picked up automatically. Both later stages also accept a bare `{ listings: [...] }`
 or `{ items: [...] }` if you want to run them standalone (skipping validation).
+
+**Valuation tuning.** `estMarketValue` is an LLM judgment (no free pricing API
+exists — see [PRICING-DATA-RESEARCH.md](PRICING-DATA-RESEARCH.md)). Calls are
+micro-batched in groups of `args.valueBatchSize` (default 8), run in parallel,
+with a static cache-friendly prompt prefix and the listing block last. Smaller
+batches = more parallelism and per-batch fault isolation; larger = fewer calls
+and less repeated per-call overhead.
 
 ## Reducing tokens: code-collect what you can, agent-collect the rest
 
@@ -160,7 +169,7 @@ renders — it is not proof of Austin-specific free delivery.
 `src/browser-verify.mjs` opens each listing's **detail URL** in the same stealth
 Chromium (shared setup lives in `src/browser-lib.mjs`) and returns a per-URL
 verdict — the only way to verify CarMax/Carvana listings, which 403 both plain
-`fetch` AND WebFetch (so stage 3's own WebFetch verifier can't reach them).
+`fetch` AND WebFetch (so `03-verify-dedupe.js`'s own WebFetch verifier can't reach them).
 
 ```
 # Verify collected listings (collector output or a bare [{url,year,make,model,price}] array)
@@ -208,8 +217,8 @@ loaded page; a lazy-load scroll then reveals inventory. Notes:
 - The DOM extractor runs inside the page via `page.evaluate`, so it takes the
   URL-path hint as a **runtime argument** (closures don't cross that boundary).
 - Counts scale with scroll depth (`--max-items`, scroll rounds); tune per need.
-- **Verification** of CarMax/Carvana URLs must also use the browser — stage 3's
-  WebFetch 403s on them. Use `src/browser-verify.mjs` (above) to produce
+- **Verification** of CarMax/Carvana URLs must also use the browser — the
+  `03-verify-dedupe.js` WebFetch 403s on them. Use `src/browser-verify.mjs` (above) to produce
   `preVerified` verdicts; a detail page returning 200 with a matching title
   satisfies the "verified as valid" gate.
 
@@ -259,7 +268,7 @@ with no listings until a headless-browser or official-feed collector is added.
 
 Because of that, they are wired **verification-gated**: any CarMax/Carvana
 listing without a resolvable detail URL is dropped in stage 1, and the rest are
-tagged `mustVerify` so stage 3 (`03-verify-dedupe.js`) must confirm the URL
+tagged `mustVerify` so the validation stage (`03-verify-dedupe.js`) must confirm the URL
 resolves to the stated vehicle before it can be included. Because WebFetch 403s
 these domains, run `src/browser-verify.mjs` on their URLs first and pass its
 verdicts as `args.preVerified` (see the browser-verifier section) — that is what

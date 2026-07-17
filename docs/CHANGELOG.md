@@ -4,6 +4,27 @@ All completed backlog items, organized by session.
 
 ---
 
+## July 17, 2026 — Car-Market Pipeline & Backlog Cleanup
+
+Source: `docs/BACKLOG.md` items CM1-CM5, GA5, GA7, A14-A18
+
+| Item | Description | Commit/Status |
+|------|-------------|--------|
+| GA5 | Add Consent Mode v2 defaults — added `gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500})` before config call in `js/gtag.js`; covers GDPR (EU) and LGPD (Brazil) compliance | in-session |
+| GA7 | Audit submodule GA setups vs. hub property — confirmed `john_skelton` has intentional separate GA4 property; `micah_lindsey` has no active tracking (no container_id in _config.yml). Separate properties correct for per-client reporting — no hub-side changes required. | in-session |
+| CM1 | Cross-source dedup weakness from 2-token model capture — `sameVehicle` now does VIN-first match then prefix-based model comparison (`ma.startsWith(mb + ' ')`) so "Sentra SR" deduplicates against "Sentra". Price/miles tolerances guard against false positives. | `d8218e3` |
+| CM2 | Stage-3 verification cannot reach CarMax/Carvana (WebFetch 403s) — new `src/browser-verify.mjs` + `run-browser-verify.sh` open each listing's detail URL in stealth Chromium and emit per-URL verdicts (`live-match`/`live-mismatch`/`dead`/`blocked`). Stage 3 accepts `args.preVerified`: listings with browser verdict skip WebFetch agent. Verified end-to-end 2026-07: 4 real CarMax URLs returned `live-match` with matching prices. | `src/browser-verify.mjs` |
+| CM3 | Headless collector low yield (shallow scroll / no pagination) — `SCROLL_ROUNDS` now scales with `--max-items` (`max(6, ceil(items/4))`); `--pages 1–3` adds URL-based multi-page collection for CarMax and Cars.com (`&page=N`); Carvana multiplies scroll rounds by PAGES; Cars.com URL adds `&sort=list_price`; cross-page dedup added. | `d2a6bfe` |
+| CM4 | Carvana geolocation-pin effect on grid unconfirmed (A/B blocked) — `probe-carvana-ab3.mjs` written: uses separate browser instances per location arm, configurable inter-run delay (default 45s + jitter), exponential backoff on bot-wall/403 (up to 3 attempts), varied scroll cadence, emits VERDICT line. Run with `node probe-carvana-ab3.mjs [--max-attempts N] [--backoff-ms N]` for clean comparison when needed. README caveat unchanged until clean run produces definitive verdict. | `probe-carvana-ab3.mjs` |
+| CM5 | Populate dealership rankings in `dealers.json` — added `rank` (1–7, lower = higher priority) and `category` (`top-rated`/`franchise-group`/`franchise`) to all 34 dealers plus `rankingSource` field citing threebestrated.com, copilotsearch.com, cardealersup.com. Texas Auto Center rank 1 (BBB A+, 4.9/5, #1 on two lists); major groups rank 2–3; high-reliability franchises rank 4; remaining verified rank 5; bot-blocked rank 6; dead/unresolvable rank 7. | `ca13e38` |
+| A14 | `.badge-direct` text contrast — raised color from `#2563eb` to `#1d4ed8` in `css/competitor-base.css`; effective contrast now passes WCAG AA (4.5:1) for 12px badge text | `b87c412` |
+| A15 | Leora form inputs: visible focus ring — replaced `outline: none` with `outline: 2px solid var(--leora-primary); outline-offset: 1px` on focus state in `css/leora-referral.css`; satisfies WCAG 2.4.7 / 1.4.11 | `36cb209` |
+| A16 | Leora dark mode `:root` overrides — added `:root` variable override block inside `@media (prefers-color-scheme: dark)` to `css/leora-referral.css`; fixes generic containers staying white in dark mode | `94d0bc9` |
+| A17 | Mobile padding for `.table-wrapper` — added `padding: var(--spacing-sm) var(--spacing-md)` to `.table-wrapper` in `css/report-base.css`; prevents tables from touching rounded section corners on mobile | `7e300bf` |
+| A18 | Minimum font-size tokens at 480px — raised `--font-size-table-sm` (0.8→0.85rem), `--font-size-toggle` (0.7→0.75rem) in `report-base.css`; raised `--font-size-milestone-label` (0.6875→0.75rem) in `leora-referral.css` | `0894cda` |
+
+---
+
 ## May 16, 2026 — UI/UX Audit Implementation
 
 Source: `docs/BACKLOG.md` items GA5, A14-A18

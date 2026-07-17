@@ -18,10 +18,16 @@ verifies each result file's detail URLs in parallel (batched), then combines,
 dedups, and ranks the survivors into one price-sorted list:
 
 ```
+# no flags needed — price band defaults to $10,000–$20,000
+./full_search_pipeline.sh
+
+# or override any flag
 ./full_search_pipeline.sh --min 10000 --max 20000 --zip 78702 --radius 75 --max-items 25
 ```
 
-Flags: `--top` (list length, 20), `--jobs` (parallel verify processes, 4),
+Flags (all optional): `--min`/`--max` (price band, default `10000`/`20000`),
+`--zip`/`--radius` (metro center + radius), `--max-items` (per source, 25),
+`--top` (list length, 20), `--jobs` (parallel verify processes, 4),
 `--out-dir` (artifacts, `pipeline-out/`), `--verified-dealers-only`,
 `--keep-blocked` (keep anti-bot-unverifiable listings), `--skip-verify` (skip
 stage 2). Writes `pipeline-out/{combined,ranked}.json` plus per-file
@@ -33,7 +39,7 @@ stage 2). Writes `pipeline-out/{combined,ranked}.json` plus per-file
   an LLM).
 - `llm` (or `--llm`) — writes the validated survivors to
   `pipeline-out/rank-args.json` and prints the Workflow command to run
-  `02-rank-listings.js`, which makes a **per-vehicle LLM call** to estimate
+  `02-rank-listings.js`, which makes **micro-batched LLM calls** to estimate
   `estMarketValue` and then discount-ranks (see [README.md](README.md) and
   [PRICING-DATA-RESEARCH.md](PRICING-DATA-RESEARCH.md)). `--metro` sets the metro
   passed to that stage (default "Austin, TX").
@@ -181,7 +187,7 @@ delivery — treat them as "available to Austin", not local inventory.
   collector directly: `node src/craigslist.mjs --area 15 --min 10000 --max 20000 --purveyor owner > cl.json`
   (`--enrich-vin --filter` drops no-VIN private listings and big trucks/vans).
 - **Feeding the LLM pipeline instead:** any collector `listings` array can be
-  passed to stage 1 as `preCollected`, and verifier output to stage 3 as
-  `preVerified`. See [README.md](README.md) for the Workflow chaining.
+  passed to `01-search-listings.js` as `preCollected`, and verifier output to
+  `03-verify-dedupe.js` as `preVerified`. See [README.md](README.md) for the Workflow chaining.
 - Shared browser setup lives in `src/browser-lib.mjs`; parsing/filter helpers in
   `src/collect-lib.mjs`.
