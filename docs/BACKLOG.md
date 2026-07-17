@@ -98,6 +98,11 @@ The collector now pins `navigator.geolocation` to `--zip` coords (default 78702)
 
 **Effort:** Low–Medium
 
+**Resources** (repro probes for re-running the investigation):
+- `scripts/car-market-research/probes/probe-carvana-ab.mjs` — Austin-vs-Montana A/B of the free/fee shipping distribution on the grid under a geolocation override
+- `scripts/car-market-research/probes/probe-carvana-ab2.mjs` — same A/B with HTTP-status + bot-wall capture (the run that hit the 403)
+- `scripts/car-market-research/probes/probe-carvana-pin.mjs` — discovery probe: dumps Carvana location controls, cookies, and localStorage to find a persisted zip/location key
+
 ---
 
 ### A14. `.badge-direct` text contrast — Done
