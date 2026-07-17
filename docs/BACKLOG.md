@@ -50,6 +50,8 @@ Repomix `--compress` is currently all-or-nothing (`output.compress: boolean`). G
 
 **Effort:** Low (documentation update when upstream ships)
 
+**Last checked 2026-07-17:** Both issues (#561, #516) still open — no linked PRs, no milestones. Latest published repomix is `1.16.1` (npm, 2026-07-11); `--compress` remains boolean/all-or-nothing with no granular flags. No action required yet.
+
 ---
 
 ### CM1. Cross-source dedup weakness from 2-token model capture
@@ -104,6 +106,9 @@ The collector now pins `navigator.geolocation` to `--zip` coords (default 78702)
 - `car-market/scripts/probes/probe-carvana-ab.mjs` — Austin-vs-Montana A/B of the free/fee shipping distribution on the grid under a geolocation override
 - `car-market/scripts/probes/probe-carvana-ab2.mjs` — same A/B with HTTP-status + bot-wall capture (the run that hit the 403)
 - `car-market/scripts/probes/probe-carvana-pin.mjs` — discovery probe: dumps Carvana location controls, cookies, and localStorage to find a persisted zip/location key
+- `car-market/scripts/probes/probe-carvana-ab3.mjs` — retry-safe A/B with per-run browser isolation, exponential backoff on 403, staggered inter-run delay, and a printed VERDICT line
+
+**[DONE]** — `probe-carvana-ab3.mjs` written (2026-07-17): uses separate browser instances per location arm, a configurable inter-run delay (default 45 s + jitter) between the Austin and Montana runs, exponential backoff with up to 3 attempts per arm on bot-wall/403, varied scroll cadence with idle jitter, and emits a VERDICT line (`no difference` / `X% differed` / `inconclusive`). Run with `node probe-carvana-ab3.mjs [--max-attempts N] [--backoff-ms N]` when a clean comparison is needed. README caveat unchanged until a clean run produces a definitive verdict.
 
 ---
 
