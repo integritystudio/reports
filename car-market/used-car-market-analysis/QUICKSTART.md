@@ -4,7 +4,7 @@ Find Austin-metro used-car bargains from the command line, no LLM agents. The
 headless browser drives a real Chrome so it reaches CarMax / Carvana / Cars.com
 (which 403 plain `fetch` and WebFetch). Two steps: **collect**, then **verify**.
 
-All commands run from this directory:
+All commands run from the scripts directory:
 
 ```
 cd car-market/scripts
@@ -36,6 +36,20 @@ redirect to a file.
 # A specific local dealer (see ../dealers.json for the Austin seed list)
 ./run-browser-collect.sh --source dealer --site https://www.covertauto.com/used-vehicles/ --name "Covert Auto" --min 10000 --max 20000 > covert.json
 ```
+
+**All built-in sources at once.** `carmax_cars_carvana_search.sh` wraps the
+collector, looping over the built-ins and writing one `<source>.json` each
+(CarMax / Cars.com get the metro filter; Carvana is national, so `--zip`/`--radius`
+are skipped for it):
+
+```
+./carmax_cars_carvana_search.sh --min 10000 --max 20000 --zip 78702 --radius 75 --max-items 25
+```
+
+Writes `carmax.json`, `cars.json`, `carvana.json` and prints a per-source count.
+Override the list with `--sources "carmax cars"`, choose a directory with
+`--out-dir`, and forward extra collector flags after `--` (e.g.
+`-- --include-paid-shipping`). Verify each file in Step 2 the same way.
 
 Each file is `{ source, url, geoScope, zip, radiusMi, blocked, count, listings:[...] }`.
 Every listing carries a verbatim detail `url`, `price`, `year/make/model`, and a

@@ -102,9 +102,9 @@ Carvana, and Cars.com listing pages — deterministically, zero LLM tokens.
 
 ```
 # via the wrapper (sets PW_DIR so global playwright-core resolves)
-./run-browser-collect.sh --source carmax  --min 10000 --max 20000 --zip 78745 --radius 75   # /car/<stock>
-./run-browser-collect.sh --source carvana --min 10000 --max 20000                           # /vehicle/<id>
-./run-browser-collect.sh --source cars    --min 10000 --max 20000 --zip 78745 --radius 75
+../scripts/run-browser-collect.sh --source carmax  --min 10000 --max 20000 --zip 78745 --radius 75   # /car/<stock>
+../scripts/run-browser-collect.sh --source carvana --min 10000 --max 20000                           # /vehicle/<id>
+../scripts/run-browser-collect.sh --source cars    --min 10000 --max 20000 --zip 78745 --radius 75
 ```
 
 Emits `{ source, url, geoScope, zip, radiusMi, blocked, count, listings:[...] }`;
@@ -157,9 +157,9 @@ verdict — the only way to verify CarMax/Carvana listings, which 403 both plain
 
 ```
 # Verify collected listings (collector output or a bare [{url,year,make,model,price}] array)
-./run-browser-collect.sh --source carmax --min 10000 --max 20000 --max-items 8 > carmax.json
-./run-browser-verify.sh --file carmax.json --pretty > verdicts.json
-# or via stdin: cat carmax.json | ./run-browser-verify.sh > verdicts.json
+../scripts/run-browser-collect.sh --source carmax --min 10000 --max 20000 --max-items 8 > carmax.json
+../scripts/run-browser-verify.sh --file carmax.json --pretty > verdicts.json
+# or via stdin: cat carmax.json | ../scripts/run-browser-verify.sh > verdicts.json
 ```
 
 Each verdict is `{ url, status, httpStatus, pageYear, pageMake, pageModel,
@@ -215,7 +215,7 @@ DealerInspire) that hide inventory behind JS, so they need the headless browser,
 not plain `fetch`. They are physical metro dealers → `geoScope:"metro"`.
 
 ```
-./run-browser-collect.sh --source dealer \
+../scripts/run-browser-collect.sh --source dealer \
   --site https://www.rogerbeasleyused.com/inventory/used \
   --name "Roger Beasley Used" --min 10000 --max 20000
 ```
