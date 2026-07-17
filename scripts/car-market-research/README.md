@@ -148,6 +148,50 @@ address). So the pin is set correctly and matters for geolocation-reading sites,
 but on Carvana the free-shipping gate still operates on whatever labels the grid
 renders — it is not proof of Austin-specific free delivery.
 
+### Headless-browser verifier (CarMax/Carvana link check)
+
+`src/browser-verify.mjs` opens each listing's **detail URL** in the same stealth
+Chromium (shared setup lives in `src/browser-lib.mjs`) and returns a per-URL
+verdict — the only way to verify CarMax/Carvana listings, which 403 both plain
+`fetch` AND WebFetch (so stage 3's own WebFetch verifier can't reach them).
+
+```
+# Verify collected listings (collector output or a bare [{url,year,make,model,price}] array)
+./run-browser-collect.sh --source carmax --min 10000 --max 20000 --max-items 8 > carmax.json
+./run-browser-verify.sh --file carmax.json --pretty > verdicts.json
+# or via stdin: cat carmax.json | ./run-browser-verify.sh > verdicts.json
+```
+
+Each verdict is `{ url, status, httpStatus, pageYear, pageMake, pageModel,
+pagePrice, priceMatches, evidence }` where `status` is:
+- **live-match** — 200 and the page's year/make/model matches the expected row
+  (model compared on the nameplate, tolerating trim/location noise — CarMax
+  titles read "…Honda Fit in Austin, TX").
+- **live-mismatch** — a specific listing loaded but it's a different vehicle, or
+  the URL redirected to a search/home page (recycled/guessed ID).
+- **dead** — 404/410 or an on-page "no longer available / sold".
+- **blocked** — 403/406/429 anti-bot refusal (unverifiable, *not* proof it's gone).
+
+Verification is **sequential** (one tab at a time) — parallel tabs on the same
+domain trip the rate-limiter that produces the 403 in the first place.
+
+Feed `verdicts.json` into stage 3 as **`args.preVerified`**: any listing whose
+URL has a pre-verdict uses it verbatim and **skips the WebFetch agent**, so
+CarMax/Carvana can finally clear the "verified as valid" gate (and it saves the
+agent call for every pre-verified URL). Run the browser verifier outside the
+Workflow sandbox (the sandbox has no network), then pass its output through:
+
+```
+Workflow({ scriptPath: ".../03-verify-dedupe.js", args: {
+  ...stage2Output,                         // topBargains, metro, price band …
+  preVerified: <verdicts array from verdicts.json>
+}})
+```
+
+Verified 2026-07: 4 real CarMax detail URLs (which `curl` 403s) all returned
+`live-match` with matching prices through the browser; a retired stock id
+returned `dead` (404).
+
 Verified working (2026-07): stealth (real-Chrome channel, `navigator.webdriver`
 spoof, `--disable-blink-features=AutomationControlled`) turns the 403 into a
 loaded page; a lazy-load scroll then reveals inventory. Notes:
@@ -157,7 +201,8 @@ loaded page; a lazy-load scroll then reveals inventory. Notes:
   URL-path hint as a **runtime argument** (closures don't cross that boundary).
 - Counts scale with scroll depth (`--max-items`, scroll rounds); tune per need.
 - **Verification** of CarMax/Carvana URLs must also use the browser — stage 3's
-  WebFetch 403s on them. A detail page returning 200 with a matching title
+  WebFetch 403s on them. Use `src/browser-verify.mjs` (above) to produce
+  `preVerified` verdicts; a detail page returning 200 with a matching title
   satisfies the "verified as valid" gate.
 
 ### CarMax & Carvana (national retailers, verification-gated)
@@ -173,12 +218,17 @@ with no listings until a headless-browser or official-feed collector is added.
 Because of that, they are wired **verification-gated**: any CarMax/Carvana
 listing without a resolvable detail URL is dropped in stage 1, and the rest are
 tagged `mustVerify` so stage 3 (`03-verify-dedupe.js`) must confirm the URL
-resolves to the stated vehicle before it can be included. Per the "only include
-what can be verified as valid" rule, an unverifiable CarMax/Carvana listing is
-never added. To exclude them entirely, pass `args.sources` without them.
+resolves to the stated vehicle before it can be included. Because WebFetch 403s
+these domains, run `src/browser-verify.mjs` on their URLs first and pass its
+verdicts as `args.preVerified` (see the browser-verifier section) — that is what
+lets a CarMax/Carvana listing clear the gate. Per the "only include what can be
+verified as valid" rule, an unverifiable CarMax/Carvana listing is never added.
+To exclude them entirely, pass `args.sources` without them.
 
 `src/collect-lib.mjs` holds the shared pure helpers (title→year/make/model
-parser with model→make inference, in-band filter, task matrix, dedupe key).
+parser with model→make inference, in-band filter, task matrix, dedupe key);
+`src/browser-lib.mjs` holds the shared stealth-browser session (playwright-core
+resolution, launch, anti-bot context) used by both the collector and verifier.
 
 ## Notes / lessons baked in
 

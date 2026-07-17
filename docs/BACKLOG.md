@@ -74,6 +74,8 @@ CarMax/Carvana listings are tagged `mustVerify` in stage 1, but stage 3 verifies
 
 **Effort:** Medium
 
+**[DONE]** — new `src/browser-verify.mjs` + `run-browser-verify.sh` open each listing's detail URL in the shared stealth Chromium (extracted to `src/browser-lib.mjs`, reused by the collector) and emit per-URL verdicts (`live-match`/`live-mismatch`/`dead`/`blocked`). Stage 3 (`03-verify-dedupe.js`) now accepts `args.preVerified`: listings with a browser verdict use it verbatim and skip the WebFetch agent. Verified end-to-end 2026-07: 4 real CarMax URLs (which `curl`/WebFetch 403) all returned `live-match` with matching prices; a retired stock id returned `dead`; stage-3 wiring consumes the verdicts with zero agent calls. Model matching tolerates the "…Fit in Austin, TX" location artifact in CarMax titles.
+
 ---
 
 ### CM3. Headless collector low yield (shallow scroll / no pagination)

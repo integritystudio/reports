@@ -13,6 +13,12 @@
 //   Workflow({ scriptPath: ".../03-verify-dedupe.js", args: <stage-2 output> })
 // It reads args.topBargains (falls back to args.items / args.listings).
 //
+// args.preVerified (optional): an array of browser-produced verdicts
+// { url, status, evidence, pageYear, pageMake, pageModel, pagePrice, priceMatches }
+// from src/browser-verify.mjs. Listings whose URL has a pre-verdict use it
+// verbatim and SKIP the WebFetch agent — the fix for CarMax/Carvana, which 403
+// WebFetch (run browser-verify.mjs on those URLs outside the sandbox first).
+//
 // Returns { verified:[...], buckets:{liveMatch,liveMismatch,dead,blocked,noUrl},
 //           dedupe:{kept,merged}, stats }.
 
@@ -60,6 +66,15 @@ for (const it of ITEMS) {
 log(`Dedupe: ${ITEMS.length} in → ${kept.length} unique (${merged.length} merged)`)
 
 // ─── (B) Link verification ─────────────────────────────────────────────────
+// Pre-supplied browser verdicts (from src/browser-verify.mjs) keyed by URL.
+// Listings with a pre-verdict use it verbatim and skip the WebFetch agent —
+// this is how CarMax/Carvana get verified (WebFetch 403s them).
+const preVerified = new Map()
+for (const pv of (Array.isArray(A.preVerified) ? A.preVerified : [])) {
+  if (pv && pv.url && pv.status) preVerified.set(pv.url, pv)
+}
+if (preVerified.size) log(`Using ${preVerified.size} pre-supplied browser verdict(s) (skip WebFetch for those URLs)`)
+
 const VERDICT_SCHEMA = {
   type: 'object', required: ['status', 'evidence'],
   properties: {
@@ -95,6 +110,16 @@ const verified = await parallel(
   kept.map((v, i) => () => {
     if (!v.url) {
       return Promise.resolve({ ...v, verify: { status: 'no-url', evidence: 'No source URL was captured for this listing.' } })
+    }
+    const pre = preVerified.get(v.url)
+    if (pre) {
+      const verdict = {
+        status: pre.status, evidence: pre.evidence || 'Browser-verified.',
+        pageYear: pre.pageYear, pageMake: pre.pageMake, pageModel: pre.pageModel,
+        pagePrice: pre.pagePrice, priceMatches: pre.priceMatches,
+      }
+      log(`${v.year} ${v.make} ${v.model}: ${verdict.status} (browser-verified)${verdict.priceMatches === false ? ' (stale price)' : ''}`)
+      return Promise.resolve({ ...v, verify: verdict })
     }
     return agent(VERIFY_PROMPT(v), {
       label: `verify:${norm(v.make)}-${norm(v.model)}`.slice(0, 40),

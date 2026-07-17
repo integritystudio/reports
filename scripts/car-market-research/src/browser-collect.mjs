@@ -3,6 +3,14 @@
 // the only path that can reach CarMax, Carvana, Cars.com, CarGurus, and KBB
 // listing pages deterministically (zero LLM tokens).
 //
+// Generic dealer source: --source dealer --site <used-inventory URL> [--name X]
+// collects any local franchise/independent dealer whose site runs on the usual
+// JS platforms (Dealer.com / DealerOn / DealerInspire). It uses a multi-marker
+// VDP link hint and a broad card selector, is tagged geoScope:'metro' (physical
+// local dealer), and band-filters in Node (no universal price param exists).
+// See src/dealers.json for the Austin-metro seed list.
+//   ./run-browser-collect.sh --source dealer --site https://www.covertauto.com/used-vehicles/ --min 10000 --max 20000
+//
 // Metro restriction: --zip + --radius geo-restrict CarMax and Cars.com to
 // physical inventory within RADIUS miles of ZIP (their real distance filters).
 // Carvana has no location filter (national inventory) and is tagged
@@ -23,24 +31,10 @@
 // Emits { source, url, count, blocked, listings:[...] } JSON to stdout.
 // Listings carry a verbatim detail URL so they can be link-verified downstream.
 
-// playwright-core is a global (not a repo dep) and ESM `import` ignores
-// NODE_PATH, so resolve it by absolute path via createRequire. PW_DIR (set by
-// the wrapper) or a small candidate list points at the global node_modules.
-import { createRequire } from 'node:module'
-import { existsSync } from 'node:fs'
-const require = createRequire(import.meta.url)
-const PW_CANDIDATES = [
-  process.env.PW_DIR,
-  '/opt/homebrew/lib/node_modules/openclaw/node_modules',
-  '/usr/local/lib/node_modules/openclaw/node_modules',
-].filter(Boolean)
-let chromium
-for (const dir of PW_CANDIDATES) {
-  if (existsSync(`${dir}/playwright-core`)) { ({ chromium } = require(`${dir}/playwright-core`)); break }
-}
-if (!chromium) {
-  try { ({ chromium } = require('playwright-core')) } catch {}
-}
+// Stealth-browser session setup (playwright-core resolution, launch, anti-bot
+// context) is shared with the verifier — see browser-lib.mjs.
+import { resolveChromium, launchStealth, newStealthContext } from './browser-lib.mjs'
+const chromium = resolveChromium()
 if (!chromium) {
   process.stderr.write('playwright-core not found. Set PW_DIR to the node_modules dir containing it.\n')
   process.exit(3)
@@ -59,6 +53,13 @@ const numArg = (f, d) => {
 const PRICE_TOKEN_FLOOR = 3000
 const CARD_TEXT_CAP = 400        // innerText longer than this spans >1 card
 const SOURCE = (arg('--source', 'carmax')).toLowerCase()
+// Generic dealer source: --site is the dealer's used-inventory URL, --name an
+// optional label (defaults to the hostname). Local franchise/independent dealer
+// sites run on JS platforms (Dealer.com / DealerOn / DealerInspire) that 403 or
+// hide inventory behind JS, so the browser reaches them the same way it reaches
+// CarMax. They are physical metro dealers, so geoScope is 'metro'.
+const SITE = arg('--site', '')
+const NAME = arg('--name', '')
 const MIN = numArg('--min', '10000')
 const MAX = numArg('--max', '20000')
 const ZIP = arg('--zip', '78702')
@@ -142,19 +143,39 @@ const SOURCES = {
   },
 }
 
+// Generic dealer source is built from --site at runtime (SOURCES is otherwise a
+// fixed per-retailer map). There is no universal price-filter query param across
+// dealer platforms, so we load the used-inventory page as given and band-filter
+// in Node; --site can already carry a platform-specific price facet if known.
+if (SOURCE === 'dealer') {
+  if (!SITE) { process.stderr.write('--source dealer requires --site <used-inventory URL>.\n'); process.exit(2) }
+  SOURCES.dealer = {
+    url: SITE,
+    // Match any of several common dealer-platform card/detail selectors.
+    waitFor: 'a[href*="/inventory/"], a[href*="/used"], a[href*="/vehicle"], .vehicle-card, [class*="vehicle-card"], [class*="inventory"], [data-vehicle]',
+    geoScope: 'metro',
+    pageParam: null,
+  }
+}
+
 // Generic anchor-based extractor: find vehicle detail links, read nearby text
 // for year/make/model/price/miles. Kept simple and resilient to markup churn.
 // NOTE: this runs INSIDE the browser via page.evaluate, so it must be a
 // self-contained function — options are passed as a runtime argument (closure
 // variables do NOT cross the serialization boundary).
-function extractInPage({ hint, priceFloor, cardTextCap }) {
+function extractInPage({ hints, priceFloor, cardTextCap }) {
   const out = []
   const seen = new Set()
   const priceRe = /\$\s?([1-9]\d{1,2}(?:,\d{3})+|\d{4,6})\b/g
   // A price marker that ends the model/trim span (miles, price, or payment).
   const stopRe = /\$|\b[\d,]+\s*k?\s*(?:mi|miles)\b|current price|original price/i
   const milesRe = /([\d,]+)\s*(k)?\s*(?:mi|miles)\b/i
-  const anchors = Array.from(document.querySelectorAll(`a[href*="${hint}"]`))
+  // hints is an array of href substrings that mark a vehicle-detail link; a card
+  // matches if its anchor href contains ANY of them (generic dealer sites expose
+  // several VDP path shapes). Deduped below, and each candidate must have a
+  // year+price ancestor, so a broad match set stays safe.
+  const sel = hints.map(h => `a[href*="${h}"]`).join(',')
+  const anchors = Array.from(document.querySelectorAll(sel))
   for (const a of anchors) {
     const href = a.href
     if (!href) continue
@@ -228,50 +249,38 @@ async function scrollAndExtract(page, cfg, rounds) {
   await page.waitForTimeout(3500)
   for (let s = 0; s < rounds; s++) { await page.mouse.wheel(0, 3200); await page.waitForTimeout(1100) }
   await page.waitForTimeout(500)
-  return page.evaluate(extractInPage, { hint: HINTS[SOURCE], priceFloor: PRICE_FLOOR, cardTextCap: CARD_TEXT_CAP })
+  return page.evaluate(extractInPage, { hints: [].concat(HINTS[SOURCE]), priceFloor: PRICE_FLOOR, cardTextCap: CARD_TEXT_CAP })
 }
 
-const HINTS = { carmax: '/car/', carvana: '/vehicle/', cars: '/vehicledetail/' }
+const HINTS = {
+  carmax: '/car/', carvana: '/vehicle/', cars: '/vehicledetail/',
+  // Generic dealer VDP path shapes across Dealer.com / DealerOn / DealerInspire.
+  dealer: ['/inventory/used', '/used-inventory/', '/used/', '/vehicledetail', '/vehicle-details', '/VehicleDetails', '/vehicle/', '-vin-'],
+}
 // Canonical source label — used for both `src` and `sellerName`, so casing is
 // identical whether or not any listing was found. (CarMax/Carvana ARE the
 // seller; for Cars.com this marks the aggregator — the per-dealer name is not
 // exposed on the results grid.)
-const SRC_LABEL = { carmax: 'CarMax', carvana: 'Carvana', cars: 'Cars.com' }[SOURCE] || SOURCE
+// For a dealer source, label from --name, else the site hostname (sans www).
+const dealerLabel = () => {
+  if (NAME) return NAME
+  try { return new URL(SITE).hostname.replace(/^www\./, '') } catch { return 'dealer' }
+}
+const SRC_LABEL = SOURCE === 'dealer' ? dealerLabel()
+  : ({ carmax: 'CarMax', carvana: 'Carvana', cars: 'Cars.com' }[SOURCE] || SOURCE)
 
 async function main() {
   const cfg = SOURCES[SOURCE]
   if (!cfg) { process.stderr.write(`Unknown --source ${SOURCE}. Known: ${Object.keys(SOURCES).join(', ')}\n`); process.exit(2) }
 
-  // Stealth: disable the AutomationControlled flag and, when available, drive
-  // the real installed Google Chrome (channel:'chrome') — far less detectable
-  // than bundled Chromium. Falls back to bundled chromium if Chrome is absent.
-  const launchOpts = {
-    headless: !HEADFUL,
-    args: ['--disable-blink-features=AutomationControlled', '--no-sandbox', '--disable-dev-shm-usage'],
-  }
   let browser = null
   let blocked = false
   let listings = []
   let droppedForShipping = 0
   try {
-    try { browser = await chromium.launch({ ...launchOpts, channel: 'chrome' }) }
-    catch { browser = await chromium.launch(launchOpts) }
-    const ctx = await browser.newContext({
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-      viewport: { width: 1440, height: 2200 },
-      locale: 'en-US',
-      timezoneId: 'America/Chicago',
-      // Pin the reported location to ZIP's coordinates (see GEO above).
-      geolocation: GEO,
-      permissions: ['geolocation'],
-    })
-    // Hide the headless/automation tells before any page script runs.
-    await ctx.addInitScript(() => {
-      Object.defineProperty(navigator, 'webdriver', { get: () => undefined })
-      Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en'] })
-      Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] })
-      window.chrome = window.chrome || { runtime: {} }
-    })
+    browser = await launchStealth(chromium, { headless: !HEADFUL })
+    // Pin the reported location to ZIP's coordinates (see GEO above).
+    const ctx = await newStealthContext(browser, { geo: GEO })
     const page = await ctx.newPage()
 
     // Collect raw listings across pages. URL-paginated sources (CarMax, Cars.com)
