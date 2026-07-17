@@ -9,14 +9,15 @@
 #                verifies as live-match (dedup happens in stage 3).
 #   3. RANK    — combines every survivor, runs src/rank.mjs to dedup + rank,
 #                and prints the remaining results sorted by price.
-# Usage:
-#   ./full_search_pipeline.sh --min 10000 --max 20000 [--zip 78702] [--radius 75]
+# Usage (all flags optional; price band defaults to $10,000–$20,000):
+#   ./full_search_pipeline.sh [--min 10000] [--max 20000] [--zip 78702] [--radius 75]
 #       [--max-items 25] [--out-dir pipeline-out] [--top 20] [--jobs 4]
-#       [--verified-dealers-only] [--keep-blocked] [--skip-verify]
+#       [--metro "Austin, TX"] [--rank-mode node|llm] [--verified-dealers-only]
+#       [--keep-blocked] [--skip-verify]
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
-MIN=""; MAX=""; ZIP="78702"; RADIUS="75"; MAX_ITEMS="25"
+MIN="10000"; MAX="20000"; ZIP="78702"; RADIUS="75"; MAX_ITEMS="25"
 OUT_DIR="pipeline-out"; TOP="20"; JOBS="4"; METRO="Austin, TX"; RANK_MODE="node"
 VERIFIED_DEALERS_ONLY="false"; KEEP_BLOCKED="false"; SKIP_VERIFY="false"
 
@@ -50,7 +51,7 @@ case "$RANK_MODE" in
 esac
 
 if [ -z "$MIN" ] || [ -z "$MAX" ]; then
-  echo "Required: --min <dollars> --max <dollars>" >&2
+  echo "--min / --max must be non-empty (default \$10,000-\$20,000)" >&2
   exit 2
 fi
 

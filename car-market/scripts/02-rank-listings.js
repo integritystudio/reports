@@ -1,8 +1,9 @@
 // VALUATION & RANKING — runs AFTER validation
 //
 // Recommended chain: 01-search → 03-verify-dedupe (validation) → 02-rank.
-// Takes the VALIDATED survivors, estimates each one's market value with a
-// per-vehicle LLM call (one focused call per listing, parallelized), screens out
+// Takes the VALIDATED survivors, estimates market value with micro-batched LLM
+// calls (groups of args.valueBatchSize, default 8, run in parallel; a static
+// cache-friendly prompt prefix + the listing block last), screens out
 // scam/curbstoner patterns, then computes discount, confidence, and ranks the
 // top-N true bargains. Valuing only post-validation survivors keeps the LLM off
 // dead/mismatched/duplicate listings.
@@ -75,52 +76,75 @@ for (const v of LISTINGS) {
   UNIQUE.push({ ...v })
 }
 
-// Per-vehicle valuation: one LLM call per unique listing (parallelized), each
-// returning ONLY judgment fields (market value + scam flag) for that single
-// vehicle. Discount math, demotion, sorting, confidence, and rationales are all
-// computed deterministically below.
+// Micro-batched valuation: one LLM call per group of BATCH vehicles, groups run
+// in parallel. Each call returns ONLY judgment fields (market value + scam flag)
+// per listing; discount math, demotion, sorting, confidence, and rationales are
+// computed deterministically below. Batching amortizes the fixed per-call
+// overhead (subagent system prompt + instructions + schema) while keeping
+// parallelism and fault-isolation between groups.
+const BATCH = Number.isFinite(A.valueBatchSize) ? A.valueBatchSize : 8
 const VALUE_SCHEMA = {
-  type: 'object', required: ['estMarketValue'],
+  type: 'object', required: ['valuations'],
   properties: {
-    estMarketValue: { type: 'integer' },
-    isScam: { type: 'boolean' },
-    scamReason: { type: 'string' },
+    valuations: {
+      type: 'array', items: {
+        type: 'object', required: ['idx', 'estMarketValue'],
+        properties: {
+          idx: { type: 'integer' },
+          estMarketValue: { type: 'integer' },
+          isScam: { type: 'boolean' },
+          scamReason: { type: 'string' },
+        },
+      },
+    },
   },
 }
 
-const valuePrompt = (v) =>
+// STATIC prefix — identical for every call, so it forms a cacheable prompt
+// prefix. All variable data (the listing block) is appended AFTER this, last.
+const VALUE_INSTRUCTIONS =
   `## Used-Car Valuation & Scam Screen (${METRO})\n\n` +
-  `One used-car listing from the ${METRO} metro. Body-class exclusions and VIN screening have ALREADY been applied upstream.\n\n` +
-  `**Vehicle:** ${v.year} ${v.make} ${v.model}${v.trim ? ' ' + v.trim : ''}` +
-  ` | $${v.price}${v.miles ? ` | ${v.miles} mi` : ''}` +
-  ` | ${v.sellerType || '?'}${v.sellerName ? ` (${v.sellerName})` : ''}` +
+  `Each item below is one de-duplicated used-car listing from the ${METRO} metro, ` +
+  `priced $${PRICE_MIN.toLocaleString()}–$${PRICE_MAX.toLocaleString()}. Body-class exclusions and VIN screening have ALREADY been applied upstream.\n\n` +
+  `## For EACH listing return only:\n` +
+  `- **idx**: the listing's [index].\n` +
+  `- **estMarketValue**: the fair local ${METRO} retail price for that year/make/model/trim/mileage, from your used-car knowledge (integer USD). Treat any platform deal badge as corroborating only.\n` +
+  `- **isScam** (+ **scamReason**): true if the listing is a likely scam/curbstoner or branded-title risk — luxury vehicle priced like an economy car, price far below comparable cars with no explanation, mileage/price mismatch, or an out-of-metro seller. Otherwise false.\n\n` +
+  `Do NOT rank, compute discounts, or write prose — that is done downstream in code. Structured output only.\n\n` +
+  `## Listings\n`
+
+const fmtListing = (v, gi) =>
+  `[${gi}] ${v.year} ${v.make} ${v.model}${v.trim ? ' ' + v.trim : ''}` +
+  ` | $${v.price}${v.miles ? ' | ' + v.miles + ' mi' : ''}` +
+  ` | ${v.sellerType || '?'}${v.sellerName ? ' (' + v.sellerName + ')' : ''}` +
   ` | body:${v.bodyStyle || '?'} | src:${v.src || v.source || '?'}` +
-  (v.dealRating ? ` | badge:${v.dealRating}` : '') +
-  (v.titleStatus ? ` | title:${v.titleStatus}` : '') +
-  (v.vin ? ` | VIN:${v.vin}` : '') + `\n\n` +
-  `## Return only:\n` +
-  `- **estMarketValue**: the fair local ${METRO} retail price for this year/make/model/trim/mileage, from your used-car knowledge (integer USD). Treat any platform deal badge as corroborating only.\n` +
-  `- **isScam** (+ **scamReason**): true if this is a likely scam/curbstoner or branded-title risk — luxury vehicle priced like an economy car, price far below comparable cars with no explanation, mileage/price mismatch, or an out-of-metro seller. Otherwise false.\n\n` +
-  `Do NOT rank, compute discounts, or write prose — that is done downstream in code. Structured output only.`
+  (v.dealRating ? ' | rating:' + v.dealRating : '') +
+  (v.titleStatus ? ' | title:' + v.titleStatus : '') +
+  (v.vin ? ' | VIN:' + v.vin : '')
+
+// Split into contiguous groups of BATCH; global idx = groupStart + offset.
+const chunks = []
+for (let i = 0; i < UNIQUE.length; i += BATCH) chunks.push(i)
 
 phase('Screen & Rank')
 // LLM does only what needs world knowledge: estimate market value + flag scams.
-// One focused call per vehicle, run in parallel.
-const valuations = await parallel(
-  UNIQUE.map((v, i) => () =>
-    agent(valuePrompt(v), {
-      label: `value:${_norm(v.make)}-${_norm(v.model)}`.slice(0, 40),
-      phase: 'Screen & Rank', schema: VALUE_SCHEMA, effort: 'high',
+const chunkResults = await parallel(
+  chunks.map((start, ci) => () => {
+    const group = UNIQUE.slice(start, start + BATCH)
+    const listBlock = group.map((v, j) => fmtListing(v, start + j)).join('\n')
+    return agent(VALUE_INSTRUCTIONS + listBlock, {
+      label: `value:batch-${ci + 1}`, phase: 'Screen & Rank', schema: VALUE_SCHEMA, effort: 'high',
     })
-      .then(res => ({ idx: i, ...(res || {}) }))
-      .catch(() => ({ idx: i }))
-  )
+      .then(res => (res && Array.isArray(res.valuations)) ? res.valuations : [])
+      .catch(() => [])
+  })
 )
+const valuations = chunkResults.flat()
 
 // ─── Deterministic ranking (mirrors src/rank-lib.mjs) ───
 const NOW_YEAR = A.nowYear || 2026
 const DEMOTE = A.demoteThreshold || 20
-const byIdx = new Map(valuations.filter(Boolean).map(x => [x.idx, x]))
+const byIdx = new Map(valuations.map(x => [x.idx, x]))
 const rejected = []
 const scored = []
 UNIQUE.forEach((v, i) => {
