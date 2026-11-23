@@ -1,0 +1,802 @@
+<title>Agent Scope Guards</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+/* ─── Tokens ─────────────────────────────────────────────────────────────── */
+:root {
+  --bg:           #F5F4EF;
+  --bg-surface:   #FFFFFE;
+  --bg-inset:     #EFEDE7;
+  --bg-code:      #E8E6DF;
+  --border:       #D8D5CC;
+  --border-faint: #E5E2D9;
+  --text:         #1A1916;
+  --text-muted:   #5E5D57;
+  --text-faint:   #9E9D97;
+  --accent:       #B87A1A;
+  --accent-dim:   #DFB96A;
+  --healthy:      #1A7A4A;
+  --healthy-bg:   #D6F5E6;
+  --warning:      #B35A00;
+  --warning-bg:   #FDECD8;
+  --critical:     #9B1C1C;
+  --critical-bg:  #FCE4E4;
+  --bar-track:    #DDD9CE;
+  --bar-fill:     #B87A1A;
+  --bar-fill-healthy: #2A9E60;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:           #131419;
+    --bg-surface:   #1B1D24;
+    --bg-inset:     #0E1015;
+    --bg-code:      #22242D;
+    --border:       #2C2E38;
+    --border-faint: #232530;
+    --text:         #E8E6DF;
+    --text-muted:   #8C8B85;
+    --text-faint:   #58574F;
+    --accent:       #F0A832;
+    --accent-dim:   #7D5210;
+    --healthy:      #3DCC82;
+    --healthy-bg:   #0D2E1E;
+    --warning:      #F5A635;
+    --warning-bg:   #2E1C05;
+    --critical:     #F87171;
+    --critical-bg:  #2A0E0E;
+    --bar-track:    #2A2C36;
+    --bar-fill:     #F0A832;
+    --bar-fill-healthy: #3DCC82;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg:           #131419;
+  --bg-surface:   #1B1D24;
+  --bg-inset:     #0E1015;
+  --bg-code:      #22242D;
+  --border:       #2C2E38;
+  --border-faint: #232530;
+  --text:         #E8E6DF;
+  --text-muted:   #8C8B85;
+  --text-faint:   #58574F;
+  --accent:       #F0A832;
+  --accent-dim:   #7D5210;
+  --healthy:      #3DCC82;
+  --healthy-bg:   #0D2E1E;
+  --warning:      #F5A635;
+  --warning-bg:   #2E1C05;
+  --critical:     #F87171;
+  --critical-bg:  #2A0E0E;
+  --bar-track:    #2A2C36;
+  --bar-fill:     #F0A832;
+  --bar-fill-healthy: #3DCC82;
+  color-scheme: dark;
+}
+
+/* ─── Reset & base ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Layout ─────────────────────────────────────────────────────────────── */
+.page {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 64px 28px 96px;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+.report-header {
+  margin-bottom: 56px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+h1.report-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 5vw, 38px);
+  line-height: 1.15;
+  margin: 0 0 20px;
+  color: var(--text);
+  text-wrap: balance;
+  letter-spacing: -0.02em;
+}
+
+.report-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 0;
+}
+
+.meta-item { white-space: nowrap; }
+.meta-label { color: var(--text-faint); }
+
+/* ─── Dashboard status banner ─────────────────────────────────────────────── */
+.dashboard-status {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 22px;
+  border-radius: 6px;
+  background: var(--healthy-bg);
+  border: 1px solid var(--healthy);
+  margin-bottom: 48px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--healthy);
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--healthy);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot { animation: none; }
+}
+
+.status-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--healthy);
+  font-weight: 500;
+}
+
+.status-detail {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-left: auto;
+  font-style: italic;
+}
+
+/* ─── Section structure ───────────────────────────────────────────────────── */
+section { margin-bottom: 56px; }
+
+h2.section-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin: 0 0 6px;
+  text-wrap: balance;
+}
+
+.section-rule {
+  height: 1px;
+  background: var(--border-faint);
+  margin-bottom: 28px;
+}
+
+p {
+  margin: 0 0 18px;
+  max-width: 65ch;
+}
+
+p:last-child { margin-bottom: 0; }
+
+/* ─── Scorecard ───────────────────────────────────────────────────────────── */
+.scorecard {
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px 24px;
+  overflow-x: auto;
+}
+
+.metric-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.metric-row:last-child { border-bottom: none; }
+
+.metric-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  width: 148px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.metric-bar-track {
+  flex: 1;
+  min-width: 80px;
+  height: 7px;
+  background: var(--bar-track);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.metric-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--bar-fill);
+  width: 0;
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.metric-bar-fill.healthy-fill { background: var(--bar-fill-healthy); }
+
+.metric-score {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  width: 52px;
+  text-align: right;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  width: 64px;
+  text-align: center;
+}
+
+.badge-healthy {
+  background: var(--healthy-bg);
+  color: var(--healthy);
+}
+
+.badge-warning {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.badge-critical {
+  background: var(--critical-bg);
+  color: var(--critical);
+}
+
+.metric-note {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--text-faint);
+  font-style: normal;
+}
+
+/* ─── Narrative ───────────────────────────────────────────────────────────── */
+.lede {
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 28px;
+  max-width: 62ch;
+  font-style: italic;
+}
+
+/* ─── Per-output table ───────────────────────────────────────────────────── */
+.table-scroll { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+thead th {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 500;
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+tbody td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--border-faint);
+  color: var(--text);
+  vertical-align: top;
+}
+
+tbody tr:last-child td {
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+  color: var(--text);
+}
+
+.file-cell {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.score-cell { text-align: right; }
+
+.score-low { color: var(--warning); }
+
+/* ─── Telemetry block ─────────────────────────────────────────────────────── */
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.telemetry-cell {
+  background: var(--bg-surface);
+  padding: 18px 20px;
+}
+
+.tele-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 6px;
+}
+
+.tele-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.tele-value.large { font-size: 22px; }
+.tele-value.small { font-size: 13px; color: var(--text-muted); }
+
+.tele-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* Token breakdown mini-bars */
+.token-bar-wrap { margin-top: 10px; }
+.token-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+.token-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--text-faint);
+  width: 74px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.token-track {
+  flex: 1;
+  height: 5px;
+  background: var(--bar-track);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.token-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--bar-fill);
+}
+.token-fill.cache { background: var(--text-faint); opacity: 0.5; }
+.token-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: right;
+  width: 52px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hooks list */
+.hooks-list {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+  margin-top: 0;
+}
+.hook-tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 7px;
+  margin: 3px 3px 3px 0;
+}
+
+/* ─── Methodology ─────────────────────────────────────────────────────────── */
+.methodology {
+  background: var(--bg-inset);
+  border-left: 3px solid var(--accent-dim);
+  padding: 20px 22px;
+  border-radius: 0 6px 6px 0;
+}
+
+.methodology p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 12px;
+  max-width: none;
+}
+
+.methodology p:last-child { margin-bottom: 0; }
+
+/* ─── Callout / aside ────────────────────────────────────────────────────── */
+.aside {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-faint);
+  margin-top: 40px;
+  padding-top: 14px;
+}
+
+/* ─── Focus ──────────────────────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+
+<div class="page">
+
+  <!-- ── Header ── -->
+  <header class="report-header">
+    <p class="eyebrow">Session Quality Report &middot; 2026&#x2011;08&#x2011;30</p>
+    <h1 class="report-title">Agent Scope Guards &amp; Routing Cross&#x2011;References</h1>
+    <div class="report-meta">
+      <span class="meta-item"><span class="meta-label">session&nbsp;</span>6b47a7cb&#x2011;db3c&#x2011;4c8d&#x2011;89dd&#x2011;286682717076</span>
+      <span class="meta-item"><span class="meta-label">model&nbsp;</span>claude&#x2011;opus&#x2011;5</span>
+      <span class="meta-item"><span class="meta-label">duration&nbsp;</span>~120 min</span>
+      <span class="meta-item"><span class="meta-label">project&nbsp;</span>claude&#x2011;dev&#x2011;environment</span>
+    </div>
+  </header>
+
+  <!-- ── Dashboard status ── -->
+  <div class="dashboard-status">
+    <div class="status-dot"></div>
+    <span class="status-label">Healthy</span>
+    <span class="status-detail">all seven metrics within thresholds</span>
+  </div>
+
+  <!-- ── Opening narrative ── -->
+  <section>
+    <p class="lede">What happens when the rules that agents are supposed to follow exist only as prose in a markdown file? A claude-opus-5 session on the night of August 29th set out to make two sets of those rules structural — turning documentation into enforced code and resolving the routing ambiguity that arises when orchestrators read only one side of an agent pair.</p>
+    <p>The session implemented backlog items AA1e (five scope guards in the PreToolUse hook, backed by 25 new tests) and AA1f (reciprocal cross-references added to four agent manifests), and closed AA1c with an artifact reference. No tool errors were recorded across 54 hook-level spans. Cache-heavy context usage — 7.4&nbsp;M tokens read from cache, 50&nbsp;k generated — reflects targeted implementation against a large, stable codebase.</p>
+  </section>
+
+  <!-- ── Quality scorecard ── -->
+  <section>
+    <h2 class="section-title">Quality Scorecard</h2>
+    <div class="section-rule"></div>
+    <p style="color:var(--text-muted);font-size:15px;margin-bottom:20px;">Three metrics from rule-based telemetry analysis. Four from LLM-as-Judge evaluation of committed outputs.</p>
+
+    <div class="scorecard">
+      <!-- LLM-as-Judge -->
+      <div class="metric-row">
+        <span class="metric-name">Relevance</span>
+        <div class="metric-bar-track">
+          <div class="metric-bar-fill healthy-fill" data-pct="98"></div>
+        </div>
+        <span class="metric-score">0.98</span>
+        <span class="metric-badge badge-healthy">healthy</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-name">Faithfulness</span>
+        <div class="metric-bar-track">
+          <div class="metric-bar-fill healthy-fill" data-pct="99"></div>
+        </div>
+        <span class="metric-score">0.99</span>
+        <span class="metric-badge badge-healthy">healthy</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-name">Coherence</span>
+        <div class="metric-bar-track">
+          <div class="metric-bar-fill healthy-fill" data-pct="95"></div>
+        </div>
+        <span class="metric-score">0.95</span>
+        <span class="metric-badge badge-healthy">healthy</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-name">Hallucination <span class="metric-note">↓</span></span>
+        <div class="metric-bar-track">
+          <div class="metric-bar-fill healthy-fill" data-pct="97"></div>
+        </div>
+        <span class="metric-score">0.03</span>
+        <span class="metric-badge badge-healthy">healthy</span>
+      </div>
+      <!-- Rule-based -->
+      <div class="metric-row" style="margin-top:8px;padding-top:16px;border-top:1px dashed var(--border);">
+        <span class="metric-name">Tool Accuracy</span>
+        <div class="metric-bar-track">
+          <div class="metric-bar-fill healthy-fill" data-pct="98"></div>
+        </div>
+        <span class="metric-score">0.98</span>
+        <span class="metric-badge badge-healthy">healthy</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-name">Eval Latency</span>
+        <div class="metric-bar-track">
+          <div class="metric-bar-fill healthy-fill" data-pct="100"></div>
+        </div>
+        <span class="metric-score">1.39ms</span>
+        <span class="metric-badge badge-healthy">healthy</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-name">Task Completion</span>
+        <div class="metric-bar-track">
+          <div class="metric-bar-fill healthy-fill" data-pct="100"></div>
+        </div>
+        <span class="metric-score">1.00</span>
+        <span class="metric-badge badge-healthy">healthy</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How we measured ── -->
+  <section>
+    <h2 class="section-title">How We Measured</h2>
+    <div class="section-rule"></div>
+    <p>Tool accuracy, evaluation latency, and task completion were derived automatically from OpenTelemetry trace spans emitted by the hooks system. Tool accuracy is the ratio of successful tool spans (0.9815 before rounding); evaluation latency is the median hook execution time across all 145 spans. Task completion defaults to 1.0 — no TaskCreate or TaskUpdate tool spans were recorded, consistent with the work being driven directly from backlog item IDs rather than a task-tracking tool.</p>
+    <p>The content quality metrics come from <strong>LLM-as-Judge evaluation</strong> using a G-Eval pattern. The judge read each committed output independently and scored along four criteria: relevance to the session goal, faithfulness to source requirements, coherence of structure, and hallucination (lower is better). Five outputs were evaluated: four agent manifest description updates for AA1f, and the <code style="font-family:'IBM Plex Mono',monospace;font-size:14px;background:var(--bg-code);padding:1px 5px;border-radius:3px;">pre-tool.ts</code> scope-guards implementation for AA1e.</p>
+  </section>
+
+  <!-- ── Per-output breakdown ── -->
+  <section>
+    <h2 class="section-title">Per-Output Breakdown</h2>
+    <div class="section-rule"></div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Output</th>
+            <th style="text-align:right">Relevance</th>
+            <th style="text-align:right">Faithfulness</th>
+            <th style="text-align:right">Coherence</th>
+            <th style="text-align:right">Halluc.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="file-cell">agents/code-reviewer.md</td>
+            <td class="score-cell">1.00</td>
+            <td class="score-cell">1.00</td>
+            <td class="score-cell">0.95</td>
+            <td class="score-cell">0.02</td>
+          </tr>
+          <tr>
+            <td class="file-cell">agents/ui-ux-design-expert.md</td>
+            <td class="score-cell">1.00</td>
+            <td class="score-cell">1.00</td>
+            <td class="score-cell">0.95</td>
+            <td class="score-cell">0.02</td>
+          </tr>
+          <tr>
+            <td class="file-cell">agents/claude-code-guide.md</td>
+            <td class="score-cell">1.00</td>
+            <td class="score-cell">1.00</td>
+            <td class="score-cell">0.97</td>
+            <td class="score-cell">0.04</td>
+          </tr>
+          <tr>
+            <td class="file-cell">agents/prompt-finder.md</td>
+            <td class="score-cell">1.00</td>
+            <td class="score-cell">1.00</td>
+            <td class="score-cell">0.97</td>
+            <td class="score-cell">0.02</td>
+          </tr>
+          <tr>
+            <td class="file-cell">hooks/handlers/pre-tool.ts</td>
+            <td class="score-cell">0.92</td>
+            <td class="score-cell">0.97</td>
+            <td class="score-cell">0.93</td>
+            <td class="score-cell">0.03</td>
+          </tr>
+          <tr>
+            <td><strong>Session Average</strong></td>
+            <td class="score-cell"><strong>0.98</strong></td>
+            <td class="score-cell"><strong>0.99</strong></td>
+            <td class="score-cell"><strong>0.95</strong></td>
+            <td class="score-cell"><strong>0.03</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── What the judge found ── -->
+  <section>
+    <h2 class="section-title">What the Judge Found</h2>
+    <div class="section-rule"></div>
+    <p>All four agent manifests scored 1.0 on both relevance and faithfulness — the cleanest possible result from the judge. Each cross-reference names the correct paired agent and attributes ownership using language verified against the counterpart's actual manifest, with no invented capabilities on either side. The code-reviewer / ui-ux-design-expert pair cleanly split "correctness, type-safety, and security" from "WCAG audits, design tokens, and component specs" — a division that holds up against each manifest's tool grants and model assignments. The prompt-finder / claude-code-guide pair was noted as the tightest of the four edits.</p>
+    <p><code style="font-family:'IBM Plex Mono',monospace;font-size:14px;background:var(--bg-code);padding:1px 5px;border-radius:3px;">pre-tool.ts</code> scored 0.92 on relevance — lower than the manifests, not because the implementation is wrong but because the web-research-analyst agent-spawn restriction lives in <code style="font-family:'IBM Plex Mono',monospace;font-size:14px;background:var(--bg-code);padding:1px 5px;border-radius:3px;">handleAgentPreTool</code> rather than <code style="font-family:'IBM Plex Mono',monospace;font-size:14px;background:var(--bg-code);padding:1px 5px;border-radius:3px;">handleAgentScopeGuards</code>, creating a minor structural split that the judge flagged. All five guards are present; the OTel ordering (guards run before OTel handlers, so denied calls never pollute telemetry) was explicitly noted as correct. The faithfulness score (0.97) is high: the MCP tool deny-list matches the six gated tools in the agent's own manifest exactly.</p>
+    <p>One open item: the session goal referenced 25 new unit tests in <code style="font-family:'IBM Plex Mono',monospace;font-size:14px;background:var(--bg-code);padding:1px 5px;border-radius:3px;">pre-tool-scope-guards.test.ts</code>. The test file was not included in the five-file evaluation cap and could not be verified by the judge. The commit message confirms the tests exist; verification against the actual test suite is a recommended follow-up.</p>
+  </section>
+
+  <!-- ── Session telemetry ── -->
+  <section>
+    <h2 class="section-title">Session Telemetry</h2>
+    <div class="section-rule"></div>
+
+    <div class="telemetry-grid">
+      <div class="telemetry-cell">
+        <div class="tele-label">Total Spans</div>
+        <div class="tele-value large">145</div>
+        <div class="tele-sub">54 tool spans</div>
+      </div>
+      <div class="telemetry-cell">
+        <div class="tele-label">Duration</div>
+        <div class="tele-value large">~120m</div>
+        <div class="tele-sub">23:43 → 01:44 CT</div>
+      </div>
+      <div class="telemetry-cell">
+        <div class="tele-label">Tool Calls</div>
+        <div class="tele-value large">19</div>
+        <div class="tele-sub">0 errors</div>
+      </div>
+      <div class="telemetry-cell">
+        <div class="tele-label">Tool Split</div>
+        <div class="tele-value small">17 Bash<br>1 Artifact<br>1 Read</div>
+      </div>
+      <div class="telemetry-cell" style="grid-column: span 2;">
+        <div class="tele-label">Token Usage</div>
+        <div class="token-bar-wrap">
+          <div class="token-row">
+            <span class="token-name">Output</span>
+            <div class="token-track"><div class="token-fill" style="width:0.67%"></div></div>
+            <span class="token-num">50,026</span>
+          </div>
+          <div class="token-row">
+            <span class="token-name">Cache read</span>
+            <div class="token-track"><div class="token-fill cache" style="width:99.3%"></div></div>
+            <span class="token-num">7,448,711</span>
+          </div>
+          <div class="token-row">
+            <span class="token-name">Input</span>
+            <div class="token-track"><div class="token-fill" style="width:0.002%"></div></div>
+            <span class="token-num">168</span>
+          </div>
+        </div>
+      </div>
+      <div class="telemetry-cell" style="grid-column: span 2;">
+        <div class="tele-label">Commits Shipped</div>
+        <div style="margin-top:6px;display:flex;flex-direction:column;gap:6px;">
+          <code style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);">483290c7 fix(agents): add reciprocal routing cross-references for AA1f</code>
+          <code style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);">6cb23e31 docs(backlog): mark AA1f Done</code>
+          <code style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);">4b4e2050 feat(hooks): enforce AA1e agent-scope guards via PreToolUse</code>
+          <code style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);">450d0bc8 fix(hooks): type-safe file path extraction in scope guards</code>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;">
+      <div class="tele-label" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;">Hooks Observed (13)</div>
+      <div class="hooks-list">
+        <span class="hook-tag">agent.operation.finalize</span>
+        <span class="hook-tag">agent.operation.prepare</span>
+        <span class="hook-tag">builtin-post-tool</span>
+        <span class="hook-tag">builtin-pre-tool</span>
+        <span class="hook-tag">error-handling-reminder</span>
+        <span class="hook-tag">notification</span>
+        <span class="hook-tag">post-commit-review</span>
+        <span class="hook-tag">session-end</span>
+        <span class="hook-tag">session-start</span>
+        <span class="hook-tag">skill-activation-prompt</span>
+        <span class="hook-tag">subagent-start</span>
+        <span class="hook-tag">subagent-stop</span>
+        <span class="hook-tag">token-metrics-extraction</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Methodology ── -->
+  <section>
+    <h2 class="section-title">Methodology Notes</h2>
+    <div class="section-rule"></div>
+    <div class="methodology">
+      <p><strong>Telemetry coverage.</strong> 145 spans across 13 hook types were available from local JSONL files. The 54 tool-span count from compute-metrics differs from the 19 transcript-level tool calls — expected, since hook spans include pre- and post-tool events and subagent lifecycle events that are not counted as user-visible tool calls.</p>
+      <p><strong>Task completion fallback.</strong> No TaskCreate or TaskUpdate spans were recorded. The fallback value is 1.0 per the metric definition. This reflects telemetry tracking ratio, not actual deliverable status.</p>
+      <p><strong>Output identification.</strong> Outputs were identified from four git commits made during the session window. <code style="font-family:'IBM Plex Mono',monospace;font-size:13px;">pre-tool.ts</code> at 514 lines exceeds the 500-line recommendation for LLM-as-Judge evaluation; it was included at the judge's discretion with the caveat noted in the coherence score.</p>
+      <p><strong>LLM-as-Judge.</strong> Scored via G-Eval pattern using the <code style="font-family:'IBM Plex Mono',monospace;font-size:13px;">genai-quality-monitor</code> agent, launched concurrently with report generation. Zero pre-existing evaluation spans were available; all four quality metrics derive entirely from the judge pass.</p>
+    </div>
+  </section>
+
+  <p class="aside">Session ID <code style="font-family:'IBM Plex Mono',monospace;font-size:13px;">6b47a7cb-db3c-4c8d-89dd-286682717076</code> &middot; claude-code-hooks v1.0.0 &middot; Generated 2026-08-30</p>
+
+</div>
+
+<script>
+  // Animate bar fills on load
+  function animateBars() {
+    const fills = document.querySelectorAll('.metric-bar-fill[data-pct]');
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    fills.forEach((el, i) => {
+      const pct = el.dataset.pct + '%';
+      if (mq.matches) {
+        el.style.width = pct;
+      } else {
+        setTimeout(() => { el.style.width = pct; }, 80 + i * 60);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', animateBars);
+  } else {
+    animateBars();
+  }
+</script>

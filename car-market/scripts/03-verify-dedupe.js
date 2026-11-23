@@ -31,7 +31,11 @@ export const meta = {
   phases: [{ title: 'Verify', detail: 'Dedupe in code, then one WebFetch verifier per unique listing URL' }],
 }
 
-const A = (typeof args === 'object' && args) ? args : {}
+// args may arrive as an object or as a JSON string, depending on how the
+// Workflow is invoked — tolerate both.
+const A = typeof args === 'string'
+  ? (() => { try { return JSON.parse(args) } catch { return {} } })()
+  : (args && typeof args === 'object') ? args : {}
 const ITEMS = Array.isArray(A.topBargains) ? A.topBargains
   : Array.isArray(A.items) ? A.items
   : Array.isArray(A.listings) ? A.listings

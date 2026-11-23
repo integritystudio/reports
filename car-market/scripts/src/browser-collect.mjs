@@ -158,6 +158,13 @@ if (SOURCE === 'dealer') {
   }
 }
 
+// Facet-targeted collection: --url replaces the source's default search URL
+// (e.g. a CarMax /cars/<make>/<model> or Carvana /cars/<make>-<model> page) while
+// keeping that source's extractor, waitFor, geoScope, and pagination behavior.
+// The generic dealer source keeps --site; --url is for the built-in retailers.
+const URL_OVERRIDE = arg('--url', '')
+if (URL_OVERRIDE && SOURCES[SOURCE]) SOURCES[SOURCE].url = URL_OVERRIDE
+
 // Generic anchor-based extractor: find vehicle detail links, read nearby text
 // for year/make/model/price/miles. Kept simple and resilient to markup churn.
 // NOTE: this runs INSIDE the browser via page.evaluate, so it must be a
